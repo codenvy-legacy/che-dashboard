@@ -11,6 +11,123 @@
     <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
   </div>
 
+  <div layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+  <div layout="column">
+    <md-content md-theme="docs-dark" class="md-padding" layout="row" layout-sm="column">
+      <md-input-container>
+        <label>Title</label>
+        <input ng-model="user.title">
+      </md-input-container>
+      <md-input-container>
+        <label>Email</label>
+        <input ng-model="user.email" type="email">
+      </md-input-container>
+    </md-content>
+    <md-content class="md-padding">
+      <form name="userForm">
+        <md-input-container flex>
+          <label>Company (Disabled)</label>
+          <input ng-model="user.company" disabled>
+        </md-input-container>
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label>First Name</label>
+            <input ng-model="user.firstName" placeholder="Placeholder text">
+          </md-input-container>
+          <md-input-container flex>
+            <label>Last Name</label>
+            <input ng-model="theMax">
+          </md-input-container>
+        </div>
+        <md-input-container flex>
+          <label>Address</label>
+          <input ng-model="user.address">
+        </md-input-container>
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label>City</label>
+            <input ng-model="user.city">
+          </md-input-container>
+          <md-input-container flex>
+            <label>State</label>
+            <input ng-model="user.state">
+          </md-input-container>
+          <md-input-container flex>
+            <label>Postal Code</label>
+            <input ng-model="user.postalCode">
+          </md-input-container>
+        </div>
+        <md-input-container flex>
+          <label>Biography</label>
+          <textarea ng-model="user.biography" columns="1" md-maxlength="150"></textarea>
+        </md-input-container>
+      </form>
+    </md-content>
+
+
+  </div>
+
+  <div layout="column">
+    <md-content >
+      <section layout="row" layout-sm="column" layout-align="center center">
+        <md-button>{{title1}}</md-button>
+        <md-button md-no-ink class="md-primary">Primary (md-noink)</md-button>
+        <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
+        <md-button class="md-warn">{{title4}}</md-button>
+      </section>
+      <section layout="row" layout-sm="column" layout-align="center center">
+        <md-button class="md-raised">Button</md-button>
+        <md-button class="md-raised md-primary">Primary</md-button>
+        <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
+        <md-button class="md-raised md-warn">Warn</md-button>
+        <div class="label">raised</div>
+      </section>
+      <section layout="row" layout-sm="column" layout-align="center center">
+        <md-button class="md-fab" aria-label="Time">
+          <md-icon icon="img/icons/ic_access_time_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+        </md-button>
+        <md-button class="md-fab md-primary" aria-label="New document">
+          <md-icon icon="img/icons/ic_insert_drive_file_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+        </md-button>
+        <md-button class="md-fab" ng-disabled="true" aria-label="Comment">
+          <md-icon icon="img/icons/ic_comment_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+        </md-button>
+        <md-button class="md-fab md-primary md-hue-1" aria-label="Profile">
+          <md-icon icon="img/icons/ic_people_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+        </md-button>
+        <div class="label">FAB</div>
+      </section>
+      <section layout="row" layout-sm="column" layout-align="center center">
+        <md-button ng-href="{{googleUrl}}" target="_blank">Go to Google</md-button>
+        <md-button>RSVP</md-button>
+      </section>
+      <section layout="row" layout-sm="column" layout-align="center center">
+        <md-button class="md-primary md-hue-1">Primary Hue 1</md-button>
+        <md-button class="md-warn md-raised md-hue-2">Warn Hue 2</md-button>
+        <md-button class="md-accent">Accent</md-button>
+        <md-button class="md-accent md-raised md-hue-1">Accent Hue 1</md-button>
+        <div class="label">Themed</div>
+      </section>
+    </md-content>
+  </div>
+
+  <div layout="column">
+  <md-tabs md-selected="selectedIndex">
+    <md-tab ng-repeat="tab in tabs"
+    ng-disabled="tab.disabled"
+    label="{{tab.title}}">
+    <div class="demo-tab tab{{$index%4}}" layout="column" layout-fill layout-align="space-around center">
+      <div ng-bind="tab.content"></div>
+      <md-button class="md-warn" ng-click="removeTab( tab )">
+        Remove Tab
+      </md-button>
+    </div>
+  </md-tab>
+</md-tabs>
+</div>
   <div class="row">
     <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in awesomeThings | orderBy:'rank'">
       <div class="thumbnail">
