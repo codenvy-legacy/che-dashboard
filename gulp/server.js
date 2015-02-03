@@ -10,6 +10,10 @@ var browserSync = require('browser-sync');
 
 var middleware = require('./proxy');
 
+var proxy = require('proxy-middleware');
+var url = require('url');
+
+
 function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
 

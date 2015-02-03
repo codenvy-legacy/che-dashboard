@@ -15,6 +15,7 @@ gulp.task('scripts', function () {
       console.error(err.toString());
       this.emit('end');
     })
+    .pipe($.ngAnnotate())
     .pipe(gulp.dest(paths.tmp + '/6to5'))
     .pipe($.size())
 });

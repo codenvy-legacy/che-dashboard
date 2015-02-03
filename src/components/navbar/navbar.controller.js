@@ -2,8 +2,10 @@
 /*jshint esnext: true */
 
 class NavbarCtrl {
+
   constructor ($scope) {
     $scope.date = new Date();
+
   }
 }
 
