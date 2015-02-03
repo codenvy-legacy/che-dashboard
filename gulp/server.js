@@ -31,6 +31,7 @@ function browserSyncInit(baseDir, files, browser) {
       middleware: middleware,
       routes: routes
     },
+    port: 5000,
     browser: browser
   });
 }
@@ -47,6 +48,9 @@ gulp.task('serve', ['watch'], function () {
     paths.tmp + '/serve/{app,components}/**/*.html',
     paths.src + '/{app,components}/**/*.html'
   ]);
+});
+
+gulp.task('serve:app', ['serve'], function () {
 });
 
 gulp.task('serve:dist', ['build'], function () {
