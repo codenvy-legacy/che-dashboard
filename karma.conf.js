@@ -2,16 +2,53 @@
 
 module.exports = function(config) {
 
+  // custom saucelabs browsers
+  var customLaunchers = {
+    sauceLabsChrome: {
+      base: 'SauceLabs',
+      browserName: 'chrome',
+      platform: 'Windows 7',
+      version: '39'
+    },
+    sauceLabsFirefox: {
+      base: 'SauceLabs',
+      browserName: 'firefox',
+      platform: 'Linux',
+      version: '35'
+    },
+    sauceLabsSafari: {
+      base: 'SauceLabs',
+      browserName: 'safari',
+      platform: 'OS X 10.10',
+      version: '8.0'
+    }
+  };
+
   config.set({
+
     autoWatch : false,
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers : ['Chrome', /*'sauceLabsChrome', 'sauceLabsFirefox', 'sauceLabsSafari'*/],
+
+    logLevel: config.LOG_INFO,
+
+    logColors: true,
+
+    sauceLabs: {
+      testName: 'User Dashboard Unit Tests',
+      startConnect: false
+    },
+
+    customLaunchers: customLaunchers,
+    reporters: ['dots', 'saucelabs'],
+    singleRun: true,
 
     plugins : [
-        'karma-chrome-launcher',
-        'karma-jasmine',
+      'karma-chrome-launcher',
+      'karma-sauce-launcher',
+      'karma-jasmine',
     ]
 
   });
