@@ -21,6 +21,7 @@
 
 
  var proxyOptions = url.parse('http://nightly.codenvy-stg.com/api');
+ //var proxyOptions = url.parse('https://codenvy.com/api');
  proxyOptions.route = '/api';
  proxyOptions.preserveHost = false;
 
