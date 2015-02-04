@@ -106,6 +106,20 @@ module.factory('ETagInterceptor', function ($window, $cookies, $q) {
       return response || $q.when(response);
     }
   };
+});
+
+
+
+// add interceptors
+module.factory('LogInterceptor', function ($q) {
+
+
+  return {
+    request: function(config) {
+      console.log('RemoteCall:', config.url);
+      return config || $q.when(config);
+    }
+  };
 })
 
 
@@ -113,6 +127,7 @@ module.factory('ETagInterceptor', function ($window, $cookies, $q) {
 
     if (DEV) {
       $httpProvider.interceptors.push('AuthInterceptor');
+      $httpProvider.interceptors.push('LogInterceptor');
     }
     // Add the ETag interceptor for Codenvy API
     $httpProvider.interceptors.push('ETagInterceptor');
