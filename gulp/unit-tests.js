@@ -33,5 +33,5 @@ function runTests (singleRun, done) {
     });
 }
 
-gulp.task('test', ['browserify'], function (done) { runTests(true /* singleRun */, done) });
-gulp.task('test:auto', ['browserify'], function (done) { runTests(false /* singleRun */, done) });
+gulp.task('test', ['browserify'], function (done) { runTests(true /* singleRun */, done); });
+gulp.task('test:auto', ['browserify'], function (done) { runTests(false /* singleRun */, done); });

@@ -17,7 +17,7 @@ gulp.task('scripts', function () {
     })
     .pipe($.ngAnnotate())
     .pipe(gulp.dest(paths.tmp + '/6to5'))
-    .pipe($.size())
+    .pipe($.size());
 });
 
 gulp.task('browserify', ['scripts'], function () {

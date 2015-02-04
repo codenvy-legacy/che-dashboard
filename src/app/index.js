@@ -44,42 +44,42 @@ module.config(function ($routeProvider) {
 
 
 // add interceptors
-module.factory('AuthInterceptor', function ($window, $cookies, $q) {
+module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $log) {
   return {
     request: function(config) {
       //remove prefix url
-      if (config.url.indexOf("https://codenvy.com/api") == 0) {
-        config.url = config.url.substring("https://codenvy.com".length);
+      if (config.url.indexOf('https://codenvy.com/api') === 0) {
+        config.url = config.url.substring('https://codenvy.com'.length);
       }
 
       //Do not add token on auth login
-      if (config.url.indexOf("/api/auth/login") == -1 && config.url.indexOf("api/") != -1 && $cookies.token) {
+      if (config.url.indexOf('/api/auth/login') === -1 && config.url.indexOf('api/') !== -1 && $cookies.token) {
         config.params = config.params || {};
         angular.extend(config.params, {token: $cookies.token});
       }
       return config || $q.when(config);
     },
     response: function(response) {
-      if (response.status === 401 || response.status == 403) {
-        $log.info('Redirect to login page.')
-        $location.path('/login');
+      if (response.status === 401 || response.status === 403) {
+        $log.info('Redirect to login page.');
+        $location.path('#/login');
       }
       return response || $q.when(response);
     }
   };
-})
+});
 
 // add interceptors
 module.factory('ETagInterceptor', function ($window, $cookies, $q) {
 
-  var etagMap = new Map();
+  var etagMap = {};
 
   return {
     request: function(config) {
       // add IfNoneMatch request on the codenvy api if there is an existing eTag
-      if ("GET" == config.method) {
-        if (config.url.indexOf("/api") == 0) {
-          let eTagURI = etagMap.get(config.url);
+      if ('GET' === config.method) {
+        if (config.url.indexOf('/api') === 0) {
+          let eTagURI = etagMap[config.url];
           if (eTagURI) {
             config.headers = config.headers || {};
             angular.extend(config.headers, {'If-None-Match': eTagURI});
@@ -91,13 +91,13 @@ module.factory('ETagInterceptor', function ($window, $cookies, $q) {
     response: function(response) {
 
       // if response is ok, keep ETag
-      if ("GET" == response.config.method) {
+      if ('GET' === response.config.method) {
         if (response.status === 200) {
           var responseEtag = response.headers().etag;
           if (responseEtag) {
-            if (response.config.url.indexOf("/api") == 0) {
+            if (response.config.url.indexOf('/api') === 0) {
 
-              etagMap.set(response.config.url, responseEtag);
+              etagMap[response.config.url] =  responseEtag;
             }
           }
         }

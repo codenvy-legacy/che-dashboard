@@ -1,4 +1,6 @@
 'use strict';
+/*exported CodenvyProject, CodenvyWorkspace */
+
 
 import Register from '../utils/register.js';
 import CodenvyProject from './codenvy-project.factory.js';
