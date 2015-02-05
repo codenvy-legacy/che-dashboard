@@ -10,12 +10,14 @@
  *******************************************************************************/
 
 'use strict';
-/*exported CodenvyProject, CodenvyWorkspace */
+/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser */
 
 
 import Register from '../utils/register.js';
 import CodenvyProject from './codenvy-project.factory.js';
 import CodenvyWorkspace from './codenvy-workspace.factory.js';
+import CodenvyUser from './codenvy-user.factory.js';
+import CodenvyFactory from './codenvy-factory.factory.js';
 
 /**
  * This class is providing the entry point for accessing to Codenvy API
@@ -28,9 +30,11 @@ class CodenvyAPI {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyProject, codenvyWorkspace) {
+  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyUser) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
+    this.codenvyFactory = codenvyFactory;
+    this.codenvyUser = codenvyUser;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
@@ -50,6 +54,22 @@ class CodenvyAPI {
    */
   getWorkspace() {
     return this.codenvyWorkspace;
+  }
+
+  /**
+   * The Codenvy Factory API
+   * @returns {codenvyFactory|*}
+   */
+  getFactory() {
+    return this.codenvyFactory;
+  }
+
+  /**
+   * The Codenvy User API
+   * @returns {CodenvyUser|*}
+   */
+  getUser() {
+    return this.codenvyUser;
   }
 
 }

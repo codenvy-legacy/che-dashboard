@@ -24,12 +24,14 @@ import MainCtrl from './main/main.controller';
 import LoginCtrl from './main/login.controller';
 import NavbarCtrl from '../components/navbar/navbar.controller';
 import ProjectsCtrl from './projects/projects.controller';
+import FactoriesCtrl from './factories/factories.controller';
 
 // and setup controllers
 module.controller('MainCtrl', MainCtrl)
 .controller('NavbarCtrl', NavbarCtrl)
 .controller('ProjectsCtrl', ProjectsCtrl)
-.controller('LoginCtrl', LoginCtrl);
+  .controller('LoginCtrl', LoginCtrl)
+.controller('FactoriesCtrl', FactoriesCtrl);
 
 
 // config routes
@@ -42,6 +44,10 @@ module.config(function ($routeProvider) {
     .when('/projects', {
       templateUrl: 'app/projects/projects.html',
       controller: 'ProjectsCtrl'
+    })
+    .when('/factories', {
+      templateUrl: 'app/factories/factories.html',
+      controller: 'FactoriesCtrl'
     })
     .when('/login', {
       templateUrl: 'app/main/login.html',

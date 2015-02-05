@@ -18,7 +18,7 @@ class ProjectsCtrl {
     var workspace = codenvyAPI.getWorkspace();
 
     // fetch workspaces when initializing
-    codenvyAPI.getWorkspace().fetchWorkspaces(true);
+    codenvyAPI.getWorkspace().fetchWorkspaces();
 
     // keep references on workspaces and projects
     $scope.workspaces = workspace.getWorkspaces();
@@ -28,6 +28,8 @@ class ProjectsCtrl {
 
     // perform another fetch
     $timeout(() => (codenvyAPI.getWorkspace().fetchWorkspaces(true)), 5000);
+
+
 
   }
 }
