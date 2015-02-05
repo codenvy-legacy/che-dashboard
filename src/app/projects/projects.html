@@ -1,13 +1,36 @@
-<p>Workspaces</p>
-<ul>
-  <li ng-repeat="workspace in workspaces">
-    {{workspace.workspaceReference.name}}
-  </li>
-</ul>
-
-<p>Projects</p>
-<ul>
-  <li ng-repeat="project in projects">
-    {{project.name}}
-  </li>
-</ul>
+<article layout="column" layout-fill layout-align="start start">
+  <md-toolbar layout="row">
+    <div class="md-toolbar-tools">
+      <span>All projects</span>
+      <span flex></span>
+      <md-button class="md-raised md-primary">Create project</md-button>
+    </div>
+  </md-toolbar>
+  <md-content layout="column" layout-fill>
+    <md-list hide show-gt-sm>
+      <md-item>
+        <md-item-content>
+          <div class="md-tile-content" layout="row">
+            <h3 flex="30">Name</h3>
+            <h3 flex="30">Description</h3>
+            <h3 flex="20">Last edited</h3>
+          </div>
+        </md-item-content>
+      </md-item>
+    </md-list>
+    <section ng-repeat="workspace in workspaces" layout="column">
+      <md-subheader class="md-primary">{{workspace.workspaceReference.name}}</md-subheader>
+      <md-list>
+        <md-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
+          <md-item-content>
+            <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column">
+              <h3 flex-gt-sm="30">{{project.name}}</h3>
+              <p flex-gt-sm="30">{{project.description}}</p>
+              <p flex-gt-sm="20"><span show-sm>Last edited: </span>2015/15/01 6:43 PM</p>
+            </div>
+          </md-item-content>
+        </md-item>
+      </md-list>
+    </section>
+  </md-content>
+</article>

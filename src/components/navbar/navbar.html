@@ -1,14 +1,22 @@
-<md-toolbar class="md-theme-indigo">
+<md-toolbar>
   <h1 class="md-toolbar-tools">Codenvy</h1>
 </md-toolbar>
-<md-content class="md-padding">
+<md-content>
   <md-button ng-click="close()" class="md-primary" hide-gt-md>
     Close Sidenav Left
   </md-button>
-  <p hide-md show-gt-md>
-    This sidenav is locked open on your device. To go back to the default behavior,
-    narrow your display.
-  </p>
-
-  <a href="#/projects">Projects</a>
+  <section layout="column" layout-align="center center" flex layout-margin>
+    <md-button class="md-raised md-primary">Create project</md-button>
+  </section>
+  <md-divider ng-if="!$last"></md-divider>
+  <section layout="column" layout-align="center center">
+    <md-button>Dashboard</md-button>
+    <a class="md-button" href="#/projects">Projects</a>
+    <md-button>Factories</md-button>
+    <md-button>Machines</md-button>
+  </section>
+  <md-divider ng-if="!$last"></md-divider>
+  <section layout="column" layout-align="center center">
+    <md-button>Stevan Le Meur</md-button>
+  </section>
 </md-content>
