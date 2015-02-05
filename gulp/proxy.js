@@ -1,17 +1,13 @@
- /*jshint unused:false */
-
-/***************
-
-  This file allow to configure a proxy system plugged into BrowserSync
-  in order to redirect backend requests while still serving and watching
-  files from the web project
-
-  IMPORTANT: The proxy is disabled by default.
-
-  If you want to enable it, watch at the configuration options and finally
-  change the `module.exports` at the end of the file
-
-***************/
+/*******************************************************************************
+ * Copyright (c) 2015 Codenvy, S.A.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Codenvy, S.A. - initial API and implementation
+ *******************************************************************************/
 
 'use strict';
 
@@ -29,10 +25,7 @@
 
 
 /*
- * This is where you activate or not your proxy.
- *
- * The first line activate if and the second one ignored it
+ * Enable proxy
  */
 
 module.exports = [proxy(proxyOptions)];
-//module.exports = [];
