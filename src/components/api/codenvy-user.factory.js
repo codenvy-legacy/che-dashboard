@@ -34,6 +34,8 @@ class CodenvyUser {
     // fetch the user when we're initialized
     this.fetchUser();
 
+    this.isLogged = false;
+
   }
 
 
@@ -42,6 +44,10 @@ class CodenvyUser {
    * @return user ID
    */
   getUser() {
+    // try to refresh if user is not yet logged in
+    if (!this.isLogged) {
+      this.fetchUser();
+    }
     return this.user;
   }
 
@@ -51,6 +57,8 @@ class CodenvyUser {
   fetchUser() {
     this.user = this.remoteUserAPI.get();
     let promise = this.user.$promise;
+    // check if if was OK or not
+    promise.then(() => {this.isLogged = true;}, () => {this.isLogged = false;});
     return promise;
   }
 
