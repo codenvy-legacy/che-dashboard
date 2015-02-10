@@ -28,7 +28,8 @@ function runProtractor (done) {
 
   gulp.src(paths.e2e + '/**/*.js')
     .pipe($.protractor.protractor({
-      configFile: 'protractor.conf.js',
+      /*debug:true,*/
+      configFile: 'protractor.conf.js'
     }))
     .on('error', function (err) {
       // Make sure failed tests cause gulp to exit non-zero
