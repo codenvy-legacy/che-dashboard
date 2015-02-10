@@ -10,7 +10,7 @@
  *******************************************************************************/
 
 'use strict';
-/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyAPIBuilder, CodenvyHttpBackend */
+/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendProviderFactory */
 
 
 import Register from '../utils/register';
@@ -19,7 +19,8 @@ import CodenvyWorkspace from './codenvy-workspace.factory';
 import CodenvyUser from './codenvy-user.factory';
 import CodenvyFactory from './codenvy-factory.factory';
 import CodenvyAPIBuilder from './builder/codenvy-api-builder.factory';
-import CodenvyHttpBackend from './test/codenvy-http-backend';
+import CodenvyHttpBackend from './test/codenvy-http-backend.factory';
+import CodenvyHttpBackendProviderFactory from './test/codenvy-http-backend-provider.factory';
 
 /**
  * This class is providing the entry point for accessing to Codenvy API

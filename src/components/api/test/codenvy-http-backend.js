@@ -10,7 +10,6 @@
  *******************************************************************************/
 
 'use strict';
-/*exported CodenvyWorkspaceReferenceBuilder */
 
 
 import Register from '../../utils/register';
@@ -22,8 +21,7 @@ import Register from '../../utils/register';
 class CodenvyHttpBackend {
 
   /**
-   * Default constructor
-   * @ngInject for Dependency injection
+   * Constructor to use
    */
   constructor ($httpBackend) {
     this.httpBackend = $httpBackend;
