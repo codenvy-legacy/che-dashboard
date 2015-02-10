@@ -19,7 +19,7 @@ describe('The projects view', function () {
   var projectsMock;
 
   beforeEach(function () {
-    
+
     browser.driver.sleep(1500);
     projectsPage = require('./projects.po.js');
     projectsMock = require('./projects-http.mock');
