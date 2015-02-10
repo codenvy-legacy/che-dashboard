@@ -21,7 +21,7 @@
         <md-item ng-repeat="factory in factories" flex-gt-sm="100" flex="33">
           <md-item-content>
             <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column">
-              <h3 flex-gt-sm="30">{{factory.id}}</h3>
+              <h3 flex-gt-sm="30">    <a class="md-button" href="#/factory/{{factory.id}}">{{factory.id}}</a></h3>
               <p flex-gt-sm="30">{{factory.project.name}}</p>
             </div>
           </md-item-content>

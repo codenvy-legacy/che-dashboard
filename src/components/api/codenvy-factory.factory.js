@@ -31,6 +31,8 @@ class CodenvyFactory {
 
     this.factories = [];
 
+    this.factoriesById = new Map();
+
     // remote call
     this.remoteFactoryFindAPI = this.$resource('/api/factory/find');
     this.remoteFactoryAPI = this.$resource('/api/factory/:factoryId',  {factoryId:'@id'});
@@ -47,6 +49,20 @@ class CodenvyFactory {
     return this.factories;
   }
 
+
+  fetchFactory(factoryId) {
+    let findFactory = this.factoriesById.get(factoryId);
+    if (findFactory) {
+      return findFactory;
+    }
+    // need to fetch
+    return this.remoteFactoryAPI.get({factoryId: factoryId});
+  }
+
+
+  getFactoryById(factoryId) {
+    return this.factoriesById.get(factoryId);
+  }
 
   /**
    * Helper method that extract the factory ID from a factory URL
@@ -83,6 +99,7 @@ class CodenvyFactory {
 
         // first, reset the list of factories
         this.factories.length = 0;
+        this.factoriesById.clear();
 
         // Gets factory resource based on the factory ID
         remoteFactories.forEach((factory) => {
@@ -92,9 +109,12 @@ class CodenvyFactory {
 
           // there is a factory ID, so we can ask the factory details
           if(factoryId){
-            let factory = this.remoteFactoryAPI.get({factoryId: factoryId})
-            this.factories.push(factory);
-
+            let tmpFactory = this.fetchFactory(factoryId);
+            let tmpFactoryPromise = tmpFactory.$promise;
+            tmpFactoryPromise.then(() => {
+              this.factories.push(tmpFactory);
+              this.factoriesById.set(factoryId, tmpFactory);
+            });
           }
         });
       });

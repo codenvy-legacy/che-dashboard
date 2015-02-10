@@ -12,23 +12,32 @@
 'use strict';
 
 /**
- * Constroller for the factories.
+ * Constroller for a factory.
  * @author Florent Benoit
  */
-class FactoriesCtrl {
+class FactoryCtrl {
 
   /**
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor ($scope, codenvyAPI) {
+  constructor ($scope, $route, $filter, codenvyAPI) {
 
     var codenvyFactory = codenvyAPI.getFactory();
-    codenvyFactory.fetchFactories();
-    $scope.factories = codenvyFactory.getFactories();
+
+    $scope.factoryId = $route.current.params.id;
+
+    var factory = codenvyFactory.fetchFactory($scope.factoryId);
+    console.log('ask for factory');
+    factory.$promise.then(() => {
+      console.log('factory retrieved');
+      $scope.factory = factory;
+      $scope.factoryContent = $filter('json')(factory, 2);
+    }, () => {$scope.factory = null;});
+
 
   }
 }
 
-export default FactoriesCtrl;
+export default FactoryCtrl;
 

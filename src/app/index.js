@@ -10,14 +10,16 @@
  *******************************************************************************/
 
 'use strict';
+/*exported CodenvyAPI */
 
 var DEV = true;
 
 // init module
-var module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'ui.bootstrap', 'ngMaterial']);
+let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'ui.bootstrap', 'ngMaterial']);
+
 
 // import factories
-import CodenvyAPI from '../components/api/codenvy.factory.js';
+import CodenvyAPI from '../components/api/codenvy-api.factory';
 
 // import controllers
 import MainCtrl from './main/main.controller';
@@ -25,13 +27,15 @@ import LoginCtrl from './main/login.controller';
 import NavbarCtrl from '../components/navbar/navbar.controller';
 import ProjectsCtrl from './projects/projects.controller';
 import FactoriesCtrl from './factories/factories.controller';
+import FactoryCtrl from './factories/factory.controller';
 
 // and setup controllers
 module.controller('MainCtrl', MainCtrl)
-.controller('NavbarCtrl', NavbarCtrl)
-.controller('ProjectsCtrl', ProjectsCtrl)
+  .controller('NavbarCtrl', NavbarCtrl)
+  .controller('ProjectsCtrl', ProjectsCtrl)
   .controller('LoginCtrl', LoginCtrl)
-.controller('FactoriesCtrl', FactoriesCtrl);
+  .controller('FactoriesCtrl', FactoriesCtrl)
+  .controller('FactoryCtrl', FactoryCtrl);
 
 
 // config routes
@@ -48,6 +52,10 @@ module.config(function ($routeProvider) {
     .when('/factories', {
       templateUrl: 'app/factories/factories.html',
       controller: 'FactoriesCtrl'
+    })
+    .when('/factory/:id', {
+      templateUrl: 'app/factories/factory.html',
+      controller: 'FactoryCtrl'
     })
     .when('/login', {
       templateUrl: 'app/main/login.html',
@@ -135,17 +143,22 @@ module.factory('LogInterceptor', function ($q) {
     request: function(config) {
       console.log('RemoteCall:', config.url);
       return config || $q.when(config);
+    },
+    response: function(response) {
+      //console.log('RemoteCall:', response);
+      return response || $q.when(response);
     }
   };
-})
+});
 
 
-  .config(function ($routeProvider, $locationProvider, $httpProvider) {
+module.config(function ($routeProvider, $locationProvider, $httpProvider) {
 
-    if (DEV) {
-      $httpProvider.interceptors.push('AuthInterceptor');
-      $httpProvider.interceptors.push('LogInterceptor');
-    }
-    // Add the ETag interceptor for Codenvy API
-    $httpProvider.interceptors.push('ETagInterceptor');
-  });
+  if (DEV) {
+    $httpProvider.interceptors.push('AuthInterceptor');
+    $httpProvider.interceptors.push('LogInterceptor');
+  }
+  // Add the ETag interceptor for Codenvy API
+  $httpProvider.interceptors.push('ETagInterceptor');
+});
+
