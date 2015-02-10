@@ -23,6 +23,16 @@ describe('CodenvyProject', function(){
    */
   var httpBackend;
 
+  /**
+   * Codenvy backend
+   */
+  var codenvyBackend;
+
+  /**
+   * API builder.
+   */
+  var apiBuilder;
+
 
   /**
    *  setup module
@@ -32,9 +42,11 @@ describe('CodenvyProject', function(){
   /**
    * Inject factory and http backend
    */
-  beforeEach(inject(function(codenvyProject, $httpBackend) {
+  beforeEach(inject(function(codenvyProject, codenvyAPIBuilder, codenvyHttpBackend) {
     factory = codenvyProject;
-    httpBackend = $httpBackend;
+    apiBuilder = codenvyAPIBuilder;
+    codenvyBackend = codenvyHttpBackend;
+    httpBackend = codenvyHttpBackend.getHttpBackend();
   }));
 
   /**
@@ -51,32 +63,34 @@ describe('CodenvyProject', function(){
    */
   it('On Change Workspaces', function() {
 
-      // setup tests objects
-      var workspace1 = {workspaceReference : {name : 'testWorkspace1', id: 'idOfMyWorkspace1'}};
-      var wksp1Project1 = {name: 'project-wk1-1'};
-      var wksp1Project2 = {name: 'project-wk1-2'};
-      var workspace2 = {workspaceReference : {name : 'testWorkspace2', id: 'idOfMyWorkspace2'}};
-      var wksp2Project1 = {name: 'project-wk2-1'};
 
+      // setup tests objects
+      var idWorkspace1 = 'idOfMyWorkspace1';
+      var idWorkspace2 = 'idOfMyWorkspace2';
+
+      var workspace1 = apiBuilder.getWorkspaceBuilder().withWorkspaceReference(apiBuilder.getWorkspaceReferenceBuilder().withName('testWorkspace1').withId(idWorkspace1).build()).build();
+      var workspace2 = apiBuilder.getWorkspaceBuilder().withWorkspaceReference(apiBuilder.getWorkspaceReferenceBuilder().withName('testWorkspace2').withId(idWorkspace2).build()).build();
+
+      var wksp1Project1 = apiBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
+      var wksp1Project2 = apiBuilder.getProjectReferenceBuilder().withName('project-wk1-2').build();
+      var wksp2Project1 = apiBuilder.getProjectReferenceBuilder().withName('project-wk2-1').build();
+
+      // add into backend
+      codenvyBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
+      codenvyBackend.addProjects(workspace2, [wksp2Project1]);
 
       // no projects now
       expect(factory.getAllProjects().length).toEqual(0);
 
       // expecting a GET
-      httpBackend.expectGET('/api/project/idOfMyWorkspace1');
-      httpBackend.expectGET('/api/project/idOfMyWorkspace2');
-
-      // providing request
-      httpBackend.when('GET', '/api/project/idOfMyWorkspace1').respond([wksp1Project1, wksp1Project2]);
-      httpBackend.when('GET', '/api/project/idOfMyWorkspace2').respond([wksp2Project1]);
-
+      httpBackend.expectGET('/api/project/' + idWorkspace1);
+      httpBackend.expectGET('/api/project/' + idWorkspace2);
 
       // update projects workspaces
       factory.onChangeWorkspaces([workspace1, workspace2]);
 
       // flush command
       httpBackend.flush();
-
 
       // check we have projects now (2 from wks 1 and 1 from wks 2)
       var receivedProjects = factory.getAllProjects();
@@ -92,8 +106,8 @@ describe('CodenvyProject', function(){
       var projectsByWorkspace = factory.getProjectsByWorkspace();
       expect(projectsByWorkspace.size).toEqual(2);
 
-      var projectsOfWorkspace1 = projectsByWorkspace.get('idOfMyWorkspace1');
-      var projectsOfWorkspace2 = projectsByWorkspace.get('idOfMyWorkspace2');
+      var projectsOfWorkspace1 = projectsByWorkspace.get(idWorkspace1);
+      var projectsOfWorkspace2 = projectsByWorkspace.get(idWorkspace2);
       expect(projectsOfWorkspace1.length).toEqual(2);
       expect(projectsOfWorkspace1[0].name).toEqual(wksp1Project1.name);
       expect(projectsOfWorkspace1[1].name).toEqual(wksp1Project2.name);

@@ -22,9 +22,19 @@ describe('CodenvyWorkspace', function(){
   var factory;
 
   /**
+   * API builder.
+   */
+  var apiBuilder;
+
+  /**
    * Backend for handling http operations
    */
   var httpBackend;
+
+  /**
+   * Codenvy backend
+   */
+  var codenvyBackend;
 
   /**
    * Listener used for the tests
@@ -47,9 +57,11 @@ describe('CodenvyWorkspace', function(){
   /**
    * Inject factory and http backend
    */
-  beforeEach(inject(function(codenvyWorkspace, $httpBackend) {
+  beforeEach(inject(function(codenvyWorkspace, codenvyAPIBuilder, codenvyHttpBackend) {
     factory = codenvyWorkspace;
-    httpBackend = $httpBackend;
+    apiBuilder = codenvyAPIBuilder;
+    codenvyBackend = codenvyHttpBackend;
+    httpBackend = codenvyHttpBackend.getHttpBackend();
   }));
 
   /**
@@ -67,8 +79,8 @@ describe('CodenvyWorkspace', function(){
   it('Fetch Workspaces', function() {
 
       // setup tests objects
-      var workspace1 = {workspaceReference : {name : 'testWorkspace'}};
-      var tmpWorkspace2 = {workspaceReference : {name : 'tmpWorkspace', temporary: true}};
+      var workspace1 = apiBuilder.getWorkspaceBuilder().withWorkspaceReference(apiBuilder.getWorkspaceReferenceBuilder().withName('testWorkspace').build()).build();
+      var tmpWorkspace2 = apiBuilder.getWorkspaceBuilder().withWorkspaceReference(apiBuilder.getWorkspaceReferenceBuilder().withName('tmpWorkspace').withTemporary(true).build()).build();
 
       // Add the listener
       var listener = new Listener();
@@ -82,7 +94,9 @@ describe('CodenvyWorkspace', function(){
       httpBackend.expectGET('/api/workspace/all');
 
       // providing request
-      httpBackend.when('GET', '/api/workspace/all').respond([workspace1, tmpWorkspace2]);
+      // add workspaces on Http backend
+      codenvyBackend.addWorkspaces([workspace1, tmpWorkspace2]);
+
 
       // fetch workspaces
       factory.fetchWorkspaces();
