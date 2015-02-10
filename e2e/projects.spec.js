@@ -24,6 +24,13 @@ describe('The projects view', function () {
   });
 
 
+  it('launch browser', function() {
+    browser.get('http://localhost:5000/');
+    browser.waitForAngular();
+
+  });
+
+
   it('should include my 2 workspaces', function() {
     browser.addMockModule('userDashboardMock', projectsMock.projectsList);
     browser.get('http://localhost:5000/#/projects');
