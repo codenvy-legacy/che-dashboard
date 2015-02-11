@@ -10,7 +10,7 @@
  */
 'use strict';
 
-class MainCtrl {
+class DashboardCtrl {
 }
 
-export default MainCtrl;
+export default DashboardCtrl;

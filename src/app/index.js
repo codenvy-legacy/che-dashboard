@@ -21,7 +21,7 @@ let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch
 import CodenvyAPI from '../components/api/codenvy-api.factory';
 
 // import controllers
-import MainCtrl from './main/main.controller';
+import DashboardCtrl from './dashboard/dashboard.controller';
 import LoginCtrl from './main/login.controller';
 import NavbarCtrl from '../components/navbar/navbar.controller';
 import ProjectsCtrl from './projects/projects.controller';
@@ -29,7 +29,7 @@ import FactoriesCtrl from './factories/factories.controller';
 import FactoryCtrl from './factories/factory.controller';
 
 // and setup controllers
-module.controller('MainCtrl', MainCtrl)
+module.controller('DashboardCtrl', DashboardCtrl)
   .controller('NavbarCtrl', NavbarCtrl)
   .controller('ProjectsCtrl', ProjectsCtrl)
   .controller('LoginCtrl', LoginCtrl)
@@ -41,8 +41,8 @@ module.controller('MainCtrl', MainCtrl)
 module.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'app/main/main.html',
-      controller: 'MainCtrl'
+      templateUrl: 'app/dashboard/dashboard.html',
+      controller: 'DashboardCtrl'
     })
     .when('/projects', {
       templateUrl: 'app/projects/projects.html',
