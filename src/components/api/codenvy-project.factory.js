@@ -29,7 +29,11 @@ class CodenvyProject {
     this.$resource = $resource;
 
     // projects per workspace id
-    this.projectsPerWorkspace = new Map();
+    this.projectsPerWorkspace = {};
+
+    // projects per workspace id
+    this.projectsPerWorkspaceMap = new Map();
+
 
     // workspaces used to retrieve projects
     this.workspaces = [];
@@ -49,8 +53,11 @@ class CodenvyProject {
   onChangeWorkspaces(workspaces) {
 
     // well we need to clear globally the current projects
-    this.projectsPerWorkspace.clear();
-
+    this.projectsPerWorkspaceMap.clear();
+    for (var member in this.projectsPerWorkspace) {
+      delete this.projectsPerWorkspace[member];
+    }
+    this.workspaces.length = 0;
     // for each workspace
     workspaces.forEach((workspace) => {
 
@@ -79,14 +86,20 @@ class CodenvyProject {
       });
 
       // add the map key
-      this.projectsPerWorkspace.set(workspace.workspaceReference.id, remoteProjects);
+      this.projectsPerWorkspaceMap.set(workspace.workspaceReference.id, remoteProjects);
+      this.projectsPerWorkspace[workspace.workspaceReference.id] = remoteProjects;
 
       // refresh global projects list
       this.projects.length = 0;
-      for (let projects of this.projectsPerWorkspace.values()) {
+
+
+      for (var member in this.projectsPerWorkspace) {
+        let projects = this.projectsPerWorkspace[member];
         projects.forEach((project) => {
+
           this.projects.push(project);
         });
+
       }
 
     });
@@ -107,6 +120,14 @@ class CodenvyProject {
    */
   getProjectsByWorkspace() {
     return this.projectsPerWorkspace;
+  }
+
+  /**
+   * The projects per workspace id
+   * @returns {Map}
+   */
+  getProjectsByWorkspaceMap() {
+    return this.projectsPerWorkspaceMap;
   }
 
 }

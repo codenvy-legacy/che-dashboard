@@ -102,7 +102,7 @@ describe('CodenvyProject', function(){
 
 
       // check map
-      var projectsByWorkspace = factory.getProjectsByWorkspace();
+      var projectsByWorkspace = factory.getProjectsByWorkspaceMap();
       expect(projectsByWorkspace.size).toEqual(2);
 
       var projectsOfWorkspace1 = projectsByWorkspace.get(idWorkspace1);

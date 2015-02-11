@@ -31,6 +31,9 @@ class CodenvyWorkspace {
     // current list of workspaces
     this.workspaces = [];
 
+    // per Id
+    this.workspacesById = new Map();
+
     // listeners if workspaces are changed/updated
     this.listeners = [];
 
@@ -56,19 +59,30 @@ class CodenvyWorkspace {
   }
 
   /**
+   * Gets the workspaces per id
+   * @returns {Map}
+   */
+  getWorkspacesById() {
+    return this.workspacesById;
+  }
+
+  /**
    * Ask for loading the workspaces in asynchronous way
    * If there are no changes, it's not updated
    */
   fetchWorkspaces() {
-    let promise = this.remoteWorkspaceAPI.query().$promise;
+    let query = this.remoteWorkspaceAPI.query();
+    let promise = query.$promise;
     promise.then((data) => {
       var remoteWorkspaces = [];
       this.workspaces.length = 0;
+      this.workspacesById.clear();
       // add workspace if not temporary
       data.forEach((workspace) => {
         if (!workspace.workspaceReference.temporary) {
           remoteWorkspaces.push(workspace);
           this.workspaces.push(workspace);
+          this.workspacesById.set(workspace.workspaceReference.id, workspace);
         }
       });
 

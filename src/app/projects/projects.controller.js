@@ -10,9 +10,17 @@
  */
 'use strict';
 
+/**
+ * This class is handling the controller for the projects
+ * @author Florent Benoit
+ */
 class ProjectsCtrl {
-  /*@ngInject*/
-  constructor ($scope, codenvyAPI, $timeout) {
+
+  /**
+   * Default constructor that is using resource
+   * @ngInject for Dependency injection
+   */
+  constructor (codenvyAPI, $timeout) {
 
     var workspace = codenvyAPI.getWorkspace();
 
@@ -20,17 +28,29 @@ class ProjectsCtrl {
     codenvyAPI.getWorkspace().fetchWorkspaces();
 
     // keep references on workspaces and projects
-    $scope.workspaces = workspace.getWorkspaces();
-    $scope.projects = codenvyAPI.getProject().getAllProjects();
-    $scope.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
+    this.workspaces = workspace.getWorkspaces();
+    this.workspacesById = workspace.getWorkspacesById();
+
+    this.projects = codenvyAPI.getProject().getAllProjects();
+    this.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
 
 
     // perform another fetch
-    $timeout(() => (codenvyAPI.getWorkspace().fetchWorkspaces(true)), 5000);
-
+    /*$timeout(() => (codenvyAPI.getWorkspace().fetchWorkspaces(true)), 5000);*/
 
 
   }
+
+  /**
+   * Gets the name of the workspace based on its ID
+   * @param workspaceId
+   * @returns {CodenvyWorkspaceReferenceBuilder.workspaceReference.name|*}
+   */
+  getWorkspaceName(workspaceId) {
+    return this.workspacesById.get(workspaceId).workspaceReference.name;
+  }
+
+
 }
 
 export default ProjectsCtrl;

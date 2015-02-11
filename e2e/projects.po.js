@@ -18,7 +18,7 @@
  */
 
 var MainPage = function() {
-  this.projectsWorkspaceElements = element.all(by.repeater('workspace in workspaces'));
+  this.projectsWorkspaceElements = element.all(by.repeater('(workspaceId, projects) in projectsCtrl.projectsPerWorkspace'));
 };
 
 module.exports = new MainPage();
