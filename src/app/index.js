@@ -46,7 +46,8 @@ module.config(function ($routeProvider) {
     })
     .when('/projects', {
       templateUrl: 'app/projects/projects.html',
-      controller: 'ProjectsCtrl'
+      controller: 'ProjectsCtrl',
+      controllerAs: 'projectsCtrl'
     })
     .when('/factories', {
       templateUrl: 'app/factories/factories.html',
@@ -148,6 +149,45 @@ module.factory('LogInterceptor', function ($q) {
       return response || $q.when(response);
     }
   };
+});
+
+module.config(function($mdThemingProvider) {
+
+  var codenvyMap = $mdThemingProvider.extendPalette('indigo', {
+    '500': '2b333e'
+  });
+  $mdThemingProvider.definePalette('codenvy', codenvyMap);
+
+  var codenvyAccentMap = $mdThemingProvider.extendPalette('green', {
+    '700' : '00897B',
+    'A400': '3d8f76',
+    'contrastDefaultColor': 'light'
+  });
+  $mdThemingProvider.definePalette('codenvyAccent', codenvyAccentMap);
+
+
+
+  $mdThemingProvider.theme('default')
+    .primaryPalette('codenvy')
+    .accentPalette('codenvyAccent');
+/*  .backgroundPalette('grey');*/
+
+  $mdThemingProvider.theme('project-theme')
+    .primaryPalette('purple')
+    .accentPalette('indigo');
+
+  $mdThemingProvider.theme('factory-theme')
+    .primaryPalette('light-blue')
+    .accentPalette('pink');
+
+  $mdThemingProvider.theme('dashboard-theme')
+    .primaryPalette('orange')
+    .accentPalette('brown');
+
+
+
+
+
 });
 
 

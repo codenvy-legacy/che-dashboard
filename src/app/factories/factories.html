@@ -11,12 +11,21 @@
 
 -->
 <article layout="column" layout-fill layout-align="start start">
-  <md-toolbar layout="row">
-    <div class="md-toolbar-tools">
-      <span>All factories</span>
-      <span flex></span>
+  <md-toolbar class="md-tall md-toolbar-tools" md-theme="factory-theme">
+    <div layout="row" flex="" class="fill-height">
+      <div class="md-toolbar-item md-breadcrumb">
+        <h1>Factories</h1>
+      </div>
+      <span flex=""></span>
+
+      <div class="md-toolbar-item md-tools" layout="row">
+        <a class="md-button md-default-theme" ng-href="#/factories/create-factory">
+          <md-button class="md-raised md-accent">Create factory</md-button>
+        </a>
+      </div>
     </div>
   </md-toolbar>
+
   <md-content layout="column" layout-fill>
     <md-list hide show-gt-sm>
       <md-item>

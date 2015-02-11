@@ -10,15 +10,50 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<md-toolbar>
-  <h1 class="md-toolbar-tools">Codenvy</h1>
+<md-toolbar flex>
+  <section class="md-toolbar-tools" layout="column" layout-align="center center">
+    <img class="codenvy-logo" src="https://codenvy.com/images/logo@3x.png" alt="logo">
+  </section>
+
+
+
+  <section layout="column" layout-align="center center">
+    <md-button class="md-accent md-raised md-hue-2">Create project</md-button>
+  </section>
+  <md-divider></md-divider>
+
+  <section layout="column" layout-align="center center">
+    <md-list layout="column">
+      <md-item>
+        <md-item-content>
+          <div class="md-tile-content">
+            <md-button flex ng-href="#/" layout-align="left"><i class="fa fa-dashboard fa-lg icon">&nbsp;</i>Dashboard</md-button>
+          </div>
+        </md-item-content>
+        <md-item-content>
+          <div class="md-tile-content">
+            <md-button ng-href="#/projects" layout-align="left"><i class="fa fa-folder-open fa-lg icon">&nbsp;</i>Projects</md-button>
+          </div>
+        </md-item-content>
+        <md-item-content>
+          <div class="md-tile-content">
+            <md-button ng-href="#/factories" layout-align="left"><i class="fa fa-tasks fa-lg icon">&nbsp;</i>Factories</md-button>
+          </div>
+        </md-item-content>
+
+      </md-item>
+      </md-list>
+</section>
+
+
+
 </md-toolbar>
-<md-content>
+<!--<md-content flex class="md-hue-3">
   <md-button ng-click="close()" class="md-primary" hide-gt-md>
     Close Sidenav Left
   </md-button>
   <section layout="column" layout-align="center center" flex layout-margin>
-    <md-button class="md-raised md-primary">Create project</md-button>
+    <md-button class="md-accent md-raised md-hue-2">Create project</md-button>
   </section>
   <md-divider ng-if="!$last"></md-divider>
   <section layout="column" layout-align="center center">
@@ -31,4 +66,5 @@
   <section layout="column" layout-align="center center">
     <md-button>Stevan Le Meur</md-button>
   </section>
-</md-content>
+</md-content>-->
+
