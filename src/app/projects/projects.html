@@ -10,8 +10,7 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<article layout="column" layout-fill layout-align="start start">
-  <md-toolbar class="md-tall md-toolbar-tools" md-theme="project-theme">
+  <md-toolbar class="md-tall md-toolbar-tools" md-theme="toolbar-theme">
     <div layout="row" flex="" class="fill-height">
       <div class="md-toolbar-item md-breadcrumb">
         <h1>All projects</h1>
@@ -27,7 +26,7 @@
   </md-toolbar>
 
 
-  <md-content layout="column" layout-fill>
+  <md-content md-scroll-y flex class="md-padding">
     <md-list hide show-gt-sm>
       <md-item>
         <md-item-content>
@@ -40,7 +39,7 @@
       </md-item>
     </md-list>
     <section ng-repeat="(workspaceId, projects) in projectsCtrl.projectsPerWorkspace"  layout="column">
-      <md-subheader class="md-primary">{{projectsCtrl.getWorkspaceName(workspaceId)}}</md-subheader>
+      <md-subheader style="background-color: #EEE" class="md-primary"><h2>{{projectsCtrl.getWorkspaceName(workspaceId)}}</h2></md-subheader>
       <md-list>
         <md-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
           <md-item-content>
@@ -55,4 +54,4 @@
       </md-list>
     </section>
   </md-content>
-</article>
+

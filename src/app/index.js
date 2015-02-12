@@ -166,19 +166,34 @@ module.config(function($mdThemingProvider) {
   $mdThemingProvider.definePalette('codenvyAccent', codenvyAccentMap);
 
 
+  var toolbarPrimaryPalette = $mdThemingProvider.extendPalette('purple', {
+    '500' : '558daa',
+    'contrastDefaultColor': 'light'
+  });
+  $mdThemingProvider.definePalette('toolbarPrimaryPalette', toolbarPrimaryPalette);
+
+  var toolbarAccentPalette = $mdThemingProvider.extendPalette('purple', {
+    'A200' : 'EF6C00',
+    '700' : 'E65100',
+    'contrastDefaultColor': 'light'
+  });
+  $mdThemingProvider.definePalette('toolbarAccentPalette', toolbarAccentPalette);
+
 
   $mdThemingProvider.theme('default')
     .primaryPalette('codenvy')
     .accentPalette('codenvyAccent');
 /*  .backgroundPalette('grey');*/
 
-  $mdThemingProvider.theme('project-theme')
-    .primaryPalette('purple')
-    .accentPalette('indigo');
+  $mdThemingProvider.theme('toolbar-theme')
+    .primaryPalette('toolbarPrimaryPalette')
+    .accentPalette('toolbarAccentPalette');
 
   $mdThemingProvider.theme('factory-theme')
     .primaryPalette('light-blue')
-    .accentPalette('pink');
+    .accentPalette('pink')
+  .warnPalette('red')
+  .backgroundPalette('purple');
 
   $mdThemingProvider.theme('dashboard-theme')
     .primaryPalette('orange')

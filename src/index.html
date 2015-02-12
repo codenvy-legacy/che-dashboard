@@ -41,14 +41,10 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div id="content" layout="column" layout-fill>
-      <section layout="row" flex>
-        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')" ng-include="'components/navbar/navbar.html'">
-        </md-sidenav>
-        <md-content flex>
-          <div layout="column" layout-fill layout-align="start start" ng-view></div>
-        </md-content>
-      </section>
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')" ng-include="'components/navbar/navbar.html'">
+    </md-sidenav>
+    <div layout="column" role="main" tabindex="-1" flex ng-view>
+
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
