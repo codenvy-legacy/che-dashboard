@@ -10,44 +10,29 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<article layout="column" layout-fill layout-align="start start">
-  <md-toolbar class="md-tall md-toolbar-tools" md-theme="toolbar-theme">
-    <div layout="row" flex="" class="fill-height">
-      <div class="md-toolbar-item md-breadcrumb">
-        <h1>Factories</h1>
-      </div>
-      <span flex=""></span>
+<cdvy-toolbar title="All factories" button-name="Create Factory" button-href="#/factories/create-factory"></cdvy-toolbar>
 
-      <div class="md-toolbar-item md-tools" layout="row">
-        <a class="md-button md-default-theme" ng-href="#/factories/create-factory">
-          <md-button class="md-raised md-accent">Create factory</md-button>
-        </a>
-      </div>
-    </div>
-  </md-toolbar>
-
-  <md-content layout="column" layout-fill>
-    <md-list hide show-gt-sm>
-      <md-item>
+<md-content layout="column" layout-fill>
+  <md-list hide show-gt-sm>
+    <md-item>
+      <md-item-content>
+        <div class="md-tile-content" layout="row">
+          <h3 flex="30">ID</h3>
+          <h3 flex="30">Name</h3>
+        </div>
+      </md-item-content>
+    </md-item>
+  </md-list>
+  <section  layout="column">
+    <md-list>
+      <md-item ng-repeat="factory in factories" flex-gt-sm="100" flex="33">
         <md-item-content>
-          <div class="md-tile-content" layout="row">
-            <h3 flex="30">ID</h3>
-            <h3 flex="30">Name</h3>
+          <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column">
+            <h3 flex-gt-sm="30">    <a class="md-button" href="#/factory/{{factory.id}}">{{factory.id}}</a></h3>
+            <p flex-gt-sm="30">{{factory.project.name}}</p>
           </div>
         </md-item-content>
       </md-item>
     </md-list>
-    <section  layout="column">
-      <md-list>
-        <md-item ng-repeat="factory in factories" flex-gt-sm="100" flex="33">
-          <md-item-content>
-            <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column">
-              <h3 flex-gt-sm="30">    <a class="md-button" href="#/factory/{{factory.id}}">{{factory.id}}</a></h3>
-              <p flex-gt-sm="30">{{factory.project.name}}</p>
-            </div>
-          </md-item-content>
-        </md-item>
-      </md-list>
-    </section>
-  </md-content>
-</article>
+  </section>
+</md-content>

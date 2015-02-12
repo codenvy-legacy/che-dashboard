@@ -28,6 +28,9 @@ import ProjectsCtrl from './projects/projects.controller';
 import FactoriesCtrl from './factories/factories.controller';
 import FactoryCtrl from './factories/factory.controller';
 
+// import directives
+import CodenvyToolbar from '../components/toolbar/toolbar.directive';
+
 // and setup controllers
 module.controller('DashboardCtrl', DashboardCtrl)
   .controller('NavbarCtrl', NavbarCtrl)

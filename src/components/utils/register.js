@@ -29,20 +29,20 @@ class Register {
 
   directive(name, constructorFn) {
 
-    constructorFn = _normalizeConstructor(constructorFn);
+    constructorFn = this._normalizeConstructor(constructorFn);
 
     if (!constructorFn.prototype.compile) {
       // create an empty compile function if none was defined.
       constructorFn.prototype.compile = () => {};
     }
 
-    var originalCompileFn = _cloneFunction(constructorFn.prototype.compile);
+    var originalCompileFn = this._cloneFunction(constructorFn.prototype.compile);
 
     // Decorate the compile method to automatically return the link method (if it exists)
     // and bind it to the context of the constructor (so `this` works correctly).
     // This gets around the problem of a non-lexical "this" which occurs when the directive class itself
     // returns `this.link` from within the compile function.
-    _override(constructorFn.prototype, 'compile', function () {
+    this._override(constructorFn.prototype, 'compile', function () {
       return function () {
         originalCompileFn.apply(this, arguments);
 
@@ -52,7 +52,7 @@ class Register {
       };
     });
 
-    var factoryArray = _createFactoryArray(constructorFn);
+    var factoryArray = this._createFactoryArray(constructorFn);
 
     this.app.directive(name, factoryArray);
     return this;
@@ -150,7 +150,7 @@ class Register {
    * @param callback
    */
   _override(object, methodName, callback) {
-    object[methodName] = callback(object[methodName])
+    object[methodName] = callback(object[methodName]);
   }
 
 }

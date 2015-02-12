@@ -10,48 +10,35 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-  <md-toolbar class="md-tall md-toolbar-tools" md-theme="toolbar-theme">
-    <div layout="row" flex="" class="fill-height">
-      <div class="md-toolbar-item md-breadcrumb">
-        <h1>All projects</h1>
-      </div>
-      <span flex=""></span>
 
-      <div class="md-toolbar-item md-tools" layout="row">
-        <a class="md-button md-default-theme" ng-href="#/projects/create-project">
-          <md-button class="md-raised md-accent">Create project</md-button>
-        </a>
-      </div>
-    </div>
-  </md-toolbar>
+<cdvy-toolbar title="All project" button-name="Create Project" button-href="#/projects/create-project"></cdvy-toolbar>
 
 
-  <md-content md-scroll-y flex class="md-padding">
-    <md-list hide show-gt-sm>
-      <md-item>
+<md-content md-scroll-y flex class="md-padding">
+  <md-list hide show-gt-sm>
+    <md-item>
+      <md-item-content>
+        <div class="md-tile-content" layout="row">
+          <h3 flex="20">Name</h3>
+          <h3 flex="25">Description</h3>
+          <h3 flex="20">Last edited</h3>
+        </div>
+      </md-item-content>
+    </md-item>
+  </md-list>
+  <section ng-repeat="(workspaceId, projects) in projectsCtrl.projectsPerWorkspace"  layout="column">
+    <md-subheader style="background-color: #EEE" class="md-primary"><h2>{{projectsCtrl.getWorkspaceName(workspaceId)}}</h2></md-subheader>
+    <md-list>
+      <md-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
         <md-item-content>
-          <div class="md-tile-content" layout="row">
-            <h3 flex="20">Name</h3>
-            <h3 flex="25">Description</h3>
-            <h3 flex="20">Last edited</h3>
+          <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column">
+            <h3 flex-gt-sm="20">{{project.name}}</h3>
+            <p flex-gt-sm="25">{{project.description}}</p>
+            <p flex-gt-sm="20"><span hide show-sm>Last edited: </span>2015/15/01 6:43 PM</p>
+            <p flex-gt-sm="20"><i class="fa fa-star-o fa-2x"></i></p>
           </div>
         </md-item-content>
       </md-item>
     </md-list>
-    <section ng-repeat="(workspaceId, projects) in projectsCtrl.projectsPerWorkspace"  layout="column">
-      <md-subheader style="background-color: #EEE" class="md-primary"><h2>{{projectsCtrl.getWorkspaceName(workspaceId)}}</h2></md-subheader>
-      <md-list>
-        <md-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
-          <md-item-content>
-            <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column">
-              <h3 flex-gt-sm="20">{{project.name}}</h3>
-              <p flex-gt-sm="25">{{project.description}}</p>
-              <p flex-gt-sm="20"><span hide show-sm>Last edited: </span>2015/15/01 6:43 PM</p>
-              <p flex-gt-sm="20"><i class="fa fa-star-o fa-2x"></i></p>
-            </div>
-          </md-item-content>
-        </md-item>
-      </md-list>
-    </section>
-  </md-content>
-
+  </section>
+</md-content>
