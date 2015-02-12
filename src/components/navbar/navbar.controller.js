@@ -13,12 +13,22 @@
 
 class NavbarCtrl {
 
-  constructor ($scope) {
-    $scope.date = new Date();
-
+  /**
+   * Default constructor
+   * @ngInject for Dependency injection
+   */
+  constructor ($mdSidenav) {
+  this.mdSidenav = $mdSidenav;
   }
-}
 
-NavbarCtrl.$inject = ['$scope'];
+
+  /**
+   * Toggle the left menu
+   */
+  toggleLeftMenu() {
+    this.mdSidenav('left').toggle();
+  }
+
+}
 
 export default NavbarCtrl;

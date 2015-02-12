@@ -24,6 +24,9 @@ class CodenvyToolbar {
    */
   constructor () {
     this.restrict='E';
+    this.controller = 'NavbarCtrl';
+    this.controllerAs = 'controller';
+    this.bindToController = true;
   }
 
   /**
@@ -32,7 +35,7 @@ class CodenvyToolbar {
    * @param attrs
    * @returns {string} the template
    */
-  template(element, attrs){
+  template( element, attrs){
     var title = attrs.title;
     var buttonHref = attrs.buttonHref;
     var buttonName = attrs.buttonName;
@@ -42,7 +45,11 @@ class CodenvyToolbar {
       theme = 'toolbar-theme';
     }
 
+
     var template = '<md-toolbar class=\"md-tall md-toolbar-tools\" md-theme=\"' + theme +'\">\n'
+        + '<button class=\"toolbar-switch\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
+    +  '<i class=\"fa fa-bars fa-2x\"></i>'
+    + '</button>'
     + '<div layout=\"row\" flex class=\"fill-height\">'
     + '<div class=\"md-toolbar-item md-breadcrumb\">'
     + '<h1>' + title + '</h1>'
