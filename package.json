@@ -35,6 +35,7 @@
     "karma-jasmine": "~0.3.1",
     "karma-sauce-launcher": "^0.2.10",
     "main-bower-files": "~2.4.0",
+    "minimist": "^1.1.0",
     "protractor": "~1.4.0",
     "proxy-middleware": "^0.10.0",
     "require-dir": "~0.1.0",

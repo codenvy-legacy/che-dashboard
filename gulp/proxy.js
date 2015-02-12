@@ -10,22 +10,39 @@
  *******************************************************************************/
 
 'use strict';
+var minimist = require('minimist');
+var url = require('url');
+var proxy = require('proxy-middleware');
 
 
- var proxy = require('proxy-middleware');
- var url = require('url');
+var serverOptions = {
+  string: 'server',
+  default: {server: 'https://codenvy.com'}
+};
+
+var options = minimist(process.argv.slice(2), serverOptions);
+
+var patterns = ['/api', '/ws', '/datasource', '/java-ca'];
+
+var proxies = []
 
 
- var proxyOptions = url.parse('http://nightly.codenvy-stg.com/api');
- //var proxyOptions = url.parse('https://codenvy.com/api');
- proxyOptions.route = '/api';
- proxyOptions.preserveHost = false;
+patterns.forEach(function(pattern) {
+  var proxyOptions = url.parse(options.server + pattern);
+  proxyOptions.route = '/api';
+  proxyOptions.preserveHost = false;
+  proxies.push(proxy(proxyOptions));
+
+});
 
 
+
+
+console.log('Using codenvy server', options.server);
 
 
 /*
  * Enable proxy
  */
 
-module.exports = [proxy(proxyOptions)];
+module.exports = proxies;
