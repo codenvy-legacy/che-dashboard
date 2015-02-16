@@ -11,34 +11,60 @@
 
 -->
 
-<cdvy-toolbar title="All project" button-name="Create Project" button-href="#/projects/create-project"></cdvy-toolbar>
+<cdvy-toolbar title="All project" button-name="Create Project" button-href="#/create-project"></cdvy-toolbar>
 
-
-<md-content md-scroll-y flex class="md-padding">
-  <md-list hide show-gt-sm>
-    <md-item>
-      <md-item-content>
-        <div class="md-tile-content" layout="row">
-          <h3 flex="20">Name</h3>
-          <h3 flex="25">Description</h3>
-          <h3 flex="20">Last edited</h3>
+<md-content md-scroll-y flex layout="row" layout-align="center" class="projects-list-projects" >
+  <md-content flex-gt-sm="90" flex-sm="98">
+    <md-card>
+      <md-toolbar class="md-toolbar-tools">
+        <h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+          <span class="projects-list-project-panel-toolbar">Projects</span>
+        </h2>
+        <span flex></span>
+        <div class="md-toolbar-item md-tools" layout="row">
+          <md-autocomplete flex hide show-gt-lg style="width: 800px"
+            md-selected-item="selectedItem"
+            md-search-text="searchText"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="display"
+            placeholder="Search project">
+            <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+          </md-autocomplete>
+          <md-button class="md-accent"><md-icon md-font-icon="fa fa-search"></md-icon></md-button>
+          <md-button class="md-accent"><md-icon md-font-icon="fa fa-cog"></md-icon></md-button>
         </div>
-      </md-item-content>
-    </md-item>
-  </md-list>
-  <section ng-repeat="(workspaceId, projects) in projectsCtrl.projectsPerWorkspace"  layout="column">
-    <md-subheader style="background-color: #EEE" class="md-primary"><h2>{{projectsCtrl.getWorkspaceName(workspaceId)}}</h2></md-subheader>
-    <md-list>
-      <md-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
-        <md-item-content>
-          <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column">
-            <h3 flex-gt-sm="20">{{project.name}}</h3>
-            <p flex-gt-sm="25">{{project.description}}</p>
-            <p flex-gt-sm="20"><span hide show-sm>Last edited: </span>2015/15/01 6:43 PM</p>
-            <p flex-gt-sm="20"><i class="fa fa-star-o fa-2x"></i></p>
-          </div>
-        </md-item-content>
-      </md-item>
-    </md-list>
-  </section>
+      </md-toolbar>
+      <md-card-content>
+        <md-list hide show-gt-sm>
+          <md-item>
+            <md-item-content>
+              <div class="md-tile-content" layout="row">
+                <h3 flex="10"></h3>
+                <h3 flex="25">Name</h3>
+                <h3 flex="35">Description</h3>
+                <h3 flex="25">Last edited</h3>
+              </div>
+            </md-item-content>
+          </md-item>
+        </md-list>
+        <section ng-repeat="(workspaceId, projects) in projectsCtrl.projectsPerWorkspace"  layout="column">
+          <md-subheader style="background-color: #EEE" class="projects-list-project-panel-subheader md-primary"><h2>{{projectsCtrl.getWorkspaceName(workspaceId)}}</h2></md-subheader>
+          <md-list>
+            <md-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
+              <md-item-content>
+                <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column">
+                  <p flex-gt-sm="10">{{project.type}}</p>
+                  <p flex-gt-sm="25">{{project.name}}</p>
+                  <p flex-gt-sm="35">{{project.description}}</p>
+                  <p flex-gt-sm="25"><span hide show-sm>Last edited: </span>2015/15/01 6:43 PM</p>
+                  <p flex-gt-sm="5"><i class="fa fa-star-o fa-2x"></i></p>
+                </div>
+              </md-item-content>
+            </md-item>
+          </md-list>
+        </section>
+      </md-card-content>
+
+    </md-card>
+  </md-content>
 </md-content>
