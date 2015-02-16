@@ -48,7 +48,7 @@ class CodenvyToolbar {
 
     var template = '<md-toolbar class=\"md-tall md-toolbar-tools\" md-theme=\"' + theme +'\">\n'
         + '<button class=\"toolbar-switch\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
-    +  '<i class=\"fa fa-bars fa-2x\"></i>'
+    +  '<md-icon md-font-icon=\"fa fa-bars fa-2x\"></md-icon>'
     + '</button>'
     + '<div layout=\"row\" flex class=\"fill-height\">'
     + '<div class=\"md-toolbar-item md-breadcrumb\">'
