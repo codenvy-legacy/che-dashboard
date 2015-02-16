@@ -1,0 +1,103 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar title="Create Project"></cdvy-toolbar>
+<md-content md-scroll-y flex layout="row" layout-align="center" class="projects-create-project" >
+  <md-content flex-gt-sm="80" flex-sm="98">
+    <md-card>
+      <md-toolbar class="">
+        <h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+          <span class="projects-create-project-panel-toolbar">Project Information</span>
+        </h2>
+      </md-toolbar>
+      <md-card-content>
+        <md-input-container>
+          <label>Name</label>
+          <input type="text" ng-model="name">
+        </md-input-container>
+        <md-input-container>
+          <label>Description</label>
+          <input type="text" ng-model="description">
+        </md-input-container>
+        <md-input-container>
+          <label>Workspace</label>
+          <input type="text" ng-model="workspace">
+        </md-input-container>
+        <span>Workspace where the project will be created</span>
+        <div layout="row" flex>
+          <span>&nbsp;</span>
+          </div>
+        <div layout="row" flex class="projects-create-project-panel-visibility">
+          <label>Visibility</label>
+          <div layout="row" flex layout-align="space-around center">
+            <md-button flex="40" class="md-accent md-raised md-hue-2"><md-icon md-font-icon="fa fa-unlock"></md-icon>Public</md-button>
+            <md-button flex="40" class="md-raised"><md-icon md-font-icon="fa fa-lock"></md-icon>Private</md-button>
+          </div>
+        </div>
+
+
+
+      </md-card-content>
+    </md-card>
+
+    <md-card>
+      <md-toolbar class="">
+        <h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+          <span class="projects-create-project-panel-toolbar">Select Source</span>
+        </h2>
+      </md-toolbar>
+      <md-card-content>
+        <md-tabs md-selected="selectedIndex">
+          <md-tab label="Blank Type">
+            <div class="demo-tab tab" layout="column" layout-fill layout-align="space-around center">
+              <div layout="column"></div>
+              Hello
+              <h3>Java</h3> <h3>Php</h3>
+
+
+            </div>
+          </md-tab>
+          <md-tab label="Samples">
+            <div class="demo-tab tab" layout="column" layout-fill layout-align="space-around center">
+              <div ng-bind="tab.content"></div>
+            </div>
+          </md-tab>
+          <md-tab label="Git Repository">
+            <div class="demo-tab tab" layout="column" layout-fill layout-align="space-around center">
+              <div ng-bind="tab.content"></div>
+            </div>
+          </md-tab>
+          <md-tab label="Github">
+            <div class="demo-tab tab" layout="column" layout-fill layout-align="space-around center">
+              <div ng-bind="tab.content"></div>
+            </div>
+          </md-tab>
+          <md-tab label="Zip">
+            <div class="demo-tab tab" layout="column" layout-fill layout-align="space-around center">
+              <div ng-bind="tab.content"></div>
+            </div>
+          </md-tab>
+          <md-tab label="Configuration file">
+            <div class="demo-tab tab" layout="column" layout-fill layout-align="space-around center">
+              <div ng-bind="tab.content"></div>
+            </div>
+          </md-tab>
+        </md-tabs>
+
+      </md-card-content>
+    </md-card>
+    <md-button class="projects-create-project-button md-accent md-raised md-hue-2" style="line-height: 30px">Create Project</md-button>
+
+  </md-content>
+
+
+</md-content>

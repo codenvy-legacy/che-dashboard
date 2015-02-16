@@ -52,6 +52,11 @@ module.config(function ($routeProvider) {
       controller: 'ProjectsCtrl',
       controllerAs: 'projectsCtrl'
     })
+    .when('/create-project', {
+      templateUrl: 'app/projects/create-project.html',
+      controller: 'ProjectsCtrl',
+      controllerAs: 'projectsCtrl'
+    })
     .when('/factories', {
       templateUrl: 'app/factories/factories.html',
       controller: 'FactoriesCtrl'
@@ -157,13 +162,15 @@ module.factory('LogInterceptor', function ($q) {
 module.config(function($mdThemingProvider) {
 
   var codenvyMap = $mdThemingProvider.extendPalette('indigo', {
-    '500': '2b333e'
+    '500': '2b333e',
+    '300' : 'D0D0D0'
   });
   $mdThemingProvider.definePalette('codenvy', codenvyMap);
 
   var codenvyAccentMap = $mdThemingProvider.extendPalette('green', {
     '700' : '00897B',
     'A400': '3d8f76',
+    'A200': '00897B',
     'contrastDefaultColor': 'light'
   });
   $mdThemingProvider.definePalette('codenvyAccent', codenvyAccentMap);
