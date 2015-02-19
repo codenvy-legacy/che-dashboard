@@ -9,32 +9,45 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
-/*exported CodenvyAPI */
+/*exported CodenvyAPI, CodeMirror, GitHub */
 
 var DEV = true;
 
 // init module
-let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'ui.bootstrap', 'ngMaterial']);
+let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages']);
 
+import Register from '../components/utils/register';
+
+// import custom codemirror
+import CodeMirror from './codemirror/codemirror';
 
 // import factories
 import CodenvyAPI from '../components/api/codenvy-api.factory';
+
+// import GitHub services
+import GitHub from '../components/github/github-service';
+
 
 // import controllers
 import DashboardCtrl from './dashboard/dashboard.controller';
 import LoginCtrl from './main/login.controller';
 import NavbarCtrl from '../components/navbar/navbar.controller';
-import ProjectsCtrl from './projects/projects.controller';
 import FactoriesCtrl from './factories/factories.controller';
 import FactoryCtrl from './factories/factory.controller';
+
+import ProjectsConfig from './projects/projects-config';
+
+var instanceRegister = Register.getInstance();
+
+new ProjectsConfig(instanceRegister);
 
 // import directives
 import CodenvyToolbar from '../components/toolbar/toolbar.directive';
 
+
 // and setup controllers
 module.controller('DashboardCtrl', DashboardCtrl)
   .controller('NavbarCtrl', NavbarCtrl)
-  .controller('ProjectsCtrl', ProjectsCtrl)
   .controller('LoginCtrl', LoginCtrl)
   .controller('FactoriesCtrl', FactoriesCtrl)
   .controller('FactoryCtrl', FactoryCtrl);
@@ -48,14 +61,14 @@ module.config(function ($routeProvider) {
       controller: 'DashboardCtrl'
     })
     .when('/projects', {
-      templateUrl: 'app/projects/projects.html',
-      controller: 'ProjectsCtrl',
-      controllerAs: 'projectsCtrl'
+      templateUrl: 'app/projects/list-projects/list-projects.html',
+      controller: 'ListProjectsCtrl',
+      controllerAs: 'listProjectsCtrl'
     })
     .when('/create-project', {
-      templateUrl: 'app/projects/create-project.html',
-      controller: 'ProjectsCtrl',
-      controllerAs: 'projectsCtrl'
+      templateUrl: 'app/projects/create-project/create-project.html',
+      controller: 'CreateProjectCtrl',
+      controllerAs: 'createProjectCtrl'
     })
     .when('/factories', {
       templateUrl: 'app/factories/factories.html',
@@ -223,6 +236,7 @@ module.config(function ($routeProvider, $locationProvider, $httpProvider) {
     $httpProvider.interceptors.push('LogInterceptor');
   }
   // Add the ETag interceptor for Codenvy API
-  $httpProvider.interceptors.push('ETagInterceptor');
+  //$httpProvider.interceptors.push('ETagInterceptor');
 });
+
 

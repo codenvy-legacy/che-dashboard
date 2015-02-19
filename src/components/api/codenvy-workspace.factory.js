@@ -90,6 +90,7 @@ class CodenvyWorkspace {
         listener.onChangeWorkspaces(this.workspaces);
       });
     });
+    return promise;
   }
 
 }

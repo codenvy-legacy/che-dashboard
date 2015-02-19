@@ -1,0 +1,12 @@
+<form name="createProjectGitForm">
+  <div layout="row" flex ng-init="createProjectCtrl.setForm(createProjectGitForm, 'git');"></div>
+  <md-input-container>
+    <label>Git URL</label>
+    <input type="text" id="gitRepositoryURL"
+           name="remoteGitURL" ng-model="createProjectCtrl.importProjectData.source.project.location"
+           required>
+    <div ng-messages="createProjectGitForm.remoteGitURL.$error">
+      <div ng-message="required">A repository URL is required.</div>
+    </div>
+  </md-input-container>
+</form>

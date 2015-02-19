@@ -11,17 +11,17 @@
 'use strict';
 
 /**
- * This class is handling the controller for the projects
+ * This class is handling the controller for listing the projects
  * @author Florent Benoit
  */
-class ProjectsCtrl {
+class ListProjectsCtrl {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $timeout) {
-
+  constructor (codenvyAPI) {
+    this.codenvyAPI = codenvyAPI;
     var workspace = codenvyAPI.getWorkspace();
 
     // fetch workspaces when initializing
@@ -29,15 +29,11 @@ class ProjectsCtrl {
 
     // keep references on workspaces and projects
     this.workspaces = workspace.getWorkspaces();
+
     this.workspacesById = workspace.getWorkspacesById();
 
     this.projects = codenvyAPI.getProject().getAllProjects();
     this.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
-
-
-    // perform another fetch
-    /*$timeout(() => (codenvyAPI.getWorkspace().fetchWorkspaces(true)), 5000);*/
-
 
   }
 
@@ -53,4 +49,4 @@ class ProjectsCtrl {
 
 }
 
-export default ProjectsCtrl;
+export default ListProjectsCtrl;

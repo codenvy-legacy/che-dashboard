@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
-/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendProviderFactory */
+/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendProviderFactory */
 
 
 import Register from '../utils/register';
@@ -17,6 +17,7 @@ import CodenvyProject from './codenvy-project.factory';
 import CodenvyWorkspace from './codenvy-workspace.factory';
 import CodenvyUser from './codenvy-user.factory';
 import CodenvyFactory from './codenvy-factory.factory';
+import CodenvyProjectType from './codenvy-project-type.factory';
 import CodenvyAPIBuilder from './builder/codenvy-api-builder.factory';
 import CodenvyHttpBackend from './test/codenvy-http-backend.factory';
 import CodenvyHttpBackendProviderFactory from './test/codenvy-http-backend-provider.factory';
@@ -32,11 +33,12 @@ class CodenvyAPI {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyUser) {
+  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyUser, codenvyProjectType) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
     this.codenvyUser = codenvyUser;
+    this.codenvyProjectType = codenvyProjectType;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
@@ -72,6 +74,14 @@ class CodenvyAPI {
    */
   getUser() {
     return this.codenvyUser;
+  }
+
+  /**
+   * The Codenvy Project Type API
+   * @returns {CodenvyProjectType|*}
+   */
+  getProjectType() {
+    return this.codenvyProjectType;
   }
 
 }

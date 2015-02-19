@@ -1,0 +1,107 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar title="Create Project"></cdvy-toolbar>
+<md-content md-scroll-y flex layout="row" layout-align="center" class="projects-create-project" >
+
+
+  <md-content flex-gt-sm="80" flex-sm="98">
+
+
+    <md-card>
+      <ng-form name="projectInformationForm">
+        <md-toolbar ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);" class="">
+          <h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+            <span class="projects-create-project-panel-toolbar">Project Information</span>
+          </h2>
+        </md-toolbar>
+        <md-card-content>
+
+          <md-input-container>
+            <label>Name</label>
+            <input type="text" name="name" ng-model="createProjectCtrl.importProjectData.project.name" md-maxlength="128" ng-pattern="/^[A-Za-z0-9_\-\.]+$/" required>
+            <div ng-messages="projectInformationForm.name.$error">
+              <div ng-message="required">A name is required.</div>
+              <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
+              <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+            <label>Description</label>
+            <input type="text" ng-model="createProjectCtrl.importProjectData.project.description" md-maxlength="256">
+          </md-input-container>
+          <div layout="row" flex>
+            <label>Workspace:</label>
+            <div layout="row" flex layout-align="space-around center">
+              <select class="create-project-select" id="targetWorkspace"
+                      name="targetWorkspace"
+                      ng-model="createProjectCtrl.workspaceSelected"
+                      ng-options="workspace.workspaceReference.name for workspace in createProjectCtrl.workspaces">
+              </select>
+            </div>
+          </div>
+
+          <span>Workspace where the project will be created</span>
+          <div layout="row" flex>
+            <span>&nbsp;</span>
+          </div>
+          <div layout="row" flex class="projects-create-project-panel-visibility">
+            <label>Visibility</label>
+            <div layout="row" flex layout-align="space-around center">
+              <md-button flex="40" class="md-accent md-raised md-hue-2"><md-icon md-font-icon="fa fa-unlock"></md-icon>Public</md-button>
+              <md-button flex="40" class="md-raised"><md-icon md-font-icon="fa fa-lock"></md-icon>Private</md-button>
+            </div>
+          </div>
+
+        </md-card-content>
+      </ng-form>
+    </md-card>
+
+    <md-card>
+      <md-toolbar class="">
+        <h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+          <span class="projects-create-project-panel-toolbar">Select Source</span>
+        </h2>
+      </md-toolbar>
+      <md-card-content>
+        <md-tabs md-selected="selectedIndex">
+          <md-tab label="Blank Type"  md-on-select="createProjectCtrl.setCurrentTab('blank')">
+              <create-project-blank layout="row" layout-wrap></create-project-blank>
+          </md-tab>
+          <md-tab label="Samples" md-on-select="createProjectCtrl.setCurrentTab('samples')">
+
+          </md-tab>
+          <md-tab label="Git Repository" md-on-select="createProjectCtrl.setCurrentTab('git')">
+              <create-project-git layout="column"></create-project-git>
+          </md-tab>
+          <md-tab label="Github" md-on-select="createProjectCtrl.setCurrentTab('github')">
+            <create-project-github layout="column"></create-project-github>
+
+          </md-tab>
+          <md-tab label="Zip" md-on-select="createProjectCtrl.setCurrentTab('zip')">
+              <create-project-zip layout="column"></create-project-zip>
+          </md-tab>
+          <md-tab md-on-select="createProjectCtrl.refreshCM(); createProjectCtrl.setCurrentTab('config')" label="Configuration file">
+                <create-project-conf-file layout="column" layout-fill></create-project-conf-file>
+          </md-tab>
+        </md-tabs>
+
+      </md-card-content>
+    </md-card>
+    <md-button ng-click="createProjectCtrl.import()" ng-disabled="!createProjectCtrl.checkValidFormState()" class="projects-create-project-button md-accent md-raised md-hue-2" style="line-height: 30px">Create Project</md-button>
+
+    <span>{{createProjectCtrl.importProjectData}}</span>
+  </md-content>
+
+
+
+</md-content>

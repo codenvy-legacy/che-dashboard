@@ -25,6 +25,9 @@
     <!-- DO NOT ADD DIRECTLY CSS THERE -->
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
     <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/codemirror/addon/lint/lint.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/codemirror/addon/fold/foldgutter.css">
+
     <!-- bower:css -->
     <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
     <!-- endbower -->
@@ -57,8 +60,21 @@
       ga('create','UA-37306001-1');ga('send','pageview');
     </script>
 
+    <!-- Addons are not automatically injected -->
+
     <!-- DO NOT ADD DIRECTLY JS THERE, THIS IS AUTOMATICALLY ADDED -->
     <!-- build:js(src) scripts/vendor.js -->
+    <script src="../bower_components/codemirror/lib/codemirror.js"></script>
+    <script src="../bower_components/jsonlint/lib/jsonlint.js"></script>
+    <script src="../bower_components/codemirror/addon/lint/lint.js"></script>
+    <script src="../bower_components/codemirror/addon/lint/json-lint.js"></script>
+    <script src="../bower_components/codemirror/mode/javascript/javascript.js"></script>
+    <script src="../bower_components/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="../bower_components/codemirror/addon/edit/closebrackets.js"></script>
+    <script src="../bower_components/codemirror/addon/fold/foldcode.js"></script>
+    <script src="../bower_components/codemirror/addon/fold/foldgutter.js"></script>
+    <script src="../bower_components/codemirror/addon/fold/brace-fold.js"></script>
+    <script src="../bower_components/codemirror/addon/selection/active-line.js"></script>
     <!-- bower:js -->
     <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
     <!-- endbower -->

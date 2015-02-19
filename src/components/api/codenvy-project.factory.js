@@ -42,7 +42,12 @@ class CodenvyProject {
     this.projects = [];
 
     // remote call
-    this.remoteProjectsAPI = this.$resource('/api/project/:workspaceId',  {workspaceId:'@id'});
+    this.remoteProjectsAPI = this.$resource('/api/project/:workspaceId',  {workspaceId:'@id'}, {
+      import: { method: 'POST', url: '/api/project/:workspaceId/import/:path'},
+      create: { method: 'POST', url: '/api/project/:workspaceId?name=:path'}
+
+
+    });
   }
 
 
@@ -71,13 +76,14 @@ class CodenvyProject {
 
   }
 
+
   /**
    * Fetch the projects for the given workspace
    * @param workspace
    */
-  fetchProjectsForWorkspace(workspace) {
+  fetchProjectsForWorkspaceId(workspaceId) {
 
-    let promise = this.remoteProjectsAPI.query({workspaceId: workspace.workspaceReference.id}).$promise;
+    let promise = this.remoteProjectsAPI.query({workspaceId: workspaceId}).$promise;
     promise.then((projectReferences) => {
 
       var remoteProjects = [];
@@ -86,8 +92,8 @@ class CodenvyProject {
       });
 
       // add the map key
-      this.projectsPerWorkspaceMap.set(workspace.workspaceReference.id, remoteProjects);
-      this.projectsPerWorkspace[workspace.workspaceReference.id] = remoteProjects;
+      this.projectsPerWorkspaceMap.set(workspaceId, remoteProjects);
+      this.projectsPerWorkspace[workspaceId] = remoteProjects;
 
       // refresh global projects list
       this.projects.length = 0;
@@ -103,6 +109,33 @@ class CodenvyProject {
       }
 
     });
+  }
+
+
+  /**
+   * Fetch the projects for the given workspace
+   * @param workspace
+   */
+  fetchProjectsForWorkspace(workspace) {
+
+    this.fetchProjectsForWorkspaceId(workspace.workspaceReference.id);
+  }
+
+  importProject(workspaceId, path, data) {
+    let promise = this.remoteProjectsAPI.import({workspaceId: workspaceId, path: path}, data).$promise;
+    promise.then(this.fetchProjectsForWorkspaceId(workspaceId));
+
+
+    return promise;
+  }
+
+
+  createProject(workspaceId, path, data) {
+    let promise = this.remoteProjectsAPI.create({workspaceId: workspaceId, path: path}, data).$promise;
+    promise.then(this.fetchProjectsForWorkspaceId(workspaceId));
+
+
+    return promise;
   }
 
 

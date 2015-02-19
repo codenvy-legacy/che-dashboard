@@ -1,0 +1,14 @@
+<md-card ng-repeat="(typeCategory, types) in createProjectCtrl.typesByCategory" class="widget-select" ng-click="createProjectCtrl.selectWidget('{{typeCategory}}')" ng-class="{'widget-select-active' : '{{typeCategory}}' == createProjectCtrl.selectedWidget}">
+  <div class="icon"><i class="fa fa-cube fa-lg icon"></i></div>
+  <div class="title">{{typeCategory}}</div>
+
+  <div class="body">
+    <select class="create-project-select" name="typeSelected"
+            ng-model="createProjectCtrl.typeSelected"
+            ng-change="createProjectCtrl.selectBlankType('{{typeCategory}}')"
+            ng-init="createProjectCtrl.initBlankType(typeCategory, types)"
+            ng-options="type.type for type in types">
+      <option value="" ng-if="false"></option>
+    </select>
+  </div>
+</md-card>

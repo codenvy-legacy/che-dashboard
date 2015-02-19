@@ -1,0 +1,12 @@
+<form name="createProjectZipForm">
+  <div layout="row" flex ng-init="createProjectCtrl.setForm(createProjectZipForm, 'zip');"></div>
+  <md-input-container>
+    <label>Zip URL</label>
+    <input type="text" id="zipURL"
+           name="zipURL" ng-model="createProjectCtrl.importProjectData.source.project.location"
+           required>
+    <div ng-messages="createProjectZipForm.zipURL.$error">
+      <div ng-message="required">A zip URL is required.</div>
+    </div>
+  </md-input-container>
+</form>
