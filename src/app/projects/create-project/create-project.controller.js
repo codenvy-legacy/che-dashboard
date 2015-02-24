@@ -20,9 +20,12 @@ class CreateProjectCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $filter, $timeout) {
+  constructor (codenvyAPI, $filter, $timeout, $location, $anchorScroll) {
     this.codenvyAPI = codenvyAPI;
     this.$timeout = $timeout;
+    this.$location = $location;
+    this.$anchorScroll = $anchorScroll;
+
     var workspace = codenvyAPI.getWorkspace();
 
     // fetch workspaces when initializing
@@ -61,9 +64,6 @@ class CreateProjectCtrl {
     this.typesByCategory = codenvyAPI.getProjectType().getTypesByCategory();
 
 
-    this.selectedWidget = 'Blank';
-    this.selectedTypeByCategory = new Map();
-
     this.jsonConfig = {};
     this.jsonConfig.content = '{}';
     try {
@@ -99,6 +99,12 @@ class CreateProjectCtrl {
     this.importProjectData.project.name = gitHubRepository.name;
     this.importProjectData.project.description = gitHubRepository.description;
     this.importProjectData.source.project.location = gitHubRepository.clone_url;
+
+   /* this.$timeout(() => {
+      this.$location.hash('create-project-button-import');
+      this.$anchorScroll();
+    }, 500);*/
+
   }
 
 
@@ -106,12 +112,12 @@ class CreateProjectCtrl {
     // check project information form and selected tab form
 
 
-    var currentForm = this.forms.get(this.currentTab);
+    /*var currentForm = this.forms.get(this.currentTab);
     if (currentForm) {
       return this.projectInformationForm.$valid && currentForm.$valid;
     } else {
       return this.projectInformationForm.$valid;
-    }
+    }*/
   }
 
   setProjectInformationForm(form) {
@@ -149,29 +155,8 @@ class CreateProjectCtrl {
 
   }
 
-  /**
-   * Sets the default blank type for the given category
-   * @param category the category to use
-   * @param types the available types
-   */
-  initBlankType(category, types) {
-    this.selectedTypeByCategory.set(category, types[0].type);
-  }
-
-
-  selectBlankType(category) {
-    this.selectedTypeByCategory.set(category, this.typeSelected.type);
-    this.updateProjectType(category);
-
-  }
-
-  selectWidget(title) {
-    this.selectedWidget = title;
-    this.updateProjectType(title);
-  }
-
-  updateProjectType(type) {
-    this.importProjectData.project.type = this.selectedTypeByCategory.get(type);
+  cdvySelecter(name, valueSelected) {
+    this.importProjectData.project.type = valueSelected.type;
   }
 
 

@@ -35,6 +35,8 @@ import NavbarCtrl from '../components/navbar/navbar.controller';
 import FactoriesCtrl from './factories/factories.controller';
 import FactoryCtrl from './factories/factory.controller';
 
+import CodenvySelecterCtrl from '../components/widget/selecter/cdvy-selecter.controller';
+import DemoComponentsCtrl from './demo-components/demo-components.controller';
 import ProjectsConfig from './projects/projects-config';
 
 var instanceRegister = Register.getInstance();
@@ -42,15 +44,21 @@ var instanceRegister = Register.getInstance();
 new ProjectsConfig(instanceRegister);
 
 // import directives
-import CodenvyToolbar from '../components/toolbar/toolbar.directive';
-
+import CodenvyToolbar from '../components/widget/toolbar/toolbar.directive';
+import CodenvyInput from '../components/widget/input/cdvy-input.directive';
+import CodenvyPanel from '../components/widget/panel/cdvy-panel.directive';
+import CodenvyButtonPrimary from '../components/widget/button/cdvy-button-primary.directive';
+import CodenvySelecter from '../components/widget/selecter/cdvy-selecter.directive';
+import CodenvyHtmlSource from '../components/widget/html-source/cdvy-html-source.directive';
 
 // and setup controllers
 module.controller('DashboardCtrl', DashboardCtrl)
   .controller('NavbarCtrl', NavbarCtrl)
   .controller('LoginCtrl', LoginCtrl)
   .controller('FactoriesCtrl', FactoriesCtrl)
-  .controller('FactoryCtrl', FactoryCtrl);
+  .controller('FactoryCtrl', FactoryCtrl)
+  .controller('DemoComponentsCtrl', DemoComponentsCtrl)
+  .controller('CodenvySelecterCtrl', CodenvySelecterCtrl);
 
 
 // config routes
@@ -85,6 +93,18 @@ module.config(function ($routeProvider) {
     .otherwise({
       redirectTo: '/'
     });
+
+
+  // add demo page
+  if (DEV) {
+    $routeProvider.when('/demo-components', {
+      templateUrl: 'app/demo-components/demo-components.html',
+      controller: 'DemoComponentsCtrl',
+      controllerAs: 'demoComponentsCtrl'
+    });
+
+  }
+
 })
 ;
 
@@ -236,7 +256,7 @@ module.config(function ($routeProvider, $locationProvider, $httpProvider) {
     $httpProvider.interceptors.push('LogInterceptor');
   }
   // Add the ETag interceptor for Codenvy API
-  //$httpProvider.interceptors.push('ETagInterceptor');
+  $httpProvider.interceptors.push('ETagInterceptor');
 });
 
 

@@ -10,7 +10,7 @@
  */
 'use strict';
 
-import Register from '../utils/register';
+import Register from '../../utils/register';
 
 /**
  * Defines a directive for creating and managing Codenvy top toolbar.

@@ -41,14 +41,12 @@ class CreateProjectGithub {
     this.templateUrl = 'app/projects/create-project/github/create-project-github.html';
   }
 
-  link($scope, element, attrs, ctrl) {
-
-
+  link($scope) {
 
     // Watch data of the createProject controller and update content with these parameters
     $scope.$watch('createProjectCtrl.importProjectData.source.project.location', (newValue) => {
       var matchRepository = this.$filter('filter')($scope.createProjectGithubCtrl.gitHubRepositories, function (repository, index) {
-        return repository.clone_url == newValue;
+        return repository.clone_url === newValue;
       });
       if (matchRepository) {
         $scope.createProjectGithubCtrl.selectedRepository = matchRepository[0];

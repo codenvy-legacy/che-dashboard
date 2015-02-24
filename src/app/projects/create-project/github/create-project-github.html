@@ -1,17 +1,5 @@
 <form name="createProjectGitHubForm">
-  <div layout="row" flex ng-init="createProjectCtrl.setForm(createProjectGitHubForm, 'github');"></div>
-  <md-input-container>
-    <label>GitHub URL</label>
-    <input type="text" id="gitRepositoryURL"
-           name="remoteGitURL" ng-model="createProjectCtrl.importProjectData.source.project.location"
-           required>
-    <div ng-messages="createProjectGitForm.remoteGitURL.$error">
-      <div ng-message="required">A repository URL is required.</div>
-    </div>
-
-  </md-input-container>
-
-
+  <div class="create-project-github-panel" layout="row" flex ng-init="createProjectCtrl.setForm(createProjectGitHubForm, 'github');"></div>
 
 
   <p ng-if="createProjectGithubCtrl.state == 'LOAD_ERROR'" class="alert alert-danger" style="margin-bottom: 15px">
@@ -21,53 +9,39 @@
   <button type="button" class="btn btn-primary" ng-click="createProjectGithubCtrl.authenticateWithGitHub()" ng-if="createProjectGithubCtrl.state != 'LOADING' && createProjectGithubCtrl.state != 'LOADED'">Load your GitHub repositories</button>
 
   <div ng-if="createProjectGithubCtrl.state == 'LOADED'">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="organizationFilter" class="control-label">Filter by organization</label>
-          <select id="organizationFilter" class="form-control" ng-model="createProjectGithubCtrl.organizationName" ng-options="createProjectGithubCtrl.resolveOrganizationName(organization) group by createProjectGithubCtrl.resolveOrganizationType(organization) for organization in createProjectGithubCtrl.organizations">
-            <option value="">All your organizations</option>
-          </select>
-        </div>
+    <div layout="row" layout-align="space-around center">
+
+      <div layout="row" flex="45">
+        <md-icon flex-gt-sm="5" md-font-icon="fa fa-search"></md-icon>
+        <input id="nameFilter" flex ng-model="createProjectGithubCtrl.repositoryName" type="text" placeholder="Start typing here">
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="nameFilter" class="control-label">Filter by name</label>
-          <input id="nameFilter" class="form-control" ng-model="createProjectGithubCtrl.repositoryName" type="text" placeholder="Start typing here">
-        </div>
+      <div layout="row" flex="45">
+        <select flex id="organizationFilter" class="github-create-project-select" ng-model="createProjectGithubCtrl.organizationName" ng-options="createProjectGithubCtrl.resolveOrganizationName(organization) group by createProjectGithubCtrl.resolveOrganizationType(organization) for organization in createProjectGithubCtrl.organizations">
+          <option value="">All Organizations</option>
+        </select>
       </div>
+
     </div>
-    <!--
-    <div class="list-group git-hub-repositories-list form-group">
-      <a class="list-group-item" ng-class="{'active': createProjectGithubCtrl.selectedRepository == gitHubRepository, 'no-desc': !gitHubRepository.description}"
-         ng-repeat="gitHubRepository in createProjectGithubCtrl.gitHubRepositories | githubFilterRepositories:createProjectGithubCtrl.organizationName:createProjectGithubCtrl.repositoryName | orderBy:'name'"
-         ng-click="createProjectGithubCtrl.selectRepository(gitHubRepository)">
-        <span ng-if="!gitHubRepository.fork" class="repo-icon octicon octicon-repo"></span>
-        <span ng-if="gitHubRepository.fork" class="repo-icon octicon octicon-repo-forked" title="forked"></span>
-        <span class="repo-name">name:{{gitHubRepository.name}}</span>
-        <span ng-if="gitHubRepository.private" class="repo-private fa fa-lock" title="private"></span>
-        <span class="repo-description">desc:{{gitHubRepository.description}}</span>
-      </a>
-    </div>-->
 
     <md-list class="github-create-project">
       <md-item ng-repeat="gitHubRepository in createProjectGithubCtrl.gitHubRepositories | githubFilterRepositories:createProjectGithubCtrl.organizationName:createProjectGithubCtrl.repositoryName | orderBy:'name'"
-               ng-click="createProjectGithubCtrl.selectRepository(gitHubRepository); createProjectCtrl.selectGitHubRepository(gitHubRepository)" flex-gt-sm="100" flex="33">
+               ng-click="createProjectGithubCtrl.selectRepository(gitHubRepository); createProjectCtrl.selectGitHubRepository(gitHubRepository)" flex-gt-sm="100" flex="33" ng-class="{'github-create-project-active' : gitHubRepository == createProjectGithubCtrl.selectedRepository}">
         <md-item-content>
           <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column" layout-align="start center" >
 
-            <div layout="row" flex-gt-sm="5">
-              <span ng-if="!gitHubRepository.fork" class="repo-icon octicon octicon-repo"></span>
+            <div layout="row" class="icons">
+              <span ng-if="!gitHubRepository.fork" class="fa fa-folder"></span>
               <span ng-if="gitHubRepository.fork" class="fa fa-code-fork" title="forked"></span>
-              <span flex="5" ng-if="gitHubRepository.private" class="repo-private fa fa-lock" title="private"></span>
+              <span ng-if="gitHubRepository.private" class="repo-private fa fa-lock" title="private"></span>
             </div>
 
-            <div layout="column" flex-gt-sm="40">
+            <div layout="column" flex="40">
               <h2>{{gitHubRepository.name}}</h2>
               <h4>{{gitHubRepository.description}}</h4>
             </div>
 
-            <div layout="row" flex-gt-sm="10">
+            <div layout="row" hide-lg hide-md hide-sm flex-gt-md="30">
+              <span>{{gitHubRepository.clone_url}}</span>
             </div>
 
 

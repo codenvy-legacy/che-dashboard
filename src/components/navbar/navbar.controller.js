@@ -18,7 +18,7 @@ class NavbarCtrl {
    * @ngInject for Dependency injection
    */
   constructor ($mdSidenav) {
-  this.mdSidenav = $mdSidenav;
+    this.mdSidenav = $mdSidenav;
   }
 
 

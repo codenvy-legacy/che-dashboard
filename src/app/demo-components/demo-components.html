@@ -1,0 +1,71 @@
+<md-tabs md-selected="selectedIndex">
+  <md-tab label="Font">
+    <p>Headings</p>
+    <cdvy-html-source>
+      <h1>This is h1 <small>Secondary text</small></h1>
+      <h2>This is h2 <small>Secondary text</small></h2>
+      <h3>This is h3 <small>Secondary text</small></h3>
+      <h4>This is h4 <small>Secondary text</small></h4>
+      <h5>This is h5 <small>Secondary text</small></h5>
+      <h6>This is h6 <small>Secondary text</small></h6>
+    </cdvy-html-source>
+  </md-tab>
+  <md-tab label="Panel">
+    <cdvy-html-source>
+
+      <cdvy-panel cdvy-title="My first panel"></cdvy-panel>
+      <cdvy-panel cdvy-title="Another panel"></cdvy-panel>
+      <cdvy-panel cdvy-title="Yet another panel"></cdvy-panel>
+    </cdvy-html-source>
+  </md-tab>
+  <md-tab label="Selecter" >
+    <div>Selected book is {{demoComponentsCtrl.selectedBook}}</div>
+
+    <div layout="row" layout-wrap>
+      <cdvy-selecter ng-repeat="(author, books) in demoComponentsCtrl.booksByAuthor"
+                     ng-model="demoComponentsCtrl.selectedBook"
+                     cdvy-values="books"
+                     cdvy-name="PickupBook"
+                     cdvy-title="{{author}}"
+                     cdvy-callback-controller="demoComponentsCtrl"
+                     cdvy-options="book.title for book in values" />
+    </div>
+  </md-tab>
+  <md-tab label="Buttons" >
+    <div layout="column" >
+      <cdvy-html-source>
+
+        <cdvy-button-primary cdvy-button-title="Primary button"
+                             ng-click="createProjectCtrl.import()">
+        </cdvy-button-primary>
+
+
+        <cdvy-button-primary cdvy-button-title="Primary disabled button"
+                             ng-disabled="!demoComponentsCtrl.testButton2">
+        </cdvy-button-primary>
+      </cdvy-html-source>
+    </div>
+  </md-tab>
+  <md-tab label="Input" >
+
+    <div layout="column" flex ng-form="demoForm">
+      <cdvy-html-source>
+
+        <cdvy-input cdvy-form="demoForm"
+                    cdvy-name="demoinput"
+                    cdvy-label-name="Name"
+                    cdvy-place-holder="Name of this demo"
+                    ng-model="demoComponentsCtrl.selectedInput"
+                    required
+                    ng-maxlength="128"
+                    ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+          <div ng-message="required">A name is required.</div>
+          <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
+          <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+          <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
+        </cdvy-input>
+      </cdvy-html-source>
+    </div>
+
+  </md-tab>
+</md-tabs>
