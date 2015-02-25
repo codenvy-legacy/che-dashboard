@@ -7,7 +7,8 @@
 		url('../fonts/material-design.svg#material-design') format('svg');
 }
 
-.icon:before {
+
+.material-design {
 	font-family: "material-design";
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
