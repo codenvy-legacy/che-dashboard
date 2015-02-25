@@ -133,6 +133,25 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <configuration>
+          <useDefaultExcludes>false</useDefaultExcludes>
+          <excludes>
+            <exclude>**/*.styl</exclude>
+            <exclude>**/*.html</exclude>
+            <exclude>**/*.ico</exclude>
+            <exclude>**/*.ttf</exclude>
+            <exclude>**/*.eot</exclude>
+            <exclude>**/*.svg</exclude>
+            <exclude>**/*.css</exclude>
+            <exclude>**/*.woff</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 </project>
