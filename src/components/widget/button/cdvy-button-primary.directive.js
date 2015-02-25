@@ -28,15 +28,21 @@ class CodenvyButtonPrimary {
 
     // scope values
     this.scope = {
-      title:'@cdvyButtonTitle',
-      ngDisabled: '@ngDisabled'
+      title:'@cdvyButtonTitle'
     };
-
 
     this.bindToController = true;
 
   }
 
+  /**
+   * Re-apply ng-disabled on child
+   */
+  link($scope, element, attrs) {
+    $scope.$parent.$watch(attrs.ngDisabled, function (isDisabled) {
+      element.find('button').prop('disabled', isDisabled);
+    });
+  }
 
 }
 
