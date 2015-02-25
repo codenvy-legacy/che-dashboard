@@ -78,7 +78,14 @@ gulp.task('images', function () {
     .pipe(gulp.dest(paths.dist + '/assets/images/'));
 });
 
-gulp.task('fonts', function () {
+gulp.task('existingfonts', function () {
+  return gulp.src(paths.src + '/assets/fonts/*')
+    .pipe($.filter('**/*.{eot,svg,ttf,otf,woff,woff2}'))
+    .pipe($.flatten())
+    .pipe(gulp.dest(paths.dist + '/fonts/'));
+});
+
+gulp.task('fonts', ['existingfonts'], function () {
   return gulp.src($.mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,otf,woff,woff2}'))
     .pipe($.flatten())
