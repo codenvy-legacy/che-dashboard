@@ -131,11 +131,17 @@ module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $l
       return config || $q.when(config);
     },
     response: function(response) {
-      if (response.status === 401 || response.status === 403) {
-        $log.info('Redirect to login page.');
-        $location.path('#/login');
-      }
+      console.log('response', response);
+
       return response || $q.when(response);
+    },
+    responseError: function (rejection) {
+      if (rejection.status === 401 || rejection.status === 403) {
+        $log.info('Redirect to login page.');
+        $location.path('/login');
+
+      }
+      return $q.reject(rejection);
     }
   };
 });
