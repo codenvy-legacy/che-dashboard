@@ -36,6 +36,7 @@ import FactoriesCtrl from './factories/factories.controller';
 import FactoryCtrl from './factories/factory.controller';
 
 import CodenvySelecterCtrl from '../components/widget/selecter/cdvy-selecter.controller';
+import CodenvyToggleCtrl from '../components/widget/toggle-button/cdvy-toggle.controller';
 import DemoComponentsCtrl from './demo-components/demo-components.controller';
 import ProjectsConfig from './projects/projects-config';
 
@@ -50,6 +51,8 @@ import CodenvyPanel from '../components/widget/panel/cdvy-panel.directive';
 import CodenvyButtonPrimary from '../components/widget/button/cdvy-button-primary.directive';
 import CodenvySelecter from '../components/widget/selecter/cdvy-selecter.directive';
 import CodenvyHtmlSource from '../components/widget/html-source/cdvy-html-source.directive';
+import CodenvyToggleButton from '../components/widget/toggle-button/cdvy-toggle-button.directive';
+import CodenvyToggle from '../components/widget/toggle-button/cdvy-toggle.directive';
 
 // and setup controllers
 module.controller('DashboardCtrl', DashboardCtrl)
@@ -58,7 +61,9 @@ module.controller('DashboardCtrl', DashboardCtrl)
   .controller('FactoriesCtrl', FactoriesCtrl)
   .controller('FactoryCtrl', FactoryCtrl)
   .controller('DemoComponentsCtrl', DemoComponentsCtrl)
-  .controller('CodenvySelecterCtrl', CodenvySelecterCtrl);
+  .controller('CodenvySelecterCtrl', CodenvySelecterCtrl)
+  .controller('CodenvyToggleCtrl', CodenvyToggleCtrl);
+
 
 
 // config routes

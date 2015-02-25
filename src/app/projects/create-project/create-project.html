@@ -81,12 +81,13 @@
     </div>
 
 
-
     <div layout="row" flex class="create-project-box" flex layout-align="space-around center">
       <label>Visibility</label>
       <div layout="row" flex="90" layout-align="space-around center">
-        <md-button flex="40" class="md-accent md-raised md-hue-2"><md-icon md-font-icon="fa fa-unlock"></md-icon>Public</md-button>
-        <md-button flex="40" class="md-raised"><md-icon md-font-icon="fa fa-lock"></md-icon>Private</md-button>
+        <cdvy-toggle ng-model="createProjectCtrl.importProjectData.project.visibility">
+          <cdvy-toggle-button cdvy-font-icon="fa fa-lock" cdvy-title="public"></cdvy-toggle-button>
+          <cdvy-toggle-button cdvy-font-icon="fa fa-unlock" cdvy-title="private"></cdvy-toggle-button>
+        </cdvy-toggle>
       </div>
     </div>
   </cdvy-panel>

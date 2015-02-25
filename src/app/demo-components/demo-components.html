@@ -1,5 +1,6 @@
 <md-tabs md-selected="selectedIndex">
   <md-tab label="Font">
+
     <p>Headings</p>
     <cdvy-html-source>
       <h1>This is h1 <small>Secondary text</small></h1>
@@ -40,9 +41,19 @@
 
 
         <cdvy-button-primary cdvy-button-title="Primary disabled button"
-                             ng-disabled="!demoComponentsCtrl.testButton2">
+                             ng-click="demoComponentsCtrl.toggleDisabled2()"
+                             ng-disabled="!demoComponentsCtrl.isToggleDisabled2()">
         </cdvy-button-primary>
       </cdvy-html-source>
+
+      <p>Selected value of toggle is : {{demoComponentsCtrl.selectedToggle}}</p>
+      <cdvy-toggle ng-init="demoComponentsCtrl.selectedToggle='Public'" ng-model="demoComponentsCtrl.selectedToggle">
+        <cdvy-toggle-button cdvy-font-icon="fa fa-lock" cdvy-title="Public"></cdvy-toggle-button>
+        <cdvy-toggle-button cdvy-font-icon="fa fa-unlock" cdvy-title="Private"></cdvy-toggle-button>
+      </cdvy-toggle>
+
+
+
     </div>
   </md-tab>
   <md-tab label="Input" >

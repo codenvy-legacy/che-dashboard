@@ -29,14 +29,17 @@ class DemoComponentsCtrl {
     this.booksByAuthor['A. Dumas'] = [{title:'The count of Monte Cristo'}, {title:'The Three Musketeers'}];
 
 
-    //buttons
-    this.testButton2 = false;
-
+    this.button2Disabled = true;
 
   }
 
-  cdvySelecter(name, valueSelected) {
-    this.selectedBook = valueSelected.title;
+
+  toggleDisabled2() {
+    this.button2Disabled = !this.button2Disabled;
+  }
+
+  isToggleDisabled2() {
+    return this.button2Disabled;
   }
 
 

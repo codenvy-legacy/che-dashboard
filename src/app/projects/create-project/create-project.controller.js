@@ -110,6 +110,7 @@ class CreateProjectCtrl {
 
   checkValidFormState() {
     // check project information form and selected tab form
+    return true;
 
 
     /*var currentForm = this.forms.get(this.currentTab);
