@@ -11,8 +11,7 @@
 
 -->
 <cdvy-toolbar title="Create Project"></cdvy-toolbar>
-<md-content md-scroll-y flex  class="projects-create-project" >
-
+<md-content md-scroll-y flex class="projects-create-project" >
   <cdvy-panel cdvy-title="Select Source">
     <md-tabs md-selected="selectedIndex">
       <md-tab label="Blank Type"  md-on-select="createProjectCtrl.setCurrentTab('blank')">
@@ -39,7 +38,7 @@
 
   </cdvy-panel>
 
-  <cdvy-panel cdvy-title="Project Information Dummy" ng-form="projectInformationForm">
+  <cdvy-panel cdvy-title="Project Information" ng-form="projectInformationForm">
 
 
     <cdvy-input cdvy-form="projectInformationForm"
@@ -55,21 +54,15 @@
       <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
       <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
     </cdvy-input>
-    </div>
-
-    <div layout="column" flex >
-      <cdvy-input cdvy-form="projectInformationForm"
-                  cdvy-name="description"
-                  cdvy-label-name="Description"
-                  cdvy-place-holder="Description of the project"
-                  ng-model="createProjectCtrl.importProjectData.project.description"
-                  ng-maxlength="256">
-        <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
-        <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
-      </cdvy-input>
-    </div>
-
-
+    <cdvy-input cdvy-form="projectInformationForm"
+                cdvy-name="description"
+                cdvy-label-name="Description"
+                cdvy-place-holder="Description of the project"
+                ng-model="createProjectCtrl.importProjectData.project.description"
+                ng-maxlength="256">
+      <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
+      <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
+    </cdvy-input>
 
     <div class="create-project-box" layout="row" flex layout-align="space-around center">
       <label>Workspace: </label>
@@ -83,8 +76,8 @@
 
     <div layout="row" flex class="create-project-box" flex layout-align="space-around center">
       <label>Visibility</label>
-      <div layout="row" flex="90" layout-align="space-around center">
-        <cdvy-toggle ng-model="createProjectCtrl.importProjectData.project.visibility">
+      <div layout="row" flex="90" >
+        <cdvy-toggle ng-model="createProjectCtrl.importProjectData.project.visibility" >
           <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_open_24px" cdvy-title="public"></cdvy-toggle-button>
           <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_24px" cdvy-title="private"></cdvy-toggle-button>
         </cdvy-toggle>
@@ -101,6 +94,5 @@
 
 
   <div class="create-project-empty-space"></div>
-
 
 </md-content>
