@@ -78,6 +78,11 @@ module.config(function ($routeProvider) {
       controller: 'ListProjectsCtrl',
       controllerAs: 'listProjectsCtrl'
     })
+    .when('/project/:workspaceId/:projectName', {
+      templateUrl: 'app/projects/project-details/project-details.html',
+      controller: 'ProjectDetailsCtrl',
+      controllerAs: 'projectDetailsCtrl'
+    })
     .when('/create-project', {
       templateUrl: 'app/projects/create-project/create-project.html',
       controller: 'CreateProjectCtrl',

@@ -18,7 +18,7 @@ import CreateProjectGit from './create-project/git/create-project-git.directive'
 import CreateProjectGithub from './create-project/github/create-project-github.directive';
 import CreateProjectZip from './create-project/zip/create-project-zip.directive';
 import CreateProjectConfFile from './create-project/config-file/create-project-conf-file.directive';
-
+import ProjectDetailsCtrl from './project-details/project-details.controller';
 
 class ProjectConfig {
 
@@ -31,6 +31,7 @@ class ProjectConfig {
     register.controller('CreateProjectCtrl', CreateProjectCtrl);
     register.controller('ListProjectsCtrl', ListProjectsCtrl);
     register.controller('CreateProjectGithubCtrl', CreateProjectGithubCtrl);
+    register.controller('ProjectDetailsCtrl', ProjectDetailsCtrl);
 
 
   }
