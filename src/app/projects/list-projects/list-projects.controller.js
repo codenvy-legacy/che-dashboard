@@ -24,16 +24,20 @@ class ListProjectsCtrl {
     this.codenvyAPI = codenvyAPI;
     var workspace = codenvyAPI.getWorkspace();
 
+    this.state = 'loading';
+
     // fetch workspaces when initializing
-    codenvyAPI.getWorkspace().fetchWorkspaces();
+    let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
 
-    // keep references on workspaces and projects
-    this.workspaces = workspace.getWorkspaces();
+    promise.then(() => {
+        this.workspacesById = workspace.getWorkspacesById();
+        this.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
+        this.state = 'loaded';
+      },
+      () => {
+        this.state = 'error';
+      });
 
-    this.workspacesById = workspace.getWorkspacesById();
-
-    this.projects = codenvyAPI.getProject().getAllProjects();
-    this.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
 
   }
 

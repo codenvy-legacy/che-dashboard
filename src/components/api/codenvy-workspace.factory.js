@@ -73,7 +73,7 @@ class CodenvyWorkspace {
   fetchWorkspaces() {
     let query = this.remoteWorkspaceAPI.query();
     let promise = query.$promise;
-    promise.then((data) => {
+    let updatedPromise = promise.then((data) => {
       var remoteWorkspaces = [];
       this.workspaces.length = 0;
       this.workspacesById.clear();
@@ -86,11 +86,13 @@ class CodenvyWorkspace {
         }
       });
 
+    }).then(() => {
+      // then notify all listeners
       this.listeners.forEach((listener) => {
         listener.onChangeWorkspaces(this.workspaces);
       });
     });
-    return promise;
+    return updatedPromise;
   }
 
 }

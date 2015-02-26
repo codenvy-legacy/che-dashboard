@@ -60,6 +60,7 @@ class CodenvyProject {
    */
   onChangeWorkspaces(workspaces) {
 
+    let changePromise = null;
     // well we need to clear globally the current projects
     this.projectsPerWorkspaceMap.clear();
     for (var member in this.projectsPerWorkspace) {
@@ -73,9 +74,16 @@ class CodenvyProject {
       this.workspaces.push(workspace);
 
       // fetch projects for this workspace
-      this.fetchProjectsForWorkspace(workspace);
+      if (changePromise == null) {
+        changePromise = this.fetchProjectsForWorkspace(workspace);
+      } else {
+        changePromise = changePromise.then(() => {
+          this.fetchProjectsForWorkspace(workspace);
+        });
+      }
     });
 
+    return changePromise;
 
   }
 
@@ -110,8 +118,9 @@ class CodenvyProject {
         });
 
       }
-
     });
+
+    return promise;
   }
 
 
@@ -121,7 +130,7 @@ class CodenvyProject {
    */
   fetchProjectsForWorkspace(workspace) {
 
-    this.fetchProjectsForWorkspaceId(workspace.workspaceReference.id);
+    return this.fetchProjectsForWorkspaceId(workspace.workspaceReference.id);
   }
 
   importProject(workspaceId, path, data) {
