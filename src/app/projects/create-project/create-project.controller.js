@@ -32,9 +32,10 @@ class CreateProjectCtrl {
     let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
 
     // keep references on workspaces and projects
-    this.workspaces = workspace.getWorkspaces();
+    this.workspaces = [];
 
     promise.then(() => {
+      this.workspaces = workspace.getWorkspaces();
       this.workspaceSelected = this.workspaces[0];
     });
 
@@ -60,8 +61,10 @@ class CreateProjectCtrl {
 
     this.importProjectData.source.project.type = 'git';
 
-    codenvyAPI.getProjectType().fetchTypes();
-    this.typesByCategory = codenvyAPI.getProjectType().getTypesByCategory();
+    let promiseTypes = codenvyAPI.getProjectType().fetchTypes();
+    promiseTypes.then(() => {
+      this.typesByCategory = codenvyAPI.getProjectType().getTypesByCategory();
+    });
 
 
     this.jsonConfig = {};

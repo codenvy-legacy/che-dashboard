@@ -51,7 +51,9 @@ class CodenvyProjectType {
 
       // reset global list
       this.types.length = 0;
-      while (this.typesPerCategory.length) {this.typesPerCategory.pop();}
+      for (var member in this.typesPerCategory) delete this.typesPerCategory[member];
+      console.log('current types is', this.typesPerCategory);
+
 
       projectTypes.forEach((projectType) => {
         // get type category
@@ -73,6 +75,7 @@ class CodenvyProjectType {
       });
 
     });
+    return promise;
   }
 
 
