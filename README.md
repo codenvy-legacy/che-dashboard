@@ -81,7 +81,7 @@ indent_size = 2
 ### syntax
 The syntax is checked by jshint (through .jshintrc file)
 
-Also when lanching grunt serve command, there is a report on each file that may have invalid data
+Also when lanching gulp serve command, there is a report on each file that may have invalid data
 
 For example use single quote 'hello', no "double quote", use === and !=== and not == or !=
 
