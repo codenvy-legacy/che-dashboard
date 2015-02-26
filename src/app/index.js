@@ -18,51 +18,42 @@ let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch
 
 import Register from '../components/utils/register';
 
-// import custom codemirror
-import CodeMirror from './codemirror/codemirror';
 
-// import factories
-import CodenvyAPI from '../components/api/codenvy-api.factory';
+// import components
+import ComponentsConfig from '../components/components-config';
 
-// import GitHub services
-import GitHub from '../components/github/github-service';
-
-
-// import controllers
+// import dashboard
 import DashboardCtrl from './dashboard/dashboard.controller';
-import LoginCtrl from './main/login.controller';
-import NavbarCtrl from '../components/navbar/navbar.controller';
-import FactoriesCtrl from './factories/factories.controller';
-import FactoryCtrl from './factories/factory.controller';
 
-import CodenvySelecterCtrl from '../components/widget/selecter/cdvy-selecter.controller';
-import CodenvyToggleCtrl from '../components/widget/toggle-button/cdvy-toggle.controller';
+//
 import DemoComponentsCtrl from './demo-components/demo-components.controller';
-import ProjectsConfig from './projects/projects-config';
+
+
+
+// import login
+import LoginCtrl from './main/login.controller';
+
+// import navabr
+import NavbarCtrl from './navbar/navbar.controller';
 
 var instanceRegister = Register.getInstance();
 
+
+// import projects
+import FactoryConfig from './factories/factories-config';
+new FactoryConfig(instanceRegister);
+
+// import projects
+import ProjectsConfig from './projects/projects-config';
 new ProjectsConfig(instanceRegister);
 
-// import directives
-import CodenvyToolbar from '../components/widget/toolbar/toolbar.directive';
-import CodenvyInput from '../components/widget/input/cdvy-input.directive';
-import CodenvyPanel from '../components/widget/panel/cdvy-panel.directive';
-import CodenvyButtonPrimary from '../components/widget/button/cdvy-button-primary.directive';
-import CodenvySelecter from '../components/widget/selecter/cdvy-selecter.directive';
-import CodenvyHtmlSource from '../components/widget/html-source/cdvy-html-source.directive';
-import CodenvyToggleButton from '../components/widget/toggle-button/cdvy-toggle-button.directive';
-import CodenvyToggle from '../components/widget/toggle-button/cdvy-toggle.directive';
+
 
 // and setup controllers
 module.controller('DashboardCtrl', DashboardCtrl)
   .controller('NavbarCtrl', NavbarCtrl)
   .controller('LoginCtrl', LoginCtrl)
-  .controller('FactoriesCtrl', FactoriesCtrl)
-  .controller('FactoryCtrl', FactoryCtrl)
-  .controller('DemoComponentsCtrl', DemoComponentsCtrl)
-  .controller('CodenvySelecterCtrl', CodenvySelecterCtrl)
-  .controller('CodenvyToggleCtrl', CodenvyToggleCtrl);
+  .controller('DemoComponentsCtrl', DemoComponentsCtrl);
 
 
 
@@ -72,29 +63,6 @@ module.config(function ($routeProvider) {
     .when('/', {
       templateUrl: 'app/dashboard/dashboard.html',
       controller: 'DashboardCtrl'
-    })
-    .when('/projects', {
-      templateUrl: 'app/projects/list-projects/list-projects.html',
-      controller: 'ListProjectsCtrl',
-      controllerAs: 'listProjectsCtrl'
-    })
-    .when('/project/:workspaceId/:projectName', {
-      templateUrl: 'app/projects/project-details/project-details.html',
-      controller: 'ProjectDetailsCtrl',
-      controllerAs: 'projectDetailsCtrl'
-    })
-    .when('/create-project', {
-      templateUrl: 'app/projects/create-project/create-project.html',
-      controller: 'CreateProjectCtrl',
-      controllerAs: 'createProjectCtrl'
-    })
-    .when('/factories', {
-      templateUrl: 'app/factories/factories.html',
-      controller: 'FactoriesCtrl'
-    })
-    .when('/factory/:id', {
-      templateUrl: 'app/factories/factory.html',
-      controller: 'FactoryCtrl'
     })
     .when('/login', {
       templateUrl: 'app/main/login.html',

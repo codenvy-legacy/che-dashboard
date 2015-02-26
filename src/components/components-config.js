@@ -10,12 +10,13 @@
  */
 'use strict';
 
-import Register from '../components/utils/register';
+/*exported CodenvyAPI, WidgetConfig, GitHub, CodeMirror */
 
-class DashboardCtrl {
-}
+import CodenvyAPI from './api/codenvy-api.factory';
+import WidgetConfig from './widget/widget-config';
 
-export default DashboardCtrl;
+// import GitHub services
+import GitHub from './github/github-service';
 
-
-Register.getInstance().controller('DashboardCtrl', DashboardCtrl);
+// import custom codemirror
+import CodeMirror from './codemirror/codemirror';

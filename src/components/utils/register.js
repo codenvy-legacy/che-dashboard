@@ -27,6 +27,9 @@ class Register {
    return this.instance;
  }
 
+
+
+
   directive(name, constructorFn) {
 
     constructorFn = this._normalizeConstructor(constructorFn);

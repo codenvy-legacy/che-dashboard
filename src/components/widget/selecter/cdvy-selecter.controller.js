@@ -10,6 +10,9 @@
  */
 'use strict';
 
+
+import Register from '../../utils/register';
+
 /**
  * This class is handling the controller for the selecter
  * @author Florent Benoit
@@ -80,3 +83,5 @@ class CodenvySelecterCtrl {
 
 
 export default CodenvySelecterCtrl;
+
+Register.getInstance().controller('CodenvySelecterCtrl', CodenvySelecterCtrl);

@@ -40,3 +40,4 @@ class CodenvyToggleCtrl {
 
 export default CodenvyToggleCtrl;
 
+Register.getInstance().controller('CodenvyToggleCtrl', CodenvyToggleCtrl);
