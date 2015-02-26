@@ -30,7 +30,7 @@
     <md-button class="md-accent"><md-icon md-font-icon="fa fa-cog"></md-icon></md-button>
   </div>
 </md-toolbar>
-<md-content md-scroll-y flex layout="row" layout-align="center" class="projects-list-projects" >
+<md-content md-scroll-y flex layout="row" layout-align="center" class="projects-list-projects" md-theme="maincontent-theme" >
   <md-content flex>
     <div ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace">
       <h2><md-icon md-font-icon="fa fa-folder"></md-icon>{{listProjectsCtrl.getWorkspaceName(workspaceId)}}</h2>

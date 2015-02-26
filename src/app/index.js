@@ -236,11 +236,17 @@ module.config(function($mdThemingProvider) {
   });
   $mdThemingProvider.definePalette('toolbarAccentPalette', toolbarAccentPalette);
 
+  var codenvyGreyPalette = $mdThemingProvider.extendPalette('grey', {
+    'A100' : 'efefef',
+    'contrastDefaultColor': 'light'
+  });
+  $mdThemingProvider.definePalette('codenvyGrey', codenvyGreyPalette);
+
 
   $mdThemingProvider.theme('default')
     .primaryPalette('codenvy')
-    .accentPalette('codenvyAccent');
-/*  .backgroundPalette('grey');*/
+    .accentPalette('codenvyAccent')
+  .backgroundPalette('grey');
 
   $mdThemingProvider.theme('toolbar-theme')
     .primaryPalette('toolbarPrimaryPalette')
@@ -252,9 +258,10 @@ module.config(function($mdThemingProvider) {
   .warnPalette('red')
   .backgroundPalette('purple');
 
-  $mdThemingProvider.theme('dashboard-theme')
-    .primaryPalette('orange')
-    .accentPalette('brown');
+  $mdThemingProvider.theme('maincontent-theme')
+    .primaryPalette('codenvy')
+    .accentPalette('codenvyAccent')
+    .backgroundPalette('codenvyGrey');
 
 
 

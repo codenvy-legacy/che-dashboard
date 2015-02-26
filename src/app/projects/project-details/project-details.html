@@ -1,7 +1,7 @@
 <cdvy-toolbar title=":: {{projectDetailsCtrl.askedProjectName}}" button-name="Open in IDE" button-href="#/create-project"></cdvy-toolbar>
 <md-progress-linear md-mode="indeterminate" ng-show="projectDetailsCtrl.loading" ></md-progress-linear>
 
-<md-content md-scroll-y flex class="projects-details-project" ng-show="projectDetailsCtrl.projectDetails">
+<md-content md-scroll-y flex class="projects-details-project" ng-show="projectDetailsCtrl.projectDetails" md-theme="maincontent-theme">
   <md-tabs md-selected="selectedIndex">
     <md-tab label="Settings">
       <cdvy-panel cdvy-title="Project Information">
@@ -83,7 +83,7 @@
 
 
 <md-content ng-show="projectDetailsCtrl.invalidProject">
-
+{{projectDetailsCtrl.invalidProject}}
 </md-content>
 
 
