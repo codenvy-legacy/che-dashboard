@@ -64,25 +64,29 @@
       <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
     </cdvy-input>
 
-    <div class="create-project-box" layout="row" flex layout-align="space-around center">
-      <label>Workspace: </label>
-      <select flex="90" class="create-project-select" id="targetWorkspace"
-              name="targetWorkspace"
-              ng-model="createProjectCtrl.workspaceSelected"
-              ng-options="workspace.workspaceReference.name for workspace in createProjectCtrl.workspaces">
-      </select>
+    <div layout="row" flex layout-align="space-around start">
+      <label flex="15" >Workspace: </label>
+      <div layout="column" flex="85">
+        <md-select flex="90" class="create-project-select" id="targetWorkspace"
+                   name="targetWorkspace"
+                   placeholder="Select a workspace"
+                   ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
+                   ng-model="createProjectCtrl.workspaceSelected">
+          <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.workspaceReference.name}}</md-option>
+        </md-select>
+      </div>
     </div>
 
-
-    <div layout="row" flex class="create-project-box" flex layout-align="space-around center">
-      <label>Visibility</label>
-      <div layout="row" flex="90" >
+    <div layout="row" flex layout-align="space-around start">
+      <label flex="15" >Visibility: </label>
+      <div layout="column" flex="85">
         <cdvy-toggle ng-model="createProjectCtrl.importProjectData.project.visibility" >
           <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_open_24px" cdvy-title="public"></cdvy-toggle-button>
           <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_24px" cdvy-title="private"></cdvy-toggle-button>
         </cdvy-toggle>
       </div>
     </div>
+
   </cdvy-panel>
 
 
