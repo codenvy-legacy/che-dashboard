@@ -34,6 +34,8 @@ class CodenvyProject {
     // projects per workspace id
     this.projectsPerWorkspaceMap = new Map();
 
+    // projects per workspace id
+    this.projectsDetailsPerWorkspaceMap = new Map();
 
     // workspaces used to retrieve projects
     this.workspaces = [];
@@ -44,7 +46,8 @@ class CodenvyProject {
     // remote call
     this.remoteProjectsAPI = this.$resource('/api/project/:workspaceId',  {workspaceId:'@id'}, {
       import: { method: 'POST', url: '/api/project/:workspaceId/import/:path'},
-      create: { method: 'POST', url: '/api/project/:workspaceId?name=:path'}
+      create: { method: 'POST', url: '/api/project/:workspaceId?name=:path'},
+      details: { method: 'GET', url: '/api/project/:workspaceId/:path'}
 
 
     });
@@ -161,6 +164,13 @@ class CodenvyProject {
    */
   getProjectsByWorkspaceMap() {
     return this.projectsPerWorkspaceMap;
+  }
+
+
+  getProjectDetails(workspaceId, projectName) {
+    let promise = this.remoteProjectsAPI.details({workspaceId: workspaceId, path: projectName}).$promise;
+
+    return promise;
   }
 
 }

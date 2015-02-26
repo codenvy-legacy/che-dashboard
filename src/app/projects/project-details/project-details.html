@@ -1,9 +1,69 @@
-<cdvy-toolbar title="{{projectDetailsCtrl.askedWorkspaceId}} :: {{projectDetailsCtrl.askedProjectName}}" button-name="Open in IDE" button-href="#/create-project"></cdvy-toolbar>
+<cdvy-toolbar title=":: {{projectDetailsCtrl.askedProjectName}}" button-name="Open in IDE" button-href="#/create-project"></cdvy-toolbar>
+<md-progress-linear md-mode="indeterminate" ng-show="projectDetailsCtrl.loading" ></md-progress-linear>
 
-<md-content md-scroll-y flex class="projects-create-project" >
+<md-content md-scroll-y flex class="projects-details-project" ng-show="projectDetailsCtrl.projectDetails">
   <md-tabs md-selected="selectedIndex">
     <md-tab label="Settings">
-      <cdvy-panel cdvy-title="Project Information"></cdvy-panel>
+      <cdvy-panel cdvy-title="Project Information">
+
+
+
+        <cdvy-input cdvy-form="projectInformationForm"
+                    cdvy-name="name"
+                    cdvy-label-name="Name"
+                    cdvy-place-holder="Name of the project"
+                    ng-model="projectDetailsCtrl.projectDetails.name"
+                    required
+                    ng-maxlength="128"
+                    ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+          <div ng-message="required">A name is required.</div>
+          <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
+          <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+          <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
+        </cdvy-input>
+
+        <cdvy-input cdvy-form="projectInformationForm"
+                    cdvy-name="description"
+                    cdvy-label-name="Description"
+                    cdvy-place-holder="Description of the project"
+                    ng-model="projectDetailsCtrl.projectDetails.description"
+                    ng-maxlength="256">
+          <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
+          <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
+        </cdvy-input>
+
+
+
+        <cdvy-button-primary cdvy-button-title="Update"
+                             ng-click="projectDetailsCtrl.todo()"/>
+
+
+      </cdvy-panel>
+
+      <cdvy-panel cdvy-title="Visibility">
+        <div layout="row" flex layout-align="space-around start">
+          <label flex="15" ></label>
+          <div layout="column" flex="85">
+            <cdvy-toggle ng-model="projectDetailsCtrl.projectDetails.visibility" >
+              <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_open_24px" cdvy-title="public"></cdvy-toggle-button>
+              <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_24px" cdvy-title="private"></cdvy-toggle-button>
+            </cdvy-toggle>
+          </div>
+        </div>
+      </cdvy-panel>
+
+
+      <cdvy-panel cdvy-title="Delete project">
+        <div layout="row" flex layout-align="space-around start">
+          <label flex="15" ></label>
+          <div layout="column" flex="85">
+            <cdvy-button-primary cdvy-button-title="Delete"
+                                 ng-click="projectDetailsCtrl.todo()"/>
+
+          </div>
+        </div>
+      </cdvy-panel>
+
 
     </md-tab>
     <md-tab label="Repository">
@@ -20,3 +80,10 @@
 
   </md-tabs>
 </md-content>
+
+
+<md-content ng-show="projectDetailsCtrl.invalidProject">
+
+</md-content>
+
+

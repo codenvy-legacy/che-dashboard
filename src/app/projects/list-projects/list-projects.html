@@ -43,7 +43,7 @@
                 <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column" layout-align="start center" >
                   <p flex-gt-sm="5" class="project-type"><md-icon md-font-icon="fa fa-cube"></md-icon></p>
                   <div layout="column" flex-gt-sm="40">
-                    <h2>{{project.name}}</h2>
+                    <h2><a ng-href="#/project/{{workspaceId}}/{{project.name}}">{{project.name}}</a></h2>
                     <h4>{{project.description}}</h4>
                     </div>
                   <p flex-gt-sm="15"><span show-sm>10 minutes</span></p>

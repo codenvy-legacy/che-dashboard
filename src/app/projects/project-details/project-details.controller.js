@@ -21,10 +21,27 @@ class ProjectDetailsCtrl {
    * @ngInject for Dependency injection
    */
   constructor ($route, codenvyAPI) {
+    this.codenvyAPI = codenvyAPI;
 
     this.askedWorkspaceId = $route.current.params.workspaceId;
     this.askedProjectName = $route.current.params.projectName;
+    this.loading = true;
+
+    let promise = codenvyAPI.getProject().getProjectDetails(this.askedWorkspaceId, this.askedProjectName);
+
+    promise.then((projectDetails) => {
+      this.projectDetails = projectDetails;
+      this.loading = false;
+    }, (error) => {
+      this.loading = false;
+      console.log('error is ', error);
+      this.invalidProject = error.statusText;
+    });
+
   }
+
+
+
 }
 
 export default ProjectDetailsCtrl;
