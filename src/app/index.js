@@ -136,8 +136,6 @@ module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $l
       return config || $q.when(config);
     },
     response: function(response) {
-      console.log('response', response);
-
       return response || $q.when(response);
     },
     responseError: function (rejection) {
