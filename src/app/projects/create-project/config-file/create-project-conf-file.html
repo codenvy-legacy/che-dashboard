@@ -10,10 +10,14 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<textarea ui-codemirror="{onLoad: createProjectCtrl.initCodeMirrorInstance}"
-          id="jsonConfig"
-          name="jsonConfig"
-          ng-model="createProjectCtrl.jsonConfig.content"
-          ng-change="createProjectCtrl.update()"
-          rows="15">
-</textarea>
+<form name="createProjectConfigForm">
+  <div class="create-project-config-panel" layout="row" flex ng-init="createProjectCtrl.setForm(createProjectConfigForm, 'config');">
+
+  <textarea ui-codemirror
+            id="jsonConfig"
+            name="jsonConfig"
+            ng-model="createProjectCtrl.jsonConfig.content"
+            ng-change="createProjectCtrl.update()"
+            rows="15"></textarea>
+  </div>
+</form>

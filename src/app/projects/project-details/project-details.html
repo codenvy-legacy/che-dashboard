@@ -1,7 +1,14 @@
 <cdvy-toolbar title=":: {{projectDetailsCtrl.askedProjectName}}" button-name="Open in IDE" button-href="#/create-project"></cdvy-toolbar>
 <md-progress-linear md-mode="indeterminate" ng-show="projectDetailsCtrl.loading" ></md-progress-linear>
 
-<md-content md-scroll-y flex class="projects-details-project" ng-show="projectDetailsCtrl.projectDetails" md-theme="maincontent-theme">
+
+<md-content md-scroll-y flex class="projects-details-project" ng-show="projectDetailsCtrl.projectDeleted" md-theme="maincontent-theme">
+
+  <h1>Project has been deleted</h1>
+
+</md-content>
+
+<md-content md-scroll-y flex class="projects-details-project" ng-show="projectDetailsCtrl.projectDetails && !projectDetailsCtrl.projectDeleted" md-theme="maincontent-theme">
   <md-tabs md-selected="selectedIndex">
     <md-tab label="Settings">
       <cdvy-panel cdvy-title="Project Information">
@@ -58,7 +65,7 @@
           <label flex="15" ></label>
           <div layout="column" flex="85">
             <cdvy-button-primary cdvy-button-title="Delete"
-                                 ng-click="projectDetailsCtrl.todo()"/>
+                                 ng-click="projectDetailsCtrl.deleteProject($event)"/>
 
           </div>
         </div>

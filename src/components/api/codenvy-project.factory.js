@@ -49,9 +49,8 @@ class CodenvyProject {
     this.remoteProjectsAPI = this.$resource('/api/project/:workspaceId',  {workspaceId:'@id'}, {
       import: { method: 'POST', url: '/api/project/:workspaceId/import/:path'},
       create: { method: 'POST', url: '/api/project/:workspaceId?name=:path'},
-      details: { method: 'GET', url: '/api/project/:workspaceId/:path'}
-
-
+      details: { method: 'GET', url: '/api/project/:workspaceId/:path'},
+      remove: {method: 'DELETE', url: '/api/project/:workspaceId/:path'}
     });
   }
 
@@ -178,6 +177,12 @@ class CodenvyProject {
 
     return promise;
   }
+
+  remove(workspaceId, projectName) {
+  let promise = this.remoteProjectsAPI.remove({workspaceId: workspaceId, path: projectName}).$promise;
+
+    return promise;
+}
 
 }
 

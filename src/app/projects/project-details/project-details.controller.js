@@ -20,12 +20,15 @@ class ProjectDetailsCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor ($route, codenvyAPI) {
+  constructor ($route, codenvyAPI, $mdDialog) {
     this.codenvyAPI = codenvyAPI;
+    this.$mdDialog = $mdDialog;
 
     this.askedWorkspaceId = $route.current.params.workspaceId;
     this.askedProjectName = $route.current.params.projectName;
     this.loading = true;
+
+    this.projectDeleted = false;
 
     let promise = codenvyAPI.getProject().getProjectDetails(this.askedWorkspaceId, this.askedProjectName);
 
@@ -34,13 +37,31 @@ class ProjectDetailsCtrl {
       this.loading = false;
     }, (error) => {
       this.loading = false;
-      console.log('error is ', error);
       this.invalidProject = error.statusText;
     });
 
   }
 
 
+
+  deleteProject(event) {
+    var confirm = this.$mdDialog.confirm()
+      .title('Would you like to delete the project ' + this.projectDetails.name)
+      .content('Please confirm for the project removal.')
+      .ariaLabel('Remove project')
+      .ok('Delete it!')
+      .cancel('Cancel')
+      .targetEvent(event);
+    this.$mdDialog.show(confirm).then(() => {
+      // remove it !
+      let promise = this.codenvyAPI.getProject().remove(this.projectDetails.workspaceId, this.projectDetails.name);
+      promise.then(() => {
+        this.projectDeleted = true;
+      }, (error) => {
+        console.log('error', error);
+      });
+    });
+  }
 
 }
 
