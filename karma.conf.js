@@ -41,12 +41,26 @@ module.exports = function(config) {
       startConnect: false
     },
 
+
     customLaunchers: customLaunchers,
-    reporters: ['dots', 'saucelabs'],
+
+    reporters: ['progress', 'coverage', 'dots', 'saucelabs'],
+
+    preprocessors: {
+      '**/app/index.js': ['coverage']
+    },
+
+    // optionally, configure the reporter
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
+
     singleRun: true,
 
     plugins : [
       'karma-chrome-launcher',
+      'karma-coverage',
       'karma-sauce-launcher',
       'karma-jasmine',
     ]
