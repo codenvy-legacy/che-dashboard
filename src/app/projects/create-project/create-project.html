@@ -38,63 +38,68 @@
 
   </cdvy-panel>
 
-  <cdvy-panel cdvy-title="Project Information" ng-form="projectInformationForm">
+  <ng-form name="projectInformationForm">
+    <cdvy-panel cdvy-title="Project Information" ng-form="projectInformationForm" ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);">
 
 
-    <cdvy-input cdvy-form="projectInformationForm"
-                cdvy-name="name"
-                cdvy-label-name="Name"
-                cdvy-place-holder="Name of the project"
-                ng-model="createProjectCtrl.importProjectData.project.name"
-                required
-                ng-maxlength="128"
-                ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
-      <div ng-message="required">A name is required.</div>
-      <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
-      <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
-      <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
-    </cdvy-input>
-    <cdvy-input cdvy-form="projectInformationForm"
-                cdvy-name="description"
-                cdvy-label-name="Description"
-                cdvy-place-holder="Description of the project"
-                ng-model="createProjectCtrl.importProjectData.project.description"
-                ng-maxlength="256">
-      <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
-      <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
-    </cdvy-input>
+      <cdvy-input cdvy-form="projectInformationForm"
+                  cdvy-name="name"
+                  cdvy-label-name="Name"
+                  cdvy-place-holder="Name of the project"
+                  ng-model="createProjectCtrl.importProjectData.project.name"
+                  required
+                  ng-maxlength="128"
+                  ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+        <div ng-message="required">A name is required.</div>
+        <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
+        <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+        <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
+      </cdvy-input>
+      <cdvy-input cdvy-form="projectInformationForm"
+                  cdvy-name="description"
+                  cdvy-label-name="Description"
+                  cdvy-place-holder="Description of the project"
+                  ng-model="createProjectCtrl.importProjectData.project.description"
+                  ng-maxlength="256">
+        <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
+        <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
+      </cdvy-input>
 
-    <div layout="row" flex layout-align="space-around start">
-      <label flex="15" >Workspace: </label>
-      <div layout="column" flex="85">
-        <md-select flex="90" class="create-project-select" id="targetWorkspace"
-                   name="targetWorkspace"
-                   placeholder="Select a workspace"
-                   ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
-                   ng-model="createProjectCtrl.workspaceSelected">
-          <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.workspaceReference.name}}</md-option>
-        </md-select>
+      <div layout="row" flex layout-align="space-around start">
+        <label flex="15" >Workspace: </label>
+        <div layout="column" flex="85">
+          <md-select flex="90" class="create-project-select" id="targetWorkspace"
+                     name="targetWorkspace"
+                     placeholder="Select a workspace"
+                     ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
+                     ng-model="createProjectCtrl.workspaceSelected">
+            <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.workspaceReference.name}}</md-option>
+          </md-select>
+        </div>
       </div>
-    </div>
 
-    <div layout="row" flex layout-align="space-around start">
-      <label flex="15" >Visibility: </label>
-      <div layout="column" flex="85">
-        <cdvy-toggle ng-model="createProjectCtrl.importProjectData.project.visibility" >
-          <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_open_24px" cdvy-title="public"></cdvy-toggle-button>
-          <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_24px" cdvy-title="private"></cdvy-toggle-button>
-        </cdvy-toggle>
+      <div layout="row" flex layout-align="space-around start">
+        <label flex="15" >Visibility: </label>
+        <div layout="column" flex="85">
+          <cdvy-toggle ng-model="createProjectCtrl.importProjectData.project.visibility" >
+            <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_open_24px" cdvy-title="public"></cdvy-toggle-button>
+            <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_24px" cdvy-title="private"></cdvy-toggle-button>
+          </cdvy-toggle>
+        </div>
       </div>
-    </div>
 
-  </cdvy-panel>
+    </cdvy-panel>
+  </ng-form>
 
+  <div layout="row" ng-show="createProjectCtrl.isImporting()" layout="column" layout-align="space-around">
+    <md-progress-circular class="md-hue-2"  md-mode="indeterminate" md-theme="default"></md-progress-circular>
+  </div>
   <cdvy-button-primary id="create-project-button-import"
                        cdvy-button-title="Create Project"
                        ng-click="createProjectCtrl.import()"
                        ng-disabled="!createProjectCtrl.checkValidFormState()"
                        class="projects-create-project-button"
-                       />
+    ></cdvy-button-primary>
 
   <div class="create-project-empty-space"></div>
 
