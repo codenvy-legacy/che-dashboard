@@ -23,10 +23,12 @@ class CodenvyWorkspace {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource) {
+  constructor ($resource, $q) {
 
     // keep resource
     this.$resource = $resource;
+
+    this.$q = $q;
 
     // current list of workspaces
     this.workspaces = [];
@@ -85,14 +87,21 @@ class CodenvyWorkspace {
           this.workspacesById.set(workspace.workspaceReference.id, workspace);
         }
       });
-
-    }).then(() => {
-      // then notify all listeners
-      this.listeners.forEach((listener) => {
-        listener.onChangeWorkspaces(this.workspaces);
-      });
+      return this.workspaces;
     });
-    return updatedPromise;
+
+    let callbackPromises = updatedPromise.then((data) => {
+      var promises = [];
+      promises.push(updatedPromise);
+
+      this.listeners.forEach((listener) => {
+        let promise = listener.onChangeWorkspaces(data);
+        promises.push(promise);
+      });
+      return this.$q.all(promises);
+    });
+
+    return callbackPromises;
   }
 
 }

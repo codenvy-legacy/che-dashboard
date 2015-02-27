@@ -22,23 +22,32 @@ class ListProjectsCtrl {
    */
   constructor (codenvyAPI) {
     this.codenvyAPI = codenvyAPI;
-    var workspace = codenvyAPI.getWorkspace();
+    this.workspace = codenvyAPI.getWorkspace();
 
     this.state = 'loading';
 
     // fetch workspaces when initializing
-    let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
+    let promise = this.workspace.fetchWorkspaces();
 
     promise.then(() => {
-        this.workspacesById = workspace.getWorkspacesById();
-        this.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
-        this.state = 'loaded';
+        this.updateData();
       },
-      () => {
+      (error) => {
+        if (error.status === 304) {
+          // ok
+          this.updateData();
+          return;
+        }
         this.state = 'error';
       });
 
 
+  }
+
+  updateData() {
+    this.workspacesById = this.workspace.getWorkspacesById();
+    this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
+    this.state = 'loaded';
   }
 
   /**

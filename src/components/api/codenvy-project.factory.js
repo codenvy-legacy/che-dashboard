@@ -23,10 +23,12 @@ class CodenvyProject {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource) {
+  constructor ($resource, $q) {
 
     // keep resource
     this.$resource = $resource;
+
+    this.$q = $q;
 
     // projects per workspace id
     this.projectsPerWorkspace = {};
@@ -60,7 +62,8 @@ class CodenvyProject {
    */
   onChangeWorkspaces(workspaces) {
 
-    let changePromise = null;
+    var promises = [];
+
     // well we need to clear globally the current projects
     this.projectsPerWorkspaceMap.clear();
     for (var member in this.projectsPerWorkspace) {
@@ -74,16 +77,11 @@ class CodenvyProject {
       this.workspaces.push(workspace);
 
       // fetch projects for this workspace
-      if (changePromise == null) {
-        changePromise = this.fetchProjectsForWorkspace(workspace);
-      } else {
-        changePromise = changePromise.then(() => {
-          this.fetchProjectsForWorkspace(workspace);
-        });
-      }
+      let promise = this.fetchProjectsForWorkspace(workspace);
+      promises.push(promise);
     });
 
-    return changePromise;
+    return this.$q.all(promises);
 
   }
 
@@ -95,7 +93,7 @@ class CodenvyProject {
   fetchProjectsForWorkspaceId(workspaceId) {
 
     let promise = this.remoteProjectsAPI.query({workspaceId: workspaceId}).$promise;
-    promise.then((projectReferences) => {
+    let downloadProjectPromise = promise.then((projectReferences) => {
 
       var remoteProjects = [];
       projectReferences.forEach((projectReference) => {
@@ -113,14 +111,13 @@ class CodenvyProject {
       for (var member in this.projectsPerWorkspace) {
         let projects = this.projectsPerWorkspace[member];
         projects.forEach((project) => {
-
           this.projects.push(project);
         });
 
       }
     });
 
-    return promise;
+    return downloadProjectPromise;
   }
 
 
