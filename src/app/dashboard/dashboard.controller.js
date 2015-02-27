@@ -10,7 +10,7 @@
  */
 'use strict';
 
-import Register from '../components/utils/register';
+import Register from '../../components/utils/register';
 
 class DashboardCtrl {
 }
