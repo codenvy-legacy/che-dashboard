@@ -27,9 +27,7 @@ class FactoryCtrl {
     $scope.factoryId = $route.current.params.id;
 
     var factory = codenvyFactory.fetchFactory($scope.factoryId);
-    console.log('ask for factory');
     factory.$promise.then(() => {
-      console.log('factory retrieved');
       $scope.factory = factory;
       $scope.factoryContent = $filter('json')(factory, 2);
     }, () => {$scope.factory = null;});
