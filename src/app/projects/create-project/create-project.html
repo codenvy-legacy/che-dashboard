@@ -91,13 +91,15 @@
     </cdvy-panel>
   </ng-form>
 
-  <div layout="row" ng-show="createProjectCtrl.isImporting()" layout="column" layout-align="space-around">
+  <div ng-show="createProjectCtrl.isImporting()" layout="column" layout-align="center center">
     <md-progress-circular class="md-hue-2"  md-mode="indeterminate" md-theme="default"></md-progress-circular>
+    <span>{{createProjectCtrl.importingData}}</span>
   </div>
+
   <cdvy-button-primary id="create-project-button-import"
                        cdvy-button-title="Create Project"
-                       ng-click="createProjectCtrl.import()"
-                       ng-disabled="!createProjectCtrl.checkValidFormState()"
+                       ng-click="!createProjectCtrl.checkValidFormState() || createProjectCtrl.import()"
+                       ng-disabled="!createProjectCtrl.checkValidFormState() || createProjectCtrl.isImporting()"
                        class="projects-create-project-button"
     ></cdvy-button-primary>
 

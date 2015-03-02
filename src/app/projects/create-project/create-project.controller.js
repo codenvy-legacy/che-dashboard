@@ -34,9 +34,16 @@ class CreateProjectCtrl {
     // keep references on workspaces and projects
     this.workspaces = [];
 
+
+    this.importingData = '';
+
+
     promise.then(() => {
       this.workspaces = workspace.getWorkspaces();
       this.workspaceSelected = this.workspaces[0];
+
+      // init WS bus
+      this.messageBus = this.codenvyAPI.getWebsocket().getBus(this.workspaceSelected.workspaceReference.id);
     });
 
 
@@ -136,18 +143,31 @@ class CreateProjectCtrl {
   import() {
     this.importing = true;
     var promise;
+
+    var channel = 'importProject:output:' + this.workspaceSelected.workspaceReference.id + ':' + this.importProjectData.project.name;
     if (this.currentTab === 'blank') {
       // no source, data is .project subpart
       promise = this.codenvyAPI.getProject().createProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData.project);
     } else {
+      // on import
+      this.messageBus.subscribe(channel, (message) => {
+        this.importingData = message.line;
+      });
+
       promise = this.codenvyAPI.getProject().importProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData);
     }
     promise.then((data) => {
       this.importing = false;
+      this.importingData = '';
       // need to redirect to the project details as it has been created !
       this.$location.path('project/' + data.workspaceId + '/' + data.name);
+
+      this.messageBus.unsubscribe(channel);
+
     }, (error) => {
+      this.messageBus.unsubscribe(channel);
       this.importing = false;
+      this.importingData = '';
       // need to show the error
       this.$mdDialog.show(
         this.$mdDialog.alert()
@@ -157,7 +177,6 @@ class CreateProjectCtrl {
           .ok('OK')
       );
     });
-
 
 
   }
