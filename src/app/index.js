@@ -216,7 +216,7 @@ module.config(function($mdThemingProvider) {
   $mdThemingProvider.definePalette('codenvyGrey', codenvyGreyPalette);
 
   $mdThemingProvider.theme('danger')
-    .primaryPalette('codenvyDanger')
+    .primaryPalette('codenvy')
     .accentPalette('codenvyDanger')
     .backgroundPalette('grey');
 
