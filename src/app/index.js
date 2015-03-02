@@ -14,7 +14,7 @@
 var DEV = true;
 
 // init module
-let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages']);
+let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', ]);
 
 import Register from '../components/utils/register';
 

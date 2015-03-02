@@ -21,6 +21,7 @@ import CodenvyProjectType from './codenvy-project-type.factory';
 import CodenvyAPIBuilder from './builder/codenvy-api-builder.factory';
 import CodenvyHttpBackend from './test/codenvy-http-backend.factory';
 import CodenvyHttpBackendProviderFactory from './test/codenvy-http-backend-provider.factory';
+import CodenvyWebsocket from './codenvy-websocket.factory';
 
 /**
  * This class is providing the entry point for accessing to Codenvy API
@@ -33,12 +34,13 @@ class CodenvyAPI {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyUser, codenvyProjectType) {
+  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyUser, codenvyProjectType, codenvyWebsocket) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
     this.codenvyUser = codenvyUser;
     this.codenvyProjectType = codenvyProjectType;
+    this.codenvyWebsocket = codenvyWebsocket;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
@@ -82,6 +84,14 @@ class CodenvyAPI {
    */
   getProjectType() {
     return this.codenvyProjectType;
+  }
+
+  /**
+   * The Codenvy Websocket API
+   * @returns {CodenvyWebsocket|*}
+   */
+  getWebsocket() {
+    return this.codenvyWebsocket;
   }
 
 }
