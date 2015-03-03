@@ -1,9 +1,10 @@
 <md-card class="cdvy-selecter"
          ng-click="codenvySelecterCtrl.select(name, title, valueModel)"
          ng-class="{'cdvy-selecter-active' : '{{title}}' == codenvySelecterCtrl.getSelected()}">
-  <md-icon md-font-icon="fa fa-cube fa-lg icon"></md-icon>
-  <div class="title">{{title}}</div>
+  <md-icon md-font-icon="fa fa-cube" flex layout="column" layout-align="start center"></md-icon>
   <div class="body">
+    <div class="title">{{title}}</div>
+    <div class="selecter" layout="row">
     <select class="codenvy-selecter"
             ng-model="valueModel"
             ng-init="codenvySelecterCtrl.initType(title, values)"
@@ -13,4 +14,6 @@
             ng-options="{{options}}">
       <option value="" ng-if="false"></option>
     </select>
+      </span>
+  </div>
 </md-card>

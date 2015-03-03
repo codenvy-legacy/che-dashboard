@@ -1,95 +1,117 @@
 .cdvy-selecter
-  height 180px
-  width 180px
-  border-color #dddddd
+  height 150px
+  width 150px
+  border-color #d3d3d3
   background-color #ffffff
-  border-width 3px
+  border-width 2px
   border-style solid
-  -moz-border-radius 10px !important
-  border-radius 10px !important
+  -moz-border-radius 3px !important
+  border-radius 3px !important
   -webkit-box-shadow 0 1px 1px rgba(0, 0, 0, 0.05)
   box-shadow 0 1px 1px rgba(0, 0, 0, 0.05)
-  padding-top 20px
-  margin-left 15px
-  margin-right 17px
+  padding-top 12px
+  margin-left 16px
+  margin-right 16px
   color #8b8b8b
+
+  &:hover
+    background-color #8b8b8b
+    color #ffffff
+
+.cdvy-selecter .title
+  padding-top 6px
+  padding-bottom 6px
+
+.cdvy-selecter .body
+  height 50px
+  margin-bottom 8px
 
 .cdvy-selecter select
   display block
   box-shadow: none;
-  width 150px
-  height 34px
-  padding 6px 12px
-  font-size 14px
+  width 118px
+  height 20px
+  padding 3px 3px
+  font-size 12px
   -webkit-appearance none
   -moz-appearance none
   -ms-appearance none
   appearance none
 
-.cdvy-selecter:hover
-  background-color #8b8b8b
-  color #ffffff
-
-
-.cdvy-selecter-active
-  border-color active-color
-  color active-color
-
-.cdvy-selecter-active select
-  color #FFFFFF
-  background-color transparent
-  border-style none
-  border-width 0
-  text-align center
-  -webkit-appearance none
-  -moz-appearance none
-  -ms-appearance none
-  appearance none
-
-.cdvy-selecter-active select:hover
-  background-color #fafafa
-  border-style solid
-  border-width 1px
-  text-align center
-  color active-color
-
-
-
-.cdvy-selecter-active .body
-  display block !important
-  background-color active-color
 
 .cdvy-selecter md-icon
-  font-size 40px
+  font-size 60px
   text-align center
   margin-left auto
   margin-right auto
   margin-top 0px
   margin-bottom 0px
-  height auto
-  width auto
+  padding 0px
+  height 74px
+  width 74px
 
 .cdvy-selecter .title
-  margin-top 20px
-  font-size 20px
+  font-size 12px
   text-align center
   text-transform uppercase
 
 .cdvy-selecter select
-  margin-left 15px
-  margin-right 15px
-
-.cdvy-selecter .body
-  margin-top 15px
-  text-align center
+  margin-left 16px
+  margin-right 16px
   display none
 
+.cdvy-selecter-active
+  border-color active-color
+  color active-color
 
-.cdvy-selecter:hover .body
-  display block
-  background-color transparent
+
+.cdvy-selecter-active .body
+  background-color active-color
+
+.cdvy-selecter-active .title
+  background-color active-color
+  color white
+
+.cdvy-selecter-active select
+  display block !important
+  color active-color
+  background-color white
+
+.cdvy-selecter-active select:hover
+  background-color #fafafa
+  border-style solid
+  border-width 1px
+  text-align left
+  color active-color
+
+
+.cdvy-selecter-active:hover .body
+  background-color active-color !important
+  color white
+
+
+
+.cdvy-selecter:hover select
+  display block !important
 
 
 
 .cdvy-selecter:active .body
   display block
+
+cdvy-selecter-icon()
+  content '\25BC'
+  margin-left -35px
+  margin-top 2px
+  pointer-events none
+  -webkit-transform scaleY(0.6) scaleX(1)
+  -ms-transform scaleY(0.6) scaleX(1)
+  transform scaleY(0.6) scaleX(1)
+  z-index 9
+
+.cdvy-selecter:hover .selecter:after
+  color #8b8b8b
+  cdvy-selecter-icon()
+
+.cdvy-selecter-active .selecter:after
+  cdvy-selecter-icon()
