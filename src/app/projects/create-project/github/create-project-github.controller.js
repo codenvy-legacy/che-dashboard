@@ -12,6 +12,7 @@
 
 /**
  * This class is handling the controller for the GitHub part
+ * @author Stéphane Daviet
  * @author Florent Benoit
  */
 class CreateProjectGithubCtrl {
@@ -37,23 +38,29 @@ class CreateProjectGithubCtrl {
     var userAPI = codenvyAPI.getUser();
 
     this.user = userAPI.getUser();
-    this.user.$promise.then(() => {this.currentUserId = this.user.id;});
+    this.user.$promise.then(() => {
+      this.currentUserId = this.user.id;
+      this.askLoad();
+    });
 
     this.currentTokenCheck = null;
     this.resolveOrganizationName = this.githubOrganizationNameResolver.resolve;
-
-
-
 
     this.organizations = [];
     this.gitHubRepositories = [];
 
     this.state = 'IDLE';
+
+
+  }
+
+  askLoad() {
     this.checkTokenValidity().then(() => {
       this.loadRepositories();
     });
 
   }
+
 
   authenticateWithGitHub() {
 
@@ -86,6 +93,7 @@ class CreateProjectGithubCtrl {
       }
       this.gitHubTokenStore.setToken(result.data);
       this.$http({method: 'POST', url: '/api/github/ssh/generate'});
+      this.askLoad();
       return true;
     });
 
@@ -109,11 +117,6 @@ class CreateProjectGithubCtrl {
   checkGitHubAuthentication() {
     return this.checkTokenValidity().then( () => {
       return this.$q.defer().resolve('true');
-    }, function () {
-      return this.confirmGitHubOAuthPopupModalInstance = this.$modal.open({
-        templateUrl: 'partials/templates/projects/confirmGitHubOAuthPopUp.html',
-        size: 'sm'
-      }).result;
     });
   }
 
