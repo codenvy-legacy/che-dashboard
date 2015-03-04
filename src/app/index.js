@@ -107,10 +107,14 @@ module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $l
       return response || $q.when(response);
     },
     responseError: function (rejection) {
-      if (rejection.status === 401 || rejection.status === 403) {
-        $log.info('Redirect to login page.');
-        $location.path('/login');
 
+      // handle only api call
+      if (rejection.config.url.indexOf('localhost') > 0) {
+        if (rejection.status === 401 || rejection.status === 403) {
+          $log.info('Redirect to login page.');
+          $location.path('/login');
+
+        }
       }
       return $q.reject(rejection);
     }
