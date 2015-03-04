@@ -10,7 +10,7 @@
 
 <md-content md-scroll-y flex class="projects-details-project" ng-show="projectDetailsCtrl.projectDetails && !projectDetailsCtrl.projectDeleted" md-theme="maincontent-theme">
   <md-tabs md-selected="selectedIndex" class="project-details-menu">
-    <md-tab label="Settings" class="project-details-tab settings-icon separator">
+    <cdvy-tab cdvy-title="Settings" cdvy-icon="settings-icon">
       <cdvy-panel cdvy-title="Project Information">
 
 
@@ -72,18 +72,19 @@
       </cdvy-panel>
 
 
-    </md-tab>
-    <md-tab label="Repository" class="project-details-tab repository-icon separator">
-    </md-tab>
+    </cdvy-tab>
 
-    <md-tab label="Machines" class="project-details-tab machines-icon separator">
-    </md-tab>
+    <cdvy-tab cdvy-title="Repository"  cdvy-icon="repository-icon">
+    </cdvy-tab>
 
-    <md-tab label="Factories" class="project-details-tab factories-icon separator">
-    </md-tab>
+    <cdvy-tab cdvy-title="Machines" cdvy-icon="machines-icon">
+    </cdvy-tab>
 
-    <md-tab label="Developers" class="project-details-tab developer-icon">
-    </md-tab>
+    <cdvy-tab cdvy-title="Factories" cdvy-icon="factories-icon">
+    </cdvy-tab>
+
+    <cdvy-tab cdvy-title="Developers" cdvy-icon="developer-icon">
+    </cdvy-tab>
 
   </md-tabs>
 </md-content>
