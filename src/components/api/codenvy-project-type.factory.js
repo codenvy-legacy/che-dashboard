@@ -46,7 +46,7 @@ class CodenvyProjectType {
   fetchTypes() {
 
     let promise = this.remoteProjectTypeAPI.query().$promise;
-    promise.then((projectTypes) => {
+    let updatedPromise = promise.then((projectTypes) => {
 
 
       // reset global list
@@ -56,8 +56,26 @@ class CodenvyProjectType {
       }
 
       projectTypes.forEach((projectType) => {
-        // get type category
-        var typeCategory = projectType.typeCategory;
+
+        // get attributes
+        var category = '';
+        var attributeDescriptors = projectType.attributeDescriptors;
+        attributeDescriptors.forEach((attributeDescriptor) => {
+          if ('language' === attributeDescriptor.name) {
+            category = attributeDescriptor.values[0];
+          }
+        });
+
+        if (attributeDescriptors.length === 0) {
+          category = projectType.id;
+        }
+
+
+        if (category === '') {
+          return;
+        }
+
+        var typeCategory = category;
 
         // get list
         var lst = this.typesPerCategory[typeCategory];
@@ -74,8 +92,10 @@ class CodenvyProjectType {
         this.types.push(projectType);
       });
 
+
+
     });
-    return promise;
+    return updatedPromise;
   }
 
 

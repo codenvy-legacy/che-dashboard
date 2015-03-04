@@ -182,7 +182,7 @@ class CreateProjectCtrl {
   }
 
   cdvySelecter(name, valueSelected) {
-    this.importProjectData.project.type = valueSelected.type;
+    this.importProjectData.project.type = valueSelected.id;
   }
 
   isImporting() {
