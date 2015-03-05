@@ -109,7 +109,8 @@ module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $l
     responseError: function (rejection) {
 
       // handle only api call
-      if (rejection.config.url.indexOf('localhost') > 0) {
+      console.log('rejection url ', rejection.config.url, rejection.status);
+      if (rejection.config.url.indexOf('localhost') > 0 || rejection.config.url.indexOf('/api/user')) {
         if (rejection.status === 401 || rejection.status === 403) {
           $log.info('Redirect to login page.');
           $location.path('/login');
