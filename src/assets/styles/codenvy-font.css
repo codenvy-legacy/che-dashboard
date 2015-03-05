@@ -20,34 +20,34 @@
 }
 
 
-.cdvyico-blank:before {
+.cdvyico-type-blank:before {
 	content: "\E001";
 }
 
-.cdvyico-cpp:before {
+.cdvyico-type-cpp:before {
 	content: "\E002";
 }
 
-.cdvyico-gopher:before {
+.cdvyico-type-gopher:before {
 	content: "\E003";
 }
 
-.cdvyico-java:before {
+.cdvyico-type-java:before {
 	content: "\E004";
 }
 
-.cdvyico-js:before {
+.cdvyico-type-js:before {
 	content: "\E005";
 }
 
-.cdvyico-php:before {
+.cdvyico-type-php:before {
 	content: "\E006";
 }
 
-.cdvyico-python:before {
+.cdvyico-type-python:before {
 	content: "\E007";
 }
 
-.cdvyico-ruby:before {
+.cdvyico-type-ruby:before {
 	content: "\E008";
 }

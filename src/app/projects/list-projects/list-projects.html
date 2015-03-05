@@ -34,29 +34,30 @@
   <md-progress-linear md-mode="indeterminate" ng-show="listProjectsCtrl.state == 'loading'" ></md-progress-linear>
   <md-content flex>
     <div ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace">
-      <h2><md-icon md-font-icon="fa fa-folder"></md-icon>{{listProjectsCtrl.getWorkspaceName(workspaceId)}}</h2>
+      <div class="project-list-section-title"><md-icon md-font-icon="fa fa-folder"></md-icon>{{listProjectsCtrl.getWorkspaceName(workspaceId)}}
+        <span ng-show="projects.length == 0" class="project-list-empty">- No project</span>
+      </div>
+
     <md-card flex-gt-sm="90" flex-sm="98">
-      <md-card-content>
+      <md-card-content ng-show="projects.length > 0">
         <section layout="column">
-          <md-list>
-            <md-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
-              <md-item-content>
-                <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column" layout-align="start center" >
-                  <p flex-gt-sm="5" class="project-type"><md-icon md-font-icon="fa fa-cube"></md-icon></p>
-                  <div layout="column" flex-gt-sm="40">
-                    <h3><a class="cdvy-link" ng-href="#/project/{{workspaceId}}/{{project.name}}">{{project.name}}</a></h3>
-                    <h4>{{project.description}}</h4>
-                    </div>
-                  <p flex-gt-sm="15"><span show-sm>10 minutes</span></p>
-                  <p flex-gt-sm="20">
+          <cdvy-list>
+            <cdvy-list-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
+                <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row">
+                  <div class="project-list-static-icon"><md-icon md-font-icon="cdvyfont cdvyico-type-{{project.type}}" class="project-type-icon"></md-icon></div>
+                  <div flex-gt-sm="50" layout="column">
+                    <div class="project-name"><a ng-href="#/project/{{workspaceId}}/{{project.name}}">{{project.name}}</a></div>
+                    <div class="project-details">{{project.description}}</div>
+                  </div>
+                  <span flex-gt-sm="20" class="project-details" show-sm am-time-ago="project.modificationDate"></span>
+                  <div flex-gt-sm="30">
                     <md-icon ng-show="project.visibility == 'public'" md-font-icon="material-design icon-ic_lock_open_24px"></md-icon>
                     <md-icon ng-show="project.visibility == 'private'" md-font-icon="material-design icon-ic_lock_24px"></md-icon>
-                  </p>
+                  </div>
                   <!--<p flex-gt-sm="20"><md-icon md-font-icon="fa fa-star"></md-icon></i></p>-->
                 </div>
-              </md-item-content>
-            </md-item>
-          </md-list>
+            </cdvy-list-item>
+          </cdvy-list>
         </section>
       </md-card-content>
 

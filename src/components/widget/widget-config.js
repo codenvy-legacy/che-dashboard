@@ -22,6 +22,9 @@ import CodenvyTab from './tab/cdvy-tab.directive';
 
 import CodenvyPanel from './panel/cdvy-panel.directive';
 
+import CodenvyList from './list/cdvy-list.directive';
+import CodenvyListItem from './list/cdvy-list-item.directive';
+
 import CodenvySelecterCtrl from './selecter/cdvy-selecter.controller';
 import CodenvySelecter from './selecter/cdvy-selecter.directive';
 
