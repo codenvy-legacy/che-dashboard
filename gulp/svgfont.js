@@ -17,19 +17,29 @@ var paths = gulp.paths;
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('svgfonts', function() {
-  return gulp.src('bower_components/material-design-icons/**/production/*')
+gulp.task('generatesvgfonts', function() {
+  return gulp.src('src/assets/svg/*')
     .pipe($.iconfontCss({
-      fontName: 'material-design',
-      targetPath: '../styles/material-design.css',
+      fontName: 'codenvy',
+      targetPath: '../styles/codenvy-font.css',
       fontPath: '../fonts/'
     }))
     .pipe($.iconfont({
-      fontName: 'material-design',
+      fontName: 'codenvy',
       appendCodepoints: false,
       normalize: true,
       centerHorizontally: true,
       fontHeight: 100
     }))
     .pipe( gulp.dest('src/assets/fonts') );
+});
+
+
+
+gulp.task('svgfonts', ['generatesvgfonts'], function () {
+  return gulp.src(['src/assets/styles/codenvy-font.css'])
+    .pipe($.replace('icon:before', 'cdvyfont:before'))
+    .pipe($.replace('.icon-', '.cdvyico-'))
+    .pipe(gulp.dest('src/assets/styles'));
+
 });

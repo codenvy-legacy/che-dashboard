@@ -1,0 +1,53 @@
+@font-face {
+	font-family: "codenvy";
+	src: url('../fonts/codenvy.eot');
+	src: url('../fonts/codenvy.eot?#iefix') format('eot'),
+		url('../fonts/codenvy.woff') format('woff'),
+		url('../fonts/codenvy.ttf') format('truetype'),
+		url('../fonts/codenvy.svg#codenvy') format('svg');
+}
+
+.cdvyfont:before {
+	font-family: "codenvy";
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	/* speak: none; only necessary if not using the private unicode range (firstGlyph option) */
+	text-decoration: none;
+	text-transform: none;
+}
+
+
+.cdvyico-blank:before {
+	content: "\E001";
+}
+
+.cdvyico-cpp:before {
+	content: "\E002";
+}
+
+.cdvyico-gopher:before {
+	content: "\E003";
+}
+
+.cdvyico-java:before {
+	content: "\E004";
+}
+
+.cdvyico-js:before {
+	content: "\E005";
+}
+
+.cdvyico-php:before {
+	content: "\E006";
+}
+
+.cdvyico-python:before {
+	content: "\E007";
+}
+
+.cdvyico-ruby:before {
+	content: "\E008";
+}
