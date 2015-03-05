@@ -10,13 +10,15 @@
  */
 'use strict';
 
-/*exported CodenvyButtonPrimary, CodenvyButtonDanger, CodenvyHtmlSource, CodenvyInput, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton, CodenvyToggle, CodenvyToolbar*/
+/*exported CodenvyButtonPrimary, CodenvyButtonDanger, CodenvyHtmlSource, CodenvyInput, CodenvyTab, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton, CodenvyToggle, CodenvyToolbar*/
 import CodenvyButtonPrimary from './button/cdvy-button-primary.directive';
 import CodenvyButtonDanger from './button/cdvy-button-danger.directive';
 
 import CodenvyHtmlSource from './html-source/cdvy-html-source.directive';
 
 import CodenvyInput from './input/cdvy-input.directive';
+
+import CodenvyTab from './tab/cdvy-tab.directive';
 
 import CodenvyPanel from './panel/cdvy-panel.directive';
 
