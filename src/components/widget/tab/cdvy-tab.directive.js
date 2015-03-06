@@ -37,6 +37,31 @@ class CodenvyTab {
 
   }
 
+  /**
+   * Performs a manual transclude of the element
+   * @param transclude the transcluded element
+   */
+  link($scope, element, attrs, ctrl, transclude) {
+
+    // root mdTabs
+    var mdTabsElement = element.parent().parent().parent().parent();
+
+    // current tab ID
+    var mdTabItem = element[0].querySelectorAll('md-tab')[0];
+    var mdTabId = mdTabItem.getAttribute('id');
+
+    // The md-tab-contents element
+    var mdTabsContents = angular.element(mdTabsElement[0].querySelector('.md-tabs-content'));
+
+    // now search the md tab content
+    var mdTabContent = angular.element(mdTabsElement[0].querySelectorAll('div[id*=content_'+ mdTabId+ ']'));
+
+    // Append the transcluded element in the tab content element
+    transclude(function (clone) {
+      mdTabContent.append(clone);
+    });
+  }
+
 }
 
 export default CodenvyTab;
