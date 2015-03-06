@@ -14,7 +14,7 @@ import Register from '../utils/register.js';
 
 /**
  * This class is handling the projects type retrieval
- * It sets to the array project types and the associated templates
+ * It sets to the array project types
  * @author Florent Benoit
  */
 class CodenvyProjectType {

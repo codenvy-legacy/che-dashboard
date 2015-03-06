@@ -1,0 +1,33 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<md-content flex class="projects-create-project-samples">
+  <div ng-repeat="(category, templates) in createProjectSamplesCtrl.templatesByCategory">
+    <h2><md-icon md-font-icon="fa fa-folder"></md-icon>{{category}}</h2>
+    <md-card flex-gt-sm="90" flex-sm="98">
+      <md-card-content>
+        <section layout="column">
+          <md-list>
+            <md-item ng-repeat="template in templates | orderBy : 'displayName'" flex-gt-sm="100" flex="33">
+              <md-item-content>
+                <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column" layout-align="start center" >
+                  <h3 flex-gt-sm="40" ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)">{{template.displayName}}</h3>
+                </div>
+              </md-item-content>
+            </md-item>
+          </md-list>
+        </section>
+      </md-card-content>
+
+    </md-card>
+  </div>
+</md-content>

@@ -27,8 +27,8 @@ class CodenvyWebsocket {
 
     this.$cookies = $cookies;
     this.$websocket = $websocket;
-    //this.wsBaseUrl = 'wss://' + $location.host() + ':' + $location.port() + '/api/ws/';
-    this.wsBaseUrl = 'wss://codenvy.com/api/ws/';
+    //this.wsBaseUrl = 'ws://' + $location.host() + ':' + $location.port() + '/api/ws/';
+    this.wsBaseUrl = 'wss://codenvy-stg.com/api/ws/';
     this.sockets = new Map();
   }
 

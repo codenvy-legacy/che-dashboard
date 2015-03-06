@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
-/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendProviderFactory */
+/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProjectTemplate, CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendProviderFactory */
 
 
 import Register from '../utils/register';
@@ -18,6 +18,7 @@ import CodenvyWorkspace from './codenvy-workspace.factory';
 import CodenvyUser from './codenvy-user.factory';
 import CodenvyFactory from './codenvy-factory.factory';
 import CodenvyProjectType from './codenvy-project-type.factory';
+import CodenvyProjectTemplate from './codenvy-project-template.factory';
 import CodenvyAPIBuilder from './builder/codenvy-api-builder.factory';
 import CodenvyHttpBackend from './test/codenvy-http-backend.factory';
 import CodenvyHttpBackendProviderFactory from './test/codenvy-http-backend-provider.factory';
@@ -34,12 +35,13 @@ class CodenvyAPI {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyUser, codenvyProjectType, codenvyWebsocket) {
+  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyUser, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
     this.codenvyUser = codenvyUser;
     this.codenvyProjectType = codenvyProjectType;
+    this.codenvyProjectTemplate = codenvyProjectTemplate;
     this.codenvyWebsocket = codenvyWebsocket;
 
     // register listener of projects onto workspaces
@@ -84,6 +86,14 @@ class CodenvyAPI {
    */
   getProjectType() {
     return this.codenvyProjectType;
+  }
+
+  /**
+   * The Codenvy Project Template API
+   * @returns {CodenvyProjectTemplate|*}
+   */
+  getProjectTemplate() {
+    return this.codenvyProjectTemplate;
   }
 
   /**

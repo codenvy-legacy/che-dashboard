@@ -26,7 +26,6 @@ class CreateProjectCtrl {
     this.$location = $location;
     this.$mdDialog = $mdDialog;
 
-    var workspace = codenvyAPI.getWorkspace();
 
     // fetch workspaces when initializing
     let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
@@ -37,15 +36,17 @@ class CreateProjectCtrl {
 
     this.importingData = '';
 
-
     promise.then(() => {
-      this.workspaces = workspace.getWorkspaces();
-      this.workspaceSelected = this.workspaces[0];
-
-      // init WS bus
-      this.messageBus = this.codenvyAPI.getWebsocket().getBus(this.workspaceSelected.workspaceReference.id);
-    });
-
+        this.updateData();
+      },
+      (error) => {
+        if (error.status === 304) {
+          // ok
+          this.updateData();
+          return;
+        }
+        this.state = 'error';
+      });
 
     this.currentTab = '';
 
@@ -69,9 +70,19 @@ class CreateProjectCtrl {
     this.importProjectData.source.project.type = 'git';
 
     let promiseTypes = codenvyAPI.getProjectType().fetchTypes();
+
+
     promiseTypes.then(() => {
-      this.typesByCategory = codenvyAPI.getProjectType().getTypesByCategory();
-    });
+        this.updateTypes();
+      },
+      (error) => {
+        if (error.status === 304) {
+          // ok
+          this.updateTypes();
+          return;
+        }
+        this.state = 'error';
+      });
 
 
     this.jsonConfig = {};
@@ -85,6 +96,25 @@ class CreateProjectCtrl {
 
     this.importing = false;
   }
+
+
+
+
+  updateData() {
+    this.workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
+    this.workspaceSelected = this.workspaces[0];
+
+    // init WS bus
+    this.messageBus = this.codenvyAPI.getWebsocket().getBus(this.workspaceSelected.workspaceReference.id);
+  }
+
+  updateTypes() {
+    this.typesByCategory = this.codenvyAPI.getProjectType().getTypesByCategory();
+  }
+
+
+
+
 
   refreshCM() {
     // hack to make a refresh of the zone
@@ -141,14 +171,31 @@ class CreateProjectCtrl {
 
 
   import() {
-    this.importing = true;
     var promise;
+    console.log('importing, this', this);
 
+    // check worspace is selected
+    if (!this.workspaceSelected || !this.workspaceSelected.workspaceReference) {
+      this.$mdDialog.show(
+        this.$mdDialog.alert()
+          .title('No workspace selected')
+          .content('No workspace is selected')
+          .ariaLabel('Project creation')
+          .ok('OK')
+      );
+      return
+    }
+
+    this.importing = true;
+
+    var mode = '';
     var channel = 'importProject:output:' + this.workspaceSelected.workspaceReference.id + ':' + this.importProjectData.project.name;
     if (this.currentTab === 'blank') {
       // no source, data is .project subpart
       promise = this.codenvyAPI.getProject().createProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData.project);
+      mode = 'createProject';
     } else {
+      mode = 'importProject';
       // on import
       this.messageBus.subscribe(channel, (message) => {
         this.importingData = message.line;
@@ -159,6 +206,11 @@ class CreateProjectCtrl {
     promise.then((data) => {
       this.importing = false;
       this.importingData = '';
+
+      if (mode === 'importProject') {
+        data = data.projectDescriptor;
+      }
+
       // need to redirect to the project details as it has been created !
       this.$location.path('project/' + data.workspaceId + '/' + data.name);
 
