@@ -13,14 +13,14 @@
 
 
 describe('The projects view', function () {
-  var projectsPage;
+  var listProjectsPage;
 
 
   var projectsMock;
 
   beforeEach(function () {
-    projectsPage = require('./projects.po.js');
-    projectsMock = require('./projects-http.mock');
+    listProjectsPage = require('./list-projects.po.js');
+    projectsMock = require('./list-projects-http.mock');
   });
 
 
@@ -36,7 +36,7 @@ describe('The projects view', function () {
     browser.get('http://localhost:5000/#/projects');
     browser.waitForAngular();
 
-    expect(projectsPage.projectsWorkspaceElements.count()).toEqual(2);
+    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(2);
 
   });
 
@@ -45,8 +45,19 @@ describe('The projects view', function () {
     browser.get('http://localhost:5000/#/projects');
     browser.waitForAngular();
 
-    expect(projectsPage.projectsWorkspaceElements.count()).toEqual(1);
+    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(1);
+    expect(listProjectsPage.projectElements.count()).toEqual(2);
+    expect(listProjectsPage.noProjectsLabel.isDisplayed()).toBe(false);
+  });
 
+  it('should not have any projects', function() {
+    browser.addMockModule('userDashboardMock', projectsMock.emptyProjectsList);
+    browser.get('http://localhost:5000/#/projects');
+    browser.waitForAngular();
+
+    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(1);
+    expect(listProjectsPage.projectElements.count()).toEqual(0);
+    expect(listProjectsPage.noProjectsLabel.isDisplayed()).toBe(true);
   });
 
 });

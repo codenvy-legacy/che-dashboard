@@ -19,6 +19,8 @@
 
 var MainPage = function() {
   this.projectsWorkspaceElements = element.all(by.repeater('(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace'));
+  this.projectElements = element.all(by.repeater('project in projects'));
+  this.noProjectsLabel = element(by.css('.project-list-empty'));
 };
 
 module.exports = new MainPage();
