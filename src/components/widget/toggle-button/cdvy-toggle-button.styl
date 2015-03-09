@@ -1,20 +1,19 @@
 cdvy-toggle-button
-  margin-left 20px
-  margin-right 15px
 
 cdvy-toggle-button .md-button
-  height 38px
-  padding 3px
+  height 40px
+  padding-left 20px
+  padding-right 28px
+  margin 10px
+
 
 cdvy-toggle-button .md-button.md-default-theme
   background-color transparent
   color active-color
-  min-width 200px
-  border-radius 5px
-  -moz-border-radius 5px
-  -webkit-border-radius 5px
-  border 3px solid active-color
-  box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+  border-radius 3px
+  -moz-border-radius 3px
+  -webkit-border-radius 3px
+  border 2px solid active-color
 
 cdvy-toggle-button .md-button.md-default-theme:not([disabled]):focus
   background-color transparent
@@ -22,11 +21,14 @@ cdvy-toggle-button .md-button.md-default-theme:not([disabled]):focus
 
 cdvy-toggle-button .md-button.md-default-theme.cdvy-toggle-button-disabled
   background-color white
-  color #cccccc
-  border 3px solid #cccccc
+  color #393939
+  border-color #d3d3d3
 
 cdvy-toggle-button md-icon
-   font-size 1.8em
+   font-size 20px
    width auto
    height auto
-   margin-right 30px
+   margin-right 28px
+
+cdvy-toggle-button .md-button.md-default-theme.cdvy-toggle-button-disabled md-icon
+  color #d3d3d3
