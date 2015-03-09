@@ -81,6 +81,9 @@ class CodenvyInput {
       if ('ngMaxlength' === key) {
         inputElement.eq(0).attr('md-maxlength', value);
       }
+
+      element.removeAttr(attrs.$attr[key]);
+
     });
 
 
