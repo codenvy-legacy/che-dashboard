@@ -23,6 +23,11 @@ class CreateProjectBlank {
   constructor () {
     this.restrict='E';
     this.templateUrl = 'app/projects/create-project/blank/create-project-blank.html';
+
+    this.controller = 'CreateProjectBlankCtrl';
+    this.controllerAs = 'createProjectBlankCtrl';
+    this.bindToController = true;
+
   }
 
 }

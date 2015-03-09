@@ -15,9 +15,12 @@
   <md-input-container>
     <label>Git URL</label>
     <input type="text" id="gitRepositoryURL"
+           ng-change="createProjectCtrl.changeGitURL()"
            name="remoteGitURL" ng-model="createProjectCtrl.importProjectData.source.project.location"
+           git-url
            required>
     <div ng-messages="createProjectGitForm.remoteGitURL.$error">
+      <div ng-message="gitUrl">Invalid Git URL</div>
       <div ng-message="required">A repository URL is required.</div>
     </div>
   </md-input-container>

@@ -23,8 +23,10 @@ class CreateProjectSamplesCtrl {
   constructor(codenvyAPI, $scope) {
     this.codenvyAPI = codenvyAPI;
 
+    // ask to load codenvy templates
     let promise = codenvyAPI.getProjectTemplate().fetchTemplates();
 
+    // promise update
     promise.then(() => {
         this.updateData();
       },
@@ -38,10 +40,18 @@ class CreateProjectSamplesCtrl {
       });
   }
 
+  /**
+   * Defines the samples
+   */
   updateData() {
     this.templatesByCategory = this.codenvyAPI.getProjectTemplate().getTemplatesByCategory();
   }
 
+  /**
+   * Callback when a template is selected and also give the controller on which to select the data
+   * @param template the selected template
+   * @param createProjectCtrl callback controller
+   */
   selectTemplate(template, createProjectCtrl) {
 
     // update source details

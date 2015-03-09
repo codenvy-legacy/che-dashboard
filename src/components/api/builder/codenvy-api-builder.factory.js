@@ -16,6 +16,10 @@ import Register from '../../utils/register';
 import CodenvyWorkspaceReferenceBuilder from './codenvy-workspacereference-builder';
 import CodenvyWorkspaceBuilder from './codenvy-workspace-builder';
 import CodenvyProjectReferenceBuilder from './codenvy-projectreference-builder';
+import CodenvyProjectTypeBuilder from './codenvy-projecttype-builder';
+import CodenvyProjectTemplateBuilder from './codenvy-projecttemplate-builder';
+import CodenvyProjectTypeAttributeDescriptorBuilder from './codenvy-projecttype-attribute-descriptor-builder';
+
 
 /**
  * This class is providing the entry point for accessing the builders
@@ -53,6 +57,31 @@ class CodenvyAPIBuilder {
    */
   getProjectReferenceBuilder() {
     return new CodenvyProjectReferenceBuilder();
+  }
+
+
+  /***
+   * The Codenvy Project Template builder
+   * @returns {CodenvyProjectTemplateBuilder}
+   */
+  getProjectTemplateBuilder() {
+    return new CodenvyProjectTemplateBuilder();
+  }
+
+  /***
+   * The Codenvy Project Type builder
+   * @returns {CodenvyProjectTypeBuilder}
+   */
+  getProjectTypeBuilder() {
+    return new CodenvyProjectTypeBuilder();
+  }
+
+  /**
+   * Attribute descriptor builder
+   * @returns {CodenvyProjectTypeAttributeDescriptorBuilder}
+   */
+  getProjectTypeAttributeDescriptorBuilder() {
+    return new CodenvyProjectTypeAttributeDescriptorBuilder();
   }
 
 

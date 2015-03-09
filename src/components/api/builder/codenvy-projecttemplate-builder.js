@@ -60,7 +60,7 @@ class CodenvyProjectTemplateBuilder {
   }
 
   build() {
-    return this.workspaceReference;
+    return this.template;
   }
 
 

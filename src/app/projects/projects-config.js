@@ -14,6 +14,7 @@ import CreateProjectCtrl from './create-project/create-project.controller';
 import ListProjectsCtrl from './list-projects/list-projects.controller';
 import CreateProjectGithubCtrl from './create-project/github/create-project-github.controller';
 import CreateProjectBlank from './create-project/blank/create-project-blank.directive';
+import CreateProjectBlankCtrl from './create-project/blank/create-project-blank.controller';
 import CreateProjectGit from './create-project/git/create-project-git.directive';
 import CreateProjectGithub from './create-project/github/create-project-github.directive';
 import CreateProjectSamplesCtrl from './create-project/samples/create-project-samples.controller';
@@ -33,6 +34,7 @@ class ProjectConfig {
     register.directive('createProjectSamples', CreateProjectSamples);
     register.controller('CreateProjectCtrl', CreateProjectCtrl);
     register.controller('ListProjectsCtrl', ListProjectsCtrl);
+    register.controller('CreateProjectBlankCtrl', CreateProjectBlankCtrl);
     register.controller('CreateProjectGithubCtrl', CreateProjectGithubCtrl);
     register.controller('CreateProjectSamplesCtrl', CreateProjectSamplesCtrl);
     register.controller('ProjectDetailsCtrl', ProjectDetailsCtrl);

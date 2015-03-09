@@ -27,19 +27,20 @@ class CreateProjectCtrl {
     this.$mdDialog = $mdDialog;
 
 
-    // fetch workspaces when initializing
-    let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
-
     // keep references on workspaces and projects
     this.workspaces = [];
 
 
+    // Text that will be used by the websocket processing when performing import
     this.importingData = '';
 
+    // fetch workspaces when initializing
+    let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
     promise.then(() => {
         this.updateData();
       },
       (error) => {
+        // etag handling so also retrieve last data that were fetched before
         if (error.status === 304) {
           // ok
           this.updateData();
@@ -48,10 +49,14 @@ class CreateProjectCtrl {
         this.state = 'error';
       });
 
+    // selected current tab
     this.currentTab = '';
 
+
+    // all forms that we have
     this.forms = new Map();
 
+    // JSON used for import data
     this.importProjectData = {
       source: {
         project: {
@@ -67,23 +72,8 @@ class CreateProjectCtrl {
       }
     };
 
+    // by default project type is git
     this.importProjectData.source.project.type = 'git';
-
-    let promiseTypes = codenvyAPI.getProjectType().fetchTypes();
-
-
-    promiseTypes.then(() => {
-        this.updateTypes();
-      },
-      (error) => {
-        if (error.status === 304) {
-          // ok
-          this.updateTypes();
-          return;
-        }
-        this.state = 'error';
-      });
-
 
     this.jsonConfig = {};
     this.jsonConfig.content = '{}';
@@ -95,33 +85,39 @@ class CreateProjectCtrl {
 
 
     this.importing = false;
+
   }
 
 
-
-
+  /**
+   * Fetching operation has been done, so get workspaces and websocket connection
+   */
   updateData() {
+
     this.workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
     this.workspaceSelected = this.workspaces[0];
 
+    // generate project name
+    this.generateProjectName(true);
+
     // init WS bus
     this.messageBus = this.codenvyAPI.getWebsocket().getBus(this.workspaceSelected.workspaceReference.id);
+
+
   }
 
-  updateTypes() {
-    this.typesByCategory = this.codenvyAPI.getProjectType().getTypesByCategory();
-  }
-
-
-
-
-
+  /**
+   * Force codemirror editor to be refreshed
+   */
   refreshCM() {
     // hack to make a refresh of the zone
     this.importProjectData.cm = 'aaa';
     this.$timeout(() => { delete this.importProjectData.cm;}, 500);
   }
 
+  /**
+   * Update internal json data from JSON codemirror editor config file
+   */
   update() {
     try {
       this.importProjectData = angular.fromJson(this.jsonConfig.content);
@@ -132,7 +128,10 @@ class CreateProjectCtrl {
   }
 
 
-
+  /**
+   * Select the given github repository
+   * @param gitHubRepository the repository selected
+   */
   selectGitHubRepository(gitHubRepository) {
     this.importProjectData.project.name = gitHubRepository.name;
     this.importProjectData.project.description = gitHubRepository.description;
@@ -140,9 +139,14 @@ class CreateProjectCtrl {
   }
 
 
+  /**
+   * Checks if the current forms are being validated
+   * @returns {boolean|FormController.$valid|*|ngModel.NgModelController.$valid|context.ctrl.$valid|Ic.$valid}
+   */
   checkValidFormState() {
     // check project information form and selected tab form
     var currentForm = this.forms.get(this.currentTab);
+
 
     if (currentForm) {
       return this.projectInformationForm.$valid && currentForm.$valid;
@@ -151,15 +155,28 @@ class CreateProjectCtrl {
     }
   }
 
+  /**
+   * Defines the project information form
+   * @param form
+   */
   setProjectInformationForm(form) {
     this.projectInformationForm = form;
   }
 
 
+  /**
+   * Sets the form for a given mode
+   * @param form the selected form
+   * @param mode the tab selected
+   */
   setForm(form, mode) {
     this.forms.set(mode, form);
   }
 
+  /**
+   * Sets the current selected tab
+   * @param tab the selected tab
+   */
   setCurrentTab(tab) {
     this.currentTab = tab;
     if ('zip' === tab) {
@@ -169,12 +186,13 @@ class CreateProjectCtrl {
     }
   }
 
-
+  /**
+   * Call the import operation that may create or import a project
+   */
   import() {
     var promise;
-    console.log('importing, this', this);
 
-    // check worspace is selected
+    // check workspace is selected
     if (!this.workspaceSelected || !this.workspaceSelected.workspaceReference) {
       this.$mdDialog.show(
         this.$mdDialog.alert()
@@ -186,10 +204,16 @@ class CreateProjectCtrl {
       return
     }
 
+    // mode
     this.importing = true;
 
     var mode = '';
+
+    // websocket channel
     var channel = 'importProject:output:' + this.workspaceSelected.workspaceReference.id + ':' + this.importProjectData.project.name;
+
+
+    // select mode (create or import)
     if (this.currentTab === 'blank') {
       // no source, data is .project subpart
       promise = this.codenvyAPI.getProject().createProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData.project);
@@ -233,8 +257,91 @@ class CreateProjectCtrl {
 
   }
 
+
+  /**
+   * Generates a default project name only if user has not entered any data
+   * @param firstInit on first init, user do not have yet initialized something
+   */
+  generateProjectName(firstInit) {
+
+    // name has not been modified by the user
+    if (firstInit || (this.projectInformationForm.projectInformationForm.deskname.$pristine && this.projectInformationForm.projectInformationForm.name.$pristine)) {
+      // generate a name
+
+      // starts with project
+      var name = 'project';
+
+      // type selected
+      if (this.importProjectData.project.type) {
+        name = name + '-' + this.importProjectData.project.type;
+      }
+
+      name = name + '-' + (("0000" + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4));
+
+      this.importProjectData.project.name = name;
+
+
+    }
+
+  }
+
+
+  /**
+   * Update the git URL based on the current location
+   */
+  changeGitURL() {
+
+    // get current url
+    var uri = this.importProjectData.source.project.location;
+
+    if (!uri || uri === '') {
+      return;
+    }
+
+    // search if repository is ending with . (for example .git) or the last name
+    var indexFinishProjectName = uri.lastIndexOf('.');
+    var indexStartProjectName;
+    if (uri.lastIndexOf('/') != -1) {
+      indexStartProjectName = uri.lastIndexOf('/') + 1;
+    } else {
+      indexStartProjectName = uri.lastIndexOf(':') + 1;
+    }
+
+
+    var name;
+
+    // extract name with .../dummy.git
+    if (indexStartProjectName != 0 && indexStartProjectName < indexFinishProjectName) {
+      name = uri.substring(indexStartProjectName, indexFinishProjectName);
+    } else if (indexStartProjectName != 0) {
+      // extract ...../dummy
+      name = uri.substring(indexStartProjectName);
+    } else {
+      // unable to do something
+      name = '';
+    }
+
+    // able to extract something, change it
+    if (name !== '') {
+      this.importProjectData.project.name = name;
+    }
+
+
+
+  }
+
+
+  /**
+   * Callback when selecter has been set
+   * @param name
+   * @param valueSelected
+   */
   cdvySelecter(name, valueSelected) {
     this.importProjectData.project.type = valueSelected.id;
+
+    // generate name
+    this.generateProjectName();
+
   }
 
   isImporting() {

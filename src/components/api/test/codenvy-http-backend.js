@@ -25,7 +25,6 @@ class CodenvyHttpBackend {
   constructor ($httpBackend) {
     this.httpBackend = $httpBackend;
     this.projectsPerWorkspace = new Map();
-
   }
 
   /**
@@ -71,6 +70,30 @@ class CodenvyHttpBackend {
     // add call to the backend
     this.httpBackend.when('GET', '/api/project/' + workspace.workspaceReference.id).respond(this.projectsPerWorkspace.get(workspace.workspaceReference.id));
 
+  }
+
+  /**
+   * Add the given project types
+   * @param projectTypes
+   */
+  addProjectTypes(projectTypes) {
+    this.httpBackend.when('GET', '/api/project-type').respond(projectTypes);
+  }
+
+  /**
+   * Add the given user
+   * @param user
+   */
+  addUser(user) {
+    this.httpBackend.when('GET', '/api/user').respond(user);
+  }
+
+  /**
+   * Add the given project templates
+   * @param projectTemplates
+   */
+  addProjectTemplates(projectTemplates) {
+    this.httpBackend.when('GET', '/api/project-template').respond(projectTemplates);
   }
 
   /**

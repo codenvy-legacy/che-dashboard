@@ -16,54 +16,34 @@
  * This class is providing a builder for ProjectTemplate
  * @author Florent Benoit
  */
-class CodenvyProjectTypeeBuilder {
+class CodenvyProjectTypeBuilder {
 
   constructor() {
-    this.template = {};
-    this.template.source = {};
-    this.template.config = {};
+    this.type = {};
+    this.type.attributeDescriptors = [];
 
   }
-  withDescription(desc) {
-    this.template.description = desc;
-    return this;
-  }
 
-  withSourceParameters(parameters) {
-    this.template.source.parameters = parameters;
-    return this;
-  }
-
-  withSourceType(type) {
-    this.template.source.type = type;
-    return this;
-  }
-
-  withSourceLocation(location) {
-    this.template.source.location = location;
+  withAttributeDescriptors(attributeDescriptors) {
+    this.type.attributeDescriptors = attributeDescriptors;
     return this;
   }
 
   withDisplayname(name) {
-  this.template.displayName = name;
+  this.type.displayName = name;
     return this;
   }
 
-  withCategory(category) {
-    this.template.category = category;
-    return this;
-  }
-
-  withProjectType(projectType) {
-    this.template.projectType = projectType;
+  withId(id) {
+    this.type.id = id;
     return this;
   }
 
   build() {
-    return this.workspaceReference;
+    return this.type;
   }
 
 
 }
 
-export default CodenvyProjectTemplateBuilder;
+export default CodenvyProjectTypeBuilder;

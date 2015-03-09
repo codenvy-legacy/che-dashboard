@@ -70,7 +70,6 @@ class CodenvyProjectType {
           category = projectType.id;
         }
 
-
         if (category === '') {
           return;
         }
@@ -92,9 +91,8 @@ class CodenvyProjectType {
         this.types.push(projectType);
       });
 
-
-
     });
+
     return updatedPromise;
   }
 

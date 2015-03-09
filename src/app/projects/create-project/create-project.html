@@ -13,33 +13,31 @@
 <cdvy-toolbar title="Create Project"></cdvy-toolbar>
 <md-content md-scroll-y flex class="projects-create-project" md-theme="maincontent-theme" >
   <cdvy-panel cdvy-title="Select Source">
-    <md-tabs md-selected="selectedIndex">
-      <md-tab label="Blank Type"  md-on-select="createProjectCtrl.setCurrentTab('blank')">
+    <md-tabs md-selected="createProjectCtrl.selectedIndex">
+      <cdvy-tab cdvy-icon="material-design icon-ic_developer_mode_24px" cdvy-title="Blank Type" md-on-select="$parent.createProjectCtrl.setCurrentTab('blank')">
         <create-project-blank layout="row" layout-wrap></create-project-blank>
-      </md-tab>
-      <md-tab label="Samples" md-on-select="createProjectCtrl.setCurrentTab('samples')">
+      </cdvy-tab>
+      <cdvy-tab cdvy-icon="fa fa-magic" cdvy-title="Samples" md-on-select="$parent.createProjectCtrl.setCurrentTab('samples')">
         <create-project-samples layout="row" layout-wrap></create-project-samples>
-      </md-tab>
-      <md-tab label="Git Repository" md-on-select="createProjectCtrl.setCurrentTab('git')">
+      </cdvy-tab>
+      <cdvy-tab cdvy-icon="fa fa-git" cdvy-title="Git Repository"  md-on-select="$parent.createProjectCtrl.setCurrentTab('git')">
         <create-project-git layout="column"></create-project-git>
-      </md-tab>
-      <md-tab label="Github" md-on-select="createProjectCtrl.setCurrentTab('github')">
+      </cdvy-tab>
+      <cdvy-tab cdvy-icon="fa fa-github" cdvy-title="Github" md-on-select="$parent.createProjectCtrl.setCurrentTab('github')">
         <create-project-github layout="column"></create-project-github>
 
-      </md-tab>
-      <md-tab label="Zip" md-on-select="createProjectCtrl.setCurrentTab('zip')">
+      </cdvy-tab>
+      <cdvy-tab cdvy-icon="fa fa-file-archive-o" cdvy-title="Zip" md-on-select="$parent.createProjectCtrl.setCurrentTab('zip')">
         <create-project-zip layout="column"></create-project-zip>
-      </md-tab>
-      <md-tab md-on-select="createProjectCtrl.refreshCM(); createProjectCtrl.setCurrentTab('config')" label="Configuration file">
+      </cdvy-tab>
+      <cdvy-tab label="Configuration file" cdvy-icon="material-design icon-ic_get_app_24px" md-on-select="$parent.createProjectCtrl.refreshCM(); $parent.createProjectCtrl.setCurrentTab('config')">
         <create-project-conf-file layout="column" layout-fill></create-project-conf-file>
-      </md-tab>
+      </cdvy-tab>
     </md-tabs>
-
   </cdvy-panel>
 
   <ng-form name="projectInformationForm">
     <cdvy-panel cdvy-title="Project Information" ng-form="projectInformationForm" ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);">
-
 
       <cdvy-input cdvy-form="projectInformationForm"
                   cdvy-name="name"
@@ -47,9 +45,11 @@
                   cdvy-place-holder="Name of the project"
                   ng-model="createProjectCtrl.importProjectData.project.name"
                   required
+                  unique-project-name="createProjectCtrl.workspaceSelected"
                   ng-maxlength="128"
                   ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
         <div ng-message="required">A name is required.</div>
+        <div ng-message="uniqueProjectName">This project name is already used.</div>
         <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
         <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
         <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>

@@ -20,3 +20,7 @@ import GitHub from './github/github-service';
 
 // import custom codemirror
 import CodeMirror from './codemirror/codemirror';
+
+import CreateProjectGitValidator from './validator/git-url-validator.directive';
+import UniqueProjectNameValidator from './validator/unique-project-name-validator.directive';
+
