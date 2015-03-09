@@ -37,7 +37,41 @@ class CodenvyTab {
 
   }
 
-  /**
+
+  compile(element, attrs) {
+    var keys = Object.keys(attrs);
+
+    // search the input field
+    var tabElement = element.find('md-tab');
+
+    keys.forEach((key) => {
+
+      // don't reapply internal properties
+      if (key.indexOf('$') === 0) {
+        return;
+      }
+      // don't reapply internal element properties
+      if (key.indexOf('cdvy') === 0) {
+        return;
+      }
+      // avoid model
+      if (key.indexOf('ngModel') === 0) {
+        return;
+      }
+      var value = attrs[key];
+
+      // handle empty values as boolean
+      if (value === '') {
+        value = 'true';
+      }
+
+      // set the value of the attribute
+      tabElement.attr(attrs.$attr[key], value);
+
+    });
+  }
+
+    /**
    * Performs a manual transclude of the element
    * @param transclude the transcluded element
    */
@@ -56,8 +90,8 @@ class CodenvyTab {
     // now search the md tab content
     var mdTabContent = angular.element(mdTabsElement[0].querySelectorAll('div[id*=content_'+ mdTabId+ ']'));
 
-    // Append the transcluded element in the tab content element
-    transclude(function (clone) {
+      // Append the transcluded element in the tab content element
+    transclude((clone) => {
       mdTabContent.append(clone);
     });
   }
