@@ -44,6 +44,7 @@ class CodenvySelecter {
       options: '@cdvyOptions',
       values: '=cdvyValues',
       name: '@cdvyName',
+      icon: '@cdvyIcon',
       callbackController: '=cdvyCallbackController'
     };
 
