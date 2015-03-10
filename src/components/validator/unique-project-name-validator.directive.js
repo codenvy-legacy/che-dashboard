@@ -26,7 +26,7 @@ class UniqueProjectNameValidator {
     this.codenvyAPI = codenvyAPI;
     this.$q = $q;
     this.restrict='A';
-    this.require = "ngModel";
+    this.require = 'ngModel';
   }
 
   /**
@@ -40,7 +40,7 @@ class UniqueProjectNameValidator {
       ngModel.$asyncValidators.uniqueProjectName = (modelValue) => {
 
         // create promise
-        var deferred = this.$q.defer()
+        var deferred = this.$q.defer();
 
         // parent scope ?
         var scopingTest = $scope.$parent;
@@ -73,7 +73,7 @@ class UniqueProjectNameValidator {
 
         // return promise
         return deferred.promise;
-      }
+      };
     }
   }
 

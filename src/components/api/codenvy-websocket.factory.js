@@ -96,10 +96,10 @@ class MessageBuilder {
 
   buildUUID() {
     var time = new Date().getTime();
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (match) => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (match) => {
       var rem = (time + 16 * Math.random()) % 16 | 0;
       time = Math.floor(time / 16);
-      return (match == "x" ? rem : rem & 7 | 8).toString(16);
+      return (match === 'x' ? rem : rem & 7 | 8).toString(16);
     });
   }
 
@@ -114,7 +114,7 @@ class MessageBus {
     this.subscribersByChannel = new Map();
 
 
-    this.datastream.onMessage((message) => {this.handleMessage(message)});
+    this.datastream.onMessage((message) => {this.handleMessage(message);});
   }
 
 
@@ -165,7 +165,7 @@ class MessageBus {
         if (existingCallback === callback) {
           delete existingSubscribers[i];
         }
-      };
+      }
     } else {
       // only one element, remove and send server message
       this.subscribersByChannel.delete(channel);
@@ -208,7 +208,7 @@ class MessageBus {
       if (subscribers) {
         subscribers.forEach((subscriber) => {
           subscriber(JSON.parse(jsonMessage.body));
-        })
+        });
       }
 
     } else {

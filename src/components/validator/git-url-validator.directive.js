@@ -24,7 +24,7 @@ class GitUrlValidator {
    */
   constructor () {
     this.restrict='A';
-    this.require = "ngModel";
+    this.require = 'ngModel';
 
   }
 
@@ -35,7 +35,7 @@ class GitUrlValidator {
     ngModel.$validators.gitUrl = function(modelValue) {
       var res = /((git|ssh|http(s)?)|(git@[\w\.]+))(:(\/\/))?([\w\.@\:/\-~]+)(\.git)?(\/)?/.test(modelValue);
       return res;
-    }
+    };
   }
 
 }

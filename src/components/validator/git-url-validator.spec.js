@@ -28,7 +28,7 @@ describe('git-url-validator', function() {
       '<input ng-model="model.myURL" name="url" git-url />' +
       '</form>'
     );
-    $scope.model = { myURL: null }
+    $scope.model = { myURL: null };
     $compile(element)($scope);
     $scope.$digest();
     form = $scope.form;
