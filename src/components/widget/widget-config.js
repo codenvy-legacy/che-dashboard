@@ -22,6 +22,8 @@ import CodenvyTab from './tab/cdvy-tab.directive';
 
 import CodenvyPanel from './panel/cdvy-panel.directive';
 
+import CodenvyLabelContainer from './label-container/cdvy-label-container.directive';
+
 import CodenvyList from './list/cdvy-list.directive';
 import CodenvyListItem from './list/cdvy-list-item.directive';
 
