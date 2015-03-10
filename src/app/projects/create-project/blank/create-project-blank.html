@@ -10,10 +10,20 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-selecter ng-repeat="(typeCategory, types) in createProjectBlankCtrl.typesByCategory"
-               ng-model="createProjectCtrl.myTypeSelected"
-               cdvy-values="types"
-               cdvy-name="BlankProjectsWidget"
-               cdvy-title="{{typeCategory}}"
-               cdvy-callback-controller="createProjectCtrl"
-               cdvy-options="type.id for type in values" />
+<div class="cdvy-input-desktop" hide-sm hide-md layout="column" flex>
+  <div layout="row" flex layout-align="space-around start">
+    <label flex="15" >Type: </label>
+
+    <div layout="row" flex="85"  layout-wrap>
+      <cdvy-selecter ng-repeat="(typeCategory, types) in createProjectBlankCtrl.typesByCategory"
+                     ng-model="createProjectCtrl.myTypeSelected"
+                     cdvy-values="types"
+                     cdvy-name="BlankProjectsWidget"
+                     cdvy-title="{{typeCategory}}"
+                     cdvy-icon="cdvyfont cdvyico-type-{{typeCategory}} cdvyico-type-blank"
+                     cdvy-callback-controller="createProjectCtrl"
+                     cdvy-options="type.id for type in values" />
+    </div>
+  </div>
+
+</div>

@@ -42,7 +42,6 @@ class CreateProjectGithub {
   }
 
   link($scope) {
-
     // Watch data of the createProject controller and update content with these parameters
     $scope.$watch('createProjectCtrl.importProjectData.source.project.location', (newValue) => {
       var matchRepository = this.$filter('filter')($scope.createProjectGithubCtrl.gitHubRepositories, function (repository, index) {

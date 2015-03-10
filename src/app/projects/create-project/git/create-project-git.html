@@ -11,17 +11,17 @@
 
 -->
 <form name="createProjectGitForm">
-  <div layout="row" flex ng-init="createProjectCtrl.setForm(createProjectGitForm, 'git');"></div>
-  <md-input-container>
-    <label>Git URL</label>
-    <input type="text" id="gitRepositoryURL"
-           ng-change="createProjectCtrl.changeGitURL()"
-           name="remoteGitURL" ng-model="createProjectCtrl.importProjectData.source.project.location"
-           git-url
-           required>
-    <div ng-messages="createProjectGitForm.remoteGitURL.$error">
-      <div ng-message="gitUrl">Invalid Git URL</div>
-      <div ng-message="required">A repository URL is required.</div>
-    </div>
-  </md-input-container>
+  <div layout="row" flex ng-init="createProjectCtrl.setForm(createProjectGitForm, 'git')"></div>
+  <cdvy-input cdvy-form="createProjectGitForm"
+              cdvy-name="remoteGitURL"
+              cdvy-label-name="Git URL"
+              cdvy-place-holder="Url of the git repository"
+              ng-model="createProjectCtrl.importProjectData.source.project.location"
+              git-url
+              required>
+    <div ng-message="gitUrl">Invalid Git URL</div>
+    <div ng-message="required">A repository URL is required.</div>
+  </cdvy-input>
+
+
 </form>

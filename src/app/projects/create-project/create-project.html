@@ -64,20 +64,18 @@
         <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
       </cdvy-input>
 
-      <div layout="row" flex layout-align="space-around start">
-        <label flex="15" >Workspace: </label>
-        <div layout="column" flex="85">
-          <md-select flex="90" class="create-project-select" id="targetWorkspace"
-                     name="targetWorkspace"
-                     placeholder="Select a workspace"
-                     ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
-                     ng-model="createProjectCtrl.workspaceSelected">
-            <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.workspaceReference.name}}</md-option>
-          </md-select>
-        </div>
-      </div>
 
-      <div layout="row" flex layout-align="space-around start">
+      <cdvy-label-container cdvy-label-name="Workspace">
+        <md-select class="create-project-select"
+                   name="targetWorkspace"
+                   placeholder="Select a workspace"
+                   ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
+                   ng-model="createProjectCtrl.workspaceSelected">
+          <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.workspaceReference.name}}</md-option>
+        </md-select>
+      </cdvy-label-container>
+
+      <div layout="row" flex layout-align="space-around center">
         <label flex="15" >Visibility: </label>
         <div layout="column" flex="85">
           <cdvy-toggle ng-model="createProjectCtrl.importProjectData.project.visibility" >

@@ -287,51 +287,6 @@ class CreateProjectCtrl {
 
 
   /**
-   * Update the git URL based on the current location
-   */
-  changeGitURL() {
-
-    // get current url
-    var uri = this.importProjectData.source.project.location;
-
-    if (!uri || uri === '') {
-      return;
-    }
-
-    // search if repository is ending with . (for example .git) or the last name
-    var indexFinishProjectName = uri.lastIndexOf('.');
-    var indexStartProjectName;
-    if (uri.lastIndexOf('/') != -1) {
-      indexStartProjectName = uri.lastIndexOf('/') + 1;
-    } else {
-      indexStartProjectName = uri.lastIndexOf(':') + 1;
-    }
-
-
-    var name;
-
-    // extract name with .../dummy.git
-    if (indexStartProjectName != 0 && indexStartProjectName < indexFinishProjectName) {
-      name = uri.substring(indexStartProjectName, indexFinishProjectName);
-    } else if (indexStartProjectName != 0) {
-      // extract ...../dummy
-      name = uri.substring(indexStartProjectName);
-    } else {
-      // unable to do something
-      name = '';
-    }
-
-    // able to extract something, change it
-    if (name !== '') {
-      this.importProjectData.project.name = name;
-    }
-
-
-
-  }
-
-
-  /**
    * Callback when selecter has been set
    * @param name
    * @param valueSelected
