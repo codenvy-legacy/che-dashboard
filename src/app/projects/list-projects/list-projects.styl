@@ -1,15 +1,19 @@
+$title-color = #545B64
+$description-color = #9B9EA0
+$icon-color = #D3D3D3
+$section-title-color = #838383
+
 .projects-list-project-panel-toolbar
   font-weight bold
 
 .projects-list-projects md-card
-  margin-top 20px
-  margin-bottom 20px
+  margin 20px 0
 
 .projects-list-projects md-icon
   font-size 24px
   height auto
   width auto
-
+  color $icon-color
 
 .projects-list-projects md-card-content
   padding 0px
@@ -20,15 +24,50 @@
 .projects-list-projects md-content
   padding 15px
 
-.projects-list-projects md-item:nth-child(2n) md-item-content
-  background-color #FCFCFC
-
-
-.projects-list-projects md-item:nth-child(2n+1) md-item-content
-  background-color #FFFFFF
-
-
 .projects-list-projects .cdvy-link
   text-decoration none
   color active-color
 
+
+.project-type-icon
+  margin 0px 24px
+  height 36px !important
+  width 36px !important
+  font-size 36px !important
+
+.project-list-static-icon
+  flex 0 0 86px
+
+.project-list-row
+  height 56px
+  width 100%
+
+.project-name
+  font-size 16px
+  line-height 19px
+  color $title-color
+  margin-bottom 3px
+
+.project-name a
+  text-decoration none
+  color inherit
+
+.project-details
+  font-size 12px
+  line-height 15px
+  color $description-color
+
+.project-list-empty
+  font-size 12px
+
+.project-list-section-title
+  color $section-title-color
+  line-height 19px
+  font-size 16px
+  font-style italic
+
+.project-list-section-title md-icon
+  margin-right 10px
+  font-size 16px
+  line-height 19px
+  color #A1A1A1

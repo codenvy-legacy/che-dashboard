@@ -73,3 +73,26 @@ exports.projectsList2 = function(){
 
     });
 };
+
+exports.emptyProjectsList = function(){
+
+  angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
+    .run(function ($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
+
+
+      // setup tests objects
+      var idWorkspace1 = 'idEmpty';
+
+      var nameWorkspace1 = 'empty';
+
+      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withWorkspaceReference(codenvyAPIBuilder.getWorkspaceReferenceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build()).build();
+
+      // create backend
+      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend);
+
+      // setup it
+      codenvyBackend.addWorkspaces([workspace1]);
+      codenvyBackend.addProjects(workspace1, []);
+
+    });
+};
