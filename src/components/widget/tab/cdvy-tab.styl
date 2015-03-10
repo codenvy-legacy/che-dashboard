@@ -1,27 +1,81 @@
-.cdvy-tab md-tab
+section:not(.md-paginating) .md-header-items
+  width 99.8%
+  margin-left 0.1%
+  display flex
+  flex-flow row nowrap
+  justify-content flex-start
+
+section:not(.md-paginating) .cdvy-tab
+  max-width 600px !important
+  align-self auto
+  flex auto
+
+section:not(.md-paginating) .cdvy-tab md-tab
+  width 100% !important
   padding-top 14px
-  padding-left 70px
-  padding-right 70px
+  min-width 150px
+
+md-tabs button.md-paginator+div.md-header-items-container
+  left 32px !important
+
+md-tabs div.md-header-items-container
+  left 0 !important
+
+md-tabs md-tabs-ink-bar.md-no-transition
+  background none
+
+.cdvy-tab:not(md-tab.active)
+    border-bottom 2px solid active-color !important
+
+.cdvy-tab md-tab
+  display inline-block
+
+.md-paginating .cdvy-tab md-tab
+  padding-top 14px
+  padding-left 100px
+  padding-right 100px
+
+.cdvy-tab md-tab:not(.material-design) md-tab-label
+  bottom 1px
 
 .cdvy-tab md-tab md-tab-label
-  font-family: Lato, sans-serif;
+  font-family Lato, sans-serif
   text-transform uppercase
+  position relative
   font-size 14px
-  margin-top 2px
+  bottom 5px
 
-.cdvy-tab  md-tab.active
+.cdvy-tab md-tab.active
   color active-color !important
 
-.cdvy-tab  md-tab:before
+.md-no-transition[style^="display: block; left: 0px;"] + .cdvy-tab md-tab
+  color active-color !important
+
+.cdvy-tab md-tab:before
+  bottom 1px
   font-size 20px
   margin-right 20px
   position relative
 
-.cdvy-tab  md-tab.separator:after
+.cdvy-tab:last-child:after
+  display none
+
+.cdvy-tab:after
   position absolute
   top 0
-  left 0
   height 24px
   margin-top 12px
   border solid 1px sub-menu-separator-color
+  content ""
+
+
+.md-no-transition[style^="display: block; left: 0px;"] + .cdvy-tab md-tab:after,
+.cdvy-tab md-tab.active:after
+  border-top solid 3px active-color
+  position absolute
+  margin-top 12px
+  bottom 0
+  right 1px
+  left 1px
+  top 34px
   content ""
