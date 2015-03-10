@@ -10,24 +10,18 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
+
 <md-content flex class="projects-create-project-samples">
   <div ng-repeat="(category, templates) in createProjectSamplesCtrl.templatesByCategory">
     <h2><md-icon md-font-icon="fa fa-folder"></md-icon>{{category}}</h2>
-    <md-card flex-gt-sm="90" flex-sm="98">
-      <md-card-content>
-        <section layout="column">
-          <md-list>
-            <md-item ng-repeat="template in templates | orderBy : 'displayName'" flex-gt-sm="100" flex="33">
-              <md-item-content>
-                <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column" layout-align="start center" >
-                  <h3 flex-gt-sm="40" ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)">{{template.displayName}}</h3>
-                </div>
-              </md-item-content>
-            </md-item>
-          </md-list>
-        </section>
-      </md-card-content>
-
-    </md-card>
+    <cdvy-list>
+      <cdvy-list-item ng-repeat="template in templates | orderBy : 'displayName'" flex-gt-sm="100" flex="33">
+        <md-item-content>
+          <div layout-gt-sm="row" flex="100" layout-align="start center">
+            <h4 flex-gt-sm="40" ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)">{{template.displayName}}</h4>
+          </div>
+        </md-item-content>
+      </cdvy-list-item>
+    </cdvy-list>
   </div>
 </md-content>

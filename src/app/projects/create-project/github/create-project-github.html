@@ -32,15 +32,12 @@
           <option value="">All Organizations</option>
         </select>
       </div>
-
     </div>
 
-    <md-list class="github-create-project">
-      <md-item ng-repeat="gitHubRepository in createProjectGithubCtrl.gitHubRepositories | githubFilterRepositories:createProjectGithubCtrl.organizationName:createProjectGithubCtrl.repositoryName | orderBy:'name'"
-               ng-click="createProjectGithubCtrl.selectRepository(gitHubRepository); createProjectCtrl.selectGitHubRepository(gitHubRepository)" flex-gt-sm="100" flex="33" ng-class="{'github-create-project-active' : gitHubRepository == createProjectGithubCtrl.selectedRepository}">
-        <md-item-content>
-          <div class="md-tile-content" layout-gt-sm="row" flex="100" layout="column" layout-align="start center" >
-
+    <cdvy-list>
+      <cdvy-list-item ng-repeat="gitHubRepository in createProjectGithubCtrl.gitHubRepositories | githubFilterRepositories:createProjectGithubCtrl.organizationName:createProjectGithubCtrl.repositoryName | orderBy:'name'"
+                      ng-click="createProjectGithubCtrl.selectRepository(gitHubRepository); createProjectCtrl.selectGitHubRepository(gitHubRepository)" flex-gt-sm="100" flex="33" ng-class="{'github-create-project-active' : gitHubRepository == createProjectGithubCtrl.selectedRepository}">
+          <div class="github-create-project" layout-gt-sm="row" flex="100" layout="column" layout-align="start center" >
             <div layout="row" class="icons">
               <span ng-if="!gitHubRepository.fork" class="fa fa-folder"></span>
               <span ng-if="gitHubRepository.fork" class="fa fa-code-fork" title="forked"></span>
@@ -58,9 +55,8 @@
 
 
           </div>
-        </md-item-content>
-      </md-item>
-    </md-list>
+      </cdvy-list-item>
+    </cdvy-list>
 
 
 
