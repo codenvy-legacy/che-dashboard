@@ -28,7 +28,7 @@
 	content: "\E002";
 }
 
-.cdvyico-type-gopher:before {
+.cdvyico-type-go:before {
 	content: "\E003";
 }
 
@@ -36,7 +36,7 @@
 	content: "\E004";
 }
 
-.cdvyico-type-js:before {
+.cdvyico-type-javascript:before {
 	content: "\E005";
 }
 

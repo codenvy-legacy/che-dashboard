@@ -1,17 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="787px" height="447px" viewBox="0 0 787 447" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.0.4 (8054) - http://www.bohemiancoding.com/sketch -->
-    <title>Slice 2</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Layer_2" sketch:type="MSLayerGroup" transform="translate(140.000000, 103.000000)" fill="#000003">
-            <g id="Group" sketch:type="MSShapeGroup">
-                <path d="M101.462,81.061 C117.283,81.061 127.827,83.981 133.099,89.822 C138.366,95.663 139.621,105.689 136.865,119.896 C133.986,134.691 128.442,145.251 120.224,151.578 C112.006,157.906 99.5,161.066 82.711,161.066 L57.381,161.066 L72.93,81.061 L101.462,81.061 L101.462,81.061 Z M0,242.057 L41.643,242.057 L51.52,191.234 L87.189,191.234 C102.928,191.234 115.875,189.584 126.039,186.274 C136.204,182.969 145.441,177.426 153.756,169.644 C160.734,163.229 166.38,156.154 170.704,148.417 C175.023,140.686 178.092,132.15 179.906,122.816 C184.312,100.156 180.987,82.506 169.941,69.861 C158.895,57.216 141.322,50.894 117.232,50.894 L37.154,50.894 L0,242.057 L0,242.057 Z" id="Shape"></path>
-                <path d="M210.49,0.071 L251.804,0.071 L241.926,50.894 L278.732,50.894 C301.889,50.894 317.864,54.936 326.656,63.011 C335.447,71.091 338.081,84.181 334.566,102.277 L317.28,191.234 L275.31,191.234 L291.746,106.652 C293.616,97.03 292.93,90.467 289.682,86.968 C286.434,83.468 279.523,81.717 268.953,81.717 L235.933,81.717 L214.65,191.233 L173.335,191.233 L210.49,0.071 L210.49,0.071 Z" id="Shape"></path>
-                <path d="M426.49,81.061 C442.311,81.061 452.855,83.981 458.127,89.822 C463.396,95.663 464.65,105.689 461.893,119.896 C459.014,134.691 453.472,145.251 445.252,151.578 C437.034,157.906 424.528,161.066 407.739,161.066 L382.41,161.066 L397.959,81.061 L426.49,81.061 L426.49,81.061 Z M325.029,242.057 L366.672,242.057 L376.548,191.234 L412.217,191.234 C427.956,191.234 440.903,189.584 451.068,186.274 C461.232,182.969 470.469,177.426 478.785,169.644 C485.764,163.229 491.409,156.154 495.733,148.417 C500.051,140.686 503.121,132.15 504.934,122.816 C509.34,100.156 506.016,82.506 494.969,69.861 C483.923,57.216 466.35,50.894 442.26,50.894 L362.184,50.894 L325.029,242.057 L325.029,242.057 Z" id="Shape"></path>
-            </g>
-        </g>
-        <ellipse id="Oval-1" stroke="#000003" stroke-width="32" sketch:type="MSShapeGroup" cx="393.5" cy="223.5" rx="377.5" ry="207.5"></ellipse>
+<svg
+   xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="787"
+   height="787"
+   viewBox="0 0 787 787"
+   version="1.1"
+   id="svg3596"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="type-php.svg">
+  <metadata
+     id="metadata3615">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Slice 2</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1524"
+     inkscape:window-height="860"
+     id="namedview3613"
+     showgrid="false"
+     inkscape:zoom="0.46632783"
+     inkscape:cx="68.621253"
+     inkscape:cy="223.5"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg3596" />
+  <!-- Generator: Sketch 3.0.4 (8054) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title3598">Slice 2</title>
+  <desc
+     id="desc3600">Created with Sketch.</desc>
+  <defs
+     id="defs3602" />
+  <g
+     id="Page-1"
+     sketch:type="MSPage"
+     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
+     transform="translate(0,170)">
+    <g
+       id="Layer_2"
+       sketch:type="MSLayerGroup"
+       transform="translate(140,103)"
+       style="fill:#000003">
+      <g
+         id="Group"
+         sketch:type="MSShapeGroup">
+        <path
+           d="m 101.462,81.061 c 15.821,0 26.365,2.92 31.637,8.761 5.267,5.841 6.522,15.867 3.766,30.074 -2.879,14.795 -8.423,25.355 -16.641,31.682 -8.218,6.328 -20.724,9.488 -37.513,9.488 l -25.33,0 15.549,-80.005 28.532,0 0,0 z M 0,242.057 l 41.643,0 9.877,-50.823 35.669,0 c 15.739,0 28.686,-1.65 38.85,-4.96 10.165,-3.305 19.402,-8.848 27.717,-16.63 6.978,-6.415 12.624,-13.49 16.948,-21.227 4.319,-7.731 7.388,-16.267 9.202,-25.601 4.406,-22.66 1.081,-40.31 -9.965,-52.955 C 158.895,57.216 141.322,50.894 117.232,50.894 l -80.078,0 L 0,242.057 l 0,0 z"
+           id="Shape"
+           inkscape:connector-curvature="0" />
+        <path
+           d="m 210.49,0.071 41.314,0 -9.878,50.823 36.806,0 c 23.157,0 39.132,4.042 47.924,12.117 8.791,8.08 11.425,21.17 7.91,39.266 l -17.286,88.957 -41.97,0 16.436,-84.582 c 1.87,-9.622 1.184,-16.185 -2.064,-19.684 -3.248,-3.5 -10.159,-5.251 -20.729,-5.251 l -33.02,0 -21.283,109.516 -41.315,0 37.155,-191.162 0,0 z"
+           id="path3608"
+           inkscape:connector-curvature="0" />
+        <path
+           d="m 426.49,81.061 c 15.821,0 26.365,2.92 31.637,8.761 5.269,5.841 6.523,15.867 3.766,30.074 -2.879,14.795 -8.421,25.355 -16.641,31.682 -8.218,6.328 -20.724,9.488 -37.513,9.488 l -25.329,0 15.549,-80.005 28.531,0 0,0 z m -101.461,160.996 41.643,0 9.876,-50.823 35.669,0 c 15.739,0 28.686,-1.65 38.851,-4.96 10.164,-3.305 19.401,-8.848 27.717,-16.63 6.979,-6.415 12.624,-13.49 16.948,-21.227 4.318,-7.731 7.388,-16.267 9.201,-25.601 4.406,-22.66 1.082,-40.31 -9.965,-52.955 C 483.923,57.216 466.35,50.894 442.26,50.894 l -80.076,0 -37.155,191.163 0,0 z"
+           id="path3610"
+           inkscape:connector-curvature="0" />
+      </g>
     </g>
+    <ellipse
+       id="Oval-1"
+       sketch:type="MSShapeGroup"
+       cx="393.5"
+       cy="223.5"
+       rx="377.5"
+       ry="207.5"
+       style="stroke:#000003;stroke-width:32" />
+  </g>
 </svg>
