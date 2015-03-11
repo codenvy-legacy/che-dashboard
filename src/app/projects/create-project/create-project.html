@@ -15,23 +15,23 @@
   <cdvy-panel cdvy-title="Select Source">
     <md-tabs md-selected="createProjectCtrl.selectedIndex">
       <cdvy-tab cdvy-icon="material-design icon-ic_developer_mode_24px" cdvy-title="Blank Type" md-on-select="$parent.createProjectCtrl.setCurrentTab('blank')">
-        <create-project-blank layout="row" layout-wrap></create-project-blank>
+        <create-project-blank class="projects-create-project-tab" layout="row" layout-wrap></create-project-blank>
       </cdvy-tab>
       <cdvy-tab cdvy-icon="fa fa-magic" cdvy-title="Samples" md-on-select="$parent.createProjectCtrl.setCurrentTab('samples')">
-        <create-project-samples layout="row" layout-wrap></create-project-samples>
+        <create-project-samples class="projects-create-project-tab" layout="row" layout-wrap></create-project-samples>
       </cdvy-tab>
       <cdvy-tab cdvy-icon="fa fa-git" cdvy-title="Git Repository"  md-on-select="$parent.createProjectCtrl.setCurrentTab('git')">
-        <create-project-git layout="column"></create-project-git>
+        <create-project-git class="projects-create-project-tab" layout="column"></create-project-git>
       </cdvy-tab>
       <cdvy-tab cdvy-icon="fa fa-github" cdvy-title="Github" md-on-select="$parent.createProjectCtrl.setCurrentTab('github')">
-        <create-project-github layout="column"></create-project-github>
+        <create-project-github class="projects-create-project-tab" layout="column"></create-project-github>
 
       </cdvy-tab>
       <cdvy-tab cdvy-icon="fa fa-file-archive-o" cdvy-title="Zip" md-on-select="$parent.createProjectCtrl.setCurrentTab('zip')">
-        <create-project-zip layout="column"></create-project-zip>
+        <create-project-zip class="projects-create-project-tab" layout="column"></create-project-zip>
       </cdvy-tab>
       <cdvy-tab label="Configuration file" cdvy-icon="material-design icon-ic_get_app_24px" md-on-select="$parent.createProjectCtrl.refreshCM(); $parent.createProjectCtrl.setCurrentTab('config')">
-        <create-project-conf-file layout="column" layout-fill></create-project-conf-file>
+        <create-project-conf-file class="projects-create-project-tab" layout="column" layout-fill></create-project-conf-file>
       </cdvy-tab>
     </md-tabs>
   </cdvy-panel>
