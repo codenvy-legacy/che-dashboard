@@ -14,7 +14,7 @@
 var DEV = true;
 
 // init module
-let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment']);
+let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter']);
 
 import Register from '../components/utils/register';
 
@@ -190,6 +190,12 @@ module.config(function($mdThemingProvider) {
   });
   $mdThemingProvider.definePalette('codenvyDanger', codenvyDangerMap);
 
+  var codenvyDefaultMap = $mdThemingProvider.extendPalette('blue', {
+    'A400'  : '538DAB'/*,
+    '700': '538DAB'*/
+  });
+  $mdThemingProvider.definePalette('codenvyDefault', codenvyDefaultMap);
+
 
   var codenvyAccentMap = $mdThemingProvider.extendPalette('green', {
     '700' : '00897B',
@@ -224,6 +230,11 @@ module.config(function($mdThemingProvider) {
     .accentPalette('codenvyDanger')
     .backgroundPalette('grey');
 
+
+  $mdThemingProvider.theme('cdvydefault')
+    .primaryPalette('codenvy')
+    .accentPalette('codenvyDefault')
+    .backgroundPalette('grey');
 
   $mdThemingProvider.theme('default')
     .primaryPalette('codenvy')

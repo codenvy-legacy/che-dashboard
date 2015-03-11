@@ -13,6 +13,7 @@
 /*exported CodenvyButtonPrimary, CodenvyButtonDanger, CodenvyHtmlSource, CodenvyInput, CodenvyTab, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton, CodenvyToggle, CodenvyToolbar*/
 import CodenvyButtonPrimary from './button/cdvy-button-primary.directive';
 import CodenvyButtonDanger from './button/cdvy-button-danger.directive';
+import CodenvyButtonDefault from './button/cdvy-button-default.directive';
 
 import CodenvyHtmlSource from './html-source/cdvy-html-source.directive';
 
