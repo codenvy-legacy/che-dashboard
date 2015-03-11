@@ -34,11 +34,10 @@
   <md-progress-linear md-mode="indeterminate" ng-show="listProjectsCtrl.state == 'loading'" ></md-progress-linear>
   <md-content flex>
     <div ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace">
-      <div class="project-list-section-title">
-        <md-icon md-font-icon="fa fa-folder"></md-icon>
+      <cdvy-list-title cdvy-icon="fa fa-folder">
         {{listProjectsCtrl.getWorkspaceName(workspaceId)}}
         <span ng-show="projects.length == 0" class="project-list-empty">- No project</span>
-      </div>
+      </cdvy-list-title>
       <cdvy-list ng-show="projects.length > 0">
         <cdvy-list-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
           <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row">
