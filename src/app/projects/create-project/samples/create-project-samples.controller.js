@@ -45,6 +45,7 @@ class CreateProjectSamplesCtrl {
    */
   updateData() {
     this.templatesByCategory = this.codenvyAPI.getProjectTemplate().getTemplatesByCategory();
+    this.templates = this.codenvyAPI.getProjectTemplate().getAllProjectTemplates();
   }
 
   /**

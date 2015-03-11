@@ -20,6 +20,7 @@ import CreateProjectGitCtrl from './create-project/git/create-project-git.contro
 import CreateProjectGithub from './create-project/github/create-project-github.directive';
 import CreateProjectSamplesCtrl from './create-project/samples/create-project-samples.controller';
 import CreateProjectSamples from './create-project/samples/create-project-samples.directive';
+import CreateProjectSamplesFilter from './create-project/samples/create-project-samples.filter';
 import CreateProjectZip from './create-project/zip/create-project-zip.directive';
 import CreateProjectConfFile from './create-project/config-file/create-project-conf-file.directive';
 import ProjectDetailsCtrl from './project-details/project-details.controller';

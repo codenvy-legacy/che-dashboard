@@ -12,16 +12,29 @@
 -->
 
 <md-content flex class="projects-create-project-samples">
-  <div ng-repeat="(category, templates) in createProjectSamplesCtrl.templatesByCategory">
-    <h2><md-icon md-font-icon="fa fa-folder"></md-icon>{{category}}</h2>
-    <cdvy-list>
-      <cdvy-list-item ng-repeat="template in templates | orderBy : 'displayName'" flex-gt-sm="100" flex="33">
-        <div layout-gt-sm="row" flex layout-align="start center" class="projects-create-project-samples-list-row">
-          <div flex-gt-sm="45" layout="column">
-            <div class="projects-create-project-samples-list-samplename" ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)">{{template.displayName}}</div>
+  <cdvy-label-container cdvy-label-name="Filter project type">
+    <md-select class="create-project-select" ng-model="createProjectSamplesCtrl.filterProjectType" placeholder="Filter">
+      <md-option ng-value="All">All</md-option>
+      <md-option ng-value="templates[0].projectType" ng-repeat="templates in createProjectSamplesCtrl.templates | groupBy:'projectType' ">{{templates[0].projectType}}</md-option>
+    </md-select>
+  </cdvy-label-container>
+
+
+  <div ng-repeat="templatesByCategory in createProjectSamplesCtrl.templates | sampleFilterProjectType:createProjectSamplesCtrl.filterProjectType | orderBy:'projectType' | groupBy:'category' ">
+    <div ng-repeat="lstTemplate in templatesByCategory | groupBy:'projectType'">
+      <cdvy-list-title cdvy-icon="fa fa-folder">
+        {{lstTemplate[0].category}} :: {{lstTemplate[0].projectType}}
+      </cdvy-list-title>
+      <cdvy-list>
+        <cdvy-list-item ng-repeat="template in lstTemplate" flex-gt-sm="100" flex="33">
+          <div layout-gt-sm="row" flex layout-align="start center" class="projects-create-project-samples-list-row">
+            <div flex layout="column">
+              <div class="projects-create-project-samples-list-samplename" ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)">{{template.displayName}}: <i>{{template.description}}</i></div>
+            </div>
           </div>
-        </div>
-      </cdvy-list-item>
-    </cdvy-list>
+        </cdvy-list-item>
+      </cdvy-list>
+    </div>
   </div>
 </md-content>
+
