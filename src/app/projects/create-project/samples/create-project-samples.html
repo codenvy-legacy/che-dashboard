@@ -21,7 +21,7 @@
 
 
   <div ng-repeat="templatesByCategory in createProjectSamplesCtrl.templates | sampleFilterProjectType:createProjectSamplesCtrl.filterProjectType | orderBy:'projectType' | groupBy:'category' ">
-    <div ng-repeat="lstTemplate in templatesByCategory | groupBy:'projectType'">
+    <div ng-repeat="lstTemplate in templatesByCategory | orderBy:'displayName' | groupBy:'projectType'">
       <cdvy-list-title cdvy-icon="fa fa-folder">
         {{lstTemplate[0].category}} :: {{lstTemplate[0].projectType}}
       </cdvy-list-title>
