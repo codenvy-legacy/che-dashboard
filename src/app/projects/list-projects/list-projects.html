@@ -25,15 +25,25 @@
   <md-button class="md-accent"><md-icon md-font-icon="fa fa-search"></md-icon></md-button>
   <span flex></span>
   <div class="md-toolbar-item md-tools" layout="row">
-    <md-button class="md-accent"><md-icon md-font-icon="fa fa-trash"></md-icon></md-button>
-    <md-button class="md-accent"><md-icon md-font-icon="fa fa-tasks"></md-icon></md-button>
-    <md-button class="md-accent"><md-icon md-font-icon="fa fa-cog"></md-icon></md-button>
+    <i class="projects-list-projects-cog fa fa-cog" dropdown-menu="listProjectsCtrl.dropDownOptionsList" dropdown-model="listProjectsCtrl.dropDownValue" dropdown-onchange="listProjectsCtrl.dropDownSelected(selected)" dropdown-item-label='name'></i>
   </div>
 </md-toolbar>
-<md-content md-scroll-y flex layout="row" layout-align="center" class="projects-list-projects" md-theme="maincontent-theme" >
-  <md-progress-linear md-mode="indeterminate" ng-show="listProjectsCtrl.state == 'loading'" ></md-progress-linear>
+<md-content md-scroll-y flex layout="column" layout-align="center" class="projects-list-projects" md-theme="maincontent-theme" >
+  <md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress" ng-show="listProjectsCtrl.state == 'loading'" ></md-progress-linear>
+  <div ng-show="listProjectsCtrl.displayWorkspaceFilter" class="projects-list-projects-filter-panel" layout="row" layout-align="start center">
+    <div class="projects-list-projects-filter-workspace-label">Filter workspaces:</div>
+    <div flex="60" layout="row" layout-align="start center" layout-wrap>
+      <div class="projects-list-projects-select-workspace" ng-repeat="workspace in listProjectsCtrl.workspaces">
+        <md-checkbox ng-model="listProjectsCtrl.filtersWorkspaceSelected[workspace.workspaceReference.id]">{{workspace.workspaceReference.name}}</md-checkbox>
+      </div>
+    </div>
+    <div flex layout="row" layout-wrap layout-align="end center"><span class="projects-list-projects-filter-action" ng-click="listProjectsCtrl.resetWorkspaceFilter()">Clear</span><i ng-click="listProjectsCtrl.hideWorkspaceFilter()" class="projects-list-projects-filter-action-icon material-design icon-ic_close_24px"></i></div>
+
+  </div>
   <md-content flex>
-    <div ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace">
+
+
+    <div ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace | listProjectWorkspaceFilter:listProjectsCtrl.filtersWorkspaceSelected">
       <cdvy-list-title cdvy-icon="fa fa-folder">
         {{listProjectsCtrl.getWorkspaceName(workspaceId)}}
         <span ng-show="projects.length == 0" class="project-list-empty">- No project</span>

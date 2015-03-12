@@ -21,6 +21,16 @@ var MainPage = function() {
   this.projectsWorkspaceElements = element.all(by.repeater('(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace'));
   this.projectElements = element.all(by.repeater('project in projects'));
   this.noProjectsLabel = element(by.css('.project-list-empty'));
+
+
+  // COG for displaying dropdown
+  this.cogElement = element(by.css('.projects-list-projects-cog'));
+
+  this.dropDownWorkspaceElement = element(by.cssContainingText('a', 'Filter Workspace'));
+
+  this.filterWorkspacePanelFistCheckBox = element.all(by.css('.projects-list-projects-select-workspace')).first().element(by.css('md-checkbox'));
+  this.filterWorkspacePanelAllCheckBoxes = element.all(by.css('.projects-list-projects-select-workspace')).all(by.css('md-checkbox'));
+
 };
 
 module.exports = new MainPage();

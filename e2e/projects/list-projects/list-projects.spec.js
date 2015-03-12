@@ -60,4 +60,46 @@ describe('The projects view', function () {
     expect(listProjectsPage.noProjectsLabel.isDisplayed()).toBe(true);
   });
 
+
+  it('Manage workspace filter: click on chechbox and look that it disappear/appear', function() {
+    // use 2 workspaces
+    browser.addMockModule('userDashboardMock', projectsMock.projectsList);
+    browser.get('http://localhost:5000/#/projects');
+    browser.waitForAngular();
+
+
+    // check that we have 2 projects
+    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(2);
+
+    // click on the cog
+    listProjectsPage.cogElement.click();
+
+    // click on the 'workspace filtering element'
+    listProjectsPage.dropDownWorkspaceElement.click();
+
+    // click on checkbox that remove a workspace
+    listProjectsPage.filterWorkspacePanelFistCheckBox.click();
+
+    // check that we have 1 projects
+    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(1);
+
+    // click again on the checkbox
+    listProjectsPage.filterWorkspacePanelFistCheckBox.click();
+
+    // it's there again
+    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(2);
+
+    // now click on all the checkboxes
+    listProjectsPage.filterWorkspacePanelAllCheckBoxes.click();
+
+    // it should be empty
+    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(0);
+
+    // now click on all the checkboxes
+    listProjectsPage.filterWorkspacePanelAllCheckBoxes.click();
+
+    // it's there again
+    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(2);
+  });
+
 });

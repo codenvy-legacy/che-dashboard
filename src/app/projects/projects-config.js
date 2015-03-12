@@ -12,6 +12,7 @@
 
 import CreateProjectCtrl from './create-project/create-project.controller';
 import ListProjectsCtrl from './list-projects/list-projects.controller';
+import ListProjectsWorkspaceFilter from './list-projects/list-projects-filter-workspace.filter';
 import CreateProjectGithubCtrl from './create-project/github/create-project-github.controller';
 import CreateProjectBlank from './create-project/blank/create-project-blank.directive';
 import CreateProjectBlankCtrl from './create-project/blank/create-project-blank.controller';
