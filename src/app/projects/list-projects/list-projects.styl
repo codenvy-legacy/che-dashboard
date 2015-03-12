@@ -2,7 +2,6 @@ $title-color = #545B64
 $description-color = #9B9EA0
 $icon-color = #D3D3D3
 
-
 .projects-list-project-panel-toolbar
   font-weight bold
 
@@ -66,3 +65,37 @@ $icon-color = #D3D3D3
   font-size 16px
   line-height 19px
   color #A1A1A1
+
+md-progress-linear.projects-list-projects-progress
+  height 10px
+
+.projects-list-projects-filter-panel
+  background-color white
+
+.projects-list-projects-filter-workspace-label
+  color $title-color
+  margin-left 10px
+  margin-top 6px
+
+.projects-list-projects-filter-action
+  color active-color
+  text-transform uppercase
+  margin-top 3px
+  margin-right 10px
+
+.projects-list-projects-filter-action-icon
+ margin-right 20px
+
+.projects-list-projects-select-workspace md-checkbox
+  margin-left 10px
+
+.projects-list-projects-select-workspace md-checkbox .md-label
+  color $title-color
+
+.projects-list-projects-select-workspace md-checkbox:after
+  codenvy-separator()
+  margin-top 17px
+  margin-left 10px
+
+.projects-list-projects-select-workspace:last-child  md-checkbox:after
+  display none
