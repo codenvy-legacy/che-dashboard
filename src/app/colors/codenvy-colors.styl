@@ -1,0 +1,35 @@
+json('codenvy-colors.json')
+
+$primary-color = $codenvy-green-color
+$default-dark-color = $codenvy-navy-color
+$default-color = $codenvy-medium-blue-color
+$secondary-color = $codenvy-orange-color
+$secondary-light = $codenvy-purple-color
+$menu-bg-color = $dark-menu-color
+$label-primary-color = $night-foggy-sky-color
+$label-secondary-color = $dark-menacing-sky-color
+$label-info-color = $clear-foggy-sky-color
+$error-color = $red-lipstick-color
+$list-separator-color = $cat-gray-color
+$form-element-border-color = $mouse-gray-color
+
+
+// change alpha on existing colors
+$hover-on-list-color = rgba($default-color, 0.13)
+
+// box shadows
+box-shadow-simple()
+  box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+  -webkit-box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+  -moz-box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+
+box-shadow-bigger()
+  box-shadow 0px 2px 6px 0 rgba(0, 0, 0, 0.40)
+  -webkit-box-shadow 0px 2px 6px 0 rgba(0, 0, 0, 0.40)
+  -moz-box-shadow 0px 2px 6px 0 rgba(0, 0, 0, 0.40)
+
+
+codenvy-border-radius(n)
+  -webkit-border-radius n
+  -moz-border-radius n
+  border-radius n !important

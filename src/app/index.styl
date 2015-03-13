@@ -1,14 +1,11 @@
-active-color = rgb(61,143,118)
-sub-menu-color = rgb(255,255,255)
-sub-menu-separator-color = rgba(0,0,0,0.34)
-
+@import 'colors/codenvy-colors.styl'
 
 codenvy-separator()
   position absolute
   top 0
   height 24px
   margin-top 12px
-  border-left solid 1px sub-menu-separator-color
+  border-left solid 1px $label-primary-color
   content ""
 
 @import '../components/widget'

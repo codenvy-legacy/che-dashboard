@@ -85,12 +85,27 @@ gulp.task('existingfonts', function () {
     .pipe(gulp.dest(paths.dist + '/fonts/'));
 });
 
-gulp.task('fonts', ['existingfonts'], function () {
+gulp.task('fonts', ['colors', 'existingfonts'], function () {
   return gulp.src($.mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,otf,woff,woff2}'))
     .pipe($.flatten())
     .pipe(gulp.dest(paths.dist + '/fonts/'));
 });
+
+var fs = require('fs');
+gulp.task('colorstemplate', function () {
+  return gulp.src('src/app/colors/codenvy-color.constant.js.template')
+    .pipe($.replace('%CONTENT%', fs.readFileSync('src/app/colors/codenvy-colors.json')))
+    .pipe(gulp.dest('src/app/colors/template'));
+});
+
+gulp.task('colors', ['colorstemplate'], function () {
+  return gulp.src("src/app/colors/template/codenvy-color.constant.js.template")
+    .pipe($.rename("codenvy-color.constant.js"))
+    .pipe(gulp.dest("src/app/colors"));
+});
+
+
 
 gulp.task('misc', function () {
   return gulp.src(paths.src + '/**/*.ico')

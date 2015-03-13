@@ -1,22 +1,23 @@
+$cdvy-selecter-color = $label-info-color
+
 .cdvy-selecter
   height 150px
   width 150px
-  border-color #d3d3d3
-  background-color #ffffff
+  border-color $form-element-border-color
+  background-color $background-color
   border-width 2px
   border-style solid
-  -moz-border-radius 3px !important
-  border-radius 3px !important
+  codenvy-border-radius(3px)
   -webkit-box-shadow 0 1px 1px rgba(0, 0, 0, 0.05)
   box-shadow 0 1px 1px rgba(0, 0, 0, 0.05)
   padding-top 12px
   margin-left 16px
   margin-right 16px
-  color #8b8b8b
+  color $cdvy-selecter-color
 
   &:hover
-    background-color #8b8b8b
-    color #ffffff
+    background-color $cdvy-selecter-color
+    color $background-color
 
 .cdvy-selecter .title
   padding-top 6px
@@ -62,39 +63,39 @@
   display none
 
 .cdvy-selecter-active
-  border-color active-color
-  color active-color
+  border-color $primary-color
+  color $primary-color
 
   &:hover
-    background-color white
+    background-color $background-color
 
 
 .cdvy-selecter-active .body
-  background-color active-color
+  background-color $primary-color
 
 .cdvy-selecter-active .title
-  background-color active-color
-  color white
+  background-color $primary-color
+  color $background-color
 
 .cdvy-selecter-active select
   display block !important
-  color active-color
-  background-color white
+  color $primary-color
+  background-color $background-color
 
 .cdvy-selecter-active select:hover
   background-color #fafafa
   border-style solid
   border-width 1px
   text-align left
-  color active-color
+  color $primary-color
 
 
 .cdvy-selecter-active:hover .body
-  background-color active-color !important
-  color white
+  background-color $primary-color !important
+  color $background-color
 
 .cdvy-selecter-active:hover md-icon
-  color active-color
+  color $primary-color
 
 .cdvy-selecter:hover select
   display block !important
@@ -115,7 +116,7 @@ cdvy-selecter-icon()
   z-index 9
 
 .cdvy-selecter:hover .selecter:after
-  color #8b8b8b
+  color $cdvy-selecter-color
   cdvy-selecter-icon()
 
 .cdvy-selecter-active .selecter:after
