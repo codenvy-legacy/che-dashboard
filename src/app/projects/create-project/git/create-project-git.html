@@ -16,6 +16,8 @@
               cdvy-name="remoteGitURL"
               cdvy-label-name="Git URL"
               cdvy-place-holder="Url of the git repository"
+              ng-focus="$parent.createProjectGitCtrl.setFocus()"
+              ng-blur="$parent.createProjectGitCtrl.lostFocus()"
               ng-model="createProjectCtrl.importProjectData.source.project.location"
               git-url
               required>

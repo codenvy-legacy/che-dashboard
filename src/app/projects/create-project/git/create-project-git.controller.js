@@ -22,7 +22,23 @@ class CreateProjectGitCtrl {
    */
   constructor(codenvyAPI) {
     this.codenvyAPI = codenvyAPI;
+    this.focus = false;
   }
+
+  /**
+   * Input for setting the GIT URL gets the focus
+   */
+  setFocus() {
+    this.focus = true;
+  }
+
+  /**
+   * Input for setting the GIT URL losts the focus
+   */
+  lostFocus() {
+    this.focus = false;
+  }
+
 
 }
 

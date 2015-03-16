@@ -45,6 +45,11 @@ class CreateProjectGit {
         return;
       }
 
+      // no focus, abort
+      if (!$scope.createProjectGitCtrl.focus) {
+        return
+      }
+
       // get current url
       var uri = newValue.source.project.location;
 
