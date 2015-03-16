@@ -36,34 +36,75 @@ class CodenvyToolbar {
    * @returns {string} the template
    */
   template( element, attrs){
-    var title = attrs.title;
-    var buttonHref = attrs.buttonHref;
-    var buttonName = attrs.buttonName;
+    var title = attrs.cdvyTitle;
+    var titleController  = attrs.cdvyTitleIconsController;
+    var buttonHref = attrs.cdvyButtonHref;
+    var buttonName = attrs.cdvyButtonName;
+
+    var breadcrumbTitle = attrs.cdvyBreadcrumbTitle;
+    var breadcrumbHref = attrs.cdvyBreadcrumbHref;
+
+    var subheaderTitle = attrs.cdvySubheaderTitle;
+    var subheaderIcon = attrs.cdvySubheaderIcon;
+
     var theme = attrs.theme;
 
     if (!theme) {
       theme = 'toolbar-theme';
     }
 
+    var template = '<md-toolbar class=\"md-tall\" md-theme=\"' + theme +'\">\n'
+      + '<button class=\"toolbar-switch\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
+      + '<md-icon md-font-icon=\"fa fa-bars fa-2x\"></md-icon>'
+      + '</button>'
+      + '<div layout=\"column\" flex>'
+      + '<div layout=\"row\" flex class=\"cdvy-toolbar-breadcrumb\">';
 
-    var template = '<md-toolbar class=\"md-tall md-toolbar-tools\" md-theme=\"' + theme +'\">\n'
-        + '<button class=\"toolbar-switch\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
-    +  '<md-icon md-font-icon=\"fa fa-bars fa-2x\"></md-icon>'
-    + '</button>'
-    + '<div layout=\"row\" flex class=\"fill-height\">'
-    + '<div class=\"md-toolbar-item md-breadcrumb\">'
-    + '<h1>' + title + '</h1>'
-    + '</div>'
-    + '<span flex></span>'
-    + '<div class=\"md-toolbar-item md-tools\" layout=\"row\">';
+    if (breadcrumbHref) {
+      template = template + '<a href=\"' + breadcrumbHref + '\" class=\"icon-breadcrumb material-design icon-ic_chevron_left_24px\" md-theme=\"default\"></a>';
+    }
 
-    if (buttonName) {
-      template = template + '<a class=\"md-button md-default-theme\" ng-href=\"' + buttonHref + '\">'
-      + '<md-button class=\"md-raised md-accent\">' + buttonName + '</md-button>'
-      + '</a>';
+    if (breadcrumbTitle) {
+      template = template + breadcrumbTitle;
     }
 
     template = template + '</div>'
+    + '<div layout=\"row\" flex class=\"fill-height \">'
+    + '<div class=\"cdvy-toolbar-title\">'
+    + '<span class=\"cdvy-toolbar-title-label\">'
+    + title + '</span><span class=\"cdvy-toolbar-title-icons\">';
+    if (titleController) {
+      template = template
+      + '<md-icon ng-repeat=\"icon in ' + titleController + '.toolbarIcons\" md-font-icon=\"{{icon.font}}\" ng-click=\"' + titleController + '.callbackToolbarClick(icon.name)\"';
+    }
+
+    template = template
+    + '</span>'
+    + '</div>'
+    + '<span flex></span>'
+    + '<div class=\"cdvy-toolbar-button\" layout=\"row\">';
+
+    if (buttonName) {
+      template = template + '<cdvy-button-primary cdvy-button-title=\"' + buttonName + '\" href=\"' + buttonHref + '\"></cdvy-button-primary>';
+    }
+
+
+    template = template + '</div>'
+    + '</div>'
+    + '<div layout=\"row\" class=\"cdvy-toolbar-subheader\">';
+    if (subheaderIcon) {
+      template = template + '<span class=\"'
+      + subheaderIcon
+      + '\"></span>';
+    }
+    if (subheaderTitle) {
+      template = template
+      + subheaderTitle
+      + '</div>';
+    }
+
+
+    template = template
     + '</div>'
     + '</md-toolbar>';
 

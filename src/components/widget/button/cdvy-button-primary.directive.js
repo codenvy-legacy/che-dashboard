@@ -24,14 +24,7 @@ class CodenvyButtonPrimary {
    */
   constructor () {
     this.restrict='E';
-
-    // scope values
-    this.scope = {
-      title:'@cdvyButtonTitle'
-    };
-
     this.bindToController = true;
-
   }
 
   /**
@@ -42,28 +35,23 @@ class CodenvyButtonPrimary {
    */
   template( element, attrs){
     var template = '<md-button md-theme=\"default\" class=\"md-accent md-raised md-hue-2\"'
-     if (attrs.href) {
-       template = template + ' href=\"' + attrs['href'] + '\"';
-     }
 
-    template = template + '>{{title}}</md-button>';
-
+    if (attrs.href) {
+      template = template + ' href=\"' + attrs['href'] + '\"';
+    }
+    template = template + '>' + attrs['cdvyButtonTitle'] + '</md-button>';
     return template;
-
-
-
-}
+  }
 
 
   /**
    * Re-apply ng-disabled on child
    */
-  link($scope, element, attrs) {
-
-
-    $scope.$parent.$watch(attrs.ngDisabled, function (isDisabled) {
+  link($scope, element, attrs, controller) {
+    $scope.$watch(attrs.ngDisabled, function (isDisabled) {
       element.find('button').prop('disabled', isDisabled);
     });
+
   }
 
 }
