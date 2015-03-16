@@ -1,7 +1,3 @@
-$title-color = #545B64
-$description-color = #9B9EA0
-$icon-color = #D3D3D3
-
 .projects-list-project-panel-toolbar
   font-weight bold
 
@@ -12,7 +8,7 @@ $icon-color = #D3D3D3
   font-size 24px
   height auto
   width auto
-  color $icon-color
+  color $form-element-border-color
 
 .projects-list-projects md-card-content
   padding 0px
@@ -25,7 +21,7 @@ $icon-color = #D3D3D3
 
 .projects-list-projects .cdvy-link
   text-decoration none
-  color active-color
+  color $primary-color
 
 
 .project-type-icon
@@ -44,7 +40,7 @@ $icon-color = #D3D3D3
 .project-name
   font-size 16px
   line-height 19px
-  color $title-color
+  color $label-primary-color
   margin-bottom 3px
 
 .project-name a
@@ -54,31 +50,24 @@ $icon-color = #D3D3D3
 .project-details
   font-size 12px
   line-height 15px
-  color $description-color
+  color $label-info-color
 
 .project-list-empty
   font-size 12px
-
-
-.project-list-section-title md-icon
-  margin-right 10px
-  font-size 16px
-  line-height 19px
-  color #A1A1A1
 
 md-progress-linear.projects-list-projects-progress
   height 10px
 
 .projects-list-projects-filter-panel
-  background-color white
+  background-color $background-color
 
 .projects-list-projects-filter-workspace-label
-  color $title-color
+  color $label-primary-color
   margin-left 10px
   margin-top 6px
 
 .projects-list-projects-filter-action
-  color active-color
+  color $primary-color
   text-transform uppercase
   margin-top 3px
   margin-right 10px
@@ -90,7 +79,7 @@ md-progress-linear.projects-list-projects-progress
   margin-left 10px
 
 .projects-list-projects-select-workspace md-checkbox .md-label
-  color $title-color
+  color $label-primary-color
 
 .projects-list-projects-select-workspace md-checkbox:after
   codenvy-separator()

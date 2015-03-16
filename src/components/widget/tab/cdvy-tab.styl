@@ -25,7 +25,7 @@ md-tabs md-tabs-ink-bar.md-no-transition
   background none
 
 .cdvy-tab:not(md-tab.active)
-    border-bottom 2px solid active-color !important
+    border-bottom 2px solid $primary-color !important
 
 .cdvy-tab md-tab
   display inline-block
@@ -46,10 +46,10 @@ md-tabs md-tabs-ink-bar.md-no-transition
   bottom 5px
 
 .cdvy-tab md-tab.active
-  color active-color !important
+  color $primary-color !important
 
 .md-no-transition[style^="display: block; left: 0px;"] + .cdvy-tab md-tab
-  color active-color !important
+  color $primary-color !important
 
 .cdvy-tab md-tab:before
   bottom 1px
@@ -66,7 +66,7 @@ md-tabs md-tabs-ink-bar.md-no-transition
 
 .md-no-transition[style^="display: block; left: 0px;"] + .cdvy-tab md-tab:after,
 .cdvy-tab md-tab.active:after
-  border-top solid 3px active-color
+  border-top solid 3px $primary-color
   position absolute
   margin-top 12px
   bottom 0

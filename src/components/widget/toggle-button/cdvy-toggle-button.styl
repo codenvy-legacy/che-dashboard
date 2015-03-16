@@ -7,20 +7,18 @@ cdvy-toggle-button .md-button
 
 cdvy-toggle-button .md-button.md-default-theme
   background-color transparent
-  color active-color
-  border-radius 3px
-  -moz-border-radius 3px
-  -webkit-border-radius 3px
-  border 2px solid active-color
+  color $primary-color
+  codenvy-border-radius(3px)
+  border 2px solid $primary-color
 
 cdvy-toggle-button .md-button.md-default-theme:not([disabled]):focus
   background-color transparent
 
 
 cdvy-toggle-button .md-button.md-default-theme.cdvy-toggle-button-disabled
-  background-color white
-  color #393939
-  border-color #d3d3d3
+  background-color $background-color
+  color $label-secondary-color
+  border-color $form-element-border-color
 
 cdvy-toggle-button md-icon
    padding-left 10px
@@ -33,4 +31,4 @@ cdvy-toggle-button .cdvy-toggle-title
   padding-right 20px
 
 cdvy-toggle-button .md-button.md-default-theme.cdvy-toggle-button-disabled md-icon
-  color #d3d3d3
+  color $form-element-border-color

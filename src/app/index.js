@@ -18,6 +18,8 @@ let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch
 
 import Register from '../components/utils/register';
 
+// colors
+import Colors from './colors/codenvy-color.constant.js';
 
 // import components
 import ComponentsConfig from '../components/components-config';
@@ -85,6 +87,8 @@ module.config(function ($routeProvider) {
 
 })
 ;
+
+
 
 
 // add interceptors
@@ -178,10 +182,29 @@ module.factory('LogInterceptor', function ($q) {
   };
 });
 
-module.config(function($mdThemingProvider) {
+
+module.config(function($mdThemingProvider, jsonColors) {
+
+
+  var codenvyColors = angular.fromJson(jsonColors);
+
+  console.log('colors are', codenvyColors);
+  var getColor = function(key) {
+    var color = codenvyColors[key];
+    if (!color) {
+      console.log('error, the color' + key + 'is undefined');
+      return '#ff0000';
+    }
+    if (color.indexOf('$') == 0) {
+      color = getColor(color);
+    }
+    return color;
+
+  }
+
 
   var codenvyMap = $mdThemingProvider.extendPalette('indigo', {
-    '500': '2b333e',
+    '500': getColor('$dark-menu-color'),
     '300' : 'D0D0D0'
   });
   $mdThemingProvider.definePalette('codenvy', codenvyMap);
@@ -192,15 +215,15 @@ module.config(function($mdThemingProvider) {
 
   var codenvyDefaultMap = $mdThemingProvider.extendPalette('blue', {
     'A400'  : '538DAB'/*,
-    '700': '538DAB'*/
+     '700': '538DAB'*/
   });
   $mdThemingProvider.definePalette('codenvyDefault', codenvyDefaultMap);
 
 
   var codenvyAccentMap = $mdThemingProvider.extendPalette('green', {
-    '700' : '00897B',
-    'A400': '3d8f76',
-    'A200': '00897B',
+    '700' : getColor('$codenvy-green-color'),
+    'A400': getColor('$codenvy-green-color'),
+    'A200': getColor('$codenvy-green-color'),
     'contrastDefaultColor': 'light'
   });
   $mdThemingProvider.definePalette('codenvyAccent', codenvyAccentMap);
@@ -239,7 +262,7 @@ module.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('codenvy')
     .accentPalette('codenvyAccent')
-  .backgroundPalette('grey');
+    .backgroundPalette('grey');
 
   $mdThemingProvider.theme('toolbar-theme')
     .primaryPalette('toolbarPrimaryPalette')
@@ -248,16 +271,13 @@ module.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('factory-theme')
     .primaryPalette('light-blue')
     .accentPalette('pink')
-  .warnPalette('red')
-  .backgroundPalette('purple');
+    .warnPalette('red')
+    .backgroundPalette('purple');
 
   $mdThemingProvider.theme('maincontent-theme')
     .primaryPalette('codenvy')
     .accentPalette('codenvyAccent')
     .backgroundPalette('codenvyGrey');
-
-
-
 
 
 });
