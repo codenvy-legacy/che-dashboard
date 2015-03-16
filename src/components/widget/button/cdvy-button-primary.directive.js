@@ -24,7 +24,6 @@ class CodenvyButtonPrimary {
    */
   constructor () {
     this.restrict='E';
-    this.templateUrl = 'components/widget/button/cdvy-button-primary.html';
 
     // scope values
     this.scope = {
@@ -36,9 +35,32 @@ class CodenvyButtonPrimary {
   }
 
   /**
+   * Template for the current toolbar
+   * @param element
+   * @param attrs
+   * @returns {string} the template
+   */
+  template( element, attrs){
+    var template = '<md-button md-theme=\"default\" class=\"md-accent md-raised md-hue-2\"'
+     if (attrs.href) {
+       template = template + ' href=\"' + attrs['href'] + '\"';
+     }
+
+    template = template + '>{{title}}</md-button>';
+
+    return template;
+
+
+
+}
+
+
+  /**
    * Re-apply ng-disabled on child
    */
   link($scope, element, attrs) {
+
+
     $scope.$parent.$watch(attrs.ngDisabled, function (isDisabled) {
       element.find('button').prop('disabled', isDisabled);
     });
