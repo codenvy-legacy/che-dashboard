@@ -14,7 +14,7 @@ import Register from '../../utils/register';
 
 /**
  * @ngdoc directive
- * @name userDashboard.directive:cdvyPanel
+ * @name components.directive:cdvyPanel
  * @restrict E
  * @function
  * @element

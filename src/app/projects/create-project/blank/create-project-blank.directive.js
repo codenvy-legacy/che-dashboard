@@ -11,7 +11,17 @@
 'use strict';
 
 /**
- * Defines a directive for creating project from blank type.
+ * @ngdoc directive
+ * @name projects.create.directive:createProjectBlank
+ * @restrict E
+ * @element
+ *
+ * @description
+ * `<create-project-blank></create-project-blank>` for creating new projects from blank.
+ *
+ * @usage
+ *   <create-project-blank class="projects-create-project-tab" layout="row" layout-wrap></create-project-blank>
+ *
  * @author Florent Benoit
  */
 class CreateProjectBlank {

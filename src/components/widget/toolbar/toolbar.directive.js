@@ -14,7 +14,7 @@ import Register from '../../utils/register';
 
 /**
  * @ngdoc directive
- * @name userDashboard.directive:cdvyToolbar
+ * @name components.directive:cdvyToolbar
  * @restrict E
  * @function
  * @element

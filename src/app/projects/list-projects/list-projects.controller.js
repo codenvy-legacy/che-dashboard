@@ -11,7 +11,9 @@
 'use strict';
 
 /**
- * This class is handling the controller for listing the projects
+ * @ngdoc controller
+ * @name projects.list.controller:ListProjectsCtrl
+ * @description This class is handling the controller for listing the projects
  * @author Florent Benoit
  */
 class ListProjectsCtrl {
