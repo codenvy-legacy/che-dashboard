@@ -75,14 +75,23 @@ Ultima Syriarum est Palaestina per intervalla magna protenta, cultis abundans te
     <div layout="column" >
       <cdvy-html-source>
 
-        <cdvy-button-primary cdvy-button-title="Primary button">
-        </cdvy-button-primary>
+        <cdvy-panel cdvy-title="Buttons" layout="column">
+          <cdvy-button-primary cdvy-button-title="Primary button"></cdvy-button-primary>
+          <cdvy-button-primary cdvy-button-title="Primary button with icon" cdvy-button-icon="fa fa-file-text-o"></cdvy-button-primary>
+
+          <cdvy-button-default cdvy-button-title="default disabled button"
+                               ng-click="demoComponentsCtrl.toggleDisabled2()"
+                               ng-disabled="!demoComponentsCtrl.isToggleDisabled2()">
+          </cdvy-button-default>
+
+          <cdvy-button-default cdvy-button-title="default button icon" cdvy-button-icon="fa fa-check-square">
+          </cdvy-button-default>
 
 
-        <cdvy-button-primary cdvy-button-title="Primary disabled button"
-                             ng-click="demoComponentsCtrl.toggleDisabled2()"
-                             ng-disabled="!demoComponentsCtrl.isToggleDisabled2()">
-        </cdvy-button-primary>
+
+          <cdvy-button-danger cdvy-button-title="Danger button"></cdvy-button-danger>
+          <cdvy-button-danger cdvy-button-title="Danger button icon" cdvy-button-icon="fa fa-trash"></cdvy-button-danger>
+        </cdvy-panel>
       </cdvy-html-source>
 
       <p>Selected value of toggle is : {{demoComponentsCtrl.selectedToggle}}</p>

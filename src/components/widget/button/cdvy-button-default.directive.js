@@ -11,38 +11,49 @@
 'use strict';
 
 import Register from '../../utils/register';
+import CodenvyButton from './cdvy-button.directive';
 
 /**
- * Defines a directive for a primary button.
+ * @ngdoc directive
+ * @name components.directive:cdvyButtonDefault
+ * @restrict E
+ * @function
+ * @element
+ *
+ * @description
+ * `<cdvy-button-default>` defines a default button.
+ *
+ * @param {string=} cdvy-button-title the title of the button
+ * @param {string=} cdvy-button-icon the optional icon of the button
+ *
+ * @usage
+ *   <cdvy-button-default cdvy-button-title="hello"></cdvy-button-default>
+ *
+ * @example
+ <example module="userDashboard">
+ <file name="index.html">
+ <cdvy-button-default cdvy-button-title="Hello"></cdvy-button-default>
+ <cdvy-button-default cdvy-button-title="Hello" cdvy-button-icon="fa fa-check-square"></cdvy-button-default>
+ </file>
+ </example>
  * @author Florent Benoit
  */
-class CodenvyButtonDefault {
+class CodenvyButtonDefault extends CodenvyButton {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
   constructor () {
-    this.restrict='E';
-    this.templateUrl = 'components/widget/button/cdvy-button-default.html';
-
-    // scope values
-    this.scope = {
-      title:'@cdvyButtonTitle',
-      icon:'@cdvyButtonIcon'
-    };
-
-    this.bindToController = true;
-
+    super();
   }
 
+
   /**
-   * Re-apply ng-disabled on child
+   * Template for the buttons
    */
-  link($scope, element, attrs) {
-    $scope.$parent.$watch(attrs.ngDisabled, function (isDisabled) {
-      element.find('button').prop('disabled', isDisabled);
-    });
+  getTemplateStart() {
+    return '<md-button md-theme=\"cdvydefault\" class=\"cdvy-button md-accent md-raised md-hue-2\"';
   }
 
 }

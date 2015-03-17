@@ -11,47 +11,48 @@
 'use strict';
 
 import Register from '../../utils/register';
+import CodenvyButton from './cdvy-button.directive';
 
 /**
- * Defines a directive for a primary button.
+ * @ngdoc directive
+ * @name components.directive:cdvyButtonPrimary
+ * @restrict E
+ * @function
+ * @element
+ *
+ * @description
+ * `<cdvy-button-primary>` defines a default button.
+ *
+ * @param {string=} cdvy-button-title the title of the button
+ * @param {string=} cdvy-button-icon the optional icon of the button
+ *
+ * @usage
+ *   <cdvy-button-primary cdvy-button-title="hello"></cdvy-button-primary>
+ *
+ * @example
+ <example module="userDashboard">
+ <file name="index.html">
+ <cdvy-button-primary cdvy-button-title="Hello"></cdvy-button-primary>
+ <cdvy-button-primary cdvy-button-title="Hello" cdvy-button-icon="fa fa-file-text-o"></cdvy-button-primary>
+ </file>
+ </example>
  * @author Florent Benoit
  */
-class CodenvyButtonPrimary {
+class CodenvyButtonPrimary extends CodenvyButton {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
   constructor () {
-    this.restrict='E';
-    this.bindToController = true;
+    super();
   }
 
   /**
-   * Template for the current toolbar
-   * @param element
-   * @param attrs
-   * @returns {string} the template
+   * Template for the buttons
    */
-  template( element, attrs){
-    var template = '<md-button md-theme=\"default\" class=\"md-accent md-raised md-hue-2\"'
-
-    if (attrs.href) {
-      template = template + ' href=\"' + attrs['href'] + '\"';
-    }
-    template = template + '>' + attrs['cdvyButtonTitle'] + '</md-button>';
-    return template;
-  }
-
-
-  /**
-   * Re-apply ng-disabled on child
-   */
-  link($scope, element, attrs, controller) {
-    $scope.$watch(attrs.ngDisabled, function (isDisabled) {
-      element.find('button').prop('disabled', isDisabled);
-    });
-
+  getTemplateStart() {
+    return '<md-button md-theme=\"default\" class=\"cdvy-button md-accent md-raised md-hue-2\"';
   }
 
 }
