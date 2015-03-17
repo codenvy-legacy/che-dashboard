@@ -51,7 +51,7 @@ gulp.task('html', ['inject', 'partials'], function () {
   return gulp.src(paths.tmp + '/serve/*.html')
     .pipe($.inject(partialsInjectFile, partialsInjectOptions))
     .pipe(assets = $.useref.assets())
-    .pipe($.rev())
+    /*.pipe($.rev())*/
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify(/*{preserveComments: $.uglifySaveLicense}*/))
@@ -113,7 +113,7 @@ gulp.task('misc', function () {
 });
 
 gulp.task('clean', function (done) {
-  $.del([paths.dist + '/', paths.tmp + '/'], done);
+  $.del([paths.dist + '/', paths.tmp + '/', paths.doc + '/'], done);
 });
 
 gulp.task('build', ['html', 'images', 'fonts', 'misc']);

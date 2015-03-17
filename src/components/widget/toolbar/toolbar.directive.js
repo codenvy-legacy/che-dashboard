@@ -13,7 +13,38 @@
 import Register from '../../utils/register';
 
 /**
- * Defines a directive for creating and managing Codenvy top toolbar.
+ * @ngdoc directive
+ * @name userDashboard.directive:cdvyToolbar
+ * @restrict E
+ * @function
+ * @element
+ *
+ * @description
+ * `<cdvy-toolbar>` defines a top toolbar.
+ *
+ * @param {string=} cdvy-title the title of the toolbar
+ * @param {string=} cdvy-button-name the optional name of the right button
+ * @param {string=} cdvy-button-href the optional link of the right button
+ * @param {string=} cdvy-breadcrumb-title title of the breadcrumb
+ * @param {string=} cdvy-breadcrumb-href link used by the breadcrumb
+ * @param {string=} cdvy-subheader-title title of the sub header
+ * @param {string=} cdvy-subheader-icon icon of the sub header
+ *
+ * @usage
+ *   <cdvy-toolbar cdvy-title="hello"></cdvy-toolbar>
+ *
+ * @example
+ <example module="userDashboard">
+ <file name="index.html">
+ <cdvy-toolbar cdvy-title="Hello"
+               cdvy-button-name="My Button"
+               cdvy-button-href="http://www.codenvy.com"
+               cdvy-breadcrumb-title="My Breadcrumb"
+               cdvy-breadcrumb-href="http://www.codenvy.com"
+               cdvy-subheader-title="subtitle"
+ ></cdvy-toolbar>
+ </file>
+ </example>
  * @author Florent Benoit
  */
 class CodenvyToolbar {

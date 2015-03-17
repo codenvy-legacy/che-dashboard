@@ -13,7 +13,26 @@
 import Register from '../../utils/register';
 
 /**
- * Defines a directive for creating Panel.
+ * @ngdoc directive
+ * @name userDashboard.directive:cdvyPanel
+ * @restrict E
+ * @function
+ * @element
+ *
+ * @description
+ * `<cdvy-toolbar>` defines a panel used to insert data.
+ *
+ * @param {string=} cdvy-title the title of the panel
+ *
+ * @usage
+ *   <cdvy-panel cdvy-title="hello"></cdvy-panel>
+ *
+ * @example
+ <example module="userDashboard">
+ <file name="index.html">
+ <cdvy-panel cdvy-title="hello">This is simple text</cdvy-panel>
+ </file>
+ </example>
  * @author Florent Benoit
  */
 class CodenvyPanel {

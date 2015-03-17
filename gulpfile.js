@@ -16,8 +16,9 @@ var gulp = require('gulp');
 gulp.paths = {
   src: 'src',
   dist: 'dist',
-  tmp: 'tmp',
-  e2e: 'e2e'
+  tmp: '.tmp',
+  e2e: 'e2e',
+  doc: 'docs'
 };
 
 require('require-dir')('./gulp');
