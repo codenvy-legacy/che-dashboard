@@ -185,13 +185,11 @@ module.factory('LogInterceptor', function ($q) {
 
 module.config(function($mdThemingProvider, jsonColors) {
 
-
   var codenvyColors = angular.fromJson(jsonColors);
-
-  console.log('colors are', codenvyColors);
   var getColor = function(key) {
     var color = codenvyColors[key];
     if (!color) {
+      // return a flashy red color if color is undefined
       console.log('error, the color' + key + 'is undefined');
       return '#ff0000';
     }
