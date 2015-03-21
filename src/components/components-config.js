@@ -10,7 +10,7 @@
  */
 'use strict';
 
-/*exported CodenvyAPI, WidgetConfig, GitHub, CodeMirror */
+/*exported CodenvyAPI, WidgetConfig, GitHub, CodeMirror, CodenvyNotificationService */
 
 import CodenvyAPI from './api/codenvy-api.factory';
 import WidgetConfig from './widget/widget-config';
@@ -20,6 +20,9 @@ import GitHub from './github/github-service';
 
 // import custom codemirror
 import CodeMirror from './codemirror/codemirror';
+
+// import custom notification service
+import CodenvyNotificationService from './notification/codenvy-notification.factory';
 
 import CreateProjectGitValidator from './validator/git-url-validator.directive';
 import UniqueProjectNameValidator from './validator/unique-project-name-validator.directive';

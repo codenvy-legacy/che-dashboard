@@ -23,7 +23,8 @@ angular.module('userDashboard').constant('jsonColors', JSON.stringify({
   "$red-lipstick-color": "#DB4437",
   "$cat-gray-color": "#E4E4E4",
   "$mouse-gray-color": "#D3D3D3",
-  "$background-color" : "#FFFFFF"
+  "$background-color" : "#FFFFFF",
+  "$border-color" : "#EEEEEE"
 }
 
 

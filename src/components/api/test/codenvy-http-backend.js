@@ -104,6 +104,44 @@ class CodenvyHttpBackend {
     return this.httpBackend;
   }
 
+  /**
+   * Add the project details
+   * @param projectDetails the project details
+   */
+  addProjectDetails(projectDetails) {
+    this.httpBackend.when('GET', '/api/project/' + projectDetails.workspaceId + '/' + projectDetails.name).respond(projectDetails);
+  }
+
+  /**
+   * Add the updated project details
+   * @param workspaceId the id of project workspace
+   * @param projectName the new project name
+   * @param projectDetails the new project details
+   */
+  addUpdatedProjectDetails(workspaceId, projectName, projectDetails) {
+    this.httpBackend.when('PUT', '/api/project/' + workspaceId + '/' + projectName).respond(projectDetails);
+  }
+
+  /**
+   * Add the updated project name
+   * @param workspaceId the id of project workspace
+   * @param projectName the project name
+   * @param newProjectName the new project name
+   */
+  addUpdatedProjectName(workspaceId, projectName, newProjectName) {
+    this.httpBackend.when('POST', '/api/project/' + workspaceId + '/rename/' + projectName + '?name=' + newProjectName).respond(newProjectName);
+  }
+
+  /**
+   * Add the switch visibility
+   * @param workspaceId the id of project workspace
+   * @param projectName the project name
+   * @param newVisibility the new project visibility
+   */
+  addSwitchVisibility(workspaceId, projectName, newVisibility) {
+    this.httpBackend.when('POST', '/api/project/' + workspaceId + '/switch_visibility/' + projectName + '?visibility=' + newVisibility).respond(newVisibility);
+  }
+
 
 }
 
