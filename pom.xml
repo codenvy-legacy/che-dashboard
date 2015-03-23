@@ -67,11 +67,11 @@
           </filesets>
         </configuration>
       </plugin>
-
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
           <execution>
+            <id>compile</id>
             <phase>compile</phase>
             <goals>
               <goal>run</goal>
@@ -91,15 +91,6 @@
                   <replacetoken><![CDATA[var DEV = true;]]></replacetoken>
                   <replacevalue><![CDATA[var DEV = false;]]></replacevalue>
                 </replace>
-                <!-- Run unit tests -->
-                <exec dir="${basedir}" executable="gulp" failonerror="true">
-                  <arg value="test" />
-                </exec>
-
-                <!-- Run e2e tests in dist mode-->
-                <exec dir="${basedir}" executable="gulp" failonerror="true">
-                  <arg value="protractor:dist" />
-                </exec>
 
                 <!-- Build the application -->
                 <exec dir="${basedir}" executable="gulp" failonerror="true">
@@ -115,25 +106,24 @@
                   <replacetoken><![CDATA[var DEV = false;]]></replacetoken>
                   <replacevalue><![CDATA[var DEV = true;]]></replacevalue>
                 </replace>
+
               </target>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
-            <webResources>
-              <resource>
-                <directory>dist</directory>
-              </resource>
-            </webResources>
+          <webResources>
+            <resource>
+              <directory>dist</directory>
+            </resource>
+          </webResources>
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>
@@ -151,7 +141,44 @@
           </excludes>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>qa</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>compilation</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <target>
+                    <!-- Run unit tests -->
+                    <exec dir="${basedir}" executable="gulp" failonerror="true">
+                      <arg value="test" />
+                    </exec>
+
+                    <!-- Run e2e tests in dist mode-->
+                    <exec dir="${basedir}" executable="gulp" failonerror="true">
+                      <arg value="protractor:dist" />
+                    </exec>
+
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <enable-tests>true</enable-tests>
+      </properties>
+    </profile>
+  </profiles>
 </project>
