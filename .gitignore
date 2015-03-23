@@ -1,3 +1,4 @@
+src/app/colors/codenvy-color.constant.js
 src/app/colors/template/
 node_modules/
 bower_components/
