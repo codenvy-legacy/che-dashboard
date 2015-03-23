@@ -18,6 +18,14 @@ exports.config = {
     'browserName': 'chrome'
   },
 
+ onPrepare: function(){
+   browser.driver.get('http://localhost:5000');
+   var x = 500;
+   var y = 100;
+   browser.driver.manage().window().setPosition(x, y);
+   browser.driver.manage().window().maximize();
+  },
+
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [paths.e2e + '/**/*.js'],
