@@ -19,7 +19,7 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
 
-gulp.task('inject', ['styles', 'browserify'], function () {
+gulp.task('inject', ['colors', 'styles', 'browserify'], function () {
 
   var injectStyles = gulp.src([
     paths.tmp + '/serve/{app,components}/**/*.css',

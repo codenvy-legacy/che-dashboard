@@ -17,7 +17,7 @@ var paths = gulp.paths;
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('scripts', function () {
+gulp.task('scripts', ['colors'], function () {
   return gulp.src(paths.src + '/{app,components}/**/*.js')
     .pipe($.sourcemaps.init())
     .pipe($.jshint())
