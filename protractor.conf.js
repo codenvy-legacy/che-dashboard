@@ -15,15 +15,15 @@ exports.config = {
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'chromeOptions' : {
+       args: ['--lang=en',
+              '--window-size=1024,768']
+     }
   },
 
  onPrepare: function(){
-   browser.driver.get('http://localhost:5000');
-   var x = 500;
-   var y = 100;
-   browser.driver.manage().window().setPosition(x, y);
-   browser.driver.manage().window().maximize();
+   browser.driver.get('http://localhost:5000'); 
   },
 
   // Spec patterns are relative to the current working directly when

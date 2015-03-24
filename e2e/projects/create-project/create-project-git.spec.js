@@ -35,6 +35,12 @@ describe('Create project using git TAB', function () {
     browser.get('http://localhost:5000/#/create-project');
     browser.waitForAngular();
 
+    // click on next
+    createProjectsPage.tabNextPaginator.click();
+    browser.sleep(1000);
+
+    expect(createProjectsPage.gitTab.isDisplayed()).toBe(true);
+
     // click on the git tab
     createProjectsPage.gitTab.click();
 
