@@ -8,6 +8,15 @@ codenvy-separator()
   border-left solid 1px $label-primary-color
   content ""
 
+codenvy-roundimage()
+  border-radius 50%
+
+codenvy-developers-face()
+  codenvy-roundimage()
+  box-shadow-simple()
+  height 37px
+  width 37px
+
 @import '../components/widget'
 @import '../components/codemirror/codemirror'
 @import 'projects/projects-config'
