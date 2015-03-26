@@ -14,7 +14,7 @@
 exports.updatedProjectName = function () {
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyHttpBackendProvider) {
+    .run(function ($httpBackend, codenvyHttpBackendProvider, codenvyAPIBuilder) {
 
 
       // setup tests objects
@@ -39,12 +39,13 @@ exports.updatedProjectName = function () {
       };
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend);
+      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
 
       // setup it
       codenvyBackend.addProjectDetails(projectDetails);
       codenvyBackend.addProjectDetails(newProjectDetails);
       codenvyBackend.addUpdatedProjectName(projectDetails.workspaceId, projectDetails.name, newProjectDetails.name);
+      codenvyBackend.setup();
 
     });
 };
@@ -52,7 +53,7 @@ exports.updatedProjectName = function () {
 exports.updatedProjectDescription = function () {
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyHttpBackendProvider) {
+    .run(function ($httpBackend, codenvyHttpBackendProvider, codenvyAPIBuilder) {
 
 
       // setup tests objects
@@ -77,11 +78,12 @@ exports.updatedProjectDescription = function () {
       };
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend);
+      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
 
       // setup it
       codenvyBackend.addProjectDetails(projectDetails);
       codenvyBackend.addUpdatedProjectDetails(projectDetails.workspaceId, projectDetails.name, newProjectDetails);
+      codenvyBackend.setup();
 
     });
 };
@@ -89,7 +91,7 @@ exports.updatedProjectDescription = function () {
 exports.updatedProjectVisibility = function () {
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyHttpBackendProvider) {
+    .run(function ($httpBackend, codenvyHttpBackendProvider, codenvyAPIBuilder) {
 
 
       // setup tests objects
@@ -105,12 +107,13 @@ exports.updatedProjectVisibility = function () {
       };
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend);
+      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
 
       // setup it
       codenvyBackend.addProjectDetails(projectDetails);
       codenvyBackend.addSwitchVisibility(projectDetails.workspaceId, projectDetails.name, projectDetails.visibility);
       codenvyBackend.addSwitchVisibility(projectDetails.workspaceId, projectDetails.name, newVisibility);
+      codenvyBackend.setup();
 
     });
 };

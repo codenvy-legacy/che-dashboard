@@ -19,7 +19,7 @@ describe('Rename project', function () {
 
   beforeEach(function () {
     renameProjectsPage = require('./rename-project.po.js');
-    renameProjectMock = require('./rename-project-http.mock');
+    renameProjectMock = require('./rename-project-http.mock.js');
   });
 
 
