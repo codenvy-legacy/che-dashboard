@@ -20,7 +20,7 @@ class CreateProjectSamplesCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, $scope) {
+  constructor(codenvyAPI) {
     this.codenvyAPI = codenvyAPI;
 
     // ask to load codenvy templates

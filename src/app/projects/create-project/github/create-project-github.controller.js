@@ -140,7 +140,7 @@ class CreateProjectGithubCtrl {
         });
 
         this.GitHub.userRepositories().query().$promise.then((repositories) => {
-          this.gitHubRepositories = this.$filter('filter')(repositories, (repository, index) => {
+          this.gitHubRepositories = this.$filter('filter')(repositories, (repository) => {
             return organizationNames.indexOf(repository.owner.login) >= 0;
           });
         });

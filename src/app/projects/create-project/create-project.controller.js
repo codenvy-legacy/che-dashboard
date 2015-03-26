@@ -201,7 +201,7 @@ class CreateProjectCtrl {
           .ariaLabel('Project creation')
           .ok('OK')
       );
-      return
+      return;
     }
 
     // mode
@@ -276,7 +276,7 @@ class CreateProjectCtrl {
         name = name + '-' + this.importProjectData.project.type;
       }
 
-      name = name + '-' + (("0000" + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4));
+      name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4));
 
       this.importProjectData.project.name = name;
 

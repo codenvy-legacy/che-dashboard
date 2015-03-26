@@ -8,7 +8,7 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  */
-"use strict";
+'use strict';
 
 angular.module('userDashboard').filter('sampleFilterProjectType', function() {
   return function (templates, categoryFilter) {

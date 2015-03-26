@@ -53,13 +53,9 @@ class ProjectDetailsCtrl {
 
     this.toolbarIcons = [{name:'favorite', font:'material-design icon-ic_star_24px'},
       {name:'share', font:'material-design icon-ic_share_24px'}
-    ]
+    ];
   }
 
-
-  callbackToolbarClick(name) {
-    console.log('click on icon', name);
-  }
 
   updateLocation() {
     if (this.$location.path().endsWith(this.projectDetails.name)) {

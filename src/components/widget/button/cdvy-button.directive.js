@@ -53,7 +53,7 @@ class CodenvyButton {
   /**
    * Re-apply ng-disabled on child
    */
-  link($scope, element, attrs, controller) {
+  link($scope, element, attrs) {
     $scope.$watch(attrs.ngDisabled, function (isDisabled) {
       element.find('button').prop('disabled', isDisabled);
     });

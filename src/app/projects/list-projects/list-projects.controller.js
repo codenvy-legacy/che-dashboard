@@ -99,7 +99,7 @@ class ListProjectsCtrl {
    * Hide the workspace filter menu
    */
   hideWorkspaceFilter() {
-    this.displayWorkspaceFilter = false
+    this.displayWorkspaceFilter = false;
   }
 
   /**
