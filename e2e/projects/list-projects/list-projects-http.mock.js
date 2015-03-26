@@ -35,12 +35,13 @@ exports.projectsList = function(){
 
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend);
+      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
 
       // setup it
       codenvyBackend.addWorkspaces([workspace1, workspace2]);
       codenvyBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
       codenvyBackend.addProjects(workspace2, [wksp2Project1]);
+      codenvyBackend.setup();
 
     });
 };
@@ -65,11 +66,12 @@ exports.projectsList2 = function(){
 
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend);
+      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
 
       // setup it
       codenvyBackend.addWorkspaces([workspace1]);
       codenvyBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
+      codenvyBackend.setup();
 
     });
 };
@@ -88,11 +90,12 @@ exports.emptyProjectsList = function(){
       var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withWorkspaceReference(codenvyAPIBuilder.getWorkspaceReferenceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build()).build();
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend);
+      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
 
       // setup it
       codenvyBackend.addWorkspaces([workspace1]);
       codenvyBackend.addProjects(workspace1, []);
+      codenvyBackend.setup();
 
     });
 };

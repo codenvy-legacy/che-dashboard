@@ -74,6 +74,10 @@ describe('CodenvyProjectType', function(){
       // add workspaces on Http backend
       codenvyBackend.addProjectTypes([mavenType, antType]);
 
+      // setup backend
+      codenvyBackend.setup();
+
+
       // no types now on factory
       expect(factory.getAllProjectTypes().length).toEqual(0);
 
@@ -96,7 +100,7 @@ describe('CodenvyProjectType', function(){
       expect(projectTypes.length).toEqual(2);
 
       // category is java
-      var javaCategory = typesByCategory['java']
+      var javaCategory = typesByCategory['java'];
       expect(javaCategory).not.toBeNull();
 
       expect(javaCategory.length).toEqual(2);

@@ -64,7 +64,9 @@ describe('unique-project-name-validator', function() {
 
       // add into backend
       codenvyBackend.addProjects(workspace1, [wksp1Project1]);
-      codenvyBackend.addUser({email: 'fbenoit@codenvy.com', id: 'user12345'});
+      codenvyBackend.setup();
+
+
       // update projects workspaces
       factoryProject.onChangeWorkspaces([workspace1]);
 
@@ -100,9 +102,12 @@ describe('unique-project-name-validator', function() {
 
       // add into backend
       codenvyBackend.addProjects(workspace1, [wksp1Project1]);
-      codenvyBackend.addUser({email: 'fbenoit@codenvy.com', id: 'user12345'});
+
       // update projects workspaces
       factoryProject.onChangeWorkspaces([workspace1]);
+
+      // setup backend
+      codenvyBackend.setup();
 
       // flush HTTP backend
       httpBackend.flush();

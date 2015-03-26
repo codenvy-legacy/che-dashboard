@@ -22,10 +22,60 @@ class CodenvyHttpBackend {
   /**
    * Constructor to use
    */
-  constructor ($httpBackend) {
+  constructor ($httpBackend, codenvyAPIBuilder) {
     this.httpBackend = $httpBackend;
     this.projectsPerWorkspace = new Map();
+    this.workspaces = [];
+    this.usersMap = new Map();
+    this.profilesMap = new Map();
+    this.projectDetailsMap = new Map();
+    this.projectPermissionsMap = new Map();
+
+
+    this.defaultUser = codenvyAPIBuilder.getUserBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').build();
+    this.defaultProfile = codenvyAPIBuilder.getProfileBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').withFirstName('FirstName').withLastName('LastName').build();
+
   }
+
+
+  /**
+   * Setup all data that should be retrieved on calls
+   */
+  setup() {
+    // add the remote call
+    this.httpBackend.when('GET', '/api/workspace/all').respond(this.workspaces);
+    this.httpBackend.when('GET', '/api/project-type').respond(this.projectTypes);
+
+
+    //users
+    this.httpBackend.when('GET', '/api/user').respond(this.defaultUser);
+    var userKeys = this.usersMap.keys();
+    for (let key of userKeys) {
+      this.httpBackend.when('GET', '/api/user/' + key).respond(this.usersMap.get(key));
+    }
+
+    //profiles
+    this.httpBackend.when('GET', '/api/profile').respond(this.defaultProfile);
+    var profileKeys = this.profilesMap.keys();
+    for (let key of profileKeys) {
+      this.httpBackend.when('GET', '/api/profile/' + key).respond(this.profilesMap.get(key));
+    }
+
+    /// project details
+    var projectDetailsKeys = this.projectDetailsMap.keys();
+    for (let projectKey of projectDetailsKeys) {
+      this.httpBackend.when('GET', '/api/project/' + projectKey).respond(this.projectDetailsMap.get(projectKey));
+    }
+
+    // permissions
+    var projectPermissionsKeys = this.projectPermissionsMap.keys();
+    for (let key of projectPermissionsKeys) {
+      this.httpBackend.when('GET', '/api/project/' + key.workspaceId + '/permissions/' + key.projectName).respond(this.projectPermissionsMap.get(key));
+    }
+
+
+  }
+
 
   /**
    * Add the given workspaces on this backend
@@ -38,12 +88,12 @@ class CodenvyHttpBackend {
       if (workspace.workspaceReference.id) {
         this.projectsPerWorkspace.set(workspace.workspaceReference.id, []);
       }
+
+      this.workspaces.push(workspace);
     });
 
-    // add the remote call
-    this.httpBackend.when('GET', '/api/workspace/all').respond(workspaces);
-
   }
+
 
   /**
    * Adds the given projects for the given workspace
@@ -77,15 +127,39 @@ class CodenvyHttpBackend {
    * @param projectTypes
    */
   addProjectTypes(projectTypes) {
-    this.httpBackend.when('GET', '/api/project-type').respond(projectTypes);
+    this.projectTypes = projectTypes;
   }
 
   /**
    * Add the given user
    * @param user
    */
-  addUser(user) {
-    this.httpBackend.when('GET', '/api/user').respond(user);
+  setDefaultUser(user) {
+    this.defaultUser = user;
+  }
+
+  /**
+   * Add the given user
+   * @param user
+   */
+  addUserId(user) {
+    this.usersMap.put(user.id, user);
+  }
+
+  /**
+   * Add the given profile
+   * @param profile
+   */
+  addDefaultProfile(profile) {
+    this.defaultProfile = profile;
+  }
+
+  /**
+   * Add the given profile
+   * @param profile
+   */
+  addProfileId(profile) {
+    this.profilesMap.put(profile.id, profile);
   }
 
   /**
@@ -109,7 +183,7 @@ class CodenvyHttpBackend {
    * @param projectDetails the project details
    */
   addProjectDetails(projectDetails) {
-    this.httpBackend.when('GET', '/api/project/' + projectDetails.workspaceId + '/' + projectDetails.name).respond(projectDetails);
+    this.projectDetailsMap.set(projectDetails.workspaceId + '/' + projectDetails.name, projectDetails);
   }
 
   /**
@@ -140,6 +214,11 @@ class CodenvyHttpBackend {
    */
   addSwitchVisibility(workspaceId, projectName, newVisibility) {
     this.httpBackend.when('POST', '/api/project/' + workspaceId + '/switch_visibility/' + projectName + '?visibility=' + newVisibility).respond(newVisibility);
+  }
+
+  addPermissions(workspaceId, projectName, permissions) {
+    var key = {workspaceId: workspaceId, projectName:projectName};
+    this.projectPermissionsMap.set(key, permissions);
   }
 
 

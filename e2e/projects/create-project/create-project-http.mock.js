@@ -35,12 +35,13 @@ exports.initialList = function(){
 
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend);
+      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
 
       // setup it
       codenvyBackend.addWorkspaces([workspace1, workspace2]);
       codenvyBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
       codenvyBackend.addProjects(workspace2, [wksp2Project1]);
+      codenvyBackend.setup();
 
     });
 };

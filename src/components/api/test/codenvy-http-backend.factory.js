@@ -25,8 +25,8 @@ class CodenvyHttpBackendFactory extends CodenvyHttpBackend {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($httpBackend) {
-    super($httpBackend);
+  constructor($httpBackend, codenvyAPIBuilder) {
+    super($httpBackend, codenvyAPIBuilder);
   }
 
 }

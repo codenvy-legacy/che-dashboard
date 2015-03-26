@@ -25,7 +25,7 @@ class CodenvyHttpBackendProviderFactory {
    * @param $httpBackend the backend on which to add calls
    * @returns {CodenvyHttpBackend} the new instance
    */
-  buildBackend($httpBackend) {
+  buildBackend($httpBackend, codenvyAPIBuilder) {
 
     // first, add pass through
     $httpBackend.whenGET(new RegExp('components.*')).passThrough();
@@ -33,7 +33,7 @@ class CodenvyHttpBackendProviderFactory {
 
 
     // return instance
-    return new CodenvyHttpBackend($httpBackend);
+    return new CodenvyHttpBackend($httpBackend, codenvyAPIBuilder);
 
 
   }

@@ -78,6 +78,9 @@ describe('CodenvyProject', function(){
       codenvyBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
       codenvyBackend.addProjects(workspace2, [wksp2Project1]);
 
+      // setup backend
+      codenvyBackend.setup();
+
       // no projects now
       expect(factory.getAllProjects().length).toEqual(0);
 

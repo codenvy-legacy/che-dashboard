@@ -16,10 +16,13 @@ import Register from '../../utils/register';
 import CodenvyWorkspaceReferenceBuilder from './codenvy-workspacereference-builder';
 import CodenvyWorkspaceBuilder from './codenvy-workspace-builder';
 import CodenvyProjectReferenceBuilder from './codenvy-projectreference-builder';
+import CodenvyProjectDetailsBuilder from './codenvy-projectdetails-builder';
+import CodenvyProjectPermissionsBuilder from './codenvy-projectpermissions-builder';
 import CodenvyProjectTypeBuilder from './codenvy-projecttype-builder';
 import CodenvyProjectTemplateBuilder from './codenvy-projecttemplate-builder';
 import CodenvyProjectTypeAttributeDescriptorBuilder from './codenvy-projecttype-attribute-descriptor-builder';
-
+import CodenvyProfileBuilder from './codenvy-profile-builder.js';
+import CodenvyUserBuilder from './codenvy-user-builder.js';
 
 /**
  * This class is providing the entry point for accessing the builders
@@ -50,6 +53,13 @@ class CodenvyAPIBuilder {
     return new CodenvyWorkspaceBuilder();
   }
 
+  /***
+   * The Codenvy Profile builder
+   * @returns {CodenvyProfileBuilder}
+   */
+  getProfileBuilder() {
+    return new CodenvyProfileBuilder();
+  }
 
   /***
    * The Codenvy Project Reference builder
@@ -57,6 +67,25 @@ class CodenvyAPIBuilder {
    */
   getProjectReferenceBuilder() {
     return new CodenvyProjectReferenceBuilder();
+  }
+
+
+  /***
+   * The Codenvy Project Details builder
+   * @returns {CodenvyProjectDetailsBuilder}
+   */
+  getProjectDetailsBuilder() {
+    return new CodenvyProjectDetailsBuilder();
+  }
+
+
+
+  /***
+   * The Codenvy Project Permission builder
+   * @returns {CodenvyProjectPermissionsBuilder}
+   */
+  getProjectPermissionsBuilder() {
+    return new CodenvyProjectPermissionsBuilder();
   }
 
 
@@ -83,6 +112,15 @@ class CodenvyAPIBuilder {
   getProjectTypeAttributeDescriptorBuilder() {
     return new CodenvyProjectTypeAttributeDescriptorBuilder();
   }
+
+  /***
+   * The Codenvy User builder
+   * @returns {CodenvyUserBuilder}
+   */
+  getUserBuilder() {
+    return new CodenvyUserBuilder();
+  }
+
 
 
 }

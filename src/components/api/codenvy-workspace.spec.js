@@ -96,6 +96,8 @@ describe('CodenvyWorkspace', function(){
       // add workspaces on Http backend
       codenvyBackend.addWorkspaces([workspace1, tmpWorkspace2]);
 
+      // setup backend
+      codenvyBackend.setup();
 
       // fetch workspaces
       factory.fetchWorkspaces();
