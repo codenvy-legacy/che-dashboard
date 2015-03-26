@@ -10,9 +10,9 @@
   <!-- Desktop version -->
   <div class="cdvy-input-desktop" hide-sm hide-md layout="column" flex>
     <div layout="row" flex layout-align="space-around start">
-      <label flex="15" >{{labelName}}: </label>
+      <label flex="15" class="cdvy-input-desktop-label">{{labelName}}: </label>
 
-      <div layout="column" flex="85">
+      <div layout="column" class="cdvy-input-desktop-value-column" flex="85">
         <input type="text" placeholder="{{placeHolder}}" ng-trim="false" name="desk{{inputName}}" data-ng-model="valueModel">
         <!-- display error messages for the form -->
         <div ng-messages="myForm.desk{{inputName}}.$error" ng-transclude></div>
