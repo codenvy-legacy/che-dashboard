@@ -1,0 +1,9 @@
+<div class="md-accent md-raised md-hue-2 md-button md-default-theme">
+  <a href="{{codenvyButtonDropdownCtrl.href}}">{{codenvyButtonDropdownCtrl.labelText}}</a>
+  <span class="cdvy-button-dropdown-separator"></span><md-icon class="cdvy-button-dropdown-icon" ng-click="codenvyButtonDropdownCtrl.toggleDropDown()" ng-blur="codenvyButtonDropdownCtrl.disableDropDown()" md-font-icon="material-design icon-ic_play_arrow_24px"></md-icon></md-button>
+</div>
+<div class="cdvy-button-dropdown-elements" ng-show="codenvyButtonDropdownCtrl.showDropdown">
+  <ul>
+    <li><a ng-repeat="link in codenvyButtonDropdownCtrl.ctrl.links" ng-href="{{link.href}}">{{link.name}}</a></li>
+  </ul>
+</div>
