@@ -25,6 +25,10 @@ import CreateProjectSamplesFilter from './create-project/samples/create-project-
 import CreateProjectZip from './create-project/zip/create-project-zip.directive';
 import CreateProjectConfFile from './create-project/config-file/create-project-conf-file.directive';
 import ProjectDetailsCtrl from './project-details/project-details.controller';
+import ProjectDetailsDevelopersCtrl from './project-details/developers/project-details-developers.controller';
+import ProjectDetailsDevelopers from './project-details/developers/project-details-developers.directive';
+import ProjectDetailsDevelopersDialogAddCtrl from './project-details/developers/project-details-developers-dialog-add.controller';
+
 
 class ProjectConfig {
 
@@ -35,6 +39,8 @@ class ProjectConfig {
     register.directive('createProjectGit', CreateProjectGit);
     register.directive('createProjectGithub', CreateProjectGithub);
     register.directive('createProjectSamples', CreateProjectSamples);
+    register.directive('projectDetailsDevelopers', ProjectDetailsDevelopers);
+
     register.controller('CreateProjectCtrl', CreateProjectCtrl);
     register.controller('ListProjectsCtrl', ListProjectsCtrl);
     register.controller('CreateProjectBlankCtrl', CreateProjectBlankCtrl);
@@ -42,6 +48,9 @@ class ProjectConfig {
     register.controller('CreateProjectGithubCtrl', CreateProjectGithubCtrl);
     register.controller('CreateProjectSamplesCtrl', CreateProjectSamplesCtrl);
     register.controller('ProjectDetailsCtrl', ProjectDetailsCtrl);
+    register.controller('ProjectDetailsDevelopersCtrl', ProjectDetailsDevelopersCtrl);
+    register.controller('ProjectDetailsDevelopersDialogAddCtrl', ProjectDetailsDevelopersDialogAddCtrl);
+
 
 
 

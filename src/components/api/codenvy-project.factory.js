@@ -23,10 +23,14 @@ class CodenvyProject {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource, $q) {
+  constructor ($resource, $q, codenvyUser, codenvyProfile) {
 
     // keep resource
     this.$resource = $resource;
+
+    this.codenvyUser = codenvyUser;
+
+    this.codenvyProfile = codenvyProfile;
 
     this.$q = $q;
 
@@ -39,6 +43,9 @@ class CodenvyProject {
     // projects per workspace id
     this.projectsDetailsPerWorkspaceMap = new Map();
 
+    // map containing map (first map is workspace with key = workspaceId, inner map is key = project, value = permissions
+    this.permissionsPerWorkspaceMap = new Map();
+
     // workspaces used to retrieve projects
     this.workspaces = [];
 
@@ -50,6 +57,8 @@ class CodenvyProject {
       import: {method: 'POST', url: '/api/project/:workspaceId/import/:path'},
       create: {method: 'POST', url: '/api/project/:workspaceId?name=:path'},
       details: {method: 'GET', url: '/api/project/:workspaceId/:path'},
+      getPermissions: { method: 'GET', url: '/api/project/:workspaceId/permissions/:path', isArray: true},
+      updatePermissions: { method: 'POST', url: '/api/project/:workspaceId/permissions/:path', isArray: true},
       rename: {method: 'POST', url: '/api/project/:workspaceId/rename/:path?name=:name'},
       remove: {method: 'DELETE', url: '/api/project/:workspaceId/:path'},
       update: {method: 'PUT', url: '/api/project/:workspaceId/:path'},
@@ -128,26 +137,174 @@ class CodenvyProject {
    * @param workspace
    */
   fetchProjectsForWorkspace(workspace) {
-
     return this.fetchProjectsForWorkspaceId(workspace.workspaceReference.id);
   }
 
+  /**
+   * Import a project based located on the given workspace id and path
+   * @param workspaceId the workspace ID to use
+   * @param path the path of the project
+   * @param data the project body description
+   * @returns {$promise|*|T.$promise}
+   */
   importProject(workspaceId, path, data) {
     let promise = this.remoteProjectsAPI.import({workspaceId: workspaceId, path: path}, data).$promise;
+    // update projects as well
     promise.then(this.fetchProjectsForWorkspaceId(workspaceId));
-
-
     return promise;
   }
 
 
+  /**
+   * Create a project based located on the given workspace id and path
+   * @param workspaceId the workspace ID to use
+   * @param path the path of the project
+   * @param data the project body description
+   * @returns {$promise|*|T.$promise}
+   */
   createProject(workspaceId, path, data) {
     let promise = this.remoteProjectsAPI.create({workspaceId: workspaceId, path: path}, data).$promise;
+    // update projects as well
     promise.then(this.fetchProjectsForWorkspaceId(workspaceId));
-
-
     return promise;
   }
+
+  /**
+   * Fetch permissions for a project based located on the given workspace id and path
+   * @param workspaceId the workspace ID to use
+   * @param path the path of the project
+   * @param data the project body description
+   * @returns {$promise|*|T.$promise}
+   */
+  fetchPermissions(workspaceId, path) {
+    let promise = this.remoteProjectsAPI.getPermissions({workspaceId: workspaceId, path: path}).$promise;
+
+    let storePermissionsPromise = promise.then((permissions) => {
+
+      var workspaceMap = this.permissionsPerWorkspaceMap.get(workspaceId);
+      if (!workspaceMap) {
+        workspaceMap = new Map();
+        this.permissionsPerWorkspaceMap.set(workspaceId, workspaceMap);
+      }
+
+      var projectMap = workspaceMap.get(path);
+      if (!projectMap) {
+        projectMap = new Map();
+        workspaceMap.set(path, projectMap);
+      }
+      projectMap.set(path, permissions);
+
+      return permissions;
+    });
+
+    // update permissions with users
+
+    let updateUsersPromise = storePermissionsPromise.then((permissions) => {
+      var allpromises = [];
+      //allpromises.push(storePermissionsPromise);
+
+      permissions.forEach((permission)=> {
+        if (permission.principal.type === 'USER' && permission.principal.name === 'any') {
+          permission.principal.email = 'Any user';
+          permission.principal.fullname = 'Public project sharing';
+        } else if (permission.principal.type === 'USER') {
+          var principalId = permission.principal.name;
+          let userPromise = this.codenvyUser.fetchUserId(principalId);
+          let profilePromise = this.codenvyProfile.fetchProfileId(principalId);
+          let updateProfilePromise = profilePromise.then(() => {
+            var profile = this.codenvyProfile.getProfileFromId(principalId);
+            permission.principal.fullname = this.getFullName(profile);
+
+          }, (error) => {
+            if (error.status === 304) {
+              // get from cache
+              var profile = this.codenvyProfile.getProfileFromId(principalId);
+              permission.principal.fullname = this.getFullName(profile);
+
+            } else {
+              // unable to get user
+              permission.principal.fullname = permission.principal.name;
+            }
+          });
+
+
+          let updatedUserPromise = userPromise.then(() => {
+            var user = this.codenvyUser.getUserFromId(principalId);
+            permission.principal.email = user.email;
+
+          }, (error) => {
+            if (error.status === 304) {
+              // get from cache
+              var user = this.codenvyUser.getUserFromId(principalId);
+              permission.principal.email = user.email;
+
+            } else {
+              // unable to get user
+              permission.principal.email = permission.principal.name;
+            }
+          });
+
+
+          allpromises.push(updatedUserPromise);
+          allpromises.push(updateProfilePromise);
+        }
+      });
+      return this.$q.all(allpromises);
+    });
+
+
+
+
+
+    return updateUsersPromise;
+
+  }
+
+  /**
+   * Gets the fullname from a profile
+   * @param profile the profile to analyze
+   * @returns {string} a name
+   */
+  getFullName(profile) {
+    var firstName = profile.attributes.firstName;
+    if (!firstName) {
+      firstName = '';
+    }
+    var lastName = profile.attributes.lastName;
+    if (!lastName) {
+      lastName = '';
+    }
+
+    return firstName + ' ' + lastName;
+  }
+
+
+
+  updatePermissions(workspaceId, path, data) {
+    let promise = this.remoteProjectsAPI.updatePermissions({workspaceId: workspaceId, path: path}, data).$promise;
+    return promise;
+
+  }
+
+  /**
+   * Return last retrieved permissions
+   * @param workspaceId
+   * @param path
+   * @returns {*}
+   */
+  getPermissions(workspaceId, path) {
+    var workspaceMap = this.permissionsPerWorkspaceMap.get(workspaceId);
+    if (!workspaceMap) {
+      return [];
+    }
+    var projectMap = workspaceMap.get(path);
+    if (!projectMap) {
+      return [];
+    }
+    return projectMap.get(path);
+
+  }
+
 
 
   /**

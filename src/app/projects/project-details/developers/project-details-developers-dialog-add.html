@@ -1,0 +1,34 @@
+<md-dialog class="project-details-developers-dialog">
+  <ng-form name="addingUserForm">
+    <md-content ng-init="projectDetailsDevelopersDialogAddCtrl.setForm(addingUserForm)">
+      <h2>Add user permissions</h2>
+      <cdvy-input cdvy-name="name"
+                  cdvy-form="addingUserForm"
+                  cdvy-label-name="Email"
+                  cdvy-place-holder="Email"
+                  type="email"
+                  required
+                  ng-model="projectDetailsDevelopersDialogAddCtrl.userIDtoAdd">
+        <div ng-message="required">Email is required.</div>
+        <div ng-message="email">Enter a valid email address.</div>
+      </cdvy-input>
+      <label>Permissions:</label>
+
+      <div layout="row">
+        <div layout="column">
+          <md-checkbox ng-model="projectDetailsDevelopersDialogAddCtrl.permissions['read']">Read</md-checkbox>
+          <md-checkbox ng-model="projectDetailsDevelopersDialogAddCtrl.permissions['write']">Write</md-checkbox>
+          <md-checkbox ng-model="projectDetailsDevelopersDialogAddCtrl.permissions['update_acl']">Update ACL</md-checkbox>
+        </div>
+        <div layout="column">
+          <md-checkbox ng-model="projectDetailsDevelopersDialogAddCtrl.permissions['build']">Build</md-checkbox>
+          <md-checkbox ng-model="projectDetailsDevelopersDialogAddCtrl.permissions['run']">Run</md-checkbox>
+        </div>
+      </div>
+    </md-content>
+    <div class="md-actions">
+      <md-button ng-click="projectDetailsDevelopersDialogAddCtrl.abort()" tabindex="0">Cancel</md-button>
+      <md-button class="md-primary" ng-click="projectDetailsDevelopersDialogAddCtrl.add()" ng-disabled="projectDetailsDevelopersDialogAddCtrl.isButtonDisabled()">Add</md-button>
+    </div>
+  </ng-form>
+</md-dialog>

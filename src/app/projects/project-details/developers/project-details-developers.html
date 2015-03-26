@@ -1,0 +1,69 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<div ng-show="projectDetailsDevelopersCtrl.mode == 'EDIT_PERMISSIONS'" class="projects-project-details-developers-edit-panel" layout="row" layout-align="start center">
+  <div class="projects-project-details-developers-edit-panel-label">Edit permissions for {{projectDetailsDevelopersCtrl.currentEditingUserPermission.principal.email}} :</div>
+  <ng-form name="editingPermissionForm">
+    <div class="projects-project-details-developers-edit-panel-checkboxes" flex="60" layout="row" layout-align="start center" layout-wrap>
+      <md-checkbox ng-model="projectDetailsDevelopersCtrl.currentEditingUserPermissionModel['read']">Read</md-checkbox>
+      <md-checkbox ng-model="projectDetailsDevelopersCtrl.currentEditingUserPermissionModel['write']">Write</md-checkbox>
+      <md-checkbox ng-model="projectDetailsDevelopersCtrl.currentEditingUserPermissionModel['build']">Build</md-checkbox>
+      <md-checkbox ng-model="projectDetailsDevelopersCtrl.currentEditingUserPermissionModel['run']">Run</md-checkbox>
+      <md-checkbox ng-model="projectDetailsDevelopersCtrl.currentEditingUserPermissionModel['update_acl']">Update ACL</md-checkbox>
+    </div>
+  </ng-form>
+  <div flex layout="row" layout-wrap layout-align="end center"><span class="projects-project-details-developers-edit-panel-action" ng-click="projectDetailsDevelopersCtrl.updatePanelPermission()">UPDATE</span><i ng-click="projectDetailsDevelopersCtrl.resetMode()" class="projects-project-details-developers-edit-panel-action-icon material-design icon-ic_close_24px"></i></div>
+</div>
+<md-content class="project-details-content">
+
+
+  <cdvy-list-title cdvy-icon="material-design icon-ic_lock_24px">
+    Permissions
+  </cdvy-list-title>
+  <label ng-show="projectDetailsDevelopersCtrl.requirePermissions" >You're not an administrator of this project/workspace.</label>
+  <cdvy-list ng-hide="projectDetailsDevelopersCtrl.requirePermissions" class="projects-project-details-developers-list">
+    <cdvy-list-item ng-repeat="permission in projectDetailsDevelopersCtrl.permissions | orderBy: ['principal.type', 'principal.email']" flex-gt-sm="100" flex="33">
+      <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row">
+        <div ng-show="permission.principal.type == 'USER'">
+          <img class="projects-project-details-developers-face" gravatar-src="'{{permission.principal.email}}'">
+        </div>
+        <div ng-show="permission.principal.type == 'GROUP'">
+        <span class="projects-project-details-developers-group fa fa-users">
+        </span>
+        </div>
+        <div flex-gt-sm="45" layout="column" ng-show="permission.principal.type == 'GROUP'">
+          <div class="projects-project-details-principal-mail">Group</div>
+          <div class="projects-project-details-principal-name">{{permission.principal.name}}</div>
+        </div>
+        <div flex-gt-sm="45" layout="column" ng-show="permission.principal.type == 'USER'">
+          <div class="projects-project-details-principal-mail">{{permission.principal.email}}</div>
+          <div class="projects-project-details-principal-name">{{permission.principal.fullname}}</div>
+        </div>
+        <div flex layout="row" class="projects-project-details-principal-permissions">
+          <span ng-repeat="acl in permission.permissions">{{acl}}<span ng-hide="$last">/</span></span>
+        </div>
+
+
+        <p flex-gt-sm="15" class="projects-project-details-line-links" ng-show="permission.principal.type == 'USER' && permission.principal.name !== 'any'">
+          <span ng-click="projectDetailsDevelopersCtrl.edit(permission)" class="material-design icon-ic_edit_24px"></span>
+          <span ng-click="projectDetailsDevelopersCtrl.remove(permission)" class="material-design icon-ic_remove_circle_outline_24px"></span>
+        </p>
+
+      </div>
+    </cdvy-list-item>
+  </cdvy-list>
+
+
+  <md-button class="md-fab cdvy-button-right-bottom" aria-label="add developer" ng-click="projectDetailsDevelopersCtrl.showAdd($event)">
+    <span class="fa fa-plus"></span>
+  </md-button>
+</md-content>
