@@ -47,7 +47,8 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')" ng-include="'app/navbar/navbar.html'">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2"  md-component-id="left" md-is-locked-open="$media('gt-md')">
+      <cdvy-nav-bar></cdvy-nav-bar>
     </md-sidenav>
     <div class="main-page" layout="column" role="main" tabindex="-1" flex ng-view >
 

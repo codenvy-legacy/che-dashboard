@@ -9,8 +9,7 @@
     Contributors:
       Codenvy, S.A. - initial API and implementation
 
--->
-<md-toolbar flex>
+--><md-toolbar flex>
   <section class="md-toolbar-tools" layout="column" layout-align="center center">
     <img class="codenvy-logo" src="https://codenvy.com/images/logo@3x.png" alt="logo">
   </section>
@@ -18,7 +17,7 @@
 
 
   <section layout="column" layout-align="center center">
-    <md-button ng-href="#/create-project" class="md-accent md-raised md-hue-2">Create project</md-button>
+    <cdvy-button-dropdown cdvy-button-dropdown-href="#/create-project" cdvy-button-dropdown-label="Create Project" cdvy-button-dropdown-controller="navbarCtrl"></cdvy-button-dropdown>
   </section>
   <section layout="column" layout-align="center center">&nbsp;</section>
   <md-divider md-theme="factory-theme"></md-divider>
@@ -46,8 +45,6 @@
   </section>
   <section layout="column" layout-align="center center">&nbsp;</section>
   <md-divider md-theme="factory-theme"></md-divider>
-
-
 </md-toolbar>
 
 

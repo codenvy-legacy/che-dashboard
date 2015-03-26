@@ -10,27 +10,24 @@
  */
 'use strict';
 
-class NavBarCtrl {
+/**
+ * Defines a directive for creating navbar.
+ * @author Florent Benoit
+ */
+class NavBar {
 
   /**
-   * Default constructor
+   * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($mdSidenav) {
-    this.mdSidenav = $mdSidenav;
-    this.links =[{href:'#/projects', name:'List Projects'}
-    ]
+  constructor () {
+    this.restrict='E';
+    this.replace=true;
+    this.templateUrl = 'app/navbar/navbar.html';
+    this.controller = 'NavbarCtrl';
+    this.controllerAs = 'navbarCtrl';
   }
-
-  /**
-   * Toggle the left menu
-   */
-  toggleLeftMenu() {
-    this.mdSidenav('left').toggle();
-  }
-
-
 
 }
 
-export default NavBarCtrl;
+export default NavBar;
