@@ -25,6 +25,12 @@
   <section layout="column" layout-align="center center">
     <md-list layout="column">
       <md-item>
+        <md-item-content ng-show="navbarCtrl.displayLoginItem">
+          <div class="md-tile-content">
+            <md-button flex ng-href="#/login" layout-align="left"><i class="fa fa-user fa-lg icon">&nbsp;</i>Login</md-button>
+          </div>
+        </md-item-content>
+
         <md-item-content>
           <div class="md-tile-content">
             <md-button flex ng-href="#/" layout-align="left"><i class="fa fa-th-large fa-lg icon">&nbsp;</i>Dashboard</md-button>

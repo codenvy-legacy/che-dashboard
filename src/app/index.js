@@ -281,6 +281,9 @@ module.config(function($mdThemingProvider, jsonColors) {
 
 });
 
+module.constant('userDashboardConfig', {
+  developmentMode: DEV
+});
 
 module.config(function ($routeProvider, $locationProvider, $httpProvider) {
 

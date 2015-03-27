@@ -16,10 +16,12 @@ class NavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor ($mdSidenav) {
+  constructor ($mdSidenav, userDashboardConfig) {
     this.mdSidenav = $mdSidenav;
     this.links =[{href:'#/projects', name:'List Projects'}
     ]
+
+    this.displayLoginItem = userDashboardConfig.developmentMode;
   }
 
   /**
