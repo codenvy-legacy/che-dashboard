@@ -51,7 +51,7 @@
         <span ng-show="projects.length == 0" class="project-list-empty">- No project</span>
       </cdvy-list-title>
       <cdvy-list ng-show="projects.length > 0">
-        <cdvy-list-item ng-repeat="project in projects" flex-gt-sm="100" flex="33">
+        <cdvy-list-item ng-repeat="project in projects" flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
           <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row">
             <div class="project-list-static-icon">
               <md-icon md-font-icon="cdvyfont cdvyico-type-{{project.type}} cdvyico-type-blank"
@@ -70,7 +70,7 @@
               <md-icon ng-show="project.visibility == 'private'"
                        md-font-icon="material-design icon-ic_lock_24px"></md-icon>
             </div>
-            <p flex-gt-sm="15">
+            <p flex-gt-sm="15" ng-show="hover" layout="row" layout-align="end center">
               <a ng-href="{{project.ideUrl}}" target="_blank">
                 <md-icon md-font-icon="material-design icon-ic_forward_24px"></md-icon>
               </a>
