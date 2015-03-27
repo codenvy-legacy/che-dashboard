@@ -149,9 +149,9 @@ class CreateProjectCtrl {
 
 
     if (currentForm) {
-      return this.projectInformationForm.$valid && currentForm.$valid;
+      return this.projectInformationForm && this.projectInformationForm.$valid && currentForm.$valid;
     } else {
-      return this.projectInformationForm.$valid;
+      return this.projectInformationForm && this.projectInformationForm.$valid;
     }
   }
 
@@ -273,7 +273,7 @@ class CreateProjectCtrl {
 
       // type selected
       if (this.importProjectData.project.type) {
-        name = name + '-' + this.importProjectData.project.type;
+        name = this.importProjectData.project.type;
       }
 
       name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4));
