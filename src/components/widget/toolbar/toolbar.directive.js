@@ -85,11 +85,11 @@ class CodenvyToolbar {
     }
 
     var template = '<md-toolbar class=\"md-tall\" md-theme=\"' + theme +'\">\n'
+      + '<div layout=\"column\" flex>'
+      + '<div layout=\"row\" flex class=\"cdvy-toolbar-breadcrumb\" layout-align=\"start center\">'
       + '<button class=\"toolbar-switch\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
       + '<md-icon md-font-icon=\"fa fa-bars fa-2x\"></md-icon>'
-      + '</button>'
-      + '<div layout=\"column\" flex>'
-      + '<div layout=\"row\" flex class=\"cdvy-toolbar-breadcrumb\">';
+      + '</button>';
 
     if (breadcrumbHref) {
       template = template + '<a href=\"' + breadcrumbHref + '\" class=\"icon-breadcrumb material-design icon-ic_chevron_left_24px\" md-theme=\"default\"></a>';
@@ -124,9 +124,9 @@ class CodenvyToolbar {
     + '</div>'
     + '<div layout=\"row\" class=\"cdvy-toolbar-subheader\">';
     if (subheaderIcon) {
-      template = template + '<span class=\"'
+      template = template + '<i class=\"'
       + subheaderIcon
-      + '\"></span>';
+      + '\"></i>';
     }
     if (subheaderTitle) {
       template = template
