@@ -42,8 +42,6 @@ class CodenvyButtonDropdown {
    * Re-apply ng-disabled on child
    */
   link($scope, element, attrs) {
-    console.log(element, attrs);
-    console.log('scope is',$scope);
     $scope.$watch(attrs.ngDisabled, function (isDisabled) {
       element.find('button').prop('disabled', isDisabled);
     });
