@@ -4,6 +4,6 @@
 </div>
 <div class="cdvy-button-dropdown-elements" ng-show="codenvyButtonDropdownCtrl.showDropdown">
   <ul>
-    <li><a ng-repeat="link in codenvyButtonDropdownCtrl.ctrl.links" ng-href="{{link.href}}">{{link.name}}</a></li>
+    <li ng-repeat="link in codenvyButtonDropdownCtrl.ctrl.links"><a ng-href="{{link.href}}">{{link.name}}</a></li>
   </ul>
 </div>
