@@ -10,9 +10,9 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<div class="cdvy-input-desktop" hide-sm hide-md layout="column" flex>
+<div layout="column" flex>
   <div layout="row" flex layout-align="space-around start">
-    <label flex="15" >Type: </label>
+    <label flex="15" hide-sm hide-md>Type: </label>
 
     <div layout="row" flex="85"  layout-wrap>
       <cdvy-selecter ng-repeat="(typeCategory, types) in createProjectBlankCtrl.typesByCategory"
