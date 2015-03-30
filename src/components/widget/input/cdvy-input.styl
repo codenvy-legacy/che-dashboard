@@ -1,5 +1,9 @@
-.cdvy-input-desktop [ng-message], .create-project-box .ng-invalid
+.cdvy-input:not(.desktop-pristine) .cdvy-input-desktop [ng-message]
   color $error-color
+
+.cdvy-input .cdvy-input-desktop [ng-message]
+  color $label-primary-color
+
 
 .cdvy-input-desktop input
   border-width 0 0 1px 0
@@ -11,10 +15,9 @@
 .cdvy-input-desktop input.ng-invalid:focus
   border-color $error-color
 
+.cdvy-input-desktop input.ng-pristine.ng-untouched.ng-invalid
+  border-color $default-border-color
 
-.cdvy-input-desktop input.ng-invalid
-  color $error-color
-  border-color $error-color
 
 .cdvy-input-desktop
   margin-top 5px

@@ -90,6 +90,21 @@ class CodenvyInput {
   }
 
 
+
+  /**
+   * Keep reference to the model controller
+   */
+  link($scope, element, attr) {
+    $scope.$watch('myForm.desk' + $scope.inputName + '.$pristine', (isPristine) => {
+      if (isPristine) {
+        element.addClass('desktop-pristine');
+      } else {
+        element.removeClass('desktop-pristine');
+      }
+    });
+
+  }
+
 }
 
 export default CodenvyInput;
