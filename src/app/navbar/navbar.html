@@ -51,6 +51,29 @@
   </section>
   <section layout="column" layout-align="center center">&nbsp;</section>
   <md-divider md-theme="factory-theme"></md-divider>
+  <div class="navbar-menu" ng-if="navbarCtrl.profile.$resolved" ng-init="navbarCtrl.updateData(); isExpand=true">
+    <div>
+      <img class="developers-face" gravatar-src="navbarCtrl.email">
+      <span>{{navbarCtrl.fullName}}</span>
+      <i class="material-design icon-ic_expand_more_24px md-tab-themed" ng-click='isExpand=!isExpand'>&nbsp;</i>
+    </div>
+    <section class="animation" layout="column" layout-align="center center" ng-if="isExpand" >
+      <md-list layout="column">
+        <md-item>
+          <md-item-content>
+            <md-button ng-href="#/account" layout-align="left">Account</md-button>
+          </md-item-content>
+          <md-item-content>
+            <md-button ng-href="#/subscriptions" layout-align="left">Subscriptions</md-button>
+          </md-item-content>
+          <md-item-content>
+            <md-button ng-href="#/billing" layout-align="left">Billing and Invoices</md-button>
+          </md-item-content>
+        </md-item>
+      </md-list>
+    </section>
+    <md-divider md-theme="factory-theme"></md-divider>
+  </div>
 </md-toolbar>
 
 
