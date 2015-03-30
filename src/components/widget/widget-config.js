@@ -26,6 +26,7 @@ import CodenvyInput from './input/cdvy-input.directive';
 
 import CodenvyTab from './tab/cdvy-tab.directive';
 
+import CodenvyPanelCtrl from './panel/cdvy-panel.controller';
 import CodenvyPanel from './panel/cdvy-panel.directive';
 
 import CodenvyLabelContainer from './label-container/cdvy-label-container.directive';

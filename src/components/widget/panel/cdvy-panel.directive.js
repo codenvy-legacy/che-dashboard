@@ -20,9 +20,10 @@ import Register from '../../utils/register';
  * @element
  *
  * @description
- * `<cdvy-toolbar>` defines a panel used to insert data.
+ * `<cdvy-panel>` defines a panel used to insert data.
  *
  * @param {string=} cdvy-title the title of the panel
+ * @param {string=} cdvy-title-icon icon prefixing the panel's title
  *
  * @usage
  *   <cdvy-panel cdvy-title="hello"></cdvy-panel>
@@ -30,7 +31,7 @@ import Register from '../../utils/register';
  * @example
  <example module="userDashboard">
  <file name="index.html">
- <cdvy-panel cdvy-title="hello">This is simple text</cdvy-panel>
+ <cdvy-panel cdvy-title-icon="fa fa-lock" cdvy-title="hello">This is simple text</cdvy-panel>
  </file>
  </example>
  * @author Florent Benoit
@@ -45,18 +46,48 @@ class CodenvyPanel {
     this.restrict='E';
     this.replace= true;
     this.transclude= true;
-    this.templateUrl = 'components/widget/panel/cdvy-panel.html';
+    this.bindToController = true;
+
+
+    this.controller = 'CodenvyPanelCtrl';
+    this.controllerAs = 'codenvyPanelCtrl';
+
 
     // we require ngModel as we want to use it inside our directive
     this.require = ['ngModel'];
+    this.scope = {};
 
-    // scope values
-    this.scope = {
-      title:'@cdvyTitle'
-
-    };
 
   }
+
+
+  /**
+   * Template for the current toolbar
+   * @param element
+   * @param attrs
+   * @returns {string} the template
+   */
+  template( element, attrs){
+    var template = '<md-card class="cdvy-panel" md-theme="default">'
+      + '<div layout="row" class="cdvy-panel-titlebox" layout-align="start center">'
+      + '<div class="cdvy-panel-title" layout="row" layout-align="start center">';
+
+    if (attrs['cdvyTitleIcon']) {
+      template = template + '<span class="cdvy-panel-title-icon ' + attrs['cdvyTitleIcon'] + '"></span>';
+    }
+
+    template = template + attrs['cdvyTitle'] + '</div>'
+    + '<span flex></span>'
+    + '<i class="{{codenvyPanelCtrl.getToggleIcon()}}" ng-click="codenvyPanelCtrl.toggle()"></i>'
+    + '</div>'
+    +  '<md-card-content class="cdvy-panel-content" ng-hide="codenvyPanelCtrl.isCollapsed()">'
+    +  '<ng-transclude></ng-transclude>'
+    +  '</md-card-content>'
+    +  '</md-card>';
+
+    return template;
+  }
+
 
 
 }
