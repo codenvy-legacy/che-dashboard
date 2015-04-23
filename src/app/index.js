@@ -37,11 +37,11 @@ import LoginCtrl from './main/login.controller';
 
 var instanceRegister = Register.getInstance();
 
-// import projects
+// import navbar
 import NavbarConfig from './navbar/navbar-config';
 new NavbarConfig(instanceRegister);
 
-// import projects
+// import factories
 import FactoryConfig from './factories/factories-config';
 new FactoryConfig(instanceRegister);
 
