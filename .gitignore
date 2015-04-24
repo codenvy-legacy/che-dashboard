@@ -11,3 +11,6 @@ dist/
 .idea/
 *.iml
 docs
+/.settings/
+/.project
+/.tern-project
