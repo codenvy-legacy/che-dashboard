@@ -52,6 +52,10 @@ new FactoryConfig(instanceRegister);
 import ProjectsConfig from './projects/projects-config';
 new ProjectsConfig(instanceRegister);
 
+//import onpremise
+import OnPremisesConfig from './onpremises/onpremises-config';
+new OnPremisesConfig(instanceRegister);
+
 
 // import onboarding
 import OnBoardConfig from './onboard/onboard-config';
