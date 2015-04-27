@@ -34,6 +34,7 @@ import CodenvyLabelContainer from './label-container/cdvy-label-container.direct
 import CodenvyList from './list/cdvy-list.directive';
 import CodenvyListItem from './list/cdvy-list-item.directive';
 import CodenvyListTitle from './list/cdvy-list-title.directive';
+import CodenvyListItemChecked from './list/cdvy-list-item-checked.directive';
 
 import CodenvySelecterCtrl from './selecter/cdvy-selecter.controller';
 import CodenvySelecter from './selecter/cdvy-selecter.directive';

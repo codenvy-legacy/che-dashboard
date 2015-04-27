@@ -134,20 +134,23 @@ Ultima Syriarum est Palaestina per intervalla magna protenta, cultis abundans te
     <div layout="column">
     <cdvy-html-source>
 
-        <cdvy-list style="margin: 10px; width: 500px">
-          <cdvy-list-item>
-              <div>Item 1</div>
-          </cdvy-list-item>
-          <cdvy-list-item>
-              <div>Item 2</div>
-          </cdvy-list-item>
-          <cdvy-list-item>
-            <div>Item 3</div>
-          </cdvy-list-item>
-          <cdvy-list-item>
-            <div>Item 4</div>
+        <cdvy-list style="margin: 10px; width: 200px">
+          <cdvy-list-item ng-repeat="document in demoComponentsCtrl.listItemsDocs">
+            <div layout="row" flex="100" style="height: 24px; margin: 5px">
+              <cdvy-list-item-checked flex="20" cdvy-icon="md-font fa fa-file-text-o" style="font-size: 20px"></cdvy-list-item-checked>
+              <div flex="80" style="height: 20px">{{document}}</div>
+            </div>
           </cdvy-list-item>
         </cdvy-list>
+
+      <cdvy-list style="margin: 10px; width: 200px">
+        <cdvy-list-item ng-repeat="task in demoComponentsCtrl.listItemsTasks">
+          <div layout="row" flex="100" style="height: 24px; margin: 5px">
+            <div flex="70">{{task.name}}</div>
+            <cdvy-list-item-checked flex="30" ng-model="task.done"></cdvy-list-item-checked>
+          </div>
+        </cdvy-list-item>
+      </cdvy-list>
       </cdvy-html-source>
   </div>
 
