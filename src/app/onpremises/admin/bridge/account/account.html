@@ -1,0 +1,45 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+
+<cdvy-panel cdvy-title="Your Codenvy.com Account Information">
+  <div layout="column" flex ng-form="codenvyAccountForm">
+    <cdvy-input cdvy-form="codenvyAccountForm"
+                cdvy-name="usernameInput"
+                cdvy-label-name="User Name"
+                ng-model="onPremisesAdminBridgeCodenvyAccountCtrl.userName"
+                required>
+      <div ng-message="required">The user name is required.</div>
+    </cdvy-input>
+    <cdvy-input type="password"
+                cdvy-form="codenvyAccountForm"
+                cdvy-name="passwordInput"
+                cdvy-label-name="Password"
+                ng-model="onPremisesAdminBridgeCodenvyAccountCtrl.password"
+                required>
+      <div ng-message="required">The password is required.</div>
+    </cdvy-input>
+    <cdvy-button-primary cdvy-button-title="Login" flex="35" ng-disabled="onPremisesAdminBridgeCodenvyAccountCtrl.loginDisabled()"></cdvy-button-primary>
+    <div ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.loggedOnSaaS()">
+      <div layout="row" layout-margin layout-padding flex>
+        <a href="" class="onpremises-admin-bridge-codenvyaccount-forgotpassword">Forgot your password</a>
+        <span class="onpremises-admin-bridge-codenvyaccount-noaccount">Don't have an account?<a href="">Sign up</a>.</span>
+      </div>
+      <div layout="row" layout-padding ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.hasOnPremSubscription">
+        <span>You have a Codenvy On-Prem subscription. Thank you!</span>
+        <span>Expiration Date: {{onPremisesAdminBridgeCodenvyAccountCtrl.onpremSubscriptionExpiration |date:'dd/MM/yyyy'}}</span>
+      </div>
+      <div layout="row" ng-if="!onPremisesAdminBridgeCodenvyAccountCtrl.hasOnPremSubscription">
+        <span>You do not have a Codenvy On-Prem subscription. <a href="">Upgrade – your conscience will thank you.</a></span>
+      </div>
+    </div>
+</cdvy-panel>
