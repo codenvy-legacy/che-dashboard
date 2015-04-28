@@ -12,5 +12,32 @@
 -->
 <cdvy-toolbar cdvy-title="Account"></cdvy-toolbar>
 
-<md-content layout="column" layout-fill>
+
+<md-content md-scroll-y flex md-theme="maincontent-theme">
+  <md-tabs md-selected="selectedIndex">
+    <cdvy-tab cdvy-title="Profile" cdvy-icon="fa fa-user">
+      <cdvy-panel cdvy-title="Your Information">
+        <ng-form name="profileInformationForm">
+          <account-profile></account-profile>
+          <cdvy-button-default cdvy-button-title="edit"></cdvy-button-default>
+        </ng-form>
+      </cdvy-panel>
+    </cdvy-tab>
+    <cdvy-tab cdvy-title="Billing" cdvy-icon="material-design icon-ic_credit_card_24px">
+      <cdvy-panel cdvy-title="Your Information">
+        <ng-form name="profileInformationForm">
+          <account-profile></account-profile>
+          <cdvy-button-default cdvy-button-title="edit"></cdvy-button-default>
+        </ng-form>
+      </cdvy-panel>
+    </cdvy-tab>
+    <cdvy-tab cdvy-title="Security" cdvy-icon="material-design icon-ic_settings_24px">
+      <cdvy-panel cdvy-title="Your Information">
+        <ng-form name="profileInformationForm">
+          <account-profile></account-profile>
+          <cdvy-button-default cdvy-button-title="edit"></cdvy-button-default>
+        </ng-form>
+      </cdvy-panel>
+    </cdvy-tab>
+  </md-tabs>
 </md-content>
