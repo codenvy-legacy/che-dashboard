@@ -9,7 +9,9 @@
     Contributors:
       Codenvy, S.A. - initial API and implementation
 
---><md-toolbar class="flex-shrink-none">
+-->
+
+<md-toolbar class="flex-shrink-none">
   <section class="md-toolbar-tools" layout="column" layout-align="center center">
     <img class="codenvy-logo" src="https://codenvy.com/images/logo@3x.png" alt="logo">
   </section>
@@ -64,6 +66,26 @@
           </md-item-content>
           <md-item-content>
             <md-button flex ng-href="#/billing" layout-align="left">Billing and Invoices</md-button>
+          </md-item-content>
+        </md-item>
+      </md-list>
+    </section>
+  </div>
+  <md-divider md-theme="factory-theme"></md-divider>
+
+  <div class="navbar-menu" ng-if="navbarCtrl.userIsAdmin()">
+    <div>
+      <span>On-Prem Admin</span>
+      <i class="material-design icon-ic_expand_more_24px md-tab-themed" ng-click="navbarCtrl.flipOnpremAdminExpanded()">&nbsp;</i>
+    </div>
+    <section class="animation" layout="column" layout-align="center center" ng-if="navbarCtrl.onpremAdminExpanded" >
+      <md-list layout="column">
+        <md-item>
+          <md-item-content>
+            <md-button flex ng-href="#/onpremises/admin/bridge" layout-align="left">Bridge to Codenvy.com</md-button>
+          </md-item-content>
+          <md-item-content>
+            <md-button flex ng-href="#/onpremises/admin/installation" layout-align="left">Your Local Installation</md-button>
           </md-item-content>
         </md-item>
       </md-list>

@@ -26,6 +26,10 @@ class NavBarCtrl {
     this.profile = codenvyAPI.getProfile().getProfile();
     this.fullName = '';
     this.email = '';
+
+    // on-prem admin section
+    this.admin = false;
+    this.onpremAdminExpanded = true;
   }
 
   /**
@@ -36,6 +40,7 @@ class NavBarCtrl {
     if(this.profile.attributes) {
       this.email = this.profile.attributes.email;
     }
+    this.admin = true // hardcoded until we know how to check it
   }
 
   /**
@@ -45,8 +50,13 @@ class NavBarCtrl {
     this.mdSidenav('left').toggle();
   }
 
+  userIsAdmin() {
+    return this.admin;
+  }
 
-
+  flipOnpremAdminExpanded() {
+    this.onpremAdminExpanded = !this.onpremAdminExpanded;
+  }
 }
 
 export default NavBarCtrl;
