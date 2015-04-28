@@ -10,11 +10,15 @@
  */
 'use strict';
 
+import OnPremisesAdminBridgeConfig from './bridge/bridge-config';
+import OnPremisesAdminInstallationConfig from './installation/installation-config';
+
 class OnPremisesAdminConfig {
 
   constructor(register) {
+    new OnPremisesAdminBridgeConfig(register);
+    new OnPremisesAdminInstallationConfig(register);
   }
 }
-
 
 export default OnPremisesAdminConfig;
