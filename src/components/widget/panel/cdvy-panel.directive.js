@@ -24,6 +24,7 @@ import Register from '../../utils/register';
  *
  * @param {string=} cdvy-title the title of the panel
  * @param {string=} cdvy-title-icon icon prefixing the panel's title
+ * @param {boolean=} cdvy-toggle boolean used to display or not the panel toggle
  *
  * @usage
  *   <cdvy-panel cdvy-title="hello"></cdvy-panel>
@@ -77,8 +78,15 @@ class CodenvyPanel {
     }
 
     template = template + attrs['cdvyTitle'] + '</div>'
-    + '<span flex></span>'
-    + '<i class="{{codenvyPanelCtrl.getToggleIcon()}}" ng-click="codenvyPanelCtrl.toggle()"></i>'
+    + '<span flex></span>';
+
+
+    if (attrs['cdvyToggle']) {
+     template = template +'<i class="{{codenvyPanelCtrl.getToggleIcon()}}" ng-click="codenvyPanelCtrl.toggle()"></i>';
+    }
+
+
+    template = template
     + '</div>'
     +  '<md-card-content class="cdvy-panel-content" ng-hide="codenvyPanelCtrl.isCollapsed()">'
     +  '<ng-transclude></ng-transclude>'
