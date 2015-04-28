@@ -1,0 +1,95 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar cdvy-title="Welcome to Codenvy" cdvy-subheader-title="Setup your account in 4 steps..." theme="factory-theme"></cdvy-toolbar>
+<md-content  md-scroll-y flex>
+  <cdvy-panel class="onboard-panel" cdvy-toggle="true" cdvy-title-svg-icon="{{onBoardCtrl.getIconStep(1)}}" cdvy-title="Step 1 - Verify email" ng-init="onBoardCtrl.setStep(1, this)">
+    <ng-form name="verifyEmailForm">
+      <div class="onboard-complete-signup-text">To complete the signup process, we need to confirm that you own the email address you used to set up the account:</div>
+
+      <cdvy-input cdvy-form="verifyEmailForm"
+                  cdvy-name="email"
+                  cdvy-label-name="Email"
+                  cdvy-place-holder="email"
+                  ng-model="onBoardCtrl.profile.email"
+                  type="email"
+                  required
+                  readonly
+                  ng-maxlength="128">
+        <div ng-message="required">A name is required.</div>
+        <div ng-message="email">A valid email is required.</div>
+        <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+      </cdvy-input>
+      <div layout="row" layout-align="center center">
+        <cdvy-button-primary cdvy-button-title="confirm" ng-click="onBoardCtrl.confirmEmail()"></cdvy-button-primary>
+      </div>
+    </ng-form>
+  </cdvy-panel>
+
+  <div class="onboard-separator" layout="row" layout-align="center center">
+    <md-icon md-svg-src="assets/images/next-step-separator.svg"></md-icon>
+  </div>
+
+
+  <cdvy-panel class="onboard-panel" cdvy-toggle="true" cdvy-title-svg-icon="{{onBoardCtrl.getIconStep(2)}}" cdvy-title="Step 2 - Complete profile" ng-init="onBoardCtrl.setStep(2, this)">
+    <ng-form name="profileInformationForm">
+    <div layout="row" layout-align="start center">
+      <image src="assets/images/image-operator.png" width="200px"></image>
+      <div layout="column" flex>
+          <account-profile ng-init="onBoardCtrl.setAccountProfile(this);onBoardCtrl.setAccountProfileForm(profileInformationForm)" accountForm="profileInformationForm"></account-profile>
+          <div layout="row" layout-align="center center">
+            <cdvy-button-primary cdvy-button-title="complete signup" ng-disabled="onBoardCtrl.isCompleteSignupButtonDisabled()" ng-click="onBoardCtrl.completeProfile()"></cdvy-button-primary>
+          </div>
+      </div>
+    </div>
+    </ng-form>
+  </cdvy-panel>
+
+  <div class="onboard-separator" layout="row" layout-align="center center">
+    <md-icon md-svg-src="assets/images/next-step-separator.svg"></md-icon>
+  </div>
+
+  <cdvy-panel class="onboard-panel" cdvy-toggle="true" cdvy-title-svg-icon="{{onBoardCtrl.getIconStep(3)}}" cdvy-title="Step 3 - Add a credit card (optional)" ng-init="onBoardCtrl.setStep(3, this)">
+    <ng-form name="creditCardForm">
+      <div layout="row" layout-align="start center">
+        <i class="cdvyfont cdvyico-creditcard" ></i>
+
+        <div layout="column" flex>
+      <cdvy-button-primary cdvy-button-title="Add" ng-click="onBoardCtrl.addCreditCard()"></cdvy-button-primary>
+      <cdvy-button-default cdvy-button-title="Skip" ng-click="onBoardCtrl.skipCreditCard()"></cdvy-button-default>
+        </div>
+      </div>
+    </ng-form>
+    </div>
+
+  </cdvy-panel>
+
+  <div class="onboard-separator" layout="row" layout-align="center center">
+    <md-icon md-svg-src="assets/images/next-step-separator.svg"></md-icon>
+  </div>
+
+
+  <cdvy-panel class="onboard-panel" cdvy-toggle="true" cdvy-title-svg-icon="assets/svg/to-complete.svg" cdvy-title="Step 4 - Create project" ng-init="onBoardCtrl.setStep(4, this)">
+    <ng-form name="creditCardForm">
+      <div layout="row" layout-align="start center">
+        <image src="assets/images/image-laptop.png" width="200px"></image>
+
+        <div layout="column" flex>
+          <cdvy-button-primary cdvy-button-title="Create project" ng-click="onBoardCtrl.createProject()"></cdvy-button-primary>
+        </div>
+      </div>
+    </ng-form>
+
+  </cdvy-panel>
+
+
+</md-content>
