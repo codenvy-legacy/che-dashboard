@@ -17,6 +17,7 @@ class OnPremisesAdminInstallationCtrl {
    * @ngInject for Dependency injection
    */
   constructor() {
+    
   }
 
 }
