@@ -4,6 +4,7 @@
   "$codenvy-orange-color": "#F37943",
   "$codenvy-green-color": "#399076",
   "$codenvy-purple-color": "#4E5A96",
+  "$codenvy-white-color" : "#FFFFFF",
   "$dark-menu-color": "#2B333F",
   "$night-foggy-sky-color": "#545B64",
   "$dark-menacing-sky-color": "#5A5A5A",

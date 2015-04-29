@@ -9,20 +9,17 @@
     Contributors:
       Codenvy, S.A. - initial API and implementation
 
---><md-toolbar flex>
+--><md-toolbar class="flex-shrink-none">
   <section class="md-toolbar-tools" layout="column" layout-align="center center">
     <img class="codenvy-logo" src="https://codenvy.com/images/logo@3x.png" alt="logo">
   </section>
-
-
-
   <section layout="column" layout-align="center center">
     <cdvy-button-dropdown cdvy-button-dropdown-href="#/create-project" cdvy-button-dropdown-label="Create Project" cdvy-button-dropdown-controller="navbarCtrl"></cdvy-button-dropdown>
   </section>
   <section layout="column" layout-align="center center">&nbsp;</section>
   <md-divider md-theme="factory-theme"></md-divider>
 
-  <section layout="column" layout-align="center center">
+  <section class="left-sidebar-menu" layout="column" layout-align="center center">
     <md-list layout="column">
       <md-item>
         <md-item-content ng-show="navbarCtrl.displayLoginItem">
@@ -38,18 +35,17 @@
         </md-item-content>
         <md-item-content>
           <div class="md-tile-content">
-            <md-button ng-href="#/projects" layout-align="left"><i class="fa fa-folder-open fa-lg icon">&nbsp;</i>Projects</md-button>
+            <md-button flex ng-href="#/projects" layout-align="left"><i class="fa fa-folder-open fa-lg icon">&nbsp;</i>Projects</md-button>
           </div>
         </md-item-content>
         <md-item-content>
           <div class="md-tile-content">
-            <md-button ng-href="#/factories" layout-align="left"><i class="fa fa-tasks fa-lg icon">&nbsp;</i>Factories</md-button>
+            <md-button flex ng-href="#/factories" layout-align="left"><i class="fa fa-tasks fa-lg icon">&nbsp;</i>Factories</md-button>
           </div>
         </md-item-content>
       </md-item>
     </md-list>
   </section>
-  <section layout="column" layout-align="center center">&nbsp;</section>
   <md-divider md-theme="factory-theme"></md-divider>
   <div class="navbar-menu" ng-if="navbarCtrl.profile.$resolved" ng-init="navbarCtrl.updateData(); isExpand=true">
     <div>
@@ -61,19 +57,19 @@
       <md-list layout="column">
         <md-item>
           <md-item-content>
-            <md-button ng-href="#/account" layout-align="left">Account</md-button>
+            <md-button flex ng-href="#/account" layout-align="left">Account</md-button>
           </md-item-content>
           <md-item-content>
-            <md-button ng-href="#/subscriptions" layout-align="left">Subscriptions</md-button>
+            <md-button flex ng-href="#/subscriptions" layout-align="left">Subscriptions</md-button>
           </md-item-content>
           <md-item-content>
-            <md-button ng-href="#/billing" layout-align="left">Billing and Invoices</md-button>
+            <md-button flex ng-href="#/billing" layout-align="left">Billing and Invoices</md-button>
           </md-item-content>
         </md-item>
       </md-list>
     </section>
-    <md-divider md-theme="factory-theme"></md-divider>
   </div>
+  <md-divider md-theme="factory-theme"></md-divider>
 </md-toolbar>
 
 

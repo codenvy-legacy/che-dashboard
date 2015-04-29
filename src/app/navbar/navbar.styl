@@ -1,33 +1,114 @@
-.navbar-menu
-  color #C5D0DF
-  font-size 16px
+$active-background-color = #222933
+$active-border-color = rgb(85,141,170)
+$navbar-menu-color = #C5D0DF
+$faces-shadow = rgba(255, 255, 255, 0.5)
 
-.navbar-menu div
-  height 54px
+.flex-shrink-none
+  flex-shrink 0
+
+.left-sidebar-menu
+  width 100%
+
+.left-sidebar-menu md-list
+  width inherit
+
+.left-sidebar-menu md-list md-item-content
+  margin-top 15px
+  margin-bottom 15px
+
+.left-sidebar-menu md-list a
+  top 0
+  left  0
+  right 0
+  bottom 0
+  position absolute
+
+.left-sidebar-menu md-list a:focus span,
+.left-sidebar-menu md-list a:focus i:before
+  color $white-color !important
+
+.left-sidebar-menu md-list a:focus,
+.left-sidebar-menu md-list a:hover
+  background-color $active-background-color !important
+
+.left-sidebar-menu md-list a:focus .md-ripple-container:before
+  content ""
+  left 0
+  top 4px
+  bottom 4px
+  position absolute
+  border-left solid 3px $active-border-color
+
+.left-sidebar-menu md-list a i
+  float left
+  margin-top 3px
+  margin-left 60px
+
+.left-sidebar-menu md-list a span
+  text-transform none
+  position absolute
+  left 100px
+
+.navbar-menu
+  font-size 16px
+  margin-bottom 4px
+  color $navbar-menu-color
+
+.navbar-menu md-item-content a:focus,
+.navbar-menu md-item-content a:hover
+  background-color $active-background-color !important
+
+.navbar-menu md-item-content a:focus span
+  color $white-color !important
+
+.navbar-menu md-item-content a:focus .md-ripple-container:before
+  content ""
+  left 0
+  top 4px
+  bottom 4px
+  position absolute
+  border-left solid 3px $active-border-color
 
 .navbar-menu div span
-  top 18px
-  position relative
+  position absolute
+  margin-top 20px
+  left  100px
+
+.navbar-menu section
+  width 100%
 
 .navbar-menu section span
+  color $navbar-menu-color
   font-size 14px
   text-transform none
 
 .navbar-menu section md-list
-  padding-top 0
+  padding 0
+  width inherit
+
+.navbar-menu section md-item-content:first-child
+  margin-top 10px
+
+.navbar-menu md-item-content a
+  height 32px
+
+.navbar-menu md-item-content span
+  left 100px
+  position absolute
 
 .navbar-menu div .material-design:before
-  font-size 24px
   float right
+  font-size 24px
   margin-top 15px
   margin-right 18px
 
 .navbar-menu .developers-face
   codenvy-developers-face()
-  -webkit-box-shadow 0 0 0 1px rgba(255, 255, 255, 0.5)
-  -moz-box-shadow 0 0 0 1px rgba(255, 255, 255, 0.5)
-  box-shadow 0 0 0 1px rgba(255, 255, 255, 0.5)
-  margin 8px 30px 8px 22px
+  -webkit-box-shadow 0 0 0 1px $faces-shadow
+  -moz-box-shadow 0 0 0 1px $faces-shadow
+  box-shadow 0 0 0 1px $faces-shadow
+  margin-left 15px
+  margin-top 10px
   float left
 
 .navbar-menu .animation.ng-enter
@@ -37,33 +118,27 @@
   opacity: 0
 
 .navbar-menu .animation.ng-enter-stagger
-  transition-delay 0.2s
+  transition-delay 2.2s
 
 .navbar-menu .animation.ng-enter.ng-enter-active
   opacity 1
 
+.navbar-menu .animation.ng-leave md-item-content,
 .navbar-menu .animation.ng-leave
   -webkit-transition: 1s
   -moz-transition: 1s
-  transition: 1s
+  transition 1s
   opacity 1
 
+.navbar-menu .animation.ng-leave-stagger md-item-content,
 .navbar-menu .animation.ng-leave-stagger
   transition-delay 0.2s
 
 .navbar-menu .animation.ng-leave.ng-leave-active
   opacity 0
 
-.navbar-menu .animation.ng-leave + md-divider
-  -webkit-transition: 1s
-  -moz-transition: 1s
-  transition 1s
-  margin-top -10px
-  opacity 1
+.navbar-menu .animation.ng-leave md-item-content
+  margin-top -32px
 
-.navbar-menu .animation.ng-leave-stagger + md-divider
-  transition-delay 0.2s
-
-.navbar-menu .animation.ng-leave.ng-leave-active + md-divider
-  opacity 0
-
+.navbar-menu + md-divider
+  margin-top 5px
