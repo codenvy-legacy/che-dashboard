@@ -12,6 +12,9 @@
 
 import NavBarCtrl from '../navbar/navbar.controller';
 import NavBar from '../navbar/navbar.directive.js';
+
+import AccountProfileCtrl from './account/profile/account-profile.controller';
+import AccountProfile from './account/profile/account-profile.directive';
 import AccountCtrl from '../navbar/account/account.controller';
 import BillingCtrl from '../navbar/billing/billing.controller';
 import SubscriptionCtrl from '../navbar/subscriptions/subscription.controller';
@@ -20,7 +23,9 @@ class NavbarConfig {
 
   constructor(register) {
     register.directive('cdvyNavBar', NavBar);
+    register.directive('accountProfile', AccountProfile);
 
+    register.controller('AccountProfileCtrl', AccountProfileCtrl);
     register.controller('NavbarCtrl', NavBarCtrl);
     register.controller('AccountCtrl', AccountCtrl);
     register.controller('BillingCtrl', BillingCtrl);

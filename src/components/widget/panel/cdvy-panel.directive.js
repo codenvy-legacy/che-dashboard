@@ -23,7 +23,9 @@ import Register from '../../utils/register';
  * `<cdvy-panel>` defines a panel used to insert data.
  *
  * @param {string=} cdvy-title the title of the panel
- * @param {string=} cdvy-title-icon icon prefixing the panel's title
+ * @param {string=} cdvy-title-icon icon font prefixing the panel's title
+ * @param {string=} cdvy-title-svg-icon path to SVG image used as panel's title
+ * @param {boolean=} cdvy-toggle boolean used to display or not the panel toggle
  *
  * @usage
  *   <cdvy-panel cdvy-title="hello"></cdvy-panel>
@@ -75,10 +77,21 @@ class CodenvyPanel {
     if (attrs['cdvyTitleIcon']) {
       template = template + '<span class="cdvy-panel-title-icon ' + attrs['cdvyTitleIcon'] + '"></span>';
     }
+    if (attrs['cdvyTitleSvgIcon']) {
+      template = template + '<md-icon md-svg-src="' +  attrs['cdvyTitleSvgIcon'] + '"></md-icon>'
+    }
+
 
     template = template + attrs['cdvyTitle'] + '</div>'
-    + '<span flex></span>'
-    + '<i class="{{codenvyPanelCtrl.getToggleIcon()}}" ng-click="codenvyPanelCtrl.toggle()"></i>'
+    + '<span flex></span>';
+
+
+    if (attrs['cdvyToggle']) {
+     template = template +'<i class="{{codenvyPanelCtrl.getToggleIcon()}}" ng-click="codenvyPanelCtrl.toggle()"></i>';
+    }
+
+
+    template = template
     + '</div>'
     +  '<md-card-content class="cdvy-panel-content" ng-hide="codenvyPanelCtrl.isCollapsed()">'
     +  '<ng-transclude></ng-transclude>'

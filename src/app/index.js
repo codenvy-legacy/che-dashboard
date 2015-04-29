@@ -50,6 +50,10 @@ import ProjectsConfig from './projects/projects-config';
 new ProjectsConfig(instanceRegister);
 
 
+// import onboarding
+import OnBoardConfig from './onboard/onboard-config';
+new OnBoardConfig(instanceRegister);
+
 
 // and setup controllers
 module.controller('DashboardCtrl', DashboardCtrl)

@@ -1,0 +1,53 @@
+<cdvy-input cdvy-form="profileInformationForm"
+            cdvy-name="firstName"
+            cdvy-label-name="First name"
+            cdvy-place-holder="First Name"
+            ng-model="accountProfileCtrl.profile.firstname"
+            required
+            ng-maxlength="128">
+  <div ng-message="required">A name is required.</div>
+  <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+</cdvy-input>
+<cdvy-input cdvy-form="profileInformationForm"
+            cdvy-name="lastName"
+            cdvy-label-name="Last name"
+            cdvy-place-holder="Last Name"
+            ng-model="accountProfileCtrl.profile.lastname"
+            required
+            ng-maxlength="128">
+  <div ng-message="required">A name is required.</div>
+  <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+</cdvy-input>
+
+<cdvy-input cdvy-form="profileInformationForm"
+            cdvy-name="phone"
+            cdvy-label-name="Phone"
+            cdvy-place-holder="phone"
+            ng-model="accountProfileCtrl.profile.phone"
+            ng-maxlength="128">
+  <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+</cdvy-input>
+<cdvy-input cdvy-form="profileInformationForm"
+            cdvy-name="country"
+            cdvy-label-name="Country"
+            cdvy-place-holder="country"
+            ng-model="accountProfileCtrl.profile.country"
+            ng-maxlength="128">
+  <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+</cdvy-input>
+<cdvy-input cdvy-form="profileInformationForm"
+            cdvy-name="department"
+            cdvy-label-name="Department name"
+            cdvy-place-holder="Department"
+            ng-model="accountProfileCtrl.profile.department"
+            ng-maxlength="128">
+  <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+</cdvy-input>
+<cdvy-input cdvy-form="profileInformationForm"
+            cdvy-name="jobtitle"
+            cdvy-label-name="Job title"
+            cdvy-place-holder="Job title"
+            ng-model="accountProfileCtrl.profile.jobtitle"
+            ng-maxlength="128">
+  <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+</cdvy-input>

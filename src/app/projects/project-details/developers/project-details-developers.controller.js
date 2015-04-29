@@ -12,7 +12,7 @@
 
 /**
  * @ngdoc controller
- * @name projects.details.directive:ProjectDetailsDevelopersCtrl
+ * @name projects.details.controller:ProjectDetailsDevelopersCtrl
  * @description This class is handling the controller for details of projects : section developers
  * @author Florent Benoit
  */
