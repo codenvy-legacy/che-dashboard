@@ -12,5 +12,31 @@
 -->
 
 <cdvy-panel cdvy-title="Your Codenvy On-Prem Installation">
-
+  <div class="onprem-your-install-customer-name-block">
+    <div class="onprem-your-install-label">Name</div>
+    <div flex style="height: 20px">{{yourInstallationCtrl.customerName}}</div>
+  </div>
+  <div class="onprem-your-install-installed-version-block">
+    <div class="onprem-your-install-label">Installed Version</div>
+    <div flex style="height: 20px">{{yourInstallationCtrl.installedVersion}}</div>
+  </div>
+  <div class="onprem-your-install-downloaded-version-block">
+    <div class="onprem-your-install-label">Downloaded Version</div>
+    <div flex style="height: 20px">{{yourInstallationCtrl.downloadedVersion}}</div>
+  </div>
+  
+  <div flex class="onprem-your-install-nodes">
+    <!-- TODO replace with md-table when available -->
+    <table flex class="onprem-your-install-nodes-table">
+      <thead>
+        <tr><th>Node</th><th>DNS hostname</th></tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="node in yourInstallationCtrl.nodeList">
+          <td class="onprem-your-install-nodes-node-col">{{node.type}}</td>
+          <td class="onprem-your-install-nodes-hostname-col">{{node.dnsHostname}}</td>
+        <tr>
+      </tbody>
+    </table>
+  </div>
 </cdvy-panel>
