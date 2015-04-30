@@ -12,5 +12,17 @@
 -->
 
 <cdvy-panel cdvy-title="Usage Data and Automatic Install">
-
+  <md-content>
+    <div>
+      <md-checkbox ng-model="AutomaticUpdatesCtrl.usageData">Anonymous Usage Data</md-checkbox>
+      <span>Help Codenvy improve quality by letting Codenvy upload usage, performance and stability data.</span>
+      <md-checkbox ng-model="AutomaticUpdatesCtrl.autoUpdate">Automatic Updates</md-checkbox>
+      <span>The installation manager will download and install new versions automatically. This may cause a
+            short maintenance window for your On-Prem installation.</span>
+    </div>
+    <md-content>
+      Accounts with valid subscriptions for Codenvy On-Prem may disable these features. A 30 day free trial is 
+      activated when you register your Codenvy.com account.
+    </md-content>
+  </md-content>
 </cdvy-panel>
