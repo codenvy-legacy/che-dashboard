@@ -16,7 +16,28 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor() {
+  constructor(imsArtifactApi) {
+    this.imsArtifactApi = imsArtifactApi;
+    let artifactsPromise = this.imsArtifactApi.artifacts();
+
+    artifactsPromise.then((result) => { this.artifacts = result; });
+    artifactsPromise.catch((error) => { console.log('artifacts list failed' , error); this.artifacts = undefined; });
+  }
+
+  downloadArtifact(artifact) {
+    this.imsArtifactApi.downloadArtifact(artifact.name, artifact.available.version);
+  }
+
+  showDownloadAction(artifact) {
+    if (artifact && artifact.available) {
+      if (artifact.downloaded) {
+        return artifact.available.version !== artifact.downloaded.version;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
   }
 }
 

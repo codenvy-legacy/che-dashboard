@@ -12,5 +12,32 @@
 -->
 
 <cdvy-panel cdvy-title="Software Available At Codenvy.com">
+  <div flex layout="row" layout-align="end center" class="onprem-admin-software-lastcheck">
+    <span>Last checked:</span>
+    <span>{{onPremisesAdminBridgeAvailableSoftwareCtrl.lastCheckDate|date:'dd/MM/yyyy : HH:mm'}}</span>
+  </div>
 
+  <div flex class="onprem-admin-available-software">
+    <!-- TODO replace with md-table when available -->
+    <table flex class="onprem-admin-available-software-table">
+      <thead>
+        <tr><th>Software</th><th>Version</th><th>Version at Codenvy.com</th></tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="artifactItem in onPremisesAdminBridgeAvailableSoftwareCtrl.artifacts">
+          <td class="onprem-admin-available-software-namecol">
+            <div class="onprem-admin-available-software-namecol-name">{{artifactItem.name}}</div>
+            <div class="onprem-admin-available-software-namecol-desc">{{artifactItem.description}}</div>
+          </td>
+          <td class="onprem-admin-installed-software-col">{{artifactItem.installed.version}} &nbsp; {{artifactItem.installed.date|date:'yyyy-MM-dd HH:mm'}}</td>
+          <td class="onprem-admin-available-software-col">
+            <div>{{artifactItem.available.version}} &nbsp; {{artifactItem.available.date|date:'yyyy-MM-dd HH:mm'}}</div>
+            <div ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.showDownloadAction(artifactItem)">
+              <md-button ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem)" target="_blank">Download</md-button>
+            </div>
+          </td>
+        <tr>
+      </tbody>
+    </table>
+  </div>
 </cdvy-panel>
