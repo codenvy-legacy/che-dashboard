@@ -22,7 +22,7 @@ class NavBar {
    */
   constructor () {
     this.restrict='E';
-    this.replace=true;
+    this.replace = false;
     this.templateUrl = 'app/navbar/navbar.html';
     this.controller = 'NavbarCtrl';
     this.controllerAs = 'navbarCtrl';
