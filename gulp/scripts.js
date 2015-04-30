@@ -23,10 +23,9 @@ gulp.task('scripts', ['colors'], function () {
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.babel())
-    .on('error', function handleError(err) {
-      console.error(err.toString());
-      this.emit('end');
-    })
+    .on('error',  $.notify.onError({
+      message: "Error: <%= error.message %>",
+      title: "There was an error in the code"}))
     .pipe($.ngAnnotate())
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(paths.tmp + '/babel'))
