@@ -22,16 +22,19 @@ class CodenvyProfile {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource) {
+  constructor ($resource, $q) {
 
     // keep resource
     this.$resource = $resource;
+    this.$q = $q;
 
     // remote call
     this.remoteProfileAPI = this.$resource('/api/profile',{}, {
       getById: {method: 'GET', url: '/api/profile/:userId'}
     });
 
+    // remote call for preferences
+    this.remoteProfilePreferencesAPI = this.$resource('/api/profile/prefs');
 
     this.profileIdMap = new Map();
 
@@ -46,6 +49,32 @@ class CodenvyProfile {
    */
   getProfile() {
     return this.profile;
+  }
+
+  /**
+   * Gets the preferences
+   * @return preferences
+   */
+  getPreferences() {
+    return this.profilePreferences;
+  }
+
+
+  /**
+   * Update the preferences
+   * @param properties
+   */
+  updatePreferences(properties) {
+    angular.extend(this.profilePreferences, properties);
+    let promise = this.profilePreferences.$save();
+  }
+
+  /**
+   * Remove preferences properties
+   * @param properties (list of keys)
+   */
+  removePreferences(properties) {
+    this.remoteProfilePreferencesAPI.delete(properties);
   }
 
   /**
@@ -68,11 +97,20 @@ class CodenvyProfile {
    */
   fetchProfile() {
     this.profile = this.remoteProfileAPI.get();
-    let promise = this.profile.$promise;
-    return promise;
+    let profilePromise = this.profile.$promise;
+    this.profilePreferences = this.remoteProfilePreferencesAPI.get();
+    let profilePrefsPromise = this.profilePreferences.$promise;
+
+    return this.$q.all([profilePromise, profilePrefsPromise]);
   }
 
 
+
+  /**
+   * Fetch the profile from the given userId
+   * @param userId the user for which we will call remote api and get promise
+   * @returns {*} the promise
+   */
   fetchProfileId(userId) {
     let promise = this.remoteProfileAPI.getById({userId: userId}).$promise;
     let parsedResultPromise = promise.then((profile) => {
