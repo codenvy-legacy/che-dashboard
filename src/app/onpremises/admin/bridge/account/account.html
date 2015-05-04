@@ -28,17 +28,20 @@
                 required>
       <div ng-message="required">The password is required.</div>
     </cdvy-input>
-    <cdvy-button-primary cdvy-button-title="Login" flex="35" ng-disabled="onPremisesAdminBridgeCodenvyAccountCtrl.loginDisabled()"></cdvy-button-primary>
-    <div ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.loggedOnSaaS()">
+    <cdvy-button-primary cdvy-button-title="Login" flex="35"
+                          ng-disabled="onPremisesAdminBridgeCodenvyAccountCtrl.loginDisabled()"
+                          ng-click="onPremisesAdminBridgeCodenvyAccountCtrl.login()">
+    </cdvy-button-primary>
+    <div>
       <div layout="row" layout-margin layout-padding flex>
         <a href="" class="onpremises-admin-bridge-codenvyaccount-forgotpassword">Forgot your password</a>
         <span class="onpremises-admin-bridge-codenvyaccount-noaccount">Don't have an account?<a href="">Sign up</a>.</span>
       </div>
-      <div layout="row" layout-padding ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.hasOnPremSubscription">
+      <div layout="row" layout-padding ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showSubscribedMessage">
         <span>You have a Codenvy On-Prem subscription. Thank you!</span>
         <span>Expiration Date: {{onPremisesAdminBridgeCodenvyAccountCtrl.onpremSubscriptionExpiration |date:'dd/MM/yyyy'}}</span>
       </div>
-      <div layout="row" ng-if="!onPremisesAdminBridgeCodenvyAccountCtrl.hasOnPremSubscription">
+      <div layout="row" ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showNotSubscribedMessage">
         <span>You do not have a Codenvy On-Prem subscription. <a href="">Upgrade – your conscience will thank you.</a></span>
       </div>
     </div>

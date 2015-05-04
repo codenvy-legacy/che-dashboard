@@ -16,20 +16,53 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor() {
-    this.onpremSubscriptionExpiration = new Date();
-  }
+  constructor(imsSaasAuthApi, imsSubscriptionApi) {
+    this.imsSaasAuthApi = imsSaasAuthApi;
+    this.imsSubscriptionApi = imsSubscriptionApi;
 
-  hasOnPremSubscription() {
-    return true;
-  }
-  
-  loggedOnSaaS() {
-    return false;
+    this.hideAllMessages();
   }
 
   loginDisabled() {
-    return this.userName == null;
+    return (!(this.userName) || !(this.password));
+  }
+
+  login() {
+    if (this.credentialsChanged) {
+      this.imsSaasAuthApi.resetLogin();
+    }
+    let loginPromise = this.imsSaasAuthApi.logOnSaas(this.userName, this.password);
+    loginPromise.then(() => { this.requestSubscriptions(); },
+                      () => { this.hideAllMessages(); });
+    this.credentialsChanged = false;
+  }
+
+  hideAllMessages() {
+      this.showSubscribedMessage = false;
+      this.showNotSubscribedMessage = false;
+      this.onpremSubscriptionExpiration = undefined;
+    }
+
+  requestSubscriptions() {
+    let subscriptionPromise = this.imsSubscriptionApi.checkOnPremisesSubscription();
+    subscriptionPromise.then((response) => { this.receiveSubscriptionResponse(response); },
+                             (error) => { this.hideAllMessages(); });
+  }
+
+  receiveSubscriptionResponse(response) {
+    if (response && response.status && response.status === 'OK') {
+      this.showSubscribedMessage = true;
+      this.showNotSubscribedMessage = false;
+      this.onpremSubscriptionExpiration = response.expirationDate;
+    } else {
+      this.showSubscribedMessage = false;
+      this.showNotSubscribedMessage = true;
+      this.onpremSubscriptionExpiration = undefined;
+    }
+  }
+
+  credentialsChanged() {
+    this.credentialsChanged = true;
   }
 }
 
