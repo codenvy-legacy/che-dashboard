@@ -66,8 +66,8 @@ class CodenvyUser {
     this.user = this.remoteUserAPI.get();
     let promise = this.user.$promise;
     // check if if was OK or not
-    promise.then(() => {this.isLogged = true;}, () => {this.isLogged = false;});
-    return promise;
+    let updatePromise = promise.then(() => {this.isLogged = true;}, () => {this.isLogged = false;});
+    return updatePromise;
   }
 
 
