@@ -57,7 +57,7 @@ class CodenvyPanel {
 
     // we require ngModel as we want to use it inside our directive
     this.require = ['ngModel'];
-    this.scope = {};
+    this.scope = true;
 
 
   }
