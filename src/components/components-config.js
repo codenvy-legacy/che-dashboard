@@ -30,3 +30,5 @@ import CodenvyNotificationService from './notification/codenvy-notification.fact
 import CreateProjectGitValidator from './validator/git-url-validator.directive';
 import UniqueProjectNameValidator from './validator/unique-project-name-validator.directive';
 
+// Inport IMS API definition
+import './ims/imsapi-config';
