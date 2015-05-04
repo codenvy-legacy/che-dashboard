@@ -15,6 +15,9 @@
 import CodenvyAPI from './api/codenvy-api.factory';
 import WidgetConfig from './widget/widget-config';
 
+// import Routing Redirect
+import RoutingRedirect from './routing/routing-redirect.factory';
+
 // import GitHub services
 import GitHub from './github/github-service';
 
