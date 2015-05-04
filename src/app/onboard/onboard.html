@@ -10,17 +10,22 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="Welcome to Codenvy" cdvy-subheader-title="Setup your account in 4 steps..." theme="factory-theme"></cdvy-toolbar>
-<md-content  md-scroll-y flex>
+<cdvy-toolbar cdvy-title="Welcome to Codenvy" cdvy-subheader-title="Setup your account in 4 steps..." theme="onboarding-theme"></cdvy-toolbar>
+<!--<md-toolbar class="md-toolbar-tools" md-theme="onboarding-theme">
+</md-toolbar>-->
+
+<md-content class="onboarding-content" md-scroll-y flex>
+<div class="onboarding-first-panel" md-theme="onboarding-theme">
+
   <cdvy-panel class="onboard-panel" cdvy-toggle="true" cdvy-title-svg-icon="{{onBoardCtrl.getIconStep(1)}}" cdvy-title="Step 1 - Verify email" ng-init="onBoardCtrl.setStep(1, this)">
+    <!-- For now, the server workflow is not allowing to confirm an email address with this way
     <ng-form name="verifyEmailForm">
       <div class="onboard-complete-signup-text">To complete the signup process, we need to confirm that you own the email address you used to set up the account:</div>
-
       <cdvy-input cdvy-form="verifyEmailForm"
                   cdvy-name="email"
                   cdvy-label-name="Email"
                   cdvy-place-holder="email"
-                  ng-model="onBoardCtrl.profile.email"
+                  ng-model="onBoardCtrl.profile.attributes.email"
                   type="email"
                   required
                   readonly
@@ -32,18 +37,19 @@
       <div layout="row" layout-align="center center">
         <cdvy-button-primary cdvy-button-title="confirm" ng-click="onBoardCtrl.confirmEmail()"></cdvy-button-primary>
       </div>
-    </ng-form>
+    </ng-form>-->
   </cdvy-panel>
+</div>
 
   <div class="onboard-separator" layout="row" layout-align="center center">
     <md-icon md-svg-src="assets/images/next-step-separator.svg"></md-icon>
   </div>
 
 
-  <cdvy-panel class="onboard-panel" cdvy-toggle="true" cdvy-title-svg-icon="{{onBoardCtrl.getIconStep(2)}}" cdvy-title="Step 2 - Complete profile" ng-init="onBoardCtrl.setStep(2, this)">
+  <cdvy-panel class="onboard-panel" ng-class="onBoardCtrl.currentStep >= 2 ? 'onboard-panel-step-enabled' : 'onboard-panel-step-disabled'" cdvy-toggle="true" cdvy-title-svg-icon="{{onBoardCtrl.getIconStep(2)}}" cdvy-title="Step 2 - Complete profile" ng-init="onBoardCtrl.setStep(2, this)">
     <ng-form name="profileInformationForm">
     <div layout="row" layout-align="start center">
-      <image src="assets/images/image-operator.png" width="200px"></image>
+      <image class="image-panel" src="assets/images/image-operator.png" width="200px"></image>
       <div layout="column" flex>
           <account-profile ng-init="onBoardCtrl.setAccountProfile(this);onBoardCtrl.setAccountProfileForm(profileInformationForm)" accountForm="profileInformationForm"></account-profile>
           <div layout="row" layout-align="center center">
@@ -58,7 +64,7 @@
     <md-icon md-svg-src="assets/images/next-step-separator.svg"></md-icon>
   </div>
 
-  <cdvy-panel class="onboard-panel" cdvy-toggle="true" cdvy-title-svg-icon="{{onBoardCtrl.getIconStep(3)}}" cdvy-title="Step 3 - Add a credit card (optional)" ng-init="onBoardCtrl.setStep(3, this)">
+  <cdvy-panel class="onboard-panel" ng-class="onBoardCtrl.currentStep >= 3 ? 'onboard-panel-step-enabled' : 'onboard-panel-step-disabled'" cdvy-toggle="true" cdvy-title-svg-icon="{{onBoardCtrl.getIconStep(3)}}" cdvy-title="Step 3 - Add a credit card (optional)" ng-init="onBoardCtrl.setStep(3, this)">
     <ng-form name="creditCardForm">
       <div layout="row" layout-align="start center">
         <i class="cdvyfont cdvyico-creditcard" ></i>
@@ -78,10 +84,10 @@
   </div>
 
 
-  <cdvy-panel class="onboard-panel" cdvy-toggle="true" cdvy-title-svg-icon="assets/svg/to-complete.svg" cdvy-title="Step 4 - Create project" ng-init="onBoardCtrl.setStep(4, this)">
+  <cdvy-panel class="onboard-panel" ng-class="onBoardCtrl.currentStep >= 4 ? 'onboard-panel-step-enabled' : 'onboard-panel-step-disabled'" cdvy-toggle="true" cdvy-title-svg-icon="assets/images/to-complete.svg" cdvy-title="Step 4 - Create project" ng-init="onBoardCtrl.setStep(4, this)">
     <ng-form name="creditCardForm">
       <div layout="row" layout-align="start center">
-        <image src="assets/images/image-laptop.png" width="200px"></image>
+        <image class="image-panel" src="assets/images/image-laptop.png" width="200px"></image>
 
         <div layout="column" flex>
           <cdvy-button-primary cdvy-button-title="Create project" ng-click="onBoardCtrl.createProject()"></cdvy-button-primary>
@@ -90,6 +96,9 @@
     </ng-form>
 
   </cdvy-panel>
+
+  <cdvy-button-primary cdvy-button-title="reset onboarding flow for testing purpose" ng-click="onBoardCtrl.deleteOnBoardingCompleted()"></cdvy-button-primary>
+
 
 
 </md-content>

@@ -31,7 +31,6 @@ import DashboardCtrl from './dashboard/dashboard.controller';
 import DemoComponentsCtrl from './demo-components/demo-components.controller';
 
 
-
 // import login
 import LoginCtrl from './main/login.controller';
 
@@ -292,6 +291,13 @@ module.config(function($mdThemingProvider, jsonColors) {
   $mdThemingProvider.definePalette('codenvyAccent', codenvyAccentMap);
 
 
+  var codenvyNavyPalette = $mdThemingProvider.extendPalette('purple', {
+    '500' : '0D4269',
+    'contrastDefaultColor': 'light'
+  });
+  $mdThemingProvider.definePalette('codenvyNavyPalette', codenvyNavyPalette);
+
+
   var toolbarPrimaryPalette = $mdThemingProvider.extendPalette('purple', {
     '500' : '558daa',
     'contrastDefaultColor': 'light'
@@ -333,6 +339,12 @@ module.config(function($mdThemingProvider, jsonColors) {
 
   $mdThemingProvider.theme('factory-theme')
     .primaryPalette('light-blue')
+    .accentPalette('pink')
+    .warnPalette('red')
+    .backgroundPalette('purple');
+
+  $mdThemingProvider.theme('onboarding-theme')
+    .primaryPalette('codenvyNavyPalette')
     .accentPalette('pink')
     .warnPalette('red')
     .backgroundPalette('purple');

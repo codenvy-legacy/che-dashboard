@@ -11,11 +11,14 @@
 'use strict';
 
 import OnBoardCtrl from './onboard.controller';
+import OnBoardRedirect from './onboard-redirect.factory';
 
 class OnBoardConfig {
 
   constructor(register) {
     register.controller('OnBoardCtrl', OnBoardCtrl);
+    register.factory('onBoardRedirect', OnBoardRedirect);
+
 
     // config routes
     register.app.config(function ($routeProvider) {
