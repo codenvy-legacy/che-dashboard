@@ -91,6 +91,68 @@ module.config(function ($routeProvider) {
 })
 ;
 
+/**
+ * This module check if we have an authenticated user and if not, redirect it to login page
+ */
+class CheckLogin {
+
+
+  /**
+   * Default constructor that is using resource
+   * @ngInject for Dependency injection
+   */
+  constructor (codenvyAPI) {
+    this.codenvyAPI = codenvyAPI;
+  }
+
+  checkPage(path) {
+    if ('app/main/login.html' == path) {
+      return true;
+    }
+    return false;
+  }
+
+
+  checkRedirect() {
+    let user = this.codenvyAPI.getUser().getUser();
+
+    // User has not logged in, redirect it to login page (dev mode only)
+    if (!user.$resolved || !user.email) {
+      return {route:"/login"};
+    }
+    return {};
+
+
+  }
+
+}
+
+
+/**
+ * Setup route redirect module
+ */
+module.run(function ($rootScope, $location, routingRedirect, codenvyAPI) {
+
+  /**
+   * Add default redirect to login in dev mode
+   */
+  if (DEV) {
+    routingRedirect.addRouteCallback(new CheckLogin(codenvyAPI));
+  }
+
+  // When a route is about to change, notify the routing redirect node
+  $rootScope.$on("$routeChangeStart", function (event, next, current) {
+
+    // check routes
+    routingRedirect.check(event, next);
+
+  })
+});
+
+// ask to instantiate factory
+module.run(function (onBoardRedirect) {
+
+});
 
 
 

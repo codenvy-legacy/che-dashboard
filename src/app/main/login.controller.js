@@ -12,7 +12,7 @@
 
 class LoginCtrl {
   /*@ngInject*/
-  constructor($scope, $http, $cookies, $window, $location) {
+  constructor($scope, $http, $cookies, $window, $location, codenvyAPI) {
 
     $scope.username = 'test';
     $scope.password = 'test';
@@ -24,7 +24,14 @@ class LoginCtrl {
       }).then(function (response) {
         $cookies.token = response.data.value;
         $cookies.refreshStatus = 'DISABLED';
-        $location.path('#/');
+
+        // update user
+        let promise = codenvyAPI.getUser().fetchUser();
+        promise.then(() => {
+          $location.path('#/');
+        }, () => {
+          $location.path('#/');
+        });
 
       }, function (response) {
         console.log('error on login');
