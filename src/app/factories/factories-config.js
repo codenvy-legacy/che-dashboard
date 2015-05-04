@@ -18,6 +18,8 @@ import FactoryCtrl from './list-factories/factory.controller';
 class FactoryConfig {
 
   constructor(register) {
+    register.controller('FactoriesCtrl', FactoriesCtrl);
+    register.controller('FactoryCtrl', FactoryCtrl);
 
     // config routes
     register.app.config(function ($routeProvider) {
