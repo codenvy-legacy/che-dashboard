@@ -14,7 +14,7 @@
 var DEV = true;
 
 // init module
-let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter', 'ngDropdowns', 'ui.gravatar']);
+let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter', 'ngDropdowns', 'ui.gravatar', 'angular-lodash']);
 
 import Register from '../components/utils/register';
 
@@ -40,6 +40,10 @@ var instanceRegister = Register.getInstance();
 import NavbarConfig from './navbar/navbar-config';
 new NavbarConfig(instanceRegister);
 
+// import subscription config
+import SubscriptionConfig from './navbar/subscriptions/subscription-config';
+new SubscriptionConfig(instanceRegister);
+
 // import factories
 import FactoryConfig from './factories/factories-config';
 new FactoryConfig(instanceRegister);
@@ -52,6 +56,7 @@ new ProjectsConfig(instanceRegister);
 // import onboarding
 import OnBoardConfig from './onboard/onboard-config';
 new OnBoardConfig(instanceRegister);
+
 
 
 // and setup controllers

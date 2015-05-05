@@ -31,10 +31,10 @@ class DemoComponentsCtrl {
 
     this.button2Disabled = true;
 
-    this.listItemsDocs = ['Document1', 'Document2', 'Document3', 'Document4', 'Document5']
+    this.listItemsDocs = ['Document1', 'Document2', 'Document3', 'Document4', 'Document5'];
 
     this.listItemsTasks = [{name : 'Task 1', done: false}, {name : 'Task 2', done: true}, {name : 'Task 3', done: false},
-      {name : 'Task 4', done: true}, {name : 'Task 5', done: false}]
+      {name : 'Task 4', done: true}, {name : 'Task 5', done: false}];
   }
 
 

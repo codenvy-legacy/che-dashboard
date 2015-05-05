@@ -10,7 +10,17 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="Subscriptions"></cdvy-toolbar>
+<cdvy-toolbar cdvy-title="Your Subscriptions"></cdvy-toolbar>
 
-<md-content layout="column" layout-fill>
+<md-content md-scroll-y flex>
+  <subscription-info ng-repeat="subscription in subscriptionCtrl.subscriptions" cdvy-subscription="subscription">
+  </subscription-info>
+  <subscription-proposal ng-repeat="proposal in subscriptionCtrl.proposals" cdvy-title="{{proposal.title}}"
+                         cdvy-description="{{proposal.description}}"
+                         cdvy-icon="{{proposal.icon}}"
+                         cdvy-button-title="{{proposal.buttonTitle}}" proposal-click="proposal.buy()">
+    <ul>
+      <li ng-repeat="item in proposal.content">{{item}}</li>
+    </ul>
+  </subscription-proposal>
 </md-content>
