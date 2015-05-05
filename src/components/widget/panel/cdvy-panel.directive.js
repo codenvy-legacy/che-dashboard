@@ -57,9 +57,10 @@ class CodenvyPanel {
 
     // we require ngModel as we want to use it inside our directive
     this.require = ['ngModel'];
-    this.scope = true;
 
-
+    this.scope = {
+      title:'@cdvyTitle'
+    };
   }
 
 
@@ -78,11 +79,11 @@ class CodenvyPanel {
       template = template + '<span class="cdvy-panel-title-icon ' + attrs['cdvyTitleIcon'] + '"></span>';
     }
     if (attrs['cdvyTitleSvgIcon']) {
-      template = template + '<md-icon md-svg-src="' +  attrs['cdvyTitleSvgIcon'] + '"></md-icon>'
+      template = template + '<md-icon md-svg-src="' +  attrs['cdvyTitleSvgIcon'] + '"></md-icon>';
     }
 
 
-    template = template + attrs['cdvyTitle'] + '</div>'
+    template = template + '{{codenvyPanelCtrl.title}}</div>'
     + '<span flex></span>';
 
 
