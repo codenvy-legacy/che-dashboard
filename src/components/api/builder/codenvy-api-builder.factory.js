@@ -23,6 +23,8 @@ import CodenvyProjectTemplateBuilder from './codenvy-projecttemplate-builder';
 import CodenvyProjectTypeAttributeDescriptorBuilder from './codenvy-projecttype-attribute-descriptor-builder';
 import CodenvyProfileBuilder from './codenvy-profile-builder.js';
 import CodenvyUserBuilder from './codenvy-user-builder.js';
+import CodenvyAccountBuilder from './codenvy-account-builder.js';
+import CodenvyMembershipBuilder from './codenvy-membership-builder.js';
 
 /**
  * This class is providing the entry point for accessing the builders
@@ -35,6 +37,22 @@ class CodenvyAPIBuilder {
    * @ngInject for Dependency injection
    */
   constructor () {
+  }
+
+  /**
+   * The Codenvy Account builder
+   * @returns {CodenvyAPI.codenvyAccount|*}
+   */
+  getAccountBuilder() {
+    return new CodenvyAccountBuilder();
+  }
+
+  /**
+   * The Codenvy Membership builder
+   * @returns {CodenvyAPI.codenvyMembership|*}
+   */
+  getUserMembershipBuilder() {
+    return new CodenvyMembershipBuilder();
   }
 
   /**

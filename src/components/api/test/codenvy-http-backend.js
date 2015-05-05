@@ -31,10 +31,11 @@ class CodenvyHttpBackend {
     this.projectDetailsMap = new Map();
     this.projectPermissionsMap = new Map();
 
+    this.memberships = [];
+
 
     this.defaultUser = codenvyAPIBuilder.getUserBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').build();
     this.defaultProfile = codenvyAPIBuilder.getProfileBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').withFirstName('FirstName').withLastName('LastName').build();
-
   }
 
 
@@ -46,6 +47,8 @@ class CodenvyHttpBackend {
     this.httpBackend.when('GET', '/api/workspace/all').respond(this.workspaces);
     this.httpBackend.when('GET', '/api/project-type').respond(this.projectTypes);
 
+    //memeberships:
+    this.httpBackend.when('GET', '/api/account').respond(this.memberships);
 
     //users
     this.httpBackend.when('GET', '/api/user').respond(this.defaultUser);
@@ -144,6 +147,14 @@ class CodenvyHttpBackend {
    */
   addUserId(user) {
     this.usersMap.put(user.id, user);
+  }
+
+  /**
+   * Add membership of the current user
+   * @param membership
+   */
+  addMembership(membership) {
+    this.memberships.push(membership);
   }
 
   /**
