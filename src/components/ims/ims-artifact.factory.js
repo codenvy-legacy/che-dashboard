@@ -59,6 +59,70 @@ class imsArtifactApi {
     let request = this.remoteImsAPI.downloadArtifact(artifact, {});
     return request.$promise;
   }
+
+  artifacts() {
+    let installPromise = this.getInstalledArtifactsList();
+    let downloadedPromise = this.getDownloadedArtifactsList();
+    let availablePromise = this.getAvailableArtifactsList();
+    let all = Promise.all([installPromise, downloadedPromise, availablePromise]);
+
+    return all.then((results) => this.consolidateArtifacts(results));
+  }
+
+  /**
+   * Assemble all sources of informations for a given artifacts: installed, downloaded and available,
+   * in the same object.
+   */
+  consolidateArtifacts(results) {
+    let artifacts = {};
+    let installedResult = results.shift();
+
+    if (installedResult && installedResult.artifacts) {
+      for (let artifact of installedResult.artifacts) {
+        let value = {
+          name: artifact.artifact,
+          description: artifact.description,
+          installed: {
+            version: artifact.version,
+            date: artifact.date
+          }
+        };
+        artifacts[artifact.artifact] = value;
+      }
+    }
+
+    let downloadedResult = results.shift();
+    if (downloadedResult && downloadedResult.artifacts) {
+      for (let artifact of downloadedResult.artifacts) {
+        let value = artifacts[artifact.artifact];
+        if (!value) {
+          value = { name: artifact.artifact, description: artifact.description };
+        }
+        artifacts[artifact.artifact] = value; // in case it was just created
+        value.downloaded = {
+          version: artifact.version,
+          date: artifact.date
+        };
+      }
+    }
+
+    let availableResult = results.shift();
+    if (availableResult && availableResult.artifacts) {
+      for (let artifact of availableResult.artifacts) {
+        let value = artifacts[artifact.artifact];
+        if (!value) {
+          value = { name: artifact.artifact, description: artifact.description };
+        }
+        artifacts[artifact.artifact] = value; // in case it was just created
+        value.available = {
+          version: artifact.version,
+          date: artifact.date
+        };
+      }
+    }
+
+    return artifacts;
+  }
 }
 
 // Register this factory
