@@ -49,6 +49,10 @@ class imsSaasAuthApi {
     // If login failed, reset promise for next try
     this.promise.catch(() => { this.promise = undefined; });
   }
+
+  resetLogin() {
+    this.promise = undefined;
+  }
 }
 
 // Register this factory
