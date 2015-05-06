@@ -25,14 +25,47 @@ class CodenvyPanelCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor() {
+  constructor($scope) {
     this.collapse = false;
 
 
     // in lock mode, we're unable to toggle and see the content
     this.locked = false;
 
+    this.id = '';
+
+
+    this.$scope = $scope;
+
   }
+
+  /**
+   * Sets the id
+   * @param id
+   */
+  setId(id) {
+    this.id = id;
+
+    // listener on events
+    this.$scope.$on('cdvyPanel:toggle', (event, data) => {
+      if (data === this.id) {
+        this.toggle();
+      }
+    });
+
+    this.$scope.$on('cdvyPanel:lock', (event, data) => {
+      if (data === this.id) {
+        this.lock();
+      }
+    });
+
+    this.$scope.$on('cdvyPanel:collapse', (event, data) => {
+      if (data === this.id) {
+        this.collapse = true;
+      }
+    });
+  }
+
 
   /**
    * @returns true if the panel is collapsed.
