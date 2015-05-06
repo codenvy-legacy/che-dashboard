@@ -11,12 +11,12 @@
 
 -->
 
-<cdvy-panel cdvy-title="Usage Data and Automatic Install">
+<cdvy-panel cdvy-title="Usage Data and Automatic Install" ng-class="automaticUpdatesCtrl.handleGraying()">
   <md-content>
     <div>
-      <md-checkbox ng-model="AutomaticUpdatesCtrl.usageData">Anonymous Usage Data</md-checkbox>
+      <md-checkbox ng-model="automaticUpdatesCtrl.usageData" ng-disabled="automaticUpdatesCtrl.isSectionDisabled()">Anonymous Usage Data</md-checkbox>
       <span>Help Codenvy improve quality by letting Codenvy upload usage, performance and stability data.</span>
-      <md-checkbox ng-model="AutomaticUpdatesCtrl.autoUpdate">Automatic Updates</md-checkbox>
+      <md-checkbox ng-model="automaticUpdatesCtrl.autoUpdate" ng-disabled="automaticUpdatesCtrl.isSectionDisabled()">Automatic Updates</md-checkbox>
       <span>The installation manager will download and install new versions automatically. This may cause a
             short maintenance window for your On-Prem installation.</span>
     </div>

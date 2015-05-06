@@ -19,6 +19,13 @@ class AutomaticUpdatesCtrl {
   constructor() {
   }
 
+  isSectionDisabled() {
+    return true;
+  }
+  
+  handleGraying() {
+    return ['automatic-updates-section-gray'];
+  }
 }
 
 export default AutomaticUpdatesCtrl;
