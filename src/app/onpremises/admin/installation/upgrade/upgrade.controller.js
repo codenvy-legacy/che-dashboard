@@ -16,9 +16,17 @@ class UpgradeInstallationCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor() {
+  constructor(imsUpdateApi) {
+    this.imsUpdateApi = imsUpdateApi;
   }
 
+  install() {
+    this.imsUpdateApi.update();
+  }
+
+  saveSchedule() {
+    // Not implemented yet
+  }
 }
 
 export default UpgradeInstallationCtrl;

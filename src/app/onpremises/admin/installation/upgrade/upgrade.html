@@ -12,7 +12,7 @@
 -->
 
 <cdvy-panel cdvy-title="Upgrade Your Codenvy On-Prem Installation">
-  <cdvy-button-primary cdvy-button-title="Install Now"></cdvy-button-primary>
+  <cdvy-button-primary cdvy-button-title="Install Now" ng-click="upgradeInstallationCtrl.install()"></cdvy-button-primary>
   <!-- Removed because not implemented in IM -->
   <!--
   <div ng-form="onPremUpgradeScheduleForm" flex>
@@ -21,11 +21,11 @@
                 cdvy-label-name="Schedule Installation"
                 ng-model="upgradeInstallationCtrl.scheduleExpression">
     </cdvy-input>
-    <cdvy-button-default cdvy-button-title="Save Schedule"></cdvy-button-default>
+    <cdvy-button-default cdvy-button-title="Save Schedule" ng-click="upgradeInstallationCtrl.saveSchedule()"></cdvy-button-default>
     <md-checkbox ng-model="upgradeInstallationCtrl.checkNewVersion">Check for new version before installing</md-checkbox>
   </div>
-  -->
   <p>Upgrading may require a maintenance window up to 30 minutes. Minor releases either do not 
      require a maintenance window or are a few minutes.</p>
   <p>Docs:<a href="" class="onprem-upgrade-installation-schedule-syntaxlink">Syntax for Scheduling Installation</a>.</p>
+  -->
 </cdvy-panel>
