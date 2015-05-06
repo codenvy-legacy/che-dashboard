@@ -10,7 +10,7 @@
  */
 'use strict';
 
-import {subscriptionOffers, subscriptionDetails} from '../subscriptions/subscriptions';
+import {subscriptionOffers, subscriptionDetails} from '../subscriptions/subscription-data';
 
 class SubscriptionCtrl {
   /**
@@ -139,10 +139,9 @@ class SubscriptionCtrl {
 
     payAsYouGoOffer.buy = function() {
         ctrl.onPayAsYouGoChoosen(ctrl.$location);
-      }
-    };
+      };
     return payAsYouGoOffer;
-  }
+   }
 
   onPayAsYouGoChoosen($location) {
     $location.path('billing');
