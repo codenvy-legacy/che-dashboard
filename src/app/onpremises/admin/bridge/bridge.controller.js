@@ -16,20 +16,10 @@ class OnPremisesAdminBridgeCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor($rootScope, imsSaasAuthApi) {
-    $rootScope.$watch(
-      () => imsSaasAuthApi.promise,
-      (newValue, oldValue) => { this.updateSubscriptionStatus(newValue); }
-    );
+  constructor() {
+
   }
 
-  updateSubscriptionStatus(value) {
-    if (value) {
-      this.showHasSubscriptionParagraph = true;
-    } else {
-      this.showHasSubscriptionParagraph = false;
-    }
-  }
 }
 
 export default OnPremisesAdminBridgeCtrl;

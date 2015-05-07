@@ -15,6 +15,8 @@ import OnPremisesAdminBridgeCodenvyAccountCtrl from './account/account.controlle
 import CodenvyAccountPanel from './account/account.directive';
 import OnPremisesAdminBridgeAvailableSoftwareCtrl from './software/software.controller';
 import AvailableSoftwarePanel from './software/software.directive';
+import OnPremisesAdminBridgeYourSubscriptionCtrl from './yoursubscription/yoursubscription.controller';
+import YourSubscriptionPanel from './yoursubscription/yoursubscription.directive';
 
 class OnPremisesAdminBridgeConfig {
 
@@ -22,9 +24,11 @@ class OnPremisesAdminBridgeConfig {
 
     register.directive('cdvyCodenvyAccount', CodenvyAccountPanel);
     register.directive('cdvyAvailableSoftware', AvailableSoftwarePanel);
+    register.directive('cdvyYourSubscription', YourSubscriptionPanel);
     register.controller('OnPremisesAdminBridgeCtrl', OnPremisesAdminBridgeCtrl);
     register.controller('OnPremisesAdminBridgeCodenvyAccountCtrl', OnPremisesAdminBridgeCodenvyAccountCtrl);
     register.controller('OnPremisesAdminBridgeAvailableSoftwareCtrl', OnPremisesAdminBridgeAvailableSoftwareCtrl);
+    register.controller('OnPremisesAdminBridgeYourSubscriptionCtrl', OnPremisesAdminBridgeYourSubscriptionCtrl);
 
     // configure routes
     register.app.config(function ($routeProvider) {
