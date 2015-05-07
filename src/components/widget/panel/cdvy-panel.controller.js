@@ -64,6 +64,12 @@ class CodenvyPanelCtrl {
         this.collapse = true;
       }
     });
+
+    this.$scope.$on('cdvyPanel:disabled', (event, data) => {
+      if (data && (data.id === this.id)) {
+        this.disabled = data.disabled;
+      }
+    });
   }
 
 

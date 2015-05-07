@@ -26,6 +26,7 @@ import Register from '../../utils/register';
  * @param {string=} cdvy-title-icon icon font prefixing the panel's title
  * @param {string=} cdvy-title-svg-icon path to SVG image used as panel's title
  * @param {boolean=} cdvy-toggle boolean used to display or not the panel toggle
+ * @param {boolean=} cdvy-disabled boolean used to add a glass panel over the panel
  *
  * @usage
  *   <cdvy-panel cdvy-title="hello"></cdvy-panel>
@@ -56,7 +57,8 @@ class CodenvyPanel {
 
     this.scope = {
       svgIcon: '@cdvyTitleSvgIcon',
-      title:'@cdvyTitle'
+      title:'@cdvyTitle',
+      disabled: '@cdvyDisabled'
     };
   }
 
@@ -79,6 +81,11 @@ class CodenvyPanel {
     // set id
     if (attributes['cdvyPanelId']) {
       controller.setId(attributes['cdvyPanelId']);
+    }
+
+    // disabled
+    if (attributes['cdvyDisabled']) {
+      controller.disabled = true;
     }
   }
 
@@ -117,6 +124,7 @@ class CodenvyPanel {
     +  '<md-card-content class="cdvy-panel-content" ng-hide="codenvyPanelCtrl.isCollapsed()">'
     +  '<ng-transclude></ng-transclude>'
     +  '</md-card-content>'
+    +  '<div class="cdvy-panel-glass" ng-show="codenvyPanelCtrl.disabled"></div>'
     +  '</md-card>';
 
     return template;
