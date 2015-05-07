@@ -11,7 +11,7 @@
 
 -->
 
-<cdvy-panel cdvy-title="Usage Data and Automatic Install" ng-class="automaticUpdatesCtrl.handleGraying()">
+<cdvy-panel cdvy-title="Usage Data and Automatic Install" cdvy-panel-id="usage-data-and-automatic-install" cdvy-disabled="automaticUpdatesCtrl.isSectionDisabled()">
   <md-content>
     <div>
       <md-checkbox ng-model="automaticUpdatesCtrl.usageData" ng-disabled="automaticUpdatesCtrl.isSectionDisabled()">Anonymous Usage Data</md-checkbox>

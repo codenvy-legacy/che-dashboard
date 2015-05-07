@@ -16,15 +16,26 @@ class AutomaticUpdatesCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor() {
+  constructor($rootScope, imsSaasAuthApi) {
+    this.$rootScope = $rootScope;
+    this.$rootScope.$watch(
+      () => imsSaasAuthApi.promise,
+      (newValue, oldValue) => { this.updateSubscriptionStatus(newValue); }
+    );
+    // by default, false, until login and subscription check
+    this.subscriptionOk = false;
+  }
+  updateSubscriptionStatus(value) {
+    if (value) {
+      this.subscriptionOk = true;
+    } else {
+      this.subscriptionOk = false;
+    }
+    this.$rootScope.$broadcast('cdvyPanel:disabled', {id: 'usage-data-and-automatic-install', disabled: this.isSectionDisabled()});
   }
 
   isSectionDisabled() {
-    return true;
-  }
-  
-  handleGraying() {
-    return ['automatic-updates-section-gray'];
+    return !this.subscriptionOk;
   }
 }
 
