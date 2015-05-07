@@ -54,13 +54,32 @@ class CodenvyPanel {
     this.controller = 'CodenvyPanelCtrl';
     this.controllerAs = 'codenvyPanelCtrl';
 
-
-    // we require ngModel as we want to use it inside our directive
-    this.require = ['ngModel'];
-
     this.scope = {
+      svgIcon: '@cdvyTitleSvgIcon',
       title:'@cdvyTitle'
     };
+  }
+
+  /**
+   * Defines id of the controller and apply some initial settings
+   */
+
+  link(scope, element, attributes, controller) {
+
+    // special mode
+    if (attributes['cdvyLockMode']) {
+      controller.lock();
+    }
+
+    // special mode
+    if (attributes['cdvyCollapse']) {
+      controller.collapse = true;
+    }
+
+    // set id
+    if (attributes['cdvyPanelId']) {
+      controller.setId(attributes['cdvyPanelId']);
+    }
   }
 
 
@@ -71,6 +90,7 @@ class CodenvyPanel {
    * @returns {string} the template
    */
   template( element, attrs){
+
     var template = '<md-card class="cdvy-panel" md-theme="default">'
       + '<div layout="row" class="cdvy-panel-titlebox" layout-align="start center">'
       + '<div class="cdvy-panel-title" layout="row" layout-align="start center">';
@@ -79,7 +99,7 @@ class CodenvyPanel {
       template = template + '<span class="cdvy-panel-title-icon ' + attrs['cdvyTitleIcon'] + '"></span>';
     }
     if (attrs['cdvyTitleSvgIcon']) {
-      template = template + '<md-icon md-svg-src="' +  attrs['cdvyTitleSvgIcon'] + '"></md-icon>';
+      template = template + '<md-icon md-svg-src="' +  '{{codenvyPanelCtrl.svgIcon}}' + '"></md-icon>';
     }
 
 

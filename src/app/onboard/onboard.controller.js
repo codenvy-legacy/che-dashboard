@@ -25,15 +25,15 @@ class OnBoardCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, $location) {
+  constructor(codenvyAPI, $location, $rootScope) {
     this.codenvyAPI = codenvyAPI;
     this.$location = $location;
 
-    this.steps = new Map();
     this.stepsIcons = new Map();
-    this.currentStep = 1;
+    this.stepsIcons.set(1, 'assets/images/completed.svg');
+    this.currentStep = 2;
 
-
+    this.$rootScope = $rootScope;
 
     this.profile = codenvyAPI.getProfile().getProfile();
   }
@@ -59,27 +59,9 @@ class OnBoardCtrl {
    * @param stepNumber the index of this step
    * @param panel the panel element
    */
-  setStep(stepNumber, panel) {
+  initStep(stepNumber) {
     // First, set it to 'to-complete' image
     this.stepsIcons.set(stepNumber, 'assets/images/to-complete.svg');
-    this.steps.set(stepNumber, panel);
-
-    // for now the first step should already be done
-    if (stepNumber === 1) {
-      panel.codenvyPanelCtrl.lock();
-      // change icon
-      this.stepsIcons.set(this.currentStep, 'assets/images/completed.svg');
-
-      // increment step
-      this.currentStep++;
-
-    }
-
-    // collapse all remaining nodes
-    if (stepNumber > 2) {
-      panel.codenvyPanelCtrl.collapse = true;
-    }
-
 
   }
 
@@ -135,8 +117,9 @@ class OnBoardCtrl {
     let properties = {'onBoardingFlowCompleted' : 'true'};
     this.codenvyAPI.getProfile().updatePreferences(properties);
 
+
     // lock current step
-    this.steps.get(this.currentStep).codenvyPanelCtrl.lock();
+    this.$rootScope.$broadcast('cdvyPanel:lock', 'onboarding-step' + this.currentStep);
 
     // change icon
     this.stepsIcons.set(this.currentStep, 'assets/images/completed.svg');
@@ -144,9 +127,9 @@ class OnBoardCtrl {
     // increment step
     this.currentStep++;
 
-    // now expand step 2
+    // now expand next step
     if (this.currentStep <= 4) {
-      this.steps.get(this.currentStep).codenvyPanelCtrl.collapse = false;
+      this.$rootScope.$broadcast('cdvyPanel:toggle', 'onboarding-step' + this.currentStep);
     }
 
 
