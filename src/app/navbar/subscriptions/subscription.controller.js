@@ -17,10 +17,11 @@ class SubscriptionCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $location, $window) {
+  constructor (codenvyAPI, $location, $window, lodash) {
       this.codenvyAPI = codenvyAPI;
       this.$location = $location;
       this.$window = $window;
+      this.lodash = lodash;
       this.proposals = [];
       this.subscriptions = [];
 
@@ -28,7 +29,7 @@ class SubscriptionCtrl {
         this.fetchSubscriptions();
       } else {
         this.codenvyAPI.getAccount().fetchAccounts().then(() => {
-          this.fetchSubscriptions;
+          this.fetchSubscriptions();
         });
       }
   }
@@ -49,16 +50,16 @@ class SubscriptionCtrl {
    * if not adds new proposals. There two types of subscriptions : on-premises and saas(pay-as-you-go).
   */
   processSubscriptions(subscriptions) {
-    let services = _.pluck(subscriptions, 'serviceId');
+    let services = this.lodash.pluck(subscriptions, 'serviceId');
     let hasOnPremises = services.indexOf(this.codenvyAPI.getAccount().getOnPremServiceId()) >= 0;
     let saasServiceId = this.codenvyAPI.getAccount().getSaasServiceId();
     let onPremServiceId = this.codenvyAPI.getAccount().getOnPremServiceId();
 
-    let saasSubscription = _.find(subscriptions, function (subscription) {
+    let saasSubscription = this.lodash.find(subscriptions, function (subscription) {
       return subscription.serviceId === saasServiceId;
     });
 
-    let onPremSubscription = _.find(subscriptions, function (subscription) {
+    let onPremSubscription = this.lodash.find(subscriptions, function (subscription) {
       return subscription.serviceId === onPremServiceId;
     });
 
@@ -87,7 +88,7 @@ class SubscriptionCtrl {
   fillPayAsYouGoDetails(saasSubscription) {
     var ctrl = this;
 
-    let details = _.find(subscriptionDetails, function (detail) {
+    let details = this.lodash.find(subscriptionDetails, function (detail) {
       return detail.type === 'pay-as-you-go';
     });
 
@@ -102,7 +103,7 @@ class SubscriptionCtrl {
 
   fillPrePaidDetails(prepaidSubscription) {
     var ctrl = this;
-    let details = _.find(subscriptionDetails, function (detail) {
+    let details = this.lodash.find(subscriptionDetails, function (detail) {
       return detail.type === 'prepaid';
     });
 
@@ -118,7 +119,7 @@ class SubscriptionCtrl {
 
   fillOnPremDetails(onPremSubscription) {
     var ctrl = this;
-    let details = _.find(subscriptionDetails, function (detail) {
+    let details = this.lodash.find(subscriptionDetails, function (detail) {
       return detail.type === 'on-prem';
     });
 
@@ -133,7 +134,7 @@ class SubscriptionCtrl {
 
   getPayAsYouGoProposal() {
     var ctrl = this;
-    let payAsYouGoOffer = _.find(subscriptionOffers, function (offer) {
+    let payAsYouGoOffer = this.lodash.find(subscriptionOffers, function (offer) {
       return offer.type === 'pay-as-you-go';
     });
 
@@ -166,7 +167,7 @@ class SubscriptionCtrl {
 
   getOnPremProposal() {
     var ctrl = this;
-    let onPremOffer = _.find(subscriptionOffers, function (offer) {
+    let onPremOffer = this.lodash.find(subscriptionOffers, function (offer) {
       return offer.type === 'on-prem';
     });
     onPremOffer.buy = function() {
