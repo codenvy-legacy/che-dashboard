@@ -14,6 +14,15 @@ $ npm install --global gulp
 
 #Quick start
 
+Install npm and bower dependencies
+```sh
+$ npm install
+```
+```sh
+$ bower install
+```
+
+
 ## Running
 In order to run the project, the serve command is used
 ```sh
