@@ -14,7 +14,9 @@ $ npm install --global gulp
 
 #Quick start
 
-Install npm and bower dependencies
+Install npm and bower dependencies when you're in the root folder of the user-dashboard v2 branch
+```cd user-dashboard```
+
 ```sh
 $ npm install
 ```
