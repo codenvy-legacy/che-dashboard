@@ -25,8 +25,8 @@ class OnBoardRedirect {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, routingRedirect) {
-    this.codenvyAPI = codenvyAPI;
+  constructor (codenvyProfile, routingRedirect) {
+    this.codenvyProfile = codenvyProfile;
     routingRedirect.addRouteCallback(this);
   }
 
@@ -47,7 +47,7 @@ class OnBoardRedirect {
    * @returns {*}
    */
   checkRedirect() {
-    let preferences = this.codenvyAPI.getProfile().getPreferences();
+    let preferences = this.codenvyProfile.getPreferences();
 
     // Preferences say that flow hasn't been completed ?
     if (!preferences.onBoardingFlowCompleted || preferences.onBoardingFlowCompleted !== 'true') {

@@ -12,6 +12,7 @@
 /*exported CodenvyAPI, CodeMirror, GitHub */
 
 var DEV = true;
+var ADDONBOARDINGFLOW = false;
 
 // init module
 let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter', 'ngDropdowns', 'ui.gravatar', 'ngLodash']);
@@ -139,14 +140,14 @@ class CheckLogin {
 /**
  * Setup route redirect module
  */
-module.run(function ($rootScope, $location, routingRedirect, codenvyAPI) {
+module.run(function ($rootScope, $location, routingRedirect) {
 
   /**
    * Add default redirect to login in dev mode
    */
-  if (DEV) {
+ /*if (DEV) {
     routingRedirect.addRouteCallback(new CheckLogin(codenvyAPI));
-  }
+  }*/
 
   // When a route is about to change, notify the routing redirect node
   $rootScope.$on("$routeChangeStart", function (event, next, current) {
@@ -157,10 +158,12 @@ module.run(function ($rootScope, $location, routingRedirect, codenvyAPI) {
   })
 });
 
-// ask to instantiate factory
-module.run(function (onBoardRedirect) {
+// ask to add onboarding flow
+if (ADDONBOARDINGFLOW) {
+  module.run(function (onBoardRedirect) {
 
-});
+  });
+}
 
 
 

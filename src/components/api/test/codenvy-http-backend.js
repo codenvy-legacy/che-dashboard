@@ -36,6 +36,7 @@ class CodenvyHttpBackend {
 
     this.defaultUser = codenvyAPIBuilder.getUserBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').build();
     this.defaultProfile = codenvyAPIBuilder.getProfileBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').withFirstName('FirstName').withLastName('LastName').build();
+    this.defaultProfilePrefs = {};
   }
 
 
@@ -59,6 +60,7 @@ class CodenvyHttpBackend {
 
     //profiles
     this.httpBackend.when('GET', '/api/profile').respond(this.defaultProfile);
+    this.httpBackend.when('GET', '/api/profile/prefs').respond(this.defaultProfilePrefs);
     var profileKeys = this.profilesMap.keys();
     for (let key of profileKeys) {
       this.httpBackend.when('GET', '/api/profile/' + key).respond(this.profilesMap.get(key));
