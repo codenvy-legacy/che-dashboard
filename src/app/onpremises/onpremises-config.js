@@ -12,7 +12,6 @@
 
 
 import OnPremisesOnboardingConfig from './onboarding/onboarding-config';
-
 import OnPremisesAdminConfig from './admin/admin-config';
 
 

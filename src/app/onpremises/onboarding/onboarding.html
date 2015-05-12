@@ -1,0 +1,77 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar cdvy-title="Admin onboarding" cdvy-subheader-title="Setup your account in 3 steps..." theme="onboarding-theme"></cdvy-toolbar>
+
+<md-content class="onpremise-onboarding-content" md-scroll-y flex>
+
+  <cdvy-panel class="onpremise-onboard-panel"
+              ng-class="onPremisesOnboardingCtrl.currentStep >= 1 ? 'onboard-panel-step-enabled' : 'onboard-panel-step-disabled'"
+              cdvy-toggle="true"
+              cdvy-title-svg-icon="{{onPremisesOnboardingCtrl.getIconStep(1)}}"
+              cdvy-title="Step 1 - Welcome"
+              cdvy-panel-id="onpremise-onboarding-step1"
+              ng-init="onPremisesOnboardingCtrl.initStep(1)">
+    <md-content>
+      Marketing text here
+    </md-content>
+    <div layout="row" layout-margin flex>
+      <cdvy-button-default id="onprem-onboard-welcome-ok-button"
+                           cdvy-button-title="OK"
+                           ng-click="onPremisesOnboardingCtrl.nextPage()"
+                           class="onprem-onboard-welcome-ok-button"></cdvy-button-default>
+
+      <cdvy-button-primary id="onprem-onboard-welcome-cancel-button"
+                           cdvy-button-title="Cancel"
+                           ng-click="onPremisesOnboardingCtrl.cancel()"
+                           class="onprem-onboard-welcome-cancel-button"></cdvy-button-primary>
+    </div>
+  </cdvy-panel>
+
+  <div class="onboard-separator" layout="row" layout-align="center center">
+    <md-icon md-svg-src="assets/images/next-step-separator.svg"></md-icon>
+  </div>
+
+  <cdvy-panel class="onpremise-onboard-panel"
+              ng-class="onPremisesOnboardingCtrl.currentStep >= 2 ? 'onboard-panel-step-enabled' : 'onboard-panel-step-disabled'"
+              cdvy-toggle="true"
+              cdvy-title-svg-icon="{{onPremisesOnboardingCtrl.getIconStep(2)}}"
+              cdvy-title="Step 2 - Accept agreement"
+              cdvy-collapse="true"
+              cdvy-panel-id="onpremise-onboarding-step2"
+              ng-init="onPremisesOnboardingCtrl.initStep(2)">
+    <md-content>
+      license agreement here
+    </md-content>
+    <div layout="row" layout-margin flex>
+
+    <cdvy-button-default id="onprem-onboard-agreement-accept-button"
+                           cdvy-button-title="Accept"
+                           ng-click="onPremisesOnboardingCtrl.acceptLicense()"
+                           class="onprem-onboard-agreement-accept-button"></cdvy-button-default>
+
+      <cdvy-button-primary id="onprem-onboard-agreement-decline-button"
+                           cdvy-button-title="Not Accept"
+                           ng-click="onPremisesOnboardingCtrl.declineLicense()"
+                           class="onprem-onboard-agreement-decline-button"></cdvy-button-primary>
+    </div>
+  </cdvy-panel>
+
+
+  <cdvy-button-primary cdvy-button-title="set admin flag" ng-click="onPremisesOnboardingCtrl.setAdminFlag()"></cdvy-button-primary>
+  <cdvy-button-primary cdvy-button-title="set user flag" ng-click="onPremisesOnboardingCtrl.setUserFlag()"></cdvy-button-primary>
+  <cdvy-button-primary cdvy-button-title="set flasg for asking admin onboarding" ng-click="onPremisesOnboardingCtrl.resetOnboardingAdminFlag()"></cdvy-button-primary>
+  <cdvy-button-primary cdvy-button-title="set flasg for skipping admin onboarding" ng-click="onPremisesOnboardingCtrl.skipOnboardingAdminFlag()"></cdvy-button-primary>
+
+
+
+</md-content>

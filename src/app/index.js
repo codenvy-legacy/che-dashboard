@@ -178,6 +178,8 @@ if (!DEV) {
   module.run(function (onBoardRedirect) {
 
   });
+  module.run(function (onPremiseOnBoardingRedirect) {
+  });
 }
 
 
