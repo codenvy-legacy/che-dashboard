@@ -59,7 +59,7 @@ describe('Create project using git TAB', function () {
     expect(createProjectsPage.projectInformationName.getAttribute('value')).not.toEqual('user-dashboard');
 
     // generated project name should start with project-<projecttype>
-    expect(createProjectsPage.projectInformationName.getAttribute('value')).toContain('project-blank-');
+    expect(createProjectsPage.projectInformationName.getAttribute('value')).toContain('blank-');
 
 
     // now enter a valid URL
