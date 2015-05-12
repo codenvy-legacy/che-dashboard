@@ -110,8 +110,8 @@ class CheckLogin {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI) {
-    this.codenvyAPI = codenvyAPI;
+  constructor (codenvyUser) {
+    this.codenvyUser = codenvyUser;
   }
 
   checkPage(path) {
@@ -123,7 +123,7 @@ class CheckLogin {
 
 
   checkRedirect() {
-    let user = this.codenvyAPI.getUser().getUser();
+    let user = this.codenvyUser.getUser();
 
     // User has not logged in, redirect it to login page (dev mode only)
     if (!user.$resolved || !user.email) {
@@ -140,19 +140,21 @@ class CheckLogin {
 /**
  * Setup route redirect module
  */
-module.run(function ($rootScope, $location, routingRedirect) {
+module.run(function ($rootScope, $location, routingRedirect, codenvyUser) {
 
   /**
    * Add default redirect to login in dev mode
    */
- /*if (DEV) {
-    routingRedirect.addRouteCallback(new CheckLogin(codenvyAPI));
-  }*/
+  if (DEV) {
+    routingRedirect.addRouteCallback(new CheckLogin(codenvyUser));
+  }
+
 
   // When a route is about to change, notify the routing redirect node
-  $rootScope.$on("$routeChangeStart", function (event, next, current) {
-
-    // check routes
+  $rootScope.$on('$routeChangeSuccess', (event, next,  previous, rejection)=> {
+    if (DEV) {
+      console.log('$routeChangeSuccess event with route', next);
+    }    // check routes
     routingRedirect.check(event, next);
 
   })
