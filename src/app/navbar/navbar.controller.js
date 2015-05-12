@@ -30,6 +30,7 @@ class NavBarCtrl {
     // on-prem admin section
     this.admin = false;
     this.onpremAdminExpanded = true;
+    this.updated = false;
   }
 
   /**
@@ -40,7 +41,8 @@ class NavBarCtrl {
     if(this.profile.attributes) {
       this.email = this.profile.attributes.email;
     }
-    this.admin = true // hardcoded until we know how to check it
+    this.admin = false; // hardcoded until we know how to check it
+    this.updated = true;
   }
 
   /**
@@ -52,6 +54,10 @@ class NavBarCtrl {
 
   userIsAdmin() {
     return this.admin;
+  }
+
+  isSimpleUser() {
+    return !this.admin;
   }
 
   flipOnpremAdminExpanded() {
