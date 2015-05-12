@@ -12,7 +12,6 @@
 /*exported CodenvyAPI, CodeMirror, GitHub */
 
 var DEV = true;
-var ADDONBOARDINGFLOW = false;
 
 // init module
 let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter', 'ngDropdowns', 'ui.gravatar', 'ngLodash']);
@@ -174,8 +173,8 @@ module.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', functio
   })
 }]);
 
-// ask to add onboarding flow
-if (ADDONBOARDINGFLOW) {
+// ask to add onboarding flow when we're on prod
+if (!DEV) {
   module.run(function (onBoardRedirect) {
 
   });

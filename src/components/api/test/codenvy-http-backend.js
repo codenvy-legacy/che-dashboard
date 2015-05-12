@@ -36,7 +36,7 @@ class CodenvyHttpBackend {
 
     this.defaultUser = codenvyAPIBuilder.getUserBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').build();
     this.defaultProfile = codenvyAPIBuilder.getProfileBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').withFirstName('FirstName').withLastName('LastName').build();
-    this.defaultProfilePrefs = {};
+    this.defaultProfilePrefs = {onBoardingFlowCompleted : 'true'};
   }
 
 
