@@ -17,12 +17,27 @@
 
 describe('git-url-validator', function() {
   var $scope, form;
+  /**
+   * Backend for handling http operations
+   */
+  var httpBackend;
+
+  /**
+   * Codenvy backend
+   */
+  var codenvyBackend;
 
   beforeEach(module('userDashboard'));
 
 
-  beforeEach(inject(function($compile, $rootScope) {
+
+  beforeEach(inject(function($compile, $rootScope, codenvyHttpBackend) {
     $scope = $rootScope;
+    // setup backend
+    codenvyBackend = codenvyHttpBackend;
+    httpBackend = codenvyHttpBackend.getHttpBackend();
+    codenvyBackend.setup();
+
     var element = angular.element(
       '<form name="form">' +
       '<input ng-model="model.myURL" name="url" git-url />' +
