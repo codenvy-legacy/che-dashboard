@@ -10,7 +10,7 @@
  */
 'use strict';
 
-var  subscriptionDetails = [
+export var  subscriptionDetails = [
   {
     'type' : 'on-prem',
     'title' : 'On-Prem Account',
