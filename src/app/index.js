@@ -23,9 +23,9 @@ module.config(['$routeProvider', function ($routeProvider) {
 
   $routeProvider.accessWhen = function(path, route) {
     route.resolve || (route.resolve = {});
-    route.resolve.app = function (codenvyUser) {
+    route.resolve.app = ['codenvyUser', function (codenvyUser) {
       return codenvyUser.fetchUser();
-    }
+    }];
     return $routeProvider.when(path, route);
   };
 }]);
@@ -86,7 +86,7 @@ module.controller('DashboardCtrl', DashboardCtrl)
 
 
 // config routes
-module.config(function ($routeProvider) {
+module.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     .accessWhen('/', {
       templateUrl: 'app/dashboard/dashboard.html',
@@ -112,8 +112,7 @@ module.config(function ($routeProvider) {
 
   }
 
-})
-;
+}]);
 
 /**
  * This module check if we have an authenticated user and if not, redirect it to login page
@@ -155,7 +154,7 @@ class CheckLogin {
 /**
  * Setup route redirect module
  */
-module.run(function ($rootScope, $location, routingRedirect, codenvyUser) {
+module.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', function ($rootScope, $location, routingRedirect, codenvyUser) {
 
   /**
    * Add default redirect to login in dev mode
@@ -173,7 +172,7 @@ module.run(function ($rootScope, $location, routingRedirect, codenvyUser) {
     routingRedirect.check(event, next);
 
   })
-});
+}]);
 
 // ask to add onboarding flow
 if (ADDONBOARDINGFLOW) {
@@ -390,7 +389,7 @@ module.constant('userDashboardConfig', {
   developmentMode: DEV
 });
 
-module.config(function ($routeProvider, $locationProvider, $httpProvider) {
+module.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
   if (DEV) {
     $httpProvider.interceptors.push('AuthInterceptor');
@@ -398,7 +397,7 @@ module.config(function ($routeProvider, $locationProvider, $httpProvider) {
   }
   // Add the ETag interceptor for Codenvy API
   $httpProvider.interceptors.push('ETagInterceptor');
-});
+}]);
 
 
 angular.module('ui.gravatar').config(['gravatarServiceProvider', function(gravatarServiceProvider) {
