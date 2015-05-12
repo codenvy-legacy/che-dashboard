@@ -22,7 +22,7 @@ class OnBoardConfig {
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.when('/welcome', {
+      $routeProvider.accessWhen('/welcome', {
         templateUrl: 'app/onboard/onboard.html',
         controller: 'OnBoardCtrl',
         controllerAs: 'onBoardCtrl'

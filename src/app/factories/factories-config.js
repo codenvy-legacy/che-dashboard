@@ -23,11 +23,11 @@ class FactoryConfig {
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.when('/factories', {
+      $routeProvider.accessWhen('/factories', {
         templateUrl: 'app/factories/list-factories/factories.html',
         controller: 'FactoriesCtrl'
       })
-        .when('/factory/:id', {
+        .accessWhen('/factory/:id', {
           templateUrl: 'app/factories/list-factories/factory.html',
           controller: 'FactoryCtrl'
         });

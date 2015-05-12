@@ -57,17 +57,17 @@ class ProjectConfig {
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.when('/projects', {
+      $routeProvider.accessWhen('/projects', {
         templateUrl: 'app/projects/list-projects/list-projects.html',
         controller: 'ListProjectsCtrl',
         controllerAs: 'listProjectsCtrl'
       })
-        .when('/project/:workspaceId/:projectName', {
+        .accessWhen('/project/:workspaceId/:projectName', {
           templateUrl: 'app/projects/project-details/project-details.html',
           controller: 'ProjectDetailsCtrl',
           controllerAs: 'projectDetailsCtrl'
         })
-        .when('/create-project', {
+        .accessWhen('/create-project', {
           templateUrl: 'app/projects/create-project/create-project.html',
           controller: 'CreateProjectCtrl',
           controllerAs: 'createProjectCtrl'

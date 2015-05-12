@@ -24,7 +24,7 @@ class SubscriptionConfig {
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.when('/subscriptions', {
+      $routeProvider.accessWhen('/subscriptions', {
           templateUrl: 'app/navbar/subscriptions/subscription.html',
           controller: 'SubscriptionCtrl',
           controllerAs: 'subscriptionCtrl'

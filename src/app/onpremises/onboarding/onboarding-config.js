@@ -28,22 +28,22 @@ class OnPremisesOnboardingConfig {
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.when('/onpremises/onboarding/welcome', {
+      $routeProvider.accessWhen('/onpremises/onboarding/welcome', {
         templateUrl: 'app/onpremises/onboarding/welcome/welcome.html',
         controller: 'OnPremisesOnboardWelcomePageCtrl',
         controllerAs: 'onPremisesOnboardWelcomePageCtrl'
       });
-      $routeProvider.when('/onpremises/onboarding/agreement', {
+      $routeProvider.accessWhen('/onpremises/onboarding/agreement', {
         templateUrl: 'app/onpremises/onboarding/agreement/agreement.html',
         controller: 'OnPremisesOnboardAgreementPageCtrl',
         controllerAs: 'onPremisesOnboardAgreementPageCtrl'
       });
-      $routeProvider.when('/onpremises/onboarding/adminlogin', {
+      $routeProvider.accessWhen('/onpremises/onboarding/adminlogin', {
         templateUrl: 'app/onpremises/onboarding/adminlogin/adminlogin.html',
         controller: 'OnPremisesOnboardAdminLoginCtrl',
         controllerAs: 'onPremisesOnboardAdminLoginCtrl'
       });
-      $routeProvider.when('/onpremises/onboarding/cancelled/:cause?', {
+      $routeProvider.accessWhen('/onpremises/onboarding/cancelled/:cause?', {
         templateUrl: 'app/onpremises/onboarding/cancelled/cancelled.html',
         controller: 'OnPremisesOnboardCancelledPageCtrl',
         controllerAs: 'onPremisesOnboardCancelledPageCtrl'

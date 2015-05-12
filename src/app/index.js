@@ -17,6 +17,20 @@ var ADDONBOARDINGFLOW = false;
 // init module
 let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter', 'ngDropdowns', 'ui.gravatar', 'ngLodash']);
 
+
+// add a global resolve flag on all routes (user needs to be resolved first)
+module.config(['$routeProvider', function ($routeProvider) {
+
+  $routeProvider.accessWhen = function(path, route) {
+    route.resolve || (route.resolve = {});
+    route.resolve.app = function (codenvyUser) {
+      return codenvyUser.fetchUser();
+    }
+    return $routeProvider.when(path, route);
+  };
+}]);
+
+
 import Register from '../components/utils/register';
 
 // colors
@@ -74,22 +88,23 @@ module.controller('DashboardCtrl', DashboardCtrl)
 // config routes
 module.config(function ($routeProvider) {
   $routeProvider
-    .when('/', {
+    .accessWhen('/', {
       templateUrl: 'app/dashboard/dashboard.html',
       controller: 'DashboardCtrl'
     })
-    .when('/login', {
+    .accessWhen('/login', {
       templateUrl: 'app/main/login.html',
       controller: 'LoginCtrl'
     })
     .otherwise({
       redirectTo: '/'
+
     });
 
 
   // add demo page
   if (DEV) {
-    $routeProvider.when('/demo-components', {
+    $routeProvider.accessWhen('/demo-components', {
       templateUrl: 'app/demo-components/demo-components.html',
       controller: 'DemoComponentsCtrl',
       controllerAs: 'demoComponentsCtrl'

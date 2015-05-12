@@ -44,6 +44,8 @@ class CodenvyUser {
 
     this.isLogged = false;
 
+    this.userPromise = null;
+
   }
 
 
@@ -63,11 +65,18 @@ class CodenvyUser {
    * Gets the user data
    */
   fetchUser() {
+    if (this.userPromise) {
+      return this.userPromise;
+    }
     this.user = this.remoteUserAPI.get();
     let promise = this.user.$promise;
     // check if if was OK or not
-    let updatePromise = promise.then(() => {this.isLogged = true;}, () => {this.isLogged = false;});
-    return updatePromise;
+    this.userPromise = promise.then(() => {
+      this.isLogged = true;
+    }, () => {
+      this.isLogged = false;
+    });
+    return this.userPromise;
   }
 
 

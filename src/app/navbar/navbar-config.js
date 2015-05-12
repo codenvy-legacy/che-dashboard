@@ -31,12 +31,12 @@ class NavbarConfig {
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.when('/account', {
+      $routeProvider.accessWhen('/account', {
         templateUrl: 'app/navbar/account/account.html',
         controller: 'AccountCtrl',
         controllerAs: 'accountCtrl'
       })
-        .when('/billing', {
+        .accessWhen('/billing', {
           templateUrl: 'app/navbar/billing/billing.html',
           controller: 'BillingCtrl',
           controllerAs: 'billingCtrl'
