@@ -1,0 +1,24 @@
+<div class="cdvy-select">
+  <!-- Mobile version -->
+  <md-input-container hide-gt-md>
+    <label>{{labelName}}</label>
+    <select ng-model="valueModel"
+            name="{{selectName}}">
+      <option value="">{{placeHolder}}</option>
+    </select>
+  </md-input-container>
+
+  <!-- Desktop version -->
+  <div class="cdvy-select-desktop" hide-sm hide-md layout="column" flex>
+    <div layout="row" flex layout-align="space-around start">
+      <label flex="15" class="cdvy-select-desktop-label">{{labelName}}: </label>
+      <div layout="column" class="cdvy-select-desktop-value-column" flex="85">
+        <select ng-model="valueModel"
+                name="{{selectName}}">
+          <option value="">{{placeHolder}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+</div>

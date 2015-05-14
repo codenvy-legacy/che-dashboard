@@ -30,7 +30,8 @@ class CodenvyProfile {
 
     // remote call
     this.remoteProfileAPI = this.$resource('/api/profile',{}, {
-      getById: {method: 'GET', url: '/api/profile/:userId'}
+      getById: {method: 'GET', url: '/api/profile/:userId'},
+      setAttributes: {method: 'POST', url: '/api/profile'}
     });
 
     // remote call for preferences
@@ -104,7 +105,16 @@ class CodenvyProfile {
     return this.$q.all([profilePromise, profilePrefsPromise]);
   }
 
+  /**
+   * Set the profile attributes data
+   * @param attributes
+   * @returns {$promise|*|T.$promise}
+   */
+  setAttributes(attributes) {
+    let promise = this.remoteProfileAPI.setAttributes(attributes).$promise;
 
+    return promise;
+  }
 
   /**
    * Fetch the profile from the given userId

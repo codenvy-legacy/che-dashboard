@@ -2,7 +2,7 @@
             cdvy-name="firstName"
             cdvy-label-name="First name"
             cdvy-place-holder="First Name"
-            ng-model="accountProfileCtrl.profile.firstname"
+            ng-model="accountProfileCtrl.profile.attributes.firstName"
             required
             ng-maxlength="128">
   <div ng-message="required">A name is required.</div>
@@ -12,10 +12,10 @@
             cdvy-name="lastName"
             cdvy-label-name="Last name"
             cdvy-place-holder="Last Name"
-            ng-model="accountProfileCtrl.profile.lastname"
+            ng-model="accountProfileCtrl.profile.attributes.lastName"
             required
             ng-maxlength="128">
-  <div ng-message="required">A name is required.</div>
+  <div ng-message="required">A last name is required.</div>
   <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
 </cdvy-input>
 
@@ -23,23 +23,26 @@
             cdvy-name="phone"
             cdvy-label-name="Phone"
             cdvy-place-holder="phone"
-            ng-model="accountProfileCtrl.profile.phone"
-            ng-maxlength="128">
-  <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+            cdvy-pattern="(^[+]{0,1}[0-9-]{0,}$)"
+            ng-model="accountProfileCtrl.profile.attributes.phone"
+            ng-maxlength="15"
+            ng-minlength="4"
+            required>
+  <div ng-message="pattern">Should be numbers and may start with a '+'.</div>
+  <div ng-message="required">A phone number is required.</div>
+  <div ng-message="minlength">The phone number  has to be more than 4 characters long.</div>
+  <div ng-message="maxlength">The phone number has to be less than 15 characters long.</div>
 </cdvy-input>
-<cdvy-input cdvy-form="profileInformationForm"
-            cdvy-name="country"
-            cdvy-label-name="Country"
-            cdvy-place-holder="country"
-            ng-model="accountProfileCtrl.profile.country"
-            ng-maxlength="128">
-  <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
-</cdvy-input>
+<cdvy-select cdvy-label-name="Country"
+             cdvy-option-values="accountProfileCtrl.countries"
+             cdvy-place-holder="Select Your Country"
+             ng-model="accountProfileCtrl.profile.attributes.country">
+</cdvy-select>
 <cdvy-input cdvy-form="profileInformationForm"
             cdvy-name="department"
-            cdvy-label-name="Company"
-            cdvy-place-holder="Company"
-            ng-model="accountProfileCtrl.profile.company"
+            cdvy-label-name="Department name"
+            cdvy-place-holder="Department"
+            ng-model="accountProfileCtrl.profile.attributes.departmentname"
             ng-maxlength="128">
   <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
 </cdvy-input>
@@ -47,7 +50,7 @@
             cdvy-name="jobtitle"
             cdvy-label-name="Job title"
             cdvy-place-holder="Job title"
-            ng-model="accountProfileCtrl.profile.jobtitle"
+            ng-model="accountProfileCtrl.profile.attributes.jobtitle"
             ng-maxlength="128">
   <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
 </cdvy-input>

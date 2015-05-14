@@ -35,6 +35,9 @@ import Register from '../components/utils/register';
 // colors
 import Colors from './colors/codenvy-color.constant.js';
 
+// countries
+import Countries from './countries/codenvy-countries.constant.js';
+
 // import components
 import ComponentsConfig from '../components/components-config';
 

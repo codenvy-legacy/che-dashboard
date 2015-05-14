@@ -175,6 +175,16 @@ class CodenvyHttpBackend {
     this.profilesMap.put(profile.id, profile);
   }
 
+
+  /**
+   * Set attributes of the current user
+   * @param attributes
+   */
+  setAttributes(attributes) {
+    this.httpBackend.when('POST', '/api/profile').respond(attributes);
+    this.defaultProfile.attributes = attributes;
+  }
+
   /**
    * Add the given project templates
    * @param projectTemplates

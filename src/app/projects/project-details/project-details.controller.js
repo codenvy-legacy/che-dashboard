@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Constroller for a project details
+ * Controller for a project details
  * @author Florent Benoit
  * @author Oleksii Orel
  */
@@ -40,9 +40,9 @@ class ProjectDetailsCtrl {
     let promise = codenvyAPI.getProject().getProjectDetails(this.askedWorkspaceId, this.askedProjectName);
 
     promise.then((projectDetails) => {
-      this.oldName = projectDetails.name;
-      this.oldDescription = projectDetails.description;
-      this.oldVisibility = projectDetails.visibility;
+      this.oldName = angular.copy(projectDetails.name);
+      this.oldDescription = angular.copy(projectDetails.description);
+      this.oldVisibility = angular.copy(projectDetails.visibility);
       this.projectDetails = projectDetails;
       this.loading = false;
     }, (error) => {
@@ -65,7 +65,6 @@ class ProjectDetailsCtrl {
   }
 
   setProjectDetails(projectDetails) {
-
     let promise = this.codenvyAPI.getProject().updateProjectDetails(projectDetails);
 
     promise.then(() => {
@@ -80,20 +79,27 @@ class ProjectDetailsCtrl {
 
   }
 
-  updateInfo(isDisabled) {
-    if (isDisabled) {
+  isNameChanged() {
+    return this.oldName !== this.projectDetails.name;
+  }
+
+  isDescriptionChanged() {
+    return this.oldDescription !== this.projectDetails.description;
+  }
+
+  updateInfo(isInputFormValid) {
+    if (!isInputFormValid || !(this.isNameChanged() || this.isDescriptionChanged())) {
       return;
     }
 
-    if (this.oldName === this.projectDetails.name) {
+    if (!this.isNameChanged()) {
       this.setProjectDetails(this.projectDetails);
     } else {
-
       let promise = this.codenvyAPI.getProject().rename(this.projectDetails.workspaceId, this.oldName, this.projectDetails.name);
 
       promise.then(() => {
         this.oldName = this.projectDetails.name;
-        if (this.oldDescription === this.projectDetails.description) {
+        if (!this.isDescriptionChanged()) {
           this.codenvyNotificationService.showInfo('Profile successfully updated.');
           this.updateLocation();
         } else {

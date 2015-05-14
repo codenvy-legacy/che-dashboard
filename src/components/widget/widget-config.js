@@ -46,3 +46,5 @@ import CodenvyToggle from './toggle-button/cdvy-toggle.directive';
 import CodenvyToolbar from './toolbar/toolbar.directive';
 
 import CodenvyLabel from './label/cdvy-label.directive';
+
+import CodenvySelect from './select/cdvy-select.directive';

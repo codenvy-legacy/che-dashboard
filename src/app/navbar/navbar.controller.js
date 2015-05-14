@@ -16,7 +16,7 @@ class NavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($mdSidenav, userDashboardConfig, codenvyAPI) {
+  constructor($scope, $mdSidenav, userDashboardConfig, codenvyAPI) {
     this.mdSidenav = $mdSidenav;
     this.codenvyAPI = codenvyAPI;
     this.links =[{href:'#/projects', name:'List Projects'}
@@ -24,6 +24,14 @@ class NavBarCtrl {
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
     this.profile = codenvyAPI.getProfile().getProfile();
+
+    $scope.$watch('navbarCtrl.profile', (newVal) => {
+      if(!newVal) {
+        return;
+      }
+      this.updateData();
+    }, true);
+
     this.fullName = '';
     this.email = '';
 
@@ -37,10 +45,11 @@ class NavBarCtrl {
    * Update current full name and email
    */
   updateData() {
-    this.fullName = this.codenvyAPI.getProfile().getFullName();
-    if(this.profile.attributes) {
-      this.email = this.profile.attributes.email;
+    if(!this.profile.attributes) {
+      return;
     }
+    this.fullName = this.codenvyAPI.getProfile().getFullName();
+    this.email = this.profile.attributes.email;
     this.admin = false; // hardcoded until we know how to check it
     this.updated = true;
   }

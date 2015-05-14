@@ -1,0 +1,22 @@
+.cdvy-select select
+  background inherit
+  border-width 0 0 1px 0
+  border-color $default-border-color
+
+.cdvy-select select.disabled
+  color $disabled-color
+
+.cdvy-select select option:first-child
+  display none
+
+.cdvy-select select.disabled option:not(:first-child)
+  color $label-primary-color
+
+.cdvy-select-desktop select:focus
+  border-color $primary-color
+
+.cdvy-select-desktop
+  margin-top 5px
+  margin-bottom 20px
+
+
