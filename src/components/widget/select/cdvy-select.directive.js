@@ -13,11 +13,11 @@
 import Register from '../../utils/register';
 
 /**
- * Defines a directive for creating input that are working either on desktop or on mobile devices.
+ * Defines a directive for creating select that are working either on desktop or on mobile devices.
  * It will change upon width of the screen
- * @author Florent Benoit
+ * @author Oleksii Orel
  */
-class CodenvyInput {
+class CodenvySelect {
 
   /**
    * Default constructor that is using resource
@@ -25,33 +25,33 @@ class CodenvyInput {
    */
   constructor () {
     this.restrict='E';
+
     this.replace= true;
     this.transclude= true;
-    this.templateUrl = 'components/widget/input/cdvy-input.html';
+    this.templateUrl = 'components/widget/select/cdvy-select.html';
 
     // we require ngModel as we want to use it inside our directive
     this.require = ['ngModel'];
 
     // scope values
     this.scope = {
-      valueModel : '=ngModel',
-      inputName:'@cdvyName',
-      labelName:'@cdvyLabelName',
+      value : '=ngModel',
+      selectName:'@cdvyName',
+      labelName: '@cdvyLabelName',
       placeHolder:'@cdvyPlaceHolder',
-      pattern: '@cdvyPattern',
       myForm: '=cdvyForm',
-      ctrl: '=cdvyController'
-
+      optionValues: '=cdvyOptionValues'
     };
 
-  }
+  };
 
 
   compile(element, attrs) {
+
     var keys = Object.keys(attrs);
 
-    // search the input field
-    var inputElement = element.find('input');
+    // search the select field
+    var selectElements = element.find('select');
 
     keys.forEach((key) => {
 
@@ -75,13 +75,7 @@ class CodenvyInput {
       }
 
       // set the value of the attribute
-      inputElement.attr(attrs.$attr[key], value);
-
-
-      //add also the material version of max length (only one the first input which is the md-input)
-      if ('ngMaxlength' === key) {
-        inputElement.eq(0).attr('md-maxlength', value);
-      }
+      selectElements.attr(attrs.$attr[key], value);
 
       element.removeAttr(attrs.$attr[key]);
 
@@ -91,23 +85,50 @@ class CodenvyInput {
   }
 
 
-
   /**
    * Keep reference to the model controller
    */
   link($scope, element, attr) {
-    $scope.$watch('myForm.desk' + $scope.inputName + '.$pristine', (isPristine) => {
+    $scope.$watch('myForm.desk' + $scope.selectName + '.$pristine', (isPristine) => {
       if (isPristine) {
         element.addClass('desktop-pristine');
       } else {
         element.removeClass('desktop-pristine');
       }
+
+      $scope.$watch('valueModel', (newVal) => {
+        if(typeof newVal === "undefined") {
+          return;
+        }
+
+        $scope.value = newVal;
+
+        angular.forEach(selectElements, function(selectElement) {
+          selectElement.className = newVal === '' ? 'disabled' : '';
+        });
+      });
+
+      // search the select field
+      var selectElements = element.find('select');
+
+      var content = '';
+      $scope.optionValues.forEach((optionValue) => {
+        content += '<option  value=\'' + (optionValue.id ? optionValue.id : optionValue.name) + '\'>' + optionValue.name + '</option>';
+      });
+
+      // Append the value elements in the select element
+      selectElements.append(content);
+
+      angular.forEach(selectElements, function(selectElement) {
+        selectElement.value = $scope.value;
+      });
+
     });
 
   }
 
 }
 
-export default CodenvyInput;
+export default CodenvySelect;
 
-Register.getInstance().directive('cdvyInput', CodenvyInput);
+Register.getInstance().directive('cdvySelect', CodenvySelect);

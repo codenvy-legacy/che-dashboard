@@ -2,7 +2,7 @@
   <!-- Mobile version -->
   <md-input-container hide-gt-md>
     <label>{{labelName}}</label>
-    <input type="text" name="{{inputName}}" ng-trim="false" data-ng-model="valueModel" >
+    <input type="text" name="{{inputName}}" pattern="{{pattern}}"  ng-trim="false" data-ng-model="valueModel" >
     <!-- display error messages for the form -->
     <div ng-messages="myForm.{{inputName}}.$error" ng-transclude></div>
   </md-input-container>
@@ -13,7 +13,7 @@
       <label flex="15" class="cdvy-input-desktop-label">{{labelName}}: </label>
 
       <div layout="column" class="cdvy-input-desktop-value-column" flex="85">
-        <input type="text" placeholder="{{placeHolder}}" ng-trim="false" name="desk{{inputName}}" data-ng-model="valueModel">
+        <input type="text" placeholder="{{placeHolder}}" ng-trim="false" name="desk{{inputName}}" pattern="{{pattern}}" data-ng-model="valueModel">
         <!-- display error messages for the form -->
         <div ng-messages="myForm.desk{{inputName}}.$error" ng-transclude></div>
       </div>

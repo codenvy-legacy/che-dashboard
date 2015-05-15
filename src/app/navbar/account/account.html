@@ -19,7 +19,11 @@
       <cdvy-panel cdvy-title="Your Information">
         <ng-form name="profileInformationForm">
           <account-profile></account-profile>
-          <cdvy-button-default cdvy-button-title="edit"></cdvy-button-default>
+          <cdvy-button-default
+            cdvy-button-title="edit"
+            ng-click="accountCtrl.setProfileAttributes(profileInformationForm.$valid)"
+            ng-disabled="profileInformationForm.$invalid || !accountCtrl.isAttributesChanged()">
+          </cdvy-button-default>
         </ng-form>
       </cdvy-panel>
     </cdvy-tab>

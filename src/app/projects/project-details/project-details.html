@@ -45,9 +45,8 @@
             <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
           </cdvy-input>
         </ng-form>
-        <cdvy-button-primary ng-disabled="updateButtondisabled = projectInformationForm.deskname.$invalid || projectInformationForm.deskdescription.$invalid
-        || (projectDetailsCtrl.oldName === projectDetailsCtrl.projectDetails.name && projectDetailsCtrl.oldDescription === projectDetailsCtrl.projectDetails.description)"
-                             cdvy-button-title="Update" name="updateButton" ng-click="projectDetailsCtrl.updateInfo(updateButtondisabled)"/>
+        <cdvy-button-primary ng-disabled="projectInformationForm.$invalid || !(projectDetailsCtrl.isNameChanged() || projectDetailsCtrl.isDescriptionChanged())"
+                             cdvy-button-title="Update" name="updateButton" ng-click="projectDetailsCtrl.updateInfo(projectInformationForm.$valid)"/>
       </cdvy-panel>
       <cdvy-panel cdvy-title="Workspace">
         <div layout="column" flex layout-align="space-around start">
