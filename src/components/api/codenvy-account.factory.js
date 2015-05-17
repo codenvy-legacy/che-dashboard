@@ -31,7 +31,8 @@ class CodenvyAccount {
     // remote call
     this.remoteAccountAPI = this.$resource('/api/account',{}, {
       getByID: {method: 'GET', url: '/api/account/:accountId'},
-      getSubscriptions: {method: 'GET', url: '/api/account/:accountId/subscriptions', isArray: true}
+      getSubscriptions: {method: 'GET', url: '/api/account/:accountId/subscriptions', isArray: true},
+      addSubscription: {method: 'POST', url: '/api/account/subscriptions/'}
     });
 
     // fetch the accounts when we're initialized
@@ -104,6 +105,17 @@ class CodenvyAccount {
   getSubscriptions(accountId) {
     return this.subscriptionsPerAccount.get(accountId);
   }
+
+  addSubscription(accountId, planId, usePaymentSystem) {
+    let data = {};
+    data.accountId = accountId;
+    data.planId = planId;
+    data.usePaymentSystem = usePaymentSystem;
+
+    return this.remoteAccountAPI.addSubscription(data).$promise;
+  }
+
+
 }
 
 // Register this factory

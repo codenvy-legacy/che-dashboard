@@ -157,11 +157,11 @@ class SubscriptionCtrl {
   }
 
   cancelPrePaid($window) {
-    $window.location.href =  'mailto:sales@codenvy.com?subject=' + escape('Cancellation of Pre-Paid Subscription');
+    $window.location.href =  'mailto:sales@codenvy.com?subject=' + encodeURIComponent('Cancellation of Pre-Paid Subscription');
   }
 
   cancelOnPrem($window) {
-    $window.location.href =  'mailto:sales@codenvy.com?subject=' + escape('Cancellation of On-Prem Subscription');
+    $window.location.href =  'mailto:sales@codenvy.com?subject=' + encodeURIComponent('Cancellation of On-Prem Subscription');
   }
 
 
