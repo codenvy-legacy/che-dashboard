@@ -41,13 +41,13 @@ class CodenvyInput {
       pattern: '@cdvyPattern',
       myForm: '=cdvyForm',
       ctrl: '=cdvyController'
-
     };
 
   }
 
 
   compile(element, attrs) {
+
     var keys = Object.keys(attrs);
 
     // search the input field
@@ -90,12 +90,18 @@ class CodenvyInput {
 
   }
 
-
-
   /**
    * Keep reference to the model controller
    */
   link($scope, element, attr) {
+    $scope.$watch(function() { return element.is(':visible'); }, function() {
+      //Since there are two inputs (for mobile and desktop versions) - add id attr only for visible one:
+      if (attr.id) {
+        element.find('input:hidden').removeAttr('id');
+        element.find('input:visible').attr('id', attr.id);
+      }
+    });
+
     $scope.$watch('myForm.desk' + $scope.inputName + '.$pristine', (isPristine) => {
       if (isPristine) {
         element.addClass('desktop-pristine');
@@ -103,9 +109,7 @@ class CodenvyInput {
         element.removeClass('desktop-pristine');
       }
     });
-
   }
-
 }
 
 export default CodenvyInput;

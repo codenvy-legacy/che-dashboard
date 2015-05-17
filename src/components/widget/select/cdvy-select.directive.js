@@ -43,7 +43,7 @@ class CodenvySelect {
       optionValues: '=cdvyOptionValues'
     };
 
-  };
+  }
 
 
   compile(element, attrs) {
@@ -97,7 +97,7 @@ class CodenvySelect {
       }
 
       $scope.$watch('valueModel', (newVal) => {
-        if(typeof newVal === "undefined") {
+        if(typeof newVal === 'undefined') {
           return;
         }
 
