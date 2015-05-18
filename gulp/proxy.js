@@ -22,7 +22,7 @@ var serverOptions = {
 
 var options = minimist(process.argv.slice(2), serverOptions);
 
-var patterns = ['/api', '/ws', '/datasource', '/java-ca'];
+var patterns = ['/api', '/ws', '/datasource', '/java-ca', '/im'];
 
 var proxies = []
 
