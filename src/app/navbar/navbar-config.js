@@ -16,7 +16,6 @@ import NavBar from '../navbar/navbar.directive.js';
 import AccountProfileCtrl from './account/profile/account-profile.controller';
 import AccountProfile from './account/profile/account-profile.directive';
 import AccountCtrl from '../navbar/account/account.controller';
-import BillingCtrl from '../navbar/billing/billing.controller';
 
 class NavbarConfig {
 
@@ -27,7 +26,6 @@ class NavbarConfig {
     register.controller('AccountProfileCtrl', AccountProfileCtrl);
     register.controller('NavbarCtrl', NavBarCtrl);
     register.controller('AccountCtrl', AccountCtrl);
-    register.controller('BillingCtrl', BillingCtrl);
 
     // config routes
     register.app.config(function ($routeProvider) {
@@ -35,14 +33,8 @@ class NavbarConfig {
         templateUrl: 'app/navbar/account/account.html',
         controller: 'AccountCtrl',
         controllerAs: 'accountCtrl'
-      })
-        .accessWhen('/billing', {
-          templateUrl: 'app/navbar/billing/billing.html',
-          controller: 'BillingCtrl',
-          controllerAs: 'billingCtrl'
-        });
+      });
     });
-
   }
 }
 

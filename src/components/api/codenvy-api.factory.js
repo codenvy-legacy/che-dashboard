@@ -21,6 +21,7 @@ import CodenvyProject from './codenvy-project.factory';
 import CodenvyWorkspace from './codenvy-workspace.factory';
 import CodenvyUser from './codenvy-user.factory';
 import CodenvyAccount from './codenvy-account.factory';
+import CodenvyPayment from './codenvy-payment.factory';
 import CodenvyProfile from './codenvy-profile.factory';
 import CodenvyFactory from './codenvy-factory.factory';
 import CodenvyProjectType from './codenvy-project-type.factory';
@@ -38,12 +39,13 @@ class CodenvyAPI {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyUser, codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket) {
+  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyUser, codenvyPayment, codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
     this.codenvyAccount = codenvyAccount;
     this.codenvyUser = codenvyUser;
+    this.codenvyPayment = codenvyPayment;
     this.codenvyProfile = codenvyProfile;
     this.codenvyProjectType = codenvyProjectType;
     this.codenvyProjectTemplate = codenvyProjectTemplate;
@@ -59,6 +61,14 @@ class CodenvyAPI {
    */
   getAccount() {
     return this.codenvyAccount;
+  }
+
+  /**
+   * The Codenvy Payment API
+   * @returns {CodenvyAPI.codenvyPayment|*}
+   */
+  getPayment() {
+    return this.codenvyPayment;
   }
 
   /**

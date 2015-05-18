@@ -11,6 +11,14 @@
 'use strict';
 
 class BillingCtrl {
+
+  /**
+   * Default constructor that is using resource injection
+   * @ngInject for Dependency injection
+   */
+  constructor (codenvyAPI) {
+    this.codenvyAPI = codenvyAPI;
+  }
 }
 
 export default BillingCtrl;

@@ -28,12 +28,24 @@
       </cdvy-panel>
     </cdvy-tab>
     <cdvy-tab cdvy-title="Billing" cdvy-icon="material-design icon-ic_credit_card_24px">
-      <cdvy-panel cdvy-title="Your Information">
-        <ng-form name="profileInformationForm">
-          <account-profile></account-profile>
-          <cdvy-button-default cdvy-button-title="edit"></cdvy-button-default>
-        </ng-form>
-      </cdvy-panel>
+      <div ng-controller="CreditcardCtrl as creditCardCtrl">
+        <cdvy-panel cdvy-title="Add a credit card" ng-show="creditCardCtrl.creditCards.length == 0 && creditCardCtrl.loadedCreditCards">
+          <ng-form name="creditCardInformationForm" id="creditCardInformationForm">
+            <add-creditcard style="display: block;" loaded="{{creditCardCtrl.loadedCreditCards}}" ng-init="creditCardCtrl.setCreditCard(this.addCreditcardCtrl.creditCard);"></add-creditcard>
+            <cdvy-button-default cdvy-button-title="add" ng-disabled="creditCardInformationForm.$invalid" ng-click="creditCardCtrl.addCreditCard();">
+            </cdvy-button-default>
+          </ng-form>
+        </cdvy-panel>
+        <cdvy-panel cdvy-title="Credit Card Information" ng-show="creditCardCtrl.creditCards.length > 0">
+          <div layout="row" layout-align="center center" ng-repeat="card in creditCardCtrl.creditCards">
+            <div layout="column" flex="85" class="creditcard-info">
+              <p>{{card.cardholder}}</p>
+              <p>{{card.type}} ...{{card.number.slice(-4)}} ({{card.expiration}})</p>
+            </div>
+            <cdvy-button-danger flex="15" cdvy-button-title="Remove" ng-click="creditCardCtrl.removeCreditCard(card, $event);"/>
+          </div>
+        </cdvy-panel>
+      </div>
     </cdvy-tab>
     <cdvy-tab cdvy-title="Security" cdvy-icon="material-design icon-ic_settings_24px">
       <cdvy-panel cdvy-title="Your Information">

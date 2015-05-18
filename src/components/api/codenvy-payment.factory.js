@@ -1,0 +1,121 @@
+/*
+ * Copyright (c) 2015 Codenvy, S.A.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Codenvy, S.A. - initial API and implementation
+ */
+'use strict';
+
+import Register from '../utils/register.js';
+Register.getInstance().app.constant('clientTokenPath', '/');//is necessary for Braintree
+
+/**
+ * This class is handling the credit card API.
+ * @author Ann Shumilova
+ */
+class CodenvyPayment {
+
+  /**
+   * Default constructor that is using resource
+   * @ngInject for Dependency injection
+   */
+  constructor ($resource, $braintree, $q) {
+    // keep resource
+    this.$resource = $resource;
+    this.$braintree = $braintree;
+    this.$q = $q;
+
+    this.creditCardsPerAccount = new Map();
+    this.tokensPerAccount = new Map();
+
+    // remote call
+    this.remotePaymentAPI = this.$resource('/api/creditcard/:accountId',{}, {
+      getToken: {method: 'GET', url: '/api/creditcard/:accountId/token'},
+      add: {method: 'POST', url: '/api/creditcard/:accountId'},
+      remove: {method: 'DELETE', url: '/api/creditcard/:accountId/:creditCardNumber'}
+    });
+
+  }
+
+  /**
+   * Gets credit cards list
+   */
+  fetchCreditCards(accountId) {
+    let promise = this.remotePaymentAPI.query({accountId: accountId}).$promise;
+    // check if if was OK or not
+    let parsedResultPromise = promise.then((data) => {
+      this.creditCardsPerAccount.set(accountId, data);
+    });
+    return parsedResultPromise;
+  }
+
+  /**
+   * Gets the list of credit cards by account id.
+   * @returns {Array}
+   */
+  getCreditCards(accountId) {
+    return this.creditCardsPerAccount.get(accountId);
+  }
+
+  /**
+   * Gets the client token to add credit card.
+   */
+  getClientToken(accountId) {
+    let promise = this.remotePaymentAPI.getToken({accountId: accountId}).$promise;
+    // check if if was OK or not
+    let parsedResultPromise = promise.then((data) => {
+      this.tokensPerAccount.set(accountId, data.token);
+    });
+    return parsedResultPromise;
+  }
+
+  /**
+   * Adds credit card data to the pointed account.
+   */
+  addCreditCard(accountId, creditCard) {
+    var client;
+    var remotePaymentAPI = this.remotePaymentAPI;
+    var mainCreditCardInfo = {};
+    mainCreditCardInfo.number = creditCard.number;
+    mainCreditCardInfo.cardholderName = creditCard.cardholder;
+    mainCreditCardInfo.expirationDate = creditCard.expires.replace(/ /g, '');
+    mainCreditCardInfo.cvv = creditCard.cvv;
+    mainCreditCardInfo.billingAddress = {};
+   // mainCreditCardInfo.billingAddress = {postalCode: creditCard.postalCode};
+    var defer = this.$q.defer();
+
+    this.getClientToken(accountId).then(() => {
+      client = new this.$braintree.api.Client({
+        clientToken: this.tokensPerAccount.get(accountId)
+      });
+
+      client.tokenizeCard(mainCreditCardInfo, function (err, nonce) {
+        var newCreditCard = {nonce: nonce};
+        newCreditCard.state = creditCard.state;
+        newCreditCard.country = creditCard.country;
+        newCreditCard.streetAddress = creditCard.streetAddress;
+        newCreditCard.city = creditCard.city;
+
+        remotePaymentAPI.add({accountId: accountId}, newCreditCard).$promise.then(() => {
+          defer.resolve();
+        });
+
+      });
+    });
+    return defer.promise;
+  }
+
+  /**
+   * Removes credit card by it's number in the pointed account.
+   */
+  removeCreditCard(accountId, creditCardNumber) {
+    return this.remotePaymentAPI.remove({accountId: accountId, creditCardNumber: creditCardNumber}).$promise;
+  }
+}
+
+// Register this factory
+Register.getInstance().factory('codenvyPayment', CodenvyPayment);
