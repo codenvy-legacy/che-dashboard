@@ -17,6 +17,8 @@ import CodenvyButtonPrimary from './button/cdvy-button-primary.directive';
 import CodenvyButtonDanger from './button/cdvy-button-danger.directive';
 import CodenvyButtonDefault from './button/cdvy-button-default.directive';
 
+import CodenvyLink from './link/cdvy-link.directive';
+
 import CodenvyButtonDropdownCtrl from './button-dropdown/cdvy-button-dropdown.controller';
 import CodenvyButtonDropdown from './button-dropdown/cdvy-button-dropdown.directive';
 
