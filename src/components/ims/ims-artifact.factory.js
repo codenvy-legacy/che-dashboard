@@ -11,6 +11,7 @@
 'use strict';
 
 import Register from '../utils/register.js';
+import dictionary from './dictionary';
 
 /**
  * This class is handling the interface with Installation Manager Server (IMS) part of the API that relates to artifacts.
@@ -21,7 +22,8 @@ class ImsArtifactApi {
    * Default constructor for the artifact API.
    * @ngInject for Dependency injection
    */
-  constructor($resource) {
+  constructor($resource, $q) {
+    this.$q = $q;
 
     // remote call
     this.remoteImsAPI = $resource('/im', {}, {
@@ -64,9 +66,9 @@ class ImsArtifactApi {
     let installPromise = this.getInstalledArtifactsList();
     let downloadedPromise = this.getDownloadedArtifactsList();
     let availablePromise = this.getAvailableArtifactsList();
-    let all = Promise.all([installPromise, downloadedPromise, availablePromise]);
+    let all = this.$q.all([installPromise, downloadedPromise, availablePromise]);
 
-    return all.then((results) => this.consolidateArtifacts(results));
+    return all.then(results => this.consolidateArtifacts(results));
   }
 
   /**
@@ -123,6 +125,34 @@ class ImsArtifactApi {
 
     return artifacts;
   }
+
+  getArtifactDisplayName(artifact) {
+    let entry = dictionary.artifacts[artifact];
+    if (entry) {
+      return entry.display;
+    } else {
+      return artifact;
+    }
+  }
+
+  getArtifactDescription(artifact) {
+    let entry = dictionary.artifacts[artifact];
+    if (entry) {
+      return entry.description;
+    } else {
+      return ;
+    }
+  }
+
+  getArtifactReleaseNotesUrl(artifact) {
+    let entry = dictionary.artifacts[artifact];
+    if (entry) {
+      return entry.releaseNotes;
+    } else {
+      return undefined;
+    }
+  }
+
 }
 
 // Register this factory
