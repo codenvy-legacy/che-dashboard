@@ -16,11 +16,19 @@ class LoginCtrl {
 
     $scope.username = 'test';
     $scope.password = 'test';
+    $scope.realm = '';
+    var loginData;
+
     $scope.submit = function () {
+      if ($scope.realm !== '') {
+        loginData = {'username': $scope.username, 'password': $scope.password, 'realm': $scope.realm};
+      } else {
+        loginData = {'username': $scope.username, 'password': $scope.password};
+      }
       $http({
         url: '/api/auth/login',
         method: 'POST',
-        data: { 'username': $scope.username, 'password': $scope.password}
+        data: loginData
       }).then(function (response) {
         $cookies.token = response.data.value;
         $cookies.refreshStatus = 'DISABLED';
