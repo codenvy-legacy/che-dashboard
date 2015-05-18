@@ -151,7 +151,7 @@ class CheckLogin {
     let user = this.codenvyUser.getUser();
 
     // User has not logged in, redirect it to login page (dev mode only)
-    if (!user.$resolved || !user.email) {
+    if (!user.$resolved) {
       return {route:"/login"};
     }
     return {};

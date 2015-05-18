@@ -45,13 +45,14 @@ class NavBarCtrl {
    * Update current full name and email
    */
   updateData() {
+
+    this.admin = false; // hardcoded until we know how to check it
+    this.updated = true;
     if(!this.profile.attributes) {
       return;
     }
     this.fullName = this.codenvyAPI.getProfile().getFullName();
     this.email = this.profile.attributes.email;
-    this.admin = false; // hardcoded until we know how to check it
-    this.updated = true;
   }
 
   /**
