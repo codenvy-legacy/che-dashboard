@@ -21,6 +21,10 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     this.imsSubscriptionApi = imsSubscriptionApi;
 
     this.hideAllMessages();
+
+    this.forgotPasswordUrl = 'https://codenvy.com/site/recover-password';
+    this.signUpUrl = 'https://codenvy.com/site/create-account';
+    this.upgradeSubscriptionUrl = 'https://codenvy.com/buy';
   }
 
   loginDisabled() {
