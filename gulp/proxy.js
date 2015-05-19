@@ -29,7 +29,11 @@ var proxies = []
 
 patterns.forEach(function(pattern) {
   var proxyOptions = url.parse(options.server + pattern);
-  proxyOptions.route = '/api';
+  if (pattern === '/im') {
+    proxyOptions.route = '/im';
+  } else {
+    proxyOptions.route = '/api';
+  }
   proxyOptions.preserveHost = false;
   proxies.push(proxy(proxyOptions));
 
