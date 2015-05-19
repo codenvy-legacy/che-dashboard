@@ -22,15 +22,17 @@ class CodenvyUser {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource) {
+  constructor ($resource, $q) {
 
     // keep resource
     this.$resource = $resource;
+    this.$q = $q;
 
     // remote call
     this.remoteUserAPI = this.$resource('/api/user',{}, {
       findByID: {method: 'GET', url: '/api/user/:userId'},
-      findByEmail: {method: 'GET', url: '/api/user/find?email=:userEmail'}
+      findByEmail: {method: 'GET', url: '/api/user/find?email=:userEmail'},
+      inRole: {method: 'GET', url: '/api/user/inrole?role=:role&scope=:scope&scopeId=:scopeId'}
     });
 
     // users by ID
@@ -38,6 +40,9 @@ class CodenvyUser {
 
     // users by email
     this.userEmailMap = new Map();
+
+    // user roles
+    this.isUserInRoleMap = new Map();
 
     // fetch the user when we're initialized
     this.fetchUser();
@@ -64,11 +69,22 @@ class CodenvyUser {
   /**
    * Gets the user data
    */
-  fetchUser() {
-    if (this.userPromise) {
+  refetchUser() {
+    return this.fetchUser(true);
+  }
+
+  /**
+   * Gets the user data
+   */
+  fetchUser(ignoreCache) {
+    if (!ignoreCache && this.userPromise) {
       return this.userPromise;
     }
     this.user = this.remoteUserAPI.get();
+
+    // check admin or not
+    let isAdminPromise = this.fetchIsUserInRole('admin', 'system', '');
+
     let promise = this.user.$promise;
     // check if if was OK or not
     this.userPromise = promise.then(() => {
@@ -76,7 +92,7 @@ class CodenvyUser {
     }, () => {
       this.isLogged = false;
     });
-    return this.userPromise;
+    return this.$q.all([this.userPromise, isAdminPromise]);;
   }
 
 
@@ -107,6 +123,25 @@ class CodenvyUser {
   getUserFromEmail(userEmail) {
     return this.userEmailMap.get(userEmail);
   }
+
+  fetchIsUserInRole(role, scope, scopeId) {
+    let promise = this.remoteUserAPI.inRole({role: role, scope: scope, scopeId: scopeId}).$promise;
+    let parsedResultPromise = promise.then((userInRole) => {
+      this.isUserInRoleMap.set(scope + '/' + role + ':' + scopeId, userInRole);
+    });
+    return parsedResultPromise;
+  }
+
+  /**
+   * Check if useris admin or not by checking the system admin role
+   * @returns {*}
+   */
+  isAdmin() {
+    let userInRole = this.isUserInRoleMap.get('system/admin:');
+    return userInRole && userInRole.isInRole;
+  }
+
+
 
 }
 

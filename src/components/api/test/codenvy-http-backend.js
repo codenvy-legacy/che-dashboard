@@ -57,6 +57,7 @@ class CodenvyHttpBackend {
     for (let key of userKeys) {
       this.httpBackend.when('GET', '/api/user/' + key).respond(this.usersMap.get(key));
     }
+    this.httpBackend.when('GET', '/api/user/inrole?role=admin&scope=system&scopeId=').respond(false);
 
     //profiles
     this.httpBackend.when('GET', '/api/profile').respond(this.defaultProfile);
