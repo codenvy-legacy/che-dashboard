@@ -29,11 +29,13 @@ class imsConfigApi {
     });
   }
 
+  /**
+   * Returns Installation Manager Server configuration
+   */
   getIMConfig() {
     let request = this.remoteImsAPI.getIMConfig();
     return request.$promise;
   }
-
 }
 
 // Register this factory
