@@ -51,6 +51,10 @@ class OnPremiseOnBoardingRedirect {
     console.log('checking redirect onboarding flow for admin');
     let user = this.codenvyAPI.getUser();
 
+    // if user is simple user, nothing to display
+    if (!user.isAdmin()) {
+      return {};
+    }
     let preferences = this.codenvyAPI.getProfile().getPreferences();
 
     // check role (needs to fixed that when isUserInRole will be merged) FIXME

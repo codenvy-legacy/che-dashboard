@@ -25,7 +25,8 @@ class OnBoardRedirect {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyProfile, routingRedirect) {
+  constructor (codenvyUser, codenvyProfile, routingRedirect) {
+    this.codenvyUser = codenvyUser;
     this.codenvyProfile = codenvyProfile;
     routingRedirect.addRouteCallback(this);
   }
@@ -47,6 +48,14 @@ class OnBoardRedirect {
    * @returns {*}
    */
   checkRedirect() {
+
+
+    // if user is admin, nothing to display
+    if (this.codenvyUser.isAdmin()) {
+      return {};
+    }
+
+
     let preferences = this.codenvyProfile.getPreferences();
 
     // Preferences say that flow hasn't been completed ?
