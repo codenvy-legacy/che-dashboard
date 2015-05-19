@@ -25,9 +25,9 @@ class imsArtifactApi {
 
     // remote call
     this.remoteImsAPI = $resource('/im', {}, {
-      getDownloadedArtifactsList: { method: 'GET', url: '/im/download/list' },
-      getInstalledArtifactsList: { method: 'GET', url: '/im/install/list' },
-      getAvailableArtifactsList: { method: 'GET', url: '/im/download/check' },
+      getDownloadedArtifactsList: { method: 'GET', url: '/im/download' },
+      getInstalledArtifactsList: { method: 'GET', url: '/im/installation' },
+      getAvailableArtifactsList: { method: 'GET', url: '/im/update' },
 
       downloadArtifacts: { method: 'POST', url: '/im/download/start' },
       downloadArtifact: { method: 'POST', url: '/im/download/start?artifact=:artifactName&version=:version' },
