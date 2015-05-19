@@ -25,7 +25,7 @@ class ImsConfigApi {
 
     // remote call
     this.remoteImsAPI = $resource('/im', {}, {
-      getIMConfig: { method: 'GET', url: '/im/config' },
+      getIMConfig: { method: 'GET', url: '/im/config' }
     });
   }
 
