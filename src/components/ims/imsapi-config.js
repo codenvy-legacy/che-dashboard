@@ -10,9 +10,9 @@
  */
 'use strict';
 
-import imsArtifactApi from './ims-artifact.factory';
-import imsConfigApi from './ims-config.factory';
-import imsSaasAuthApi from './ims-saasauth.factory';
-import imsSubscriptionApi from './ims-subscription.factory';
-import imsUpdateApi from './ims-update.factory';
+import './ims-artifact.factory';
+import './ims-config.factory';
+import './ims-saasauth.factory';
+import './ims-subscription.factory';
+import './ims-update.factory';
 
