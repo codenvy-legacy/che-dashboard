@@ -15,7 +15,7 @@ import Register from '../utils/register.js';
 /**
  * This class is handling the interface with Installation Manager Server (IMS) part of the API that relates to artifacts.
  */
-class imsArtifactApi {
+class ImsArtifactApi {
 
   /**
    * Default constructor for the artifact API.
@@ -126,4 +126,4 @@ class imsArtifactApi {
 }
 
 // Register this factory
-Register.getInstance().factory('imsArtifactApi', imsArtifactApi);
+Register.getInstance().factory('imsArtifactApi', ImsArtifactApi);

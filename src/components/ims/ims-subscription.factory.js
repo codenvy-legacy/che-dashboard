@@ -15,7 +15,7 @@ import Register from '../utils/register.js';
 /**
  * This class is handling the interface with Installation Manager Server (IMS) part of the API that relates to subscriptions.
  */
-class imsSubscriptionApi {
+class ImsSubscriptionApi {
 
   /**
    * Default constructor for the subscription API.
@@ -36,4 +36,4 @@ class imsSubscriptionApi {
 }
 
 // Register this factory
-Register.getInstance().factory('imsSubscriptionApi', imsSubscriptionApi);
+Register.getInstance().factory('imsSubscriptionApi', ImsSubscriptionApi);

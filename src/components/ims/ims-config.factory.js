@@ -15,7 +15,7 @@ import Register from '../utils/register.js';
 /**
  * This class is handling the interface with Installation Manager Server (IMS) configuration.
  */
-class imsConfigApi {
+class ImsConfigApi {
 
   /**
    * Default constructorfor the config API.
@@ -39,4 +39,4 @@ class imsConfigApi {
 }
 
 // Register this factory
-Register.getInstance().factory('imsConfigApi', imsConfigApi);
+Register.getInstance().factory('imsConfigApi', ImsConfigApi);
