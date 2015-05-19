@@ -15,4 +15,5 @@ import './ims-config.factory';
 import './ims-saasauth.factory';
 import './ims-subscription.factory';
 import './ims-update.factory';
+import './ims-nodes.factory';
 
