@@ -34,7 +34,7 @@ class LoginCtrl {
         $cookies.refreshStatus = 'DISABLED';
 
         // update user
-        let promise = codenvyAPI.getUser().fetchUser();
+        let promise = codenvyAPI.getUser().refetchUser();
         promise.then(() => {
           $location.path('#/');
         }, () => {
