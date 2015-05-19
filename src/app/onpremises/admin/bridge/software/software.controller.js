@@ -20,8 +20,8 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
     this.imsArtifactApi = imsArtifactApi;
     let artifactsPromise = this.imsArtifactApi.artifacts();
 
-    artifactsPromise.then((result) => { this.artifacts = result; });
-    artifactsPromise.catch((error) => { console.log('artifacts list failed' , error); this.artifacts = undefined; });
+    artifactsPromise.then(result => { console.log('got artifacts data:', result); this.artifacts = result; });
+    artifactsPromise.catch(error => { console.log('artifacts list failed' , error); this.artifacts = undefined; });
   }
 
   downloadArtifact(artifact) {
@@ -38,6 +38,18 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
     } else {
       return false;
     }
+  }
+
+  artifactDisplayName(artifactId) {
+    return this.imsArtifactApi.getArtifactDisplayName(artifactId);
+  }
+
+  artifactDescription(artifactId) {
+    return this.imsArtifactApi.getArtifactDescription(artifactId);
+  }
+
+  releaseNoteUrl(artifactId) {
+    return this.imsArtifactApi.getArtifactReleaseNotesUrl(artifactId);
   }
 }
 

@@ -24,10 +24,10 @@
         <tr><th>Software</th><th>Version</th><th>Version at Codenvy.com</th></tr>
       </thead>
       <tbody>
-        <tr ng-repeat="artifactItem in onPremisesAdminBridgeAvailableSoftwareCtrl.artifacts">
+        <tr ng-repeat="(artifactId, artifactItem) in onPremisesAdminBridgeAvailableSoftwareCtrl.artifacts">
           <td class="onprem-admin-available-software-namecol">
-            <div class="onprem-admin-available-software-namecol-name">{{artifactItem.name}}</div>
-            <div class="onprem-admin-available-software-namecol-desc">{{artifactItem.description}}</div>
+            <div class="onprem-admin-available-software-namecol-name">{{onPremisesAdminBridgeAvailableSoftwareCtrl.artifactDisplayName(artifactId)}}</div>
+            <div class="onprem-admin-available-software-namecol-desc">{{onPremisesAdminBridgeAvailableSoftwareCtrl.artifactDescription(artifactId)}}</div>
           </td>
           <td class="onprem-admin-installed-software-col">{{artifactItem.installed.version}} &nbsp; {{artifactItem.installed.date|date:'yyyy-MM-dd HH:mm'}}</td>
           <td class="onprem-admin-available-software-col">
@@ -35,6 +35,7 @@
             <div ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.showDownloadAction(artifactItem)">
               <cdvy-link ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem)" target="_blank">Download</cdvy-link>
             </div>
+            <cdvy-link ng-href="{{onPremisesAdminBridgeAvailableSoftwareCtrl.releaseNoteUrl(artifactItem.name)}}" target="_blank">Release Notes</cdvy-link>
           </td>
         <tr>
       </tbody>
