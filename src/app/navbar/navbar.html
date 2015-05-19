@@ -24,7 +24,7 @@
   <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
 
   <section class="left-sidebar-menu" layout="column" layout-align="center center">
-    <md-list layout="column" ng-if="navbarCtrl.isSimpleUser()">
+    <md-list layout="column" ng-show="navbarCtrl.isSimpleUser()">
       <md-item>
         <md-item-content ng-show="navbarCtrl.displayLoginItem">
           <div class="md-tile-content">
@@ -50,8 +50,8 @@
       </md-item>
     </md-list>
   </section>
-  <md-divider md-theme="factory-theme"></md-divider>
-  <div class="navbar-menu" ng-if="navbarCtrl.profile.attributes" ng-init="isExpand=true" ng-show="navbarCtrl.isSimpleUser()">
+  <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
+  <div class="navbar-menu" ng-show="navbarCtrl.profile.attributes" ng-init="isExpand=true" ng-show="navbarCtrl.isSimpleUser()">
     <div>
       <img class="developers-face" gravatar-src="navbarCtrl.email">
       <span>{{navbarCtrl.fullName}}</span>
@@ -73,9 +73,9 @@
       </md-list>
     </section>
   </div>
-  <md-divider md-theme="factory-theme" ng-if="navbarCtrl.userIsAdmin()"></md-divider>
+  <md-divider md-theme="factory-theme" ng-show="navbarCtrl.userIsAdmin()"></md-divider>
 
-  <div class="navbar-menu" ng-if="navbarCtrl.userIsAdmin()">
+  <div class="navbar-menu" ng-show="navbarCtrl.userIsAdmin()">
     <div>
       <span>On-Prem Admin</span>
       <i class="material-design icon-ic_expand_more_24px md-tab-themed" ng-click="navbarCtrl.flipOnpremAdminExpanded()">&nbsp;</i>

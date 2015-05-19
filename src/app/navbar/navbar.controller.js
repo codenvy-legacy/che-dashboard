@@ -19,11 +19,17 @@ class NavBarCtrl {
   constructor($scope, $mdSidenav, userDashboardConfig, codenvyAPI) {
     this.mdSidenav = $mdSidenav;
     this.codenvyAPI = codenvyAPI;
+    this.codenvyUser = codenvyAPI.getUser();
     this.links =[{href:'#/projects', name:'List Projects'}
     ];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
     this.profile = codenvyAPI.getProfile().getProfile();
+
+    let promiseUser = this.codenvyUser.fetchUser();
+    promiseUser.then(() => {
+      this.updateAdminRole();
+    });
 
     $scope.$watch('navbarCtrl.profile', (newVal) => {
       if(!newVal) {
@@ -35,24 +41,25 @@ class NavBarCtrl {
     this.fullName = '';
     this.email = '';
 
-    // on-prem admin section
-    this.admin = false;
     this.onpremAdminExpanded = true;
     this.updated = false;
+
   }
 
   /**
    * Update current full name and email
    */
   updateData() {
-
-    this.admin = false; // hardcoded until we know how to check it
     this.updated = true;
     if(!this.profile.attributes) {
       return;
     }
     this.fullName = this.codenvyAPI.getProfile().getFullName();
     this.email = this.profile.attributes.email;
+  }
+
+  updateAdminRole() {
+    this.admin = this.codenvyUser.isAdmin();
   }
 
   /**
@@ -63,11 +70,11 @@ class NavBarCtrl {
   }
 
   userIsAdmin() {
-    return this.admin;
+    return this.codenvyUser.isAdmin();
   }
 
   isSimpleUser() {
-    return !this.admin;
+    return !this.codenvyUser.isAdmin();
   }
 
   flipOnpremAdminExpanded() {
