@@ -39,7 +39,7 @@ class OnPremisesAdminInstallationConfig {
 
     // configure routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.accessWhen('/onpremises/admin/installation', {
+      $routeProvider.accessWhen('/onprem/admin/installation', {
         templateUrl: 'app/onpremises/admin/installation/installation.html',
         controller: 'OnPremisesAdminInstallationCtrl',
         controllerAs: 'onPremisesAdminInstallationCtrl'

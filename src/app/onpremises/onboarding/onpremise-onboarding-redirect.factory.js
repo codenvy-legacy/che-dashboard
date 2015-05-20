@@ -48,8 +48,8 @@ class OnPremiseOnBoardingRedirect {
    * @returns {*}
    */
   checkRedirect() {
-    let user = this.codenvyAPI.getUser();
 
+    let user = this.codenvyAPI.getUser();
     // if user is simple user, nothing to display
     if (!user.isAdmin()) {
       return {};
@@ -58,8 +58,9 @@ class OnPremiseOnBoardingRedirect {
     // check if property is defined on the ims server
     // if not defined, redirect to the onboarding flow
     let property = this.imsPropertiesApi.getProperty('onboardingCompleted');
+
     if (!property  || property !== 'true') {
-        return {route:"/onpremises/onboarding"};
+      return {route:"/onprem/onboarding"};
     }
 
     // flow not yet completed

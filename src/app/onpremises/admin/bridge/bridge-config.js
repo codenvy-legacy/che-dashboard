@@ -32,7 +32,7 @@ class OnPremisesAdminBridgeConfig {
 
     // configure routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.accessWhen('/onpremises/admin/bridge', {
+      $routeProvider.accessWhen('/onprem/admin/bridge', {
         templateUrl: 'app/onpremises/admin/bridge/bridge.html',
         controller: 'OnPremisesAdminBridgeCtrl',
         controllerAs: 'onPremisesAdminBridgeCtrl'

@@ -22,7 +22,7 @@ class OnPremisesOnboardingConfig {
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.accessWhen('/onpremises/onboarding', {
+      $routeProvider.accessWhen('/onprem/onboarding', {
         templateUrl: 'app/onpremises/onboarding/onboarding.html',
         controller: 'OnPremisesOnboardingCtrl',
         controllerAs: 'onPremisesOnboardingCtrl'
