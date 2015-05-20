@@ -25,19 +25,33 @@ class ImsPropertiesApi {
 
     // remote call
     this.remoteImsAPI = $resource('/im/property', {}, {
-      getProperty: { method: 'GET' },
+      getProperty: { method: 'GET', url:'/im/property?name=:propertyName' },
       storeProperty: { method: 'POST' }
     });
+
+    this.propertiesMap = new Map();
+  }
+
+
+  fetchProperty(propertyName) {
+    let propertyRetrieval = this.remoteImsAPI.getProperty({propertyName: propertyName});
+    let updatedPromise = propertyRetrieval.$promise.then((data) => {
+      if (data[propertyName]) {
+        this.propertiesMap.set(propertyName, data[propertyName]);
+      } else {
+        this.propertiesMap.set(propertyName, '');
+      }
+    });
+    return updatedPromise;
   }
 
   /**
    * Returns the value of the property.
-   * @param the name of the desired property
+   * @param propertyName the name of the desired property
    * @returns a promise on the property value
    */
   getProperty(propertyName) {
-    let resultMapPromise = getProperties([propertyName]);
-    return resultMapPromise.then((resultMap) => resultMap.get(propertyName));
+    return this.propertiesMap.get(propertyName);
   }
 
   /**
@@ -47,7 +61,7 @@ class ImsPropertiesApi {
    */
   getProperties(properties) {
     let param = { name: properties };
-    return this.remoteImsAPI.getProperty(param).$promise;
+    return this.remoteImsAPI.getProperty(param);
   }
 
   /**
@@ -60,9 +74,9 @@ class ImsPropertiesApi {
   }
 
   storeProperty(key, value) {
-    let param = new Map();
-    param.set(key, value)
-    return this.remoteImsAPI.storeProperty({}, pram).$promise;
+    let param = {};
+    param[key] = value;
+    return this.remoteImsAPI.storeProperty(param).$promise;
   }
 }
 
