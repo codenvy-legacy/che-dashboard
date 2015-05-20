@@ -31,7 +31,8 @@ class ImsSubscriptionApi {
   }
 
   checkOnPremisesSubscription() {
-    return checkSubscription();
+    let serverPromise = this.remoteImsAPI.checkSubscription();
+    return serverPromise.$promise;
   }
 }
 
