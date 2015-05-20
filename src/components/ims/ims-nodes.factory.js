@@ -11,6 +11,7 @@
 'use strict';
 
 import Register from '../utils/register.js';
+import dictionary from './dictionary';
 
 /**
  * This class is handling the interface with Installation Manager Server (IMS) update API.
@@ -21,14 +22,14 @@ class ImsNodesApi {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor($resource) {
+  constructor($http) {
 
     // remote call
-    this.remoteImsAPI = $resource('/im', {}, {
-      addNode: { method: 'POST', url: '/im/node?dns=:nodeName' },
-      deleteNode: { method: 'DELETE', url: '/im/node?dns=:nodeName' },
-      getCodenvyOnPremConfig: { method: 'GET', url: '/im/config/codenvy' }
-    });
+    this.remoteImsAPI = {
+      addNode: (node) => $http.post('/im/node', { params: {nodeName: node}}),
+      deleteNode: (node) => $http.delete('/im/node', { params: {nodeName: node}}),
+      getCodenvyOnPremConfig: () => $http.get('/im/nodes')
+    };
   }
 
   /**
@@ -37,8 +38,7 @@ class ImsNodesApi {
    */
   addNode(node) {
     let nodeDesc = { nodeName: node };
-    let request = this.remoteImsAPI.addNode(nodeDesc, {});
-    return request.$promise;
+    return this.remoteImsAPI.addNode(nodeDesc, {});
   }
 
   /**
@@ -47,16 +47,47 @@ class ImsNodesApi {
    */
   deleteNode(node) {
     let nodeDesc = { nodeName: node };
-    let request = this.remoteImsAPI.deleteNode(nodeDesc, {});
-    return request.$promise;
+    return this.remoteImsAPI.deleteNode(nodeDesc, {});
   }
 
   /**
    * Returns Codenvy on-premise installation node list.
+   * @returns a promise on an object hostKey => { nodeType, hostname }
    */
   listNodes() {
-    let request = this.remoteImsAPI.getCodenvyOnPremConfig();
-    return request.$promise;
+    let serverPromise = this.remoteImsAPI.getCodenvyOnPremConfig();
+    return serverPromise.then(response => this.unwrapNodes(response.data));
+  }
+
+  unwrapNodes(nodes) {
+    if (! nodes || Object.keys(nodes).length === 0) {
+      nodes['aio'] = ''; // how do I get this hostname? $location won't provide me a reliable value
+    }
+    let result = {};
+    for (let key in nodes) {
+      if (nodes.hasOwnProperty(key)) {
+        let nodeHostname = nodes[key];
+        let nodeData = dictionary.nodes.get(key);
+        if (nodeData) {
+          if (nodeData.unwrap) {
+            unwrapNodeSet(result, key, nodeData.type, nodeHostName); // Actually, here nodeHostname is not a hostname but an array
+          } else {
+            result[key] = { type: nodeData.type, hostname: nodeHostname };
+          }
+        } else {
+          result[key] = { type: 'Unknown Type', hostname: nodeHostname };
+        }
+      } 
+    }
+    return result;
+  }
+  
+  unwrapNodeSet(result, key, type, nodeArray) {
+    var i = 0;
+    for (let hostname of nodeArray) {
+      result[`${key}_${i}`] = { type: nodeData.type, hostname: nodeHostname };
+      i++;
+    }
   }
 }
 
