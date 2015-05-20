@@ -16,22 +16,13 @@ class YourInstallationCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor() {
+  constructor(imsNodesApi) {
+    this.imsNodesApi = imsNodesApi;
     this.customerName = 'Toto inc.';
     this.installedVersion = '1.0.0';
     this.downloadedVersion= '1.0.1';
-    this.nodeList = [
-      {
-        type: 'All-in-one single node',
-        dnsHostname: 'demo.codenvy.com'
-      },
-      {
-        type: 'API Service',
-        dnsHostname: 'api.yourdomain.com'
-      }
-    ];
+    this.imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes });
   }
-
 }
 
 export default YourInstallationCtrl;
