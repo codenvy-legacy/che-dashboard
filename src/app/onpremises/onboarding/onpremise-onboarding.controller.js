@@ -16,8 +16,9 @@ class OnPremisesOnboardingCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI) {
+  constructor(codenvyAPI, imsPropertiesApi) {
     this.codenvyAPI = codenvyAPI;
+    this.imsPropertiesApi = imsPropertiesApi;
 
     this.stepsIcons = new Map();
     this.currentStep = 1;
@@ -46,26 +47,13 @@ class OnPremisesOnboardingCtrl {
   }
 
 
-  setAdminFlag() {
-      let properties = {'isAdmin' : 'true'};
-      this.codenvyAPI.getProfile().updatePreferences(properties);
-  }
-
-
-  setUserFlag() {
-    let properties = {'isAdmin' : 'false'};
-    this.codenvyAPI.getProfile().updatePreferences(properties);
-  }
-
 
   resetOnboardingAdminFlag() {
-    let properties = {'adminOnBoardingFlowCompleted' : 'false'};
-    this.codenvyAPI.getProfile().updatePreferences(properties);
+    this.imsPropertiesApi.storeProperty('onboardingCompleted', 'false');
   }
 
   skipOnboardingAdminFlag() {
-    let properties = {'adminOnBoardingFlowCompleted' : 'true'};
-    this.codenvyAPI.getProfile().updatePreferences(properties);
+    this.imsPropertiesApi.storeProperty('onboardingCompleted', 'true');
 
   }
 }
