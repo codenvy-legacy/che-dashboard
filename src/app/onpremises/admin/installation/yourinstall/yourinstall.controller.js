@@ -21,7 +21,7 @@ class YourInstallationCtrl {
     this.customerName = 'Toto inc.';
     this.installedVersion = '1.0.0';
     this.downloadedVersion= '1.0.1';
-    this.imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes });
+    this.imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes; });
   }
 }
 
