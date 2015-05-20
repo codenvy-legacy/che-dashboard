@@ -25,8 +25,9 @@ class OnPremiseOnBoardingRedirect {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, routingRedirect) {
+  constructor (codenvyAPI, routingRedirect, imsPropertiesApi) {
     this.codenvyAPI = codenvyAPI;
+    this.imsPropertiesApi = imsPropertiesApi;
     routingRedirect.addRouteCallback(this);
   }
 
@@ -35,7 +36,6 @@ class OnPremiseOnBoardingRedirect {
    * @param path
    */
   checkPage(path) {
-    console.log('checking path onboarding flow for admin');
     if ('app/onpremises/onboarding/onboarding.html' == path) {
       return true;
     }
@@ -48,29 +48,21 @@ class OnPremiseOnBoardingRedirect {
    * @returns {*}
    */
   checkRedirect() {
-    console.log('checking redirect onboarding flow for admin');
     let user = this.codenvyAPI.getUser();
 
     // if user is simple user, nothing to display
     if (!user.isAdmin()) {
       return {};
     }
-    let preferences = this.codenvyAPI.getProfile().getPreferences();
 
-    // check role (needs to fixed that when isUserInRole will be merged) FIXME
-    // for now admin is a preference
-    console.log('preferences are', preferences);
-    if (preferences.isAdmin && preferences.isAdmin == 'true') {
-      console.log('preferences isAdmin is', preferences.isAdmin);
-      console.log('preferences adminOnBoardingFlowCompleted is', preferences.adminOnBoardingFlowCompleted);
-
-      // check if onboarding has already been made (it should call remote IMS) !!! FIXME
-      if (!preferences.adminOnBoardingFlowCompleted || preferences.adminOnBoardingFlowCompleted !== 'true') {
+    // check if property is defined on the ims server
+    // if not defined, redirect to the onboarding flow
+    let property = this.imsPropertiesApi.getProperty('onboardingCompleted');
+    if (!property  || property !== 'true') {
         return {route:"/onpremises/onboarding"};
-      }
     }
 
-    // simple user or flow already be done
+    // flow not yet completed
     return {};
 
   }
