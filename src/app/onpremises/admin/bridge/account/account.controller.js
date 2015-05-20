@@ -38,10 +38,10 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     let loginPromise = this.imsSaasAuthApi.logOnSaas(this.userName, this.password);
     loginPromise.then(() => { this.requestSubscriptions(); },
                       () => { this.hideAllMessages(); });
-    this.credentialsChanged = false;
+    this.resetCredentialsChanged();
   }
 
-  hideAllMessages() {
+  hideAllMessages(error) {
       this.showSubscribedMessage = false;
       this.showNotSubscribedMessage = false;
       this.onpremSubscriptionExpiration = undefined;
@@ -50,7 +50,7 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
   requestSubscriptions() {
     let subscriptionPromise = this.imsSubscriptionApi.checkOnPremisesSubscription();
     subscriptionPromise.then((response) => { this.receiveSubscriptionResponse(response); },
-                             (error) => { this.hideAllMessages(); });
+                             (error) => { this.hideAllMessages(error); });
   }
 
   receiveSubscriptionResponse(response) {
@@ -65,8 +65,30 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     }
   }
 
-  credentialsChanged() {
+  get userName() {
+    return this._username;
+  }
+
+  set userName(newName) {
+    this._username = newName;
+    this.setCredentialsChanged();
+  }
+
+  get password() {
+    return this._password;
+  }
+
+  set password(newPassword) {
+    this._password = newPassword;
+    this.setCredentialsChanged();
+  }
+
+  setCredentialsChanged() {
     this.credentialsChanged = true;
+  }
+
+  resetCredentialsChanged() {
+    this.credentialsChanged = false;
   }
 }
 

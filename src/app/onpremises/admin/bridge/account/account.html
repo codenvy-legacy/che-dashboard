@@ -17,6 +17,7 @@
                 cdvy-name="usernameInput"
                 cdvy-label-name="User Name"
                 ng-model="onPremisesAdminBridgeCodenvyAccountCtrl.userName"
+                ng-model-options="{ getterSetter: true }"
                 required>
       <div ng-message="required">The user name is required.</div>
     </cdvy-input>
@@ -25,6 +26,7 @@
                 cdvy-name="passwordInput"
                 cdvy-label-name="Password"
                 ng-model="onPremisesAdminBridgeCodenvyAccountCtrl.password"
+                ng-model-options="{ getterSetter: true }"
                 required>
       <div ng-message="required">The password is required.</div>
     </cdvy-input>
