@@ -34,10 +34,13 @@
     </cdvy-button-primary>
     <div>
       <div layout="row" layout-margin layout-padding flex>
-        <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.forgotPasswordUrl}}" target="_blank" cdvy-link-text="Forgot your password."></cdvy-link>
+        <span>
+          Forgot your password?
+        </span>
+        <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.forgotPasswordUrl}}" target="_blank" cdvy-link-text="Recover"></cdvy-link>
         <span class="onpremises-admin-bridge-codenvyaccount-noaccount">
           Don't have an account?
-          <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.signUpUrl}}" target="_blank" cdvy-link-text="Sign up."></cdvy-link>
+          <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.signUpUrl}}" target="_blank" cdvy-link-text="Sign up"></cdvy-link>
         </span>
       </div>
       <div layout="row" layout-padding ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showSubscribedMessage">
