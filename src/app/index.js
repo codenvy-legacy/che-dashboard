@@ -25,8 +25,19 @@ module.config(['$routeProvider', function ($routeProvider) {
     route.resolve.app = ['codenvyUser', function (codenvyUser) {
       return codenvyUser.fetchUser();
     }];
+
+
+    // add fetch of the onboarding flag for onpremises route
+    if (route.templateUrl.startsWith('app/onpremises/')) {
+      route.resolve.appOnBoarding = ['imsPropertiesApi', function (imsPropertiesApi) {
+        return imsPropertiesApi.fetchProperty('onboardingCompleted');
+      }];
+    }
+
     return $routeProvider.when(path, route);
   };
+
+
 }]);
 
 
