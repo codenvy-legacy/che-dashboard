@@ -35,7 +35,7 @@ var NodeDictionary = new Map([
     ['api_host_name',           { type: 'Api service' }],
     ['site_host_name',          { type: 'Site' }],
     ['datasource_host_name',    { type: 'Datasource service' }],
-    ['aio',                     { type: 'All-in-one single node' }]
+    ['host_url',                { type: 'All-in-one single node' }]
   ]);
 
 export default { artifacts: ArtifactDictionary, nodes: NodeDictionary };

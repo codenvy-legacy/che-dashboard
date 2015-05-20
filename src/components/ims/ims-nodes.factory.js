@@ -60,9 +60,6 @@ class ImsNodesApi {
   }
 
   unwrapNodes(nodes) {
-    if (! nodes || Object.keys(nodes).length === 0) {
-      nodes['aio'] = ''; // how do I get this hostname? $location won't provide me a reliable value
-    }
     let result = {};
     for (let key in nodes) {
       if (nodes.hasOwnProperty(key)) {
