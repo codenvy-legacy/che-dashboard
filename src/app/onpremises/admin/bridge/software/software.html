@@ -33,9 +33,9 @@
           <td class="onprem-admin-available-software-col">
             <div>{{artifactItem.available.version}} &nbsp; {{artifactItem.available.date|date:'yyyy-MM-dd HH:mm'}}</div>
             <div ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.showDownloadAction(artifactItem)">
-              <cdvy-link ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem)" target="_blank">Download</cdvy-link>
+              <cdvy-link ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem)" target="_blank" cdvy-link-text="Download"></cdvy-link>
             </div>
-            <cdvy-link ng-href="{{onPremisesAdminBridgeAvailableSoftwareCtrl.releaseNoteUrl(artifactItem.name)}}" target="_blank">Release Notes</cdvy-link>
+            <cdvy-link ng-href="{{onPremisesAdminBridgeAvailableSoftwareCtrl.releaseNoteUrl(artifactItem.name)}}" target="_blank" cdvy-link-text="Release Notes"></cdvy-link>
           </td>
         <tr>
       </tbody>
