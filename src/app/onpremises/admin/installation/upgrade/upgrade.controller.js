@@ -16,7 +16,7 @@ class UpgradeInstallationCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor($rootScope, imsSaasAuthApi, imsUpdateApi) {
+  constructor($rootScope, imsSaasAuthApi, imsUpdateApi, imsArtifactApi) {
     this.imsUpdateApi = imsUpdateApi;
     this.$rootScope = $rootScope;
     this.$rootScope.$watch(
@@ -25,6 +25,12 @@ class UpgradeInstallationCtrl {
     );
     // by default, false, until login and subscription check
     this.subscriptionOk = false;
+
+    this.upgradable = false;
+    imsArtifactApi.artifacts().then(
+      artifacts => this.updateUpgradable(artifacts),
+      () => this.updateUpgradable(undefined)
+    );
   }
 
   install() {
@@ -46,6 +52,19 @@ class UpgradeInstallationCtrl {
 
   isSectionDisabled() {
     return !this.subscriptionOk;
+  }
+
+  updateUpgradable(artifacts) {
+    if (artifacts) {
+      if (artifacts.codenvy && artifacts.codenvy.installed && artifacts.codenvy.downloaded) {
+        if (artifacts.codenvy.installed.date < artifacts.codenvy.downloaded.date) {
+          this.upgradable = true;
+          return;
+        }
+      }
+    }
+
+    this.upgradable = false;
   }
 }
 

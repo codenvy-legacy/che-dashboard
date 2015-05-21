@@ -12,7 +12,7 @@
 -->
 
 <cdvy-panel cdvy-title="Upgrade Your Codenvy On-Prem Installation" cdvy-panel-id="upgrade-your-installation-panel" cdvy-disabled="upgradeInstallationCtrl.isSectionDisabled()">
-  <cdvy-button-primary cdvy-button-title="Install Now" ng-click="upgradeInstallationCtrl.install()" ng-disabled="upgradeInstallationCtrl.isSectionDisabled()"></cdvy-button-primary>
+  <cdvy-button-primary cdvy-button-title="Install Now" ng-click="upgradeInstallationCtrl.install()" ng-disabled="upgradeInstallationCtrl.isSectionDisabled() || (! upgradeInstallationCtrl.upgradable)"></cdvy-button-primary>
   <!-- Removed because not implemented in IM -->
   <!--
   <div ng-form="onPremUpgradeScheduleForm" flex>
