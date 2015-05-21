@@ -41,6 +41,9 @@ class ImsPropertiesApi {
       } else {
         this.propertiesMap.set(propertyName, '');
       }
+    }, () => {
+      // if not found, set empty value
+      this.propertiesMap.set(propertyName, '');
     });
     return updatedPromise;
   }
@@ -76,7 +79,12 @@ class ImsPropertiesApi {
   storeProperty(key, value) {
     let param = {};
     param[key] = value;
-    return this.remoteImsAPI.storeProperty(param).$promise;
+    let promiseSet = this.remoteImsAPI.storeProperty(param).$promise;
+    let updatedGet = promiseSet.then(() => {
+      return this.fetchProperty(key);
+    });
+
+    return updatedGet;
   }
 }
 

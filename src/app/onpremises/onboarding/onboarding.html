@@ -12,8 +12,8 @@
 -->
 <cdvy-toolbar cdvy-title="Admin onboarding" cdvy-subheader-title="Setup your account in 3 steps..." theme="onboarding-theme"></cdvy-toolbar>
 
-<md-content class="onpremise-onboarding-content" md-scroll-y flex>
-
+<md-content class="onpremise-onboarding-content" md-scroll-y flex md-theme="maincontent-theme">
+<div ng-hide="onPremisesOnboardingCtrl.isCompleted()">
   <cdvy-panel class="onpremise-onboard-panel"
               ng-class="onPremisesOnboardingCtrl.currentStep >= 1 ? 'onboard-panel-step-enabled' : 'onboard-panel-step-disabled'"
               cdvy-toggle="true"
@@ -22,18 +22,13 @@
               cdvy-panel-id="onpremise-onboarding-step1"
               ng-init="onPremisesOnboardingCtrl.initStep(1)">
     <md-content>
-      Marketing text here
+      <div ng-include src="'app/onpremises/onboarding/marketing.html'"></div>
     </md-content>
-    <div layout="row" layout-margin flex>
+    <div layout="row" layout-margin flex layout-align="center center">
       <cdvy-button-default id="onprem-onboard-welcome-ok-button"
                            cdvy-button-title="OK"
-                           ng-click="onPremisesOnboardingCtrl.nextPage()"
+                           ng-click="onPremisesOnboardingCtrl.validateMarketing()"
                            class="onprem-onboard-welcome-ok-button"></cdvy-button-default>
-
-      <cdvy-button-primary id="onprem-onboard-welcome-cancel-button"
-                           cdvy-button-title="Cancel"
-                           ng-click="onPremisesOnboardingCtrl.cancel()"
-                           class="onprem-onboard-welcome-cancel-button"></cdvy-button-primary>
     </div>
   </cdvy-panel>
 
@@ -49,27 +44,28 @@
               cdvy-collapse="true"
               cdvy-panel-id="onpremise-onboarding-step2"
               ng-init="onPremisesOnboardingCtrl.initStep(2)">
-    <md-content>
-      license agreement here
+    <div layout="row" layout-margin flex layout-align="center center">
+    <md-content style="height: 300px;max-width: 1000px" >
+      <div layout-align="center center" ng-include src="'app/onpremises/onboarding/agreement.html'"></div>
     </md-content>
-    <div layout="row" layout-margin flex>
-
-    <cdvy-button-default id="onprem-onboard-agreement-accept-button"
+      </div>
+    <div layout="row" layout-margin flex layout-align="center center">
+      <cdvy-button-default id="onprem-onboard-agreement-accept-button"
                            cdvy-button-title="Accept"
-                           ng-click="onPremisesOnboardingCtrl.acceptLicense()"
+                           ng-disabled="onPremisesOnboardingCtrl.currentStep < 2"
+                           ng-click="onPremisesOnboardingCtrl.validateAgreement()"
                            class="onprem-onboard-agreement-accept-button"></cdvy-button-default>
-
-      <cdvy-button-primary id="onprem-onboard-agreement-decline-button"
-                           cdvy-button-title="Not Accept"
-                           ng-click="onPremisesOnboardingCtrl.declineLicense()"
-                           class="onprem-onboard-agreement-decline-button"></cdvy-button-primary>
     </div>
   </cdvy-panel>
+</div>
 
-
+<div ng-show="onPremisesOnboardingCtrl.isCompleted()">
+  Onboarding has been done. Nothing to do.
+</div>
+<div ng-if="onPremisesOnboardingCtrl.inDevelopmentMode()">
+  Only in development mode:
   <cdvy-button-primary cdvy-button-title="set flag for asking admin onboarding" ng-click="onPremisesOnboardingCtrl.resetOnboardingAdminFlag()"></cdvy-button-primary>
-  <cdvy-button-primary cdvy-button-title="set flag for skipping admin onboarding" ng-click="onPremisesOnboardingCtrl.skipOnboardingAdminFlag()"></cdvy-button-primary>
-
+</div>
 
 
 </md-content>

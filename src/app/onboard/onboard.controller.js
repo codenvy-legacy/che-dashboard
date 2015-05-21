@@ -129,7 +129,7 @@ class OnBoardCtrl {
 
     // now expand next step
     if (this.currentStep <= 4) {
-      this.$rootScope.$broadcast('cdvyPanel:toggle', 'onboarding-step' + this.currentStep);
+      this.$rootScope.$broadcast('cdvyPanel:toggle', 'onpremise-onboarding-step' + this.currentStep);
     }
 
 
