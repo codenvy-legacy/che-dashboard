@@ -14,6 +14,11 @@ import Register from '../../utils/register';
 
 /**
  * Defines the link component.
+ * Uses the following options:
+ * * cdvy-link-text for the visible content text of the link
+ * * ng-href fot the destination url
+ * * target fot the HTML link target value (_self, _blank, _parent, _top) - see {@link https://developer.mozilla.org/fr/docs/Web/HTML/Element/a#attr-target}
+ * * cdvy-no-padding if truthy, do not add the horizontal and vertical padding and margin
  */
 class CodenvyLink {
 
@@ -36,8 +41,9 @@ class CodenvyLink {
     let linkText = attrs['cdvyLinkText'] || '';
     let destination = attrs.ngHref ? `ng-href="${attrs.ngHref}"` : '';
     let target = attrs.target ? `target="${attrs.target}"` : '';
+    let noPadding = attrs.cdvyNoPadding ? 'cdvy-link-no-padding' : '';
 
-    var template = `<md-button md-theme="default" class="cdvy-link md-primary md-no-ink md-hue-2" ${destination} ${target}>${linkText}</md-button>`;
+    var template = `<md-button md-theme="default" class="cdvy-link md-primary md-no-ink md-hue-2 ${noPadding}" ${destination} ${target}>${linkText}</md-button>`;
 
     return template;
   }
