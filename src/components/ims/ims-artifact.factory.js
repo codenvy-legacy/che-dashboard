@@ -33,6 +33,8 @@ class ImsArtifactApi {
 
       downloadArtifacts: { method: 'POST', url: '/im/download/start' },
       downloadArtifact: { method: 'POST', url: '/im/download/start?artifact=:artifactName&version=:version' },
+
+      artifactProperties: {method: 'GET', url:'/im/properties/:artifactName/:version'}
     });
   }
 
@@ -68,28 +70,28 @@ class ImsArtifactApi {
     let availablePromise = this.getAvailableArtifactsList();
     let all = this.$q.all([installPromise, downloadedPromise, availablePromise]);
 
-    return all.then(results => this.consolidateArtifacts(results));
+    return all.then(results => this._consolidateArtifacts(results));
   }
 
   /**
    * Assemble all sources of informations for a given artifacts: installed, downloaded and available,
    * in the same object.
    */
-  consolidateArtifacts(results) {
+  _consolidateArtifacts(results) {
     let artifacts = {};
+    let toGather = new Set();
     let installedResult = results.shift();
 
     if (installedResult && installedResult.artifacts) {
       for (let artifact of installedResult.artifacts) {
         let value = {
           name: artifact.artifact,
-          description: artifact.description,
           installed: {
-            version: artifact.version,
-            date: artifact.date
+            version: artifact.version
           }
         };
         artifacts[artifact.artifact] = value;
+        toGather.add({ name: artifact.artifact, version: artifact.version });
       }
     }
 
@@ -98,13 +100,13 @@ class ImsArtifactApi {
       for (let artifact of downloadedResult.artifacts) {
         let value = artifacts[artifact.artifact];
         if (!value) {
-          value = { name: artifact.artifact, description: artifact.description };
+          value = { name: artifact.artifact };
         }
         artifacts[artifact.artifact] = value; // in case it was just created
         value.downloaded = {
-          version: artifact.version,
-          date: artifact.date
+          version: artifact.version
         };
+        toGather.add({ name: artifact.artifact, version: artifact.version });
       }
     }
 
@@ -113,16 +115,56 @@ class ImsArtifactApi {
       for (let artifact of availableResult.artifacts) {
         let value = artifacts[artifact.artifact];
         if (!value) {
-          value = { name: artifact.artifact, description: artifact.description };
+          value = { name: artifact.artifact };
         }
         artifacts[artifact.artifact] = value; // in case it was just created
         value.available = {
-          version: artifact.version,
-          date: artifact.date
+          version: artifact.version
         };
+        toGather.add({ name: artifact.artifact, version: artifact.version });
       }
     }
 
+    let datesPromise = this._gatherDates(toGather);
+    return datesPromise.then(data => this._injectDates(data, artifacts));
+  }
+
+  /**
+   * Builds a Map with the dates of release for all listed artifacts.
+   */
+  _gatherDates(artifacts) {
+    let promises = [];
+    for (let artifact of artifacts) {
+      let promise = this.getArtifactReleaseDate(artifact.name, artifact.version);
+      promises.push(promise);
+    }
+    let all = this.$q.all(promises);
+    return all.then(function(dates) {
+      let result = new Map();
+      for (let i in artifacts) {
+        result.set(this._formatkey(artifacts[i].name, artifacts[i].version), dates[i]);
+      }
+      return result;
+    });
+  }
+
+  _formatkey(name, version) {
+    return `${name}\/${version}`;
+  }
+
+  /**
+   * Inject the dates in the artifacts.
+   */
+  _injectDates(data, artifacts) {
+    for (let name of Object.keys(artifacts)) {
+      for (let state of ['available', 'downloaded', 'installed']) {
+        let artifact = artifacts[name][state];
+        if (artifact) {
+          let key = this._formatkey(name, artifact.version);
+          artifact.date = data.get(key);
+        }
+      }
+    }
     return artifacts;
   }
 
@@ -153,6 +195,17 @@ class ImsArtifactApi {
     }
   }
 
+  getArtifactProperties(artifactName, version) {
+    let params = { artifactName: artifactName, version: version };
+    return this.remoteImsAPI.artifactProperties(params).$promise;
+  }
+
+  getArtifactReleaseDate(artifactName, version) {
+    let propertiesPromise = this.getArtifactProperties(artifactName, version);
+    return propertiesPromise.then(props => new Date(props['build-time']))
+                                  /* Eat all errors. */
+                                  .catch(error => undefined);
+  }
 }
 
 // Register this factory
