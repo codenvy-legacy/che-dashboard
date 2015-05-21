@@ -39,6 +39,8 @@ class AccountCtrl {
       }
     }, true);
 
+    this.resetPasswordForm = false;
+
   }
 
   isAttributesChanged() {
@@ -76,12 +78,31 @@ class AccountCtrl {
           if(this.oldAttributes) {
             this.profile.attributes = angular.copy(this.oldAttributes);
           }
-          this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Update information failed.');
+          this.codenvyNotificationService.showError(error.data.message ? error.data.message : 'Profile update failed.');
           console.log('error', error);
         }
       });
 
     }
+  }
+
+  /**
+   * set new password
+   */
+  setPassword(password) {
+    if(!password) {
+      return;
+    }
+
+    let promise = this.codenvyAPI.getUser().setPassword(password);
+
+    promise.then(() => {
+      this.codenvyNotificationService.showInfo('Password successfully updated.');
+      this.resetPasswordForm = true;
+    }, (error) => {
+        this.codenvyNotificationService.showError(error.data.message ? error.data.message : 'Password updated failed.');
+        console.log('error', error);
+    });
   }
 
 }

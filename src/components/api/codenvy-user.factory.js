@@ -32,7 +32,13 @@ class CodenvyUser {
     this.remoteUserAPI = this.$resource('/api/user',{}, {
       findByID: {method: 'GET', url: '/api/user/:userId'},
       findByEmail: {method: 'GET', url: '/api/user/find?email=:userEmail'},
-      inRole: {method: 'GET', url: '/api/user/inrole?role=:role&scope=:scope&scopeId=:scopeId'}
+      inRole: {method: 'GET', url: '/api/user/inrole?role=:role&scope=:scope&scopeId=:scopeId'},
+      setPassword: {
+        method: 'POST', url: '/api/user/password', isArray: false,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+      }
     });
 
     // users by ID
@@ -122,6 +128,12 @@ class CodenvyUser {
 
   getUserFromEmail(userEmail) {
     return this.userEmailMap.get(userEmail);
+  }
+
+  setPassword(password) {
+    let promise = this.remoteUserAPI.setPassword('password=' + password).$promise;
+
+    return promise;
   }
 
   fetchIsUserInRole(role, scope, scopeId) {

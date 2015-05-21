@@ -1,13 +1,15 @@
-.cdvy-input:not(.desktop-pristine) .cdvy-input-desktop [ng-message]
+.cdvy-input:not(.desktop-pristine) .cdvy-input-desktop [ng-message],
+.cdvy-input:not(.desktop-pristine) .cdvy-input-desktop [ng-show]
   color $error-color
 
-.cdvy-input .cdvy-input-desktop [ng-message]
+.cdvy-input .cdvy-input-desktop [ng-message],
+.cdvy-input .cdvy-input-desktop [ng-show]
   color $label-primary-color
 
-
 .cdvy-input-desktop input
-  border-width 0 0 1px 0
-  border-color $default-border-color
+  border none
+  box-shadow none
+  border-bottom 1px solid $default-border-color
 
 .cdvy-input-desktop input:focus
   border-color $primary-color
@@ -17,7 +19,6 @@
 
 .cdvy-input-desktop input.ng-pristine.ng-untouched.ng-invalid
   border-color $default-border-color
-
 
 .cdvy-input-desktop
   margin-top 5px

@@ -30,12 +30,9 @@ class CodenvySelect {
     this.transclude= true;
     this.templateUrl = 'components/widget/select/cdvy-select.html';
 
-    // we require ngModel as we want to use it inside our directive
-    this.require = ['ngModel'];
-
     // scope values
     this.scope = {
-      value : '=ngModel',
+      value : '=cdvyValue',
       selectName:'@cdvyName',
       labelName: '@cdvyLabelName',
       placeHolder:'@cdvyPlaceHolder',
@@ -88,7 +85,7 @@ class CodenvySelect {
   /**
    * Keep reference to the model controller
    */
-  link($scope, element, attr) {
+  link($scope, element) {
     $scope.$watch('myForm.desk' + $scope.selectName + '.$pristine', (isPristine) => {
       if (isPristine) {
         element.addClass('desktop-pristine');

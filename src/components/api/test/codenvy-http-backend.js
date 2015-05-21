@@ -22,11 +22,12 @@ class CodenvyHttpBackend {
   /**
    * Constructor to use
    */
-  constructor ($httpBackend, codenvyAPIBuilder) {
+  constructor($httpBackend, codenvyAPIBuilder) {
     this.httpBackend = $httpBackend;
     this.projectsPerWorkspace = new Map();
     this.workspaces = [];
-    this.usersMap = new Map();
+    this.userIdMap = new Map();
+    this.userEmailMap = new Map();
     this.profilesMap = new Map();
     this.projectDetailsMap = new Map();
     this.projectPermissionsMap = new Map();
@@ -36,7 +37,7 @@ class CodenvyHttpBackend {
 
     this.defaultUser = codenvyAPIBuilder.getUserBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').build();
     this.defaultProfile = codenvyAPIBuilder.getProfileBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').withFirstName('FirstName').withLastName('LastName').build();
-    this.defaultProfilePrefs = {onBoardingFlowCompleted : 'true'};
+    this.defaultProfilePrefs = {onBoardingFlowCompleted: 'true'};
   }
 
 
@@ -53,9 +54,13 @@ class CodenvyHttpBackend {
 
     //users
     this.httpBackend.when('GET', '/api/user').respond(this.defaultUser);
-    var userKeys = this.usersMap.keys();
-    for (let key of userKeys) {
-      this.httpBackend.when('GET', '/api/user/' + key).respond(this.usersMap.get(key));
+    var userIdKeys = this.userIdMap.keys();
+    for (let key of userIdKeys) {
+      this.httpBackend.when('GET', '/api/user/' + key).respond(this.userIdMap.get(key));
+    }
+    var userEmailKeys = this.userEmailMap.keys();
+    for (let key of userEmailKeys) {
+      this.httpBackend.when('GET', '/api/user/find?email=' + key).respond(this.userEmailMap.get(key));
     }
     this.httpBackend.when('GET', '/api/user/inrole?role=admin&scope=system&scopeId=').respond(false);
 
@@ -145,11 +150,29 @@ class CodenvyHttpBackend {
   }
 
   /**
-   * Add the given user
+   * Add the given user to userIdMap
    * @param user
    */
   addUserId(user) {
-    this.usersMap.put(user.id, user);
+    this.userIdMap.set(user.id, user);
+  }
+
+  /**
+   * Add the given user to userEmailMap
+   * @param user
+   */
+  addUserEmail(user) {
+    this.userEmailMap.set(user.email, user);
+  }
+
+  /**
+   * Set new user password
+   * @param password
+   */
+  setPassword(password) {
+    this.httpBackend.when('POST', '/api/user/password').respond(() => {
+      return [200, {success: true, errors: []}];
+    });
   }
 
   /**
@@ -241,7 +264,7 @@ class CodenvyHttpBackend {
   }
 
   addPermissions(workspaceId, projectName, permissions) {
-    var key = {workspaceId: workspaceId, projectName:projectName};
+    var key = {workspaceId: workspaceId, projectName: projectName};
     this.projectPermissionsMap.set(key, permissions);
   }
 
