@@ -13,16 +13,40 @@
 
 <cdvy-panel cdvy-title="Your Subscription Status">
   <div class="onprem-admin-bridge-yoursubscription">
-    <p ng-if="onPremisesAdminBridgeYourSubscriptionCtrl.showHasSubscriptionParagraph">
-      You currently have an active subscription to Codenvy On-Prem. Your subscription provides premium support, download scheduling,
-      and license compliance reports. Get support at <cdvy-link ng-href="mailto:premiumsupport@codenvy.com" cdvy-link-text="premiumsupport@codenvy.com" cdvy-no-padding="true"></cdvy-link>.<br>
-      Thank you for being a customer. We value your patronage.</p>
-    <p ng-if="!onPremisesAdminBridgeYourSubscriptionCtrl.showHasSubscriptionParagraph">
-      You do not have a subscription to Codenvy On-Prem. No worries! Your installation will continue to operate
-      normally. Codenvy will automatically download new version and anonymously send usage data back to us. By
+    <div ng-switch on="onPremisesAdminBridgeYourSubscriptionCtrl.subscriptionState">
+      <div ng-switch-when="SUBSCRIPTION">
+        <div class="onprem-admin-bridge-header-highlight-subscription">You currently have an active subscription to Codenvy On-Prem.</div>
+        <p>
+          Your subscription provides premium support, download scheduling,
+          and license compliance reports. Get support at <cdvy-link ng-href="mailto:premiumsupport@codenvy.com" cdvy-link-text="premiumsupport@codenvy.com" cdvy-no-padding="true"></cdvy-link>.
+          <br>
+          Thank you for being a customer. We value your patronage.
+        </p>
+      </div>
+      <div ng-switch-when="NO_SUBSCRIPTION">
+        <div class="onprem-admin-bridge-header-highlight-no-subscription">You do not have a subscription to Codenvy On-Prem.</div>
+        <p>
+          No worries!
+        </p>
+      </div>
+      <div ng-switch-when="NOT_LOGGED">
+        <div class="onprem-admin-bridge-header-highlight-not-logged">Log-in your codenvy.com account to check your On-Prem subscription</div>
+        <p>
+          When you are logged in your codenvy.com account, we can determine if you have an active subscription to Codenvy On-Prem
+          and unlock all the configuration options.
+          <br>
+          If you do not have a subscription to Codenvy On-Prem, no worries!
+        </p>
+      </div>
+      <div ng-switch-default>{{onPremisesAdminBridgeYourSubscriptionCtrl.subscriptionState}}</div>
+    </div>
+    <p ng-if="onPremisesAdminBridgeYourSubscriptionCtrl.showNotSubscribed()">
+      Your installation will continue to operate normally. Codenvy will automatically download new version and anonymously send usage data back to us. By
       purchasing a subscription, you can disable automatic downloads and anonymous data, get premium (human)
       support, and generate compliance reports for your legal department. While the Codenvy IDE is open source,
-      Codenvy On-Prem is not. We depend upon your patronage to continue building great software for you.<br>
-      Please consider a commercial relationship with us. Your mother would approve.</p>
+      Codenvy On-Prem is not. We depend upon your patronage to continue building great software for you.
+      <br>
+      Please consider a commercial relationship with us. Your mother would approve.
+    <p>
   </div>
 </cdvy-panel>

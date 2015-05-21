@@ -1,3 +1,37 @@
+/*
+ * Copyright (c) 2015 Codenvy, S.A.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Codenvy, S.A. - initial API and implementation
+ */
+
+fontsize = 15px
+paragraph-margin = 14px
+
 .onprem-admin-bridge-yoursubscription
-  font-size: 20px
   max-width 80em
+
+onprem-admin-bridge-yoursubscription-text()
+  font-size fontsize
+  line-height 1.42
+
+.onprem-admin-bridge-yoursubscription p
+  onprem-admin-bridge-yoursubscription-text()
+  margin-bottom paragraph-margin
+
+onprem-admin-bridge-header-highlight(col)
+  onprem-admin-bridge-yoursubscription-text()
+  color col
+
+.onprem-admin-bridge-header-highlight-subscription
+  onprem-admin-bridge-header-highlight($codenvy-green-color)
+
+.onprem-admin-bridge-header-highlight-no-subscription
+  onprem-admin-bridge-header-highlight($codenvy-orange-color)
+
+.onprem-admin-bridge-header-highlight-not-logged
+  onprem-admin-bridge-header-highlight($codenvy-orange-color)

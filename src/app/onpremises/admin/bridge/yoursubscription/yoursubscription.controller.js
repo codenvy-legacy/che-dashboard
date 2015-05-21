@@ -16,19 +16,37 @@ class OnPremisesAdminBridgeYourSubscriptionCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor($rootScope, imsSaasAuthApi) {
+  constructor($rootScope, imsSaasAuthApi, imsSubscriptionApi) {
     $rootScope.$watch(
       () => imsSaasAuthApi.promise,
-      (newValue, oldValue) => { this.updateSubscriptionStatus(newValue); }
+      newValue => { this.updateLoggedInStatus(newValue); }
     );
+    this.imsSubscriptionApi = imsSubscriptionApi;
+    this.subscriptionState = 'NOT_LOGGED';
   }
 
-  updateSubscriptionStatus(value) {
-    if (value) {
-      this.showHasSubscriptionParagraph = true;
+  updateLoggedInStatus(authValue) {
+    if (!authValue) {
+      this.subscriptionState = 'NOT_LOGGED';
     } else {
-      this.showHasSubscriptionParagraph = false;
+      this.imsSubscriptionApi.checkOnPremisesSubscription().then(this.updateSubscriptionState);
     }
+  }
+
+  updateSubscriptionState(newValue) {
+    if (newValue && newValue.state) {
+      this.subscriptionState = 'SUBSCRIPTION';
+    } else {
+      this.subscriptionState = 'NO_SUBSCRIPTION';
+    }
+  }
+
+  setHasSubscription(value) {
+    this.subscriptionState = value;
+  }
+
+  showNotSubscribed() {
+    return ((this.subscriptionState === 'NOT_LOGGED')||(this.subscriptionState === 'NO_SUBSCRIPTION'));
   }
 }
 
