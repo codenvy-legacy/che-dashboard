@@ -57,7 +57,7 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     if (response && response.status && response.status === 'OK') {
       this.showSubscribedMessage = true;
       this.showNotSubscribedMessage = false;
-      this.onpremSubscriptionExpiration = response.expirationDate;
+      this.onpremSubscriptionExpiration = response.endDate || 'unknown';
     } else {
       this.showSubscribedMessage = false;
       this.showNotSubscribedMessage = true;
