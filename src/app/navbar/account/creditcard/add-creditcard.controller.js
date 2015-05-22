@@ -34,7 +34,7 @@ class AddCreditcardCtrl {
     });
 
     //Select the country from user's profile attributes if exists:
-    if (this.profile && this.profile.attributes.country) {
+    if (this.profile && this.profile.attributes && this.profile.attributes.country) {
       this.creditCard.country = this.profile.attributes.country;
     } else {
       //TODO remove this when bug with billingAddress NullPointerException is fixed

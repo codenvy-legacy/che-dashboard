@@ -12,7 +12,7 @@
 -->
 <cdvy-toolbar cdvy-title="Your Subscriptions"></cdvy-toolbar>
 
-<md-content md-scroll-y flex>
+<md-content md-scroll-y flex md-theme="maincontent-theme">
   <subscription-info ng-repeat="subscription in subscriptionCtrl.subscriptions" cdvy-subscription="subscription">
   </subscription-info>
   <subscription-proposal ng-repeat="proposal in subscriptionCtrl.proposals" cdvy-title="{{proposal.title}}"
