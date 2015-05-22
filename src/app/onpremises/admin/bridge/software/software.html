@@ -17,13 +17,17 @@
     <span>{{onPremisesAdminBridgeAvailableSoftwareCtrl.lastCheckDate|date:'dd/MM/yyyy : HH:mm'}}</span>
   </div>
 
-  <div flex class="onprem-admin-available-software">
+  <div flex layout="row" class="onprem-admin-available-software">
     <!-- TODO replace with md-table when available -->
     <table flex class="onprem-admin-available-software-table">
       <thead>
-        <tr><th>Software</th><th>Version</th><th>Version at Codenvy.com</th></tr>
+        <tr>
+          <th class="onprem-admin-available-software-namecol">Software</th>
+          <th class="onprem-admin-installed-software-col">Local Version</th>
+          <th class="onprem-admin-available-software-col">Version at Codenvy.com</th>
+        </tr>
       </thead>
-      <tbody>
+      <tbody ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.artifacts">
         <tr ng-repeat="(artifactId, artifactItem) in onPremisesAdminBridgeAvailableSoftwareCtrl.artifacts">
           <td class="onprem-admin-available-software-namecol">
             <div class="onprem-admin-available-software-namecol-name">{{onPremisesAdminBridgeAvailableSoftwareCtrl.artifactDisplayName(artifactId)}}</div>
@@ -38,6 +42,11 @@
             <cdvy-link ng-href="{{onPremisesAdminBridgeAvailableSoftwareCtrl.releaseNoteUrl(artifactItem.name)}}" target="_blank" cdvy-link-text="Release Notes"></cdvy-link>
           </td>
         <tr>
+      </tbody>
+      <tbody ng-if="!onPremisesAdminBridgeAvailableSoftwareCtrl.artifacts">
+        <tr>
+          <td colspan="3">No software information</td>
+        </tr>
       </tbody>
     </table>
   </div>
