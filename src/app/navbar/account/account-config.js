@@ -13,13 +13,40 @@
 import AddCreditcardCtrl from '../account/creditcard/add-creditcard.controller';
 import AddCreditcard from '../account/creditcard/add-creditcard.directive';
 import CreditcardCtrl from '../account/creditcard/creditcard.controller';
+import AccountProfile from './profile/account-profile.directive';
+import AccountProfileCtrl from './profile/account-profile.controller';
+import AccountDelete from '../account/account-delete.directive';
+import AccountDeleteCtrl from '../account/account-delete.controller';
+import AccountUpdatePassword from '../account/account-update-password.directive';
+import AccountCtrl from '../account/account.controller';
+
 
 class AccountConfig {
 
   constructor(register) {
-   register.controller('CreditcardCtrl', CreditcardCtrl);
-   register.controller('AddCreditcardCtrl', AddCreditcardCtrl);
-   register.directive('addCreditcard', AddCreditcard);
+    register.controller('CreditcardCtrl', CreditcardCtrl);
+
+    register.controller('AddCreditcardCtrl', AddCreditcardCtrl);
+    register.directive('addCreditcard', AddCreditcard);
+
+    register.directive('accountUpdatePassword', AccountUpdatePassword);
+
+    register.controller('AccountProfileCtrl', AccountProfileCtrl);
+    register.directive('accountProfile', AccountProfile);
+
+    register.controller('AccountDeleteCtrl', AccountDeleteCtrl);
+    register.directive('accountDelete', AccountDelete);
+
+    register.controller('AccountCtrl', AccountCtrl);
+
+    // config routes
+    register.app.config(function ($routeProvider) {
+      $routeProvider.accessWhen('/account', {
+        templateUrl: 'app/navbar/account/account.html',
+        controller: 'AccountCtrl',
+        controllerAs: 'accountCtrl'
+      });
+    });
   }
 }
 
