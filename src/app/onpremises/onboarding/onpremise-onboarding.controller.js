@@ -25,6 +25,7 @@ class OnPremisesOnboardingCtrl {
     this.currentStep = 1;
     this.completed = false;
     this.devMode = userDashboardConfig.developmentMode;
+    this.agreementButtonEnabled = true;
   }
 
 
@@ -102,6 +103,13 @@ class OnPremisesOnboardingCtrl {
 
   }
 
+  isValidateAgreementDisabled() {
+    return  (this.currentStep < 2) || !this.agreementButtonEnabled;
+  }
+
+  enableLicenseAgreement() {
+    this.agreementButtonEnabled = true;
+  }
 
   isCompleted() {
     return this.completed;

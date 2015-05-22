@@ -12,12 +12,14 @@
 
 import OnPremisesOnboardingCtrl from './onpremise-onboarding.controller';
 import OnPremiseOnBoardingRedirect from './onpremise-onboarding-redirect.factory'
+import ScrollValidate from './onpremise-onboarding-scroll-validate.directive'
 
 class OnPremisesOnboardingConfig {
 
   constructor(register) {
 
     register.controller('OnPremisesOnboardingCtrl', OnPremisesOnboardingCtrl);
+    register.directive('onPremiseOnBoardingRedirectScrollValidate', ScrollValidate);
     register.factory('onPremiseOnBoardingRedirect', OnPremiseOnBoardingRedirect);
 
     // config routes
