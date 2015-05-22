@@ -13,5 +13,27 @@
 
 <cdvy-toolbar cdvy-title="Billing and Invoices"></cdvy-toolbar>
 
-<md-content md-scroll-y flex>
+<md-content md-scroll-y flex md-theme="maincontent-theme">
+  <cdvy-panel cdvy-title="Usage and Balance">
+    <div>For the current billing period : {{billingCtrl.startPeriod | date:'MM/dd/yyyy'}} to {{billingCtrl.endPeriod | date:'MM/dd/yyyy'}}</div>
+    <div layout="row" class="balance-panel">
+      <div ac-chart="'pie'" ac-data="billingCtrl.data" id='chart' ac-config="billingCtrl.config" class="chart-of-usage"></div>
+      <div layout="column" class="available-provided-section">
+        <div class="consumed-value">{{billingCtrl.usedGBH}}GB Hours Consumed</div>
+        <div class="available-provided-separator"></div>
+        <div class="provided-value">{{billingCtrl.providedGBH}}GB Hours Allocated</div>
+      </div>
+    </div>
+  </cdvy-panel>
+  <cdvy-panel cdvy-title="Invoices" ng-show="billingCtrl.invoices.length > 0">
+    <div layout="column">
+      <div ng-repeat="invoice in billingCtrl.invoices" layout="row" class="invoice-row">
+        <div flex="85">{{invoice.creationDate | date:'MMMM d, yyyy'}} (${{invoice.total}})</div>
+        <div flex="15" layout-align="end center" layout="row">
+          <!--<a flex="50" ng-href="{{invoice.pdfLink}}" class="invoice-link" target="_blank">PDF</a>-->
+          <a flex="50" ng-href="{{invoice.htmlLink}}" class="invoice-link" target="_blank">HTML</a>
+        </div>
+      </div>
+    </div>
+  </cdvy-panel>
 </md-content>

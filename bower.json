@@ -26,6 +26,7 @@
     "ng-lodash": "~0.2.3",
     "card": "1.0.0",
     "braintree-angular": "~1.2.6",
+    "angular-charts": "0.2.6",
     "ng-password-strength": "~0.1.0"
   },
   "devDependencies": {

@@ -31,12 +31,14 @@ class CodenvyPayment {
 
     this.creditCardsPerAccount = new Map();
     this.tokensPerAccount = new Map();
+    this.invoicesPerAccount = new Map();
 
     // remote call
     this.remotePaymentAPI = this.$resource('/api/creditcard/:accountId',{}, {
       getToken: {method: 'GET', url: '/api/creditcard/:accountId/token'},
       add: {method: 'POST', url: '/api/creditcard/:accountId'},
-      remove: {method: 'DELETE', url: '/api/creditcard/:accountId/:creditCardNumber'}
+      remove: {method: 'DELETE', url: '/api/creditcard/:accountId/:creditCardNumber'},
+      getInvoices: {method: 'GET', url: '/api/invoice/:accountId', isArray: true}
     });
 
   }
@@ -85,7 +87,7 @@ class CodenvyPayment {
     mainCreditCardInfo.expirationDate = creditCard.expires.replace(/ /g, '');
     mainCreditCardInfo.cvv = creditCard.cvv;
     mainCreditCardInfo.billingAddress = {};
-   // mainCreditCardInfo.billingAddress = {postalCode: creditCard.postalCode};
+    mainCreditCardInfo.billingAddress = {postalCode: creditCard.postCode};
     var defer = this.$q.defer();
 
     this.getClientToken(accountId).then(() => {
@@ -102,6 +104,8 @@ class CodenvyPayment {
 
         remotePaymentAPI.add({accountId: accountId}, newCreditCard).$promise.then(() => {
           defer.resolve();
+        }, (error) => {
+          defer.reject(error);
         });
 
       });
@@ -114,6 +118,23 @@ class CodenvyPayment {
    */
   removeCreditCard(accountId, creditCardNumber) {
     return this.remotePaymentAPI.remove({accountId: accountId, creditCardNumber: creditCardNumber}).$promise;
+  }
+
+  fetchInvoices(accountId) {
+    let promise = this.remotePaymentAPI.getInvoices({accountId: accountId}).$promise;
+    // check if if was OK or not
+    let parsedResultPromise = promise.then((data) => {
+      this.invoicesPerAccount.set(accountId, data);
+    });
+    return parsedResultPromise;
+  }
+
+  /**
+   * Gets the list of invoices by account id.
+   * @returns {Array}
+   */
+  getInvoices(accountId) {
+    return this.invoicesPerAccount.get(accountId);
   }
 }
 
