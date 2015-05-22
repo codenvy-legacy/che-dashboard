@@ -50,6 +50,18 @@
       <div ng-message="maxlength">The cvv code has to be less than 4 digits long.</div>
       <div ng-message="minlength">The cvv code has to be more than 3 digits long.</div>
     </cdvy-input>
+    <cdvy-input cdvy-form="creditCardInformationForm"
+                cdvy-name="postCode"
+                cdvy-label-name="Post Code"
+                cdvy-place-holder="****"
+                ng-model="addCreditcardCtrl.creditCard.postCode"
+                required
+                ng-minlength="3"
+                ng-maxlength="10">
+      <div ng-message="required">A postal code is required.</div>
+      <div ng-message="maxlength">The postal code has to be 3-10 symbols long.</div>
+      <div ng-message="minlength">The postal code has to be 3-10 symbols long.</div>
+    </cdvy-input>
   </div>
 </div>
 <cdvy-input cdvy-form="creditCardInformationForm"
@@ -79,5 +91,5 @@
 <cdvy-select cdvy-label-name="Country"
              cdvy-option-values="addCreditcardCtrl.countries"
              cdvy-place-holder="Select Your Country"
-             ng-model="addCreditcardCtrl.creditCard.country">
+             cdvy-value="addCreditcardCtrl.creditCard.country">
 </cdvy-select>
