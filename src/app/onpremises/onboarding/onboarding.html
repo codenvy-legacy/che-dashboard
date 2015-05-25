@@ -21,9 +21,16 @@
                 cdvy-title="Step 1 - Welcome"
                 cdvy-panel-id="onpremise-onboarding-step1"
                 ng-init="onPremisesOnboardingCtrl.initStep(1)">
-      <md-content class="on-premise-on-boarding-marketing-text">
-        <div ng-include src="'app/onpremises/onboarding/marketing.html'"></div>
-      </md-content>
+
+      <div layout="row" layout-align="start center">
+        <image class="image-panel" src="assets/images/admin/on-prem-black.png" width="65px"></image>
+        <div layout="column" flex>
+          <md-content class="on-premise-on-boarding-marketing-text">
+            <div ng-include src="'app/onpremises/onboarding/marketing.html'"></div>
+          </md-content>
+        </div>
+      </div>
+
       <div layout="row" class="on-premise-on-boarding-marketing-buttons" layout-margin flex layout-align="center center">
         <cdvy-button-default id="onprem-onboard-welcome-ok-button"
                              cdvy-button-title="CONTINUE"
@@ -40,14 +47,16 @@
                 ng-class="onPremisesOnboardingCtrl.currentStep >= 2 ? 'onboard-panel-step-enabled' : 'onboard-panel-step-disabled'"
                 cdvy-toggle="true"
                 cdvy-title-svg-icon="{{onPremisesOnboardingCtrl.getIconStep(2)}}"
-                cdvy-title="Step 2 - Review agreement"
+                cdvy-title="Step 2 - Review Agreement"
                 cdvy-collapse="true"
                 cdvy-panel-id="onpremise-onboarding-step2"
                 ng-init="onPremisesOnboardingCtrl.initStep(2)">
       <div layout="row" class="on-premise-on-boarding-agreement-box" layout-margin flex layout-align="center center">
-        <iframe flex src="app/onpremises/onboarding/agreement.html"  style="height: 300px;max-width: 1000px"></iframe>
+        <iframe flex src="app/onpremises/onboarding/agreement.html" class="on-premise-on-boarding-iframe-agreement"></iframe>
       </div>
       <div class="on-premise-on-boarding-agreement-buttons" layout="row" layout-margin flex layout-align="center center">
+        <span class="on-premise-on-boarding-agreement-label-button">
+        By clicking accept we are granting you a free Codenvy On-Prem subscription</span>
         <cdvy-button-default id="onprem-onboard-agreement-accept-button"
                              cdvy-button-title="Accept"
                              ng-disabled="onPremisesOnboardingCtrl.isValidateAgreementDisabled()"

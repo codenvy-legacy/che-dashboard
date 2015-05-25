@@ -77,23 +77,23 @@
 
   <div class="navbar-menu" ng-show="navbarCtrl.userIsAdmin()">
     <div>
-      <span>On-Prem Admin</span>
+      <span><i class="cdvyfont cdvyico-administration">&nbsp;</i>On-Prem Admin</span>
       <i class="material-design icon-ic_expand_more_24px md-tab-themed" ng-click="navbarCtrl.flipOnpremAdminExpanded()">&nbsp;</i>
     </div>
     <section class="animation" layout="column" layout-align="center center" ng-if="navbarCtrl.onpremAdminExpanded" >
-      <md-list layout="column">
+      <md-list layout="column"layout="column">
         <md-item>
           <md-item-content>
-            <md-button flex ng-href="#/onprem/admin/bridge" layout-align="left">Bridge to Codenvy.com</md-button>
+            <md-button flex ng-href="#/onprem/admin/bridge" layout-align="left"><i class="cdvyfont cdvyico-bridge">&nbsp;</i>Bridge to Codenvy.com</md-button>
           </md-item-content>
           <md-item-content>
-            <md-button flex ng-href="#/onprem/admin/installation" layout-align="left">Your Local Installation</md-button>
+            <md-button flex ng-href="#/onprem/admin/installation" layout-align="left"><i class="cdvyfont cdvyico-your-installation icon">&nbsp;</i>Your Local Installation</md-button>
           </md-item-content>
         </md-item>
       </md-list>
     </section>
   </div>
-  <md-divider md-theme="factory-theme"></md-divider>
+  <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
   </div>
 </md-toolbar>
 
