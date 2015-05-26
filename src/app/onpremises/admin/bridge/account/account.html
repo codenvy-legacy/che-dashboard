@@ -54,7 +54,8 @@
       </div>
       <div layout="row" layout-padding ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showSubscribedMessage">
         <span>You have a Codenvy On-Prem subscription. Thank you!</span>
-        <span>Expiration Date: {{onPremisesAdminBridgeCodenvyAccountCtrl.onpremSubscriptionExpiration |date:'dd/MM/yyyy'}}</span>
+        <span class="onpremises-admin-bridge-codenvyaccount-expiration-label">Expiration Date:</span>
+        <span class="onpremises-admin-bridge-codenvyaccount-expiration-date">{{onPremisesAdminBridgeCodenvyAccountCtrl.onpremSubscriptionExpiration |date:'dd/MM/yyyy'}}</span>
       </div>
       <div layout="row" ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showNotSubscribedMessage">
         <span>You do not have a Codenvy On-Prem subscription.</span>
