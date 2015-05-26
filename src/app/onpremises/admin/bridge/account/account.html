@@ -41,25 +41,25 @@
                           ng-click="onPremisesAdminBridgeCodenvyAccountCtrl.login()">
     </cdvy-button-primary>
   </div>
-    <div>
-      <div layout="row" layout-margin layout-padding flex>
-        <span>
-          Forgot your password?
-        </span>
-        <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.forgotPasswordUrl}}" target="_blank" cdvy-link-text="Recover"></cdvy-link>
-        <span class="onpremises-admin-bridge-codenvyaccount-noaccount">
-          Don't have an account?
-        </span>
-        <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.signUpUrl}}" target="_blank" cdvy-link-text="Sign up"></cdvy-link>
-      </div>
-      <div layout="row" layout-padding ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showSubscribedMessage">
-        <span>You have a Codenvy On-Prem subscription. Thank you!</span>
-        <span class="onpremises-admin-bridge-codenvyaccount-expiration-label">Expiration Date:</span>
-        <span class="onpremises-admin-bridge-codenvyaccount-expiration-date">{{onPremisesAdminBridgeCodenvyAccountCtrl.onpremSubscriptionExpiration |date:'dd/MM/yyyy'}}</span>
-      </div>
-      <div layout="row" ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showNotSubscribedMessage">
-        <span>You do not have a Codenvy On-Prem subscription.</span>
-        <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.upgradeSubscriptionUrl}}" target="_blank" cdvy-link-text="Upgrade – your conscience will thank you."></cdvy-link>
-      </div>
+  <div>
+    <div layout="row" layout-margin layout-padding flex>
+      <span>
+        Forgot your password?
+      </span>
+      <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.forgotPasswordUrl}}" target="_blank" cdvy-link-text="Recover"></cdvy-link>
+      <span class="onpremises-admin-bridge-codenvyaccount-noaccount">
+        Don't have an account?
+      </span>
+      <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.signUpUrl}}" target="_blank" cdvy-link-text="Sign up"></cdvy-link>
     </div>
+    <div layout="row" layout-padding ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showSubscribedMessage">
+      <span>You have a Codenvy On-Prem subscription. Thank you!</span>
+      <span class="onpremises-admin-bridge-codenvyaccount-expiration-label">Expiration Date:</span>
+      <span class="onpremises-admin-bridge-codenvyaccount-expiration-date">{{onPremisesAdminBridgeCodenvyAccountCtrl.onpremSubscriptionExpiration |date:'dd/MM/yyyy'}}</span>
+    </div>
+    <div layout="row" ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showNotSubscribedMessage">
+      <span>You do not have a Codenvy On-Prem subscription.</span>
+      <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.upgradeSubscriptionUrl}}" target="_blank" cdvy-link-text="Upgrade – your conscience will thank you."></cdvy-link>
+    </div>
+  </div>
 </cdvy-panel>
