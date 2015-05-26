@@ -24,7 +24,7 @@ class CodenvyInput {
    * @ngInject for Dependency injection
    */
   constructor () {
-    this.restrict='E';
+    this.restrict = 'E';
     this.replace= true;
     this.transclude= true;
     this.templateUrl = 'components/widget/input/cdvy-input.html';
@@ -53,6 +53,8 @@ class CodenvyInput {
     // search the input field
     var inputElement = element.find('input');
 
+    var tabIndex = undefined;
+
     keys.forEach((key) => {
 
       // don't reapply internal properties
@@ -69,8 +71,13 @@ class CodenvyInput {
       }
       var value = attrs[key];
 
+      // remember tabindex
+      if (key === 'tabindex') {
+        tabIndex = value;
+      }
+
       // handle empty values as boolean
-      if (value ==='') {
+      if (value === '') {
         value = 'true';
       }
 
@@ -88,6 +95,12 @@ class CodenvyInput {
     });
 
 
+    // The focusable element is the input, remove tabIndex from top-level element
+    element.attr('tabindex', -1);
+    // The default value for tabindex on the input is 0 (meaning: set 0 if no value was set)
+    if (!tabIndex) {
+      inputElement.attr('tabindex', 0);
+    }
   }
 
   /**
