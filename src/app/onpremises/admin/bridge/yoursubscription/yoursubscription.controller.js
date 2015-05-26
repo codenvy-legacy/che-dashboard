@@ -29,7 +29,7 @@ class OnPremisesAdminBridgeYourSubscriptionCtrl {
     if (!authValue) {
       this.subscriptionState = 'NOT_LOGGED';
     } else {
-      this.imsSubscriptionApi.checkOnPremisesSubscription().then(this.updateSubscriptionState);
+      this.imsSubscriptionApi.checkOnPremisesSubscription().then(_ => this.updateSubscriptionState(_));
     }
   }
 
