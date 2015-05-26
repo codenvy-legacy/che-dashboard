@@ -32,6 +32,10 @@
                 required>
       <div ng-message="required">The password is required.</div>
     </cdvy-input>
+    <div layout="row">
+      <div flex="15">&nbsp;</div>
+      <div ng-show="onPremisesAdminBridgeCodenvyAccountCtrl.loginError" class="onprem-admin-bridge-account-auth-error">Authentication Error</div>
+    </div>
     <cdvy-button-primary cdvy-button-title="Login" flex="35"
                           ng-disabled="onPremisesAdminBridgeCodenvyAccountCtrl.loginDisabled()"
                           ng-click="onPremisesAdminBridgeCodenvyAccountCtrl.login()">

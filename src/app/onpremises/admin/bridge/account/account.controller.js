@@ -21,6 +21,7 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     this.imsSubscriptionApi = imsSubscriptionApi;
 
     this.hideAllMessages();
+    this.loginError = false;
 
     this.forgotPasswordUrl = 'https://codenvy.com/site/recover-password';
     this.signUpUrl = 'https://codenvy.com/site/create-account';
@@ -36,9 +37,20 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
       this.imsSaasAuthApi.resetLogin();
     }
     let loginPromise = this.imsSaasAuthApi.logOnSaas(this.userName, this.password);
-    loginPromise.then(() => { this.requestSubscriptions(); },
-                      () => { this.hideAllMessages(); });
+    loginPromise.then(() => this.loginSuccess());
+    // do not catch exceptions that may happen in subscription codepath
+    loginPromise.catch(_ => this.loginFailed(_));
     this.resetCredentialsChanged();
+  }
+
+  loginFailed(error) {
+    this.hideAllMessages(error);
+    this.loginError = true;
+  }
+
+  loginSuccess() {
+    this.requestSubscriptions();
+    this.loginError = false;
   }
 
   hideAllMessages(error) {
