@@ -24,15 +24,34 @@ class ImsSubscriptionApi {
   constructor($resource) {
 
     // remote call
-    this.remoteImsAPI = $resource('/im', {}, {
-      addTrialSubscription: { method: 'POST', url: '/im/subscription' },
-      checkSubscription: { method: 'GET', url: '/im/subscription' },
-    });
+    this.remoteImsAPI = {
+      addTrialSubscription: () => $http.post('/im/subscription'),
+      checkSubscription: () => $http.get('/im/subscription')
+    };
   }
 
+  /**
+   * Checks if the user logged on SaaS has an active on-prem subscription.
+   */
   checkOnPremisesSubscription() {
     let serverPromise = this.remoteImsAPI.checkSubscription();
-    return serverPromise.$promise;
+    this.promise =  serverPromise.then(response => this._gotSubscription(response)).catch(response => this._failedSubscription(response));
+    return this.promise;
+  }
+
+  _gotSubscription(response) {
+    return response.data;
+  }
+
+  _failedSubscription(response) {
+    switch (response.status) {
+      case 404:// Subscription not found
+        return { state: 'NO_SUBSCRIPTION' };
+      case 403:// SaaS User is not authenticated or authentication token is expired
+      case 500:// server error
+      default:// unspecified error
+        throw response.status;
+    }
   }
 }
 
