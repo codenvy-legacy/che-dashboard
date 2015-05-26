@@ -28,42 +28,34 @@
 	content: "\E002";
 }
 
-.cdvyico-bridge:before {
+.cdvyico-type-blank:before {
 	content: "\E003";
 }
 
-.cdvyico-type-blank:before {
+.cdvyico-type-cpp:before {
 	content: "\E004";
 }
 
-.cdvyico-type-cpp:before {
+.cdvyico-type-go:before {
 	content: "\E005";
 }
 
-.cdvyico-type-go:before {
+.cdvyico-type-java:before {
 	content: "\E006";
 }
 
-.cdvyico-type-java:before {
+.cdvyico-type-javascript:before {
 	content: "\E007";
 }
 
-.cdvyico-type-javascript:before {
+.cdvyico-type-php:before {
 	content: "\E008";
 }
 
-.cdvyico-type-php:before {
+.cdvyico-type-python:before {
 	content: "\E009";
 }
 
-.cdvyico-type-python:before {
-	content: "\E00A";
-}
-
 .cdvyico-type-ruby:before {
-	content: "\E00B";
-}
-
-.cdvyico-your-installation:before {
-	content: "\E00C";
+	content: "\E00A";
 }
