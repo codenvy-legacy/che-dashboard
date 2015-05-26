@@ -22,7 +22,7 @@ class CodenvyButton {
    * @ngInject for Dependency injection
    */
   constructor () {
-    this.restrict='E';
+    this.restrict = 'E';
     this.bindToController = true;
   }
 
@@ -32,12 +32,17 @@ class CodenvyButton {
    * @param attrs
    * @returns {string} the template
    */
-  template( element, attrs){
+  template(element, attrs) {
     var template = this.getTemplateStart();
 
     if (attrs.href) {
       template = template + ' href=\"' + attrs['href'] + '\"';
     }
+
+    if (attrs.ngClick) {
+      template = template + ` ng-click="${attrs.ngClick}"`;
+    }
+
     template = template + '>';
 
     if (attrs.cdvyButtonIcon) {
@@ -49,6 +54,18 @@ class CodenvyButton {
     return template;
   }
 
+  compile(element, attrs) {
+    let button = element.find('button');
+    if (attrs && attrs.tabindex) {
+      button.attr('tabindex', attrs.tabindex);
+    } else {
+      button.attr('tabindex', 0);
+    }
+    // top level element doesn't have tabindex, only the button has
+    element.attr('tabindex', -1);
+
+    attrs.$set('ngClick', undefined);
+  }
 
   /**
    * Re-apply ng-disabled on child
