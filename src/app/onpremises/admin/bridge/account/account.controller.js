@@ -16,7 +16,7 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor(imsSaasAuthApi, imsSubscriptionApi) {
+  constructor(imsSaasAuthApi, imsSubscriptionApi, $rootScope) {
     this.imsSaasAuthApi = imsSaasAuthApi;
     this.imsSubscriptionApi = imsSubscriptionApi;
 
@@ -26,6 +26,9 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     this.forgotPasswordUrl = 'https://codenvy.com/site/recover-password';
     this.signUpUrl = 'https://codenvy.com/site/create-account';
     this.upgradeSubscriptionUrl = 'https://codenvy.com/buy';
+
+    $rootScope.$watch(() => imsSaasAuthApi.promise, (newValue, oldValue) => this._authChanged(newValue, oldValue));
+    $rootScope.$watch(() => imsSubscriptionApi.promise, (newValue, oldValue) => this._subscriptionChanged(newValue, oldValue));
   }
 
   loginDisabled() {
@@ -40,20 +43,20 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
       this.imsSaasAuthApi.resetLogin();
     }
     let loginPromise = this.imsSaasAuthApi.logOnSaas(this.userName, this.password);
-    loginPromise.then(() => this.loginSuccess());
-    // do not catch exceptions that may happen in subscription codepath
-    loginPromise.catch(_ => this.loginFailed(_));
+
     this.resetCredentialsChanged();
   }
 
   loginFailed(error) {
     this.hideAllMessages(error);
     this.loginError = true;
+    this.loggedIn = false;
   }
 
   loginSuccess() {
     this.requestSubscriptions();
     this.loginError = false;
+    this.loggedIn = true;
   }
 
   hideAllMessages(error) {
@@ -64,7 +67,16 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
 
   requestSubscriptions() {
     let subscriptionPromise = this.imsSubscriptionApi.checkOnPremisesSubscription();
-    subscriptionPromise.then((response) => { this.receiveSubscriptionResponse(response); },
+    this._handleSubscriptionPromise(subscriptionPromise);
+  }
+
+  _handleAuthPromise(promise) {
+    promise.then(() => this.loginSuccess());
+    promise.catch(_ => this.loginFailed(_));
+  }
+
+  _handleSubscriptionPromise(promise) {
+    promise.then((response) => { this.receiveSubscriptionResponse(response); },
                              (error) => { this.hideAllMessages(error); });
   }
 
@@ -104,6 +116,24 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
 
   resetCredentialsChanged() {
     this.credentialsChanged = false;
+  }
+
+  _authChanged(newValue, oldValue) {
+    if (!newValue) {
+      this.hideAllMessages();
+      this.loginError = false;
+      this.loggedIn = false;
+    } else {
+      this._handleAuthPromise(newValue);
+    }
+  }
+
+  _subscriptionChanged(newValue, oldValue) {
+    if (!newValue) {
+      this.hideAllMessages();
+    } else {
+      this._handleSubscriptionPromise(newValue);
+    }
   }
 }
 

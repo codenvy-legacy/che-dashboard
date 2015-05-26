@@ -21,13 +21,18 @@ class ImsSubscriptionApi {
    * Default constructor for the subscription API.
    * @ngInject for Dependency injection
    */
-  constructor($resource) {
+  constructor($resource, $rootScope, imsSaasAuthApi) {
 
     // remote call
     this.remoteImsAPI = $resource('/im/subscription', {}, {
       addTrialSubscription: { method: 'POST', url: '/im/subscription' },
       checkSubscription: { method: 'GET', url: '/im/subscription' }
     });
+
+    $rootScope.$watch(
+      () => imsSaasAuthApi.promise,
+      newValue => this._loginChanged(newValue)
+    );
   }
 
   /**
@@ -53,6 +58,13 @@ class ImsSubscriptionApi {
         throw response.status;
     }
   }
+
+  _loginChanged(newValue) {
+    if (newValue) {
+      this.checkOnPremisesSubscription();
+    }
+  }
+
 }
 
 // Register this factory
