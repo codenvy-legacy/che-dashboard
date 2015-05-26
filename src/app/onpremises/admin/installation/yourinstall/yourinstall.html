@@ -16,11 +16,11 @@
     <div class="onprem-your-install-label">Name</div>
     <div flex style="height: 20px">{{yourInstallationCtrl.customerName}}</div>
   </div>
-  <div class="onprem-your-install-installed-version-block">
+  <div class="onprem-your-install-installed-version-block" ng-if="yourInstallationCtrl.installedVersion">
     <div class="onprem-your-install-label">Installed Version</div>
     <div flex style="height: 20px">{{yourInstallationCtrl.installedVersion}}</div>
   </div>
-  <div class="onprem-your-install-downloaded-version-block">
+  <div class="onprem-your-install-downloaded-version-block" ng-if="yourInstallationCtrl.downloadedVersion">
     <div class="onprem-your-install-label">Downloaded Version</div>
     <div flex style="height: 20px">{{yourInstallationCtrl.downloadedVersion}}</div>
   </div>

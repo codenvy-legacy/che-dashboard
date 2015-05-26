@@ -16,12 +16,28 @@ class YourInstallationCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor(imsNodesApi) {
-    this.imsNodesApi = imsNodesApi;
-    this.customerName = 'Toto inc.';
-    this.installedVersion = '1.0.0';
-    this.downloadedVersion= '1.0.1';
-    this.imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes; });
+  constructor(imsNodesApi, imsArtifactApi) {
+    this.customerName = '<Customer Name>';
+
+    imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes; });
+    imsArtifactApi.getInstalledArtifactsList().then(result => this.updateInstalledVersion(result));
+    imsArtifactApi.getDownloadedArtifactsList().then(result => this.updateDownloadedVersion(result));
+  }
+
+  updateInstalledVersion(resource) {
+    if (resource.artifacts && resource.artifacts.codenvy) {
+      this.installedVersion = resource.artifacts.codenvy.version;
+    } else {
+      this.installedVersion = undefined;
+    }
+  }
+
+  updateDownloadedVersion(resource) {
+    if (resource.artifacts && resource.artifacts.codenvy) {
+      this.downloadedVersion = resource.artifacts.codenvy.version;
+    } else {
+      this.downloadedVersion = undefined;
+    }
   }
 }
 
