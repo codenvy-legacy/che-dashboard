@@ -134,15 +134,18 @@ class ImsArtifactApi {
    */
   _gatherDates(artifacts) {
     let promises = [];
+    let artifactsArray = [];
     for (let artifact of artifacts) {
       let promise = this.getArtifactReleaseDate(artifact.name, artifact.version);
+      artifactsArray.push(artifact);
       promises.push(promise);
     }
     let all = this.$q.all(promises);
-    return all.then(function(dates) {
+    return all.then(dates => {
       let result = new Map();
-      for (let i in artifacts) {
-        result.set(this._formatkey(artifacts[i].name, artifacts[i].version), dates[i]);
+      for (let i in artifactsArray) {
+        let key = this._formatkey(artifactsArray[i].name, artifactsArray[i].version);
+        result.set(key, dates[i]);
       }
       return result;
     });
@@ -202,9 +205,24 @@ class ImsArtifactApi {
 
   getArtifactReleaseDate(artifactName, version) {
     let propertiesPromise = this.getArtifactProperties(artifactName, version);
-    return propertiesPromise.then(props => new Date(props['build-time']))
+    return propertiesPromise.then(props => this._gotArtifactProperties(artifactName, version, props))
                                   /* Eat all errors. */
-                                  .catch(error => undefined);
+                            .catch(error => this._artifactPropertiesError(artifactName, version, error));
+  }
+
+  _gotArtifactProperties(artifact, version, properties) {
+    if (properties && properties['build-time']) {
+      let result =  Date.parse(properties['build-time']);
+      return result;
+    } else {
+      console.log(`WARNING no date for artifact ${artifact} ${version}`);
+      return undefined;
+    }
+  }
+
+  _artifactPropertiesError(artifact, version, error) {
+    console.log(`Can't get properties for artifact ${artifact}, ${version}`, error);
+    return undefined;
   }
 }
 
