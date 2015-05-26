@@ -36,7 +36,7 @@ class CodenvyButton {
     var template = this.getTemplateStart();
 
     if (attrs.href) {
-      template = template + ' href=\"' + attrs['href'] + '\"';
+      template = template + ` href="${attrs.href}"`;
     }
 
     if (attrs.ngClick) {
@@ -46,7 +46,7 @@ class CodenvyButton {
     template = template + '>';
 
     if (attrs.cdvyButtonIcon) {
-      template = template + '<md-icon md-font-icon=\"' + attrs['cdvyButtonIcon'] + '\" flex layout=\"column\" layout-align=\"start center\"></md-icon>';
+      template = template + `<md-icon md-font-icon="${attrs.cdvyButtonIcon}" flex layout="column" layout-align="start center"></md-icon>`;
     }
 
 
