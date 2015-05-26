@@ -33,6 +33,9 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
   }
 
   login() {
+    if (this.loginDisabled()) {
+      return;
+    }
     if (this.credentialsChanged) {
       this.imsSaasAuthApi.resetLogin();
     }
