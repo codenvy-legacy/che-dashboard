@@ -65,7 +65,7 @@ class RoutingRedirect {
 
       let routeCallback = this.routeCallbacks[i];
 
-      let answer = routeCallback.checkRedirect(routeCallback);
+      let answer = routeCallback.checkRedirect(next.templateUrl);
 
       // continue routing as there is no routing blocker
       // there was an answer, route to this path
