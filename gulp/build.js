@@ -78,6 +78,12 @@ gulp.task('images', function () {
     .pipe(gulp.dest(paths.dist + '/assets/images/'));
 });
 
+
+gulp.task('htmlassets', function () {
+  return gulp.src(paths.src + '/assets/html/**/*')
+    .pipe(gulp.dest(paths.dist + '/assets/html/'));
+});
+
 gulp.task('existingfonts', function () {
   return gulp.src(paths.src + '/assets/fonts/*')
     .pipe($.filter('**/*.{eot,svg,ttf,otf,woff,woff2}'))
@@ -116,4 +122,4 @@ gulp.task('clean', function (done) {
   $.del([paths.dist + '/', paths.tmp + '/', paths.doc + '/'], done);
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'misc']);
+gulp.task('build', ['html', 'images', 'htmlassets', 'fonts', 'misc']);

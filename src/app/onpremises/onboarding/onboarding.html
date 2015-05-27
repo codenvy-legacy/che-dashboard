@@ -26,7 +26,7 @@
         <image class="image-panel" src="assets/images/admin/on-prem-black.png" width="65px"></image>
         <div layout="column" flex>
           <md-content class="on-premise-on-boarding-marketing-text">
-            <div ng-include src="'app/onpremises/onboarding/marketing.html'"></div>
+            <span class="on-premise-on-boarding-welcome-label">Welcome to Codenvy!</span><br> Codenvy On-Prem provides a hosted developer workspace cloud that is private, extensible, and secure. It runs behind your firewall, connected to your systems and projects to remove configuration maintenance from development.
           </md-content>
         </div>
       </div>
@@ -52,7 +52,7 @@
                 cdvy-panel-id="onpremise-onboarding-step2"
                 ng-init="onPremisesOnboardingCtrl.initStep(2)">
       <div layout="row" class="on-premise-on-boarding-agreement-box" layout-margin flex layout-align="center center">
-        <iframe flex src="app/onpremises/onboarding/agreement.html" class="on-premise-on-boarding-iframe-agreement"></iframe>
+        <iframe flex src="assets/html/agreement.html" class="on-premise-on-boarding-iframe-agreement"></iframe>
       </div>
       <div class="on-premise-on-boarding-agreement-buttons" layout="row" layout-margin flex layout-align="center center">
         <span class="on-premise-on-boarding-agreement-label-button">
