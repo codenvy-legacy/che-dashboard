@@ -14,8 +14,8 @@ class LoginCtrl {
   /*@ngInject*/
   constructor($scope, $http, $cookies, $window, $location, codenvyAPI) {
 
-    $scope.username = 'test';
-    $scope.password = 'test';
+    $scope.username = '';
+    $scope.password = '';
     $scope.realm = '';
     var loginData;
 
