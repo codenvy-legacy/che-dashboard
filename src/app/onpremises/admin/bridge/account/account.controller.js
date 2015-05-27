@@ -50,8 +50,13 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
   }
 
   loginFailed(error) {
+    console.log('loginFailed', error);
     this.hideAllMessages(error);
-    this.loginError = true;
+    if (this.imsSaasAuthApi.isAuthFailedError(error)) {
+      this.loginError = 'The authentication failed. Please check your login and password.';
+    } else {
+      this.loginError = 'There was a server error during authentication. Please try again later.';
+    }
     this.loggedIn = false;
   }
 
@@ -73,13 +78,12 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
   }
 
   _handleAuthPromise(promise) {
-    promise.then(() => this.loginSuccess());
-    promise.catch(_ => this.loginFailed(_));
+    promise.then(() => this.loginSuccess(), _ => this.loginFailed(_));
   }
 
   _handleSubscriptionPromise(promise) {
-    promise.then((response) => { this.receiveSubscriptionResponse(response); },
-                             (error) => { this.hideAllMessages(error); });
+    promise.then(response => this.receiveSubscriptionResponse(response),
+                 error => this.hideAllMessages(error));
   }
 
   receiveSubscriptionResponse(response) {
@@ -121,12 +125,15 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
   }
 
   _authChanged(newValue, oldValue) {
-    if (!newValue) {
+    if (newValue === oldValue) {
+      return;
+    }
+    if (newValue) {
+      this._handleAuthPromise(newValue);
+    } else {
       this.hideAllMessages();
       this.loginError = false;
       this.loggedIn = false;
-    } else {
-      this._handleAuthPromise(newValue);
     }
   }
 

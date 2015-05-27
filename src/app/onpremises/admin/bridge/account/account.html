@@ -35,26 +35,38 @@
                 required>
       <div ng-message="required">The password is required.</div>
     </cdvy-input>
-    <div layout="row">
-      <div flex="15">&nbsp;</div>
-      <div ng-show="onPremisesAdminBridgeCodenvyAccountCtrl.loginError" class="onprem-admin-bridge-account-auth-error">Authentication Error</div>
+
+    <div flex layout="column" layout-gt-md="row" layout-align="start center" layout-align-gt-md="start center">
+      <div flex="15" hide show-gt-md>&nbsp;</div><!-- only show when layout=row above -->
+      <div><!-- cdvy-button doesn't properly support flex / no min size -->
+        <cdvy-button-primary cdvy-button-title="Login"
+                              ng-disabled="onPremisesAdminBridgeCodenvyAccountCtrl.loginDisabled()"
+                              ng-click="onPremisesAdminBridgeCodenvyAccountCtrl.login()">
+        </cdvy-button-primary>
+      </div>
+      <div flex layout="column" layout-align="center start" class="onpremises-admin-bridge-codenvyaccount-auth-message"><!-- only one of the children is shown at a time -->
+        <span layout="row" layout-wrap ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.loginError" class="onprem-admin-bridge-account-auth-error">
+          {{onPremisesAdminBridgeCodenvyAccountCtrl.loginError}}
+        </span>
+        <span ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.loggedIn" class="onprem-admin-bridge-account-auth-loggedin">You are logged in</span>
+      </div>
     </div>
-    <cdvy-button-primary cdvy-button-title="Login" flex="35"
-                          ng-disabled="onPremisesAdminBridgeCodenvyAccountCtrl.loginDisabled()"
-                          ng-click="onPremisesAdminBridgeCodenvyAccountCtrl.login()">
-    </cdvy-button-primary>
+    <div flex layout-fill layout="row" layout-sm="column" layout-md="column" layout-align="center center">
+      <div layout="row" layout-align="start center">
+        <span class="onpremises-admin-bridge-codenvyaccount-forgot-password">
+          Forgot your password?&emsp;
+        </span>
+        <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.forgotPasswordUrl}}" target="_blank" cdvy-link-text="Recover" cdvy-no-padding></cdvy-link>
+      </div>
+      <div flex="5">&nbsp;</div>
+      <div layout="row" layout-align="center center">
+        <span class="onpremises-admin-bridge-codenvyaccount-noaccount">
+          Don't have an account?&emsp;
+        </span>
+        <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.signUpUrl}}" target="_blank" cdvy-link-text="Sign up" cdvy-no-padding></cdvy-link>
+      </div>
   </div>
   <div>
-    <div layout="row" layout-margin layout-padding flex>
-      <span>
-        Forgot your password?
-      </span>
-      <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.forgotPasswordUrl}}" target="_blank" cdvy-link-text="Recover"></cdvy-link>
-      <span class="onpremises-admin-bridge-codenvyaccount-noaccount">
-        Don't have an account?
-      </span>
-      <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.signUpUrl}}" target="_blank" cdvy-link-text="Sign up"></cdvy-link>
-    </div>
     <div layout="row" layout-padding ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.showSubscribedMessage">
       <span>You have a Codenvy On-Prem subscription. Thank you!</span>
       <span class="onpremises-admin-bridge-codenvyaccount-expiration-label">Expiration Date:</span>
