@@ -93,12 +93,13 @@ class CodenvyUser {
 
     let promise = this.user.$promise;
     // check if if was OK or not
-    this.userPromise = promise.then(() => {
+    let updatePromise = promise.then(() => {
       this.isLogged = true;
     }, () => {
       this.isLogged = false;
     });
-    return this.$q.all([this.userPromise, isAdminPromise]);;
+    this.userPromise = this.$q.all([updatePromise, isAdminPromise]);
+    return this.userPromise;
   }
 
 
@@ -140,6 +141,8 @@ class CodenvyUser {
     let promise = this.remoteUserAPI.inRole({role: role, scope: scope, scopeId: scopeId}).$promise;
     let parsedResultPromise = promise.then((userInRole) => {
       this.isUserInRoleMap.set(scope + '/' + role + ':' + scopeId, userInRole);
+    }, () => {
+
     });
     return parsedResultPromise;
   }
