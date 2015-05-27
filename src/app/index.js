@@ -21,22 +21,28 @@ let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch
 
 // add a global resolve flag on all routes (user needs to be resolved first)
 module.config(['$routeProvider', function ($routeProvider) {
-
   $routeProvider.accessWhen = function(path, route) {
     route.resolve || (route.resolve = {});
     route.resolve.app = ['codenvyUser', function (codenvyUser) {
       return codenvyUser.fetchUser();
     }];
 
-
     // add fetch of the onboarding flag for onpremises route
-    if (route.templateUrl.startsWith('app/onpremises/')) {
+    if (route.templateUrl.startsWith('app/onpremises/') || '/' === path) {
       route.resolve.appOnBoarding = ['imsPropertiesApi', function (imsPropertiesApi) {
         return imsPropertiesApi.fetchProperty('onboardingCompleted');
       }];
     }
 
     return $routeProvider.when(path, route);
+  };
+
+  $routeProvider.accessOtherWise = function(route) {
+    route.resolve || (route.resolve = {});
+    route.resolve.app = ['codenvyUser', function (codenvyUser) {
+      return codenvyUser.fetchUser();
+    }];
+    return $routeProvider.otherwise(route);
   };
 
 
@@ -120,9 +126,8 @@ module.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'app/main/login.html',
       controller: 'LoginCtrl'
     })
-    .otherwise({
+    .accessOtherWise({
       redirectTo: '/'
-
     });
 
 
@@ -137,6 +142,8 @@ module.config(['$routeProvider', function ($routeProvider) {
   }
 
 }]);
+
+
 
 /**
  * This module check if we have an authenticated user and if not, redirect it to login page
@@ -160,13 +167,13 @@ class CheckLogin {
   }
 
 
-  checkRedirect() {
+  checkRedirect(url) {
     let user = this.codenvyUser.getUser();
-
-    // User has not logged in, redirect it to login page (dev mode only)
-    if (!user.$resolved) {
+    // User is not admin and user has no email it needs to be logged in
+    if (!this.codenvyUser.isAdmin() && !user.email) {
       return {route:"/login"};
     }
+
     return {};
 
 
@@ -188,13 +195,20 @@ module.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', functio
   }
 
 
+  $rootScope.$on('$routeChangeStart', (event, next,  previous, rejection)=> {
+    if (DEV) {
+      console.log('$routeChangeStart event with route', next);
+    }
+  });
+
   // When a route is about to change, notify the routing redirect node
   $rootScope.$on('$routeChangeSuccess', (event, next,  previous, rejection)=> {
-    if (DEV) {
-      console.log('$routeChangeSuccess event with route', next);
-    }    // check routes
-    routingRedirect.check(event, next);
-
+    if (next.resolve) {
+      if (DEV) {
+        console.log('$routeChangeSuccess event with route', next);
+      }// check routes
+      routingRedirect.check(event, next);
+    }
   })
 }]);
 
@@ -206,8 +220,6 @@ if (!DEV) {
   module.run(function (onPremiseOnBoardingRedirect) {
   });
 }
-
-
 
 // add interceptors
 module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $log) {
