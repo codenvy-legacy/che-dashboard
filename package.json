@@ -1,6 +1,10 @@
 {
   "name": "userDashboard",
   "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codenvy/user-dashboard.git"
+  },
   "devDependencies": {
     "browser-sync": "~1.7.1",
     "chalk": "~0.5.1",
@@ -46,7 +50,6 @@
     "proxy-middleware": "^0.10.0",
     "require-dir": "~0.1.0",
     "uglify-save-license": "~0.4.1",
-    "url": "^0.10.2",
     "wiredep": "~2.2.0"
   },
   "engines": {
