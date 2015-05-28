@@ -18,7 +18,7 @@
                 ng-class="onPremisesOnboardingCtrl.currentStep >= 1 ? 'onboard-panel-step-enabled' : 'onboard-panel-step-disabled'"
                 cdvy-toggle="true"
                 cdvy-title-svg-icon="{{onPremisesOnboardingCtrl.getIconStep(1)}}"
-                cdvy-title="Step 1 - Welcome"
+                cdvy-title="Step 1 - Get Started"
                 cdvy-panel-id="onpremise-onboarding-step1"
                 ng-init="onPremisesOnboardingCtrl.initStep(1)">
 
@@ -26,12 +26,14 @@
         <image class="image-panel" src="assets/images/admin/on-prem-black.png" width="65px"></image>
         <div layout="column" flex>
           <md-content class="on-premise-on-boarding-marketing-text">
-            <span class="on-premise-on-boarding-welcome-label">Welcome to Codenvy!</span><br> Codenvy On-Prem provides a hosted developer workspace cloud that is private, extensible, and secure. It runs behind your firewall, connected to your systems and projects to remove configuration maintenance from development.
+            <span class="on-premise-on-boarding-welcome-label">Welcome!</span> Codenvy On-Prem is a private, extensible, and secure developer workspace cloud. <br><br>
           </md-content>
         </div>
       </div>
 
-      <div layout="row" class="on-premise-on-boarding-marketing-buttons" layout-margin flex layout-align="center center">
+      <div layout="column" class="on-premise-on-boarding-marketing-buttons" layout-margin flex layout-align="center center">
+        <div layout="row" layout-align="center center">
+          <cdvy-link ng-href="http://helpdesk.codenvy.com/" target="_blank" cdvy-link-text="Troubleshooting"></cdvy-link> | <cdvy-link ng-href="http://docs.codenvy.com/onpremises/evaluators-guide/" target="_blank" cdvy-link-text="Sizing"></cdvy-link> | <cdvy-link ng-href="http://docs.codenvy.com/onpremises/system-administration/" target="_blank" cdvy-link-text="Administration"></cdvy-link> | <cdvy-link ng-href="https://codenvy.com/onprem" target="_blank" cdvy-link-text="Marketing"></cdvy-link></div><br>
         <cdvy-button-default id="onprem-onboard-welcome-ok-button"
                              cdvy-button-title="CONTINUE"
                              ng-click="onPremisesOnboardingCtrl.validateMarketing()"
@@ -54,9 +56,9 @@
       <div layout="row" class="on-premise-on-boarding-agreement-box" layout-margin flex layout-align="center center">
         <iframe flex src="assets/html/agreement.html" class="on-premise-on-boarding-iframe-agreement"></iframe>
       </div>
-      <div class="on-premise-on-boarding-agreement-buttons" layout="row" layout-margin flex layout-align="center center">
+      <div class="on-premise-on-boarding-agreement-buttons" layout="column" layout-margin flex layout-align="center center">
         <span class="on-premise-on-boarding-agreement-label-button">
-        By clicking accept we are granting you a free Codenvy On-Prem subscription</span>
+        By clicking accept, Codenvy grants you a 1 year, automatically renewable On-Premises Free Subscription (section 7.2.1). Enjoy!</span><br>
         <cdvy-button-default id="onprem-onboard-agreement-accept-button"
                              cdvy-button-title="Accept"
                              ng-disabled="onPremisesOnboardingCtrl.isValidateAgreementDisabled()"
