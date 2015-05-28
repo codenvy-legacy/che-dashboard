@@ -12,6 +12,10 @@
 -->
 
 <cdvy-panel cdvy-title="Your Codenvy.com Account Information">
+  <p>
+    Receive a free 30 day On-Prem Paid Subscription when you login with Codenvy.com credentials.
+    <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.upgradeSubscriptionUrl}}" target="_blank" cdvy-link-text="What is included with an On-Prem Paid Subscription?"></cdvy-link>
+  </p>
   <div layout="column" flex ng-form="codenvyAccountForm">
     <cdvy-input cdvy-form="codenvyAccountForm"
                 cdvy-name="usernameInput"
