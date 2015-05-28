@@ -25,19 +25,27 @@ class YourInstallationCtrl {
   }
 
   updateInstalledVersion(resource) {
-    if (resource.artifacts && resource.artifacts.codenvy) {
-      this.installedVersion = resource.artifacts.codenvy.version;
-    } else {
-      this.installedVersion = undefined;
+    if (resource.artifacts) {
+      for (let artifact of resource.artifacts) {
+        if (artifact.artifact === 'codenvy') {
+          this.installedVersion = artifact.version;
+          return;
+        }
+      }
     }
+    this.installedVersion = undefined;
   }
 
   updateDownloadedVersion(resource) {
-    if (resource.artifacts && resource.artifacts.codenvy) {
-      this.downloadedVersion = resource.artifacts.codenvy.version;
-    } else {
-      this.downloadedVersion = undefined;
+    if (resource.artifacts) {
+      for (let artifact of resource.artifacts) {
+        if (artifact.artifact === 'codenvy') {
+          this.downloadedVersion = artifact.version;
+          return;
+        }
+      }
     }
+    this.downloadedVersion = undefined;
   }
 }
 
