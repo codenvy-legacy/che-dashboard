@@ -10,7 +10,7 @@
  */
 'use strict';
 
-var anonUsageDataPropertyName = 'anon-usage-data';
+const anonUsageDataPropertyName = 'anon-usage-data';
 
 class AutomaticUpdatesCtrl {
 
@@ -32,7 +32,7 @@ class AutomaticUpdatesCtrl {
 
     this.usageData = false;
 
-    this.imsPropertiesApi.getProperties([anonUsageDataPropertyName]).$promise.then(result => this._propertiesReceived(result));
+    this.imsPropertiesApi.fetchProperty(anonUsageDataPropertyName).then(_ => this._propertiesReceived(this.imsPropertiesApi.getProperty(anonUsageDataPropertyName)));
   }
 
   updateSubscriptionStatus(value) {
@@ -56,14 +56,9 @@ class AutomaticUpdatesCtrl {
     this.imsPropertiesApi.storeProperty(prop, value).then(() => this._saveOk(prop)).catch(error => this._saveFailed(error, prop));
   }
 
-  _propertiesReceived(result) {
-    console.log('_propertiesReceived', result);
-    if (result) {
-      if (result.hasOwnProperty(anonUsageDataPropertyName)) {
-        this.usageData = result[anonUsageDataPropertyName];
-      } else {
-        this.usageData = false;
-      }
+  _propertiesReceived(value) {
+    if (value) {
+      this.usageData = true;
     } else {
       this.usageData = false;
     }
