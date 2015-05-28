@@ -10,21 +10,31 @@
  */
 'use strict';
 
+var anonUsageDataPropertyName = 'anon-usage-data';
+
 class AutomaticUpdatesCtrl {
+
 
   /**
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor($rootScope, imsSaasAuthApi) {
+  constructor($rootScope, imsSaasAuthApi, imsPropertiesApi) {
     this.$rootScope = $rootScope;
+    this.imsPropertiesApi = imsPropertiesApi;
+
     this.$rootScope.$watch(
       () => imsSaasAuthApi.promise,
       (newValue, oldValue) => { this.updateSubscriptionStatus(newValue); }
     );
     // by default, false, until login and subscription check
     this.subscriptionOk = false;
+
+    this.usageData = false;
+
+    this.imsPropertiesApi.getProperties([anonUsageDataPropertyName]).$promise.then(result => this._propertiesReceived(result));
   }
+
   updateSubscriptionStatus(value) {
     if (value) {
       this.subscriptionOk = true;
@@ -36,6 +46,48 @@ class AutomaticUpdatesCtrl {
 
   isSectionDisabled() {
     return !this.subscriptionOk;
+  }
+
+  usageDataChanged() {
+    this._dataChanged(anonUsageDataPropertyName, this.usageData);
+  }
+
+  _dataChanged(prop, value) {
+    this.imsPropertiesApi.storeProperty(prop, value).then(() => this._saveOk(prop)).catch(error => this._saveFailed(error, prop));
+  }
+
+  _propertiesReceived(result) {
+    console.log('_propertiesReceived', result);
+    if (result) {
+      if (result.hasOwnProperty(anonUsageDataPropertyName)) {
+        this.usageData = result[anonUsageDataPropertyName];
+      } else {
+        this.usageData = false;
+      }
+    } else {
+      this.usageData = false;
+    }
+  }
+
+  _setDisabledProps(disabled) {
+    this.usageDataDisabled = disabled;
+  }
+
+  _saveOk(prop) {
+    this._setDisabledProps(false);
+  }
+
+  _saveFailed(error, prop) {
+    switch (prop) {
+      case anonUsageDataPropertyName:
+        this.usageDataSaveError = true;
+        // restore previous value
+        this.usageData = !this.usageData;
+        break;
+      default:
+        break;
+    }
+    this._setDisabledProps(false);
   }
 }
 
