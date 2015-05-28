@@ -33,9 +33,17 @@
             <div class="onprem-admin-available-software-namecol-name">{{onPremisesAdminBridgeAvailableSoftwareCtrl.artifactDisplayName(artifactId)}}</div>
             <div class="onprem-admin-available-software-namecol-desc">{{onPremisesAdminBridgeAvailableSoftwareCtrl.artifactDescription(artifactId)}}</div>
           </td>
-          <td class="onprem-admin-installed-software-col">{{artifactItem.installed.version}} &nbsp; {{artifactItem.installed.date|date:'yyyy-MM-dd HH:mm'}}</td>
+          <td class="onprem-admin-installed-software-col">
+            <div layout-gt-md="row" layout-md="column">
+              <div flex>{{artifactItem.installed.version}}</div>
+              <div flex>{{artifactItem.installed.date|date:'yyyy/dd/MM'}}</div>
+            </div>
+          </td>
           <td class="onprem-admin-available-software-col">
-            <div>{{artifactItem.available.version}} &nbsp; {{artifactItem.available.date|date:'yyyy-MM-dd HH:mm'}}</div>
+            <div layout-gt-md="row" layout-md="column">
+              <div flex>{{artifactItem.available.version}}</div>
+              <div flex>{{artifactItem.available.date|date:'yyyy/dd/MM'}}</div>
+            </div>
             <div ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.showDownloadAction(artifactItem)">
               <cdvy-link ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem)" target="_blank" cdvy-link-text="Download"></cdvy-link>
             </div>
