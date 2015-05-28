@@ -1,0 +1,22 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar cdvy-title="DEV: reset server admin properties"></cdvy-toolbar>
+
+<md-content flex md-scroll-y md-theme="maincontent-theme">
+  <h3>Old properties</h3>
+  <tt>{{resetServerPropsCtrl.oldProperties|json}}</tt>
+  <h3>New properties</h3>
+  <tt>{{resetServerPropsCtrl.newProperties|json}}</tt>
+  <h3>Messages</h3>
+  <p ng-repeat="message in resetServerPropsCtrl.messages">{{message}}</p>
+</md-content>

@@ -65,6 +65,7 @@ import DashboardCtrl from './dashboard/dashboard.controller';
 
 //
 import DemoComponentsCtrl from './demo-components/demo-components.controller';
+import ResetServerPropsCtrl from './onprem/admin/reset-server-properties/reset-server-properties.controller';
 
 
 // import login
@@ -110,9 +111,12 @@ new OnBoardConfig(instanceRegister);
 
 // and setup controllers
 module.controller('DashboardCtrl', DashboardCtrl)
-  .controller('LoginCtrl', LoginCtrl)
-  .controller('DemoComponentsCtrl', DemoComponentsCtrl);
+  .controller('LoginCtrl', LoginCtrl);
 
+if (DEV) {
+  module.controller('DemoComponentsCtrl', DemoComponentsCtrl)
+        .controller('ResetServerPropsCtrl', ResetServerPropsCtrl);
+}
 
 
 // config routes
@@ -137,6 +141,11 @@ module.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'app/demo-components/demo-components.html',
       controller: 'DemoComponentsCtrl',
       controllerAs: 'demoComponentsCtrl'
+    });
+    $routeProvider.accessWhen('/onprem/admin/reset-server-properties', {
+      templateUrl: 'app/onprem/admin/reset-server-properties/reset-server-properties.html',
+      controller: 'ResetServerPropsCtrl',
+      controllerAs: 'resetServerPropsCtrl'
     });
 
   }
