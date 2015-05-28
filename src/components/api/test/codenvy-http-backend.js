@@ -31,6 +31,8 @@ class CodenvyHttpBackend {
     this.profilesMap = new Map();
     this.projectDetailsMap = new Map();
     this.projectPermissionsMap = new Map();
+    this.remoteUrlArraysMap = new Map();
+    this.localUrlsMap = new Map();
 
     this.memberships = [];
 
@@ -268,6 +270,45 @@ class CodenvyHttpBackend {
     this.projectPermissionsMap.set(key, permissions);
   }
 
+  /**
+   * Add the given remote array of url to map
+   * @param workspaceId
+   * @param projectPath
+   * @param remoteArray
+   */
+  addRemoteUrlArraysMap(workspaceId, projectPath, remoteArray) {
+    this.remoteUrlArraysMap.set(workspaceId + projectPath, remoteArray);
+  }
+
+  /**
+   * Add the given local url to map
+   * @param workspaceId
+   * @param projectPath
+   * @param localUrl
+   */
+  addLocalUrlsMap(workspaceId, projectPath, localUrl) {
+    this.localUrlsMap.set(workspaceId + projectPath, localUrl);
+  }
+
+  /**
+   * Get local url
+   * @param workspaceId
+   * @param projectPath
+   */
+  getLocalUrl(workspaceId, projectPath) {
+    this.httpBackend.when('GET', '/api/git/' + workspaceId + '/read-only-url?projectPath=' + projectPath)
+      .respond(this.localUrlsMap.get(workspaceId + projectPath));
+  }
+
+  /**
+   * Get remote array of url
+   * @param workspaceId
+   * @param projectPath
+   */
+  getRemoteUrlArray(workspaceId, projectPath) {
+    this.httpBackend.when('POST', '/api/git/' + workspaceId + '/remote-list?projectPath=' + projectPath)
+      .respond(this.remoteUrlArraysMap.get(workspaceId + projectPath));
+  }
 
 }
 
