@@ -10,6 +10,8 @@
  */
 'use strict';
 
+const saasLoginDone = 'saas-login-done';
+
 class OnPremisesAdminBridgeCodenvyAccountCtrl {
 
   /**
