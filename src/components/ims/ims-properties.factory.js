@@ -21,12 +21,15 @@ class ImsPropertiesApi {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor($resource) {
-
+  constructor($resource, $q) {
+    this.$q = $q;
     // remote call
-    this.remoteImsAPI = $resource('/im/property', {}, {
-      getProperty: { method: 'GET', url:'/im/property?name=:propertyName' },
-      storeProperty: { method: 'POST' }
+    this.remoteImsAPI = $resource('/im/storage/properties/:name', {}, {
+      getAllProperties: { method: 'GET', url: '/im/storage/properties/'},
+      getProperty: { method: 'GET' },
+      storeProperty: { method: 'POST' },
+      putProperty: { method: 'PUT', url: '/im/storage/properties/', headers: { 'Content-Type': 'text/plain;charset=utf-8' } },
+      deleteProperty: { method: 'DELETE' }
     });
 
     this.propertiesMap = new Map();
@@ -34,7 +37,7 @@ class ImsPropertiesApi {
 
 
   fetchProperty(propertyName) {
-    let propertyRetrieval = this.remoteImsAPI.getProperty({propertyName: propertyName});
+    let propertyRetrieval = this.remoteImsAPI.getProperty({ name: propertyName });
     let updatedPromise = propertyRetrieval.$promise.then((data) => {
       if (data[propertyName]) {
         this.propertiesMap.set(propertyName, data[propertyName]);
@@ -57,14 +60,25 @@ class ImsPropertiesApi {
     return this.propertiesMap.get(propertyName);
   }
 
-  /**
-   * Returns the given properties.
-   * @param properties an array containing the names of the desired properties
-   * @returns a promise on the map of the properties
-   */
-  getProperties(properties) {
-    let param = { name: properties };
-    return this.remoteImsAPI.getProperty(param);
+  _handleGetError(resource, error) {
+    console.log('_handleGetError error', error);
+    console.log('_handleGetError resource', resource);
+  }
+
+  getAllProperties() {
+    let allPropsResource = this.remoteImsAPI.getAllProperties();
+    // store all properties
+    return allPropsResource.$promise.then(data => this._cacheProperties(data));
+  }
+
+  _cacheProperties(data) {
+    for (let property of Object.keys(data)) {
+      // must ignore $resource-polluted properties
+      if (property !== '$promise' && property !== '$resolved') {
+        this.propertiesMap.set(property, data[property]);
+      }
+    }
+    return data;
   }
 
   /**
@@ -79,12 +93,18 @@ class ImsPropertiesApi {
   storeProperty(key, value) {
     let param = {};
     param[key] = value;
-    let promiseSet = this.remoteImsAPI.storeProperty(param).$promise;
+    let promiseSet = this.remoteImsAPI.storeProperty({}, param).$promise;
     let updatedGet = promiseSet.then(() => {
       return this.fetchProperty(key);
     });
 
     return updatedGet;
+  }
+
+  deleteProperty(key) {
+    let resource = this.remoteImsAPI.deleteProperty({ name: key }, {});
+    resource.$promise.then(_ => this.propertiesMap.delete(key));
+    return resource;
   }
 }
 
