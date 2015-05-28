@@ -22,12 +22,12 @@ class OnPremisesAdminBridgeYourSubscriptionCtrl {
       newValue => { this.updateLoggedInStatus(newValue); }
     );
     this.imsSubscriptionApi = imsSubscriptionApi;
-    this.subscriptionState = 'NOT_LOGGED';
+    this.subscriptionState = 'NO_SUBSCRIPTION';
   }
 
   updateLoggedInStatus(authValue) {
     if (!authValue) {
-      this.subscriptionState = 'NOT_LOGGED';
+      this.subscriptionState = 'NO_SUBSCRIPTION';
     } else {
       this.imsSubscriptionApi.checkOnPremisesSubscription().then(_ => this.updateSubscriptionState(_));
     }
@@ -36,6 +36,7 @@ class OnPremisesAdminBridgeYourSubscriptionCtrl {
   updateSubscriptionState(newValue) {
     if (newValue && newValue.state) {
       this.subscriptionState = 'SUBSCRIPTION';
+      this.expirationDate = newValue.endDate;
     } else {
       this.subscriptionState = 'NO_SUBSCRIPTION';
     }
@@ -46,7 +47,7 @@ class OnPremisesAdminBridgeYourSubscriptionCtrl {
   }
 
   showNotSubscribed() {
-    return ((this.subscriptionState === 'NOT_LOGGED')||(this.subscriptionState === 'NO_SUBSCRIPTION'));
+    return (this.subscriptionState === 'NO_SUBSCRIPTION');
   }
 }
 
