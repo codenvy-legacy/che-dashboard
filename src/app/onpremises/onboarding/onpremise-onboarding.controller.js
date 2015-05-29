@@ -92,7 +92,7 @@ class OnPremisesOnboardingCtrl {
     this.nextStep();
     promise.then(() => {
       this.completed = true;
-      this.$location.path('/onprem/admin/installation');
+      this.$location.path('/onprem/admin/bridge');
     });
   }
 
