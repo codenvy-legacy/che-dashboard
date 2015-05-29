@@ -27,6 +27,7 @@ import CodenvyFactory from './codenvy-factory.factory';
 import CodenvyProjectType from './codenvy-project-type.factory';
 import CodenvyProjectTemplate from './codenvy-project-template.factory';
 import CodenvyWebsocket from './codenvy-websocket.factory';
+import CodenvyGit from './codenvy-git.factory';
 
 /**
  * This class is providing the entry point for accessing to Codenvy API
@@ -39,7 +40,7 @@ class CodenvyAPI {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyUser, codenvyPayment, codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket) {
+  constructor (codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyUser, codenvyPayment, codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
@@ -50,6 +51,7 @@ class CodenvyAPI {
     this.codenvyProjectType = codenvyProjectType;
     this.codenvyProjectTemplate = codenvyProjectTemplate;
     this.codenvyWebsocket = codenvyWebsocket;
+    this.codenvyGit = codenvyGit;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
@@ -133,6 +135,14 @@ class CodenvyAPI {
    */
   getWebsocket() {
     return this.codenvyWebsocket;
+  }
+
+  /**
+   * The Codenvy Git API
+   * @returns {CodenvyGit|*}
+   */
+  getGit() {
+    return this.codenvyGit;
   }
 
 }

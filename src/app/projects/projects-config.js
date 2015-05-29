@@ -28,31 +28,38 @@ import ProjectDetailsCtrl from './project-details/project-details.controller';
 import ProjectDetailsDevelopersCtrl from './project-details/developers/project-details-developers.controller';
 import ProjectDetailsDevelopers from './project-details/developers/project-details-developers.directive';
 import ProjectDetailsDevelopersDialogAddCtrl from './project-details/developers/project-details-developers-dialog-add.controller';
+import ProjectRepositoryConfig from './project-details/repository/project-repository-config';
 
 
 class ProjectConfig {
 
   constructor(register) {
-    register.directive('createProjectConfFile', CreateProjectConfFile);
-    register.directive('createProjectBlank', CreateProjectBlank);
-    register.directive('createProjectZip', CreateProjectZip);
-    register.directive('createProjectGit', CreateProjectGit);
-    register.directive('createProjectGithub', CreateProjectGithub);
-    register.directive('createProjectSamples', CreateProjectSamples);
-    register.directive('projectDetailsDevelopers', ProjectDetailsDevelopers);
-
-    register.controller('CreateProjectCtrl', CreateProjectCtrl);
     register.controller('ListProjectsCtrl', ListProjectsCtrl);
-    register.controller('CreateProjectBlankCtrl', CreateProjectBlankCtrl);
-    register.controller('CreateProjectGitCtrl', CreateProjectGitCtrl);
-    register.controller('CreateProjectGithubCtrl', CreateProjectGithubCtrl);
-    register.controller('CreateProjectSamplesCtrl', CreateProjectSamplesCtrl);
+
     register.controller('ProjectDetailsCtrl', ProjectDetailsCtrl);
-    register.controller('ProjectDetailsDevelopersCtrl', ProjectDetailsDevelopersCtrl);
+
     register.controller('ProjectDetailsDevelopersDialogAddCtrl', ProjectDetailsDevelopersDialogAddCtrl);
 
+    register.controller('CreateProjectBlankCtrl', CreateProjectBlankCtrl);
+    register.directive('createProjectBlank', CreateProjectBlank);
 
+    register.controller('CreateProjectGitCtrl', CreateProjectGitCtrl);
+    register.directive('createProjectGit', CreateProjectGit);
 
+    register.controller('CreateProjectGithubCtrl', CreateProjectGithubCtrl);
+    register.directive('createProjectGithub', CreateProjectGithub);
+
+    register.controller('CreateProjectSamplesCtrl', CreateProjectSamplesCtrl);
+    register.directive('createProjectSamples', CreateProjectSamples);
+
+    register.controller('ProjectDetailsDevelopersCtrl', ProjectDetailsDevelopersCtrl);
+    register.directive('projectDetailsDevelopers', ProjectDetailsDevelopers);
+
+    register.directive('createProjectZip', CreateProjectZip);
+
+    register.directive('createProjectConfFile', CreateProjectConfFile);
+
+    register.controller('CreateProjectCtrl', CreateProjectCtrl);
 
 
     // config routes
@@ -73,8 +80,11 @@ class ProjectConfig {
           controllerAs: 'createProjectCtrl'
         });
 
-    })
-    ;
+    });
+
+    // config files
+    new ProjectRepositoryConfig(register);
+
   }
 }
 

@@ -1,0 +1,65 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<div class="project-repositories">
+
+  <!-- Mobile version -->
+  <cdvy-panel cdvy-title="Project Repository" hide-gt-md>
+    <div class="repository-mobile" layout="row" flex layout-align="space-around start">
+      <div class="label-name">URL:</div>
+      <div>
+        <label class="url-label "><span>{{projectRepositoryCtrl.localRepository}}</span></label>
+
+        <div class="copy-clipboard fa fa-clipboard"></div>
+      </div>
+    </div>
+  </cdvy-panel>
+  <!-- Desktop version -->
+  <cdvy-panel cdvy-title="Project Repository" hide-sm hide-md>
+    <div class="repository-desktop" layout="row" flex layout-align="space-around start">
+      <div class="label-name" flex="20">URL:</div>
+      <div layout="column" flex="80">
+        <div>
+          <label class="url-label"><span>{{projectRepositoryCtrl.localRepository}}</span></label>
+
+          <div class="copy-clipboard fa fa-clipboard"></div>
+        </div>
+      </div>
+    </div>
+    <label class="prompt">To clone this repository with git, just use the command <span>git clone &lt;url&gt;</span></label>
+  </cdvy-panel>
+
+  <!-- Mobile version -->
+  <cdvy-panel ng-if="projectRepositoryCtrl.remoteRepositories.length" cdvy-title="Remote repository" hide-gt-md>
+    <div class="repository-mobile" ng-repeat="remoteRepository in projectRepositoryCtrl.remoteRepositories" layout="row" flex>
+      <div class="label-name"><span>Remote{{remoteRepository.name.charAt(0).toUpperCase() + remoteRepository.name.slice(1)}}</span> URL:
+      </div>
+      <div>
+        <label class="url-label"><span>{{remoteRepository.url}}</span></label>
+
+        <div class="copy-clipboard fa fa-clipboard"></div>
+      </div>
+    </div>
+  </cdvy-panel>
+  <!-- Desktop version -->
+  <cdvy-panel ng-if="projectRepositoryCtrl.remoteRepositories.length" cdvy-title="Remote repository" hide-sm hide-md>
+    <div class="repository-desktop" ng-repeat="remoteRepository in projectRepositoryCtrl.remoteRepositories" layout="row" flex>
+      <div flex="20" class="label-name"><span>{{remoteRepository.name}}</span> URL:</div>
+      <div layout="column" flex="80">
+        <label class="url-label"><span>{{remoteRepository.url}}</span></label>
+
+        <div class="copy-clipboard fa fa-clipboard"></div>
+      </div>
+    </div>
+  </cdvy-panel>
+
+</div>
