@@ -32,13 +32,13 @@
           <td class="onprem-admin-installed-software-col">
             <div layout-gt-md="row" layout-md="column">
               <div flex>{{artifactItem.installed.version}}</div>
-              <div flex>{{artifactItem.installed.date|date:'yyyy/dd/MM'}}</div>
+              <div flex>{{artifactItem.installed.date|date: 'longDate'}}</div>
             </div>
           </td>
           <td class="onprem-admin-available-software-col">
             <div layout-gt-md="row" layout-md="column">
               <div flex>{{artifactItem.available.version}}</div>
-              <div flex>{{artifactItem.available.date|date:'yyyy/dd/MM'}}</div>
+              <div flex>{{artifactItem.available.date|date: 'longDate'}}</div>
             </div>
             <div ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.showDownloadAction(artifactItem)">
               <cdvy-link ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem)" target="_blank" cdvy-link-text="Download"></cdvy-link>
