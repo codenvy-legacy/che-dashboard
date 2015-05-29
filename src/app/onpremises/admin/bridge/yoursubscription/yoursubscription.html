@@ -15,7 +15,7 @@
   <div class="onprem-admin-bridge-yoursubscription">
     <div ng-switch on="onPremisesAdminBridgeYourSubscriptionCtrl.subscriptionState">
       <div ng-switch-when="SUBSCRIPTION">
-        <p>You have a <b>Codenvy On-Prem Paid Subscription</b>. It is set to renew on
+        <p>You have a <b>Codenvy On-Prem Paid Subscription</b>. It will renew on
            {{onPremisesAdminBridgeYourSubscriptionCtrl.expirationDate|date:"yyyy/dd/MM"}}.
          </p>
         <p>Your subscription lets you schedule downloads, disable data uploads, receive premium (human!)
@@ -29,11 +29,11 @@
       <div ng-switch-when="NO_SUBSCRIPTION">
         <p>You have a <b>Codenvy On-Prem Free Subscription</b>. This is a yearly, automatically renewed subscription.</p>
 
-        <p>With this subscription, Codenvy installs new versions automatically and sends your usage data to Codenvy.com.
-        You can purchase an On-Prem Paid Subscription, which disables automatic downloads and data upload, provides premium
-        (human) support, and generates compliance reports for legal.</p>
+        <p>With this subscription, your usage data is uploaded to Codenvy.com.
+        You can purchase a <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.upgradeSubscriptionUrl}}" target="_blank" cdvy-link-text="Codenvy On-Prem Paid Subscription"></cdvy-link>, which disables data upload, provides premium
+        (human) support, and generates compliance reports.</p>
 
-        <p>While much of Codenvy is open source, Codenvy On-Prem is not.  We depend upon your patronage to continue building great software for you.
+        <p>We depend upon your patronage to continue building great software for you.
         Please consider a commercial relationship with us.  Your mother would approve!
         </p>
       </div>
