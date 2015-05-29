@@ -24,16 +24,15 @@
 
       <div layout="row" layout-align="start center">
         <image class="image-panel" src="assets/images/admin/on-prem-black.png" width="65px"></image>
-        <div layout="column" flex>
-          <md-content class="on-premise-on-boarding-marketing-text">
-            <span class="on-premise-on-boarding-welcome-label">Welcome!</span> Codenvy On-Prem is a private, extensible, and secure developer workspace cloud. <br><br>
-          </md-content>
+        <div layout="column" layout-align="center start" flex class="on-premise-on-boarding-marketing-text">
+          Welcome!</span> Codenvy On-Prem is a private, extensible, and secure developer workspace cloud.
         </div>
       </div>
 
       <div layout="column" class="on-premise-on-boarding-marketing-buttons" layout-margin flex layout-align="center center">
-        <div layout="row" layout-align="center center">
-          <cdvy-link ng-href="http://helpdesk.codenvy.com/" target="_blank" cdvy-link-text="Troubleshooting"></cdvy-link> | <cdvy-link ng-href="http://docs.codenvy.com/onpremises/evaluators-guide/" target="_blank" cdvy-link-text="Sizing"></cdvy-link> | <cdvy-link ng-href="http://docs.codenvy.com/onpremises/system-administration/" target="_blank" cdvy-link-text="Administration"></cdvy-link> | <cdvy-link ng-href="https://codenvy.com/onprem" target="_blank" cdvy-link-text="Marketing"></cdvy-link></div><br>
+        <div layout="row" >
+          <cdvy-link ng-href="http://helpdesk.codenvy.com/" target="_blank" cdvy-link-text="Troubleshooting"></cdvy-link> | <cdvy-link ng-href="http://docs.codenvy.com/onpremises/evaluators-guide/" target="_blank" cdvy-link-text="Sizing"></cdvy-link> | <cdvy-link ng-href="http://docs.codenvy.com/onpremises/system-administration/" target="_blank" cdvy-link-text="Administration"></cdvy-link> | <cdvy-link ng-href="https://codenvy.com/onprem" target="_blank" cdvy-link-text="Marketing"></cdvy-link>
+        </div>
         <cdvy-button-default id="onprem-onboard-welcome-ok-button"
                              cdvy-button-title="CONTINUE"
                              ng-click="onPremisesOnboardingCtrl.validateMarketing()"
