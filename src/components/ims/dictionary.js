@@ -14,7 +14,7 @@
 var ArtifactDictionary = {
   codenvy: {
     display: 'Codenvy',
-    description: 'The file that contains the configuration to run all of the Codenvy nodes. The Codenvy Installer will partition the software onto the appropriate nodes during installation.',
+    description: 'The Codenvy On-Prem binary that runs both single-node and multi-node.',
     releaseNotes: 'http://docs.codenvy.com/user/saas-release-notes/'
   },
   'installation-manager-cli': {
