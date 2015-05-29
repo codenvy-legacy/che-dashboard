@@ -59,7 +59,7 @@ class ImsArtifactApi {
 
   downloadArtifact(artifactName, artifactVersion) {
     let artifact = { artifact: artifactName, version: artifactVersion };
-    let request = this.remoteImsAPI.downloadArtifacts(artifact);
+    let request = this.remoteImsAPI.downloadArtifacts(artifact, {});
     return request.$promise;
   }
 
