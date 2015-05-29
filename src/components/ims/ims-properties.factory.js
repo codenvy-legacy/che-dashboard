@@ -26,7 +26,10 @@ class ImsPropertiesApi {
     // remote call
     this.remoteImsAPI = $resource('/im/storage/properties/:name', {}, {
       getAllProperties: { method: 'GET', url: '/im/storage/properties/'},
-      getProperty: { method: 'GET' },
+      getProperty: { method: 'GET', transformResponse: function(data) {
+        // wrap answer in a content
+        return {content: data};
+      }},
       storeProperty: { method: 'POST' },
       putProperty: { method: 'PUT', url: '/im/storage/properties/', headers: { 'Content-Type': 'text/plain;charset=utf-8' } },
       deleteProperty: { method: 'DELETE' }
@@ -39,8 +42,8 @@ class ImsPropertiesApi {
   fetchProperty(propertyName) {
     let propertyRetrieval = this.remoteImsAPI.getProperty({ name: propertyName });
     let updatedPromise = propertyRetrieval.$promise.then((data) => {
-      if (data[propertyName]) {
-        this.propertiesMap.set(propertyName, data[propertyName]);
+      if (data.content) {
+        this.propertiesMap.set(propertyName, data.content);
       } else {
         this.propertiesMap.set(propertyName, '');
       }
