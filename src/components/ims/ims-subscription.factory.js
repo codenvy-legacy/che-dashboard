@@ -31,7 +31,7 @@ class ImsSubscriptionApi {
 
     $rootScope.$watch(
       () => imsSaasAuthApi.promise,
-      newValue => this._loginChanged(newValue)
+      (newValue, oldValue) => this._loginChanged(newValue, oldValue)
     );
   }
 
@@ -59,8 +59,8 @@ class ImsSubscriptionApi {
     }
   }
 
-  _loginChanged(newValue) {
-    if (newValue) {
+  _loginChanged(newValue, oldValue) {
+    if (newValue && newValue !== oldValue) {
       this.checkOnPremisesSubscription();
     }
   }
