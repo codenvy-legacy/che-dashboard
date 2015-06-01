@@ -41,9 +41,9 @@ class CodenvyLink {
     let linkText = attrs['cdvyLinkText'] || '';
     let destination = attrs.ngHref ? `ng-href="${attrs.ngHref}"` : '';
     let target = attrs.target ? `target="${attrs.target}"` : '';
-    let noPadding = attrs.cdvyNoPadding ? 'cdvy-link-no-padding' : '';
+    let noPadding = attrs.hasOwnProperty('cdvyNoPadding') ? 'cdvy-link-no-padding' : '';
 
-    var template = `<md-button md-theme="default" class="cdvy-link md-primary md-no-ink md-hue-2 ${noPadding}" ${destination} ${target}>${linkText}</md-button>`;
+    var template = `<md-button cdvy-link md-theme="default" class="cdvy-link ${noPadding} md-primary md-no-ink md-hue-2" ${destination} ${target}>${linkText}</md-button>`;
 
     return template;
   }
