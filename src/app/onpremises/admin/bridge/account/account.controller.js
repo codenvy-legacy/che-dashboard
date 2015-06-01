@@ -24,6 +24,7 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
 
     this.hideAllMessages();
     this.loginError = false;
+    this.show30DaysAdvertisement = true;
 
     this.forgotPasswordUrl = 'https://codenvy.com/site/recover-password';
     this.signUpUrl = 'https://codenvy.com/site/create-account';
@@ -58,12 +59,14 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
       this.loginError = 'There was a server error during authentication. Please try again later.';
     }
     this.loggedIn = false;
+    this.show30DaysAdvertisement = true;
   }
 
   loginSuccess() {
     this.requestSubscriptions();
     this.loginError = false;
     this.loggedIn = true;
+    this.show30DaysAdvertisement = false;
   }
 
   hideAllMessages(error) {
