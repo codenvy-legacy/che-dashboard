@@ -12,9 +12,14 @@
 -->
 
 <cdvy-panel cdvy-title="Your Codenvy.com Account Information">
-  <p>
-    Receive a free 30 day On-Prem Paid Subscription when you first login with Codenvy.com credentials.
-  </p>
+  <div layout="row" layout-align="center center" layout-fill
+        ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.show30DaysAdvertisement">
+    <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
+    <span flex class="onpremises-admin-bridge-codenvyaccount-subscription-frame-nosub onpremises-admin-bridge-codenvyaccount-margin-below">
+      Receive a free 30 day On-Prem Paid Subscription when you first login with Codenvy.com credentials.
+    </span>
+    <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
+  </div>
   <div layout="column" flex ng-form="codenvyAccountForm">
     <cdvy-input cdvy-form="codenvyAccountForm"
                 cdvy-name="usernameInput"
