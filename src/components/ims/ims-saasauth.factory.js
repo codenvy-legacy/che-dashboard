@@ -35,7 +35,7 @@ class ImsSaasAuthApi {
    */
   logOnSaas(username, password) {
     // try to refresh if user is not yet logged in
-    if (!this.promise) {
+    if (!this.promise || this.canRetry) {
       this.requestLogin(username, password);
     }
     return this.promise;
@@ -45,9 +45,10 @@ class ImsSaasAuthApi {
     let credentials = { username: username, password: password };
     let saasAuth = this.remoteImsAPI.logOnSaas(credentials);
     this.promise = saasAuth.$promise;
+    this.canRetry = false;
 
     // If login failed, reset promise for next try
-    this.promise.catch(() => { this.promise = undefined; });
+    this.promise.catch(() => { this.canRetry = true; });
   }
 
   resetLogin() {
