@@ -54,6 +54,10 @@ class ImsSaasAuthApi {
   resetLogin() {
     this.promise = undefined;
   }
+
+  isAuthFailedError(error) {
+    return (error && error.status === 400);
+  }
 }
 
 // Register this factory
