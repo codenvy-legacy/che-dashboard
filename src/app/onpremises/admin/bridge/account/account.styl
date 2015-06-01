@@ -13,16 +13,33 @@
   margin-left: 1em
 
 .onprem-admin-bridge-account-auth-error
-  color $codenvy-orange-color
+  color $auth-error-color
 
 .onprem-admin-bridge-account-auth-loggedin
-  color $codenvy-green-color
+  color $auth-ok-color
 
 /*.onpremises-admin-bridge-codenvyaccount-expiration-label*/
 
 
 .onpremises-admin-bridge-codenvyaccount-expiration-date
   font-weight bold
+
+frame(bgcolor, textcolor)
+  text-align center
+  background-color bgcolor
+  color textcolor
+  border-radius 4px
+  padding-top 4px
+  padding-bottom 4px
+
+.onpremises-admin-bridge-codenvyaccount-subscription-frame-nosub
+  frame($frame-nosubscription-bg-color, $frame-nosubscription-color)
+
+.onpremises-admin-bridge-codenvyaccount-subscription-frame-sub
+  frame($frame-subscription-bg-color, $frame-subscription-color)
+
+.onpremises-admin-bridge-codenvyaccount-margin-above
+  margin-top 1em
 
 .onpremises-admin-bridge-codenvyaccount-auth-message
   margin-left 2em
