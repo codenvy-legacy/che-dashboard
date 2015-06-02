@@ -10,8 +10,6 @@
  */
 'use strict';
 
-const saasLoginDone = 'saas-login-done';
-
 class OnPremisesAdminBridgeCodenvyAccountCtrl {
 
   /**
@@ -45,7 +43,7 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     if (this.credentialsChanged) {
       this.imsSaasAuthApi.resetLogin();
     }
-    let loginPromise = this.imsSaasAuthApi.logOnSaas(this.userName, this.password);
+    this.imsSaasAuthApi.logOnSaas(this.userName, this.password);
 
     this.resetCredentialsChanged();
   }
