@@ -13,6 +13,8 @@
 <cdvy-toolbar cdvy-title="Your Subscriptions"></cdvy-toolbar>
 
 <md-content md-scroll-y flex md-theme="maincontent-theme">
+  <pay-as-you-go-info cdvy-subscription="subscriptionCtrl.payAsYouGoSubscription" ng-show="subscriptionCtrl.payAsYouGoSubscription">
+  </pay-as-you-go-info>
   <subscription-info ng-repeat="subscription in subscriptionCtrl.subscriptions" cdvy-subscription="subscription">
   </subscription-info>
   <subscription-proposal ng-repeat="proposal in subscriptionCtrl.proposals" cdvy-title="{{proposal.title}}"

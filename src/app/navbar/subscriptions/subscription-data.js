@@ -21,7 +21,7 @@ export var  subscriptionDetails = [
   {
     'type' : 'pay-as-you-go',
     'title' : 'Pay-As-You-Go Account',
-    'description' : '$0.15 / GB Hour',
+    'description' : 'Your account has standart Pay-As-You-Go subscription :',
     'buttonTitle' : 'Remove Credit Card',
     'icon' : 'assets/images/icon-saas.png'
   },

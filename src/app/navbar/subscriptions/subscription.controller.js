@@ -50,6 +50,7 @@ class SubscriptionCtrl {
    * if not adds new proposals. There two types of subscriptions : on-premises and saas(pay-as-you-go).
   */
   processSubscriptions(subscriptions) {
+    this.payAsYouGoSubscription = null;
     let services = this.lodash.pluck(subscriptions, 'serviceId');
     let hasOnPremises = services.indexOf(this.codenvyAPI.getAccount().getOnPremServiceId()) >= 0;
     let saasServiceId = this.codenvyAPI.getAccount().getSaasServiceId();
@@ -68,7 +69,7 @@ class SubscriptionCtrl {
         this.proposals.push(this.getPayAsYouGoProposal());
       } else if (saasSubscription.planId === this.codenvyAPI.getAccount().getPayAsYouGoPlanId()) {
         this.fillPayAsYouGoDetails(saasSubscription);
-        this.subscriptions.push(saasSubscription);
+        this.payAsYouGoSubscription = saasSubscription;
       } else if (saasSubscription.planId === this.codenvyAPI.getAccount().getPrepaidPlanId()) {
         this.fillPrePaidDetails(saasSubscription);
         this.subscriptions.push(saasSubscription);
