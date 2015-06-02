@@ -78,7 +78,7 @@ class AutomaticUpdatesCtrl {
           this.usageDataChanged();
           break;
       }
-    } else if (typeof(value) == 'boolean') {
+    } else if (typeof(value) === 'boolean') {
       this.usageData = value;
     } else {
       this.usageData = false;
