@@ -25,23 +25,26 @@ class AutomaticUpdatesCtrl {
 
     this.$rootScope.$watch(
       () => imsSaasAuthApi.promise,
-      (newValue, oldValue) => { this.updateSubscriptionStatus(newValue); }
+      (newValue) => { this._updateSubscriptionStatus(newValue); }
     );
     // by default, false, until login and subscription check
     this.subscriptionOk = false;
 
+    /* flag set when property is received */
+    this.propertyReceived = false;
+
     this.usageData = false;
 
-    this.imsPropertiesApi.fetchProperty(anonUsageDataPropertyName).then(_ => this._propertiesReceived(this.imsPropertiesApi.getProperty(anonUsageDataPropertyName)));
+    this.imsPropertiesApi.fetchProperty(anonUsageDataPropertyName).then(() => this._propertiesReceived(this.imsPropertiesApi.getProperty(anonUsageDataPropertyName)));
   }
 
-  updateSubscriptionStatus(value) {
-    if (value) {
+  _updateSubscriptionStatus(newValue) {
+    if (newValue) {
       this.subscriptionOk = true;
     } else {
       this.subscriptionOk = false;
     }
-    this.$rootScope.$broadcast('cdvyPanel:disabled', {id: 'usage-data-and-automatic-install', disabled: this.isSectionDisabled()});
+    this.$rootScope.$broadcast('cdvyPanel:disabled', { id: 'usage-data-and-automatic-install', disabled: this.isSectionDisabled() });
   }
 
   isSectionDisabled() {
@@ -49,7 +52,9 @@ class AutomaticUpdatesCtrl {
   }
 
   usageDataChanged() {
-    this._dataChanged(anonUsageDataPropertyName, this.usageData);
+    if (!this.usageDataDisabled) {
+      this._dataChanged(anonUsageDataPropertyName, this._usageData);
+    }
   }
 
   _dataChanged(prop, value) {
@@ -57,10 +62,27 @@ class AutomaticUpdatesCtrl {
   }
 
   _propertiesReceived(value) {
-    if (value) {
-      this.usageData = true;
+    this.propertyReceived = true;
+    if (typeof(value) === 'undefined') {
+      this.usageData = false;
+    } else if (typeof(value) === 'string') {
+      switch (value) {
+        case 'true':
+          this.usageData = true;
+          break;
+        case 'false':
+          this.usageData = false;
+          break;
+        default:
+          this.usageData = false;
+          this.usageDataChanged();
+          break;
+      }
+    } else if (typeof(value) == 'boolean') {
+      this.usageData = value;
     } else {
       this.usageData = false;
+      this.usageDataChanged();
     }
   }
 
@@ -83,6 +105,16 @@ class AutomaticUpdatesCtrl {
         break;
     }
     this._setDisabledProps(false);
+  }
+
+  set usageData(newValue) {
+    //console.log('set usageData', newValue);
+    this._usageData = newValue;
+  }
+
+  get usageData() {
+    //console.log('get usageData', this._usageData);
+    return this._usageData;
   }
 }
 
