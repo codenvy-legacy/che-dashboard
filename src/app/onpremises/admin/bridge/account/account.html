@@ -28,7 +28,10 @@
                 ng-model-options="{ getterSetter: true }"
                 aria-label="User Name"
                 required>
-      <div ng-message="required">The user name is required.</div>
+      <div layout="row" layout-wrap><!-- take space even when no messages -->
+        <span ng-message="required">The user name is required.</span>
+        <span>&thinsp;</span>
+      </div>
     </cdvy-input>
     <cdvy-input type="password"
                 cdvy-form="codenvyAccountForm"
@@ -38,7 +41,10 @@
                 ng-model-options="{ getterSetter: true }"
                 aria-label="Password"
                 required>
-      <div ng-message="required">The password is required.</div>
+      <div layout="row" layout-wrap><!-- take space even when no messages -->
+        <div ng-message="required">The password is required.</div>
+        <span>&thinsp;</span>
+      </div>
     </cdvy-input>
 
     <div flex layout="column" layout-gt-md="row" layout-align="start center" layout-align-gt-md="start center">
