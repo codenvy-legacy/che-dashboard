@@ -341,6 +341,11 @@ module.config(function($mdThemingProvider, jsonColors) {
   });
   $mdThemingProvider.definePalette('codenvyDanger', codenvyDangerMap);
 
+  var codenvyWarningMap = $mdThemingProvider.extendPalette('orange', {
+    'contrastDefaultColor': 'light'
+  });
+  $mdThemingProvider.definePalette('codenvyWarning', codenvyWarningMap);
+
   var codenvyDefaultMap = $mdThemingProvider.extendPalette('blue', {
     'A400'  : '538DAB'/*,
      '700': '538DAB'*/
@@ -386,6 +391,11 @@ module.config(function($mdThemingProvider, jsonColors) {
   $mdThemingProvider.theme('danger')
     .primaryPalette('codenvy')
     .accentPalette('codenvyDanger')
+    .backgroundPalette('grey');
+
+  $mdThemingProvider.theme('warning')
+    .primaryPalette('codenvy')
+    .accentPalette('codenvyWarning')
     .backgroundPalette('grey');
 
 
