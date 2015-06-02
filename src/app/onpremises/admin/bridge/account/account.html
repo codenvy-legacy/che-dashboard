@@ -12,6 +12,7 @@
 -->
 
 <cdvy-panel cdvy-title="Your Codenvy.com Account Information">
+  <!-- 30 days free subscription banner -->
   <div layout="row" layout-align="center center" layout-fill
         ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.show30DaysAdvertisement">
     <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
@@ -20,6 +21,8 @@
     </span>
     <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
   </div>
+
+  <!-- Login form zone -->
   <form layout="column" flex
         name="codenvyAccountForm" novalidate
         ng-submit="onPremisesAdminBridgeCodenvyAccountCtrl.login()">
@@ -64,6 +67,8 @@
       </div>
     </div>
   </form>
+
+  <!-- Recover password / Create account part -->
   <div flex layout-fill layout="row" layout-sm="column" layout-md="column" layout-align="center center"
            class="onpremises-admin-bridge-codenvyaccount-margin-above-bigger">
     <div layout="row" layout-align="start center">
@@ -80,6 +85,8 @@
       <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.signUpUrl}}" target="_blank" cdvy-link-text="Sign up" cdvy-no-padding></cdvy-link>
     </div>
   </div>
+
+  <!-- Subscription status frame -->
   <div class="onpremises-admin-bridge-codenvyaccount-subscription-frame onpremises-admin-bridge-codenvyaccount-margin-above" layout="row" layout-fill>
     <div flex="5" hide-sm hide-md hide-lg></div>
     <span class="onpremises-admin-bridge-codenvyaccount-subscription-frame-sub" flex
