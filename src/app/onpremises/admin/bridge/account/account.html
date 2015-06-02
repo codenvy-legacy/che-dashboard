@@ -12,15 +12,6 @@
 -->
 
 <cdvy-panel cdvy-title="Your Codenvy.com Account Information">
-  <!-- 30 days free subscription banner -->
-  <div layout="row" layout-align="center center" layout-fill
-        ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.show30DaysAdvertisement">
-    <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
-    <span flex class="onpremises-admin-bridge-codenvyaccount-subscription-frame-nosub onpremises-admin-bridge-codenvyaccount-margin-below">
-      Receive a free 30 day On-Prem Paid Subscription when you first login with Codenvy.com credentials.
-    </span>
-    <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
-  </div>
 
   <!-- Login form zone -->
   <form layout="column" flex
@@ -84,6 +75,16 @@
       </span>
       <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.signUpUrl}}" target="_blank" cdvy-link-text="Sign up" cdvy-no-padding></cdvy-link>
     </div>
+  </div>
+
+    <!-- 30 days free subscription banner -->
+  <div layout="row" layout-align="center center" layout-fill
+        ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.show30DaysAdvertisement">
+    <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
+    <span flex class="onpremises-admin-bridge-codenvyaccount-subscription-frame-nosub onpremises-admin-bridge-codenvyaccount-margin-above">
+      Receive a free 30 day On-Prem Paid Subscription when you first login with Codenvy.com credentials.
+    </span>
+    <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
   </div>
 
   <!-- Subscription status frame -->
