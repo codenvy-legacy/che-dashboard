@@ -65,6 +65,9 @@ class ImsSubscriptionApi {
     }
   }
 
+  isActive(subscription) {
+    return (subscription && subscription.state === 'ACTIVE');
+  }
 }
 
 // Register this factory

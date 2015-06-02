@@ -90,7 +90,7 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
   }
 
   receiveSubscriptionResponse(response) {
-    if (response && response.state && response.state === 'ACTIVE') {
+    if (this.imsSubscriptionApi.isActive(response)) {
       this.showSubscribedMessage = true;
       this.showNotSubscribedMessage = false;
       this.onpremSubscriptionExpiration = response.endDate || 'unknown';
