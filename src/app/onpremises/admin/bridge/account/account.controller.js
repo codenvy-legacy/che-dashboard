@@ -32,8 +32,8 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     $rootScope.$watch(() => imsSubscriptionApi.promise, (newValue, oldValue) => this._subscriptionChanged(newValue, oldValue));
   }
 
-  login() {
-    if (this.loginDisabled()) {
+  login(form) {
+    if (form.$invalid) {
       return;
     }
     if (this.credentialsChanged) {
