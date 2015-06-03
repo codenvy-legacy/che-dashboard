@@ -32,10 +32,6 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     $rootScope.$watch(() => imsSubscriptionApi.promise, (newValue, oldValue) => this._subscriptionChanged(newValue, oldValue));
   }
 
-  loginDisabled() {
-    return (!(this.userName) || !(this.password));
-  }
-
   login() {
     if (this.loginDisabled()) {
       return;
