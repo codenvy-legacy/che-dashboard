@@ -36,7 +36,7 @@ class OnPremisesAdminBridgeYourSubscriptionCtrl {
   updateSubscriptionState(newValue) {
     if (newValue && this.imsSubscriptionApi.isActive(newValue)) {
       this.subscriptionState = 'SUBSCRIPTION';
-      this.expirationDate = newValue.endDate;
+      this.expirationDate = new Date(newValue.endDate);
     } else {
       this.subscriptionState = 'NO_SUBSCRIPTION';
     }

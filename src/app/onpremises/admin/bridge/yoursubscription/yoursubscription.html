@@ -16,7 +16,7 @@
     <div ng-switch on="onPremisesAdminBridgeYourSubscriptionCtrl.subscriptionState">
       <div ng-switch-when="SUBSCRIPTION">
         <p>You have a <b>Codenvy On-Prem Paid Subscription</b>. It will renew on
-           {{onPremisesAdminBridgeYourSubscriptionCtrl.expirationDate|date:"yyyy/dd/MM"}}.
+           {{onPremisesAdminBridgeYourSubscriptionCtrl.expirationDate|date:"longDate"}}.
          </p>
         <p>Your subscription lets you schedule downloads, disable data uploads, receive premium (human!)
            support, and generate license compliance reports. Get support at&#0020
