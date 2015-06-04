@@ -12,9 +12,6 @@
 .onprem-admin-software-lastcheck
   max-width 60em
 
-.onprem-admin-available-software
-  margin-top 3em
-
 .onprem-admin-available-software-table
   width 100%
 
@@ -23,27 +20,30 @@
   empty-cells show
   border-width 1px
   border-style solid
-  border-color #E4E4E4
+  border-color $list-separator-color
 
 /* style for headers */
 .onprem-admin-available-software-table th
   background-color #F1F1F1
   font-size 18px
-  color #545B64
+  color $label-primary-color
 
 /* all cells (header and data) have padding */
 .onprem-admin-available-software-table th, .onprem-admin-available-software-table td
   padding 1em
 
+td.onprem-admin-available-software-col
+  padding 0
+
 .onprem-admin-available-software-namecol-name
   font-weight bold
   margin-bottom 1em
-  color #545B64
+  color $label-primary-color
   font-size 14px
 
 .onprem-admin-available-software-namecol-desc
   font-size 11px
-  color #AEB0B2
+  color $label-info-color
 
 
 .onprem-admin-available-software-namecol
@@ -54,3 +54,14 @@
 
 .onprem-admin-available-software-col
   width 25%
+
+.onprem-admin-available-software-available-version
+  color $label-secondary-color
+  background-color $frame-available-bg-color
+  padding 5px
+
+.onprem-admin-available-software-available-version-details
+  padding 1em
+
+.onprem-admin-available-software-available-version-help-download
+  margin-top 10px

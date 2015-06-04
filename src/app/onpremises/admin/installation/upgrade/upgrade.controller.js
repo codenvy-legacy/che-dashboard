@@ -19,6 +19,7 @@ class UpgradeInstallationCtrl {
   constructor($rootScope, imsSaasAuthApi, imsUpdateApi, imsArtifactApi) {
     this.imsUpdateApi = imsUpdateApi;
     this.$rootScope = $rootScope;
+    this.fetchAll = false;
     this.$rootScope.$watch(
       () => imsSaasAuthApi.promise,
       (newValue, oldValue) => { this.updateSubscriptionStatus(newValue); }
@@ -27,10 +28,15 @@ class UpgradeInstallationCtrl {
     this.subscriptionOk = false;
 
     this.upgradable = false;
-    imsArtifactApi.artifacts().then(
+    let promise = imsArtifactApi.artifacts().then(
       artifacts => this.updateUpgradable(artifacts),
       () => this.updateUpgradable(undefined)
     );
+
+
+    this.codenvyAvailableArtifacts = [];
+
+    promise.then(() => this.fetchAll = true, () => this.errorFetching = true);
   }
 
   install() {
@@ -56,6 +62,12 @@ class UpgradeInstallationCtrl {
 
   updateUpgradable(artifacts) {
     if (artifacts) {
+      if (artifacts.codenvy && artifacts.codenvy.availables) {
+        artifacts.codenvy.availables.forEach((available)=> {
+          this.codenvyAvailableArtifacts.push(available);
+        });
+      }
+
       if (artifacts.codenvy && artifacts.codenvy.installed && artifacts.codenvy.downloaded) {
         if (artifacts.codenvy.installed.date < artifacts.codenvy.downloaded.date) {
           this.upgradable = true;
@@ -64,7 +76,8 @@ class UpgradeInstallationCtrl {
       }
     }
 
-    this.upgradable = false;
+    // for now, always upgradable
+    this.upgradable = true;
   }
 }
 

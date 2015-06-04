@@ -20,7 +20,7 @@
         <tr>
           <th class="onprem-admin-available-software-namecol">Software</th>
           <th class="onprem-admin-installed-software-col">Local Version</th>
-          <th class="onprem-admin-available-software-col">Version at Codenvy.com</th>
+          <th class="onprem-admin-available-software-col">Version(s) at Codenvy.com</th>
         </tr>
       </thead>
       <tbody ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.artifacts">
@@ -36,14 +36,17 @@
             </div>
           </td>
           <td class="onprem-admin-available-software-col">
-            <div layout-gt-md="row" layout-md="column">
-              <div flex>{{artifactItem.available.version}}</div>
-              <div flex>{{artifactItem.available.date|date: 'longDate'}}</div>
+            <div ng-repeat="artifactAvailableVersion in artifactItem.availables">
+              <div layout-gt-md="row" layout-md="column">
+                <div class="onprem-admin-available-software-available-version" flex>{{artifactAvailableVersion}}</div>
+              </div>
+              <div class="onprem-admin-available-software-available-version-details">
+              <div ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.showDownloadAction(artifactItem)">
+                <cdvy-link ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem, artifactAvailableVersion)" target="_blank" cdvy-link-text="Download"></cdvy-link>
+              </div>
+              <cdvy-link ng-href="{{onPremisesAdminBridgeAvailableSoftwareCtrl.releaseNoteUrl(artifactItem.name, artifactAvailableVersion)}}" target="_blank" cdvy-link-text="Release Notes"></cdvy-link>
+              </div>
             </div>
-            <div ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.showDownloadAction(artifactItem)">
-              <cdvy-link ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem)" target="_blank" cdvy-link-text="Download"></cdvy-link>
-            </div>
-            <cdvy-link ng-href="{{onPremisesAdminBridgeAvailableSoftwareCtrl.releaseNoteUrl(artifactItem.name)}}" target="_blank" cdvy-link-text="Release Notes"></cdvy-link>
           </td>
         <tr>
       </tbody>
@@ -55,6 +58,6 @@
     </table>
   </div>
   <div layout="column" layout-align="center end">
-    <div flex>You can upgrade Codenvy On-Prem by downloading a new version and <cdvy-link cdvy-link-text="installing it" ng-href="#/onprem/admin/installation"></cdvy-link>.</div>
+    <div class="onprem-admin-available-software-available-version-help-download" flex>You can upgrade Codenvy On-Prem by downloading a new version and <a ng-href="#/onprem/admin/installation">installing it</a>.</div>
   </div>
 </cdvy-panel>

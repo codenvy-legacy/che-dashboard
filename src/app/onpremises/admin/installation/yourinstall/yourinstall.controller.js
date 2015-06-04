@@ -16,12 +16,16 @@ class YourInstallationCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor(imsNodesApi, imsArtifactApi) {
+  constructor(imsNodesApi, imsArtifactApi, $q) {
     this.customerName = '<Customer Name>';
-
-    imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes; });
-    imsArtifactApi.getInstalledArtifactsList().then(result => this.updateInstalledVersion(result));
-    imsArtifactApi.getDownloadedArtifactsList().then(result => this.updateDownloadedVersion(result));
+    this.downloadedVersions = [];
+    this.fetchAll = false;
+    this.errorFetching = false;
+    let first = imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes; });
+    let second = imsArtifactApi.getInstalledArtifactsList().then(result => this.updateInstalledVersion(result));
+    let third = imsArtifactApi.getDownloadedArtifactsList().then(result => this.updateDownloadedVersion(result));
+    let allPromise = $q.all([first, second, third]);
+    allPromise.then(() => this.fetchAll = true, () => this.errorFetching = true);
   }
 
   updateInstalledVersion(resource) {
@@ -40,12 +44,13 @@ class YourInstallationCtrl {
     if (resource.artifacts) {
       for (let artifact of resource.artifacts) {
         if (artifact.artifact === 'codenvy') {
-          this.downloadedVersion = artifact.version;
-          return;
+          this.downloadedVersions.push(artifact.version);
         }
       }
+      return;
     }
-    this.downloadedVersion = undefined;
+    // else, clear all values
+    this.downloadedVersions.length = 0;
   }
 }
 

@@ -24,14 +24,14 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
     artifactsPromise.catch(error => { console.log('artifacts list failed' , error); this.artifacts = undefined; });
   }
 
-  downloadArtifact(artifact) {
-    this.imsArtifactApi.downloadArtifact(artifact.name, artifact.available.version);
+  downloadArtifact(artifact, artifactAvailableVersion) {
+    this.imsArtifactApi.downloadArtifact(artifact.name, artifactAvailableVersion);
   }
 
   showDownloadAction(artifact) {
-    if (artifact && artifact.available) {
+    if (artifact && artifact.availables) {
       if (artifact.downloaded) {
-        return artifact.available.version !== artifact.downloaded.version;
+        return artifact.availables.indexOf(artifact.downloaded.version) !== -1;
       } else {
         return true;
       }
@@ -48,8 +48,8 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
     return this.imsArtifactApi.getArtifactDescription(artifactId);
   }
 
-  releaseNoteUrl(artifactId) {
-    return this.imsArtifactApi.getArtifactReleaseNotesUrl(artifactId);
+  releaseNoteUrl(artifactId, version) {
+    return this.imsArtifactApi.getArtifactReleaseNotesUrl(artifactId, version);
   }
 }
 

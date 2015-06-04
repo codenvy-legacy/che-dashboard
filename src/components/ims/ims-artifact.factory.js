@@ -110,6 +110,7 @@ class ImsArtifactApi {
     }
 
     let availableResult = results.shift();
+
     if (availableResult && availableResult.artifacts) {
       for (let artifact of availableResult.artifacts) {
         let value = artifacts[artifact.artifact];
@@ -117,9 +118,10 @@ class ImsArtifactApi {
           value = { name: artifact.artifact };
         }
         artifacts[artifact.artifact] = value; // in case it was just created
-        value.available = {
-          version: artifact.version
-        };
+        if (!value.availables) {
+          value.availables = [];
+        }
+        value.availables.push(artifact.version);
         toGather.add({ name: artifact.artifact, version: artifact.version });
       }
     }
@@ -188,10 +190,10 @@ class ImsArtifactApi {
     }
   }
 
-  getArtifactReleaseNotesUrl(artifact) {
+  getArtifactReleaseNotesUrl(artifact, version) {
     let entry = dictionary.artifacts[artifact];
     if (entry) {
-      return entry.releaseNotes;
+      return entry.releaseNotes  + 'release-' + version.replace(/\./g, '-') + '/';
     } else {
       return undefined;
     }

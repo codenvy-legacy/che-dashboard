@@ -12,20 +12,34 @@
 -->
 
 <cdvy-panel cdvy-title="Upgrade Your Codenvy On-Prem Installation" cdvy-panel-id="upgrade-your-installation-panel" cdvy-disabled="upgradeInstallationCtrl.isSectionDisabled()">
-  <cdvy-button-primary cdvy-button-title="Install Now" ng-click="upgradeInstallationCtrl.install()" ng-disabled="upgradeInstallationCtrl.isSectionDisabled() || (! upgradeInstallationCtrl.upgradable)"></cdvy-button-primary>
-  <!-- Removed because not implemented in IM -->
-  <!--
-  <div ng-form="onPremUpgradeScheduleForm" flex>
-    <cdvy-input cdvy-form="onPremUpgradeScheduleForm"
-                cdvy-name="upgradeScheduleInput"
-                cdvy-label-name="Schedule Installation"
-                ng-model="upgradeInstallationCtrl.scheduleExpression">
-    </cdvy-input>
-    <cdvy-button-default cdvy-button-title="Save Schedule" ng-click="upgradeInstallationCtrl.saveSchedule()"></cdvy-button-default>
-    <md-checkbox ng-model="upgradeInstallationCtrl.checkNewVersion">Check for new version before installing</md-checkbox>
+  <md-progress-linear md-mode="indeterminate"  ng-hide="upgradeInstallationCtrl.fetchAll" ></md-progress-linear>
+
+  <div ng-show="upgradeInstallationCtrl.fetchAll">
+
+    <div ng-show="upgradeInstallationCtrl.codenvyAvailableArtifacts.length == 1">
+      <cdvy-button-primary cdvy-button-title="Install {{upgradeInstallationCtrl.codenvyAvailableArtifacts[0]}} Now" ng-click="upgradeInstallationCtrl.install()" ng-disabled="upgradeInstallationCtrl.isSectionDisabled() || (! upgradeInstallationCtrl.upgradable)"></cdvy-button-primary>
+    </div>
+
+    <div ng-show="upgradeInstallationCtrl.codenvyAvailableArtifacts.length > 1">
+      Select a version to install:&nbsp;&nbsp;<md-select ng-model="upgradeInstallationCtrl.selectedVersion">
+      <md-option ng-repeat="version in upgradeInstallationCtrl.codenvyAvailableArtifacts" value="{{version}}" ng-selected="true">{{version}}</md-option>
+    </md-select>&nbsp;&nbsp;&nbsp;&nbsp;
+      <cdvy-button-primary cdvy-button-title="Install Now" ng-click="upgradeInstallationCtrl.install()" ng-disabled="upgradeInstallationCtrl.isSectionDisabled() || (! upgradeInstallationCtrl.upgradable)"></cdvy-button-primary>
+    </div>
+    <!-- Removed because not implemented in IM -->
+    <!--
+    <div ng-form="onPremUpgradeScheduleForm" flex>
+      <cdvy-input cdvy-form="onPremUpgradeScheduleForm"
+                  cdvy-name="upgradeScheduleInput"
+                  cdvy-label-name="Schedule Installation"
+                  ng-model="upgradeInstallationCtrl.scheduleExpression">
+      </cdvy-input>
+      <cdvy-button-default cdvy-button-title="Save Schedule" ng-click="upgradeInstallationCtrl.saveSchedule()"></cdvy-button-default>
+      <md-checkbox ng-model="upgradeInstallationCtrl.checkNewVersion">Check for new version before installing</md-checkbox>
+    </div>
+    <p>Upgrading may require a maintenance window up to 30 minutes. Minor releases either do not
+       require a maintenance window or are a few minutes.</p>
+    <p>Docs:<a href="" class="onprem-upgrade-installation-schedule-syntaxlink">Syntax for Scheduling Installation</a>.</p>
+    -->
   </div>
-  <p>Upgrading may require a maintenance window up to 30 minutes. Minor releases either do not 
-     require a maintenance window or are a few minutes.</p>
-  <p>Docs:<a href="" class="onprem-upgrade-installation-schedule-syntaxlink">Syntax for Scheduling Installation</a>.</p>
-  -->
 </cdvy-panel>
