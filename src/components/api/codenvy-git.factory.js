@@ -29,8 +29,8 @@ class CodenvyGit {
     this.$resource = $resource;
     this.lodash = lodash;
 
-    this.remoteUrlArraysMap = new Map();
-    this.localUrlsMap = new Map();
+    this.remoteGitUrlArraysMap = new Map();
+    this.localGitUrlsMap = new Map();
 
     // remote call
     this.remoteGitAPI = this.$resource('/api/git', {}, {
@@ -63,7 +63,7 @@ class CodenvyGit {
           }
         });
       }
-      this.localUrlsMap.set(workspaceId + projectPath, localUrl);
+      this.localGitUrlsMap.set(workspaceId + projectPath, localUrl);
     });
 
     return parsedResultPromise;
@@ -85,18 +85,18 @@ class CodenvyGit {
     // check if it was OK or not
     let parsedResultPromise = promise.then((remoteArray) => {
       remoteArray = this.lodash.sortBy(remoteArray, 'name');
-      this.remoteUrlArraysMap.set(workspaceId + projectPath, remoteArray);
+      this.remoteGitUrlArraysMap.set(workspaceId + projectPath, remoteArray);
     });
 
     return parsedResultPromise;
   }
 
   getRemoteUrlArrayByKey(workspaceId, projectPath) {
-    return this.remoteUrlArraysMap.get(workspaceId + projectPath);
+    return this.remoteGitUrlArraysMap.get(workspaceId + projectPath);
   }
 
   getLocalUrlByKey(workspaceId, projectPath) {
-    return this.localUrlsMap.get(workspaceId + projectPath);
+    return this.localGitUrlsMap.get(workspaceId + projectPath);
   }
 
 }

@@ -82,7 +82,7 @@ exports.updatedProjectDescription = function () {
 
       // setup it
       codenvyBackend.addProjectDetails(projectDetails);
-      codenvyBackend.addUpdatedProjectDetails(projectDetails.workspaceId, projectDetails.name, newProjectDetails);
+      codenvyBackend.addUpdatedProjectDetails(projectDetails.workspaceId, projectDetails.name);
       codenvyBackend.setup();
 
     });

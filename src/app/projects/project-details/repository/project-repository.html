@@ -13,36 +13,60 @@
 <div class="project-repositories">
 
   <!-- Mobile version -->
-  <cdvy-panel cdvy-title="Project Repository" hide-gt-md>
-    <div class="repository-mobile" layout="row" flex layout-align="space-around start">
-      <div class="label-name">URL:</div>
+  <cdvy-panel ng-if="projectRepositoryCtrl.localGitRepository || projectRepositoryCtrl.remoteSvnRepository" cdvy-title="Project Repository"
+              hide-gt-md>
+    <div ng-if="projectRepositoryCtrl.localGitRepository" class="repository-mobile" layout="row" flex layout-align="space-around start">
+      <div class="label-name">GIT&nbsp;URL:</div>
       <div>
-        <label class="url-label"><span>{{projectRepositoryCtrl.localRepository}}</span></label>
+        <label class="url-label"><span>{{projectRepositoryCtrl.localGitRepository}}</span></label>
 
-        <cdvy-clipboard cdvy-value="projectRepositoryCtrl.localRepository" class="copy-clipboard"></cdvy-clipboard>
+        <cdvy-clipboard cdvy-value="projectRepositoryCtrl.localGitRepository" class="copy-clipboard"></cdvy-clipboard>
+      </div>
+    </div>
+    <div ng-if="projectRepositoryCtrl.remoteSvnRepository" class="repository-mobile" layout="row" flex layout-align="space-around start">
+      <div class="label-name">SVN&nbsp;URL:</div>
+      <div>
+        <label class="url-label"><span>{{projectRepositoryCtrl.localSvnRepository}}</span></label>
+
+        <cdvy-clipboard cdvy-value="projectRepositoryCtrl.remoteSvnRepository" class="copy-clipboard"></cdvy-clipboard>
       </div>
     </div>
   </cdvy-panel>
   <!-- Desktop version -->
-  <cdvy-panel cdvy-title="Project Repository" hide-sm hide-md>
-    <div class="repository-desktop" layout="row" flex layout-align="space-around start">
-      <div class="label-name" flex="20">URL:</div>
-      <div layout="column" flex="80">
-        <div>
-          <label class="url-label"><span>{{projectRepositoryCtrl.localRepository}}</span></label>
+  <cdvy-panel ng-if="projectRepositoryCtrl.localGitRepository || projectRepositoryCtrl.remoteSvnRepository" cdvy-title="Project Repository"
+              hide-sm hide-md>
+    <div ng-if="projectRepositoryCtrl.localGitRepository">
+      <div class="repository-desktop" layout="row" flex layout-align="space-around start">
+        <div class="label-name" flex="20">GIT URL:</div>
+        <div layout="column" flex="80">
+          <div>
+            <label class="url-label"><span>{{projectRepositoryCtrl.localGitRepository}}</span></label>
 
-          <cdvy-clipboard cdvy-value="projectRepositoryCtrl.localRepository" class="copy-clipboard"></cdvy-clipboard>
+            <cdvy-clipboard cdvy-value="projectRepositoryCtrl.localGitRepository" class="copy-clipboard"></cdvy-clipboard>
+          </div>
         </div>
       </div>
+      <label class="prompt">To clone this repository with git, just use the command <span>git clone &lt;url&gt;</span></label>
     </div>
-    <label class="prompt">To clone this repository with git, just use the command <span>git clone &lt;url&gt;</span></label>
+    <div ng-if="projectRepositoryCtrl.remoteSvnRepository">
+      <div class="repository-desktop" layout="row" flex layout-align="space-around start">
+        <div class="label-name" flex="20">SVN URL:</div>
+        <div layout="column" flex="80">
+          <div>
+            <label class="url-label"><span>{{projectRepositoryCtrl.remoteSvnRepository}}</span></label>
+
+            <cdvy-clipboard cdvy-value="projectRepositoryCtrl.remoteSvnRepository" class="copy-clipboard"></cdvy-clipboard>
+          </div>
+        </div>
+      </div>
+      <label class="prompt">Checkout the subversion repository, by using the command <span>svn checkout &lt;url&gt;</span></label>
+    </div>
   </cdvy-panel>
 
   <!-- Mobile version -->
-  <cdvy-panel ng-if="projectRepositoryCtrl.remoteRepositories.length" cdvy-title="Remote repository" hide-gt-md>
-    <div class="repository-mobile" ng-repeat="remoteRepository in projectRepositoryCtrl.remoteRepositories" layout="row" flex>
-      <div class="label-name"><span>Remote{{remoteRepository.name.charAt(0).toUpperCase() + remoteRepository.name.slice(1)}}</span> URL:
-      </div>
+  <cdvy-panel ng-if="projectRepositoryCtrl.remoteGitRepositories.length" cdvy-title="Remote Repository" hide-gt-md>
+    <div class="repository-mobile" ng-repeat="remoteRepository in projectRepositoryCtrl.remoteGitRepositories" layout="row" flex>
+      <div class="label-name"><span>{{remoteRepository.name}}</span>GIT&nbsp;URL:</div>
       <div>
         <label class="url-label"><span>{{remoteRepository.url}}</span></label>
 
@@ -51,9 +75,9 @@
     </div>
   </cdvy-panel>
   <!-- Desktop version -->
-  <cdvy-panel ng-if="projectRepositoryCtrl.remoteRepositories.length" cdvy-title="Remote repository" hide-sm hide-md>
-    <div class="repository-desktop" ng-repeat="remoteRepository in projectRepositoryCtrl.remoteRepositories" layout="row" flex>
-      <div flex="20" class="label-name"><span>{{remoteRepository.name}}</span> URL:</div>
+  <cdvy-panel ng-if="projectRepositoryCtrl.remoteGitRepositories.length" cdvy-title="Remote Repository" hide-sm hide-md>
+    <div class="repository-desktop" ng-repeat="remoteRepository in projectRepositoryCtrl.remoteGitRepositories" layout="row" flex>
+      <div flex="20" class="label-name"><span>{{remoteRepository.name}}</span>GIT&nbsp;URL:</div>
       <div layout="column" flex="80">
         <label class="url-label"><span>{{remoteRepository.url}}</span></label>
 

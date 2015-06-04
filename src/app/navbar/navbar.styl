@@ -34,8 +34,10 @@ $faces-shadow = rgba(255, 255, 255, 0.5)
 .left-sidebar-menu md-list a:focus .md-ripple-container:before
   content ""
   left 0
+  right 0
   top 4px
   bottom 4px
+  border-radius 0
   position absolute
   border-left solid 3px $active-border-color
 
@@ -52,7 +54,7 @@ $faces-shadow = rgba(255, 255, 255, 0.5)
 
 .navbar-menu
   font-size 16px
-  margin-bottom 4px
+  margin-bottom 10px
   color $navbar-menu-color
 
 .navbar-menu md-list a i
@@ -76,15 +78,14 @@ $faces-shadow = rgba(255, 255, 255, 0.5)
   border-left solid 3px $active-border-color
 
 .navbar-menu div
-  height 55px
-  max-width 200px
+  height 100%
   overflow hidden
   white-space nowrap
 
 .navbar-menu div span
   position absolute
   margin-top 20px
-  left 45px
+  left 56px
 
 .navbar-menu div span i
   margin-right 10px
@@ -124,7 +125,7 @@ $faces-shadow = rgba(255, 255, 255, 0.5)
   -webkit-box-shadow 0 0 0 1px $faces-shadow
   -moz-box-shadow 0 0 0 1px $faces-shadow
   box-shadow 0 0 0 1px $faces-shadow
-  margin-left 14px
+  margin-left 9px
   margin-top 12px
   float left
 

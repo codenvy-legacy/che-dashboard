@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright (c) 2015 Codenvy, S.A.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,7 +10,7 @@
  */
 'use strict';
 
-describe('CodenvyProject', function(){
+describe('CodenvyProject', function () {
 
   /**
    * Project Factory for the test
@@ -41,7 +41,7 @@ describe('CodenvyProject', function(){
   /**
    * Inject factory and http backend
    */
-  beforeEach(inject(function(codenvyProject, codenvyAPIBuilder, codenvyHttpBackend) {
+  beforeEach(inject(function (codenvyProject, codenvyAPIBuilder, codenvyHttpBackend) {
     factory = codenvyProject;
     apiBuilder = codenvyAPIBuilder;
     codenvyBackend = codenvyHttpBackend;
@@ -60,7 +60,7 @@ describe('CodenvyProject', function(){
   /**
    * Check that we're able to fetch projects
    */
-  it('On Change Workspaces', function() {
+  it('On Change Workspaces', function () {
 
 
       // setup tests objects
@@ -120,6 +120,43 @@ describe('CodenvyProject', function(){
     }
   );
 
+  /**
+   * Check that we're able to fetch project details
+   */
+  it('Fetch project details', function () {
+      // setup tests objects
+      var testProjectDetails = {
+        name: 'project-tst',
+        description: 'test description',
+        workspaceName: 'qwerty',
+        workspaceId: 'workspace12345'
+      };
 
+      // providing request
+      // add project details on http backend
+      codenvyBackend.addProjectDetails(testProjectDetails);
+
+      // setup backend
+      codenvyBackend.setup();
+
+      // fetch remote url
+      factory.fetchProjectDetails(testProjectDetails.workspaceId, '/' + testProjectDetails.name);
+
+      // expecting GET
+      httpBackend.expectGET('/api/project/' + testProjectDetails.workspaceId + '/' + testProjectDetails.name);
+
+      // flush command
+      httpBackend.flush();
+
+      // now, check
+      var projectDetails = factory.getProjectDetailsByKey(testProjectDetails.workspaceId, '/' + testProjectDetails.name);
+
+      // check project details
+      expect(projectDetails.name).toEqual(testProjectDetails.name);
+      expect(projectDetails.description).toEqual(testProjectDetails.description);
+      expect(projectDetails.workspaceName).toEqual(testProjectDetails.workspaceName);
+      expect(projectDetails.workspaceId).toEqual(testProjectDetails.workspaceId);
+    }
+  );
 
 });
