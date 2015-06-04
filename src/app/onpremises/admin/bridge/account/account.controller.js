@@ -22,7 +22,11 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
 
     this.hideAllMessages();
     this.loginError = false;
-    this.show30DaysAdvertisement = true;
+    if (this.imsSaasAuthApi.promise) {
+      this.imsSaasAuthApi.promise.then(() => this.loginSuccess(), () => this.loginError());
+    } else {
+      this.show30DaysAdvertisement = true;
+    }
 
     this.forgotPasswordUrl = 'https://codenvy.com/site/recover-password';
     this.signUpUrl = 'https://codenvy.com/site/create-account';
