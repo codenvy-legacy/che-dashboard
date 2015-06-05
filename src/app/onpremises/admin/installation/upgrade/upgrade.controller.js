@@ -34,13 +34,9 @@ class UpgradeInstallationCtrl {
     );
 
 
-    this.codenvyAvailableArtifacts = [];
+    this.codenvyUpgradableArtifact = undefined;
 
     promise.then(() => this.fetchAll = true, () => this.errorFetching = true);
-  }
-
-  install() {
-    this.imsUpdateApi.update();
   }
 
   saveSchedule() {
@@ -61,23 +57,22 @@ class UpgradeInstallationCtrl {
   }
 
   updateUpgradable(artifacts) {
+    // only one artifact can be installed at a time
+    // search if there is one with the correct status
     if (artifacts) {
-      if (artifacts.codenvy && artifacts.codenvy.availables) {
-        artifacts.codenvy.availables.forEach((available)=> {
-          this.codenvyAvailableArtifacts.push(available);
-        });
-      }
-
-      if (artifacts.codenvy && artifacts.codenvy.installed && artifacts.codenvy.downloaded) {
-        if (artifacts.codenvy.installed.date < artifacts.codenvy.downloaded.date) {
-          this.upgradable = true;
-          return;
+        if (artifacts.codenvy && artifacts.codenvy.toInstall) {
+          artifacts.codenvy.toInstall.forEach((artifact) => {
+            if ('READY_TO_INSTALL' === artifact.status) {
+              this.codenvyUpgradableArtifact = artifact;
+            }
+          })
         }
-      }
     }
+  }
 
-    // for now, always upgradable
-    this.upgradable = true;
+  install(artifactVersion) {
+    //this.imsUpdateApi.update();
+
   }
 }
 

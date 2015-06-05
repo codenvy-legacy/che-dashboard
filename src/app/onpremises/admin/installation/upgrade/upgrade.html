@@ -16,16 +16,13 @@
 
   <div ng-show="upgradeInstallationCtrl.fetchAll">
 
-    <div ng-show="upgradeInstallationCtrl.codenvyAvailableArtifacts.length == 1">
-      <cdvy-button-primary cdvy-button-title="Install {{upgradeInstallationCtrl.codenvyAvailableArtifacts[0]}} Now" ng-click="upgradeInstallationCtrl.install()" ng-disabled="upgradeInstallationCtrl.isSectionDisabled() || (! upgradeInstallationCtrl.upgradable)"></cdvy-button-primary>
+    <div ng-show="upgradeInstallationCtrl.codenvyUpgradableArtifact">
+      <cdvy-button-primary cdvy-button-title="Install {{upgradeInstallationCtrl.codenvyUpgradableArtifact.version}} Now" ng-click="upgradeInstallationCtrl.install(upgradeInstallationCtrl.codenvyUpgradableArtifact.version)" ng-disabled="upgradeInstallationCtrl.isSectionDisabled()"></cdvy-button-primary>
+    </div>
+    <div ng-hide="upgradeInstallationCtrl.codenvyUpgradableArtifact">
+      No available upgrade based on current downloaded files.
     </div>
 
-    <div ng-show="upgradeInstallationCtrl.codenvyAvailableArtifacts.length > 1">
-      Select a version to install:&nbsp;&nbsp;<md-select ng-model="upgradeInstallationCtrl.selectedVersion">
-      <md-option ng-repeat="version in upgradeInstallationCtrl.codenvyAvailableArtifacts" value="{{version}}" ng-selected="true">{{version}}</md-option>
-    </md-select>&nbsp;&nbsp;&nbsp;&nbsp;
-      <cdvy-button-primary cdvy-button-title="Install Now" ng-click="upgradeInstallationCtrl.install()" ng-disabled="upgradeInstallationCtrl.isSectionDisabled() || (! upgradeInstallationCtrl.upgradable)"></cdvy-button-primary>
-    </div>
     <!-- Removed because not implemented in IM -->
     <!--
     <div ng-form="onPremUpgradeScheduleForm" flex>

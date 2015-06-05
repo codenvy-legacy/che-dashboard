@@ -27,9 +27,9 @@ class ImsArtifactApi {
 
     // remote call
     this.remoteImsAPI = $resource('/im', {}, {
-      getDownloadedArtifactsList: { method: 'GET', url: '/im/downloads' },
-      getInstalledArtifactsList: { method: 'GET', url: '/im/installation' },
-      getAvailableArtifactsList: { method: 'GET', url: '/im/update' },
+      getDownloadedArtifactsList: { method: 'GET', url: '/im/artifacts', isArray: true },
+      getInstalledArtifactsList: { method: 'GET', url: '/im/installations', isArray: true },
+      getAvailableArtifactsList: { method: 'GET', url: '/im/updates', isArray: true },
 
       downloadArtifacts: { method: 'POST', url: '/im/downloads' },
 
@@ -73,7 +73,7 @@ class ImsArtifactApi {
   }
 
   /**
-   * Assemble all sources of informations for a given artifacts: installed, downloaded and available,
+   * Assemble all sources of information for a given artifacts: installed, downloaded and available,
    * in the same object.
    */
   _consolidateArtifacts(results) {
@@ -81,48 +81,78 @@ class ImsArtifactApi {
     let toGather = new Set();
     let installedResult = results.shift();
 
-    if (installedResult && installedResult.artifacts) {
-      for (let artifact of installedResult.artifacts) {
+    if (installedResult && installedResult.length > 0) {
+      for (let artifact of installedResult) {
         let value = {
           name: artifact.artifact,
           installed: {
             version: artifact.version
           }
         };
+        if (artifact.label) {
+          value.installed.label = artifact.label;
+        }
+
         artifacts[artifact.artifact] = value;
         toGather.add({ name: artifact.artifact, version: artifact.version });
       }
     }
 
     let downloadedResult = results.shift();
-    if (downloadedResult && downloadedResult.artifacts) {
-      for (let artifact of downloadedResult.artifacts) {
-        let value = artifacts[artifact.artifact];
-        if (!value) {
-          value = { name: artifact.artifact };
+    if (downloadedResult && downloadedResult.length > 0) {
+      for (let artifact of downloadedResult) {
+        if (artifact.status !== 'INSTALLED') {
+          let value = artifacts[artifact.artifact];
+          if (!value) {
+            value = { name: artifact.artifact };
+          }
+          artifacts[artifact.artifact] = value; // in case it was just created
+          // add download info to the list of artifacts
+          let downloadInfo = {
+            status: artifact.status,
+            version: artifact.version
+          };
+          if (artifact.status == 'DOWNLOADED') {
+            if (value.downloaded) {
+              value.downloaded.push(downloadInfo);
+            } else {
+              value.downloaded = [downloadInfo];
+            }
+          } else if (artifact.status == 'READY_TO_INSTALL') {
+            if (value.toInstall) {
+              value.toInstall.push(downloadInfo);
+            } else {
+              value.toInstall = [downloadInfo];
+            }
+          }
+
+          toGather.add({name: artifact.artifact, version: artifact.version});
         }
-        artifacts[artifact.artifact] = value; // in case it was just created
-        value.downloaded = {
-          version: artifact.version
-        };
-        toGather.add({ name: artifact.artifact, version: artifact.version });
       }
     }
 
     let availableResult = results.shift();
 
-    if (availableResult && availableResult.artifacts) {
-      for (let artifact of availableResult.artifacts) {
-        let value = artifacts[artifact.artifact];
-        if (!value) {
-          value = { name: artifact.artifact };
+    if (availableResult && availableResult.length > 0) {
+      for (let artifact of availableResult) {
+
+        if ('AVAILABLE_TO_DOWNLOAD' === artifact.status) {
+          let value = artifacts[artifact.artifact];
+          if (!value) {
+            value = {name: artifact.artifact};
+          }
+          let availableInfo = {
+            status: artifact.status,
+            version: artifact.version
+          };
+
+          artifacts[artifact.artifact] = value; // in case it was just created
+          if (!value.availables) {
+            value.availables = [];
+          }
+          value.availables.push(availableInfo);
+          toGather.add({name: artifact.artifact, version: artifact.version});
         }
-        artifacts[artifact.artifact] = value; // in case it was just created
-        if (!value.availables) {
-          value.availables = [];
-        }
-        value.availables.push(artifact.version);
-        toGather.add({ name: artifact.artifact, version: artifact.version });
       }
     }
 

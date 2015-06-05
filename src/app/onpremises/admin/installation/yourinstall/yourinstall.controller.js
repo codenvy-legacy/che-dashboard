@@ -29,8 +29,8 @@ class YourInstallationCtrl {
   }
 
   updateInstalledVersion(resource) {
-    if (resource.artifacts) {
-      for (let artifact of resource.artifacts) {
+    if (resource) {
+      for (let artifact of resource) {
         if (artifact.artifact === 'codenvy') {
           this.installedVersion = artifact.version;
           return;
@@ -41,9 +41,9 @@ class YourInstallationCtrl {
   }
 
   updateDownloadedVersion(resource) {
-    if (resource.artifacts) {
-      for (let artifact of resource.artifacts) {
-        if (artifact.artifact === 'codenvy') {
+    if (resource) {
+      for (let artifact of resource) {
+        if (artifact.artifact === 'codenvy' && artifact.status !== 'INSTALLED') {
           this.downloadedVersions.push(artifact.version);
         }
       }
