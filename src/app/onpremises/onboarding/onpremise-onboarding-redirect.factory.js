@@ -47,13 +47,20 @@ class OnPremiseOnBoardingRedirect {
    * Check if we need for the selected user to redirect to onboarding flow or not
    * @returns {*}
    */
-  checkRedirect() {
+  checkRedirect(url) {
 
     let user = this.codenvyAPI.getUser();
     // if user is simple user, nothing to display
     if (!user.isAdmin()) {
       return {};
     }
+
+    // if user tries to get dashboard, redirect
+    if ('app/dashboard/dashboard.html' === url) {
+      console.log('redirecting the user')
+      return {route:"/onprem/admin/bridge"};
+    }
+
 
     // check if property is defined on the ims server
     // if not defined, redirect to the onboarding flow
