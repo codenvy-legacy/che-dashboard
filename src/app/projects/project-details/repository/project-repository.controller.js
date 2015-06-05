@@ -10,6 +10,8 @@
  */
 'use strict';
 
+import {gitId, subversionId} from '../repository/project-repository-data';
+
 class ProjectRepositoryCtrl {
 
   /**
@@ -17,36 +19,76 @@ class ProjectRepositoryCtrl {
    * @ngInject for Dependency injection
    * @author Oleksii Orel
    */
-  constructor($route, codenvyAPI) {
+  constructor($route, codenvyAPI, lodash) {
     this.codenvyAPI = codenvyAPI;
+    this.lodash = lodash;
 
-    this.remoteRepositories = [];
-    this.localRepository = '';
+    this.remoteGitRepositories = [];
+    this.localGitRepository = null;
+
+    this.remoteSvnRepository = null;
 
     var workspaceId = $route.current.params.workspaceId;
     var projectPath = '/' + $route.current.params.projectName;
 
-    if (!this.codenvyAPI.getGit().getLocalUrlByKey(workspaceId, projectPath)) {
-      let promise = this.codenvyAPI.getGit().fetchLocalUrl(workspaceId, projectPath);
+    if (!this.codenvyAPI.getProject().getProjectDetailsByKey(workspaceId, projectPath)) {
+      let promise = this.codenvyAPI.getProject().fetchProjectDetails(workspaceId, projectPath);
 
       promise.then(() => {
-        this.localRepository = this.codenvyAPI.getGit().getLocalUrlByKey(workspaceId, projectPath);
+        var projectDetails = this.codenvyAPI.getProject().getProjectDetailsByKey(workspaceId, projectPath);
+        this.updateRepositories(projectDetails);
       });
     } else {
-      this.localRepository = this.codenvyAPI.getGit().getLocalUrlByKey(workspaceId, projectPath);
-    }
-
-    if (!this.codenvyAPI.getGit().getRemoteUrlArrayByKey(workspaceId, projectPath)) {
-      let promise = this.codenvyAPI.getGit().fetchRemoteUrlArray(workspaceId, projectPath);
-
-      promise.then(() => {
-        this.remoteRepositories = this.codenvyAPI.getGit().getRemoteUrlArrayByKey(workspaceId, projectPath);
-      });
-    } else {
-      this.remoteRepositories = this.codenvyAPI.getGit().getRemoteUrlArrayByKey(workspaceId, projectPath);
+      var projectDetails = this.codenvyAPI.getProject().getProjectDetailsByKey(workspaceId, projectPath);
+      this.updateRepositories(projectDetails);
     }
 
   }
+
+  updateRepositories(projectDetails) {
+    if (!projectDetails.mixins) {
+      return;
+    }
+
+    if (projectDetails.mixins.indexOf(subversionId) != -1) {
+      //update remote svn url
+      if (!this.codenvyAPI.getSvn().getRemoteUrlByKey(projectDetails.workspaceId, projectDetails.path)) {
+        let promise = this.codenvyAPI.getSvn().fetchRemoteUrl(projectDetails.workspaceId, projectDetails.path);
+
+        promise.then(() => {
+          this.remoteSvnRepository = this.codenvyAPI.getSvn().getRemoteUrlByKey(projectDetails.workspaceId, projectDetails.path);
+        });
+      } else {
+        this.remoteSvnRepository = this.codenvyAPI.getSvn().getRemoteUrlByKey(projectDetails.workspaceId, projectDetails.path);
+      }
+    }
+
+    if (projectDetails.mixins.indexOf(gitId) != -1) {
+      //update git local url
+      if (!this.codenvyAPI.getGit().getLocalUrlByKey(projectDetails.workspaceId, projectDetails.path)) {
+        let promise = this.codenvyAPI.getGit().fetchLocalUrl(projectDetails.workspaceId, projectDetails.path);
+
+        promise.then(() => {
+          this.localGitRepository = this.codenvyAPI.getGit().getLocalUrlByKey(projectDetails.workspaceId, projectDetails.path);
+        });
+      } else {
+        this.localGitRepository = this.codenvyAPI.getGit().getLocalUrlByKey(projectDetails.workspaceId, projectDetails.path);
+      }
+
+      //update git remote urls
+      if (!this.codenvyAPI.getGit().getRemoteUrlArrayByKey(projectDetails.workspaceId, projectDetails.path)) {
+        let promise = this.codenvyAPI.getGit().fetchRemoteUrlArray(projectDetails.workspaceId, projectDetails.path);
+
+        promise.then(() => {
+          this.remoteGitRepositories = this.codenvyAPI.getGit().getRemoteUrlArrayByKey(projectDetails.workspaceId, projectDetails.path);
+        });
+      } else {
+        this.remoteGitRepositories = this.codenvyAPI.getGit().getRemoteUrlArrayByKey(projectDetails.workspaceId, projectDetails.path);
+      }
+    }
+
+  }
+
 
 }
 

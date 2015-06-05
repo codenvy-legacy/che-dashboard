@@ -23,7 +23,7 @@ class CodenvyProject {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource, $q, codenvyUser, codenvyProfile) {
+  constructor($resource, $q, codenvyUser, codenvyProfile) {
 
     // keep resource
     this.$resource = $resource;
@@ -52,13 +52,16 @@ class CodenvyProject {
     // projects on all workspaces
     this.projects = [];
 
+    // project details map with key = workspaceId+projectPath
+    this.projectDetailsMap = new Map();
+
     // remote call
     this.remoteProjectsAPI = this.$resource('/api/project/:workspaceId', {workspaceId: '@id'}, {
       import: {method: 'POST', url: '/api/project/:workspaceId/import/:path'},
       create: {method: 'POST', url: '/api/project/:workspaceId?name=:path'},
       details: {method: 'GET', url: '/api/project/:workspaceId/:path'},
-      getPermissions: { method: 'GET', url: '/api/project/:workspaceId/permissions/:path', isArray: true},
-      updatePermissions: { method: 'POST', url: '/api/project/:workspaceId/permissions/:path', isArray: true},
+      getPermissions: {method: 'GET', url: '/api/project/:workspaceId/permissions/:path', isArray: true},
+      updatePermissions: {method: 'POST', url: '/api/project/:workspaceId/permissions/:path', isArray: true},
       rename: {method: 'POST', url: '/api/project/:workspaceId/rename/:path?name=:name'},
       remove: {method: 'DELETE', url: '/api/project/:workspaceId/:path'},
       update: {method: 'PUT', url: '/api/project/:workspaceId/:path'},
@@ -253,9 +256,6 @@ class CodenvyProject {
     });
 
 
-
-
-
     return updateUsersPromise;
 
   }
@@ -277,7 +277,6 @@ class CodenvyProject {
 
     return firstName + ' ' + lastName;
   }
-
 
 
   updatePermissions(workspaceId, path, data) {
@@ -306,7 +305,6 @@ class CodenvyProject {
   }
 
 
-
   /**
    * Gets all projects that are currently monitored
    * @returns {Array}
@@ -331,11 +329,32 @@ class CodenvyProject {
     return this.projectsPerWorkspaceMap;
   }
 
-
-  getProjectDetails(workspaceId, projectName) {
+  /**
+   * Fetch project details on the given workspace id and path
+   * @param workspaceId the workspace ID to use
+   * @param projectPath the path of the project
+   */
+  fetchProjectDetails(workspaceId, projectPath) {
+    //TODO why we cannot use project path
+    var projectName = projectPath[0] === '/' ? projectPath.slice(1) : projectPath;
     let promise = this.remoteProjectsAPI.details({workspaceId: workspaceId, path: projectName}).$promise;
 
-    return promise;
+    // check if it was OK or not
+    let parsedResultPromise = promise.then((projectDetails) => {
+      if (projectDetails) {
+        this.projectDetailsMap.set(workspaceId + projectPath, projectDetails);
+      }
+    });
+
+    return parsedResultPromise;
+  }
+
+  getProjectDetailsByKey(workspaceId, projectPath) {
+    return this.projectDetailsMap.get(workspaceId + projectPath);
+  }
+
+  removeProjectDetailsByKey(workspaceId, projectPath) {
+    this.projectDetailsMap.delete(workspaceId + projectPath);
   }
 
   updateProjectDetails(projectDetails) {
@@ -364,10 +383,10 @@ class CodenvyProject {
   }
 
   remove(workspaceId, projectName) {
-  let promise = this.remoteProjectsAPI.remove({workspaceId: workspaceId, path: projectName}).$promise;
+    let promise = this.remoteProjectsAPI.remove({workspaceId: workspaceId, path: projectName}).$promise;
 
     return promise;
-}
+  }
 
 }
 

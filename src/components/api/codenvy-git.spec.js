@@ -69,11 +69,11 @@ describe('CodenvyGit', function () {
 
       // providing request
       // add test localUrl on Http backend
-      codenvyBackend.addLocalUrlsMap(workspaceId, encodeURIComponent(projectPath), localUrl);
+      codenvyBackend.addLocalGitUrl(workspaceId, encodeURIComponent(projectPath), localUrl);
 
       // setup backend
       codenvyBackend.setup();
-      codenvyBackend.getLocalUrl(workspaceId, encodeURIComponent(projectPath));
+      codenvyBackend.getLocalGitUrl(workspaceId, encodeURIComponent(projectPath));
 
       // fetch localUrl
       factory.fetchLocalUrl(workspaceId, projectPath);
@@ -93,9 +93,9 @@ describe('CodenvyGit', function () {
   );
 
   /**
-   * Check that we're able to fetch local git url
+   * Check that we're able to fetch remote git urls
    */
-  it('Fetch local git url', function () {
+  it('Fetch remote git urls', function () {
       // setup tests objects
       var workspaceId = 'workspace123test';
       var projectPath = '/testProject';
@@ -112,11 +112,11 @@ describe('CodenvyGit', function () {
 
       // providing request
       // add test remote array with urls on Http backend
-      codenvyBackend.addRemoteUrlArraysMap(workspaceId, encodeURIComponent(projectPath), remoteArray);
+      codenvyBackend.addRemoteGitUrlArray(workspaceId, encodeURIComponent(projectPath), remoteArray);
 
       // setup backend
       codenvyBackend.setup();
-      codenvyBackend.getRemoteUrlArray(workspaceId, encodeURIComponent(projectPath));
+      codenvyBackend.getRemoteGitUrlArray(workspaceId, encodeURIComponent(projectPath));
 
       // fetch localUrl
       factory.fetchRemoteUrlArray(workspaceId, projectPath);

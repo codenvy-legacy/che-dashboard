@@ -31,8 +31,9 @@ class CodenvyHttpBackend {
     this.profilesMap = new Map();
     this.projectDetailsMap = new Map();
     this.projectPermissionsMap = new Map();
-    this.remoteUrlArraysMap = new Map();
-    this.localUrlsMap = new Map();
+    this.remoteGitUrlArraysMap = new Map();
+    this.localGitUrlsMap = new Map();
+    this.remoteSvnUrlsMap = new Map();
 
     this.memberships = [];
 
@@ -239,10 +240,10 @@ class CodenvyHttpBackend {
    * Add the updated project details
    * @param workspaceId the id of project workspace
    * @param projectName the new project name
-   * @param projectDetails the new project details
    */
-  addUpdatedProjectDetails(workspaceId, projectName, projectDetails) {
-    this.httpBackend.when('PUT', '/api/project/' + workspaceId + '/' + projectName).respond(projectDetails);
+  addUpdatedProjectDetails(workspaceId, projectName) {
+    this.httpBackend.when('PUT', '/api/project/' + workspaceId + '/' + projectName)
+      .respond(this.projectDetailsMap.get(workspaceId + '/' + projectName));
   }
 
   /**
@@ -271,43 +272,65 @@ class CodenvyHttpBackend {
   }
 
   /**
-   * Add the given remote array of url to map
+   * Add the given remote array of git url to map
    * @param workspaceId
    * @param projectPath
    * @param remoteArray
    */
-  addRemoteUrlArraysMap(workspaceId, projectPath, remoteArray) {
-    this.remoteUrlArraysMap.set(workspaceId + projectPath, remoteArray);
+  addRemoteGitUrlArray(workspaceId, projectPath, remoteArray) {
+    this.remoteGitUrlArraysMap.set(workspaceId + projectPath, remoteArray);
   }
 
   /**
-   * Add the given local url to map
+   * Add the given local git url to map
    * @param workspaceId
    * @param projectPath
    * @param localUrl
    */
-  addLocalUrlsMap(workspaceId, projectPath, localUrl) {
-    this.localUrlsMap.set(workspaceId + projectPath, localUrl);
+  addLocalGitUrl(workspaceId, projectPath, localUrl) {
+    this.localGitUrlsMap.set(workspaceId + projectPath, localUrl);
   }
 
   /**
-   * Get local url
+   * Add the given local svn url to map
+   * @param workspaceId
+   * @param projectPath
+   * @param localUrl
+   */
+  addRemoteSvnUrl(workspaceId, projectPath, localUrl) {
+    this.remoteSvnUrlsMap.set(workspaceId + projectPath, localUrl);
+  }
+
+  /**
+   * Get local git url
    * @param workspaceId
    * @param projectPath
    */
-  getLocalUrl(workspaceId, projectPath) {
+  getLocalGitUrl(workspaceId, projectPath) {
     this.httpBackend.when('GET', '/api/git/' + workspaceId + '/read-only-url?projectPath=' + projectPath)
-      .respond(this.localUrlsMap.get(workspaceId + projectPath));
+      .respond(this.localGitUrlsMap.get(workspaceId + projectPath));
   }
 
   /**
-   * Get remote array of url
+   * Get remote array of git url
    * @param workspaceId
    * @param projectPath
    */
-  getRemoteUrlArray(workspaceId, projectPath) {
+  getRemoteGitUrlArray(workspaceId, projectPath) {
     this.httpBackend.when('POST', '/api/git/' + workspaceId + '/remote-list?projectPath=' + projectPath)
-      .respond(this.remoteUrlArraysMap.get(workspaceId + projectPath));
+      .respond(this.remoteGitUrlArraysMap.get(workspaceId + projectPath));
+  }
+
+  /**
+   * Get remote svn url
+   * @param workspaceId
+   * @param projectPath
+   */
+  getRemoteSvnUrl(workspaceId, projectPath) {
+    var svnInfo ={};
+    svnInfo.repositoryUrl = this.remoteSvnUrlsMap.get(workspaceId + projectPath);
+
+    this.httpBackend.when('POST', '/api/svn/' + workspaceId + '/info').respond(svnInfo);
   }
 
 }
