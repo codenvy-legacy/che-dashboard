@@ -10,6 +10,6 @@
  */
 'use strict';
 
-export var gitId = "git";
+export var gitMixinId = 'git';
 
-export var subversionId = "subversion";
+export var subversionMixinId = 'subversion';

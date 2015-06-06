@@ -17,10 +17,10 @@
  * @author Oleksii Orel
  */
 
-var MainPage = function() {
+var MainPage = function () {
 
   this.settingsTab = element(by.cssContainingText('md-tab', 'Settings'));
-  this.updateButton = $('cdvy-button-primary[cdvy-button-title="Update"]');
+  this.updateButton = $('cdvy-button-primary[name="updateButton"]');
   this.visibilityPublicWidget = $('cdvy-toggle-button[cdvy-title="public"]');
   this.visibilityPrivateWidget = $('cdvy-toggle-button[cdvy-title="private"]');
   this.visibilityPublicButton = $('cdvy-toggle-button[cdvy-title="public"] button');

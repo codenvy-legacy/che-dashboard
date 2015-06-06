@@ -17,23 +17,12 @@
  * @author Oleksii Orel
  */
 
-var MainPage = function() {
+var MainPage = function () {
 
   this.accessTab = element(by.cssContainingText('md-tab', 'Access'));
   this.tabNextPaginator = element(by.css('.md-paginator.md-next'));
 
   this.permissionsElement = element.all(by.repeater('permission in projectDetailsDevelopersCtrl.permissions'));
-
-
-
-
-  /*this.updateButton = $('cdvy-button-primary[cdvy-button-title="Update"]');
-  this.visibilityPublicWidget = $('cdvy-toggle-button[cdvy-title="public"]');
-  this.visibilityPrivateWidget = $('cdvy-toggle-button[cdvy-title="private"]');
-  this.visibilityPublicButton = $('cdvy-toggle-button[cdvy-title="public"] button');
-  this.visibilityPrivateButton = $('cdvy-toggle-button[cdvy-title="private"] button');
-  this.projectNameInput = $('input[name="deskname"]');
-  this.projectDescriptionInput = $('input[name="deskdescription"]');*/
 
 };
 

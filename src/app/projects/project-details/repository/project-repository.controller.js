@@ -10,7 +10,7 @@
  */
 'use strict';
 
-import {gitId, subversionId} from '../repository/project-repository-data';
+import {gitMixinId, subversionMixinId} from '../repository/project-repository-data';
 
 class ProjectRepositoryCtrl {
 
@@ -25,8 +25,8 @@ class ProjectRepositoryCtrl {
 
     this.remoteGitRepositories = [];
     this.localGitRepository = null;
-
     this.remoteSvnRepository = null;
+    this.isEmptyState = false;
 
     var workspaceId = $route.current.params.workspaceId;
     var projectPath = '/' + $route.current.params.projectName;
@@ -46,11 +46,12 @@ class ProjectRepositoryCtrl {
   }
 
   updateRepositories(projectDetails) {
-    if (!projectDetails.mixins) {
+    if (!projectDetails.mixins || !projectDetails.mixins.length) {
+      this.isEmptyState = true;
       return;
     }
 
-    if (projectDetails.mixins.indexOf(subversionId) != -1) {
+    if (projectDetails.mixins.indexOf(subversionMixinId) !== -1) {
       //update remote svn url
       if (!this.codenvyAPI.getSvn().getRemoteUrlByKey(projectDetails.workspaceId, projectDetails.path)) {
         let promise = this.codenvyAPI.getSvn().fetchRemoteUrl(projectDetails.workspaceId, projectDetails.path);
@@ -63,7 +64,7 @@ class ProjectRepositoryCtrl {
       }
     }
 
-    if (projectDetails.mixins.indexOf(gitId) != -1) {
+    if (projectDetails.mixins.indexOf(gitMixinId) !== -1) {
       //update git local url
       if (!this.codenvyAPI.getGit().getLocalUrlByKey(projectDetails.workspaceId, projectDetails.path)) {
         let promise = this.codenvyAPI.getGit().fetchLocalUrl(projectDetails.workspaceId, projectDetails.path);
@@ -88,7 +89,6 @@ class ProjectRepositoryCtrl {
     }
 
   }
-
 
 }
 

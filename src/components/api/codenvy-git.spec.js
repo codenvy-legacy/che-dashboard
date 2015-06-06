@@ -100,14 +100,14 @@ describe('CodenvyGit', function () {
       var workspaceId = 'workspace123test';
       var projectPath = '/testProject';
       var remoteArray = [{
-        "url": "https://github.com/test1",
-        "name": "test3"
+        'url': 'https://github.com/test1',
+        'name': 'test3'
       }, {
-        "url": "https://github.com/test2",
-        "name": "test1"
+        'url': 'https://github.com/test2',
+        'name': 'test1'
       }, {
-        "url": "https://github.com/test3",
-        "name": "test2"
+        'url': 'https://github.com/test3',
+        'name': 'test2'
       }];
 
       // providing request

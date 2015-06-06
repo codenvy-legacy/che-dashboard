@@ -37,7 +37,7 @@
               hide-sm hide-md>
     <div ng-if="projectRepositoryCtrl.localGitRepository">
       <div class="repository-desktop" layout="row" flex layout-align="space-around start">
-        <div class="label-name" flex="20">GIT URL:</div>
+        <div class="label-name" flex="20">GIT&nbsp;URL:</div>
         <div layout="column" flex="80">
           <div>
             <label class="url-label"><span>{{projectRepositoryCtrl.localGitRepository}}</span></label>
@@ -50,7 +50,7 @@
     </div>
     <div ng-if="projectRepositoryCtrl.remoteSvnRepository">
       <div class="repository-desktop" layout="row" flex layout-align="space-around start">
-        <div class="label-name" flex="20">SVN URL:</div>
+        <div class="label-name" flex="20">SVN&nbsp;URL:</div>
         <div layout="column" flex="80">
           <div>
             <label class="url-label"><span>{{projectRepositoryCtrl.remoteSvnRepository}}</span></label>
@@ -85,5 +85,9 @@
       </div>
     </div>
   </cdvy-panel>
+
+  <cdvy-empty-repository cdvy-value="There are no repositories yet."
+                         cdvy-prompt="You can add GIT or SVN repository through the IDE menus."
+                         ng-if="projectRepositoryCtrl.isEmptyState"></cdvy-empty-repository>
 
 </div>

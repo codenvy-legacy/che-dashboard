@@ -239,10 +239,20 @@ class CodenvyHttpBackend {
   /**
    * Add the updated project details
    * @param workspaceId the id of project workspace
-   * @param projectName the new project name
+   * @param projectName
+   * @param newProjectDetails
    */
-  addUpdatedProjectDetails(workspaceId, projectName) {
-    this.httpBackend.when('PUT', '/api/project/' + workspaceId + '/' + projectName)
+  addUpdatedProjectDetails(workspaceId, projectName, newProjectDetails) {
+    this.httpBackend.when('PUT', '/api/project/' + workspaceId + '/' + projectName).respond(newProjectDetails);
+  }
+
+  /**
+   * Add the fetch project details
+   * @param workspaceId the id of project workspace
+   * @param projectName the project name
+   */
+  addFetchProjectDetails(workspaceId, projectName) {
+    this.httpBackend.when('GET', '/api/project/' + workspaceId + '/' + projectName)
       .respond(this.projectDetailsMap.get(workspaceId + '/' + projectName));
   }
 
@@ -327,7 +337,7 @@ class CodenvyHttpBackend {
    * @param projectPath
    */
   getRemoteSvnUrl(workspaceId, projectPath) {
-    var svnInfo ={};
+    var svnInfo = {};
     svnInfo.repositoryUrl = this.remoteSvnUrlsMap.get(workspaceId + projectPath);
 
     this.httpBackend.when('POST', '/api/svn/' + workspaceId + '/info').respond(svnInfo);

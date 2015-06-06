@@ -79,12 +79,15 @@ class ProjectDetailsCtrl {
     let promise = this.codenvyAPI.getProject().updateProjectDetails(projectDetails);
 
     promise.then(() => {
-      this.oldDescription = projectDetails.description;
       this.codenvyNotificationService.showInfo('Profile successfully updated.');
       this.updateLocation();
-      this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath).then(() => {
-        this.updateProjectDetails();
-      });
+      if (this.isNameChanged()) {
+        this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath).then(() => {
+          this.updateProjectDetails();
+        });
+      } else {
+        this.oldDescription = projectDetails.description;
+      }
     }, (error) => {
       this.projectDetails.description = this.oldDescription;
       this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Update information failed.');
@@ -141,9 +144,7 @@ class ProjectDetailsCtrl {
 
     promise.then(() => {
       this.codenvyNotificationService.showInfo('Update visibility completed.');
-      this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath).then(() => {
-        this.updateProjectDetails();
-      });
+      this.oldVisibility = this.projectDetails.visibility;
     }, (error) => {
       this.projectDetails.visibility = this.oldVisibility;
       this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Update visibility failed.');
