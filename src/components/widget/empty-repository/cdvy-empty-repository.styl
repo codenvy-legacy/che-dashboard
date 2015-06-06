@@ -1,0 +1,77 @@
+$empty-repo-background-color = #F7F7F7
+$empty-repo-border-color = #CBCBCB
+$empty-repo-label-color = #9B9B9B
+
+.cdvy-empty-repository
+  text-align center
+  padding 35px
+  height 100%
+  width 100%
+
+.cdvy-empty-repository .cdvy-mobile,
+.cdvy-empty-repository .cdvy-desktop
+  margin auto
+  background $empty-repo-background-color
+  border 9px solid $empty-repo-border-color
+
+.cdvy-empty-repository .cdvy-mobile
+  width 500px
+  height 500px
+  border-radius 250px
+
+.cdvy-empty-repository .cdvy-desktop
+  width 700px
+  height 700px
+  border-radius 350px
+
+.cdvy-empty-repository .cdvy-mobile div
+  position relative
+  line-height 482px
+
+.cdvy-empty-repository .cdvy-desktop div
+  position relative
+  line-height 682px
+
+.cdvy-empty-repository label
+  position absolute
+  left 0
+  right 0
+  font-size 22px
+  line-height 25px
+  color $empty-repo-label-color
+
+.cdvy-empty-repository .cdvy-mobile label:first-child
+  margin auto
+  overflow auto
+  top 75px
+  width 300px
+  height 65px
+
+.cdvy-empty-repository .cdvy-desktop label:first-child
+  margin auto
+  overflow auto
+  top 120px
+  width 450px
+  height 100px
+
+.cdvy-empty-repository .cdvy-mobile div:before
+  color $empty-repo-border-color
+  font-size 200px
+
+.cdvy-empty-repository .cdvy-desktop div:before
+  color $empty-repo-border-color
+  font-size 250px
+
+.cdvy-empty-repository .cdvy-mobile label:last-child
+  margin auto
+  overflow auto
+  top 350px
+  width 300px
+  height 80px
+
+.cdvy-empty-repository .cdvy-desktop label:last-child
+  margin auto
+  overflow auto
+  top 500px
+  width 450px
+  height 100px
