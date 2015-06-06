@@ -82,7 +82,8 @@ exports.updatedProjectDescription = function () {
 
       // setup it
       codenvyBackend.addProjectDetails(projectDetails);
-      codenvyBackend.addUpdatedProjectDetails(projectDetails.workspaceId, projectDetails.name);
+      codenvyBackend.addFetchProjectDetails(projectDetails.workspaceId, projectDetails.name);
+      codenvyBackend.addUpdatedProjectDetails(projectDetails.workspaceId, projectDetails.name, newProjectDetails);
       codenvyBackend.setup();
 
     });
@@ -111,6 +112,7 @@ exports.updatedProjectVisibility = function () {
 
       // setup it
       codenvyBackend.addProjectDetails(projectDetails);
+      codenvyBackend.addFetchProjectDetails(projectDetails.workspaceId, projectDetails.name);
       codenvyBackend.addSwitchVisibility(projectDetails.workspaceId, projectDetails.name, projectDetails.visibility);
       codenvyBackend.addSwitchVisibility(projectDetails.workspaceId, projectDetails.name, newVisibility);
       codenvyBackend.setup();

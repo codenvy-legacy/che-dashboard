@@ -23,14 +23,14 @@ describe('Rename project', function () {
   });
 
 
-  it('launch browser', function() {
+  it('launch browser', function () {
     browser.get('http://localhost:5000/');
     browser.waitForAngular();
 
   });
 
 
-  it('updated project name', function() {
+  it('updated project name', function () {
     browser.addMockModule('userDashboardMock', renameProjectMock.updatedProjectName);
     browser.get('http://localhost:5000/#/project/idOleksii/project-tst');
     browser.waitForAngular();
@@ -66,7 +66,7 @@ describe('Rename project', function () {
 
   });
 
-  it('updated project description', function() {
+  it('updated project description', function () {
     browser.addMockModule('userDashboardMock', renameProjectMock.updatedProjectDescription);
     browser.get('http://localhost:5000/#/project/idOleksii/project-tst');
     browser.waitForAngular();
@@ -95,7 +95,7 @@ describe('Rename project', function () {
 
   });
 
-  it('updated project visibility', function() {
+  it('updated project visibility', function () {
     browser.addMockModule('userDashboardMock', renameProjectMock.updatedProjectVisibility);
     browser.get('http://localhost:5000/#/project/idOleksii/project-tst');
     browser.waitForAngular();

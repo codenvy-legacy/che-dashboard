@@ -16,14 +16,14 @@ exports.config = {
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
     'browserName': 'chrome',
-    'chromeOptions' : {
-       args: ['--lang=en',
-              '--window-size=1024,768']
-     }
+    'chromeOptions': {
+      args: ['--lang=en',
+        '--window-size=1024,768']
+    }
   },
 
- onPrepare: function(){
-   browser.driver.get('http://localhost:5000'); 
+  onPrepare: function () {
+    browser.driver.get('http://localhost:5000');
   },
 
   // Spec patterns are relative to the current working directly when
