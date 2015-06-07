@@ -29,6 +29,7 @@ class ListProjectsCtrl {
     this.state = 'loading';
 
     this.filtersWorkspaceSelected = {};
+    this.projectFilter = {name : ''};
 
     // fetch workspaces when initializing
     let promise = this.workspace.fetchWorkspaces();
@@ -111,8 +112,6 @@ class ListProjectsCtrl {
       this.filtersWorkspaceSelected[key] = true;
     });
   }
-
-
 }
 
 export default ListProjectsCtrl;

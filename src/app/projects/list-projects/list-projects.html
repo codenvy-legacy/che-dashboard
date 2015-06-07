@@ -16,15 +16,7 @@
               cdvy-button-href="#/create-project"></cdvy-toolbar>
 
 <md-toolbar class="md-toolbar-tools" md-theme="toolbar-theme">
-  <md-autocomplete flex hide show-gt-lg style="width: 800px"
-                   md-selected-item="selectedItem"
-                   md-search-text="searchText"
-                   md-items="item in ctrl.querySearch(ctrl.searchText)"
-                   md-item-text="display"
-                   placeholder="Search project">
-    <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
-  </md-autocomplete>
-  <md-button class="md-accent"><md-icon md-font-icon="fa fa-search"></md-icon></md-button>
+  <cdvy-search flex hide show-gt-lg style="width: 800px" cdvy-placeholder="Search for projects" ng-model="listProjectsCtrl.projectFilter.name"></cdvy-search>
   <span flex></span>
   <div class="md-toolbar-item md-tools" layout="row">
     <i class="projects-list-projects-cog fa fa-cog" dropdown-menu="listProjectsCtrl.dropDownOptionsList" dropdown-model="listProjectsCtrl.dropDownValue" dropdown-onchange="listProjectsCtrl.dropDownSelected(selected)" dropdown-item-label='name'></i>
@@ -51,7 +43,7 @@
         <span ng-show="projects.length == 0" class="project-list-empty">- No project</span>
       </cdvy-list-title>
       <cdvy-list ng-show="projects.length > 0">
-        <cdvy-list-item ng-repeat="project in projects" flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
+        <cdvy-list-item ng-repeat="project in projects | filter:listProjectsCtrl.projectFilter" flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
           <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row">
             <div class="project-list-static-icon">
               <cdvy-list-item-checked cdvy-icon="cdvyfont cdvyico-type-{{project.type}} cdvyico-type-blank" class="project-type-icon"></cdvy-list-item-checked>
