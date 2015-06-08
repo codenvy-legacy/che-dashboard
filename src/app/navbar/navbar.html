@@ -52,7 +52,7 @@
   </section>
   <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
   <div class="navbar-menu" ng-show="navbarCtrl.profile.attributes" ng-init="isExpand=true" ng-show="navbarCtrl.isSimpleUser()">
-    <div>
+    <div class=""navbar-header">
       <img class="developers-face" gravatar-src="navbarCtrl.email">
       <span>{{navbarCtrl.fullName}}</span>
       <i class="material-design icon-ic_expand_more_24px md-tab-themed" ng-click='isExpand=!isExpand'>&nbsp;</i>
