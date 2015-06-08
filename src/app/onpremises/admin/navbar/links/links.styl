@@ -1,0 +1,112 @@
+/*
+ * Copyright (c) 2015 Codenvy, S.A.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Codenvy, S.A. - initial API and implementation
+ */
+
+$active-background-color = #222933
+$active-border-color = rgb(85, 141, 170)
+$navbar-menu-color = #C5D0DF
+$faces-shadow = rgba(255, 255, 255, 0.5)
+$menu-font-size = 14px
+$submenu-font-size = 12px
+
+/* restore non-allcaps */
+.admin-navbar-menu section a.md-button
+  text-transform none
+
+/* text color */
+.admin-navbar-menu .navbar-header,
+.admin-navbar-menu section a.md-button span
+  color $navbar-menu-color
+
+.admin-navbar-menu md-item-content a.md-button:focus span
+  color $white-color
+
+/* background color */
+
+.admin-navbar-menu md-item-content a.md-button:focus,
+.admin-navbar-menu md-item-content a.md-button:hover
+  background-color $active-background-color
+
+/* layout */
+
+.admin-navbar-menu .navbar-header
+  margin-top 20px
+
+.admin-navbar-menu .navbar-header
+  margin-left 50px
+
+.admin-navbar-menu .navbar-header span.navbar-title
+  margin-left 5px
+
+.admin-navbar-menu md-item-content a.md-button
+  width fill-available
+
+.admin-navbar-menu md-item-content a.md-button .navbar-item
+  padding-left 76px
+
+.admin-navbar-menu section md-list
+  width fill-available
+
+/* hover, focus */
+  /* remove underline on focus */
+.admin-navbar-menu section a.md-button:focus
+  text-decoration none
+
+  /* uselessly long selector to pump up specificity */
+.admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-item-content a.md-button:focus,
+.admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-item-content a.md-button:hover
+  background-color $active-background-color 
+
+/* effect */
+.admin-navbar-menu md-item-content a:focus .md-ripple-container:before
+  content ""
+  left 0
+  top 4px
+  bottom 4px
+  position absolute
+  border-left solid 3px $active-border-color
+
+  /* animations */
+.admin-navbar-menu .animation.ng-enter
+  -webkit-transition: 1s
+  -moz-transition: 1s
+  transition: 1s
+  opacity: 0
+
+.admin-navbar-menu .animation.ng-enter-stagger
+  transition-delay 2.2s
+
+.admin-navbar-menu .animation.ng-enter.ng-enter-active
+  opacity 1
+
+.admin-navbar-menu .animation.ng-leave md-item-content,
+.admin-navbar-menu .animation.ng-leave
+  -webkit-transition: 1s
+  -moz-transition: 1s
+  transition 1s
+  opacity 1
+
+.admin-navbar-menu .animation.ng-leave-stagger md-item-content,
+.admin-navbar-menu .animation.ng-leave-stagger
+  transition-delay 0.2s
+
+.admin-navbar-menu .animation.ng-leave.ng-leave-active
+  opacity 0
+
+.admin-navbar-menu .animation.ng-leave md-item-content
+  margin-top -32px
+
+/* fonts sizes */
+
+.admin-navbar-menu .navbar-header
+  font-size $menu-font-size
+
+.admin-navbar-menu section a.md-button
+  font-size $submenu-font-size
