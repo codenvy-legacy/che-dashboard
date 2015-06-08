@@ -1,0 +1,49 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<div layout="column" class="cdvy-admin-links">
+  <div class="navbar-header"
+        flex layout="row" layout-align="start center">
+    <span layout="row" layout-align="start center">
+       <i class="material-design icon-ic_apps_24px" style="font-size:24px;"></i>
+      <span class="navbar-title">User Dashboard</span>
+    </span>
+    
+    
+  </div>
+  <section class="animation navbar-subsection"
+            flex layout="column" layout-align="center start" layout-fill
+            >
+    <md-list layout="column" flex>
+      <md-item flex class="navbar-subsection-item">
+        <md-item-content>
+          <md-button ng-href="{{adminLinksCtrl.userLoginUrl}}" target="_blank">
+            <div class="navbar-item" layout="row" layout-align="start center">
+              <i class="fa fa-sign-in">&nbsp;</i>
+              <span>Login</span>
+            </div>
+          </md-button>
+        </md-item-content>
+      </md-item>
+      <md-item flex class="navbar-subsection-item">
+        <md-item-content>
+          <md-button ng-href="{{adminLinksCtrl.userCreateUrl}}" target="_blank" layout="row">
+            <div class="navbar-item" layout="row" layout-align="start center">
+              <i class="material-design icon-ic_account_box_18px">&nbsp;</i>
+              <span flex>Create User</span>
+            </div>
+          </md-button>
+        </md-item-content>
+      </md-item>
+    </md-list>
+  </section>
+</div>
