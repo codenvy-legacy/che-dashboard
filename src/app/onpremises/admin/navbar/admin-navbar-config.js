@@ -10,6 +10,8 @@
  */
 'use strict';
 
+import AdminLinksPanel from './links/links.directive';
+import AdminLinksCtrl from './links/links.controller';
 import NavbarAdminPanel from './admin/navbar-admin.directive';
 import NavbarAdminCtrl from './admin/navbar-admin.controller';
 
@@ -18,6 +20,8 @@ class OnPremisesAdminNavbarConfig {
   constructor(register) {
     register.controller('NavbarAdminCtrl', NavbarAdminCtrl);
     register.directive('cdvyNavbarAdmin', NavbarAdminPanel);
+    register.controller('AdminLinksCtrl', AdminLinksCtrl);
+    register.directive('cdvyAdminLinks', AdminLinksPanel);
   }
 }
 
