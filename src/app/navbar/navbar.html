@@ -75,24 +75,8 @@
   </div>
   <md-divider md-theme="factory-theme" ng-show="navbarCtrl.userIsAdmin()"></md-divider>
 
-  <div class="navbar-menu" ng-show="navbarCtrl.userIsAdmin()">
-    <div>
-      <span><i class="cdvyfont cdvyico-administration">&nbsp;</i>On-Prem Administration</span>
-      <i class="material-design icon-ic_expand_more_24px md-tab-themed" ng-click="navbarCtrl.flipOnpremAdminExpanded()">&nbsp;</i>
-    </div>
-    <section class="animation" layout="column" layout-align="center center" ng-if="navbarCtrl.onpremAdminExpanded" >
-      <md-list layout="column"layout="column">
-        <md-item>
-          <md-item-content>
-            <md-button flex ng-href="#/onprem/admin/bridge" layout-align="left"><i class="fa fa-globe">&nbsp;</i>Bridge to Codenvy.com</md-button>
-          </md-item-content>
-          <md-item-content>
-            <md-button flex ng-href="#/onprem/admin/installation" layout-align="left"><i class="fa fa-sitemap">&nbsp;</i>Your Local Installation</md-button>
-          </md-item-content>
-        </md-item>
-      </md-list>
-    </section>
-  </div>
+  <cdvy-navbar-admin class="admin-navbar-menu" ng-show="navbarCtrl.userIsAdmin()"></cdvy-navbar-admin>
+
   <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
   </div>
 </md-toolbar>
