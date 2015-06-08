@@ -76,6 +76,7 @@
   <md-divider md-theme="factory-theme" ng-show="navbarCtrl.userIsAdmin()"></md-divider>
 
   <cdvy-navbar-admin class="admin-navbar-menu" ng-show="navbarCtrl.userIsAdmin()"></cdvy-navbar-admin>
+  <cdvy-admin-links class="admin-navbar-menu" ng-if="navbarCtrl.userIsAdmin()"></cdvy-admin-links>
 
   <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
   </div>
