@@ -2,6 +2,8 @@ $active-background-color = #222933
 $active-border-color = rgb(85, 141, 170)
 $navbar-menu-color = #C5D0DF
 $faces-shadow = rgba(255, 255, 255, 0.5)
+$menu-font-size = 14px
+$submenu-font-size = 12px
 
 .flex-shrink-none
   flex-shrink 0
@@ -53,7 +55,6 @@ $faces-shadow = rgba(255, 255, 255, 0.5)
   left 100px
 
 .navbar-menu
-  font-size 16px
   margin-bottom 10px
   color $navbar-menu-color
 
@@ -96,7 +97,6 @@ $faces-shadow = rgba(255, 255, 255, 0.5)
 
 .navbar-menu section span
   color $navbar-menu-color
-  font-size 14px
   text-transform none
 
 .navbar-menu section md-list
@@ -160,3 +160,13 @@ $faces-shadow = rgba(255, 255, 255, 0.5)
 
 .navbar-menu + md-divider
   margin-top 5px
+
+/* fonts sizes */
+.left-sidebar-menu a.md-button
+  font-size $menu-font-size
+
+.navbar-menu .navbar-header
+  font-size $menu-font-size
+
+.navbar-menu section a.md-button
+  font-size $submenu-font-size
