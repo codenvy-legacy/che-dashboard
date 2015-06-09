@@ -20,6 +20,7 @@ class BillingCtrl {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotificationService = codenvyNotificationService;
     this.lodash = lodash;
+    this.providedResources = {};
 
     this.invoices = [];
 
@@ -61,24 +62,24 @@ class BillingCtrl {
 
   detectUsage() {
     let currentAccount = this.codenvyAPI.getAccount().getCurrentAccount();
-    //TODO Fix this hardcorded value when API is ready (CLDIDE-2408)
-    this.providedGBH = 20;
     this.usedGBH = 0;
 
-
-    this.codenvyAPI.getAccount().fetchAccountResources(currentAccount.id).then(() => {
-      let resources = this.codenvyAPI.getAccount().getAccountResources(currentAccount.id);
+    this.codenvyAPI.getSaas().fetchUsedResources(currentAccount.id).then(() => {
+      let resources = this.codenvyAPI.getSaas().getUsedResources(currentAccount.id);
       this.usedGBH = this.countUsedGBH(resources);
-      this.setUpChart(this.usedGBH, this.providedGBH);
+      this.getProvided(currentAccount);
+    });
+  }
+
+  getProvided(account) {
+    this.codenvyAPI.getSaas().fetchProvidedResources(account.id).then(() => {
+      this.providedResources = this.codenvyAPI.getSaas().getProvidedResources(account.id);
+      this.setUpChart(this.usedGBH, this.providedResources.freeAmount);
     });
   }
 
   countUsedGBH(resources) {
-    let saasServiceId = this.codenvyAPI.getAccount().getSaasServiceId();
-    let saasSubscription = this.lodash.find(resources, function (subscription) {
-      return saasServiceId === subscription.subscriptionReference.serviceId;
-    });
-    let used = this.lodash.pluck(saasSubscription.used, 'memory');
+    let used = this.lodash.pluck(resources, 'memory');
     let usedMb = used.reduce(function(sum, use) {
       sum += use;
       return sum;

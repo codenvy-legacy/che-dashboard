@@ -21,6 +21,7 @@ import CodenvyProject from './codenvy-project.factory';
 import CodenvyWorkspace from './codenvy-workspace.factory';
 import CodenvyUser from './codenvy-user.factory';
 import CodenvyAccount from './codenvy-account.factory';
+import CodenvySaas from './codenvy-saas.factory';
 import CodenvyPayment from './codenvy-payment.factory';
 import CodenvyProfile from './codenvy-profile.factory';
 import CodenvyFactory from './codenvy-factory.factory';
@@ -41,11 +42,12 @@ class CodenvyAPI {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyUser, codenvyPayment, codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn) {
+  constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvySaas, codenvyUser, codenvyPayment, codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
     this.codenvyAccount = codenvyAccount;
+    this.codenvySaas = codenvySaas;
     this.codenvyUser = codenvyUser;
     this.codenvyPayment = codenvyPayment;
     this.codenvyProfile = codenvyProfile;
@@ -65,6 +67,14 @@ class CodenvyAPI {
    */
   getAccount() {
     return this.codenvyAccount;
+  }
+
+  /**
+   * The Codenvy Saas API
+   * @returns {CodenvyAPI.codenvySaas|*}
+   */
+    getSaas() {
+    return this.codenvySaas;
   }
 
   /**
