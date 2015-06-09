@@ -20,23 +20,17 @@ class NavBarCtrl {
     this.mdSidenav = $mdSidenav;
     this.codenvyAPI = codenvyAPI;
     this.codenvyUser = codenvyAPI.getUser();
-    this.links =[{href:'#/projects', name:'List Projects'}
-    ];
+    this.links =[{href:'#/projects', name:'List Projects'}];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
-    this.profile = codenvyAPI.getProfile().getProfile();
 
     let promiseUser = this.codenvyUser.fetchUser();
     promiseUser.then(() => {
       this.updateAdminRole();
     });
 
-    $scope.$watch('navbarCtrl.profile', (newVal) => {
-      if(!newVal) {
-        return;
-      }
-      this.updateData();
-    }, true);
+    this.profile = codenvyAPI.getProfile().getProfile();
+    this.profile.$promise.then(() => this.updateData());
 
     this.fullName = '';
     this.email = '';
