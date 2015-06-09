@@ -19,13 +19,21 @@ class YourInstallationCtrl {
   constructor(imsNodesApi, imsArtifactApi, $q) {
     this.customerName = '<Customer Name>';
     this.downloadedVersions = [];
+    this.imsArtifactApi = imsArtifactApi;
+    this.imsNodesApi = imsNodesApi;
+    this.$q = $q;
     this.fetchAll = false;
     this.errorFetching = false;
-    let first = imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes; });
-    let second = imsArtifactApi.getInstalledArtifactsList().then(result => this.updateInstalledVersion(result));
-    let third = imsArtifactApi.getDownloadedArtifactsList().then(result => this.updateDownloadedVersion(result));
-    let allPromise = $q.all([first, second, third]);
+    this.initArtifacts();
+  }
+
+  initArtifacts() {
+    let first = this.imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes; });
+    let second = this.imsArtifactApi.getInstalledArtifactsList().then(result => this.updateInstalledVersion(result));
+    let third = this.imsArtifactApi.getDownloadedArtifactsList().then(result => this.updateDownloadedVersion(result));
+    let allPromise = this.$q.all([first, second, third]);
     allPromise.then(() => this.fetchAll = true, () => this.errorFetching = true);
+
   }
 
   updateInstalledVersion(resource) {
@@ -40,7 +48,18 @@ class YourInstallationCtrl {
     this.installedVersion = undefined;
   }
 
+  removeDownloadedVersion(downloadedVersion) {
+    // delete
+    let deletePromise = this.imsArtifactApi.deleteDownloadedArtifact('codenvy', downloadedVersion);
+
+    // remove existing versions
+    let promise = deletePromise.then(() => {this.imsArtifactApi.getDownloadedArtifactsList().then(result => this.updateDownloadedVersion(result))});
+
+  }
+
+
   updateDownloadedVersion(resource) {
+    this.downloadedVersions.length = 0;
     if (resource) {
       for (let artifact of resource) {
         if (artifact.artifact === 'codenvy' && artifact.status !== 'INSTALLED') {

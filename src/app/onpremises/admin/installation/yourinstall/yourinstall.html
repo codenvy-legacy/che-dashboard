@@ -18,14 +18,6 @@
       <div class="onprem-your-install-label">Installed Version</div>
       <div flex style="height: 20px">{{yourInstallationCtrl.installedVersion}}</div>
     </div>
-    <div class="onprem-your-install-downloaded-version-block" ng-show="yourInstallationCtrl.downloadedVersions.length > 1">
-      <div class="onprem-your-install-label">Downloaded Versions</div>
-      <div flex style="height: 20px">{{yourInstallationCtrl.downloadedVersions}}</div>
-    </div>
-    <div class="onprem-your-install-downloaded-version-block" ng-show="yourInstallationCtrl.downloadedVersions.length == 1">
-      <div class="onprem-your-install-label">Downloaded Version</div>
-      <div flex style="height: 20px">{{yourInstallationCtrl.downloadedVersions[0]}}</div>
-    </div>
 
     <div flex class="onprem-your-install-nodes">
       <!-- TODO replace with md-table when available -->
@@ -41,5 +33,22 @@
         </tbody>
       </table>
     </div>
+
+    <div flex class="onprem-your-install-nodes" ng-show="yourInstallationCtrl.downloadedVersions.length > 0">
+      <!-- TODO replace with md-table when available -->
+      <table flex class="onprem-your-install-nodes-table">
+        <thead>
+        <tr><th>Downloaded version</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="downloadedVersion in yourInstallationCtrl.downloadedVersions">
+          <td class="onprem-your-install-nodes-hostname-col">{{downloadedVersion}}</td>
+          <td class="onprem-your-install-nodes-node-col"><cdvy-button-default cdvy-button-title="Delete" ng-click="yourInstallationCtrl.removeDownloadedVersion(downloadedVersion)"></cdvy-button-default></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
   </div>
 </cdvy-panel>

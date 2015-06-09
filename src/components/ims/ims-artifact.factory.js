@@ -33,6 +33,7 @@ class ImsArtifactApi {
       getInfoDownloadID: { method: 'GET', url: '/im/downloads/:id'},
       getCurrentDownloadID: { method: 'GET', url: '/im/downloads'},
       downloadArtifacts: { method: 'POST', url: '/im/downloads' },
+      deleteDownloadedArtifact: {method: 'DELETE', url:'/im/downloads/:artifactName/:version'},
       artifactProperties: {method: 'GET', url:'/im/artifact/:artifactName/version/:version/properties'}
     });
   }
@@ -243,6 +244,11 @@ class ImsArtifactApi {
   getArtifactProperties(artifactName, version) {
     let params = { artifactName: artifactName, version: version };
     return this.remoteImsAPI.artifactProperties(params).$promise;
+  }
+
+  deleteDownloadedArtifact(artifactName, version) {
+    let params = { artifactName: artifactName, version: version };
+    return this.remoteImsAPI.deleteDownloadedArtifact(params).$promise;
   }
 
   getArtifactReleaseDate(artifactName, version) {
