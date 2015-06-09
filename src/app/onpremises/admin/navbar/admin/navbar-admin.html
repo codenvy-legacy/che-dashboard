@@ -24,26 +24,22 @@
             flex layout="column" layout-align="center start" layout-fill
             ng-if="navbarAdminCtrl.onpremAdminExpanded" >
     <md-list layout="column" flex>
-      <md-item flex class="navbar-subsection-item">
-        <md-item-content>
-          <md-button ng-href="#/onprem/admin/bridge">
-            <div class="navbar-item" layout="row" layout-align="start center">
-              <i class="fa fa-globe">&nbsp;</i>
-              <span>Bridge to Codenvy.com</span>
-            </div>
-          </md-button>
-        </md-item-content>
-      </md-item>
-      <md-item flex class="navbar-subsection-item">
-        <md-item-content>
-          <md-button ng-href="#/onprem/admin/installation">
-            <div class="navbar-item" layout="row" layout-align="start center">
-              <i class="fa fa-sitemap">&nbsp;</i>
-              <span >Your Local Installation</span>
-            </div>
-          </md-button>
-        </md-item-content>
-      </md-item>
+      <md-list-item flex class="navbar-subsection-item">
+        <md-button ng-href="#/onprem/admin/bridge">
+          <div class="navbar-item" layout="row" layout-align="start center">
+            <i class="fa fa-globe">&nbsp;</i>
+            <span>Bridge to Codenvy.com</span>
+          </div>
+        </md-button>
+      </md-list-item>
+      <md-list-item flex class="navbar-subsection-item">
+        <md-button ng-href="#/onprem/admin/installation">
+          <div class="navbar-item" layout="row" layout-align="start center">
+            <i class="fa fa-sitemap">&nbsp;</i>
+            <span >Your Local Installation</span>
+          </div>
+        </md-button>
+      </md-list-item>
     </md-list>
   </section>
 </div>

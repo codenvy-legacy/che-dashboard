@@ -1,3 +1,14 @@
+/*
+ * Copyright (c) 2015 Codenvy, S.A.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Codenvy, S.A. - initial API and implementation
+ */
+
 $active-background-color = #222933
 $active-border-color = rgb(85, 141, 170)
 $navbar-menu-color = #C5D0DF
@@ -5,72 +16,65 @@ $faces-shadow = rgba(255, 255, 255, 0.5)
 $menu-font-size = 14px
 $submenu-font-size = 12px
 
-.flex-shrink-none
-  flex-shrink 0
+/* restore non-allcaps */
+.admin-navbar-menu section a.md-button
+  text-transform none
 
-.left-sidebar-menu
-  width 100%
+/* remove button margins */
+.admin-navbar-menu md-list-item a.md-button
+  margin 0
 
-.left-sidebar-menu md-list
-  width inherit
+/* text color */
+.admin-navbar-menu .navbar-header,
+.admin-navbar-menu .navbar-identity,
+.admin-navbar-menu section a.md-button span
+  color $navbar-menu-color
 
-.left-sidebar-menu md-list md-item-content
-  margin-top 15px
-  margin-bottom 15px
+.admin-navbar-menu md-list-item a.md-button:focus span
+  color $white-color
 
-.left-sidebar-menu md-list a
-  top 0
-  left 0
-  right 0
-  bottom 0
-  position absolute
+/* background color */
 
-.left-sidebar-menu md-list a:focus span,
-.left-sidebar-menu md-list a:focus i:before
-  color $white-color !important
+.admin-navbar-menu md-list-item a.md-button:focus,
+.admin-navbar-menu md-list-item a.md-button:hover
+  background-color $active-background-color
 
-.left-sidebar-menu md-list a:focus,
-.left-sidebar-menu md-list a:hover
-  background-color $active-background-color !important
+/* layout */
 
-.left-sidebar-menu md-list a:focus .md-ripple-container:before
-  content ""
-  left 0
-  right 0
-  top 4px
-  bottom 4px
-  border-radius 0
-  position absolute
-  border-left solid 3px $active-border-color
+.admin-navbar-menu .navbar-header
+  margin-top 20px
 
-.left-sidebar-menu md-list a i
-  float left
-  margin-top 3px
+.admin-navbar-menu .navbar-header
   margin-left 50px
 
-.left-sidebar-menu md-list a span
-  text-transform none
-  position absolute
-  bottom 3.5px
-  left 100px
+.admin-navbar-menu .navbar-header span.navbar-title
+  margin-left 5px
 
-.navbar-menu
-  margin-bottom 10px
-  color $navbar-menu-color
+.admin-navbar-menu md-list-item a.md-button
+  width fill-available
 
-.navbar-menu md-list a i
-  float left
-  margin-top 3px
-  margin-left 70px
+.admin-navbar-menu .left-sidebar-menu md-list-item a.md-button .navbar-item
+  padding-left 56px
 
-.navbar-menu md-item-content a:focus,
-.navbar-menu md-item-content a:hover
-  background-color $active-background-color !important
+.admin-navbar-menu md-list-item a.md-button .navbar-item
+  padding-left 76px
 
-.navbar-menu md-item-content a:focus span
-  color $white-color !important
+.admin-navbar-menu section md-list,
+.admin-navbar-menu .navbar-identity
+  width fill-available
 
-.navbar-menu md-item-content a:focus .md-ripple-container:before
+/* hover, focus */
+  /* remove underline on focus */
+.admin-navbar-menu section a.md-button:focus
+  text-decoration none
+
+  /* uselessly long selector to pump up specificity */
+.admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button:focus,
+.admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button:hover
+  background-color $active-background-color 
+
+/* effect */
+.admin-navbar-menu md-list-item a:focus .md-ripple-container:before
   content ""
   left 0
   top 4px
@@ -78,95 +82,53 @@ $submenu-font-size = 12px
   position absolute
   border-left solid 3px $active-border-color
 
-.navbar-menu div
-  height 100%
-  overflow hidden
-  white-space nowrap
-
-.navbar-menu div span
-  position absolute
-  margin-top 20px
-  left 56px
-
-.navbar-menu div span i
-  margin-right 10px
-
-.navbar-menu section
-  width 100%
-  overflow hidden
-
-.navbar-menu section span
-  color $navbar-menu-color
-  text-transform none
-
-.navbar-menu section md-list
-  padding 0
-  width inherit
-
-.navbar-menu section md-item-content:first-child
-  margin-top 10px
-
-.navbar-menu md-item-content a
-  height 32px
-
-.navbar-menu md-item-content span
-  left 100px
-  position absolute
-
-.navbar-menu div .material-design:before
-  font-size 24px
-  margin-top 16px
-  margin-right 16px
-  position absolute
-  right 5px
-
-.navbar-menu .developers-face
-  codenvy-developers-face()
-  -webkit-box-shadow 0 0 0 1px $faces-shadow
-  -moz-box-shadow 0 0 0 1px $faces-shadow
-  box-shadow 0 0 0 1px $faces-shadow
-  margin-left 9px
-  margin-top 12px
-  float left
-
-.navbar-menu .animation.ng-enter
+  /* animations */
+.admin-navbar-menu .animation.ng-enter
   -webkit-transition: 1s
   -moz-transition: 1s
   transition: 1s
   opacity: 0
 
-.navbar-menu .animation.ng-enter-stagger
+.admin-navbar-menu .animation.ng-enter-stagger
   transition-delay 2.2s
 
-.navbar-menu .animation.ng-enter.ng-enter-active
+.admin-navbar-menu .animation.ng-enter.ng-enter-active
   opacity 1
 
-.navbar-menu .animation.ng-leave md-item-content,
-.navbar-menu .animation.ng-leave
+.admin-navbar-menu .animation.ng-leave md-list-item,
+.admin-navbar-menu .animation.ng-leave
   -webkit-transition: 1s
   -moz-transition: 1s
   transition 1s
   opacity 1
 
-.navbar-menu .animation.ng-leave-stagger md-item-content,
-.navbar-menu .animation.ng-leave-stagger
+.admin-navbar-menu .animation.ng-leave-stagger md-list-item,
+.admin-navbar-menu .animation.ng-leave-stagger
   transition-delay 0.2s
 
-.navbar-menu .animation.ng-leave.ng-leave-active
+.admin-navbar-menu .animation.ng-leave.ng-leave-active
   opacity 0
 
-.navbar-menu .animation.ng-leave md-item-content
+.admin-navbar-menu .animation.ng-leave md-list-item
   margin-top -32px
 
-.navbar-menu + md-divider
-  margin-top 5px
+/* user avatar */
+.admin-navbar-menu .navbar-identity .developers-face
+  codenvy-developers-face()
+  -webkit-box-shadow 0 0 0 1px $faces-shadow
+  -moz-box-shadow 0 0 0 1px $faces-shadow
+  box-shadow 0 0 0 1px $faces-shadow
 
 /* fonts sizes */
-.left-sidebar-menu a.md-button
+
+.admin-navbar-menu .navbar-header,
+.admin-navbar-menu section.left-sidebar-menu a.md-button,
+.admin-navbar-menu .navbar-identity
   font-size $menu-font-size
 
-.navbar-menu .navbar-header
-  font-size $menu-font-size
-
-.navbar-menu section a.md-button
+.admin-navbar-menu section a.md-button
   font-size $submenu-font-size
+
+/* remove focus effect on fold/unfold button */
+.admin-navbar-menu .navbar-identity i.material-design:focus
+  outline none

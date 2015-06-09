@@ -24,26 +24,22 @@
             flex layout="column" layout-align="center start" layout-fill
             >
     <md-list layout="column" flex>
-      <md-item flex class="navbar-subsection-item">
-        <md-item-content>
-          <md-button ng-href="{{adminLinksCtrl.userLoginUrl}}" target="_blank">
-            <div class="navbar-item" layout="row" layout-align="start center">
-              <i class="fa fa-sign-in">&nbsp;</i>
-              <span>Login</span>
-            </div>
-          </md-button>
-        </md-item-content>
-      </md-item>
-      <md-item flex class="navbar-subsection-item">
-        <md-item-content>
-          <md-button ng-href="{{adminLinksCtrl.userCreateUrl}}" target="_blank" layout="row">
-            <div class="navbar-item" layout="row" layout-align="start center">
-              <i class="material-design icon-ic_account_box_18px">&nbsp;</i>
-              <span flex>Create User</span>
-            </div>
-          </md-button>
-        </md-item-content>
-      </md-item>
+      <md-list-item flex class="navbar-subsection-item">
+        <md-button ng-href="{{adminLinksCtrl.userLoginUrl}}" target="_blank">
+          <div class="navbar-item" layout="row" layout-align="start center">
+            <i class="fa fa-sign-in">&nbsp;</i>
+            <span>Login</span>
+          </div>
+        </md-button>
+      </md-list-item>
+      <md-list-item flex class="navbar-subsection-item">
+        <md-button ng-href="{{adminLinksCtrl.userCreateUrl}}" target="_blank" layout="row">
+          <div class="navbar-item" layout="row" layout-align="start center">
+            <i class="material-design icon-ic_account_box_18px">&nbsp;</i>
+            <span>Create User</span>
+          </div>
+        </md-button>
+      </md-list-item>
     </md-list>
   </section>
 </div>
