@@ -30,9 +30,9 @@ class ImsArtifactApi {
       getDownloadedArtifactsList: { method: 'GET', url: '/im/artifacts', isArray: true },
       getInstalledArtifactsList: { method: 'GET', url: '/im/installations', isArray: true },
       getAvailableArtifactsList: { method: 'GET', url: '/im/updates', isArray: true },
-
+      getInfoDownloadID: { method: 'GET', url: '/im/downloads/:id'},
+      getCurrentDownloadID: { method: 'GET', url: '/im/downloads'},
       downloadArtifacts: { method: 'POST', url: '/im/downloads' },
-
       artifactProperties: {method: 'GET', url:'/im/artifact/:artifactName/version/:version/properties'}
     });
   }
@@ -47,6 +47,12 @@ class ImsArtifactApi {
     return request.$promise;
   }
 
+  getCurrentDownloadID() {
+    let request = this.remoteImsAPI.getCurrentDownloadID();
+    return request.$promise;
+  }
+
+
   getAvailableArtifactsList() {
     let request = this.remoteImsAPI.getAvailableArtifactsList();
     return request.$promise;
@@ -54,6 +60,11 @@ class ImsArtifactApi {
 
   downloadArtifacts() {
     let request = this.remoteImsAPI.downloadArtifacts();
+    return request.$promise;
+  }
+
+  getInfoDownloadID(id) {
+    let request = this.remoteImsAPI.getInfoDownloadID({id: id});
     return request.$promise;
   }
 

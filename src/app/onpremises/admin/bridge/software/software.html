@@ -52,8 +52,13 @@
                 <div class="onprem-admin-available-software-available-version" flex>{{artifactAvailable.version}}</div>
               </div>
               <div class="onprem-admin-available-software-available-version-details">
-              <div ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.showDownloadAction(artifactItem)">
-                <cdvy-button-default ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem, artifactAvailable.version)" cdvy-button-title="Download"></cdvy-button-default>
+              <div>
+                <div ng-show="onPremisesAdminBridgeAvailableSoftwareCtrl.currentDownloadedArtifact.name === artifactAvailable.name && onPremisesAdminBridgeAvailableSoftwareCtrl.currentDownloadedArtifact.version === artifactAvailable.version">
+                  Downloading<md-progress-linear  md-mode="determinate" value="{{onPremisesAdminBridgeAvailableSoftwareCtrl.currentDownloadedArtifact.percent}}" ></md-progress-linear>
+                </div>
+                <div ng-hide="onPremisesAdminBridgeAvailableSoftwareCtrl.currentDownloadedArtifact.name === artifactAvailable.name && onPremisesAdminBridgeAvailableSoftwareCtrl.currentDownloadedArtifact.version === artifactAvailable.version">
+                  <cdvy-button-default ng-click="onPremisesAdminBridgeAvailableSoftwareCtrl.downloadArtifact(artifactItem, artifactAvailable.version)" cdvy-button-title="Download"></cdvy-button-default>
+              </div>
               </div>
               <div class="onprem-admin-available-software-available-version-details-releasenotes">
                 <cdvy-link ng-href="{{onPremisesAdminBridgeAvailableSoftwareCtrl.releaseNoteUrl(artifactItem.name, artifactAvailable.version)}}" cdvy-no-padding target="_blank" cdvy-link-text="Release Notes"></cdvy-link>
