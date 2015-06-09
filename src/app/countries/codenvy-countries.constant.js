@@ -27,7 +27,7 @@ angular.module('userDashboard').constant('jsonCountries', JSON.stringify({
       name: 'American Samoa',
       code: 'AS'
     }, {
-      name: 'AndorrA',
+      name: 'Andorra',
       code: 'AD'
     }, {
       name: 'Angola',
