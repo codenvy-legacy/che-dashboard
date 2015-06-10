@@ -13,33 +13,34 @@
 import Register from '../../utils/register';
 
 /**
- * Defines a directive for creating empty repository widget that are working either on desktop or on mobile devices.
+ * Defines a directive for creating empty state widget that are working either on desktop or on mobile devices.
  * It will change upon width of the screen
  * @author Oleksii Orel
  */
-class CodenvyEmptyRepository {
+class CodenvyEmptyState {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor () {
-    this.restrict='E';
+  constructor() {
+    this.restrict = 'E';
 
     this.replace = true;
     this.transclude = false;
-    this.templateUrl = 'components/widget/empty-repository/cdvy-empty-repository.html';
+    this.templateUrl = 'components/widget/empty-state/cdvy-empty-state.html';
 
     // scope values
     this.scope = {
       value: '@cdvyValue',
-      prompt: '@cdvyPrompt'
+      prompt: '@cdvyPrompt',
+      iconClass: '@cdvyIconClass'
     };
 
   }
 
 }
 
-export default CodenvyEmptyRepository;
+export default CodenvyEmptyState;
 
-Register.getInstance().directive('cdvyEmptyRepository', CodenvyEmptyRepository);
+Register.getInstance().directive('cdvyEmptyState', CodenvyEmptyState);

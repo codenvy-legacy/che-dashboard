@@ -86,8 +86,10 @@
     </div>
   </cdvy-panel>
 
-  <cdvy-empty-repository cdvy-value="There are no repositories yet."
-                         cdvy-prompt="You can add GIT or SVN repository through the IDE menus."
-                         ng-if="projectRepositoryCtrl.isEmptyState"></cdvy-empty-repository>
+  <div layout="row" layout-align="center center" class="empty-repository" ng-if="projectRepositoryCtrl.isEmptyState">
+    <cdvy-empty-state cdvy-value="There are no repositories yet."
+                      cdvy-prompt="You can add a GIT or SVN repository in the menu."
+                      cdvy-icon-class="fa fa-code-fork"></cdvy-empty-state>
+  </div>
 
 </div>
