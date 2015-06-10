@@ -30,7 +30,7 @@ class NavBarCtrl {
     });
 
     this.profile = codenvyAPI.getProfile().getProfile();
-    this.profile.$promise.then(() => this.updateData());
+    this.profile.$promise.then(() => this.updateData(),() => this.updateData());
 
     this.fullName = '';
     this.email = '';
