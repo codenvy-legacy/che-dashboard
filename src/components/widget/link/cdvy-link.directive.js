@@ -40,10 +40,19 @@ class CodenvyLink {
   template( element, attrs) {
     let linkText = attrs['cdvyLinkText'] || '';
     let destination = attrs.ngHref ? `ng-href="${attrs.ngHref}"` : '';
-    let target = attrs.target ? `target="${attrs.target}"` : '';
     let noPadding = attrs.hasOwnProperty('cdvyNoPadding') ? 'cdvy-link-no-padding' : '';
+    let target = '';
+    if (attrs.target) {
+      target = `target="${attrs.target}"`;
+    } else if (attrs.hasOwnProperty('cdvySameWindow')) {
+      target = 'target="_top"';
+    } else if (attrs.hasOwnProperty('cdvyNewWindow')) {
+      target = 'target="_blank"';
+    } else if (attrs.hasOwnProperty('cdvySameFrame')) {
+      target = 'target="_self"';
+    }
 
-    var template = `<md-button cdvy-link md-theme="default" class="cdvy-link ${noPadding} md-primary md-no-ink md-hue-2" ${destination} ${target}>${linkText}</md-button>`;
+    var template = `<a cdvy-link md-theme="default" class="cdvy-link ${noPadding} md-primary md-no-ink md-hue-2" ${destination} ${target}>${linkText}</a>`;
 
     return template;
   }
