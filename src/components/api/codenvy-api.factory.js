@@ -85,7 +85,7 @@ class CodenvyAPI {
 
   /**
    * The Codenvy Workspace API
-   * @returns {CodenvyAPI.codenvyProject|*}
+   * @returns {CodenvyAPI.codenvyWorkspace|*}
    */
   getWorkspace() {
     return this.codenvyWorkspace;
