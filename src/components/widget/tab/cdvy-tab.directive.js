@@ -23,9 +23,9 @@ class CodenvyTab {
    * @ngInject for Dependency injection
    */
     constructor () {
-    this.restrict='E';
-    this.replace= true;
-    this.transclude= true;
+    this.restrict = 'E';
+    this.replace = true;
+    this.transclude = true;
     this.templateUrl = 'components/widget/tab/cdvy-tab.html';
 
     // scope values
@@ -78,7 +78,7 @@ class CodenvyTab {
   link($scope, element, attrs, ctrl, transclude) {
 
     // root mdTabs
-    var mdTabsElement = element.parent().parent().parent().parent();
+    var mdTabsElement = element.closest('md-tabs');
 
     // current tab ID
     var mdTabItem = element[0].querySelectorAll('md-tab')[0];
