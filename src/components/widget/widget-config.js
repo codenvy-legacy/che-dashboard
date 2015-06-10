@@ -54,6 +54,6 @@ import CodenvySelect from './select/cdvy-select.directive';
 
 import CodenvyClipboard from './copy-clipboard/cdvy-clipboard.directive';
 
-import CodenvyEmptyRepository from './empty-repository/cdvy-empty-repository.directive';
+import CodenvyEmptyState from './empty-state/cdvy-empty-state.directive';
 
 import CodenvySearch from './search/cdvy-search.directive';
