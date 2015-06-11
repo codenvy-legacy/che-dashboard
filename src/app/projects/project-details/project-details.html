@@ -19,78 +19,108 @@
 <md-content md-scroll-y flex class="projects-details-project"
             ng-show="projectDetailsCtrl.projectDetails && !projectDetailsCtrl.projectDeleted" md-theme="maincontent-theme">
   <md-tabs md-selected="selectedIndex" class="project-details-menu">
-    <cdvy-tab cdvy-title="Settings" cdvy-icon="material-design  icon-ic_settings_24px">
-      <cdvy-panel cdvy-title="Project Information">
-        <ng-form name="projectInformationForm">
-          <cdvy-input cdvy-form="projectInformationForm"
-                      cdvy-name="name"
-                      cdvy-label-name="Name"
-                      cdvy-place-holder="Name of the project"
-                      ng-model="projectDetailsCtrl.projectDetails.name"
-                      required
-                      ng-maxlength="128"
-                      ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
-            <div ng-message="required">A name is required.</div>
-            <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
-            <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
-            <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
-          </cdvy-input>
-          <cdvy-input cdvy-form="projectInformationForm"
-                      cdvy-name="description"
-                      cdvy-label-name="Description"
-                      cdvy-place-holder="Description of the project"
-                      ng-model="projectDetailsCtrl.projectDetails.description"
-                      ng-maxlength="256">
-            <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
-            <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
-          </cdvy-input>
-        </ng-form>
-        <cdvy-button-primary ng-disabled="projectInformationForm.$invalid || !(projectDetailsCtrl.isNameChanged() || projectDetailsCtrl.isDescriptionChanged())"
-                             cdvy-button-title="Update" name="updateButton" ng-click="projectDetailsCtrl.updateInfo(projectInformationForm.$valid)"/>
-      </cdvy-panel>
-      <cdvy-panel cdvy-title="Workspace">
-        <div layout="column" flex layout-align="space-around start">
-          <cdvy-label cdvy-label-text="{{projectDetailsCtrl.projectDetails.workspaceName}}"></cdvy-label>
-        </div>
-      </cdvy-panel>
-      <cdvy-panel cdvy-title="Visibility">
-        <div layout="row" flex layout-align="space-around start">
-          <label flex="15"></label>
-
-          <div layout="column" flex="85">
-            <cdvy-toggle ng-model="projectDetailsCtrl.projectDetails.visibility">
-              <cdvy-toggle-button ng-click="projectDetailsCtrl.updateVisibility()" cdvy-font-icon="material-design icon-ic_lock_open_24px"
-                                  cdvy-title="public"></cdvy-toggle-button>
-              <cdvy-toggle-button ng-click="projectDetailsCtrl.updateVisibility()" cdvy-font-icon="material-design icon-ic_lock_24px"
-                                  cdvy-title="private"></cdvy-toggle-button>
-            </cdvy-toggle>
+    <md-tab>
+      <md-tab-label>
+        <i class="material-design  icon-ic_settings_24px cdvy-tab-label-icon"></i>
+        <span class="cdvy-tab-label-title">Settings</span>
+      </md-tab-label>
+      <md-tab-body>
+        <cdvy-panel cdvy-title="Project Information">
+          <ng-form name="projectInformationForm">
+            <cdvy-input cdvy-form="projectInformationForm"
+                        cdvy-name="name"
+                        cdvy-label-name="Name"
+                        cdvy-place-holder="Name of the project"
+                        ng-model="projectDetailsCtrl.projectDetails.name"
+                        required
+                        ng-maxlength="128"
+                        ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+              <div ng-message="required">A name is required.</div>
+              <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
+              <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+              <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
+            </cdvy-input>
+            <cdvy-input cdvy-form="projectInformationForm"
+                        cdvy-name="description"
+                        cdvy-label-name="Description"
+                        cdvy-place-holder="Description of the project"
+                        ng-model="projectDetailsCtrl.projectDetails.description"
+                        ng-maxlength="256">
+              <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
+              <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
+            </cdvy-input>
+          </ng-form>
+          <cdvy-button-primary ng-disabled="projectInformationForm.$invalid || !(projectDetailsCtrl.isNameChanged() || projectDetailsCtrl.isDescriptionChanged())"
+                              cdvy-button-title="Update" name="updateButton" ng-click="projectDetailsCtrl.updateInfo(projectInformationForm.$valid)"/>
+        </cdvy-panel>
+        <cdvy-panel cdvy-title="Workspace">
+          <div layout="column" flex layout-align="space-around start">
+            <cdvy-label cdvy-label-text="{{projectDetailsCtrl.projectDetails.workspaceName}}"></cdvy-label>
           </div>
-        </div>
-      </cdvy-panel>
-      <cdvy-panel cdvy-title="Delete project">
-        <div layout="row" flex layout-align="space-around start">
-          <label flex="15"></label>
+        </cdvy-panel>
+        <cdvy-panel cdvy-title="Visibility">
+          <div layout="row" flex layout-align="space-around start">
+            <label flex="15"></label>
 
-          <div layout="column" flex="85">
-            <cdvy-button-danger cdvy-button-title="Delete" ng-click="projectDetailsCtrl.deleteProject($event)"/>
+            <div layout="column" flex="85">
+              <cdvy-toggle ng-model="projectDetailsCtrl.projectDetails.visibility">
+                <cdvy-toggle-button ng-click="projectDetailsCtrl.updateVisibility()" cdvy-font-icon="material-design icon-ic_lock_open_24px"
+                                    cdvy-title="public"></cdvy-toggle-button>
+                <cdvy-toggle-button ng-click="projectDetailsCtrl.updateVisibility()" cdvy-font-icon="material-design icon-ic_lock_24px"
+                                    cdvy-title="private"></cdvy-toggle-button>
+              </cdvy-toggle>
+            </div>
           </div>
-        </div>
-      </cdvy-panel>
-    </cdvy-tab>
+        </cdvy-panel>
+        <cdvy-panel cdvy-title="Delete project">
+          <div layout="row" flex layout-align="space-around start">
+            <label flex="15"></label>
 
-    <cdvy-tab cdvy-title="Repository" cdvy-icon="fa fa-code-fork">
-    <project-repository></project-repository>
-    </cdvy-tab>
+            <div layout="column" flex="85">
+              <cdvy-button-danger cdvy-button-title="Delete" ng-click="projectDetailsCtrl.deleteProject($event)"/>
+            </div>
+          </div>
+        </cdvy-panel>
+      </md-tab-body>
+    </md-tab>
 
-    <cdvy-tab cdvy-title="Machines" cdvy-icon="fa fa-cube">
-    </cdvy-tab>
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-font-icon="fa-code-fork" class="fa cdvy-tab-label-icon"></md-icon>
+        <span class="cdvy-tab-label-title">Repository</span>
+      </md-tab-label>
+      <md-tab-body>
+        <project-repository></project-repository>
+      </md-tab-body>
+    </md-tab>
 
-    <cdvy-tab cdvy-title="Factories" cdvy-icon="fa fa-rocket">
-    </cdvy-tab>
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-font-icon="fa-cube" class="fa cdvy-tab-label-icon"></md-icon>
+        <span class="cdvy-tab-label-title">Machines</span>
+      </md-tab-label>
+      <md-tab-body>
+      </md-tab-body>
+    </md-tab>
 
-    <cdvy-tab cdvy-title="Access" cdvy-icon="material-design icon-ic_folder_shared_24px">
-      <project-details-developers></project-details-developers>
-    </cdvy-tab>
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-font-icon="fa-rocket" class="fa cdvy-tab-label-icon"></md-icon>
+        <span class="cdvy-tab-label-title">Factories</span>
+      </md-tab-label>
+      <md-tab-body>
+      </md-tab-body>
+    </md-tab>
+
+    <md-tab>
+      <md-tab-label>
+        <i class="material-design  icon-ic_folder_shared_24px cdvy-tab-label-icon"></i>
+        <span class="cdvy-tab-label-title">Access</span>
+      </md-tab-label>
+      <md-tab-body>
+        <project-details-developers></project-details-developers>
+      </md-tab-body>
+    </md-tab>
 
   </md-tabs>
 </md-content>

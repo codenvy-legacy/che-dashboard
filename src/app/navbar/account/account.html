@@ -14,48 +14,66 @@
 
 <md-content md-scroll-y flex md-theme="maincontent-theme">
   <md-tabs md-selected="selectedIndex" class="account-menu">
-    <cdvy-tab cdvy-title="Profile" cdvy-icon="fa fa-user">
-      <cdvy-panel cdvy-title="Your Information">
-        <ng-form name="profileInformationForm">
-          <account-profile></account-profile>
-          <cdvy-button-default cdvy-button-title="edit"
-                               ng-click="accountCtrl.setProfileAttributes(profileInformationForm.$valid)"
-                               ng-disabled="profileInformationForm.$invalid || !accountCtrl.isAttributesChanged()">
-          </cdvy-button-default>
-        </ng-form>
-      </cdvy-panel>
-    </cdvy-tab>
-    <cdvy-tab cdvy-title="Billing" cdvy-icon="material-design icon-ic_credit_card_24px">
-      <div ng-controller="CreditcardCtrl as creditCardCtrl">
-        <cdvy-panel cdvy-title="Add a credit card" ng-show="creditCardCtrl.creditCards.length == 0 && creditCardCtrl.loadedCreditCards">
-          <ng-form name="creditCardInformationForm" id="creditCardInformationForm">
-            <add-creditcard style="display: block;" loaded="{{creditCardCtrl.loadedCreditCards}}" ng-init="creditCardCtrl.setCreditCard(this.addCreditcardCtrl.creditCard);"></add-creditcard>
-            <cdvy-button-default cdvy-button-title="add" ng-disabled="creditCardInformationForm.$invalid" ng-click="creditCardCtrl.addCreditCard();">
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-font-icon="fa-user" class="fa cdvy-tab-label-icon"></md-icon>
+        <span class="cdvy-tab-label-title">Profile</span>
+      </md-tab-label>
+      <md-tab-body>
+        <cdvy-panel cdvy-title="Your Information">
+          <ng-form name="profileInformationForm">
+            <account-profile></account-profile>
+            <cdvy-button-default cdvy-button-title="edit"
+                                 ng-click="accountCtrl.setProfileAttributes(profileInformationForm.$valid)"
+                                 ng-disabled="profileInformationForm.$invalid || !accountCtrl.isAttributesChanged()">
             </cdvy-button-default>
           </ng-form>
         </cdvy-panel>
-        <cdvy-panel cdvy-title="Credit Card Information" ng-show="creditCardCtrl.creditCards.length > 0">
-          <div layout="row" layout-align="center center" ng-repeat="card in creditCardCtrl.creditCards">
-            <div layout="column" flex="85" class="creditcard-info">
-              <p>{{card.cardholder}}</p>
-              <p>{{card.type}} ...{{card.number.slice(-4)}} ({{card.expiration}})</p>
+      </md-tab-body>
+    </md-tab>
+    <md-tab>
+      <md-tab-label>
+        <i class="material-design icon-ic_credit_card_24px cdvy-tab-label-icon"></i>
+        <span class="cdvy-tab-label-title">Billing</span>
+      </md-tab-label>
+      <md-tab-body>
+        <div ng-controller="CreditcardCtrl as creditCardCtrl">
+          <cdvy-panel cdvy-title="Add a credit card" ng-show="creditCardCtrl.creditCards.length == 0 && creditCardCtrl.loadedCreditCards">
+            <ng-form name="creditCardInformationForm" id="creditCardInformationForm">
+              <add-creditcard style="display: block;" loaded="{{creditCardCtrl.loadedCreditCards}}" ng-init="creditCardCtrl.setCreditCard(this.addCreditcardCtrl.creditCard);"></add-creditcard>
+              <cdvy-button-default cdvy-button-title="add" ng-disabled="creditCardInformationForm.$invalid" ng-click="creditCardCtrl.addCreditCard();">
+              </cdvy-button-default>
+            </ng-form>
+          </cdvy-panel>
+          <cdvy-panel cdvy-title="Credit Card Information" ng-show="creditCardCtrl.creditCards.length > 0">
+            <div layout="row" layout-align="center center" ng-repeat="card in creditCardCtrl.creditCards">
+              <div layout="column" flex="85" class="creditcard-info">
+                <p>{{card.cardholder}}</p>
+                <p>{{card.type}} ...{{card.number.slice(-4)}} ({{card.expiration}})</p>
+              </div>
+              <cdvy-button-danger flex="15" cdvy-button-title="Remove" ng-click="creditCardCtrl.removeCreditCard(card, $event);"/>
             </div>
-            <cdvy-button-danger flex="15" cdvy-button-title="Remove" ng-click="creditCardCtrl.removeCreditCard(card, $event);"/>
-          </div>
+          </cdvy-panel>
+        </div>
+      </md-tab-body>
+    </md-tab>
+    <md-tab>
+      <md-tab-label>
+        <i class="material-design icon-ic_settings_24px cdvy-tab-label-icon"></i>
+        <span class="cdvy-tab-label-title">Security</span>
+      </md-tab-label>
+      <md-tab-body>
+        <cdvy-panel cdvy-title="Update Your Password">
+            <account-update-password cdvy-password="newPassword"
+                                    cdvy-reset-password="accountCtrl.resetPasswordForm">
+            </account-update-password>
+            <cdvy-button-default cdvy-button-title="Update Password"
+                                ng-disabled="!newPassword"
+                                ng-click="accountCtrl.setPassword(newPassword)">
+            </cdvy-button-default>
         </cdvy-panel>
-      </div>
-    </cdvy-tab>
-    <cdvy-tab cdvy-title="Security" cdvy-icon="material-design icon-ic_settings_24px">
-      <cdvy-panel cdvy-title="Update Your Password">
-          <account-update-password cdvy-password="newPassword"
-                                   cdvy-reset-password="accountCtrl.resetPasswordForm">
-          </account-update-password>
-          <cdvy-button-default cdvy-button-title="Update Password"
-                               ng-disabled="!newPassword"
-                               ng-click="accountCtrl.setPassword(newPassword)">
-          </cdvy-button-default>
-      </cdvy-panel>
-      <account-delete></account-delete>
-    </cdvy-tab>
+        <account-delete></account-delete>
+      </md-tab-body>
+    </md-tab>
   </md-tabs>
 </md-content>
