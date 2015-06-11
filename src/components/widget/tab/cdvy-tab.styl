@@ -1,3 +1,15 @@
+
+
+md-tab-item.md-tab
+  min-width fit-content /* at least as wide as the content */
+  flex-basis 0          /* all tab headers should have same width _when possible_ */
+
+/* add a separator before each tab item except the first one */
+md-tab-item.md-tab + md-tab-item.md-tab::before
+  codenvy-separator()
+  left 0               /* codenvy-separator() creates a 1px border at absolute top=0, add right 0 to position horozontally */
+
+/** Keep for the moment **/
 section:not(.md-paginating) .md-header-items
   width 99.8%
   margin-left 0.1%
