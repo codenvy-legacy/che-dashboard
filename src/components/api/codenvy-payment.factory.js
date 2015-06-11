@@ -38,7 +38,7 @@ class CodenvyPayment {
       getToken: {method: 'GET', url: '/api/creditcard/:accountId/token'},
       add: {method: 'POST', url: '/api/creditcard/:accountId'},
       remove: {method: 'DELETE', url: '/api/creditcard/:accountId/:creditCardNumber'},
-      getInvoices: {method: 'GET', url: '/api/invoice/:accountId', isArray: true}
+      getInvoices: {method: 'GET', url: '/api/invoice/find/?accountId=:accountId', isArray: true}
     });
 
   }

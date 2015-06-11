@@ -32,7 +32,7 @@ class CodenvyAccount {
     // remote call
     this.remoteAccountAPI = this.$resource('/api/account',{}, {
       getByID: {method: 'GET', url: '/api/account/:accountId'},
-      getSubscriptions: {method: 'GET', url: '/api/subscription/account/:accountId', isArray: true},
+      getSubscriptions: {method: 'GET', url: '/api/subscription/find/account/:accountId', isArray: true},
       addSubscription: {method: 'POST', url: '/api/subscription'}
     });
 
