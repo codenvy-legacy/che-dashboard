@@ -10,10 +10,11 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<h3>Login</h3>
-<form>
-  <label>Username:</label><input type="text" ng-model="username" /></br></br>
-  <label></label>Password:</label><input type="password" ng-model="password"></br>
-  <label></label>Realm:</label><input type="text" ng-model="realm"></br>
-  <button  type="submit" ng-click="submit()">login</button>
-</form>
+<cdvy-panel cdvy-title="Login">
+  <form ng-submit="loginCtrl.submit()">
+    <label>Username:</label><input type="text" ng-model="loginCtrl.username" /></br></br>
+    <label></label>Password:</label><input type="password" ng-model="loginCtrl.password"></br>
+    <label></label>Realm:</label><input type="text" ng-model="loginCtrl.realm"></br>
+    <button>login</button>
+  </form>
+</cdvy-panel>

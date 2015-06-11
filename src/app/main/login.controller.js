@@ -12,18 +12,18 @@
 
 class LoginCtrl {
   /*@ngInject*/
-  constructor($scope, $http, $cookies, $window, $location, codenvyAPI) {
+  constructor($http, $cookies, $window, $location, codenvyAPI) {
 
-    $scope.username = '';
-    $scope.password = '';
-    $scope.realm = '';
-    var loginData;
+    this.username = '';
+    this.password = '';
+    this.realm = '';
 
-    $scope.submit = function () {
-      if ($scope.realm !== '') {
-        loginData = {'username': $scope.username, 'password': $scope.password, 'realm': $scope.realm};
+    this.submit = function() {
+      var loginData;
+      if (this.realm !== '') {
+        loginData = {'username': this.username, 'password': this.password, 'realm': this.realm};
       } else {
-        loginData = {'username': $scope.username, 'password': $scope.password};
+        loginData = {'username': this.username, 'password': this.password};
       }
       $http({
         url: '/api/auth/login',
@@ -46,7 +46,7 @@ class LoginCtrl {
         $window.alert('error');
         console.log(response);
       });
-    };
+    }
   }
 }
 

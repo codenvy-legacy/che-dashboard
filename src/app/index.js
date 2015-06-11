@@ -128,7 +128,8 @@ module.config(['$routeProvider', function ($routeProvider) {
     })
     .accessWhen('/login', {
       templateUrl: 'app/main/login.html',
-      controller: 'LoginCtrl'
+      controller: 'LoginCtrl',
+      controllerAs: 'loginCtrl'
     })
     .accessOtherWise({
       redirectTo: '/'
