@@ -1,6 +1,6 @@
 <md-dialog class="project-details-developers-dialog">
-  <ng-form name="addingUserForm">
-    <md-content ng-init="projectDetailsDevelopersDialogAddCtrl.setForm(addingUserForm)">
+  <form name="addingUserForm">
+    <md-dialog-content ng-init="projectDetailsDevelopersDialogAddCtrl.setForm(addingUserForm)">
       <h2>Add user permissions</h2>
       <cdvy-input cdvy-name="useremail"
                   cdvy-form="addingUserForm"
@@ -25,10 +25,10 @@
           <md-checkbox ng-model="projectDetailsDevelopersDialogAddCtrl.permissions['run']">Run</md-checkbox>
         </div>
       </div>
-    </md-content>
+    </md-dialog-content>
     <div class="md-actions">
       <md-button ng-click="projectDetailsDevelopersDialogAddCtrl.abort()" tabindex="0">Cancel</md-button>
       <md-button class="md-primary" ng-click="projectDetailsDevelopersDialogAddCtrl.add()" ng-disabled="projectDetailsDevelopersDialogAddCtrl.isButtonDisabled()">Add</md-button>
     </div>
-  </ng-form>
+  </form>
 </md-dialog>
