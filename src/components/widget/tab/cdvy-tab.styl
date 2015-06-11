@@ -3,6 +3,16 @@
 md-tab-item.md-tab
   min-width fit-content /* at least as wide as the content */
   flex-basis 0          /* all tab headers should have same width _when possible_ */
+  display flex
+  /* same as angular-md layout="row" layout-align="center center" */
+  flex-direction row
+  justify-content center
+  align-items center
+
+md-tab-item.md-tab .cdvy-tab-label-icon
+  flex-grow 0
+  margin-left 0
+  margin-right 20px
 
 /* add a separator before each tab item except the first one */
 md-tab-item.md-tab + md-tab-item.md-tab::before
