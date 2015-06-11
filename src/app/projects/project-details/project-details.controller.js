@@ -97,11 +97,19 @@ class ProjectDetailsCtrl {
   }
 
   isNameChanged() {
-    return this.oldName !== this.projectDetails.name;
+    if (this.projectDetails) {
+      return this.oldName !== this.projectDetails.name;
+    } else {
+      return false;
+    }
   }
 
   isDescriptionChanged() {
-    return this.oldDescription !== this.projectDetails.description;
+    if (this.projectDetails) {
+      return this.oldDescription !== this.projectDetails.description;
+    } else {
+      return false;
+    }
   }
 
   updateInfo(isInputFormValid) {
