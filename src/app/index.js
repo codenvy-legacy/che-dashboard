@@ -28,7 +28,8 @@ module.config(['$routeProvider', function ($routeProvider) {
     }];
 
     // add fetch of the onboarding flag for onpremises route
-    if (route.templateUrl.startsWith('app/onpremises/') || '/' === path) {
+
+    if (route.templateUrl.indexOf('app/onpremises/')  === 0|| '/' === path) {
       route.resolve.appOnBoarding = ['imsPropertiesApi', function (imsPropertiesApi) {
         return imsPropertiesApi.fetchProperty('onboardingCompleted');
       }];
