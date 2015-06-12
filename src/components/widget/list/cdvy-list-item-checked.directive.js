@@ -57,6 +57,10 @@ class CodenvyListItemChecked {
         checkboxElement.css('display', 'none');
       }
     });
+
+    if (attrs.hasOwnProperty('cdvyAriaLabelCheckbox')) {
+      checkboxElement.attr('aria-label', attrs.cdvyAriaLabelCheckbox);
+    }
   }
 }
 

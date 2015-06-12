@@ -28,7 +28,7 @@
     <div class="projects-list-projects-filter-workspace-label">Filter workspaces:</div>
     <div flex="60" layout="row" layout-align="start center" layout-wrap>
       <div class="projects-list-projects-select-workspace" ng-repeat="workspace in listProjectsCtrl.workspaces">
-        <md-checkbox ng-model="listProjectsCtrl.filtersWorkspaceSelected[workspace.workspaceReference.id]">{{workspace.workspaceReference.name}}</md-checkbox>
+        <md-checkbox ng-model="listProjectsCtrl.filtersWorkspaceSelected[workspace.workspaceReference.id]" aria-label="Workspace {{workspace.workspaceReference.name}}">{{workspace.workspaceReference.name}}</md-checkbox>
       </div>
     </div>
     <div flex layout="row" layout-wrap layout-align="end center"><span class="projects-list-projects-filter-action" ng-click="listProjectsCtrl.resetWorkspaceFilter()">Clear</span><i ng-click="listProjectsCtrl.hideWorkspaceFilter()" class="projects-list-projects-filter-action-icon material-design icon-ic_close_24px"></i></div>
@@ -46,7 +46,7 @@
         <cdvy-list-item ng-repeat="project in projects | filter:listProjectsCtrl.projectFilter" flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
           <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row">
             <div class="project-list-static-icon">
-              <cdvy-list-item-checked cdvy-icon="cdvyfont cdvyico-type-{{project.type}} cdvyico-type-blank" class="project-type-icon"></cdvy-list-item-checked>
+              <cdvy-list-item-checked cdvy-icon="cdvyfont cdvyico-type-{{project.type}} cdvyico-type-blank" class="project-type-icon" cdvy-aria-label-checkbox="Project {{project.name}}"></cdvy-list-item-checked>
             </div>
             <div flex-gt-sm="45" layout="column">
               <div class="project-name"><a ng-href="#/project/{{workspaceId}}/{{project.name}}">{{project.name}}</a>
