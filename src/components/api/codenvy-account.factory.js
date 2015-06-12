@@ -27,15 +27,13 @@ class CodenvyAccount {
     this.$resource = $resource;
     this.accounts = [];
     this.subscriptionsPerAccount = new Map();
-    this.resourcesPerAccount = new Map();
     this.accountDetails = new Map();
 
     // remote call
     this.remoteAccountAPI = this.$resource('/api/account',{}, {
       getByID: {method: 'GET', url: '/api/account/:accountId'},
-      getResources: {method: 'GET', url: '/api/account/:accountId/resources', isArray: true},
-      getSubscriptions: {method: 'GET', url: '/api/account/:accountId/subscriptions', isArray: true},
-      addSubscription: {method: 'POST', url: '/api/account/subscriptions/'}
+      getSubscriptions: {method: 'GET', url: '/api/subscription/find/account/:accountId', isArray: true},
+      addSubscription: {method: 'POST', url: '/api/subscription'}
     });
 
     // fetch the accounts when we're initialized
@@ -107,23 +105,6 @@ class CodenvyAccount {
 
   getAccountDetails(accountId) {
     return this.accountDetails.get(accountId);
-  }
-
-  fetchAccountResources(accountId) {
-    let promise = this.remoteAccountAPI.getResources({accountId : accountId}).$promise;
-    // check if if was OK or not
-    let parsedResultPromise = promise.then((data) => {
-      this.resourcesPerAccount.set(accountId, data);
-    }, (error) => {
-      if (error.status !== 304) {
-        console.log(error);
-      }
-    });
-    return parsedResultPromise;
-  }
-
-  getAccountResources(accountId) {
-    return this.resourcesPerAccount.get(accountId);
   }
 
   fetchSubscriptions(accountId) {

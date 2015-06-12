@@ -65,9 +65,7 @@ class SubscriptionCtrl {
     });
 
     if (saasSubscription) {
-      if (saasSubscription.properties && saasSubscription.properties['Package'] && saasSubscription.properties['Package'] === 'Community'){
-        this.proposals.push(this.getPayAsYouGoProposal());
-      } else if (saasSubscription.planId === this.codenvyAPI.getAccount().getPayAsYouGoPlanId()) {
+      if (saasSubscription.planId === this.codenvyAPI.getAccount().getPayAsYouGoPlanId()) {
         this.fillPayAsYouGoDetails(saasSubscription);
         this.payAsYouGoSubscription = saasSubscription;
       } else if (saasSubscription.planId === this.codenvyAPI.getAccount().getPrepaidPlanId()) {
