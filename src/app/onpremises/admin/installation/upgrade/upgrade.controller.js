@@ -71,8 +71,7 @@ class UpgradeInstallationCtrl {
   }
 
   install(artifactVersion) {
-    //this.imsUpdateApi.update();
-
+    this.imsUpdateApi.update();
   }
 }
 
