@@ -29,6 +29,11 @@ md-tab-item.md-tab + md-tab-item.md-tab::before
 md-tabs-canvas
   background-color $background-color
 
+/* selected tab color changes */
+md-tabs-canvas md-tab-item.md-tab.md-active
+  color $primary-color !important /* either !important or preprend md-tabs.md-maincontent-theme-theme  to selector */
+
+
 /** Keep for the moment **/
 section:not(.md-paginating) .md-header-items
   width 99.8%
