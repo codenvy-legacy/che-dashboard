@@ -5,15 +5,14 @@
   <div class="body">
     <div class="title">{{title}}</div>
     <div class="selecter" layout="row">
-    <select class="codenvy-selecter"
-            ng-model="valueModel"
-            ng-init="codenvySelecterCtrl.initType(title, values)"
-            ng-change="codenvySelecterCtrl.onChangeType(title)"
-            name="typeSelected"
-
-            ng-options="{{options}}">
-      <option value="" ng-if="false"></option>
-    </select>
-      </span>
+      <select class="codenvy-selecter"
+              ng-model="valueModel"
+              ng-init="codenvySelecterCtrl.initType(title, values)"
+              ng-change="codenvySelecterCtrl.onChangeType(title)"
+              name="typeSelected"
+              ng-options="{{options}}">
+        <option value="" ng-if="false"></option>
+      </select>
+    </div>
   </div>
 </md-card>
