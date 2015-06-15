@@ -14,6 +14,12 @@ md-tab-item.md-tab .cdvy-tab-label-icon
   margin-left 0
   margin-right 20px
 
+/* set font-sier and line height for both <md-icon> and <i> tab icons */
+md-tab-item.md-tab .cdvy-tab-label-icon span.md-font.cdvy-tab-label-icon,
+md-tab-item.md-tab i.cdvy-tab-label-icon::before
+  font-size 20px
+  line-height 24px
+
 /* add a separator before each tab item except the first one */
 md-tab-item.md-tab + md-tab-item.md-tab::before
   codenvy-separator()
