@@ -41,11 +41,11 @@ class CodenvySelecter {
     this.scope = {
       valueModel : '=ngModel',
       title: '@cdvyTitle',
-      options: '@cdvyOptions',
-      values: '=cdvyValues',
+      options: '@cdvyOptions', /* uses ngOptions syntax */
+      values: '=cdvyValues', /* source of the select values _in parent scope_ */
       name: '@cdvyName',
       icon: '@cdvyIcon',
-      callbackController: '=cdvyCallbackController'
+      callbackController: '=cdvyCallbackController' /* object with a cdvySelecter(name, valueSelected) function, called when the selecter is selector or the select value changes */
     };
 
 
