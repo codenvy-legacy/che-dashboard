@@ -37,6 +37,7 @@ class CodenvySelecterCtrl {
     this.globalSelecterName = globalSelecterName;
     this.$scope.$parent.$parent[globalSelecterName + '.selecterSelected'] = name;
 
+    this.$scope.valueModel = this.selectedValuesByKey.get(name);
     this.$scope.callbackController.cdvySelecter(name, this.selectedValuesByKey.get(name));
   }
 
@@ -56,7 +57,7 @@ class CodenvySelecterCtrl {
    */
   initType(key, values) {
     // set with first value
-    this.selectedValuesByKey.set(key, values[0]);
+    this.selectedValuesByKey.set(key, values[0].id);
 
   }
 

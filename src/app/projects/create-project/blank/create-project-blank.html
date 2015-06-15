@@ -15,15 +15,14 @@
     <label flex="15" hide-sm hide-md>Type: </label>
 
     <div layout="row" flex="85"  layout-wrap>
-      <cdvy-selecter ng-repeat="(typeCategory, types) in createProjectBlankCtrl.typesByCategory"
+      <cdvy-selecter ng-repeat="(index, data) in createProjectBlankCtrl.typesByCategory |orderBy: 'category'"
                      ng-model="createProjectCtrl.myTypeSelected"
-                     cdvy-values="types"
+                     cdvy-values="data.types"
                      cdvy-name="BlankProjectsWidget"
-                     cdvy-title="{{typeCategory}}"
-                     cdvy-icon="cdvyfont cdvyico-type-{{typeCategory}} cdvyico-type-blank"
+                     cdvy-title="{{data.category}}"
+                     cdvy-icon="cdvyfont cdvyico-type-{{data.category}} cdvyico-type-blank"
                      cdvy-callback-controller="createProjectCtrl"
-                     cdvy-options="type.id for type in values" />
+                     cdvy-options="type.id as type.displayName for type in values" />
     </div>
   </div>
-
 </div>

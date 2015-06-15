@@ -46,7 +46,11 @@ class CreateProjectBlankCtrl {
    * Update the project types. (Callback of a promise)
    */
   updateTypes() {
-    this.typesByCategory = this.codenvyAPI.getProjectType().getTypesByCategory();
+    let rawTypesByCategory = this.codenvyAPI.getProjectType().getTypesByCategory();
+    this.typesByCategory = [];
+    for (let categoryName in rawTypesByCategory) {
+      this.typesByCategory.push({ category: categoryName, types: rawTypesByCategory[categoryName] });
+    }
   }
 
 }
