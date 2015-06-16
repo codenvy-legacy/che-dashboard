@@ -265,7 +265,7 @@ class CreateProjectCtrl {
   generateProjectName(firstInit) {
 
     // name has not been modified by the user
-    if (firstInit || (this.projectInformationForm['desk.name'].$pristine && this.projectInformationForm.name.$pristine)) {
+    if (firstInit || (this.projectInformationForm['deskname'].$pristine && this.projectInformationForm.name.$pristine)) {
       // generate a name
 
       // starts with project
