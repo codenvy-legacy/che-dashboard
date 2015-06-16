@@ -39,8 +39,7 @@ class CodenvyInput {
       labelName:'@cdvyLabelName',
       placeHolder:'@cdvyPlaceHolder',
       pattern: '@cdvyPattern',
-      myForm: '=cdvyForm',
-      ctrl: '=cdvyController'
+      myForm: '=cdvyForm'
     };
 
   }
