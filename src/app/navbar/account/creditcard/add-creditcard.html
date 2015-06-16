@@ -12,6 +12,7 @@
                 pattern="[0-9,/ ]{16,}"
                 ng-maxlength="19" ng-minlength="12">
       <div ng-message="required">A credit card number is required.</div>
+      <div ng-message="pattern">A valid credit card number is required.</div>
       <div ng-message="maxlength">The credit card number has to be 12-19 digits long.</div>
       <div ng-message="minlength">The credit card number has to be 12-19 digits long.</div>
     </cdvy-input>
