@@ -26,10 +26,8 @@
             cdvy-pattern="(^[+]{0,1}[0-9-]{0,}$)"
             ng-model="accountProfileCtrl.profile.attributes.phone"
             ng-maxlength="15"
-            ng-minlength="4"
-            required>
+            ng-minlength="4">
   <div ng-message="pattern">Should be numbers and may start with a '+'.</div>
-  <div ng-message="required">A phone number is required.</div>
   <div ng-message="minlength">The phone number  has to be more than 4 characters long.</div>
   <div ng-message="maxlength">The phone number has to be less than 15 characters long.</div>
 </cdvy-input>
