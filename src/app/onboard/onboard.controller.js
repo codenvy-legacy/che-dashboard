@@ -81,11 +81,32 @@ class OnBoardCtrl {
     this.nextStep();
   }
 
+
+  /**
+   * Defines the credit card controller
+   * @param creditCardController
+   */
+  setCreditCardController(creditCardController) {
+    this.creditCardController = creditCardController;
+  }
+
+
   /**
    * Callback when credit card is added
    */
   addCreditCard() {
-    this.nextStep();
+    let promise = this.creditCardController.addCreditCard();
+    this.addingCardIsInProgress = true;
+    // we enable next step only if card is added
+    promise.then((data) => {
+      this.addingCardIsInProgress = false;
+      // ok switch to next step
+      this.nextStep();
+    }, (error) => {
+      //we got error
+      this.addingCardIsInProgress = false;
+    })
+
   }
 
   /**
@@ -100,6 +121,11 @@ class OnBoardCtrl {
    */
   createProject() {
     this.nextStep();
+
+    // save preferences by updating the onboarding flow
+    let properties = {'onBoardingFlowCompleted' : 'true'};
+    this.codenvyAPI.getProfile().updatePreferences(properties);
+
     this.$location.path('/create-project');
   }
 
@@ -107,6 +133,8 @@ class OnBoardCtrl {
    * Callback when profile is being completed
    */
   completeProfile() {
+
+    // go to the next step
     this.nextStep();
   }
 
@@ -114,8 +142,6 @@ class OnBoardCtrl {
    * When completing a step, flag the current step in lock mode
    */
   nextStep() {
-    let properties = {'onBoardingFlowCompleted' : 'true'};
-    this.codenvyAPI.getProfile().updatePreferences(properties);
 
 
     // lock current step
@@ -129,7 +155,7 @@ class OnBoardCtrl {
 
     // now expand next step
     if (this.currentStep <= 4) {
-      this.$rootScope.$broadcast('cdvyPanel:toggle', 'onpremise-onboarding-step' + this.currentStep);
+      this.$rootScope.$broadcast('cdvyPanel:toggle', 'onboarding-step' + this.currentStep);
     }
 
 

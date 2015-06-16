@@ -11,39 +11,19 @@
 
 -->
 <cdvy-toolbar cdvy-title="Welcome to Codenvy" cdvy-subheader-title="Setup your account in 4 steps..." theme="onboarding-theme"></cdvy-toolbar>
-<!--<md-toolbar class="md-toolbar-tools" md-theme="onboarding-theme">
-</md-toolbar>-->
 
 <md-content class="onboarding-content" md-scroll-y flex>
-<div class="onboarding-first-panel" md-theme="onboarding-theme">
+  <div class="onboarding-first-panel" md-theme="onboarding-theme">
 
-  <cdvy-panel class="onboard-panel"
-              cdvy-toggle="true"
-              cdvy-title-svg-icon="assets/images/completed.svg"
-              cdvy-title="Step 1 - Verify email"
-              cdvy-panel-id="onboarding-step1"
-              cdvy-lock-mode="true">
-    <ng-form name="verifyEmailForm" ></ng-form>
-    <!-- For now, the server workflow is not allowing to confirm an email address with this way
-      <div class="onboard-complete-signup-text">To complete the signup process, we need to confirm that you own the email address you used to set up the account:</div>
-      <cdvy-input cdvy-form="verifyEmailForm"
-                  cdvy-name="email"
-                  cdvy-label-name="Email"
-                  cdvy-place-holder="email"
-                  ng-model="onBoardCtrl.profile.attributes.email"
-                  type="email"
-                  required
-                  readonly
-                  ng-maxlength="128">
-        <div ng-message="required">A name is required.</div>
-        <div ng-message="email">A valid email is required.</div>
-        <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
-      </cdvy-input>
-      <div layout="row" layout-align="center center">
-        <cdvy-button-primary cdvy-button-title="confirm" ng-click="onBoardCtrl.confirmEmail()"></cdvy-button-primary>
-      </div>-->
-  </cdvy-panel>
-</div>
+    <cdvy-panel class="onboard-panel"
+                cdvy-toggle="true"
+                cdvy-title-svg-icon="assets/images/completed.svg"
+                cdvy-title="Step 1 - Verify email"
+                cdvy-panel-id="onboarding-step1"
+                cdvy-lock-mode="true">
+      <ng-form name="verifyEmailForm" ></ng-form>
+    </cdvy-panel>
+  </div>
 
   <div class="onboard-separator" layout="row" layout-align="center center">
     <md-icon md-svg-src="assets/images/next-step-separator.svg"></md-icon>
@@ -58,15 +38,15 @@
               cdvy-panel-id="onboarding-step2"
               ng-init="onBoardCtrl.initStep(2)">
     <ng-form name="profileInformationForm">
-    <div layout="row" layout-align="start center">
-      <image class="image-panel" src="assets/images/image-operator.png" width="200px"></image>
-      <div layout="column" flex>
-          <account-profile ng-init="onBoardCtrl.setAccountProfile(this);onBoardCtrl.setAccountProfileForm(profileInformationForm)" accountForm="profileInformationForm"></account-profile>
+      <div layout="row" layout-align="start center">
+        <image class="image-panel" src="assets/images/image-operator.png" width="200px"></image>
+        <div layout="column" flex>
+          <account-profile ng-init="onBoardCtrl.setAccountProfile(accountCtrl);onBoardCtrl.setAccountProfileForm(profileInformationForm)" accountForm="profileInformationForm"></account-profile>
           <div layout="row" layout-align="center center">
-            <cdvy-button-primary cdvy-button-title="complete signup" ng-disabled="onBoardCtrl.isCompleteSignupButtonDisabled()" ng-click="onBoardCtrl.completeProfile()"></cdvy-button-primary>
+            <cdvy-button-primary cdvy-button-title="complete signup" ng-disabled="onBoardCtrl.isCompleteSignupButtonDisabled()" ng-click="onBoardCtrl.completeProfile();accountCtrl.setProfileAttributes(profileInformationForm.$valid)"></cdvy-button-primary>
           </div>
+        </div>
       </div>
-    </div>
     </ng-form>
   </cdvy-panel>
 
@@ -82,14 +62,28 @@
               cdvy-collapse="true"
               cdvy-panel-id="onboarding-step3"
               ng-init="onBoardCtrl.initStep(3)">
-    <ng-form name="creditCardForm">
-      <div layout="row" layout-align="start center">
-        <i class="cdvyfont cdvyico-creditcard" ></i>
+    <ng-form name="creditCardInformationForm" id="creditCardInformationForm">
+      <div layout="row" layout-align="start center" ng-controller="CreditcardCtrl as creditCardCtrl">
+        <image class="image-panel" src="assets/images/creditcard.svg" width="200px"></image>
+        <div layout="column" flex ng-init="onBoardCtrl.setCreditCardController(creditCardCtrl)" ng-show="creditCardCtrl.creditCards.length == 0">
+          <div class="onboard-panel-credit-card-info">Remove limits and get unlimited RAM with a Pay As You Go account by adding a credit card:</div>
 
-        <div layout="column" flex>
-      <cdvy-button-primary cdvy-button-title="Add" ng-click="onBoardCtrl.addCreditCard()"></cdvy-button-primary>
-      <cdvy-button-default cdvy-button-title="Skip" ng-click="onBoardCtrl.skipCreditCard()"></cdvy-button-default>
+          <add-creditcard style="display: block;" loaded="{{creditCardCtrl.loadedCreditCards}}" ng-init="creditCardCtrl.setCreditCard(this.addCreditcardCtrl.creditCard);"></add-creditcard>
+
+          <md-progress-linear md-mode="indeterminate" class="onboard-panel-inprogress-card" ng-show="onBoardCtrl.addingCardIsInProgress" ></md-progress-linear>
+          <div layout="row" layout-align="center center" >
+            <cdvy-button-primary ng-hide="onBoardCtrl.addingCardIsInProgress" class="onboard-panel-credit-card-addbutton" ng-disabled="creditCardInformationForm.$invalid" cdvy-button-title="Add" ng-click="onBoardCtrl.addCreditCard()"></cdvy-button-primary>
+            <cdvy-button-default ng-hide="onBoardCtrl.addingCardIsInProgress" class="onboard-panel-credit-card-skipbutton" cdvy-button-title="Skip" ng-click="onBoardCtrl.skipCreditCard()"></cdvy-button-default>
+          </div>
         </div>
+
+        <div layout="column" flex ng-show="creditCardCtrl.creditCards.length > 0">
+          A credit card is already linked to this account.
+          <div layout="row" layout-align="center center" >
+            <cdvy-button-default class="onboard-panel-credit-card-skipbutton" cdvy-button-title="continue" ng-click="onBoardCtrl.skipCreditCard()"></cdvy-button-default>
+          </div>
+        </div>
+
       </div>
     </ng-form>
     </div>
