@@ -72,6 +72,7 @@ class CreditcardCtrl {
       this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Adding credit card failed.');
       console.log('error', error);
     });
+    return promise;
   }
 
   addSubscription(accountId) {
