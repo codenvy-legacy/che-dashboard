@@ -59,7 +59,11 @@
           <create-project-zip class="projects-create-project-tab" layout="column"></create-project-zip>
         </md-tab-body>
       </md-tab>
-      <md-tab label="Configuration file" cdvy-icon="material-design icon-ic_get_app_24px" md-on-select="$parent.createProjectCtrl.refreshCM(); $parent.createProjectCtrl.setCurrentTab('config')">
+      <md-tab md-on-select="$parent.createProjectCtrl.refreshCM(); $parent.createProjectCtrl.setCurrentTab('config')">
+        <md-tab-label>
+          <i class="material-design  icon-ic_get_app_24px cdvy-tab-label-icon"></i>
+          <span class="cdvy-tab-label-title">Configuration File</span>
+        </md-tab-label>
         <create-project-conf-file class="projects-create-project-tab" layout="column" layout-fill></create-project-conf-file>
       </md-tab>
     </md-tabs>
