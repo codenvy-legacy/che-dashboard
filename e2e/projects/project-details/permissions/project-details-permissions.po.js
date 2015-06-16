@@ -19,8 +19,7 @@
 
 var MainPage = function () {
 
-  this.accessTab = element(by.cssContainingText('md-tab', 'Access'));
-  this.tabNextPaginator = element(by.css('.md-paginator.md-next'));
+  this.accessTab = element(by.cssContainingText('md-tab-item span', 'Access'));
 
   this.permissionsElement = element.all(by.repeater('permission in projectDetailsDevelopersCtrl.permissions'));
 

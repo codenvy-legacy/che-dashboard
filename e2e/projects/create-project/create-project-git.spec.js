@@ -35,10 +35,6 @@ describe('Create project using git TAB', function () {
     browser.get('http://localhost:5000/#/create-project');
     browser.waitForAngular();
 
-    // click on next
-    createProjectsPage.tabNextPaginator.click();
-    browser.sleep(1000);
-
     expect(createProjectsPage.gitTab.isDisplayed()).toBe(true);
 
     // click on the git tab
@@ -63,15 +59,13 @@ describe('Create project using git TAB', function () {
 
 
     // now enter a valid URL
-    gitInputElement.sendKeys('https://github.com/codenvy/user-dashboard');
+    gitInputElement.sendKeys('https://github.com/codenvy/user-dashboard').then(function() {
+      // check it's now valid
+      expect(gitInputElement.getAttribute('class')).toContain('ng-valid-required', 'ng-valid', 'ng-valid-git-url');
 
-    // check it's now valid
-    expect(gitInputElement.getAttribute('class')).toContain('ng-valid-required', 'ng-valid', 'ng-valid-git-url');
-
-
-    // now we want to also check that project name has been automatically setup
-    expect(createProjectsPage.projectInformationName.getAttribute('value')).toEqual('user-dashboard');
-
+      // now we want to also check that project name has been automatically setup
+      expect(createProjectsPage.projectInformationName.getAttribute('value')).toEqual('user-dashboard');
+    });
   });
 
 });

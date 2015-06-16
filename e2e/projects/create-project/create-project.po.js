@@ -19,12 +19,12 @@
 
 var MainPage = function() {
 
-  this.tabNextPaginator = element(by.css('.md-paginator.md-next'));
+  this.gitTab = element(by.cssContainingText('md-tab-item span', 'Git Repository'));
 
-  this.gitTab = element(by.cssContainingText('md-tab', 'Git Repository'));
   this.gitUrlInput = $('input[name="deskremoteGitURL"]');
   this.projectInformationName = $('input[name="deskname"]');
 
 };
+
 
 module.exports = new MainPage();

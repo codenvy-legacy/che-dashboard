@@ -34,11 +34,6 @@ describe('Manage access of a project', function () {
     browser.get('http://localhost:5000/#/project/idFlorent/project-wk1-1');
     browser.waitForAngular();
 
-    expect(accessProjectsPage.accessTab.isDisplayed()).toBe(false);
-
-    // click on next
-    accessProjectsPage.tabNextPaginator.click();
-    browser.sleep(1000);
     expect(accessProjectsPage.accessTab.isDisplayed()).toBe(true);
 
 
