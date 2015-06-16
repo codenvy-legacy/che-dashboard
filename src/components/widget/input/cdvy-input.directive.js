@@ -27,7 +27,6 @@ class CodenvyInput {
     this.restrict = 'E';
     this.replace= true;
     this.transclude= true;
-    this.templateUrl = 'components/widget/input/cdvy-input.html';
 
     // we require ngModel as we want to use it inside our directive
     this.require = ['ngModel'];
@@ -45,7 +44,57 @@ class CodenvyInput {
   }
 
 
-  compile(element, attrs) {
+
+  /**
+   * Template for the current toolbar
+   * @param element
+   * @param attrs
+   * @returns {string} the template
+   */
+  template(element, attrs) {
+
+      var inputName = attrs.cdvyName;
+      var labelName = attrs.cdvyLabelName;
+      var placeHolder = attrs.cdvyPlaceHolder;
+      var pattern = attrs.cdvyPattern;
+
+      var template = '<div class="cdvy-input">'
+          + '<md-input-container hide-gt-md>'
+          + '<label>' + labelName + '</label>'
+          + '<input type="text" name="' + inputName + '"';
+      if (attrs.cdvyPattern) {
+          template = template + ' pattern="' + pattern + '"';
+      }
+
+      template = template + ' ng-trim="false" data-ng-model="valueModel" >'
+          + '<!-- display error messages for the form -->'
+          + '<div ng-messages="myForm.' + inputName + '.$error"></div>'
+          + '</md-input-container>'
+          + ''
+          + '    <div class="cdvy-input-desktop" hide-sm hide-md layout="column" flex>'
+          + '<div layout="row" flex layout-align="space-around start">'
+          + ' <label flex="15" class="cdvy-input-desktop-label">' + labelName + ': </label>'
+          + ''
+          + '<div layout="column" class="cdvy-input-desktop-value-column" flex="85">'
+          + '<input type="text" placeholder="' + placeHolder + '" ng-trim="false" name="desk' + inputName + '"';
+      if (attrs.cdvyPattern) {
+          template = template + ' pattern="' + pattern + '"';
+      }
+
+
+      template = template + ' data-ng-model="valueModel">'
+      + '<!-- display error messages for the form -->'
+      + '<div ng-messages="myForm.desk' + inputName + '.$error" ng-transclude></div>'
+      + '</div>'
+      + '</div>'
+      + ' </div>'
+      + '</div>';
+
+      return template;
+  }
+
+
+    compile(element, attrs) {
 
     var keys = Object.keys(attrs);
 
