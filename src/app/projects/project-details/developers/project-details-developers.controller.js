@@ -69,6 +69,7 @@ class ProjectDetailsDevelopersCtrl {
       controller: 'ProjectDetailsDevelopersDialogAddCtrl',
       controllerAs: 'projectDetailsDevelopersDialogAddCtrl',
       bindToController:true,
+      clickOutsideToClose: true,
       locals: { callbackController: this},
       templateUrl: 'app/projects/project-details/developers/project-details-developers-dialog-add.html'
     });
