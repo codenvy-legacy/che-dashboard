@@ -90,6 +90,7 @@ class CreditcardCtrl {
       .ariaLabel('Remove credit card')
       .ok('Ok')
       .cancel('Cancel')
+      .clickOutsideToClose(true)
       .targetEvent(event);
     this.$mdDialog.show(confirm).then(() => {
       let promise = this.codenvyAPI.getPayment().removeCreditCard(card.accountId, card.number);
