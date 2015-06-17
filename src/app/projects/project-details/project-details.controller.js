@@ -168,6 +168,7 @@ class ProjectDetailsCtrl {
       .ariaLabel('Remove project')
       .ok('Delete it!')
       .cancel('Cancel')
+      .clickOutsideToClose(true)
       .targetEvent(event);
     this.$mdDialog.show(confirm).then(() => {
       // remove it !
