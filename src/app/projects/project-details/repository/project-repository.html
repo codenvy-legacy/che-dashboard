@@ -13,8 +13,8 @@
 <div class="project-repositories">
 
   <!-- Mobile version -->
-  <cdvy-panel ng-if="projectRepositoryCtrl.localGitRepository || projectRepositoryCtrl.remoteSvnRepository" cdvy-title="Project Repository"
-              hide-gt-md>
+  <cdvy-panel ng-if="projectRepositoryCtrl.localGitRepository || projectRepositoryCtrl.remoteSvnRepository"
+              cdvy-title="Local Clone" hide-gt-md>
     <div ng-if="projectRepositoryCtrl.localGitRepository" class="repository-mobile" layout="row" flex layout-align="space-around start">
       <div class="label-name">GIT&nbsp;URL:</div>
       <div>
@@ -33,8 +33,8 @@
     </div>
   </cdvy-panel>
   <!-- Desktop version -->
-  <cdvy-panel ng-if="projectRepositoryCtrl.localGitRepository || projectRepositoryCtrl.remoteSvnRepository" cdvy-title="Project Repository"
-              hide-sm hide-md>
+  <cdvy-panel ng-if="projectRepositoryCtrl.localGitRepository || projectRepositoryCtrl.remoteSvnRepository"
+              cdvy-title="Local Clone" hide-sm hide-md>
     <div ng-if="projectRepositoryCtrl.localGitRepository">
       <div class="repository-desktop" layout="row" flex layout-align="space-around start">
         <div class="label-name" flex="20">GIT&nbsp;URL:</div>
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <label class="prompt">To clone this repository with git, just use the command <span>git clone &lt;url&gt;</span></label>
+      <label class="prompt">Clone repository with command <span>git clone &lt;url&gt;</span></label>
     </div>
     <div ng-if="projectRepositoryCtrl.remoteSvnRepository">
       <div class="repository-desktop" layout="row" flex layout-align="space-around start">
@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-      <label class="prompt">Checkout the subversion repository, by using the command <span>svn checkout &lt;url&gt;</span></label>
+      <label class="prompt">Checkout repository with command <span>svn checkout &lt;url&gt;</span></label>
     </div>
   </cdvy-panel>
 
