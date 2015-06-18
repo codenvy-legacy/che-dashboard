@@ -3,3 +3,31 @@
 
 .cdvy-list-item-checkbox div
   margin 0
+
+/*
+ * Handle the 3 possible states for the icon/checkbox zone.
+ */
+
+/* hover one the icon/checkbox zone */
+
+.cdvy-list-item-checkbox-main:hover md-checkbox.cdvy-list-item-checkbox
+  display inline-block
+
+.cdvy-list-item-checkbox-main:hover md-icon
+  display none
+
+/* checked, hovered or not */
+
+.cdvy-list-item-checkbox-main md-checkbox.cdvy-list-item-checkbox[aria-checked="true"]
+  display inline-block
+
+.cdvy-list-item-checkbox-main md-checkbox.cdvy-list-item-checkbox[aria-checked="true"] + md-icon
+  display none
+
+/* ground state : not hovered, not checked */
+
+.cdvy-list-item-checkbox-main md-checkbox.cdvy-list-item-checkbox
+  display none
+
+.cdvy-list-item-checkbox-main md-icon
+  display inline-block

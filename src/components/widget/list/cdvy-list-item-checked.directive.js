@@ -37,26 +37,7 @@ class CodenvyListItemChecked {
 
   link($scope, element, attrs) {
     var checkboxElement = element.find('md-checkbox');
-    var imageElement = element.find('md-icon');
 
-    $scope.$watch('valueModel', function(value) {
-      imageElement.css('display', value ? 'none' : 'inline-block');
-      checkboxElement.css('display', value ? 'inline-block' : 'none');
-    });
-
-    element.parent().bind('mouseover', function(event) {
-      checkboxElement.css('display', 'inline-block');
-      imageElement.css('display', 'none');
-    });
-
-    element.parent().bind('mouseout', function(event) {
-      if (checkboxElement.attr('aria-checked') === 'true') {
-        imageElement.css('display', 'none');
-      } else {
-        imageElement.css('display', 'inline-block');
-        checkboxElement.css('display', 'none');
-      }
-    });
 
     if (attrs.hasOwnProperty('cdvyAriaLabelCheckbox')) {
       checkboxElement.attr('aria-label', attrs.cdvyAriaLabelCheckbox);
