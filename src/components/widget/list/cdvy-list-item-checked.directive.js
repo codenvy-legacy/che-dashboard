@@ -23,26 +23,19 @@ class CodenvyListItemChecked {
    * @ngInject for Dependency injection
    */
   constructor () {
-    this.restrict='E';
-    this.replace= true;
-    this.transclude= true;
+    this.restrict = 'E';
+    this.replace = true;
+    this.transclude = true;
     this.templateUrl = 'components/widget/list/cdvy-list-item-checked.html';
 
     // scope values
     this.scope = {
       valueModel : '=?ngModel',
-      icon:'@cdvyIcon'
+      icon: '@cdvyIcon',
+      ariaLabel: '@cdvyAriaLabelCheckbox'
     };
   }
 
-  link($scope, element, attrs) {
-    var checkboxElement = element.find('md-checkbox');
-
-
-    if (attrs.hasOwnProperty('cdvyAriaLabelCheckbox')) {
-      checkboxElement.attr('aria-label', attrs.cdvyAriaLabelCheckbox);
-    }
-  }
 }
 
 export default CodenvyListItemChecked;
