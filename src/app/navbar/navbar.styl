@@ -24,6 +24,18 @@ $submenu-font-size = 12px
 .admin-navbar-menu md-list-item a.md-button
   margin 0
 
+.left-sidebar-container
+  height 100vh
+  display flex
+  flex-flow row wrap
+  justify-content space-around
+
+.left-sidebar-container md-toolbar
+  box-shadow none
+
+.left-sidebar-menu
+  width 100%
+
 /* text color */
 .admin-navbar-menu .navbar-header,
 .admin-navbar-menu .navbar-identity,
@@ -71,7 +83,7 @@ $submenu-font-size = 12px
   /* uselessly long selector to pump up specificity */
 .admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button:focus,
 .admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button:hover
-  background-color $active-background-color 
+  background-color $active-background-color
 
 .admin-navbar-menu a:hover, .admin-navbar-menu a:focus
   color inherit
@@ -135,3 +147,11 @@ $submenu-font-size = 12px
 /* remove focus effect on fold/unfold button */
 .admin-navbar-menu .navbar-identity i.material-design:focus
   outline none
+
+.navbar-beta-widget
+  width 100%
+  display flex
+  align-items flex-end
+
+.navbar-beta-widget ud-beta-widget
+  width 100%
