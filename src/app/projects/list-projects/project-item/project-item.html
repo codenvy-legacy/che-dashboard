@@ -1,0 +1,43 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-list-item flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
+  <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row">
+    <div class="project-list-static-icon" layout-align="center center">
+      <cdvy-list-item-checked cdvy-icon="cdvyfont cdvyico-type-{{project.type}} cdvyico-type-blank" class="project-type-icon" cdvy-aria-label-checkbox="Project {{project.name}}"></cdvy-list-item-checked>
+    </div>
+    <div flex="45" layout="column" layout-align-gt="start center" layout-align-md="start center" layout-align-sm="center center">
+      <div class="project-name"><a ng-href="#/project/{{workspaceId}}/{{project.name}}">{{project.name}}</a>
+      </div>
+      <div class="project-details">{{project.description}}</div>
+    </div>
+    <div flex="15" class="project-details" layout-align="center center">
+      <cdvy-tooltip
+        cdvy-title="Last modified: {{listProjectsCtrl.getProjectModificationDate(project) | amDateFormat:'dddd, MMMM Do, YYYY'}}">
+        <span am-time-ago="listProjectsCtrl.getProjectModificationDate(project)"></span>
+      </cdvy-tooltip>
+    </div>
+    <div flex="15" layout="row" layout-align="center center">
+      <cdvy-tooltip cdvy-title="{{project.visibility=='public'?'Public':'Private'}}">
+        <md-icon md-font-icon="material-design {{project.visibility=='public'?'icon-ic_lock_open_24px':'icon-ic_lock_24px'}}">
+        </md-icon>
+      </cdvy-tooltip>
+    </div>
+    <p ng-show="hover">
+      <cdvy-tooltip cdvy-title="Open">
+        <a ng-href="{{project.ideUrl}}" target="_blank">
+          <md-icon md-font-icon="material-design icon-ic_forward_24px"></md-icon>
+        </a>
+      </cdvy-tooltip>
+    </p>
+  </div>
+</cdvy-list-item>
