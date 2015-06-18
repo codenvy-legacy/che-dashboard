@@ -38,8 +38,8 @@
               cdvy-panel-id="onboarding-step2"
               ng-init="onBoardCtrl.initStep(2)">
     <ng-form name="profileInformationForm">
-      <div layout="row" layout-align="start center">
-        <image class="image-panel" src="assets/images/image-operator.png" width="200px"></image>
+      <div layout="row" layout-align="start start">
+        <image class="onboard-image-panel" src="assets/images/image-operator.png"></image>
         <div layout="column" flex>
           <account-profile ng-init="onBoardCtrl.setAccountProfile(accountCtrl);onBoardCtrl.setAccountProfileForm(profileInformationForm)" accountForm="profileInformationForm"></account-profile>
           <div layout="row" layout-align="center center">
@@ -63,8 +63,8 @@
               cdvy-panel-id="onboarding-step3"
               ng-init="onBoardCtrl.initStep(3)">
     <ng-form name="creditCardInformationForm" id="creditCardInformationForm">
-      <div layout="row" layout-align="start center" ng-controller="CreditcardCtrl as creditCardCtrl">
-        <image class="image-panel" src="assets/images/creditcard.svg" width="200px"></image>
+      <div layout="row" layout-align="start start" ng-controller="CreditcardCtrl as creditCardCtrl">
+        <image class="onboard-image-panel" src="assets/images/creditcard.svg"></image>
         <div layout="column" flex ng-init="onBoardCtrl.setCreditCardController(creditCardCtrl)" ng-show="creditCardCtrl.creditCards.length == 0">
           <div class="onboard-panel-credit-card-info">Remove limits and get unlimited RAM with a Pay As You Go account by adding a credit card:</div>
 
@@ -103,8 +103,8 @@
               cdvy-collapse="true"
               cdvy-panel-id="onboarding-step4">
     <ng-form name="creditCardForm" >
-      <div layout="row" layout-align="start center">
-        <image class="image-panel" src="assets/images/image-laptop.png" width="200px"></image>
+      <div layout="row" layout-align="start start">
+        <image class="onboard-image-panel" src="assets/images/image-laptop.png"></image>
 
         <div layout="column" flex>
           <cdvy-button-primary cdvy-button-title="Create project" ng-click="onBoardCtrl.createProject()"></cdvy-button-primary>
