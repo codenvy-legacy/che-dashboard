@@ -19,7 +19,7 @@
     <version>1.12.0</version>
   </parent>
   <groupId>com.codenvy.dashboard</groupId>
-  <artifactId>user-dashboard-war</artifactId>
+  <artifactId>next-user-dashboard-war</artifactId>
   <version>2.0.0-beta1-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>User Dashboard :: Web App</name>
@@ -49,7 +49,7 @@
     </pluginRepository>
   </pluginRepositories>
   <build>
-    <finalName>user-dashboard-war</finalName>
+    <finalName>next-user-dashboard-war</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
@@ -99,7 +99,7 @@
                 <!-- Change base HREF of the application that will be hosted on /dashboard -->
                 <replace file="${basedir}/dist/index.html">
                   <replacetoken><![CDATA[<base href="/">]]></replacetoken>
-                  <replacevalue><![CDATA[<base href="/dashboard/">]]></replacevalue>
+                  <replacevalue><![CDATA[<base href="/next-dashboard/">]]></replacevalue>
                 </replace>
                 <!-- Enable back development mode -->
                 <replace file="${basedir}/src/app/index.js">
