@@ -29,7 +29,7 @@ class CodenvyClipboard {
 
     // scope value
     this.scope = {
-      value: '=cdvyValue'
+      value: '@cdvyValue'
     };
 
   }
@@ -39,10 +39,10 @@ class CodenvyClipboard {
    */
   link($scope, element) {
     //TODO why the zeroclipboard-is-hover class may not be removed after mouse leave
-    $scope.onMouseLeave = function() {
+    $scope.onMouseLeave = function () {
       // search the copy clipboard hover element
       var hoverElement = element.find('.zeroclipboard-is-hover');
-      if(hoverElement) {
+      if (hoverElement) {
         hoverElement.removeClass('zeroclipboard-is-hover');
       }
     };

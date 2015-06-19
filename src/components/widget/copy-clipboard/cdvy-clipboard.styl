@@ -8,7 +8,7 @@
 
 .copy-clipboard span
   position absolute
-  top 24px
+  bottom 100%
   left 50%
 
 .copy-clipboard span span
@@ -17,7 +17,7 @@
   color $white-color
   cursor default
   left -50%
-  top 4px
+  bottom 8px
   padding 7px 15px 7px 15px
   font-size 12px
   border-radius 3px
@@ -30,10 +30,10 @@
   content ""
   width 0
   height 0
-  top -11px
+  top 28px
   border 6px solid
   left calc(50% - 6px)
-  border-color transparent transparent $tooltip-border-color transparent
+  border-color $tooltip-border-color transparent transparent transparent
 
 .copy-clipboard div:hover span span,
 .copy-clipboard div:hover span:after,

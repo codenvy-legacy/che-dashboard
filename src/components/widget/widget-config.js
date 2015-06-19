@@ -57,3 +57,5 @@ import CodenvyClipboard from './copy-clipboard/cdvy-clipboard.directive';
 import CodenvyEmptyState from './empty-state/cdvy-empty-state.directive';
 
 import CodenvySearch from './search/cdvy-search.directive';
+
+import CodenvyTooltip from './tooltip/cdvy-tooltip.directive';

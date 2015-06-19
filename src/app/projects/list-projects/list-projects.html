@@ -53,18 +53,24 @@
               </div>
               <div class="project-details">{{project.description}}</div>
             </div>
-            <span flex-gt-sm="15" class="project-details" show-sm am-time-ago="project.modificationDate"></span>
-
+            <div flex-gt-sm="15" class="project-details" show-sm>
+              <cdvy-tooltip
+                cdvy-title="Last modified: {{listProjectsCtrl.getProjectModificationDate(project) | amDateFormat:'dddd, MMMM Do, YYYY'}}">
+                <span am-time-ago="listProjectsCtrl.getProjectModificationDate(project)"></span>
+              </cdvy-tooltip>
+            </div>
             <div flex-gt-sm="15">
-              <md-icon ng-show="project.visibility == 'public'"
-                       md-font-icon="material-design icon-ic_lock_open_24px"></md-icon>
-              <md-icon ng-show="project.visibility == 'private'"
-                       md-font-icon="material-design icon-ic_lock_24px"></md-icon>
+              <cdvy-tooltip cdvy-title="{{project.visibility=='public'?'Public':'Private'}}">
+                <md-icon md-font-icon="material-design {{project.visibility=='public'?'icon-ic_lock_open_24px':'icon-ic_lock_24px'}}">
+                </md-icon>
+              </cdvy-tooltip>
             </div>
             <p flex-gt-sm="15" ng-show="hover" layout="row" layout-align="end center">
-              <a ng-href="{{project.ideUrl}}" target="_blank">
-                <md-icon md-font-icon="material-design icon-ic_forward_24px"></md-icon>
-              </a>
+              <cdvy-tooltip cdvy-title="Open">
+                <a ng-href="{{project.ideUrl}}" target="_blank">
+                  <md-icon md-font-icon="material-design icon-ic_forward_24px"></md-icon>
+                </a>
+              </cdvy-tooltip>
             </p>
           </div>
         </cdvy-list-item>
