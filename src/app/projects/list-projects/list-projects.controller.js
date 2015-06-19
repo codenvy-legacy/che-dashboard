@@ -25,6 +25,7 @@ class ListProjectsCtrl {
   constructor (codenvyAPI) {
     this.codenvyAPI = codenvyAPI;
     this.workspace = codenvyAPI.getWorkspace();
+    this.profilePreferences = codenvyAPI.getProfile().getPreferences();
 
     this.state = 'loading';
 
@@ -60,6 +61,16 @@ class ListProjectsCtrl {
     // by default, the workspace filter is hidden
     this.displayWorkspaceFilter = false;
 
+  }
+
+  getProjectModificationDate(project) {
+    if (project.modificationDate !== -1) {
+      return project.modificationDate;
+    } else if(project.creationDate !== -1){
+      return project.creationDate;
+    }
+
+    return this.profilePreferences["codenvy:created"];
   }
 
   updateData() {

@@ -30,9 +30,8 @@ class CodenvyTab {
 
     // scope values
     this.scope = {
-      title:'@cdvyTitle',
-      icon:'@cdvyIcon',
-      separator:'@cdvySeparator'
+      title: '@cdvyTitle',
+      icon: '@cdvyIcon'
     };
 
   }
