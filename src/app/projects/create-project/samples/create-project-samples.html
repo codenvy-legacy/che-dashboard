@@ -23,17 +23,19 @@
   <div ng-repeat="templatesByCategory in createProjectSamplesCtrl.templates | sampleFilterProjectType:createProjectSamplesCtrl.filterProjectType | orderBy:'projectType' | groupBy:'category' ">
     <div ng-repeat="lstTemplate in templatesByCategory | orderBy:'displayName' | groupBy:'projectType'">
       <cdvy-list-title cdvy-icon="fa fa-folder">
-        {{lstTemplate[0].category}} :: {{lstTemplate[0].projectType}}
+        {{lstTemplate[0].category}} <span class="projects-create-project-samples-header-projecttype">({{lstTemplate[0].projectType}})</span>
       </cdvy-list-title>
       <cdvy-list>
-        <cdvy-list-item ng-repeat="template in lstTemplate" flex-gt-sm="100" flex="33">
+        <cdvy-list-item ng-repeat="template in lstTemplate" flex>
           <div layout-gt-sm="row" flex layout-align="start center" class="projects-create-project-samples-list-row">
-            <div flex layout="column">
-              <div class="projects-create-project-samples-list-samplename" ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)">{{template.displayName}}: <i>{{template.description}}</i></div>
-            </div>
+              <div ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)" layout="column" flex>
+                  <div class="projects-create-project-samples-list-samplename">{{template.displayName}}</div>
+                  <div class="projects-create-project-samples-list-sampledescription">{{template.description}}</div>
+              </div>
           </div>
         </cdvy-list-item>
       </cdvy-list>
+
     </div>
   </div>
 </md-content>

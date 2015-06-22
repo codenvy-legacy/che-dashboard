@@ -143,10 +143,10 @@ class CreateProjectGithubCtrl {
           this.gitHubRepositories = this.$filter('filter')(repositories, (repository) => {
             return organizationNames.indexOf(repository.owner.login) >= 0;
           });
+          this.state = 'LOADED';
         });
       });
 
-      this.state = 'LOADED';
     }, function () {
       this.state = 'LOAD_ERROR';
     });
