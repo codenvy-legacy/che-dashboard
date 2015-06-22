@@ -55,6 +55,7 @@ class CodenvyToolbar {
    */
   constructor () {
     this.restrict='E';
+    this.replace = true;
     this.controller = 'NavbarCtrl';
     this.controllerAs = 'controller';
     this.bindToController = true;
@@ -84,7 +85,7 @@ class CodenvyToolbar {
       theme = 'toolbar-theme';
     }
 
-    var template = '<md-toolbar class=\"md-tall\" md-theme=\"' + theme +'\">\n'
+    var template = '<div class=\"cdvy-toolbar\"><md-toolbar md-theme=\"' + theme +'\">\n'
       + '<div layout=\"column\" flex>'
       + '<div layout=\"row\" flex class=\"cdvy-toolbar-breadcrumb\" layout-align=\"start center\">'
       + '<button class=\"toolbar-switch\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
@@ -100,7 +101,7 @@ class CodenvyToolbar {
     }
 
     template = template + '</div>'
-    + '<div layout=\"row\" flex class=\"fill-height \">'
+    + '<div layout=\"row\" flex class=\"cdvy-toolbar-header\">'
     + '<div class=\"cdvy-toolbar-title\">'
     + '<span class=\"cdvy-toolbar-title-label\">'
     + title + '</span><span class=\"cdvy-toolbar-title-icons\">';
@@ -137,7 +138,7 @@ class CodenvyToolbar {
 
     template = template
     + '</div>'
-    + '</md-toolbar>';
+    + '</md-toolbar></div>';
 
     return template;
   }
