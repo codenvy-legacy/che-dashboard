@@ -1,8 +1,12 @@
-cdvy-toolbar
+.cdvy-toolbar
  flex-shrink 0
 
+.cdvy-toolbar  md-toolbar
+  min-height 128px
+
 .cdvy-toolbar-breadcrumb
-  margin-top 0px
+  white-space nowrap
+  margin-top 0
   margin-left 10px
   font-size 1em
 
@@ -11,11 +15,15 @@ cdvy-toolbar
 
 .cdvy-toolbar-breadcrumb .icon-breadcrumb
   font-size 38px
-  margin-top 0px
+  margin-top 0
   margin-left 2px
 
+.cdvy-toolbar-header
+  flex-wrap wrap
 
 .cdvy-toolbar-title
+  min-width fit-content
+  white-space nowrap
   font-size 2em
   margin-top -14px
   margin-left 23px
@@ -30,8 +38,10 @@ cdvy-toolbar
   margin-right 10px
 
 .cdvy-toolbar-button
+  min-width fit-content
   font-size 14px
   margin-top -7px
+  margin-bottom 10px
   margin-right 10px
 
 .cdvy-toolbar-subheader

@@ -16,7 +16,7 @@
               cdvy-button-href="#/create-project"></cdvy-toolbar>
 
 <md-toolbar class="md-toolbar-tools" md-theme="toolbar-theme">
-  <cdvy-search flex hide show-gt-lg style="width: 800px" cdvy-placeholder="Search for projects" ng-model="listProjectsCtrl.projectFilter.name"></cdvy-search>
+  <cdvy-search flex cdvy-placeholder="Search for projects" ng-model="listProjectsCtrl.projectFilter.name"></cdvy-search>
   <span flex></span>
   <div class="md-toolbar-item md-tools" layout="row">
     <i class="projects-list-projects-cog fa fa-cog" dropdown-menu="listProjectsCtrl.dropDownOptionsList" dropdown-model="listProjectsCtrl.dropDownValue" dropdown-onchange="listProjectsCtrl.dropDownSelected(selected)" dropdown-item-label='name'></i>
@@ -48,29 +48,31 @@
             <div class="project-list-static-icon">
               <cdvy-list-item-checked cdvy-icon="cdvyfont cdvyico-type-{{project.type}} cdvyico-type-blank" class="project-type-icon" cdvy-aria-label-checkbox="Project {{project.name}}"></cdvy-list-item-checked>
             </div>
-            <div flex-gt-sm="45" layout="column">
+            <div flex="45" layout="column">
               <div class="project-name"><a ng-href="#/project/{{workspaceId}}/{{project.name}}">{{project.name}}</a>
               </div>
               <div class="project-details">{{project.description}}</div>
             </div>
-            <div flex-gt-sm="15" class="project-details" show-sm>
+            <div flex="15" class="project-details">
               <cdvy-tooltip
                 cdvy-title="Last modified: {{listProjectsCtrl.getProjectModificationDate(project) | amDateFormat:'dddd, MMMM Do, YYYY'}}">
                 <span am-time-ago="listProjectsCtrl.getProjectModificationDate(project)"></span>
               </cdvy-tooltip>
             </div>
-            <div flex-gt-sm="15">
+            <div flex="15" layout-align="center center">
               <cdvy-tooltip cdvy-title="{{project.visibility=='public'?'Public':'Private'}}">
                 <md-icon md-font-icon="material-design {{project.visibility=='public'?'icon-ic_lock_open_24px':'icon-ic_lock_24px'}}">
                 </md-icon>
               </cdvy-tooltip>
             </div>
-            <p flex-gt-sm="15" ng-show="hover" layout="row" layout-align="end center">
+            <p flex="15" layout="row" layout-align="end center">
+            <div ng-show="hover">
               <cdvy-tooltip cdvy-title="Open">
                 <a ng-href="{{project.ideUrl}}" target="_blank">
                   <md-icon md-font-icon="material-design icon-ic_forward_24px"></md-icon>
                 </a>
               </cdvy-tooltip>
+            </div>
             </p>
           </div>
         </cdvy-list-item>
