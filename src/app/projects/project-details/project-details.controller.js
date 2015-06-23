@@ -34,9 +34,9 @@ class ProjectDetailsCtrl {
 
     this.projectDeleted = false;
 
-    this.oldName = null;
-    this.oldDescription = null;
-    this.oldVisibility = null;
+    this.askedName = null;
+    this.askedDescription = null;
+    this.askedVisibility = null;
 
     if (!this.codenvyAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath)) {
       let promise = this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath);
@@ -62,9 +62,9 @@ class ProjectDetailsCtrl {
 
   updateProjectDetails() {
     this.projectDetails = this.codenvyAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath);
-    this.oldName = angular.copy(this.projectDetails.name);
-    this.oldDescription = angular.copy(this.projectDetails.description);
-    this.oldVisibility = angular.copy(this.projectDetails.visibility);
+    this.askedName = angular.copy(this.projectDetails.name);
+    this.askedDescription = angular.copy(this.projectDetails.description);
+    this.askedVisibility = angular.copy(this.projectDetails.visibility);
     this.loading = false;
   }
 
@@ -86,10 +86,10 @@ class ProjectDetailsCtrl {
           this.updateProjectDetails();
         });
       } else {
-        this.oldDescription = projectDetails.description;
+        this.askedDescription = projectDetails.description;
       }
     }, (error) => {
-      this.projectDetails.description = this.oldDescription;
+      this.projectDetails.description = this.askedDescription;
       this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Update information failed.');
       console.log('error', error);
     });
@@ -98,7 +98,7 @@ class ProjectDetailsCtrl {
 
   isNameChanged() {
     if (this.projectDetails) {
-      return this.oldName !== this.projectDetails.name;
+      return this.askedName !== this.projectDetails.name;
     } else {
       return false;
     }
@@ -106,7 +106,7 @@ class ProjectDetailsCtrl {
 
   isDescriptionChanged() {
     if (this.projectDetails) {
-      return this.oldDescription !== this.projectDetails.description;
+      return this.askedDescription !== this.projectDetails.description;
     } else {
       return false;
     }
@@ -118,7 +118,7 @@ class ProjectDetailsCtrl {
     }
 
     if (this.isNameChanged()) {
-      let promise = this.codenvyAPI.getProject().rename(this.projectDetails.workspaceId, this.oldName, this.projectDetails.name);
+      let promise = this.codenvyAPI.getProject().rename(this.projectDetails.workspaceId, this.askedName, this.projectDetails.name);
 
       promise.then(() => {
         this.codenvyAPI.getProject().removeProjectDetailsByKey(this.workspaceId, this.projectPath);
@@ -133,7 +133,7 @@ class ProjectDetailsCtrl {
           this.setProjectDetails(this.projectDetails);
         }
       }, (error) => {
-        this.projectDetails.name = this.oldName;
+        this.projectDetails.name = this.askedName;
         this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Update information failed.');
         console.log('error', error);
       });
@@ -144,7 +144,7 @@ class ProjectDetailsCtrl {
   }
 
   updateVisibility() {
-    if (this.oldVisibility === this.projectDetails.visibility) {
+    if (this.askedVisibility === this.projectDetails.visibility) {
       return;
     }
 
@@ -152,9 +152,9 @@ class ProjectDetailsCtrl {
 
     promise.then(() => {
       this.codenvyNotificationService.showInfo('Update visibility completed.');
-      this.oldVisibility = this.projectDetails.visibility;
+      this.askedVisibility = this.projectDetails.visibility;
     }, (error) => {
-      this.projectDetails.visibility = this.oldVisibility;
+      this.projectDetails.visibility = this.askedVisibility;
       this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Update visibility failed.');
       console.log('error', error);
     });
