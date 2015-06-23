@@ -11,7 +11,7 @@
 'use strict';
 
 angular.module('userDashboard').constant('jsonCountries', JSON.stringify({
-    "all": [{
+    'all': [{
       name: 'Afghanistan',
       code: 'AF'
     }, {
