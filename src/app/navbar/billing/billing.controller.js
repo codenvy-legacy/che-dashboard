@@ -21,21 +21,42 @@ class BillingCtrl {
     this.codenvyNotificationService = codenvyNotificationService;
     this.lodash = lodash;
     this.providedResources = {};
+    this.isFreeAccount = false;
+    this.payAsYouGo = false;
 
     this.invoices = [];
 
     if (this.codenvyAPI.getAccount().getAccounts().length > 0) {
+      this.fetchSubscriptions();
       this.fetchInvoices();
-      this.detectUsage();
     } else {
       this.codenvyAPI.getAccount().fetchAccounts().then(() => {
         this.fetchInvoices();
-        this.detectUsage();
+        this.fetchSubscriptions();
       });
     }
 
    this.detectCurrentMonthPeriod();
 
+  }
+
+  fetchSubscriptions() {
+    let currentAccount = this.codenvyAPI.getAccount().getCurrentAccount();
+    this.codenvyAPI.getAccount().fetchSubscriptions(currentAccount.id).then(() => {
+      this.processSubscriptions();
+    }, (error) => {
+      if (error.status === 304) {
+        this.processSubscriptions();
+      }
+    });
+  }
+
+  processSubscriptions() {
+    let currentAccount = this.codenvyAPI.getAccount().getCurrentAccount();
+    this.isFreeAccount = this.codenvyAPI.getAccount().getSubscriptions(currentAccount.id).length === 0;
+    let plans = this.lodash.pluck(this.codenvyAPI.getAccount().getSubscriptions(currentAccount.id), 'planId');
+    this.isPayAsYouGo = plans.indexOf(this.codenvyAPI.getAccount().getPayAsYouGoPlanId()) >= 0;
+    this.detectUsage();
   }
 
   fetchInvoices() {
@@ -63,6 +84,7 @@ class BillingCtrl {
   detectUsage() {
     let currentAccount = this.codenvyAPI.getAccount().getCurrentAccount();
     this.usedGBH = 0;
+    this.chargedGBH = 0;
 
     this.codenvyAPI.getSaas().fetchUsedResources(currentAccount.id).then(() => {
       let resources = this.codenvyAPI.getSaas().getUsedResources(currentAccount.id);
@@ -74,7 +96,8 @@ class BillingCtrl {
   getProvided(account) {
     this.codenvyAPI.getSaas().fetchProvidedResources(account.id).then(() => {
       this.providedResources = this.codenvyAPI.getSaas().getProvidedResources(account.id);
-      this.setUpChart(this.usedGBH, this.providedResources.freeAmount);
+      let providedSum = this.providedResources.freeAmount + this.providedResources.prepaidAmount;
+      this.chargedGBH = (providedSum > this.usedGBH) ? 0 : this.usedGBH - providedSum;
     });
   }
 
@@ -85,41 +108,6 @@ class BillingCtrl {
       return sum;
     });
     return (usedMb).toFixed(2);
-  }
-
-  setUpChart(used, provided) {
-    let available = provided - used;
-
-    let usedPercents = (used * 100 / provided).toFixed(0);
-    let availablePercents = 100 - usedPercents;
-
-    this.config = {
-      tooltips: true,
-      labels: false,
-      mouseover: function() {},
-      mouseout: function() {},
-      click: function() {},
-      legend: {
-        display: false,
-        position: 'right'
-      },
-      innerRadius: '25',
-      colors: ['#4e5a96', '#d4d4d4']
-    };
-
-    this.data = {
-      data: [{
-        x: 'Consumed',
-        y: [used],
-        tooltip: 'Consumed (' + usedPercents + '%)'
-      }, {
-        x: 'Available',
-        y: [available],
-        tooltip: 'Available (' + availablePercents + '%)'
-      }]
-    };
-
-
   }
 
   processInvoices(invoices) {

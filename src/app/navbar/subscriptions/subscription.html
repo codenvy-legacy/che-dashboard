@@ -13,14 +13,15 @@
 <cdvy-toolbar cdvy-title="Your Subscriptions"></cdvy-toolbar>
 
 <md-content md-scroll-y flex md-theme="maincontent-theme">
-  <pay-as-you-go-info cdvy-subscription="subscriptionCtrl.payAsYouGoSubscription" ng-show="subscriptionCtrl.payAsYouGoSubscription">
-  </pay-as-you-go-info>
-  <subscription-info ng-repeat="subscription in subscriptionCtrl.subscriptions" cdvy-subscription="subscription">
-  </subscription-info>
+  <saas-subscription-info cdvy-subscription="subscriptionCtrl.saasSubscription" ng-show="subscriptionCtrl.saasSubscription">
+  </saas-subscription-info>
+  <onprem-subscription-info cdvy-subscription="subscriptionCtrl.onPremSubscription" ng-show="subscriptionCtrl.onPremSubscription">
+  </onprem-subscription-info>
   <subscription-proposal ng-repeat="proposal in subscriptionCtrl.proposals" cdvy-title="{{proposal.title}}"
                          cdvy-description="{{proposal.description}}"
                          cdvy-icon="{{proposal.icon}}"
-                         cdvy-button-title="{{proposal.buttonTitle}}" proposal-click="proposal.buy()">
+                         cdvy-button-title="{{proposal.buttonTitle}}" proposal-click="proposal.buy()"
+                         cdvy-additional-button-title="{{proposal.additionalButtonTitle}}" additional-button-click="proposal.additionalButtonClick()">
     <ul>
       <li ng-repeat="item in proposal.content">{{item}}</li>
     </ul>

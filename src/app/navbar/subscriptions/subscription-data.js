@@ -13,22 +13,17 @@
 export var  subscriptionDetails = [
   {
     'type' : 'on-prem',
-    'title' : 'On-Prem Account',
-    'description' : '$300 / user / year',
-    'buttonTitle' : 'Cancel',
-    'icon' : 'assets/images/icon-on-prem.png'
+    'title' : 'On-Prem',
   },
   {
     'type' : 'pay-as-you-go',
     'title' : 'Pay-As-You-Go Account',
-    'description' : 'Your account has standart Pay-As-You-Go subscription :',
     'buttonTitle' : 'Remove Credit Card',
     'icon' : 'assets/images/icon-saas.png'
   },
   {
     'type' : 'prepaid',
     'title' : 'SaaS Pre-Paid Subscription',
-    'description' : ' GB Hrs / Month',
     'buttonTitle' : 'Cancel',
     'icon' : 'assets/images/icon-saas.png'
   }
@@ -42,24 +37,20 @@ export var subscriptionOffers = [
       'buttonTitle' : 'Add Credit Card',
       'icon' : 'assets/images/icon-saas.png',
       'content' : [
-        'Machines up to 200GB RAM',
+        'Unlimited workspaces, projects, developers and IDE time',
+        'Machines up to 4GB RAM',
         'Always-on machines',
-        '10 GB hours free per month',
-        'Billing starts after free monthly hours',
-        'Email support'
+        '20 GB hours free per month icon',
+        'Forum support'
       ]
     },
     {
       'type' : 'on-prem',
       'title' : 'On-Prem',
       'description' : 'All the power of Codenvy\'s Cloud behind your firewall, connected to your systems and processes.',
-      'buttonTitle' : 'Buy',
-      'icon' : 'assets/images/icon-on-prem.png',
-      'content' : [
-        'Unlimited nodes',
-        'Updater service',
-        'Email support'
-      ]
+      'buttonTitle' : 'Learn More',
+      'additionalButtonTitle' : 'Contact Sales',
+      'icon' : 'assets/images/icon-on-prem.png'
     }
   ];
 

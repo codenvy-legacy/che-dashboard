@@ -12,15 +12,15 @@
 
 import SubscriptionCtrl from '../subscriptions/subscription.controller';
 import SubscriptionProposal from '../subscriptions/subscription-proposal.directive';
-import SubscriptionInfo from '../subscriptions/subscription-info.directive';
-import PayAsYouGoInfo from '../subscriptions/pay-as-you-go-info.directive';
+import OnpremSubscriptionInfo from '../subscriptions/onprem-subscription-info.directive';
+import SaasSubscriptionInfo from '../subscriptions/saas-subscription-info.directive';
 
 class SubscriptionConfig {
 
   constructor(register) {
     register.directive('subscriptionProposal', SubscriptionProposal);
-    register.directive('subscriptionInfo', SubscriptionInfo);
-    register.directive('payAsYouGoInfo', PayAsYouGoInfo);
+    register.directive('onpremSubscriptionInfo', OnpremSubscriptionInfo);
+    register.directive('saasSubscriptionInfo', SaasSubscriptionInfo);
     register.controller('SubscriptionCtrl', SubscriptionCtrl);
 
 
