@@ -17,8 +17,6 @@ import OnPremisesAdminBridgeAvailableSoftwareCtrl from './software/software.cont
 import AvailableSoftwarePanel from './software/software.directive';
 import OnPremisesAdminBridgeYourSubscriptionCtrl from './yoursubscription/yoursubscription.controller';
 import YourSubscriptionPanel from './yoursubscription/yoursubscription.directive';
-import OnPremisesAdminBridgeInstallManagerCtrl from './installmanager/installmanager.controller';
-import InstallManagerPanel from './installmanager/installmanager.directive';
 
 class OnPremisesAdminBridgeConfig {
 
@@ -27,12 +25,10 @@ class OnPremisesAdminBridgeConfig {
     register.directive('cdvyCodenvyAccount', CodenvyAccountPanel);
     register.directive('cdvyAvailableSoftware', AvailableSoftwarePanel);
     register.directive('cdvyYourSubscription', YourSubscriptionPanel);
-    register.directive('cdvyInstallManager', InstallManagerPanel);
     register.controller('OnPremisesAdminBridgeCtrl', OnPremisesAdminBridgeCtrl);
     register.controller('OnPremisesAdminBridgeCodenvyAccountCtrl', OnPremisesAdminBridgeCodenvyAccountCtrl);
     register.controller('OnPremisesAdminBridgeAvailableSoftwareCtrl', OnPremisesAdminBridgeAvailableSoftwareCtrl);
     register.controller('OnPremisesAdminBridgeYourSubscriptionCtrl', OnPremisesAdminBridgeYourSubscriptionCtrl);
-    register.controller('OnPremisesAdminBridgeInstallManagerCtrl', OnPremisesAdminBridgeInstallManagerCtrl);
 
     // configure routes
     register.app.config(function ($routeProvider) {
