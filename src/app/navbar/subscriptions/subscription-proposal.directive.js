@@ -31,7 +31,9 @@ class SubscriptionProposal {
       icon: '@cdvyIcon',
       description: '@cdvyDescription',
       buttonTitle: '@cdvyButtonTitle',
-      proposalClick: '&'
+      proposalClick: '&',
+      additionalButtonTitle: '@cdvyAdditionalButtonTitle',
+      additionalButtonClick: '&'
     };
   }
 

@@ -17,8 +17,12 @@
     <p>{{description}}</p>
   </div>
   <ng-transclude class="subscription-proposal-content"></ng-transclude>
-  <div layout="column" layout-align="center center">
+  <div layout="row" layout-sm="column" layout-align="center center">
     <cdvy-button-primary cdvy-button-title="{{buttonTitle}}" ng-click="proposalClick();"></cdvy-button-primary>
+    <div ng-if="additionalButtonTitle" hide-sm class="subscription-proposal-button-space"></div>
+    <cdvy-button-default ng-if="additionalButtonTitle" cdvy-button-title="{{additionalButtonTitle}}"
+                         ng-click="additionalButtonClick();">
+    </cdvy-button-default>
   </div>
 </cdvy-panel>
 

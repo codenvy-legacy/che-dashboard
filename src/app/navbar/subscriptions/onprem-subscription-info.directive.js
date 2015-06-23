@@ -11,10 +11,10 @@
 'use strict';
 
 /**
- * Defines a directive for displaying Pay-as-You-Go subscription information.
+ * Defines a directive for displaying on-prem subscription information.
  * @author Ann Shumilova
  */
-class PayAsYouGoInfo {
+class OnpremSubscriptionInfo {
 
   /**
    * Default constructor that is using resource
@@ -22,7 +22,7 @@ class PayAsYouGoInfo {
    */
   constructor () {
     this.restrict='E';
-    this.templateUrl = 'app/navbar/subscriptions/pay-as-you-go-info.html';
+    this.templateUrl = 'app/navbar/subscriptions/onprem-subscription-info.html';
     this.transclude= true;
 
     // scope values
@@ -33,5 +33,5 @@ class PayAsYouGoInfo {
 
 }
 
-export default PayAsYouGoInfo;
+export default OnpremSubscriptionInfo;
 

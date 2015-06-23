@@ -23,7 +23,6 @@ class SubscriptionCtrl {
       this.$window = $window;
       this.lodash = lodash;
       this.proposals = [];
-      this.subscriptions = [];
 
       if (this.codenvyAPI.getAccount().getAccounts().length > 0) {
         this.fetchSubscriptions();
@@ -50,38 +49,46 @@ class SubscriptionCtrl {
    * if not adds new proposals. There two types of subscriptions : on-premises and saas(pay-as-you-go).
   */
   processSubscriptions(subscriptions) {
-    this.payAsYouGoSubscription = null;
+    this.saasSubscription = null;
+    this.onPremSubscription = null;
+
     let services = this.lodash.pluck(subscriptions, 'serviceId');
     let hasOnPremises = services.indexOf(this.codenvyAPI.getAccount().getOnPremServiceId()) >= 0;
     let saasServiceId = this.codenvyAPI.getAccount().getSaasServiceId();
     let onPremServiceId = this.codenvyAPI.getAccount().getOnPremServiceId();
 
-    let saasSubscription = this.lodash.find(subscriptions, function (subscription) {
+    this.saasSubscription = this.lodash.find(subscriptions, function (subscription) {
       return subscription.serviceId === saasServiceId;
     });
 
-    let onPremSubscription = this.lodash.find(subscriptions, function (subscription) {
+    this.onPremSubscription = this.lodash.find(subscriptions, function (subscription) {
       return subscription.serviceId === onPremServiceId;
     });
 
-    if (saasSubscription) {
-      if (saasSubscription.planId === this.codenvyAPI.getAccount().getPayAsYouGoPlanId()) {
-        this.fillPayAsYouGoDetails(saasSubscription);
-        this.payAsYouGoSubscription = saasSubscription;
-      } else if (saasSubscription.planId === this.codenvyAPI.getAccount().getPrepaidPlanId()) {
-        this.fillPrePaidDetails(saasSubscription);
-        this.subscriptions.push(saasSubscription);
-      }
+    if (this.saasSubscription) {
+      this.getProvidedResources();
     } else {
       this.proposals.push(this.getPayAsYouGoProposal());
     }
 
     if (hasOnPremises) {
-      this.fillOnPremDetails(onPremSubscription);
-      this.subscriptions.push(onPremSubscription);
+      this.fillOnPremDetails(this.onPremSubscription);
+
     } else {
       this.proposals.push(this.getOnPremProposal());
     }
+  }
+
+  getProvidedResources() {
+    let currentAccount = this.codenvyAPI.getAccount().getCurrentAccount();
+    this.codenvyAPI.getSaas().fetchProvidedResources(currentAccount.id).then(() => {
+      this.providedResources = this.codenvyAPI.getSaas().getProvidedResources(currentAccount.id);
+      if (this.saasSubscription.planId === this.codenvyAPI.getAccount().getPayAsYouGoPlanId()) {
+        this.fillPayAsYouGoDetails(this.saasSubscription);
+      } else if (this.saasSubscription.planId === this.codenvyAPI.getAccount().getPrepaidPlanId()) {
+        this.fillPrePaidDetails(this.saasSubscription);
+      }
+    });
   }
 
   fillPayAsYouGoDetails(saasSubscription) {
@@ -92,12 +99,16 @@ class SubscriptionCtrl {
     });
 
     saasSubscription.title = details.title;
-    saasSubscription.description = details.description;
-    saasSubscription.icon = details.icon;
     saasSubscription.buttonTitle = details.buttonTitle;
     saasSubscription.cancel = function() {
       ctrl.cancelPayAsYouGo(ctrl.$location);
     };
+
+    saasSubscription.attributes = [];
+    saasSubscription.attributes.push({title : 'Free GBH', value : this.providedResources.freeAmount + ' GB hours/month'});
+    saasSubscription.attributes.push({title : 'Billing Rate', value : '$' + 0 + '/GB hour'});
+    saasSubscription.attributes.push({title : 'Activation Date', value : saasSubscription.startDate });
+    saasSubscription.attributes.push({title : 'Next Renewal', value : saasSubscription.endDate });
   }
 
   fillPrePaidDetails(prepaidSubscription) {
@@ -108,12 +119,17 @@ class SubscriptionCtrl {
 
     let prepaid = prepaidSubscription.properties.PrepaidGbH;
     prepaidSubscription.title = details.title;
-    prepaidSubscription.description = prepaid + details.description;
-    prepaidSubscription.icon = details.icon;
     prepaidSubscription.buttonTitle = details.buttonTitle;
     prepaidSubscription.cancel = function() {
       ctrl.cancelPrePaid(ctrl.$window);
     };
+
+    prepaidSubscription.attributes = [];
+    prepaidSubscription.attributes.push({title : 'Prepaid GBH', value : this.providedResources.prepaidAmount + ' GB hours/month'});
+    prepaidSubscription.attributes.push({title : 'Free GBH', value : this.providedResources.freeAmount + ' GB hours/month'});
+    prepaidSubscription.attributes.push({title : 'Overage GBH rate', value : '$' + 0 + '/GB hour'});
+    prepaidSubscription.attributes.push({title : 'Activation Date', value : prepaidSubscription.startDate });
+    prepaidSubscription.attributes.push({title : 'Next Renewal', value : prepaidSubscription.endDate });
   }
 
   fillOnPremDetails(onPremSubscription) {
@@ -123,12 +139,12 @@ class SubscriptionCtrl {
     });
 
     onPremSubscription.title = details.title;
-    onPremSubscription.description = details.description;
-    onPremSubscription.icon = details.icon;
-    onPremSubscription.buttonTitle = details.buttonTitle;
     onPremSubscription.cancel = function() {
       ctrl.cancelOnPrem(ctrl.$window);
     };
+
+    onPremSubscription.attributes = [];
+    onPremSubscription.attributes.push({title : 'Expiring Date', value : onPremSubscription.endDate });
   }
 
   getPayAsYouGoProposal() {
@@ -151,6 +167,10 @@ class SubscriptionCtrl {
     $window.open('https://codenvy.com/products/onprem', '_blank');
   }
 
+  onLearnMore($window) {
+    $window.open('http://pages.codenvy.com/contact.html', '_blank');
+  }
+
   cancelPayAsYouGo(location) {
     location.path('account');
   }
@@ -171,6 +191,10 @@ class SubscriptionCtrl {
     });
     onPremOffer.buy = function() {
       ctrl.onPremChoosen(ctrl.$window);
+    };
+
+    onPremOffer.additionalButtonClick = function() {
+      ctrl.onLearnMore(ctrl.$window);
     };
     return onPremOffer;
   }
