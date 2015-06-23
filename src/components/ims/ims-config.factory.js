@@ -24,8 +24,10 @@ class ImsConfigApi {
   constructor($resource) {
 
     // remote call
-    this.remoteImsAPI = $resource('/im', {}, {
-      getIMConfig: { method: 'GET', url: '/im/config' }
+    this.remoteImsAPI = $resource('/im/codenvy/properties', {}, {
+      getIMConfig: { method: 'GET' },
+      getIMConfigProperty: { method: 'GET', url: '/im/codenvy/properties/:key' },
+      setIMConfig: { method: 'PUT' }
     });
   }
 
@@ -33,8 +35,24 @@ class ImsConfigApi {
    * Returns Installation Manager Server configuration
    */
   getIMConfig() {
-    let request = this.remoteImsAPI.getIMConfig();
-    return request.$promise;
+    return this.remoteImsAPI.getIMConfig();
+  }
+
+  getIMConfigProperty(propertyName) {
+    let param = { key: propertyName };
+    return this.remoteImsAPI.getIMConfigProperty(param);
+  }
+
+  /**
+   * Add the given values to the codenvy configuration.
+   * @param it an iterator for [key, value] arrays
+   */
+  setIMConfig(it) {
+    let payload = {};
+    for (let [key, value] of it) {
+      payload[key] = value;
+    }
+    return this.remoteImsAPI.setIMConfig(payload);
   }
 }
 
