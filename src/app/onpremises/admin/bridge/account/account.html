@@ -78,36 +78,28 @@
   </div>
 
     <!-- 30 days free subscription banner -->
-  <div layout="row" layout-align="center center" layout-fill
-        ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.show30DaysAdvertisement">
-    <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
-    <span flex class="onpremises-admin-bridge-codenvyaccount-subscription-frame-notlogged onpremises-admin-bridge-codenvyaccount-margin-above">
-      Receive a free 30 day On-Prem Paid Subscription when you first login with Codenvy.com credentials.
-    </span>
-    <div flex="5" hide-sm hide-md hide-lg>&nbsp;</div>
-  </div>
+  <cdvy-frame cdvy-frame-class="onpremises-admin-bridge-codenvyaccount-subscription-frame-notlogged onpremises-admin-bridge-codenvyaccount-margin-above"
+              ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.show30DaysAdvertisement">
+    Receive a free 30 day On-Prem Paid Subscription when you first login with Codenvy.com credentials.
+  </cdvy-frame>
 
   <!-- Subscription status frame -->
-  <div class="onpremises-admin-bridge-codenvyaccount-subscription-frame onpremises-admin-bridge-codenvyaccount-margin-above" layout="row" layout-fill>
-    <div flex="5" hide-sm hide-md hide-lg></div>
-    <span class="onpremises-admin-bridge-codenvyaccount-subscription-frame-sub" flex
-          layout="row" layout-md="column" layout-sm="column"
-          layout-align="center center"
-          layout-wrap
-          ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.loggedIn && onPremisesAdminBridgeCodenvyAccountCtrl.showSubscribedMessage">
-      <span>You have a Codenvy On-Prem Paid Subscription.</span>
-      <span hide-sm hide-md>&emsp;</span>
-      <span layout="row" layout-align="start center">
-        <span class="onpremises-admin-bridge-codenvyaccount-expiration-label">Renewal Date:&nbsp;</span>
-        <span class="onpremises-admin-bridge-codenvyaccount-expiration-date">
-          {{onPremisesAdminBridgeCodenvyAccountCtrl.onpremSubscriptionExpiration |date:'longDate'}}
-        </span>
+  <cdvy-frame class="onpremises-admin-bridge-codenvyaccount-subscription-frame onpremises-admin-bridge-codenvyaccount-margin-above"
+              cdvy-frame-class="onpremises-admin-bridge-codenvyaccount-subscription-frame-sub"
+              ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.loggedIn && onPremisesAdminBridgeCodenvyAccountCtrl.showSubscribedMessage">
+    <span>You have a Codenvy On-Prem Paid Subscription.</span>
+    <span hide-sm hide-md>&emsp;</span>
+    <span layout="row" layout-align="start center">
+      <span class="onpremises-admin-bridge-codenvyaccount-expiration-label">Renewal Date:&nbsp;</span>
+      <span class="onpremises-admin-bridge-codenvyaccount-expiration-date">
+        {{onPremisesAdminBridgeCodenvyAccountCtrl.onpremSubscriptionExpiration |date:'longDate'}}
       </span>
     </span>
-    <div class="onpremises-admin-bridge-codenvyaccount-subscription-frame-nosub" flex layout-align="center center" layout="column" layout-gt-md="row" ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.loggedIn && onPremisesAdminBridgeCodenvyAccountCtrl.showNotSubscribedMessage">
+  </cdvy-frame>
+  <cdvy-frame class="onpremises-admin-bridge-codenvyaccount-subscription-frame onpremises-admin-bridge-codenvyaccount-margin-above"
+              cdvy-frame-class="onpremises-admin-bridge-codenvyaccount-subscription-frame-nosub"
+              ng-if="onPremisesAdminBridgeCodenvyAccountCtrl.loggedIn && onPremisesAdminBridgeCodenvyAccountCtrl.showNotSubscribedMessage">
       <span>You have a Codenvy On-Prem Free Subscription.&emsp;</span>
       <cdvy-link ng-href="{{onPremisesAdminBridgeCodenvyAccountCtrl.upgradeSubscriptionUrl}}" target="_blank" cdvy-no-padding cdvy-link-text="Add a paid one – your conscience will thank you."></cdvy-link>
-    </div>
-    <div flex="5" hide-sm hide-md hide-lg></div>
-  </div>
+  </cdvy-frame>
 </cdvy-panel>
