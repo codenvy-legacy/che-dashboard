@@ -36,6 +36,9 @@
             </div>
           </td>
           <td class="onprem-admin-available-software-col">
+            <div class="onprem-admin-available-software-latest" ng-show="!artifactItem.toInstall && !artifactItem.availables">
+              Your local version is the latest available
+            </div>
             <div ng-repeat="artifactToInstall in artifactItem.toInstall">
               <div layout-gt-md="row" layout-md="column">
                 <div class="onprem-admin-available-software-available-version" flex>{{artifactToInstall.version}}</div>
