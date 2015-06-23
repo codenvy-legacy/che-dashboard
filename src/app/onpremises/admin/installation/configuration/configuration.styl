@@ -1,5 +1,11 @@
 .onprem-installation-config-block
-  border: 1px solid black
+  border: 1px solid $default-border-color
   padding: 2px
   margin: 5px
-  max-width: 80em
+
+.onprem-installation-config-update-warning
+  frame($config-frame-warning-bg-color, $config-frame-warning-color)
+
+.onprem-installation-config-syntax
+  font-style italic
+  color $config-syntax-help-color
