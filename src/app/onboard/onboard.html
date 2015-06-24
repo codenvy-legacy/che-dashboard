@@ -114,7 +114,10 @@
 
   </cdvy-panel>
 
-  <cdvy-button-primary cdvy-button-title="reset onboarding flow for testing purpose" ng-click="onBoardCtrl.deleteOnBoardingCompleted()"></cdvy-button-primary>
+  <div ng-if="onBoardCtrl.inDevelopmentMode()">
+    Only in development mode:
+    <cdvy-button-primary cdvy-button-title="reset onboarding flow for testing purpose" ng-click="onBoardCtrl.deleteOnBoardingCompleted()"></cdvy-button-primary>
+  </div>
 
 
 

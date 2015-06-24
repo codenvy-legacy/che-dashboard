@@ -25,7 +25,7 @@ class OnBoardCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, $location, $rootScope) {
+  constructor(codenvyAPI, $location, $rootScope, userDashboardConfig) {
     this.codenvyAPI = codenvyAPI;
     this.$location = $location;
 
@@ -36,7 +36,11 @@ class OnBoardCtrl {
     this.$rootScope = $rootScope;
 
     this.profile = codenvyAPI.getProfile().getProfile();
+
+    this.devMode = userDashboardConfig.developmentMode;
+
   }
+
 
   deleteOnBoardingCompleted() {
     let properties = {'onBoardingFlowCompleted' : 'false'};
@@ -175,6 +179,11 @@ class OnBoardCtrl {
    */
   isCompleteSignupButtonDisabled() {
     return !this.profileInformationForm  || this.profileInformationForm.$invalid;
+  }
+
+
+  inDevelopmentMode() {
+    return this.devMode;
   }
 
 
