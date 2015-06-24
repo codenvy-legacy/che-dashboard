@@ -40,10 +40,10 @@
     <ng-form name="profileInformationForm">
       <div layout="row" layout-align="start start">
         <image class="onboard-image-panel" src="assets/images/image-operator.png"></image>
-        <div layout="column" flex>
-          <account-profile ng-init="onBoardCtrl.setAccountProfile(accountCtrl);onBoardCtrl.setAccountProfileForm(profileInformationForm)" accountForm="profileInformationForm"></account-profile>
+        <div layout="column" flex ng-controller="AccountCtrl as accountCtrl">
+          <account-profile ng-init="onBoardCtrl.setAccountController(accountCtrl);onBoardCtrl.setAccountProfileForm(profileInformationForm)" accountForm="profileInformationForm"></account-profile>
           <div layout="row" layout-align="center center">
-            <cdvy-button-primary cdvy-button-title="update profile" ng-disabled="onBoardCtrl.isCompleteSignupButtonDisabled()" ng-click="onBoardCtrl.completeProfile();accountCtrl.setProfileAttributes(profileInformationForm.$valid)"></cdvy-button-primary>
+            <cdvy-button-primary cdvy-button-title="update profile" ng-disabled="onBoardCtrl.isCompleteSignupButtonDisabled()" ng-click="onBoardCtrl.completeProfile()"></cdvy-button-primary>
           </div>
         </div>
       </div>

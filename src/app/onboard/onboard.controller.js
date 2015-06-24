@@ -70,11 +70,11 @@ class OnBoardCtrl {
   }
 
   /**
-   * Sets the account profile
-   * @param profile the profile data
+   * Sets the account controller
+   * @param accountController the account controller
    */
-  setAccountProfile(profile) {
-    this.profileScope = profile;
+  setAccountController(accountController) {
+    this.accountController = accountController;
   }
 
 
@@ -137,6 +137,7 @@ class OnBoardCtrl {
    * Callback when profile is being completed
    */
   completeProfile() {
+    this.accountController.setProfileAttributes(this.profileInformationForm.$valid)
 
     // go to the next step
     this.nextStep();
