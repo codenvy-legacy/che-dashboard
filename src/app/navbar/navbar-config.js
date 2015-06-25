@@ -12,6 +12,7 @@
 
 import NavBarCtrl from '../navbar/navbar.controller';
 import NavBar from '../navbar/navbar.directive.js';
+import NavBarSelected from '../navbar/navbar-selected.directive.js';
 import UdBetaWidget from '../navbar/ud-beta-widget.directive.js';
 
 class NavbarConfig {
@@ -19,7 +20,7 @@ class NavbarConfig {
   constructor(register) {
     register.controller('NavbarCtrl', NavBarCtrl);
     register.directive('cdvyNavBar', NavBar);
-
+    register.directive('navBarSelected', NavBarSelected);
     register.directive('udBetaWidget', UdBetaWidget);
   }
 }

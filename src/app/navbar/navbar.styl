@@ -42,12 +42,12 @@ $submenu-font-size = 12px
 .admin-navbar-menu section a.md-button span
   color $navbar-menu-color
 
-.admin-navbar-menu md-list-item a.md-button:focus span
+.admin-navbar-menu md-list-item a.md-button.cdvy-navbar-selected span
   color $white-color
 
 /* background color */
 
-.admin-navbar-menu md-list-item a.md-button:focus,
+.admin-navbar-menu md-list-item a.md-button.cdvy-navbar-selected,
 .admin-navbar-menu md-list-item a.md-button:hover
   background-color $active-background-color
 
@@ -86,15 +86,15 @@ $submenu-font-size = 12px
   text-decoration none
 
   /* uselessly long selector to pump up specificity */
-.admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button:focus,
+.admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button.cdvy-navbar-selected,
 .admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button:hover
   background-color $active-background-color
 
-.admin-navbar-menu a:hover, .admin-navbar-menu a:focus
+.admin-navbar-menu a:hover, .admin-navbar-menu a.cdvy-navbar-selected
   color inherit
 
 /* effect */
-.admin-navbar-menu md-list-item a:focus .md-ripple-container:before
+.admin-navbar-menu md-list-item a.cdvy-navbar-selected .md-ripple-container:before
   content ""
   left 0
   top 4px
