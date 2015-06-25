@@ -55,8 +55,11 @@ class CreateProjectGithubCtrl {
   }
 
   askLoad() {
+    this.state = 'LOADING';
     this.checkTokenValidity().then(() => {
       this.loadRepositories();
+    }).catch(() => {
+      this.state = 'NO_REPO';
     });
 
   }
@@ -122,7 +125,7 @@ class CreateProjectGithubCtrl {
 
 
   loadRepositories()  {
-    this.state = 'LOADING';
+
 
     this.checkGitHubAuthentication().then( () => {
       var user = this.GitHub.user().get();
