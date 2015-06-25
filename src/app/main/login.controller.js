@@ -46,7 +46,7 @@ class LoginCtrl {
         $window.alert('error');
         console.log(response);
       });
-    }
+    };
   }
 }
 

@@ -28,7 +28,7 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
       name: '',
       version: '',
       percent: 0
-    }
+    };
 
     function internalFunction(object, id) {
       object.checkDownloadID(id);

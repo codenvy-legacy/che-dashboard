@@ -109,7 +109,7 @@ class OnBoardCtrl {
     }, (error) => {
       //we got error
       this.addingCardIsInProgress = false;
-    })
+    });
 
   }
 
@@ -137,7 +137,7 @@ class OnBoardCtrl {
    * Callback when profile is being completed
    */
   completeProfile() {
-    this.accountController.setProfileAttributes(this.profileInformationForm.$valid)
+    this.accountController.setProfileAttributes(this.profileInformationForm.$valid);
 
     // go to the next step
     this.nextStep();

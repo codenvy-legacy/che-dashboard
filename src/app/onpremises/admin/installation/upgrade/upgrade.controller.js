@@ -65,7 +65,7 @@ class UpgradeInstallationCtrl {
             if ('READY_TO_INSTALL' === artifact.status) {
               this.codenvyUpgradableArtifact = artifact;
             }
-          })
+          });
         }
     }
   }
