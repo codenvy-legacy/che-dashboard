@@ -124,17 +124,17 @@ if (DEV) {
 // config routes
 module.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
-    .accessWhen('/', {
+/*    .accessWhen('/', {
       templateUrl: 'app/dashboard/dashboard.html',
       controller: 'DashboardCtrl'
-    })
+    })*/
     .accessWhen('/login', {
       templateUrl: 'app/main/login.html',
       controller: 'LoginCtrl',
       controllerAs: 'loginCtrl'
     })
     .accessOtherWise({
-      redirectTo: '/'
+      redirectTo: '/projects'
     });
 
 

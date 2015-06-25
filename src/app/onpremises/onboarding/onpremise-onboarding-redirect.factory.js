@@ -56,7 +56,7 @@ class OnPremiseOnBoardingRedirect {
     }
 
     // if user tries to get dashboard, redirect
-    if ('app/dashboard/dashboard.html' === url) {
+    if ('app/projects/list-projects/list-projects.html' === url) {
       return {route:"/onprem/admin/bridge"};
     }
 
