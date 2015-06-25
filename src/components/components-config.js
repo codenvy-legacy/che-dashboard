@@ -10,10 +10,11 @@
  */
 'use strict';
 
-/*exported CodenvyAPI, WidgetConfig, GitHub, CodeMirror, CodenvyNotificationService */
+/*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotificationService */
 
 import CodenvyAPI from './api/codenvy-api.factory';
 import WidgetConfig from './widget/widget-config';
+import AttributeConfig from './attribute/attribute-config';
 
 // import Routing Redirect
 import RoutingRedirect from './routing/routing-redirect.factory';
