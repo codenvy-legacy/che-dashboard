@@ -43,15 +43,18 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
-  <body layout="row">
+  <body layout="row" >
+     <div ng-hide="waitingLoaded" class="main-page-loader">
+       <img src="https://codenvy.com/images/logo@3x.png">Loading...
+     </div>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2 dark-menu-bg sidebar-entry"  md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+    <md-sidenav ng-show="waitingLoaded" class="md-sidenav-left md-whiteframe-z2 dark-menu-bg sidebar-entry"  md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
       <cdvy-nav-bar></cdvy-nav-bar>
     </md-sidenav>
-    <div class="main-page" layout="column" role="main" tabindex="-1" flex ng-view >
+    <div class="main-page" layout="column" role="main" tabindex="-1" flex ng-view ng-show="waitingLoaded">
 
     </div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

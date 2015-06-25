@@ -197,7 +197,9 @@ class CheckLogin {
 /**
  * Setup route redirect module
  */
-module.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', function ($rootScope, $location, routingRedirect, codenvyUser) {
+module.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', function ($rootScope, $location, routingRedirect, codenvyUser, $timeout) {
+
+  $rootScope.waitingLoaded = false;
 
   /**
    * Add default redirect to login in dev mode
@@ -206,6 +208,12 @@ module.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', functio
     routingRedirect.addRouteCallback(new CheckLogin(codenvyUser));
   }
 
+  $rootScope.$on('$viewContentLoaded', function(event) {
+
+    $timeout(function() {
+      $rootScope.waitingLoaded = true;
+    }, 1000);
+  });
 
   $rootScope.$on('$routeChangeStart', (event, next,  previous, rejection)=> {
     if (DEV) {
