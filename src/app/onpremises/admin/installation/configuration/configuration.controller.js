@@ -172,13 +172,11 @@ class OnPremConfigurationCtrl {
   }
 
   _enterSubmitState() {
-    console.log('entering submit state');
     this.editorOptions.readOnly = 'nocursor';
     this.submitState = true;
   }
 
   _exitSubmitState() {
-    console.log('leaving submit state');
     this.editorOptions.readOnly = false;
     this.submitState = false;
   }
