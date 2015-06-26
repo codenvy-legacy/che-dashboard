@@ -1,11 +1,35 @@
-.onprem-installation-config-block
-  border: 1px solid $default-border-color
-  padding: 2px
-  margin: 5px
 
 .onprem-installation-config-update-warning
   frame($config-frame-warning-bg-color, $config-frame-warning-color)
 
-.onprem-installation-config-syntax
-  font-style italic
-  color $config-syntax-help-color
+.onprem-installation-config-header,
+.onprem-installation-config-row
+  min-height max-content
+
+.onprem-installation-config-body
+  max-height 40vh
+  overflow-x visible
+  overflow-y scroll
+
+.onprem-installation-config-header
+  background-color #F1F1F1
+  font-size 18px
+  color $label-primary-color
+
+.onprem-installation-config-header-cell
+  padding 1em
+
+.onprem-installation-config-row
+  padding 18px
+
+.onprem-installation-config-header
+  border-bottom 1px solid $list-separator-color
+
+.onprem-installation-config-table
+  border 1px solid $list-separator-color
+
+.onprem-installation-config-header div.header-property
+  border-right 1px solid $list-separator-color
+
+.onprem-installation-config-table
+  margin-bottom 1em

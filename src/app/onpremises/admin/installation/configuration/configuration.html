@@ -13,35 +13,36 @@
 
 <cdvy-panel cdvy-title="Your Codenvy On-Prem Configuration">
   <md-content ng-form="onpremInstallationConfigForm">
-    <p>
-      This file contains the system configuration of Codenvy. Changing the parameters in this file will 
-      change the behavior of how Codenvy operates.
-    </p>
-    <p class="onprem-installation-config-syntax" style="display:none;">
-      Use the following syntax:<br>
-      <tt>property_name property value</tt><br>
-      Everything between the first space and the end of the line is considered the property value.
-    </p>
+
+    <div layout="column" class="onprem-installation-config-table">
+      <div layout="row" class="onprem-installation-config-header">
+        <div flex="30" class="onprem-installation-config-header-cell header-property">Property</div>
+        <div flex class="onprem-installation-config-header-cell hheader-value">Value</div>
+      </div>
+      <div layout="column" class="onprem-installation-config-body">
+        <div layout="row" class="onprem-installation-config-row"
+              ng-repeat="(index, data) in onPremConfigurationCtrl.config">
+          <div flex="30" class="onprem-installation-config-cell config-key">{{data[0]}}</div>
+          <div flex class="onprem-installation-config-cell config-value">
+            <md-input-container>
+              <input flex ng-model="onPremConfigurationCtrl.config[index][1]" aria-label="{{data[0]}}"></input>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <cdvy-frame cdvy-frame-class="onprem-installation-config-update-warning">
-      Changing these parameters will invoke a server restart and cause a maintenance window for your users. The admin dashboard may also be interrupted.
+      By updating these parameters, the server will restart and cause a maintenance window.
     </cdvy-frame>
-
-    <div class="onprem-installation-config-block">
-      <textarea ui-codemirror
-                ui-codemirror-opts="onPremConfigurationCtrl.editorOptions"
-                id="onpremInstallationConfigEditor"
-                ng-model="onPremConfigurationCtrl.config"
-                ng-change="onPremConfigurationCtrl.update()"
-                rows="15">
-      </textarea>
+    <div layout="column" layout-align="start center">
+      <div flex ng-show="onPremConfigurationCtrl.submitState" layout="column" layout-align="center center">
+        <md-progress-circular class="md-hue-2"  md-mode="indeterminate" md-theme="default"></md-progress-circular>
+      </div>
+      <cdvy-button-primary cdvy-button-title="Update Configuration"
+                            ng-click="onPremConfigurationCtrl.updateConfig()"
+                            ng-show="!onPremConfigurationCtrl.submitState">
+      </cdvy-button-primary>
     </div>
-    <div ng-show="onPremConfigurationCtrl.submitState" layout="column" layout-align="center center">
-      <md-progress-circular class="md-hue-2"  md-mode="indeterminate" md-theme="default"></md-progress-circular>
-    </div>
-    <cdvy-button-primary cdvy-button-title="Update Configuration"
-                          ng-click="onPremConfigurationCtrl.updateConfig()"
-                          ng-show="!onPremConfigurationCtrl.submitState">
-    </cdvy-button-primary>
   </md-content>
 </cdvy-panel>

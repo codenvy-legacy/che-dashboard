@@ -51,10 +51,9 @@ class OnPremConfigurationCtrl {
     }
     props.sort();
 
-    let result = '';
+    let result = [];
     for (let propName of props) {
-      let value = this.unmodifiedConfig.get(propName);
-      result = result + propName + ' ' + value + '\n';
+      result.push([propName, this.unmodifiedConfig.get(propName)]);
     }
     this.config = result;
   }
@@ -75,21 +74,10 @@ class OnPremConfigurationCtrl {
   }
 
   updateConfig() {
-    let lines = this.config.split('\n');
     let config = new Map();
 
-    for (let line of lines) {
-      let parseLineResult = this._handleLine(line);
-      if (parseLineResult) {
-        let [key, value] = parseLineResult;
-        if (config.get(key)) {
-          // already seen the key, warn and abort
-          this._warnDuplicate(key);
-          return;
-        } else {
-          config.set(key, value);
-        }
-      }
+    for (let property of this.config) {
+      config.set(property[0], property[1]);
     }
     let filtered = this._filterUnchanged(config);
     if (filtered && filtered.size > 0) {
@@ -119,6 +107,7 @@ class OnPremConfigurationCtrl {
       let payload = angular.fromJson(error.data);
       if (payload.properties && payload.properties.length > 0) {
         this._warnInvalidProperties(payload.properties);
+        this._exitSubmitState();
       }
       // will not synchronize the content to let the user fix their changes
     } else {
@@ -127,46 +116,15 @@ class OnPremConfigurationCtrl {
     }
   }
 
-  /**
-   * Parses a line.
-   * @param {line|string} the line to parse
-   * @returns [key, value] or undefined
-   */
-  _handleLine(line) {
-      let words = line.split(' ');
-      switch (words.length) {
-        case 0:
-          return;
-        case 1:
-          let key = words[0];
-          if (key.length > 0) {
-            return [key, ''];
-          } else {
-            return;
-          }
-        default:
-          return [words[0], words.slice(1).join(' ')];
-      }
-  }
-
-  _warnDuplicate(key) {
-    console.log(`Codenvy configuration editor: the ${key} property is set multiple times ; aborting update.`);
-    let aborted = this.$mdDialog.alert()
-      .title('Update Configuration Aborted')
-      .content(`There is more than one value for the property '${key}'`)
-      .ok('Close');
-    this.$mdDialog.show(aborted);
-  }
-
   _warnInvalidProperties(properties) {
-    console.log(`Codenvy configuration editor: the ${key} property is not accepted. Update cancelled.`);
+    console.log(`Codenvy configuration editor: the following properties are not accepted. Update cancelled.`, properties);
     let errorDialog = this.$mdDialog.alert()
       .title('Update Configuration Aborted')
       .ok('Close');
     if (properties.length == 1) {
       errorDialog.content(`The property ${properties[0]} is not a known configuration property name. The configuration was not updated.`);
     } else {
-      errorDialog.content(`The following properties are not known configuration property names. The configuration was not updated.<br>${properties}`);
+      errorDialog.content(`Some properties were not known configuration property names. The configuration was not updated. (properties: ${properties.join(', ')}).`);
     }
     this.$mdDialog.show(errorDialog);
   }
