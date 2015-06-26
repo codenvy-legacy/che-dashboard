@@ -301,7 +301,7 @@ class CreateProjectCtrl {
    * @param valueSelected
    */
   cdvySelecter(name, valueSelected) {
-    this.importProjectData.project.type = valueSelected.id;
+    this.importProjectData.project.type = valueSelected;
 
     // generate name
     this.generateProjectName();
