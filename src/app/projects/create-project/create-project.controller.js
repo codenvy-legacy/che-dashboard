@@ -20,12 +20,15 @@ class CreateProjectCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $filter, $timeout, $location, $mdDialog) {
+  constructor (codenvyAPI, $filter, $timeout, $location, $mdDialog, $rootScope) {
     this.codenvyAPI = codenvyAPI;
     this.$timeout = $timeout;
     this.$location = $location;
-    this.$mdDialog = $mdDialog;
+    this.$mdDialog = $mdDialog
+    this.$rootScope = $rootScope;
 
+    // subitem not yet completed
+    this.projectBlankCompleted = false;
 
     // keep references on workspaces and projects
     this.workspaces = [];
@@ -82,6 +85,12 @@ class CreateProjectCtrl {
     } catch (e) {
       // ignore the error
     }
+
+
+
+    $rootScope.$on('create-project-blank:initialized', () => {
+      this.projectBlankCompleted = true;
+    });
 
 
     this.importing = false;

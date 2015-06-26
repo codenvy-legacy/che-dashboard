@@ -20,8 +20,9 @@ class CreateProjectBlankCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI) {
+  constructor(codenvyAPI, $rootScope) {
     this.codenvyAPI = codenvyAPI;
+    this.$rootScope = $rootScope;
 
 
     // get project types
@@ -51,6 +52,9 @@ class CreateProjectBlankCtrl {
     for (let categoryName in rawTypesByCategory) {
       this.typesByCategory.push({ category: categoryName, types: rawTypesByCategory[categoryName] });
     }
+    // broadcast event
+    this.$rootScope.$broadcast('create-project-blank:initialized');
+
   }
 
 }
