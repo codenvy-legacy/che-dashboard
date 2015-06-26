@@ -43,6 +43,8 @@ md-tabs-canvas md-tab-item.md-tab.md-active,
 md-tabs-canvas md-tab-item.md-tab.md-active md-icon.cdvy-tab-label-icon::before
   color $primary-color !important /* either !important or preprend md-tabs.md-maincontent-theme-theme  to selector */
 
+md-tabs md-tab-item:not(.md-active)
+  border-bottom 1px solid $disabled-color
 
 /** Keep for the moment **/
 section:not(.md-paginating) .md-header-items
