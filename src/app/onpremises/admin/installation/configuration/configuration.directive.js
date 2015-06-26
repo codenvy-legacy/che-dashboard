@@ -22,6 +22,7 @@ class ConfigurationPanel {
   constructor () {
     this.restrict = 'E';
     this.replace = false;
+    this.bindToController = true;
     this.templateUrl = 'app/onpremises/admin/installation/configuration/configuration.html';
     this.controller = 'OnPremConfigurationCtrl';
     this.controllerAs = 'onPremConfigurationCtrl';

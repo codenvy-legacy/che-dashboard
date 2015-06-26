@@ -16,7 +16,7 @@ class OnPremConfigurationCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor(imsConfigApi, $mdDialog) {
+  constructor(imsConfigApi, $mdDialog, $rootScope, $timeout) {
     this.imsConfigApi = imsConfigApi;
     this.$mdDialog = $mdDialog;
 
@@ -31,6 +31,8 @@ class OnPremConfigurationCtrl {
       styleActiveLine: true,
       theme: 'codenvy'
     };
+
+    this.editorOptions.onLoad = (instance => this.codemirrorLoaded(instance, $rootScope, $timeout));
 
     this._enterSubmitState();
     this._retrieveConfig();
@@ -179,6 +181,14 @@ class OnPremConfigurationCtrl {
     console.log('leaving submit state');
     this.editorOptions.readOnly = false;
     this.submitState = false;
+  }
+
+  codemirrorLoaded(instance, $rootScope, $timeout) {
+    $rootScope.$watch(() => $rootScope.waitingLoaded, (newValue) => {
+      if (newValue) {
+        $timeout(() => instance.refresh(), 500);
+      }
+    });
   }
 }
 
