@@ -30,6 +30,12 @@ class CodenvyToggleCtrl {
     return this.$scope.setupModelController.$viewValue;
   }
 
+  getCss(title) {
+    if (this.getSelected() !== title) {
+      return 'cdvy-toggle-button-disabled';
+    }
+    return 'cdvy-toggle-button-enabled';
+  }
 
   onClick(selected) {
     this.$scope.setupModelController.$setViewValue(selected);
