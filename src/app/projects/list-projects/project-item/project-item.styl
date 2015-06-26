@@ -17,9 +17,15 @@
  display flex
 
 .project-list-row > p
+  margin 0
   width 100%
   text-align end
   display inline-block
+
+.hover-state:hover
+  -webkit-filter brightness(80%)
+  -moz-filter brightness(80%)
+  filter brightness(80%)
 
 .project-name
   font-size 16px
@@ -33,9 +39,6 @@
 
 .project-name a:hover
   color inherit
-
-.project-name a:not(:hover)
-  opacity 0.8
 
 .project-details
   font-size 12px
