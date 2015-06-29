@@ -24,6 +24,22 @@ class AddCreditcardCtrl {
    */
   constructor(codenvyAPI, jsonCountries) {
     this.creditCard = {};
+    this.values = {
+      number: '•••• •••• •••• ••••',
+      name: 'Full Name',
+      expiry: '••/••',
+      cvc: '•••'
+    };
+
+    this.messages = {
+      validDate: 'valid\ndate', // optional - default 'valid\nthru'
+      monthYear: 'mm/yyyy' // optional - default 'month/year'
+    };
+
+    this.options = {
+      debug: true,
+      formatting: true
+    };
 
     this.countries = [];
     this.profile = codenvyAPI.getProfile().getProfile();
@@ -42,30 +58,38 @@ class AddCreditcardCtrl {
     }
   }
 
-  getCard() {
-    new Card({
-      form: '#creditCardInformationForm',
-      container: '.card-wrapper',
+  getCard(element) {
+    var cardContainer = element.find('#card-container');
+    if (cardContainer && cardContainer.children().length > 0) {
+      cardContainer.empty();
+    }
 
-      formSelectors: {
-        numberInput: 'input[id=cardNumber]', // optional — default input[name="number"]
-        expiryInput: 'input[id=expires]', // optional — default input[name="expiry"]
-        cvcInput: 'input[id=cvv]', // optional — default input[name="cvc"]
-        nameInput: 'input[id=cardholderName]' // optional - defaults input[name="name"]
-      },
-      formatting: true, // optional - default true
+    var card = {
+      container: '#card-container',
+
+      numberInput: 'input#cardNumber',
+      expiryInput: 'input#expires',
+      cvcInput: 'input#cvv',
+      nameInput: 'input#cardholderName',
+
+      width: 350,
+      // Strings for translation - optional
       messages: {
-        validDate: 'valid\ndate', // optional - default 'valid\nthru'
-        monthYear: 'mm/yyyy' // optional - default 'month/year'
+        validDate: this.messages.validDate,
+        monthYear: this.messages.monthYear
       },
+      // Default values for rendered fields - options
       values: {
-        number: '•••• •••• •••• ••••',
-        name: 'Full Name',
-        expiry: '••/••',
-        cvc: '•••'
+        number: this.values.number,
+        name: this.values.name,
+        expiry: this.values.expiry,
+        cvc: this.values.cvc
       },
-      debug: false // optional - default false
-    });
+
+      formatting: this.options.formatting,
+      debug: this.options.debug
+    }
+    $(element).card(card);
   }
 }
 
