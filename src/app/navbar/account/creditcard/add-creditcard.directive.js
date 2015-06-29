@@ -31,7 +31,6 @@ class AddCreditcard {
    * @ngInject for Dependency injection
    */
   constructor ($timeout) {
-    this.$timeout = $timeout;
     this.restrict='E';
     this.templateUrl = 'app/navbar/account/creditcard/add-creditcard.html';
     this.controller = 'AddCreditcardCtrl';
@@ -40,26 +39,24 @@ class AddCreditcard {
     this.bindToController = true;
 
     this.scope = true;
+    this.$timeout = $timeout;
   }
-
   link($scope, element, attrs) {
-    /*attrs.$observe('loaded', function (val) {
-      if (val === 'true') {
-        $scope.addCreditcardCtrl.getCard();
-      }
-    });*/
-    var t = this;
-    $scope.$watch(function() { return element.is(':visible'); }, function() {
+    var timeout = this.$timeout;
+
+    $scope.$watch(function () {
+      return element.is(':visible');
+    }, function () {
       //Check credit card is already loaded not to load it twice:
       if (element.is(':visible') && element.find('.card-wrapper').children().length === 0) {
         //Timeout is needed to wait form components also to become visible to be able to bind them:
-        t.$timeout(function() {
-          $scope.addCreditcardCtrl.getCard();
+        timeout(function () {
+          $scope.addCreditcardCtrl.getCard(element);
         }, 200);
       }
     });
-
   }
+
 }
 
 export default AddCreditcard;

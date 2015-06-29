@@ -1,6 +1,13 @@
-<script src="/bower_components/card/lib/js/card.js"></script>
+<form action="#"
+      data-card
+      data-width="500"
+      data-card-container="#card-container"
+      data-values="addCreditcardCtrl.values"
+      data-options="addCreditcardCtrl.options"
+      data-messages="addCreditcardCtrl.messages">
 <div layout="row" >
-  <div class="card-wrapper card-container"></div>
+
+  <div id="card-container" class="card-container"></div>
   <div layout="column" flex>
     <cdvy-input cdvy-form="creditCardInformationForm"
                 cdvy-name="cardNumber"
@@ -94,3 +101,4 @@
              cdvy-place-holder="Select Your Country"
              cdvy-value="addCreditcardCtrl.creditCard.country">
 </cdvy-select>
+</form>
