@@ -92,12 +92,18 @@ class CodenvyToolbar {
       + '<md-icon md-font-icon=\"fa fa-bars fa-2x\"></md-icon>'
       + '</button>';
 
+    // start href link
     if (breadcrumbHref) {
-      template = template + '<a href=\"' + breadcrumbHref + '\" class=\"icon-breadcrumb material-design icon-ic_chevron_left_24px\" md-theme=\"default\"></a>';
+      template = template + '<a href=\"' + breadcrumbHref + '\" layout=\"row\" layout-align=\"start center\"><i class=\"icon-breadcrumb material-design icon-ic_chevron_left_24px\" md-theme=\"default\"></i>';
     }
 
     if (breadcrumbTitle) {
-      template = template + breadcrumbTitle;
+      template = template + '<span class="cdvy-toolbar-breadcrumb-title">' + breadcrumbTitle + '</span>';
+    }
+
+    // end href link
+    if (breadcrumbHref) {
+      template = template + '</a>';
     }
 
     template = template + '</div>'
