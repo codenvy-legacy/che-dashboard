@@ -44,7 +44,8 @@
         <span ng-show="projects.length == 0" class="project-list-empty">- No project</span>
       </cdvy-list-title>
       <cdvy-list ng-show="projects.length > 0">
-        <cdvy-project-item ng-repeat="project in projects | filter:listProjectsCtrl.projectFilter" cdvy-project-item-workspace-id="workspaceId" cdvy-project-item-project="project"></cdvy-project-item>
+        <cdvy-project-item ng-repeat="project in projects | filter:listProjectsCtrl.projectFilter" cdvy-project-item-workspace-id="workspaceId"
+                           cdvy-project-item-project="project" cdvy-profile-creation-date="listProjectsCtrl.profileCreationDate"></cdvy-project-item>
       </cdvy-list>
     </div>
   </md-content>
