@@ -1,5 +1,24 @@
+.project-permissions-content
+  padding-left 15px
+  padding-top 15px
+  padding-bottom 15px
+
 .projects-project-details-developers-list
-  margin-right 80px
+  //nothing ATM
+
+.project-permission-list-side
+  width 0
+  flex-shrink 0
+  flex-grow 0
+  position static
+
+.project-permission-list-side-big
+  width 80px
+  position relative
+
+
+.projects-project-details-developers-face-container
+  flex-shrink 0
 
 .projects-project-details-developers-face
   codenvy-developers-face()
@@ -22,25 +41,33 @@
 .projects-project-details-principal-permissions
   color $label-info-color
 
+.projects-project-details-principal-permissions-small
+  margin-left 67px
 
-.cdvy-list-item .projects-project-details-line-links
+.cdvy-list-item .project-permission-row .project-permission-actions-big
   display none
 
-.cdvy-list-item:hover .projects-project-details-line-links
-  display inherit
+.cdvy-list-item:hover .project-permission-row .project-permission-actions-big
+  display flex
 
-
-.projects-project-details-line-links
+.project-permission-actions, .project-permission-actions-big
   color $label-info-color
   cursor pointer
   font-size 30px
+  & span
+    margin-right 15px
 
-.projects-project-details-line-links span
-  margin-right 15px
+.project-permission-row
+  min-height 56px
+
+.project-permission-row > .project-permission-actions-big
+  margin 0
+  width 100%
+  text-align end
+  display inline-block
 
 .project-details-developers-dialog .cdvy-input-desktop-value-column
   padding-left 15px
-
 
 .projects-project-details-developers-edit-panel
   background-color $list-separator-color
@@ -74,3 +101,6 @@
 
 .projects-project-details-developers-edit-panel-checkboxes md-checkbox:last-child:after
   display none
+
+
+

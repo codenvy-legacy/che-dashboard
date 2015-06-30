@@ -23,47 +23,61 @@
   </ng-form>
   <div flex layout="row" layout-wrap layout-align="end center"><span class="projects-project-details-developers-edit-panel-action" ng-click="projectDetailsDevelopersCtrl.updatePanelPermission()">UPDATE</span><i ng-click="projectDetailsDevelopersCtrl.resetMode()" class="projects-project-details-developers-edit-panel-action-icon material-design icon-ic_close_24px"></i></div>
 </div>
-<md-content class="project-details-content">
+<md-content class="project-permissions-content">
 
 
   <cdvy-list-title cdvy-icon="material-design icon-ic_lock_24px">
     Permissions
   </cdvy-list-title>
   <label ng-show="projectDetailsDevelopersCtrl.requirePermissions" >You're not an administrator of this project/workspace.</label>
-  <cdvy-list ng-hide="projectDetailsDevelopersCtrl.requirePermissions" class="projects-project-details-developers-list">
-    <cdvy-list-item ng-repeat="permission in projectDetailsDevelopersCtrl.permissions | orderBy: ['principal.type', 'principal.email']" flex-gt-sm="100" flex="33">
-      <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row">
-        <div ng-show="permission.principal.type == 'USER'">
-          <img class="projects-project-details-developers-face" gravatar-src="'{{permission.principal.email}}'">
-        </div>
-        <div ng-show="permission.principal.type == 'GROUP'">
-        <span class="projects-project-details-developers-group fa fa-users">
-        </span>
-        </div>
-        <div flex-gt-sm="45" layout="column" ng-show="permission.principal.type == 'GROUP'">
-          <div class="projects-project-details-principal-mail">Group</div>
-          <div class="projects-project-details-principal-name">{{permission.principal.name}}</div>
-        </div>
-        <div flex-gt-sm="45" layout="column" ng-show="permission.principal.type == 'USER'">
-          <div class="projects-project-details-principal-mail">{{permission.principal.email}}</div>
-          <div class="projects-project-details-principal-name">{{permission.principal.fullname}}</div>
-        </div>
-        <div flex layout="row" class="projects-project-details-principal-permissions">
-          <span ng-repeat="acl in permission.permissions">{{acl}}<span ng-hide="$last">/</span></span>
-        </div>
+  <div flex layout="row">
+    <cdvy-list flex ng-hide="projectDetailsDevelopersCtrl.requirePermissions" class="projects-project-details-developers-list">
+      <cdvy-list-item ng-repeat="permission in projectDetailsDevelopersCtrl.permissions | orderBy: ['principal.type', 'principal.email']" flex-gt-sm="100" flex="33">
+        <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-permission-row">
+          <div flex layout="row" class="project-permission-info">
+            <div ng-show="permission.principal.type == 'USER'"
+                  class="projects-project-details-developers-face-container">
+              <img class="projects-project-details-developers-face" gravatar-src="'{{permission.principal.email}}'">
+            </div>
+            <div ng-show="permission.principal.type == 'GROUP'"
+                  class="projects-project-details-developers-face-container">
+              <span class="projects-project-details-developers-group fa fa-users">
+              </span>
+            </div>
+            <div flex-gt-sm layout="column" ng-show="permission.principal.type == 'GROUP'">
+              <div class="projects-project-details-principal-mail">Group</div>
+              <div class="projects-project-details-principal-name">{{permission.principal.name}}</div>
+            </div>
+            <div flex-gt-sm layout="column" ng-show="permission.principal.type == 'USER'">
+              <div class="projects-project-details-principal-mail">{{permission.principal.email}}</div>
+              <div class="projects-project-details-principal-name">{{permission.principal.fullname}}</div>
+            </div>
+          </div>
+          <div flex layout="row" layout-align-sm="start center" class="projects-project-details-principal-permissions" ng-class="{ 'projects-project-details-principal-permissions-small': !projectDetailsDevelopersCtrl.widthGtSm() }">
+            <span ng-repeat="acl in permission.permissions">{{acl}}<span ng-hide="$last">/</span></span>
+          </div>
 
 
-        <p flex-gt-sm="15" class="projects-project-details-line-links" ng-show="permission.principal.type == 'USER' && permission.principal.name !== 'any'">
-          <span ng-click="projectDetailsDevelopersCtrl.edit(permission)" class="material-design icon-ic_edit_24px"></span>
-          <span ng-click="projectDetailsDevelopersCtrl.remove(permission)" class="material-design icon-ic_remove_circle_outline_24px"></span>
-        </p>
+          <div flex="15">
+            <div ng-show="permission.principal.type == 'USER' && permission.principal.name !== 'any'"
+                layout="row" layout-align="center center"
+                class="project-permission-actions" ng-class="{ 'project-permission-actions-big': projectDetailsDevelopersCtrl.widthGtSm() }">
+              <span ng-click="projectDetailsDevelopersCtrl.edit(permission)" class="material-design icon-ic_edit_24px"></span>
+              <span ng-click="projectDetailsDevelopersCtrl.remove(permission)" class="material-design icon-ic_remove_circle_outline_24px"></span>
+            </div>
+          </div>
 
-      </div>
-    </cdvy-list-item>
-  </cdvy-list>
+        </div>
+      </cdvy-list-item>
+    </cdvy-list>
 
 
-  <md-button class="md-fab md-fab-bottom-right" aria-label="add developer" ng-click="projectDetailsDevelopersCtrl.showAdd($event)">
-    <span class="fa fa-plus"></span>
-  </md-button>
+    <div class="project-permission-list-side" ng-class="{ 'project-permission-list-side-big': projectDetailsDevelopersCtrl.widthGtSm() }"
+          layout-gt-sm="column" layout-align="end center">
+      <md-button class="md-fab" ng-class="{ 'md-fab-top-right': !projectDetailsDevelopersCtrl.widthGtSm() }"
+                 aria-label="add developer" ng-click="projectDetailsDevelopersCtrl.showAdd($event)">
+        <span class="fa fa-plus"></span>
+      </md-button>
+    </div>
+  </div>
 </md-content>
