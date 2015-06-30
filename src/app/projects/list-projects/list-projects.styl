@@ -1,3 +1,6 @@
+.panel-background
+  background-color $background-color
+
 .projects-list-project-panel-toolbar
   font-weight bold
 
@@ -46,8 +49,34 @@
 md-progress-linear.projects-list-projects-progress
   height 10px
 
-.projects-list-projects-filter-panel
+.projects-filter-animation
   background-color $background-color
+  height max-content
+  min-height 43px
+
+.projects-filter-animation.ng-enter
+  -webkit-transition 0.3s
+  -moz-transition 0.3s
+  transition 0.3s
+  opacity 0
+  height 0
+  min-height 0
+
+.projects-filter-animation.ng-enter-active
+  opacity 1
+  height 43px
+
+.projects-filter-animation.ng-leave
+  -webkit-transition: 0.3s
+  -moz-transition: 0.3s
+  transition 0.3s
+  opacity 1
+  height max-content
+
+.projects-filter-animation.ng-leave-active
+  opacity 0
+  height 0
+  min-height 0
 
 .projects-list-projects-filter-workspace-label
   color $label-primary-color
@@ -72,6 +101,7 @@ md-progress-linear.projects-list-projects-progress
   codenvy-separator()
   margin-top 17px
   margin-left 10px
+  position relative
 
 .projects-list-projects-select-workspace:last-child md-checkbox:after
   display none
