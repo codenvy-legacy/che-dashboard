@@ -40,7 +40,7 @@
 
     <div ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace | listProjectWorkspaceFilter:listProjectsCtrl.filtersWorkspaceSelected">
       <cdvy-list-title cdvy-icon="fa fa-folder">
-        {{listProjectsCtrl.getWorkspaceName(workspaceId)}}
+        <span class="projects-list-workspace-name">{{listProjectsCtrl.getWorkspaceName(workspaceId)}}</span>
         <span ng-show="projects.length == 0" class="project-list-empty">- No project</span>
       </cdvy-list-title>
       <cdvy-list ng-show="projects.length > 0">
