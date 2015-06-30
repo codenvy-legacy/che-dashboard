@@ -27,12 +27,26 @@ class CodenvyProjectItem {
     // scope values
     this.scope = {
       workspaceId: '=cdvyProjectItemWorkspaceId',
-      project: '=cdvyProjectItemProject'
+      project: '=cdvyProjectItemProject',
+      profileCreationDate: '=cdvyProfileCreationDate'
     };
 
     this.templateUrl = 'app/projects/list-projects/project-item/project-item.html';
   }
 
+  /**
+   * Keep reference to the model controller
+   */
+  link($scope) {
+    $scope.getProjectModificationDate = function (project) {
+      if (project.modificationDate !== -1) {
+        return project.modificationDate;
+      } else if (project.creationDate !== -1) {
+        return project.creationDate;
+      }
+      return $scope.profileCreationDate;
+    };
+  }
 }
 
 export default CodenvyProjectItem;
