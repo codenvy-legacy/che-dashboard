@@ -10,7 +10,7 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-
+<div class="panel-background">
 <cdvy-toolbar cdvy-title="All projects"
               cdvy-button-name="Create Project"
               cdvy-button-href="#/create-project"></cdvy-toolbar>
@@ -22,18 +22,19 @@
     <i class="projects-list-projects-cog fa fa-cog" dropdown-menu="listProjectsCtrl.dropDownOptionsList" dropdown-model="listProjectsCtrl.dropDownValue" dropdown-onchange="listProjectsCtrl.dropDownSelected(selected)" dropdown-item-label='name'></i>
   </div>
 </md-toolbar>
+<div ng-if="listProjectsCtrl.displayWorkspaceFilter" class="projects-filter-animation projects-filter-panel" layout="row" layout-align="start center">
+  <div class="projects-list-projects-filter-workspace-label">Filter workspaces:</div>
+  <div flex="60" layout="row" layout-align="start center" layout-wrap>
+    <div class="projects-list-projects-select-workspace" ng-repeat="workspace in listProjectsCtrl.workspaces">
+      <md-checkbox ng-model="listProjectsCtrl.filtersWorkspaceSelected[workspace.workspaceReference.id]" aria-label="Workspace {{workspace.workspaceReference.name}}">{{workspace.workspaceReference.name}}</md-checkbox>
+    </div>
+  </div>
+  <div flex layout="row" layout-wrap layout-align="end center"><span class="projects-list-projects-filter-action" ng-click="listProjectsCtrl.resetWorkspaceFilter()">Clear</span><i ng-click="listProjectsCtrl.hideWorkspaceFilter()" class="projects-list-projects-filter-action-icon material-design icon-ic_close_24px"></i></div>
+</div>
+
 <md-content md-scroll-y flex layout="column" layout-align="center" class="projects-list-projects" md-theme="maincontent-theme" >
   <md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress" ng-show="listProjectsCtrl.state == 'loading'" ></md-progress-linear>
-  <div ng-show="listProjectsCtrl.displayWorkspaceFilter" class="projects-list-projects-filter-panel" layout="row" layout-align="start center">
-    <div class="projects-list-projects-filter-workspace-label">Filter workspaces:</div>
-    <div flex="60" layout="row" layout-align="start center" layout-wrap>
-      <div class="projects-list-projects-select-workspace" ng-repeat="workspace in listProjectsCtrl.workspaces">
-        <md-checkbox ng-model="listProjectsCtrl.filtersWorkspaceSelected[workspace.workspaceReference.id]" aria-label="Workspace {{workspace.workspaceReference.name}}">{{workspace.workspaceReference.name}}</md-checkbox>
-      </div>
-    </div>
-    <div flex layout="row" layout-wrap layout-align="end center"><span class="projects-list-projects-filter-action" ng-click="listProjectsCtrl.resetWorkspaceFilter()">Clear</span><i ng-click="listProjectsCtrl.hideWorkspaceFilter()" class="projects-list-projects-filter-action-icon material-design icon-ic_close_24px"></i></div>
 
-  </div>
   <md-content flex>
 
 
@@ -48,3 +49,4 @@
     </div>
   </md-content>
 </md-content>
+</div>
