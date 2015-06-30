@@ -22,11 +22,12 @@ class ProjectDetailsDevelopersCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($route, codenvyAPI, $mdDialog, codenvyNotificationService, $q) {
+  constructor($route, codenvyAPI, $mdDialog, codenvyNotificationService, $q, $mdMedia) {
     this.codenvyAPI = codenvyAPI;
     this.$mdDialog = $mdDialog;
     this.codenvyNotificationService = codenvyNotificationService;
     this.$q = $q;
+    this.$mdMedia = $mdMedia;
 
     this.workspaceId = $route.current.params.workspaceId;
     this.projectName = $route.current.params.projectName;
@@ -250,7 +251,9 @@ class ProjectDetailsDevelopersCtrl {
 
   }
 
-
+  widthGtSm() {
+    return this.$mdMedia('gt-sm');
+  }
 }
 
 export default ProjectDetailsDevelopersCtrl;
