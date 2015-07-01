@@ -5,38 +5,3 @@
   cursor pointer
   position relative
   display inline-block
-
-.copy-clipboard span
-  position absolute
-  bottom 100%
-  left 50%
-
-.copy-clipboard span span
-  position relative
-  display none
-  color $white-color
-  cursor default
-  left -50%
-  bottom 8px
-  padding 7px 15px 7px 15px
-  font-size 12px
-  border-radius 3px
-  white-space nowrap
-  background $tooltip-background-color
-  border: solid 1px $tooltip-border-color;
-
-.copy-clipboard span span:after
-  position absolute
-  content ""
-  width 0
-  height 0
-  top 28px
-  border 6px solid
-  left calc(50% - 6px)
-  border-color $tooltip-border-color transparent transparent transparent
-
-.copy-clipboard div:hover span span,
-.copy-clipboard div:hover span:after,
-.copy-clipboard .zeroclipboard-is-hover + span span,
-.copy-clipboard .zeroclipboard-is-hover + span:after
-  display inline
