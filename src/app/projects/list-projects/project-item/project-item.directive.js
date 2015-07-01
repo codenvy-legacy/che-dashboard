@@ -32,21 +32,14 @@ class CodenvyProjectItem {
     };
 
     this.templateUrl = 'app/projects/list-projects/project-item/project-item.html';
+
+
+    this.controller = 'ProjectItemCtrl';
+    this.controllerAs = 'projectItemCtrl';
+    this.bindToController = true;
+
   }
 
-  /**
-   * Keep reference to the model controller
-   */
-  link($scope) {
-    $scope.getProjectModificationDate = function (project) {
-      if (project.modificationDate !== -1) {
-        return project.modificationDate;
-      } else if (project.creationDate !== -1) {
-        return project.creationDate;
-      }
-      return $scope.profileCreationDate;
-    };
-  }
 }
 
 export default CodenvyProjectItem;

@@ -30,6 +30,7 @@ import ProjectDetailsDevelopers from './project-details/developers/project-detai
 import ProjectDetailsDevelopersDialogAddCtrl from './project-details/developers/project-details-developers-dialog-add.controller';
 import ProjectRepositoryConfig from './project-details/repository/project-repository-config';
 import CodenvyProjectItem from './list-projects/project-item/project-item.directive';
+import ProjectItemCtrl from './list-projects/project-item/project-item.controller';
 
 
 class ProjectConfig {
@@ -63,6 +64,9 @@ class ProjectConfig {
     register.controller('CreateProjectCtrl', CreateProjectCtrl);
 
     register.directive('cdvyProjectItem', CodenvyProjectItem);
+
+    register.controller('ProjectItemCtrl', ProjectItemCtrl);
+
 
     // config routes
     register.app.config(function ($routeProvider) {
