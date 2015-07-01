@@ -37,6 +37,10 @@ class ProjectItemCtrl {
   };
 
 
+  redirectToProjectDetails() {
+    this.$location.path('/project/' + this.workspaceId + '/' + this.project.name);
+  }
+
 }
 
 export default ProjectItemCtrl;
