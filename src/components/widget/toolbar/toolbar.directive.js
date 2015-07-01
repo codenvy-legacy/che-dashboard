@@ -25,6 +25,7 @@ import Register from '../../utils/register';
  * @param {string=} cdvy-title the title of the toolbar
  * @param {string=} cdvy-button-name the optional name of the right button
  * @param {string=} cdvy-button-href the optional link of the right button
+ * @param {string=} cdvy-button-href-target the optional target of the right button
  * @param {string=} cdvy-breadcrumb-title title of the breadcrumb
  * @param {string=} cdvy-breadcrumb-href link used by the breadcrumb
  * @param {string=} cdvy-subheader-title title of the sub header
@@ -71,6 +72,7 @@ class CodenvyToolbar {
     var title = attrs.cdvyTitle;
     var titleController  = attrs.cdvyTitleIconsController;
     var buttonHref = attrs.cdvyButtonHref;
+    var buttonHrefTarget = attrs.cdvyButtonHrefTarget;
     var buttonName = attrs.cdvyButtonName;
 
     var breadcrumbTitle = attrs.cdvyBreadcrumbTitle;
@@ -123,7 +125,13 @@ class CodenvyToolbar {
     + '<div class=\"cdvy-toolbar-button\" layout=\"row\">';
 
     if (buttonName) {
-      template = template + '<cdvy-button-primary cdvy-button-title=\"' + buttonName + '\" href=\"' + buttonHref + '\"></cdvy-button-primary>';
+      template = template + '<cdvy-button-primary cdvy-button-title=\"' + buttonName + '\" href=\"' + buttonHref + '\"';
+
+      if (buttonHrefTarget) {
+        template = template + ' target=\"' + buttonHrefTarget + '\"';
+      }
+
+      template = template + '></cdvy-button-primary>';
     }
 
 
