@@ -33,7 +33,7 @@ class CodenvyClipboard {
     };
 
   }
-  
+
 }
 
 export default CodenvyClipboard;
