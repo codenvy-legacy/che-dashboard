@@ -16,7 +16,7 @@
   <parent>
     <artifactId>maven-depmgt-pom</artifactId>
     <groupId>org.eclipse.che.depmgt</groupId>
-    <version>3.10.4-SNAPSHOT</version>
+    <version>3.11.0-SNAPSHOT</version>
   </parent>
   <groupId>com.codenvy.dashboard</groupId>
   <artifactId>user-dashboard-war</artifactId>
