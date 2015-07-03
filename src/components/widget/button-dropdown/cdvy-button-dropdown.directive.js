@@ -22,8 +22,8 @@ class CodenvyButtonDropdown {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor () {
-    this.restrict='E';
+  constructor() {
+    this.restrict = 'E';
     this.bindToController = true;
     this.templateUrl = 'components/widget/button-dropdown/cdvy-button-dropdown.html';
     this.controller = 'CodenvyButtonDropdownCtrl';
@@ -31,21 +31,11 @@ class CodenvyButtonDropdown {
 
     // scope values
     this.scope = {
-      labelText:'@cdvyButtonDropdownLabel',
-      href:'@cdvyButtonDropdownHref',
-      ctrl: '=cdvyButtonDropdownController'
-
+      labelText: '@cdvyButtonDropdownLabel',
+      href: '@cdvyButtonDropdownHref',
+      ctrl: '=cdvyButtonDropdownController',
+      isDisabled: '=cdvyDisabled'
     };
-  }
-
-  /**
-   * Re-apply ng-disabled on child
-   */
-  link($scope, element, attrs) {
-    $scope.$watch(attrs.ngDisabled, function (isDisabled) {
-      element.find('button').prop('disabled', isDisabled);
-    });
-
   }
 
 }

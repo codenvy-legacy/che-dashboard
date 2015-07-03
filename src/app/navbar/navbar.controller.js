@@ -16,9 +16,10 @@ class NavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($scope, $mdSidenav, userDashboardConfig, codenvyAPI) {
+  constructor($scope, $mdSidenav, userDashboardConfig, codenvyAPI, onBoarding) {
     this.mdSidenav = $mdSidenav;
     this.codenvyAPI = codenvyAPI;
+    this.onBoarding = onBoarding;
     this.codenvyUser = codenvyAPI.getUser();
     this.links =[{href:'#/projects', name:'List Projects'}];
 
