@@ -26,9 +26,9 @@
         {{lstTemplate[0].category}} <span class="projects-create-project-samples-header-projecttype">({{lstTemplate[0].projectType}})</span>
       </cdvy-list-title>
       <cdvy-list>
-        <cdvy-list-item ng-repeat="template in lstTemplate" flex>
+        <cdvy-list-item  ng-repeat="template in lstTemplate" flex>
           <div layout-gt-sm="row" flex layout-align="start center" class="projects-create-project-samples-list-row">
-              <div ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)" layout="column" flex>
+              <div class="projects-create-project-samples-list-item" ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)" layout="column" flex>
                   <div class="projects-create-project-samples-list-samplename">{{template.displayName}}</div>
                   <div class="projects-create-project-samples-list-sampledescription">{{template.description}}</div>
               </div>
