@@ -12,7 +12,7 @@
 
 class LoginCtrl {
   /*@ngInject*/
-  constructor($http, $cookies, $window, $location, codenvyAPI) {
+  constructor($http, $cookies, $window, codenvyAPI) {
 
     this.username = '';
     this.password = '';
@@ -36,9 +36,13 @@ class LoginCtrl {
         // update user
         let promise = codenvyAPI.getUser().refetchUser();
         promise.then(() => {
-          $location.path('#/');
+          // refresh the home page
+          $window.location = '#/';
+          $window.location.reload();
         }, () => {
-          $location.path('#/');
+          // refresh the home page
+          $window.location = '#/';
+          $window.location.reload();
         });
 
       }, function (response) {
