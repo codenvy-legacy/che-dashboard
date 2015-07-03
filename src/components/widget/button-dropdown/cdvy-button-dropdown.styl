@@ -6,7 +6,7 @@ cdvy-button-dropdown .md-button.md-accent.md-raised.md-hue-2
   height auto
   padding-left 10px
   padding-right 7px
-  margin-right 0px
+  margin-right 0
   margin-bottom 10px
   webkit-transform none
   -moz-transform none
@@ -36,13 +36,13 @@ cdvy-button-dropdown .cdvy-button-dropdown-elements ul li
   background-color white
   display list-item
 
-cdvy-button-dropdown .cdvy-button-dropdown-elements ul li:hover a
+cdvy-button-dropdown .cdvy-button-dropdown-elements ul li:hover .cdvy-button-click-area
   background $hover-on-list-color
 
-cdvy-button-dropdown .cdvy-button-dropdown-elements ul li:last-of-type a
+cdvy-button-dropdown .cdvy-button-dropdown-elements ul li:last-of-type .cdvy-button-click-area
   border none
 
-cdvy-button-dropdown .cdvy-button-dropdown-elements ul li a
+cdvy-button-dropdown .cdvy-button-dropdown-elements ul li .cdvy-button-click-area
   codenvy-border-radius(5px)
   border-bottom hidden
   display block
@@ -51,12 +51,16 @@ cdvy-button-dropdown .cdvy-button-dropdown-elements ul li a
   text-decoration none
   color $label-info-color
   border-bottom 1px solid $default-border-color
-  box-shadow inset 0 1px 0 rgba(255,255,255,1)
+  box-shadow inset 0 1px 0 rgba(255, 255, 255, 1)
   cursor pointer
 
-cdvy-button-dropdown a, a:hover, a:focus
+cdvy-button-dropdown .cdvy-button-click-area,
+cdvy-button-dropdown .cdvy-button-click-area:hover,
+cdvy-button-dropdown .cdvy-button-click-area:focus
   color $background-color
   text-decoration none
+  font-size 21px
+  outline none
 
 .cdvy-button-dropdown i
   display inline
@@ -67,6 +71,11 @@ cdvy-button-dropdown a, a:hover, a:focus
   margin-left -2px
   margin-top -12px
   font-size 32px
+  outline none
 
-cdvy-button-dropdown .md-button:hover
+.cdvy-button-dropdown[disabled]
+  background-color $default-border-color !important
+  opacity 0.8
+
+cdvy-button-dropdown:not(div:disabled) .md-button:hover
   codenvy-brightness(90%)

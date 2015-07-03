@@ -28,6 +28,9 @@ import CodeMirror from './codemirror/codemirror';
 // import custom notification service
 import CodenvyNotificationService from './notification/codenvy-notification.factory';
 
+// import OnBoarding
+import OnBoarding from './onboarding/onboarding.factory';
+
 import CreateProjectGitValidator from './validator/git-url-validator.directive';
 import UniqueProjectNameValidator from './validator/unique-project-name-validator.directive';
 

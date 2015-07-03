@@ -1,9 +1,17 @@
-<div class="md-accent md-raised md-hue-2 md-button md-default-theme">
-  <a href="{{codenvyButtonDropdownCtrl.href}}">{{codenvyButtonDropdownCtrl.labelText}}</a>
-  <span class="cdvy-button-dropdown-separator"></span><md-icon class="cdvy-button-dropdown-icon" ng-click="codenvyButtonDropdownCtrl.toggleDropDown()" ng-blur="codenvyButtonDropdownCtrl.disableDropDown()" md-font-icon="fa fa-caret-down"></md-icon></md-button>
+<div ng-disabled="codenvyButtonDropdownCtrl.isDisabled"
+     class="cdvy-button-dropdown md-accent md-raised md-hue-2 md-button md-default-theme">
+  <span class="cdvy-button-click-area" ng-click="codenvyButtonDropdownCtrl.redirect(codenvyButtonDropdownCtrl.href)">{{codenvyButtonDropdownCtrl.labelText}}</span>
+  <span class="cdvy-button-dropdown-separator"></span>
+  <md-icon class="cdvy-button-dropdown-icon" ng-click="codenvyButtonDropdownCtrl.toggleDropDown()"
+           ng-blur="codenvyButtonDropdownCtrl.disableDropDown()" md-font-icon="fa fa-caret-down"></md-icon>
+  </md-button>
 </div>
 <div class="cdvy-button-dropdown-elements" ng-show="codenvyButtonDropdownCtrl.showDropdown">
   <ul>
-    <li ng-repeat="link in codenvyButtonDropdownCtrl.ctrl.links"><a ng-href="{{link.href}}">{{link.name}}</a></li>
+    <li ng-repeat="link in codenvyButtonDropdownCtrl.ctrl.links">
+      <span class="cdvy-button-click-area" ng-click="codenvyButtonDropdownCtrl.redirect(link.href)">
+        {{link.name}}
+      </span>
+    </li>
   </ul>
 </div>
