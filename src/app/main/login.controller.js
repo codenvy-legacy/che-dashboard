@@ -12,46 +12,66 @@
 
 class LoginCtrl {
   /*@ngInject*/
-  constructor($http, $cookies, $window, codenvyAPI) {
+  constructor($http, $cookies, $window, codenvyAPI, $timeout, $location) {
 
     this.username = '';
     this.password = '';
-    this.realm = '';
+    this.usermode = 'User';
 
-    this.submit = function() {
+
+    this.$http = $http;
+    this.$cookies = $cookies;
+    this.$window = $window;
+    this.$timeout = $timeout
+    this.codenvyAPI = codenvyAPI;
+    this.location = $location;
+
+    // hide the navbar
+    angular.element('#codenvynavbar').hide();
+
+  }
+
+
+    submit() {
+      // reset error message
+      this.error = null;
+      this.loginInProgress = true;
+
       var loginData;
-      if (this.realm !== '') {
-        loginData = {'username': this.username, 'password': this.password, 'realm': this.realm};
+      if (this.usermode === 'Admin') {
+        loginData = {'username': this.username, 'password': this.password, 'realm': 'sysldap'};
       } else {
         loginData = {'username': this.username, 'password': this.password};
       }
-      $http({
+      this.$http({
         url: '/api/auth/login',
         method: 'POST',
         data: loginData
-      }).then(function (response) {
-        $cookies.token = response.data.value;
-        $cookies.refreshStatus = 'DISABLED';
+      }).then((response) => {
+
+        this.$cookies.token = response.data.value;
+        this.$cookies.refreshStatus = 'DISABLED';
 
         // update user
-        let promise = codenvyAPI.getUser().refetchUser();
-        promise.then(() => {
-          // refresh the home page
-          $window.location = '#/';
-          $window.location.reload();
-        }, () => {
-          // refresh the home page
-          $window.location = '#/';
-          $window.location.reload();
-        });
+        let promise = this.codenvyAPI.getUser().refetchUser();
+        promise.then(() => this.refresh() , () => this.refresh());
+      },  (response) => {
+        this.loginInProgress = false;
+        console.log('error on login', response);
+        this.error = response.statusText;
 
-      }, function (response) {
-        console.log('error on login');
-        $window.alert('error');
-        console.log(response);
       });
-    };
+    }
+
+  refresh() {
+
+    // refresh the home page
+    this.$location = "/"
+    this.$window.location = '/';
+    this.$timeout(() =>  this.$window.location.reload(), 500);
+
   }
+
 }
 
 

@@ -10,11 +10,47 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-panel cdvy-title="Login">
-  <form ng-submit="loginCtrl.submit()">
-    <label>Username:</label><input type="text" ng-model="loginCtrl.username" /></br></br>
-    <label></label>Password:</label><input type="password" ng-model="loginCtrl.password"></br>
-    <label></label>Realm:</label><input type="text" ng-model="loginCtrl.realm"></br>
-    <button>login</button>
-  </form>
-</cdvy-panel>
+<div layout="row" flex layout-align="center center">
+  <cdvy-panel cdvy-title="Developer Mode Login" flex="50">
+    <ng-form name="loginDeveloperForm">
+
+      <cdvy-input cdvy-form="loginDeveloperForm"
+                  cdvy-name="login"
+                  cdvy-label-name="Login"
+                  cdvy-place-holder="Login of the user"
+                  ng-model="loginCtrl.username"
+                  required
+                  ng-maxlength="128">
+        <div ng-message="required">A login is required.</div>
+      </cdvy-input>
+
+      <cdvy-input cdvy-form="loginDeveloperForm"
+                  cdvy-name="password"
+                  cdvy-label-name="Password"
+                  cdvy-place-holder="Password of the user"
+                  ng-model="loginCtrl.password"
+                  type="password"
+                  required
+                  ng-maxlength="128">
+        <div ng-message="required">A password is required.</div>
+      </cdvy-input>
+
+      <cdvy-label-container cdvy-label-name="Mode">
+
+        <cdvy-toggle ng-model="loginCtrl.usermode" >
+          <cdvy-toggle-button cdvy-font-icon="fa fa-user" cdvy-title="User"></cdvy-toggle-button>
+          <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_verified_user_24px" cdvy-title="Admin"></cdvy-toggle-button>
+        </cdvy-toggle>
+      </cdvy-label-container>
+
+      <cdvy-button-primary ng-click="loginCtrl.submit()" cdvy-button-title="Login"></cdvy-button-primary>
+      <div layout="column" layout-align="center center">
+        <md-progress-circular ng-show="loginCtrl.loginInProgress" class="md-hue-2"  md-mode="indeterminate" md-theme="default"></md-progress-circular>
+        <div class="login-error-message" ng-show="loginCtrl.error">
+          {{loginCtrl.error}}
+        </div>
+      </div>
+
+    </ng-form>
+  </cdvy-panel>
+</div>
