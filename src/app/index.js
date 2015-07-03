@@ -251,9 +251,9 @@ module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $l
       }
 
       //Do not add token on auth login
-      if (config.url.indexOf('/api/auth/login') === -1 && config.url.indexOf('api/') !== -1 && $cookies.token) {
+      if (config.url.indexOf('/api/auth/login') === -1 && config.url.indexOf('api/') !== -1 && $window.sessionStorage["codenvyToken"]) {
         config.params = config.params || {};
-        angular.extend(config.params, {token: $cookies.token});
+        angular.extend(config.params, {token: $window.sessionStorage["codenvyToken"]});
       }
       return config || $q.when(config);
     },

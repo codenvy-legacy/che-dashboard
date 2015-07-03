@@ -50,6 +50,7 @@ class LoginCtrl {
       }).then((response) => {
 
         this.$cookies.token = response.data.value;
+        this.$window.sessionStorage["codenvyToken"] = response.data.value;
         this.$cookies.refreshStatus = 'DISABLED';
 
         // update user
