@@ -17,16 +17,16 @@ class AccountCtrl {
    * @ngInject for Dependency injection
    * @author Oleksii Orel
    */
-  constructor($scope, codenvyAPI, codenvyNotification) {
+  constructor($scope, $routeParams, $location, codenvyAPI, codenvyNotification) {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
 
-    this.oldAttributes = {};
     this.profile = this.codenvyAPI.getProfile().getProfile();
 
+    this.requestedAttributes = {};
     //copy the profile attribute if it exist
-    if(this.profile.attributes) {
-      this.oldAttributes = angular.copy(this.profile.attributes);
+    if (this.profile.attributes) {
+      this.requestedAttributes = angular.copy(this.profile.attributes);
     }
 
     //copy the profile attribute when we receive it in the first time
@@ -34,23 +34,43 @@ class AccountCtrl {
       if (!newVal) {
         return;
       }
-      if(!oldVal) {
-        this.oldAttributes = angular.copy(newVal);
+      if (!oldVal) {
+        this.requestedAttributes = angular.copy(newVal);
       }
     }, true);
+
+    //search the selected tab
+    let routeParams = $routeParams.tabName;
+    if (!routeParams) {
+      this.selectedTabIndex = 0;
+    } else {
+      switch (routeParams) {
+        case 'profile':
+          this.selectedTabIndex = 0;
+          break;
+        case 'billing':
+          this.selectedTabIndex = 1;
+          break;
+        case 'security':
+          this.selectedTabIndex = 2;
+          break;
+        default:
+          $location.path('/account');
+      }
+    }
 
     this.resetPasswordForm = false;
 
   }
 
   isAttributesChanged() {
-    return !angular.equals(this.profile.attributes, this.oldAttributes);
+    return !angular.equals(this.profile.attributes, this.requestedAttributes);
   }
 
   /**
    * Update current profile
    */
-  //TODO: Add onclick event to cdvy-tab elements
+  //TODO: Add onclick event to md-tab elements
   updateProfile() {
     this.codenvyAPI.getProfile().fetchProfile();
   }
@@ -59,24 +79,24 @@ class AccountCtrl {
    * set profile attributes
    */
   setProfileAttributes(isInputFormValid) {
-    if(!isInputFormValid) {
-       return;
+    if (!isInputFormValid) {
+      return;
     }
 
-    if(this.isAttributesChanged()){
+    if (this.isAttributesChanged()) {
       let promise = this.codenvyAPI.getProfile().setAttributes(this.profile.attributes);
 
       promise.then(() => {
         this.codenvyNotification.showInfo('Profile successfully updated.');
-        this.oldAttributes = angular.copy(this.profile.attributes);
+        this.requestedAttributes = angular.copy(this.profile.attributes);
       }, (error) => {
         if (error.status === 304) {
-          if(this.profile.attributes) {
-            this.oldAttributes = angular.copy(this.profile.attributes);
+          if (this.profile.attributes) {
+            this.requestedAttributes = angular.copy(this.profile.attributes);
           }
         } else {
-          if(this.oldAttributes) {
-            this.profile.attributes = angular.copy(this.oldAttributes);
+          if (this.requestedAttributes) {
+            this.profile.attributes = angular.copy(this.requestedAttributes);
           }
           this.codenvyNotification.showError(error.data.message ? error.data.message : 'Profile update failed.');
           console.log('error', error);
@@ -90,7 +110,7 @@ class AccountCtrl {
    * set new password
    */
   setPassword(password) {
-    if(!password) {
+    if (!password) {
       return;
     }
 
@@ -100,8 +120,8 @@ class AccountCtrl {
       this.codenvyNotification.showInfo('Password successfully updated.');
       this.resetPasswordForm = true;
     }, (error) => {
-        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Password updated failed.');
-        console.log('error', error);
+      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Password updated failed.');
+      console.log('error', error);
     });
   }
 

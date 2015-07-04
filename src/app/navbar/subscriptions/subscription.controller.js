@@ -160,7 +160,7 @@ class SubscriptionCtrl {
    }
 
   onPayAsYouGoChoosen($location) {
-    $location.path('account');
+    $location.path('account/billing');
   }
 
   onPremChoosen($window) {
@@ -172,7 +172,7 @@ class SubscriptionCtrl {
   }
 
   cancelPayAsYouGo(location) {
-    location.path('account');
+    location.path('account/billing');
   }
 
   cancelPrePaid($window) {
