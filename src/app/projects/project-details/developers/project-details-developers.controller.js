@@ -22,10 +22,10 @@ class ProjectDetailsDevelopersCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($route, codenvyAPI, $mdDialog, codenvyNotificationService, $q, $mdMedia) {
+  constructor($route, codenvyAPI, $mdDialog, codenvyNotification, $q, $mdMedia) {
     this.codenvyAPI = codenvyAPI;
     this.$mdDialog = $mdDialog;
-    this.codenvyNotificationService = codenvyNotificationService;
+    this.codenvyNotification = codenvyNotification;
     this.$q = $q;
     this.$mdMedia = $mdMedia;
 
@@ -110,9 +110,9 @@ class ProjectDetailsDevelopersCtrl {
     });
 
     updatePermissionPromise.then(() => {
-      this.codenvyNotificationService.showInfo('Permissions added for ' + userEmailToAdd);
+      this.codenvyNotification.showInfo('Permissions added for ' + userEmailToAdd);
     }, (error) => {
-      this.codenvyNotificationService.showError('Unable to add permissions for ' + userEmailToAdd + ':' + error);
+      this.codenvyNotification.showError('Unable to add permissions for ' + userEmailToAdd + ':' + error);
     });
   }
 
@@ -190,7 +190,7 @@ class ProjectDetailsDevelopersCtrl {
     // we set empty permissions
     let promise = this.setPermission(permission.principal.name, []);
     promise.then(() => {
-        this.codenvyNotificationService.showInfo('Remove permissions for ' + permission.principal.email);
+        this.codenvyNotification.showInfo('Remove permissions for ' + permission.principal.email);
       }
     );
 
@@ -242,10 +242,10 @@ class ProjectDetailsDevelopersCtrl {
     let promise = this.setPermission(userID, roles);
     promise.then(() => {
       this.resetMode();
-      this.codenvyNotificationService.showInfo('Permissions updated for ' + email);
+      this.codenvyNotification.showInfo('Permissions updated for ' + email);
       this.currentEditingUserPermission = null;
     }, (error) => {
-      this.codenvyNotificationService.showError('Unable to update permissions: ' + error);
+      this.codenvyNotification.showError('Unable to update permissions: ' + error);
     });
 
 

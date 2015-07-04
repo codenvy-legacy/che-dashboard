@@ -17,9 +17,9 @@ class AccountCtrl {
    * @ngInject for Dependency injection
    * @author Oleksii Orel
    */
-  constructor($scope, codenvyAPI, codenvyNotificationService) {
+  constructor($scope, codenvyAPI, codenvyNotification) {
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotificationService = codenvyNotificationService;
+    this.codenvyNotification = codenvyNotification;
 
     this.oldAttributes = {};
     this.profile = this.codenvyAPI.getProfile().getProfile();
@@ -67,7 +67,7 @@ class AccountCtrl {
       let promise = this.codenvyAPI.getProfile().setAttributes(this.profile.attributes);
 
       promise.then(() => {
-        this.codenvyNotificationService.showInfo('Profile successfully updated.');
+        this.codenvyNotification.showInfo('Profile successfully updated.');
         this.oldAttributes = angular.copy(this.profile.attributes);
       }, (error) => {
         if (error.status === 304) {
@@ -78,7 +78,7 @@ class AccountCtrl {
           if(this.oldAttributes) {
             this.profile.attributes = angular.copy(this.oldAttributes);
           }
-          this.codenvyNotificationService.showError(error.data.message ? error.data.message : 'Profile update failed.');
+          this.codenvyNotification.showError(error.data.message ? error.data.message : 'Profile update failed.');
           console.log('error', error);
         }
       });
@@ -97,10 +97,10 @@ class AccountCtrl {
     let promise = this.codenvyAPI.getUser().setPassword(password);
 
     promise.then(() => {
-      this.codenvyNotificationService.showInfo('Password successfully updated.');
+      this.codenvyNotification.showInfo('Password successfully updated.');
       this.resetPasswordForm = true;
     }, (error) => {
-        this.codenvyNotificationService.showError(error.data.message ? error.data.message : 'Password updated failed.');
+        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Password updated failed.');
         console.log('error', error);
     });
   }

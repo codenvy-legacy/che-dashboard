@@ -16,9 +16,9 @@ class BillingCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, lodash, codenvyNotificationService) {
+  constructor (codenvyAPI, lodash, codenvyNotification) {
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotificationService = codenvyNotificationService;
+    this.codenvyNotification = codenvyNotification;
     this.lodash = lodash;
     this.providedResources = {};
     this.isFreeAccount = false;
@@ -67,7 +67,7 @@ class BillingCtrl {
       if (error.status === 304) {
         this.processInvoices(this.codenvyAPI.getPayment().getInvoices(currentAccount.id));
       } else {
-        this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Failed to load invoices.');
+        this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Failed to load invoices.');
       }
     });
   }
