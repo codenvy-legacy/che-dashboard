@@ -11,13 +11,12 @@
 'use strict';
 
 import Register from '../../components/utils/register.js';
-import CodenvyNotificationController from '../../components/notification/codenvy-notification.controller.js';
 
 /**
  * Provides custom notifications
  * @author Oleksii Orel
  */
-class CodenvyNotificationService {
+class CodenvyNotification {
 
   /**
    * Default constructor that is using resource injection
@@ -25,40 +24,39 @@ class CodenvyNotificationService {
    */
   constructor($mdToast) {
     this.$mdToast = $mdToast;
-    this.text = '';
   }
 
   showInfo(text) {
     this.$mdToast.hide();
-    this.text = text;
     this.$mdToast.show({
-      templateUrl: 'components/notification/codenvy-notification-info.html',
-      controller: 'codenvyNotificationController',
+      template: '<md-toast class="cdvy-notification-info"><span flex>' + text + '</span></md-toast>',
       hideDelay: 3000
     });
   }
 
   showError(text) {
     this.$mdToast.hide();
-    this.text = text;
     this.$mdToast.show({
-      templateUrl: 'components/notification/codenvy-notification-error.html',
-      controller: 'codenvyNotificationController',
+      template: '<md-toast class="cdvy-notification-error">' +
+      '<span flex><b>Failed!</b> ' + text + '</span>' +
+      '<md-button ng-click="hideNotification()">Close</md-button>' +
+      '</md-toast>',
+      controller: function ($scope, codenvyNotification) {
+        $scope.hideNotification = function () {
+          codenvyNotification.hide();
+        }
+      },
       hideDelay: 20000
     });
   }
 
-  getNotificationText() {
-    return this.text;
-  }
-
-  closeToast() {
+  hide() {
     this.$mdToast.hide();
   }
 
 }
 
-export default CodenvyNotificationService;
+export default CodenvyNotification;
 
 // Register this factory
-Register.getInstance().factory('codenvyNotificationService', CodenvyNotificationService);
+Register.getInstance().factory('codenvyNotification', CodenvyNotification);

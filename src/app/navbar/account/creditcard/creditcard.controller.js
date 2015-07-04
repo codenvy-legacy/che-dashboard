@@ -23,10 +23,10 @@ class CreditcardCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-    constructor(codenvyAPI, $mdDialog, codenvyNotificationService) {
+    constructor(codenvyAPI, $mdDialog, codenvyNotification) {
     this.codenvyAPI = codenvyAPI;
     this.$mdDialog = $mdDialog;
-    this.codenvyNotificationService = codenvyNotificationService;
+    this.codenvyNotification = codenvyNotification;
 
     this.creditCards = [];
     this.creditCard = {};
@@ -54,7 +54,7 @@ class CreditcardCtrl {
         this.loadedCreditCards = true;
         this.creditCards = this.codenvyAPI.getPayment().getCreditCards(currentAccount.id);
       } else {
-        this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Failed to load credit cards.');
+        this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Failed to load credit cards.');
         console.log('error', error);
       }
     });
@@ -69,7 +69,7 @@ class CreditcardCtrl {
       }
       this.fetchCreditCards();
     }, (error) => {
-      this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Adding credit card failed.');
+      this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Adding credit card failed.');
       console.log('error', error);
     });
     return promise;
@@ -98,7 +98,7 @@ class CreditcardCtrl {
         console.log('error', 'test');
         this.fetchCreditCards();
       }, (error) => {
-        this.codenvyNotificationService.showError(error.data.message !== null ? error.data.message : 'Removing credit card failed.');
+        this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Removing credit card failed.');
         console.log('error', error);
       });
     });

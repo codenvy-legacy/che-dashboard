@@ -10,7 +10,7 @@
  */
 'use strict';
 
-/*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotificationService */
+/*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotification */
 
 import CodenvyAPI from './api/codenvy-api.factory';
 import WidgetConfig from './widget/widget-config';
@@ -25,8 +25,8 @@ import GitHub from './github/github-service';
 // import custom codemirror
 import CodeMirror from './codemirror/codemirror';
 
-// import custom notification service
-import CodenvyNotificationService from './notification/codenvy-notification.factory';
+// import custom notification
+import CodenvyNotification from './notification/codenvy-notification.factory';
 
 // import OnBoarding
 import OnBoarding from './onboarding/onboarding.factory';
