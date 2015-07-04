@@ -23,10 +23,10 @@ class CodenvyButtonDropdownCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($timeout, $location) {
+  constructor($timeout, $window) {
     this.$timeout = $timeout;
     this.showDropdown = false;
-    this.$location = $location;
+    this.$window = $window;
   }
 
   toggleDropDown() {
@@ -48,12 +48,7 @@ class CodenvyButtonDropdownCtrl {
     if (!newPath || this.isDisabled) {
       return;
     }
-
-    if (newPath.charAt(0) == '#') {
-      newPath = newPath.substring(1);
-    }
-
-    this.$location.path(newPath);
+    this.$window.location.href = newPath;
   }
 
 }
