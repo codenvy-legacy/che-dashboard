@@ -41,11 +41,14 @@ class AccountConfig {
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.accessWhen('/account', {
+      let locationProvider = {
         templateUrl: 'app/navbar/account/account.html',
         controller: 'AccountCtrl',
         controllerAs: 'accountCtrl'
-      });
+      };
+
+      $routeProvider.accessWhen('/account', locationProvider)
+        .accessWhen('/account/:tabName', locationProvider);
     });
   }
 }
