@@ -51,11 +51,17 @@ class CodenvySelecter {
 
   }
 
-  link($scope) {
+  link($scope, element) {
     // defines the first element as selected
     if ($scope.$parent.$first) {
         $scope.$parent.$parent[$scope.name + '.selecterSelected'] = $scope.title;
     }
+
+    let selectElement = element.find('select');
+    //fixes: first click on select element is not handled as clicked event on whole selected component:
+    selectElement.bind('mousedown', function() {
+      selectElement.click();
+    });
   }
 
 
