@@ -19,20 +19,18 @@
     <version>3.11.0-SNAPSHOT</version>
   </parent>
   <groupId>com.codenvy.dashboard</groupId>
-  <artifactId>user-dashboard-war</artifactId>
-  <version>2.0.0-beta4-SNAPSHOT</version>
+  <artifactId>dashboard-war</artifactId>
+  <version>2.0.0-beta1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>User Dashboard :: Web App</name>
+  <name>Codenvy Dashboard :: Web App</name>
   <scm>
-    <connection>scm:git:git@github.com:codenvy/user-dashboard.git</connection>
-    <developerConnection>scm:git:git@github.com:codenvy/user-dashboard.git</developerConnection>
+    <connection>scm:git:git@github.com:codenvy/dashboard.git</connection>
+    <developerConnection>scm:git:git@github.com:codenvy/dashboard.git</developerConnection>
     <tag>HEAD</tag>
-    <url>https://github.com/codenvy/user-dashboard</url>
+    <url>https://github.com/codenvy/dashboard</url>
   </scm>
   <properties>
     <license_years>2015</license_years>
-    <maven.releases.repo.url>https://maven.codenvycorp.com/content/repositories/codenvy-private-releases/</maven.releases.repo.url>
-    <maven.snapshots.repo.url>https://maven.codenvycorp.com/content/repositories/codenvy-private-snapshots/</maven.snapshots.repo.url>
   </properties>
   <repositories>
     <repository>
@@ -49,7 +47,7 @@
     </pluginRepository>
   </pluginRepositories>
   <build>
-    <finalName>user-dashboard-war</finalName>
+    <finalName>dashboard-war</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
