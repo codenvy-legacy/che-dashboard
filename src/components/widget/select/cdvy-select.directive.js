@@ -23,19 +23,20 @@ class CodenvySelect {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor () {
-    this.restrict='E';
+  constructor() {
+    this.restrict = 'E';
 
-    this.replace= true;
-    this.transclude= true;
+    this.replace = true;
+    this.transclude = true;
     this.templateUrl = 'components/widget/select/cdvy-select.html';
 
     // scope values
     this.scope = {
-      value : '=cdvyValue',
-      selectName:'@cdvyName',
+      value: '=cdvyValue',
+      selectName: '@cdvyName',
       labelName: '@cdvyLabelName',
-      placeHolder:'@cdvyPlaceHolder',
+      placeHolder: '@cdvyPlaceHolder',
+      size: '@cdvySize',
       myForm: '=cdvyForm',
       optionValues: '=cdvyOptionValues'
     };
@@ -67,7 +68,7 @@ class CodenvySelect {
       var value = attrs[key];
 
       // handle empty values as boolean
-      if (value ==='') {
+      if (value === '') {
         value = 'true';
       }
 
@@ -86,6 +87,9 @@ class CodenvySelect {
    * Keep reference to the model controller
    */
   link($scope, element) {
+    // search the select field
+    var selectElements = element.find('select');
+
     $scope.$watch('myForm.desk' + $scope.selectName + '.$pristine', (isPristine) => {
       if (isPristine) {
         element.addClass('desktop-pristine');
@@ -94,21 +98,19 @@ class CodenvySelect {
       }
 
       $scope.$watch('valueModel', (newVal) => {
-        if(typeof newVal === 'undefined') {
+        if (typeof newVal === 'undefined') {
           return;
         }
 
         $scope.value = newVal;
+        $scope.hideOptions();
 
-        angular.forEach(selectElements, function(selectElement) {
+        angular.forEach(selectElements, function (selectElement) {
           selectElement.className = newVal === '' ? 'disabled' : '';
         });
       });
 
-      // search the select field
-      var selectElements = element.find('select');
-
-      var content = '';
+      let content = '';
       $scope.optionValues.forEach((optionValue) => {
         content += '<option  value=\'' + (optionValue.id ? optionValue.id : optionValue.name) + '\'>' + optionValue.name + '</option>';
       });
@@ -116,11 +118,26 @@ class CodenvySelect {
       // Append the value elements in the select element
       selectElements.append(content);
 
-      angular.forEach(selectElements, function(selectElement) {
+      angular.forEach(selectElements, function (selectElement) {
         selectElement.value = $scope.value;
       });
 
     });
+
+    $scope.showOptions = function () {
+      if ($scope.size && $scope.size > 0) {
+        selectElements.attr('size', $scope.size);
+      } else {
+        // set default value
+        selectElements.attr('size', 10);
+      }
+      selectElements.addClass('cdvy-select-border');
+    };
+
+    $scope.hideOptions = function () {
+      selectElements.attr('size', 0);
+      selectElements.removeClass('cdvy-select-border');
+    };
 
   }
 
