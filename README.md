@@ -67,7 +67,7 @@ Note: before pushing contribution, these tests should always work
 
 #Architecture design
 
-## Ecmascript6/es6
+## Ecmascript 2015/es6
 
 This new version is using the new feature of Javascript language with a transpiler named babel (previously 6to5)
 
