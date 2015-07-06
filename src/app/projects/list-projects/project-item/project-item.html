@@ -17,24 +17,24 @@
                               cdvy-aria-label-checkbox="Project {{projectItemCtrl.project.name}}"></cdvy-list-item-checked>
     </div>
     <div flex="40" layout="column" layout-align-gt="start center" layout-align-md="start center" layout-align-sm="center center" ng-click="projectItemCtrl.redirectToProjectDetails()">
-      <div class="project-name"><a class="hover-state">{{projectItemCtrl.project.name}}</a>
+      <div class="project-name"><a class="codenvy-hover">{{projectItemCtrl.project.name}}</a>
       </div>
       <div class="project-details">{{projectItemCtrl.project.description}}</div>
     </div>
     <div flex="15" class="project-details" layout-align="center center" ng-click="projectItemCtrl.redirectToProjectDetails()">
-        <span class="hover-state"
+        <span class="codenvy-hover"
               tooltip="Last modified: {{projectItemCtrl.getProjectModificationDate() | amDateFormat:'dddd, MMMM Do, YYYY'}}"
               am-time-ago="projectItemCtrl.getProjectModificationDate()"></span>
     </div>
     <div flex="10" layout="row" layout-align="center center" ng-click="projectItemCtrl.redirectToProjectDetails()">
-      <md-icon class="hover-state"
+      <md-icon class="codenvy-hover"
                tooltip="{{projectItemCtrl.project.visibility=='public'?'Public':'Private'}}"
                md-font-icon="material-design {{projectItemCtrl.project.visibility=='public'?'icon-ic_lock_open_24px':'icon-ic_lock_24px'}}">
       </md-icon>
     </div>
-    <p ng-show="hover" >
+    <p ng-show="hover">
       <a ng-href="{{projectItemCtrl.project.ideUrl}}" target="_blank" tooltip="Open" tooltip-placement="left">
-        <cdvy-button-default class="hover-state project-list-details-arrow"
+        <cdvy-button-default class="codenvy-hover project-list-details-arrow"
                              cdvy-button-icon="fa fa fa-chevron-circle-right"
                              cdvy-button-title="Open in IDE"
                              ng-click="createProjectGithubCtrl.authenticateWithGitHub()"></cdvy-button-default>
