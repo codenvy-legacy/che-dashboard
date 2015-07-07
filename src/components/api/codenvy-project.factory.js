@@ -396,9 +396,14 @@ class CodenvyProject {
   }
 
   remove(workspaceId, projectName) {
-    let promise = this.remoteProjectsAPI.remove({workspaceId: workspaceId, path: projectName}).$promise;
+    let promiseDelete = this.remoteProjectsAPI.remove({workspaceId: workspaceId, path: projectName}).$promise;
+    // update list of projects
+    let promiseUpdateProjects = promiseDelete.then(() => {
+      this.fetchProjectsForWorkspaceId(workspaceId);
+    });
 
-    return promise;
+
+    return promiseUpdateProjects;
   }
 
 }
