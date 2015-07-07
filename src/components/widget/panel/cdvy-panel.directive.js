@@ -100,7 +100,8 @@ class CodenvyPanel {
 
     var template = '<md-card class="cdvy-panel" md-theme="default">'
       + '<div layout="row" class="cdvy-panel-titlebox" layout-align="start center">'
-      + '<div class="cdvy-panel-title" layout="row" layout-align="start center">';
+      + '<div class="cdvy-panel-title" layout="row" layout-align="start center"'
+      + (attrs['cdvyToggle'] ? ' ng-click="codenvyPanelCtrl.toggle()">' : '>');
 
     if (attrs['cdvyTitleIcon']) {
       template = template + '<span class="cdvy-panel-title-icon ' + attrs['cdvyTitleIcon'] + '"></span>';
