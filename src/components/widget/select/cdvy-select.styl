@@ -1,5 +1,16 @@
 .cdvy-select .cdvy-select-container
+  outline none
+  border none
   border-bottom 1px solid $default-border-color
+
+.cdvy-select md-input-container .cdvy-select-container
+  border-bottom 1px solid $default-border-color
+  margin-left -4px
+  width calc(100% + 4px)
+
+.cdvy-select .cdvy-select-desktop .cdvy-select-container
+  position relative
+  min-height 20px
 
 .cdvy-select md-input-container
   margin-top 30px
@@ -9,11 +20,25 @@
 
 .cdvy-select select
   background inherit
-  border none
+  outline none
 
 .cdvy-select .cdvy-select-desktop select
+  position absolute
+  z-index 1000
+
+.cdvy-select .cdvy-select-desktop select:not(.cdvy-select-border)
   margin-left -4px
+  width calc(100% + 4px)
   border none
+
+.cdvy-select .cdvy-select-desktop .cdvy-select-border
+  background $white-color
+  border-style solid
+  border-width 1.5px
+  border-color $primary-color
+
+.cdvy-select .cdvy-select-desktop select.cdvy-select-border
+  width 100%
 
 .cdvy-select select.disabled
   color $disabled-color
@@ -30,5 +55,3 @@
 .cdvy-select-desktop
   margin-top 5px
   margin-bottom 20px
-
-

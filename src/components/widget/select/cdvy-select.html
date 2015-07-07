@@ -12,10 +12,14 @@
   <!-- Desktop version -->
   <div class="cdvy-select-desktop" hide-sm hide-md layout="column" flex>
     <div layout="row" flex layout-align="space-around start">
-      <label flex="15" >{{labelName}}: </label>
+      <label flex="15">{{labelName}}: </label>
+
       <div layout="column" class="cdvy-select-container" flex="85">
         <select ng-model="valueModel"
-                name="{{selectName}}">
+                name="{{selectName}}"
+                ng-mousedown="showOptions()"
+                ng-change="hideOptions()"
+                ng-blur="hideOptions()">
           <option value="">{{placeHolder}}</option>
         </select>
       </div>
