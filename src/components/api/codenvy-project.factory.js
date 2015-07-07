@@ -379,13 +379,20 @@ class CodenvyProject {
   }
 
   setVisibility(workspaceId, projectName, visibility) {
-    let promise = this.remoteProjectsAPI.setVisibility({
+    let promiseVisibility = this.remoteProjectsAPI.setVisibility({
       workspaceId: workspaceId,
       path: projectName,
       visibility: visibility
     }, null).$promise;
 
-    return promise;
+    // update list of projects
+    let promiseUpdateProjects = promiseVisibility.then(() => {
+      this.fetchProjectsForWorkspaceId(workspaceId);
+    });
+
+
+
+    return promiseUpdateProjects;
   }
 
   remove(workspaceId, projectName) {
