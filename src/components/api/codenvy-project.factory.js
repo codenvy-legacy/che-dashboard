@@ -358,12 +358,18 @@ class CodenvyProject {
   }
 
   updateProjectDetails(projectDetails) {
-    let promise = this.remoteProjectsAPI.update({
+    let promiseUpdateProjectDetails = this.remoteProjectsAPI.update({
       workspaceId: projectDetails.workspaceId,
       path: projectDetails.name
     }, projectDetails).$promise;
 
-    return promise;
+
+    // update list of projects
+    let promiseUpdateProjects = promiseUpdateProjectDetails.then(() => {
+      this.fetchProjectsForWorkspaceId(projectDetails.workspaceId);
+    });
+
+    return promiseUpdateProjects;
   }
 
   rename(workspaceId, projectName, newProjectName) {
