@@ -32,8 +32,6 @@ class ProjectDetailsCtrl {
 
     this.loading = true;
 
-    this.projectDeleted = false;
-
     this.askedName = null;
     this.askedDescription = null;
     this.askedVisibility = null;
@@ -174,7 +172,7 @@ class ProjectDetailsCtrl {
       // remove it !
       let promise = this.codenvyAPI.getProject().remove(this.projectDetails.workspaceId, this.projectDetails.name);
       promise.then(() => {
-        this.projectDeleted = true;
+        this.$location.path('/projects');
       }, (error) => {
         console.log('error', error);
       });

@@ -10,15 +10,8 @@
 </cdvy-toolbar>
 <md-progress-linear md-mode="indeterminate" ng-show="projectDetailsCtrl.loading"></md-progress-linear>
 
-
-<md-content md-scroll-y flex class="projects-details-project" ng-show="projectDetailsCtrl.projectDeleted" md-theme="maincontent-theme">
-
-  <h1>Project has been deleted</h1>
-
-</md-content>
-
 <md-content md-scroll-y flex class="projects-details-project"
-            ng-show="projectDetailsCtrl.projectDetails && !projectDetailsCtrl.projectDeleted" md-theme="maincontent-theme">
+            ng-show="projectDetailsCtrl.projectDetails" md-theme="maincontent-theme">
   <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="selectedIndex" class="project-details-menu">
     <md-tab>
       <md-tab-label>
