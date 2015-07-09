@@ -28,6 +28,7 @@ gulp.task('generatesvgfonts', function() {
       fontName: 'codenvy',
       appendCodepoints: false,
       normalize: true,
+      svg: true,
       centerHorizontally: true,
       fontHeight: 100
     }))
