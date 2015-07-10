@@ -24,19 +24,18 @@ var ArtifactDictionary = {
   }
 };
 
-var NodeDictionary = new Map([
-    ['puppet_master_host_name', { type: 'Puppet Master' }],
-    ['builder_host_name',       { type: 'Main Builder' }],
-    ['additional_builders',     { type: 'Additional Builder', unwrap: true }],
-    ['runner_host_name',        { type: 'Main Runner' }],
-    ['additional_runners',      { type: 'Additional Runner', unwrap: true }],
-    ['analytics_host_name',     { type: 'Analytics service' }],
-    ['data_host_name',          { type: 'Data service' }],
-    ['api_host_name',           { type: 'Api service' }],
-    ['site_host_name',          { type: 'Site' }],
-    ['datasource_host_name',    { type: 'Datasource service' }],
-    ['host_url',                { type: 'All-in-one single node' }]
-  ]);
+var NodeDictionary = new Map();
+NodeDictionary.set('puppet_master_host_name', { type: 'Puppet Master' });
+NodeDictionary.set('builder_host_name', { type: 'Main Builder' });
+NodeDictionary.set('additional_builders', { type: 'Additional Builder', unwrap: true });
+NodeDictionary.set('runner_host_name', { type: 'Main Runner' });
+NodeDictionary.set('additional_runners', { type: 'Additional Runner', unwrap: true });
+NodeDictionary.set('analytics_host_name', { type: 'Analytics service' });
+NodeDictionary.set('data_host_name', { type: 'Data service' });
+NodeDictionary.set('api_host_name', { type: 'Api service' });
+NodeDictionary.set('site_host_name', { type: 'Site' });
+NodeDictionary.set('datasource_host_name', { type: 'Datasource service' });
+NodeDictionary.set('host_url', { type: 'All-in-one single node' });
 
 export default { artifacts: ArtifactDictionary, nodes: NodeDictionary };
 
