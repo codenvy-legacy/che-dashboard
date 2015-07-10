@@ -11,7 +11,7 @@
 'use strict';
 /*exported CodenvyAPI, CodeMirror, GitHub */
 
-var DEV = false;
+var DEV = true;
 
 // init module
 let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute',
