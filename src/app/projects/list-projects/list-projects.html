@@ -10,7 +10,6 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<div class="panel-background">
   <cdvy-toolbar cdvy-title="All projects"
                 cdvy-button-name="New Project"
                 cdvy-button-href="#/create-project"></cdvy-toolbar>
@@ -53,8 +52,9 @@
         <cdvy-list-title cdvy-icon="fa fa-folder">
           <span class="projects-list-workspace-name">{{listProjectsCtrl.getWorkspaceName(workspaceId)}}</span>
           <span ng-show="projects.length == 0" class="project-list-empty">- No project</span>
+          <span ng-show="(projects | filter:listProjectsCtrl.projectFilter).length == 0 && projects.length > 0" class="project-list-empty">- No projects found</span>
         </cdvy-list-title>
-        <cdvy-list ng-show="projects.length > 0">
+        <cdvy-list ng-show="(projects | filter:listProjectsCtrl.projectFilter).length > 0">
           <cdvy-project-item ng-repeat="project in projects | filter:listProjectsCtrl.projectFilter"
                              cdvy-project-item-workspace-id="workspaceId"
                              cdvy-project-item-project="project"
@@ -63,4 +63,3 @@
       </div>
     </md-content>
   </md-content>
-</div>
