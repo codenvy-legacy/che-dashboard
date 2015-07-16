@@ -46,7 +46,7 @@ class AccountUpdatePassword {
         $scope.password = newVal;
       });
       $scope.$watch('confirmPassword', (newVal) => {
-        if ($scope.changePasswordForm.$invalid || ($scope.newPassword !== newVal)) {
+        if ($scope.changePasswordForm.newPassword.$invalid || ($scope.newPassword !== newVal)) {
           $scope.password = null;
           return;
         }
