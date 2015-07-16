@@ -125,7 +125,34 @@ class ProjectDetailsDevelopersCtrl {
   setPermissionsForUserEmail(userEmailToAdd, roles) {
     var user = this.codenvyAPI.getUser().getUserFromEmail(userEmailToAdd);
     var userID = user.id;
-    return this.setPermission(userID, roles);
+
+
+
+    let promiseMembers = this.codenvyAPI.getWorkspace().getMembers(this.workspaceId);
+    let promiseCheckMember = promiseMembers.then((data) => {
+      // check if userId is there or not
+      let existMember = false;
+      var i;
+      for (i = 0; i < data.length; i++) {
+        if (user.id === data[i].userId) {
+          existMember = true;
+        }
+      }
+      // do not exist, add member
+      if (!existMember) {
+        let promiseAdd = this.codenvyAPI.getWorkspace().addMember(this.workspaceId, userID, ['workspace/stakeholder']);
+        return promiseAdd;
+      }
+
+
+      });
+
+
+    let promiseSetPermission = this.setPermission(userID, roles);
+
+
+    return this.$q.all([promiseCheckMember, promiseSetPermission]);
+
   }
 
 

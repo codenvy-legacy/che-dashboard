@@ -40,7 +40,11 @@ class CodenvyWorkspace {
     this.listeners = [];
 
     // remote call
-    this.remoteWorkspaceAPI = this.$resource('/api/workspace/all');
+    this.remoteWorkspaceAPI = this.$resource('/api/workspace/all', {}, {
+        addMember: {method: 'POST', url: '/api/workspace/:workspaceId/members'},
+        getMembers: {method: 'GET', url: '/api/workspace/:workspaceId/members', isArray: true}
+      }
+    );
   }
 
   /**
@@ -103,6 +107,36 @@ class CodenvyWorkspace {
 
     return callbackPromises;
   }
+
+
+  /**
+   * Adds for the given workspaceId the given role for the userId
+   * @param workspaceId the workspace ID
+   * @param userId the user ID
+   * @param roles the array of roles to add
+   * @returns {*|promise|n|N}
+   */
+  addMember(workspaceId, userId, roles) {
+    let data = {};
+    data.userId = userId;
+    data.roles = roles;
+
+    return this.remoteWorkspaceAPI.addMember({workspaceId: workspaceId}, data).$promise;
+  }
+
+  /**
+   * Gets the  for the given workspaceId the given role for the userId
+   * @param workspaceId the workspace ID
+   * @param userId the user ID
+   * @param roles the array of roles to add
+   * @returns {*|promise|n|N}
+   */
+  getMembers(workspaceId) {
+    console.log('getting members of ', workspaceId);
+    return this.remoteWorkspaceAPI.getMembers({workspaceId: workspaceId}).$promise;
+  }
+
+
 
 }
 
