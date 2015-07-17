@@ -73,6 +73,17 @@ class CreateProjectSamplesCtrl {
 
   }
 
+
+  /**
+   * Helper method used to get the length of keys of the given object
+   * @param items
+   * @returns length of keys
+   */
+  getItemsSize(items) {
+    return Object.keys(items).length;
+
+}
+
 }
 
 
