@@ -23,7 +23,7 @@ class CodenvyProject {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($resource, $q, codenvyUser, codenvyProfile) {
+  constructor($resource, $q, codenvyUser, codenvyProfile, codenvyWebsocket) {
 
     // keep resource
     this.$resource = $resource;
@@ -31,6 +31,8 @@ class CodenvyProject {
     this.codenvyUser = codenvyUser;
 
     this.codenvyProfile = codenvyProfile;
+
+    this.codenvyWebsocket = codenvyWebsocket;
 
     this.$q = $q;
 
@@ -89,6 +91,30 @@ class CodenvyProject {
 
       // update the current workspaces (replacing old one)
       this.workspaces.push(workspace);
+
+      // init bus
+      let bus = this.codenvyWebsocket.getBus(workspace.workspaceReference.id);
+      bus.subscribe('vfs', (message) => {
+        // if vfs is updated, and this is a root module, refresh
+        console.log('vfs data:', message);
+
+        if (workspace.workspaceReference.id === message.workspaceId) {
+          if ('CREATED' === message.type || 'DELETED' === message.type || 'RENAMED' == message.type) {
+
+            // count number of slashes to detect if this is a root project
+            let slashCount = (message.path.match(/\//g) || []).length;
+
+            console.log('itemLength =', slashCount);
+
+            if (1 === slashCount) {
+              // refresh
+              console.log('refreshing projects of workspace id', workspace.workspaceReference.id);
+              this.fetchProjectsForWorkspaceId(workspace.workspaceReference.id);
+            }
+          }
+        }
+      });
+
 
       // fetch projects for this workspace
       let promise = this.fetchProjectsForWorkspace(workspace);
