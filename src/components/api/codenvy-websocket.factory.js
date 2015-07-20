@@ -23,9 +23,9 @@ class CodenvyWebsocket {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($websocket, $location, $cookies) {
+  constructor ($websocket, $location, $window) {
 
-    this.$cookies = $cookies;
+    this.$window = $window;
     this.$websocket = $websocket;
     //this.wsBaseUrl = 'ws://' + $location.host() + ':' + $location.port() + '/api/ws/';
     this.wsBaseUrl = 'wss://codenvy.com/api/ws/';
@@ -37,7 +37,7 @@ class CodenvyWebsocket {
     var currentBus = this.sockets.get(workspaceId);
     if (!currentBus) {
       // needs to initialize
-      var url = this.wsBaseUrl + workspaceId + '?token=' + this.$cookies.token;
+      var url = this.wsBaseUrl + workspaceId + '?token=' + this.$window.sessionStorage["codenvyToken"];
       var dataStream = this.$websocket(url);
       var bus = new MessageBus(dataStream);
       this.sockets.set(workspaceId, bus);
