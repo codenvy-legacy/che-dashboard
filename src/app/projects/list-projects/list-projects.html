@@ -12,7 +12,7 @@
 -->
   <cdvy-toolbar cdvy-title="All projects"
                 cdvy-button-name="New Project"
-                cdvy-button-href="#/create-project"></cdvy-toolbar>
+                cdvy-button-href="#/create-project" cdvy-event-logger="projects/new.project"></cdvy-toolbar>
 
   <md-toolbar class="projects-list-header md-toolbar-tools" md-theme="toolbar-theme">
     <cdvy-search flex cdvy-placeholder="Search for projects" ng-model="listProjectsCtrl.projectFilter.name"></cdvy-search>
@@ -21,7 +21,7 @@
     <div class="md-toolbar-item md-tools" layout="row">
       <i class="projects-list-projects-cog material-design icon-ic_filter_list_24px" dropdown-menu="listProjectsCtrl.dropDownOptionsList"
          dropdown-model="listProjectsCtrl.dropDownValue" dropdown-onchange="listProjectsCtrl.dropDownSelected(selected)"
-         dropdown-item-label='name'></i>
+         dropdown-item-label='name' cdvy-event-logger="projects/filter"></i>
     </div>
   </md-toolbar>
   <div ng-if="listProjectsCtrl.displayWorkspaceFilter" class="projects-filter-animation projects-filter-panel" layout="row"

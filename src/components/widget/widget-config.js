@@ -58,4 +58,6 @@ import CodenvyEmptyState from './empty-state/cdvy-empty-state.directive';
 
 import CodenvySearch from './search/cdvy-search.directive';
 
+import CodenvyEventLogger from './event-logger/cdvy-event-logger.directive';
+
 import './frame/cdvy-frame.directive';

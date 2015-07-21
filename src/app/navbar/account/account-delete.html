@@ -15,7 +15,9 @@
     <label flex="15">Delete your account is irreversible</label>
 
     <div layout="column" flex="85">
-      <cdvy-button-danger cdvy-button-title="Delete this account" ng-click="accountDeleteCtrl.prepareEmail()"/>
+      <cdvy-button-danger cdvy-button-title="Delete this account"
+                          cdvy-event-logger="account/security/delete-account"
+                          ng-click="accountDeleteCtrl.prepareEmail()"/>
     </div>
   </div>
 </cdvy-panel>
