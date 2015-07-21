@@ -233,6 +233,8 @@ class CreateProjectCtrl {
       this.messageBus.subscribe(channel, (message) => {
         this.importingData = message.line;
       });
+      // no type when importing
+      delete this.importProjectData.project.type;
 
       promise = this.codenvyAPI.getProject().importProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData);
     }
