@@ -1,0 +1,37 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<md-toolbar>
+  <div class="help-menu" ng-show="navbarCtrl.isSimpleUser()">
+    <section class="left-sidebar-menu" layout="column" layout-align="center center">
+      <md-list layout="column" >
+        <md-list-item flex class="navbar-subsection-item"
+                      ng-show="navbarCtrl.displayLoginItem">
+          <div class="codenvy-bubble codenvy-bubble-arrow-left" ng-show="helpCtrl.showHelp">
+            <ul>
+              <li><a ng-href="http://docs.codenvy.com" target="_blank">Codenvy Help</a></li>
+              <li><a ng-href="http://helpdesk.codenvy.com" target="_blank">Forum</a></li>
+              <li><a ng-href="https://codenvy.uservoice.com" target="_blank">Feedback and Feature Vote</a></li>
+              <li><a ng-href="https://codenvy.uservoice.com" target="_blank">Create Support Ticket</a></li>
+            </ul>
+          </div>
+          <md-button nav-bar-selected flex ng-click="helpCtrl.toggleHelp()" layout-align="left" ng-blur="helpCtrl.disableHelp()">
+            <div class="navbar-item" layout="row" layout-align="start center">
+              <i class="material-design md-tab-themed icon-ic_help_outline_24px">&nbsp;</i>
+              <span>Help</span>
+            </div>
+          </md-button>
+        </md-list-item>
+      </md-list>
+    </section>
+  </div>
+</md-toolbar>

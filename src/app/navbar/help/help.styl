@@ -1,0 +1,39 @@
+.help-menu md-list md-list-item button.md-button:not([disabled]):hover
+  background-color $active-background-color
+
+
+.codenvy-bubble
+  margin-left -50px
+  margin-top -95px
+  display inline-block
+  position absolute
+  width 200px
+  height auto
+  background-color $white-color
+  border-radius 3px
+  text-align left
+  box-shadow 0 0 7px black
+  font-size 14px
+  z-index 100
+
+.codenvy-bubble ul
+    list-style none
+    padding 0
+    margin 8px
+
+.codenvy-bubble a
+  color $label-primary-color
+
+
+.codenvy-bubble-arrow-left:after
+  content ' '
+  position absolute;
+  width 0
+  height 0
+  left 94px
+  right auto
+  top auto
+  bottom -10px
+  border 11px solid
+  border-color transparent transparent transparent $white-color
+
