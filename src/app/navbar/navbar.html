@@ -108,10 +108,12 @@
       <cdvy-admin-links class="admin-navbar-menu" ng-if="navbarCtrl.userIsAdmin()"></cdvy-admin-links>
 
       <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
+
+      <help-widget></help-widget>
+
     </div>
   </md-toolbar>
 
-  <help-widget></help-widget>
   <div class="navbar-beta-widget" ng-show="navbarCtrl.isSimpleUser()">
     <ud-beta-widget></ud-beta-widget>
   </div>
