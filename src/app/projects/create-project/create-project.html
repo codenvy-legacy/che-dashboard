@@ -16,7 +16,7 @@
 <md-content md-scroll-y flex class="projects-create-project" md-theme="maincontent-theme" ng-show="createProjectCtrl.projectBlankCompleted">
   <cdvy-panel cdvy-title="Select Source">
     <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedIndex">
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('blank')">
+      <md-tab md-on-select="createProjectCtrl.setCurrentTab('blank')" cdvy-event-logger="new.project/empty">
         <md-tab-label>
           <i class="material-design  icon-ic_developer_mode_24px cdvy-tab-label-icon"></i>
           <span class="cdvy-tab-label-title">Empty Project</span>
@@ -25,7 +25,7 @@
           <create-project-blank class="projects-create-project-tab" layout="row" layout-wrap></create-project-blank>
         </md-tab-body>
       </md-tab>
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('samples')">
+      <md-tab md-on-select="createProjectCtrl.setCurrentTab('samples')" cdvy-event-logger="new.project/samples">
         <md-tab-label>
           <md-icon md-font-icon="fa-magic" class="fa cdvy-tab-label-icon"></md-icon>
           <span class="cdvy-tab-label-title">Samples</span>
@@ -34,7 +34,7 @@
           <create-project-samples class="projects-create-project-tab" layout="row" layout-wrap></create-project-samples>
         </md-tab-body>
       </md-tab>
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('git')">
+      <md-tab md-on-select="createProjectCtrl.setCurrentTab('git')" cdvy-event-logger="new.project/git">
         <md-tab-label>
           <md-icon md-font-icon="fa-git" class="fa cdvy-tab-label-icon"></md-icon>
           <span class="cdvy-tab-label-title">Git Repository</span>
@@ -43,7 +43,7 @@
           <create-project-git class="projects-create-project-tab" layout="column"></create-project-git>
         </md-tab-body>
       </md-tab>
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('github')">
+      <md-tab md-on-select="createProjectCtrl.setCurrentTab('github')" cdvy-event-logger="new.project/github">
         <md-tab-label>
           <md-icon md-font-icon="fa-github" class="fa cdvy-tab-label-icon"></md-icon>
           <span class="cdvy-tab-label-title">Github</span>
@@ -52,7 +52,7 @@
           <create-project-github class="projects-create-project-tab" layout="column"></create-project-github>
         </md-tab-body>
       </md-tab>
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('zip')">
+      <md-tab md-on-select="createProjectCtrl.setCurrentTab('zip')" cdvy-event-logger="new.project/zip">
         <md-tab-label>
           <md-icon md-font-icon="fa-file-archive-o" class="fa cdvy-tab-label-icon"></md-icon>
           <span class="cdvy-tab-label-title">Zip</span>
@@ -61,7 +61,7 @@
           <create-project-zip class="projects-create-project-tab" layout="column"></create-project-zip>
         </md-tab-body>
       </md-tab>
-      <md-tab md-on-select="createProjectCtrl.refreshCM(); $parent.createProjectCtrl.setCurrentTab('config')">
+      <md-tab md-on-select="createProjectCtrl.refreshCM(); $parent.createProjectCtrl.setCurrentTab('config')" cdvy-event-logger="new.project/config">
         <md-tab-label>
           <md-icon md-font-icon="fa-download" class="fa cdvy-tab-label-icon"></md-icon>
           <span class="cdvy-tab-label-title">Configuration File</span>
