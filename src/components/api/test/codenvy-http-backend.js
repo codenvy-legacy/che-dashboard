@@ -172,7 +172,7 @@ class CodenvyHttpBackend {
    * Set new user password
    * @param password
    */
-  setPassword(password) {
+  setPassword() {
     this.httpBackend.when('POST', '/api/user/password').respond(() => {
       return [200, {success: true, errors: []}];
     });

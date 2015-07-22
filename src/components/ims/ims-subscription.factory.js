@@ -54,6 +54,7 @@ class ImsSubscriptionApi {
         return { state: 'NO_SUBSCRIPTION' };
       case 403:// SaaS User is not authenticated or authentication token is expired
       case 500:// server error
+        throw response.status;
       default:// unspecified error
         throw response.status;
     }

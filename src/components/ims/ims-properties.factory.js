@@ -106,7 +106,7 @@ class ImsPropertiesApi {
 
   deleteProperty(key) {
     let resource = this.remoteImsAPI.deleteProperty({ name: key }, {});
-    resource.$promise.then(_ => this.propertiesMap.delete(key));
+    resource.$promise.then(() => this.propertiesMap.delete(key));
     return resource;
   }
 }

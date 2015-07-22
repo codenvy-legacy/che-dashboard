@@ -18,7 +18,7 @@ var ArtifactDictionary = {
     releaseNotes: 'http://docs.codenvy.com/user/saas-release-notes/'
   },
   'installation-manager-cli': {
-    display: "Codenvy Installer",
+    display: 'Codenvy Installer',
     description: 'Detects new versions of Codenvy software, schedules software downloads, and executes the installation / update process for new software.',
     releaseNotes: 'http://docs.codenvy.com/onpremises/cdec-onpremises-installation-manager-release-notes/'
   }

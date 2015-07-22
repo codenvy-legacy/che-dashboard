@@ -90,7 +90,7 @@ class AutomaticUpdatesCtrl {
     this.usageDataDisabled = disabled;
   }
 
-  _saveOk(prop) {
+  _saveOk() {
     this._setDisabledProps(false);
   }
 

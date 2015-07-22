@@ -67,7 +67,7 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     this.show30DaysAdvertisement = false;
   }
 
-  hideAllMessages(error) {
+  hideAllMessages() {
       this.showSubscribedMessage = false;
       this.showNotSubscribedMessage = false;
       this.onpremSubscriptionExpiration = undefined;
@@ -138,7 +138,7 @@ class OnPremisesAdminBridgeCodenvyAccountCtrl {
     }
   }
 
-  _subscriptionChanged(newValue, oldValue) {
+  _subscriptionChanged(newValue) {
     if (!newValue) {
       this.hideAllMessages();
     } else {

@@ -10,8 +10,6 @@
  */
 'use strict';
 
-import Register from '../../components/utils/register';
-
 /**
  * @ngdoc controller
  * @name onboard.controller:OnBoardCtrl
@@ -102,11 +100,11 @@ class OnBoardCtrl {
     let promise = this.creditCardController.addCreditCard();
     this.addingCardIsInProgress = true;
     // we enable next step only if card is added
-    promise.then((data) => {
+    promise.then(() => {
       this.addingCardIsInProgress = false;
       // ok switch to next step
       this.nextStep();
-    }, (error) => {
+    }, () => {
       //we got error
       this.addingCardIsInProgress = false;
     });

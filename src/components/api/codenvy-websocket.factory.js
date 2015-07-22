@@ -10,6 +10,7 @@
  */
 'use strict';
 
+/* exported MessageBus */
 import Register from '../utils/register.js';
 
 
@@ -37,7 +38,7 @@ class CodenvyWebsocket {
     var currentBus = this.sockets.get(workspaceId);
     if (!currentBus) {
       // needs to initialize
-      var url = this.wsBaseUrl + workspaceId + '?token=' + this.$window.sessionStorage["codenvyToken"];
+      var url = this.wsBaseUrl + workspaceId + '?token=' + this.$window.sessionStorage['codenvyToken'];
       var dataStream = this.$websocket(url);
       var bus = new MessageBus(dataStream);
       this.sockets.set(workspaceId, bus);
@@ -97,16 +98,16 @@ class MessageBuilder {
   buildUUID() {
     var time = new Date().getTime();
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (match) => {
-      var rem = (time + 16 * Math.random()) % 16 | 0;
+      var rem = (time + 16 * Math.random()) % 16 | 0; // jshint ignore:line
       time = Math.floor(time / 16);
-      return (match === 'x' ? rem : rem & 7 | 8).toString(16);
+      return (match === 'x' ? rem : rem & 7 | 8).toString(16); // jshint ignore:line
     });
   }
 
 
 }
 
-class MessageBus {
+class MessageBus { // jshint ignore:line
 
   constructor(datastream) {
     this.datastream = datastream;
@@ -151,7 +152,7 @@ class MessageBus {
    * If it's the last unsubscribe to a channel, a message is sent to the server to
    * unsubscribe the client for that channel.
    */
-  unsubscribe(channel, callback) {
+  unsubscribe(channel) {
     // already subscribed ?
     var existingSubscribers = this.subscribersByChannel.get(channel);
     // unable to cancel if not existing channel
@@ -162,9 +163,7 @@ class MessageBus {
     if (existingSubscribers > 1) {
       // only remove callback
       for(let i = 0; i < existingSubscribers.length; i++) {
-        if (existingCallback === callback) {
           delete existingSubscribers[i];
-        }
       }
     } else {
       // only one element, remove and send server message
@@ -210,9 +209,6 @@ class MessageBus {
           subscriber(JSON.parse(jsonMessage.body));
         });
       }
-
-    } else {
-      // it's based on the UUID
     }
 
   }

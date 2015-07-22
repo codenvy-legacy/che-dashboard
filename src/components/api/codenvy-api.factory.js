@@ -9,7 +9,9 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
-/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate, CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendProviderFactory */
+/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
+ CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
+ CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn */
 
 
 import Register from '../utils/register';
@@ -43,7 +45,8 @@ class CodenvyAPI {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment, codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn) {
+  constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
+              codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;

@@ -10,7 +10,7 @@
  */
 'use strict';
 
-/*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotification */
+/*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotification, RoutingRedirect, OnBoarding, CreateProjectGitValidator, UniqueProjectNameValidator */
 
 import CodenvyAPI from './api/codenvy-api.factory';
 import WidgetConfig from './widget/widget-config';

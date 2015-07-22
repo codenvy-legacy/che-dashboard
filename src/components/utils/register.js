@@ -113,19 +113,19 @@ class Register {
    * In order to inject the dependencies, they must be attached to the constructor function with the
    * `$inject` property annotation.
    *
-   * @param constructorFn
+   * @param ConstructorFn
    * @returns {Array.<T>}
    * @private
    */
-  _createFactoryArray(constructorFn) {
+  _createFactoryArray(ConstructorFn) {
     // get the array of dependencies that are needed by this component (as contained in the `$inject` array)
-    var args = constructorFn.$inject || [];
+    var args = ConstructorFn.$inject || [];
     var factoryArray = args.slice(); // create a copy of the array
     // The factoryArray uses Angular's array notation whereby each element of the array is the name of a
     // dependency, and the final item is the factory function itself.
     factoryArray.push((...args) => {
       //return new constructorFn(...args);
-      var instance = new constructorFn(...args);
+      var instance = new ConstructorFn(...args);
       for (var key in instance) {
         instance[key] = instance[key];
       }

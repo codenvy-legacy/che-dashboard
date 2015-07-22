@@ -32,7 +32,7 @@ class NavBarSelected {
   /**
    * Monitor click
    */
-  link($scope, element, attrs, controller) {
+  link($scope, element) {
     element.bind('click', () => {
 
       // if there is a previous selected element, unselect it

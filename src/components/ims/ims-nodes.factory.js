@@ -67,22 +67,22 @@ class ImsNodesApi {
         let nodeData = dictionary.nodes.get(key);
         if (nodeData) {
           if (nodeData.unwrap) {
-            unwrapNodeSet(result, key, nodeData.type, nodeHostName); // Actually, here nodeHostname is not a hostname but an array
+            this.unwrapNodeSet(result, key, nodeData.type, nodeHostname); // Actually, here nodeHostname is not a hostname but an array
           } else {
             result[key] = { type: nodeData.type, hostname: nodeHostname };
           }
         } else {
           result[key] = { type: 'Unknown Type', hostname: nodeHostname };
         }
-      } 
+      }
     }
     return result;
   }
-  
+
   unwrapNodeSet(result, key, type, nodeArray) {
     var i = 0;
     for (let hostname of nodeArray) {
-      result[`${key}_${i}`] = { type: nodeData.type, hostname: nodeHostname };
+      result[`${key}_${i}`] = { type: type, hostname: hostname };
       i++;
     }
   }

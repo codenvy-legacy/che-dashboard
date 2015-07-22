@@ -24,7 +24,7 @@ class ScrollValidate {
   /**
    * Re-apply ng-disabled on child
    */
-  link($scope, element, attrs) {
+  link($scope, element) {
     var innerElement = element[0];
 
     element.bind('scroll', function () {

@@ -10,6 +10,8 @@
  */
 'use strict';
 
+/*exported ListProjectsWorkspaceFilter, CreateProjectSamplesFilter, CreateProjectSamplesNameFilter */
+
 import CreateProjectCtrl from './create-project/create-project.controller';
 import ListProjectsCtrl from './list-projects/list-projects.controller';
 import ListProjectsWorkspaceFilter from './list-projects/list-projects-filter-workspace.filter';

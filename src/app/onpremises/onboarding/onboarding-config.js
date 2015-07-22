@@ -11,8 +11,8 @@
 'use strict';
 
 import OnPremisesOnboardingCtrl from './onpremise-onboarding.controller';
-import OnPremiseOnBoardingRedirect from './onpremise-onboarding-redirect.factory'
-import ScrollValidate from './onpremise-onboarding-scroll-validate.directive'
+import OnPremiseOnBoardingRedirect from './onpremise-onboarding-redirect.factory';
+import ScrollValidate from './onpremise-onboarding-scroll-validate.directive';
 
 class OnPremisesOnboardingConfig {
 

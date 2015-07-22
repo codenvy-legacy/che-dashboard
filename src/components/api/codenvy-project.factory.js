@@ -99,7 +99,7 @@ class CodenvyProject {
         console.log('vfs data:', message);
 
         if (workspace.workspaceReference.id === message.workspaceId) {
-          if ('CREATED' === message.type || 'DELETED' === message.type || 'RENAMED' == message.type) {
+          if ('CREATED' === message.type || 'DELETED' === message.type || 'RENAMED' === message.type) {
 
             // count number of slashes to detect if this is a root project
             let slashCount = (message.path.match(/\//g) || []).length;

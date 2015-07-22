@@ -88,8 +88,8 @@ class AddCreditcardCtrl {
 
       formatting: this.options.formatting,
       debug: this.options.debug
-    }
-    $(element).card(card);
+    };
+    $(element).card(card); // jshint ignore:line
   }
 }
 

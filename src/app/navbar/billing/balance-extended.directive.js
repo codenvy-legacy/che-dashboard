@@ -39,19 +39,19 @@ class BalanceExtened {
   link($scope, element, attrs) {
     var t = this;
 
-    attrs.$observe('cdvyConsumed', function (newValue) {
+    attrs.$observe('cdvyConsumed', function () {
       if ($scope.consumed && $scope.provided && $scope.charged) {
         t.initChart($scope);
       }
     });
 
-    attrs.$observe('cdvyProvided', function (newValue) {
+    attrs.$observe('cdvyProvided', function () {
       if ($scope.consumed && $scope.provided && $scope.charged) {
         t.initChart($scope);
       }
     });
 
-    attrs.$observe('cdvyCharged', function (newValue) {
+    attrs.$observe('cdvyCharged', function () {
       if ($scope.consumed && $scope.provided && $scope.charged) {
         t.initChart($scope);
       }

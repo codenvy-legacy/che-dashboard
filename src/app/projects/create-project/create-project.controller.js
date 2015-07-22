@@ -24,7 +24,7 @@ class CreateProjectCtrl {
     this.codenvyAPI = codenvyAPI;
     this.$timeout = $timeout;
     this.$location = $location;
-    this.$mdDialog = $mdDialog
+    this.$mdDialog = $mdDialog;
     this.$rootScope = $rootScope;
 
     // subitem not yet completed
@@ -287,7 +287,7 @@ class CreateProjectCtrl {
         name = this.importProjectData.project.type;
       }
 
-      name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4));
+      name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)); // jshint ignore:line
 
       this.importProjectData.project.name = name;
 

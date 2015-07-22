@@ -36,7 +36,7 @@ class OnPremiseOnBoardingRedirect {
    * @param path
    */
   checkPage(path) {
-    if ('app/onpremises/onboarding/onboarding.html' == path) {
+    if ('app/onpremises/onboarding/onboarding.html' === path) {
       return true;
     }
     return false;
@@ -57,7 +57,7 @@ class OnPremiseOnBoardingRedirect {
 
     // if user tries to get dashboard, redirect
     if ('app/projects/list-projects/list-projects.html' === url) {
-      return {route:"/onprem/admin/bridge"};
+      return {route:'/onprem/admin/bridge'};
     }
 
 
@@ -66,7 +66,7 @@ class OnPremiseOnBoardingRedirect {
     let property = this.imsPropertiesApi.getProperty('onboardingCompleted');
 
     if (!property  || property !== 'true') {
-      return {route:"/onprem/onboarding"};
+      return {route:'/onprem/onboarding'};
     }
 
     // flow not yet completed

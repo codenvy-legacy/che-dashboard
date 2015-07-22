@@ -46,7 +46,7 @@ angular.module('userDashboard')
 
       popup.open = function(url, options, config) {
         var optionsString = popup.stringifyOptions(popup.prepareOptions(options || {}));
-        popupWindow = window.open(url, '_blank', optionsString);
+        popupWindow = window.open(url, '_blank', optionsString); // jshint ignore:line
 
         if (popupWindow && popupWindow.focus) {
           popupWindow.focus();
@@ -55,7 +55,7 @@ angular.module('userDashboard')
         return popup.pollPopup(config);
       };
 
-      popup.pollPopup = function(config) {
+      popup.pollPopup = function() {
         var deferred = $q.defer();
         polling = $interval(function() {
           try {
@@ -131,10 +131,10 @@ angular.module('userDashboard')
   .factory('gitHubTokenStore', function() {
     return {
       setToken: function (token) {
-        localStorage.setItem('gitHubToken', token);
+        localStorage.setItem('gitHubToken', token); // jshint ignore:line
       },
       getToken: function () {
-        return localStorage.getItem('gitHubToken');
+        return localStorage.getItem('gitHubToken'); // jshint ignore:line
       }
     };
   }).factory('gitHubApiUtils', ['gitHubApiUrlRoot', function(gitHubApiUrlRoot) {
@@ -172,7 +172,7 @@ angular.module('userDashboard')
      * @returns true if targeted to GitHub API, false either
      */
     function isGitHubApiUrl(url) {
-      var checked = url && url.indexOf(gitHubApiUrlRoot) == 0;
+      var checked = url && url.indexOf(gitHubApiUrlRoot) === 0;
       return checked;
     }
 
@@ -189,7 +189,7 @@ angular.module('userDashboard')
       var filtered = [];
       for (var i = 0; i < repositories.length; i++) {
         var repository = repositories[i];
-        if ((!organizationFilter || repository.owner.login == organizationFilter.login)
+        if ((!organizationFilter || repository.owner.login === organizationFilter.login)
           && (!repositoryNameFilter || repository.name.toLocaleLowerCase().indexOf(repositoryNameFilter.toLocaleLowerCase()) >= 0)) {
           filtered.push(repository);
         }

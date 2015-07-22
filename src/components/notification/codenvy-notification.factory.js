@@ -44,7 +44,7 @@ class CodenvyNotification {
       controller: function ($scope, codenvyNotification) {
         $scope.hideNotification = function () {
           codenvyNotification.hide();
-        }
+        };
       },
       hideDelay: 20000
     });

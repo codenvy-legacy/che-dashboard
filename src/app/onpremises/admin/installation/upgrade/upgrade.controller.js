@@ -22,7 +22,7 @@ class UpgradeInstallationCtrl {
     this.fetchAll = false;
     this.$rootScope.$watch(
       () => imsSaasAuthApi.promise,
-      (newValue, oldValue) => { this.updateSubscriptionStatus(newValue); }
+      (newValue) => { this.updateSubscriptionStatus(newValue); }
     );
     // by default, false, until login and subscription check
     this.subscriptionOk = false;
@@ -70,7 +70,7 @@ class UpgradeInstallationCtrl {
     }
   }
 
-  install(artifactVersion) {
+  install() {
     this.imsUpdateApi.update();
   }
 }

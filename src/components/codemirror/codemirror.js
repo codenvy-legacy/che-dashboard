@@ -25,5 +25,5 @@ angular.module('userDashboard').constant('udCodemirrorConfig', {
     theme: 'codenvy'
   }
 }).config(function() {
-  uiCodemirrorDirective.$inject = ['$timeout', 'udCodemirrorConfig'];
+  uiCodemirrorDirective.$inject = ['$timeout', 'udCodemirrorConfig']; // jshint ignore:line
 });

@@ -24,7 +24,7 @@ class CodenvyEventLogger {
    */
   constructor (codenvyAPI) {
     this.restrict = 'A';
-    this.codenvyAPI = codenvyAPI
+    this.codenvyAPI = codenvyAPI;
   }
 
   link($scope, element, attr) {

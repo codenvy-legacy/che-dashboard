@@ -117,7 +117,6 @@ class SubscriptionCtrl {
       return detail.type === 'prepaid';
     });
 
-    let prepaid = prepaidSubscription.properties.PrepaidGbH;
     prepaidSubscription.title = details.title;
     prepaidSubscription.buttonTitle = details.buttonTitle;
     prepaidSubscription.cancel = function() {

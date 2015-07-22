@@ -96,7 +96,8 @@ class CodenvyToolbar {
 
     // start href link
     if (breadcrumbHref) {
-      template = template + '<a href=\"' + breadcrumbHref + '\" layout=\"row\" layout-align=\"start center\"><i class=\"icon-breadcrumb material-design icon-ic_chevron_left_24px\" md-theme=\"default\"></i>';
+      template = template + '<a href=\"' + breadcrumbHref + '\" layout=\"row\" layout-align=\"start center\">' +
+      '<i class=\"icon-breadcrumb material-design icon-ic_chevron_left_24px\" md-theme=\"default\"></i>';
     }
 
     if (breadcrumbTitle) {
@@ -115,7 +116,8 @@ class CodenvyToolbar {
     + title + '</span><span class=\"cdvy-toolbar-title-icons\">';
     if (titleController) {
       template = template
-      + '<md-icon ng-repeat=\"icon in ' + titleController + '.toolbarIcons\" md-font-icon=\"{{icon.font}}\" ng-click=\"' + titleController + '.callbackToolbarClick(icon.name)\"';
+      + '<md-icon ng-repeat=\"icon in ' + titleController + '.toolbarIcons\" md-font-icon=\"{{icon.font}}\" ng-click=\"'
+      + titleController + '.callbackToolbarClick(icon.name)\"';
     }
 
     template = template

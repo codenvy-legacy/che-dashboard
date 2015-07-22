@@ -102,6 +102,7 @@ var fs = require('fs');
 gulp.task('colorstemplate', function () {
   return gulp.src('src/app/colors/codenvy-color.constant.js.template')
     .pipe($.replace('%CONTENT%', fs.readFileSync('src/app/colors/codenvy-colors.json')))
+    .pipe($.replace('\"', '\''))
     .pipe(gulp.dest('src/app/colors/template'));
 });
 

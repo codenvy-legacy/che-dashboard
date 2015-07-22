@@ -36,9 +36,9 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
 
     // do we have a download in progress ?
     let promise = this.imsArtifactApi.getCurrentDownloadID();
-    promise.then(id => {
+    promise.then(() => {
       promise.then((data) => {
-        this.promiseInterval = this.$interval(() => {internalFunction(this, data.id)}, 2000);
+        this.promiseInterval = this.$interval(() => {internalFunction(this, data.id);}, 2000);
       });
     });
   }
@@ -51,7 +51,7 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
 
     let promise = this.imsArtifactApi.downloadArtifact(artifact.name, artifactAvailableVersion);
     promise.then((data) => {
-      this.promiseInterval = this.$interval(() => {internalFunction(this, data.id)}, 2000);
+      this.promiseInterval = this.$interval(() => {internalFunction(this, data.id);}, 2000);
     });
 
   }
@@ -84,7 +84,7 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
       this.currentDownloadedArtifact.inProgress = true;
     });
 
-      promise.catch(error => {
+      promise.catch(() => {
       // remove any timeout
       if (this.promiseInterval) {
         this.$interval.cancel(this.promiseInterval);

@@ -41,7 +41,7 @@ class AddCreditcard {
     this.scope = true;
     this.$timeout = $timeout;
   }
-  link($scope, element, attrs) {
+  link($scope, element) {
     var timeout = this.$timeout;
 
     $scope.$watch(function () {

@@ -124,13 +124,13 @@ class ImsArtifactApi {
             status: artifact.status,
             version: artifact.version
           };
-          if (artifact.status == 'DOWNLOADED') {
+          if (artifact.status === 'DOWNLOADED') {
             if (value.downloaded) {
               value.downloaded.push(downloadInfo);
             } else {
               value.downloaded = [downloadInfo];
             }
-          } else if (artifact.status == 'READY_TO_INSTALL') {
+          } else if (artifact.status === 'READY_TO_INSTALL') {
             if (value.toInstall) {
               value.toInstall.push(downloadInfo);
             } else {

@@ -46,7 +46,7 @@ class OnPremConfigurationCtrl {
   _formatConfig(response) {
     this.unmodifiedConfig = this._filterUnwanted(angular.fromJson(response.toJSON()));
     let props = [];
-    for (let [key, value] of this.unmodifiedConfig) {
+    for (let [key] of this.unmodifiedConfig) {
       props.push(key);
     }
     props.sort();
@@ -82,7 +82,7 @@ class OnPremConfigurationCtrl {
     let filtered = this._filterUnchanged(config);
     if (filtered && filtered.size > 0) {
       this._enterSubmitState();
-      this.imsConfigApi.setIMConfig(filtered).$promise.then((response) => this._updateSuccess()).catch((error) => this._updateError(error));
+      this.imsConfigApi.setIMConfig(filtered).$promise.then(() => this._updateSuccess()).catch((error) => this._updateError(error));
     }
   }
 
@@ -121,7 +121,7 @@ class OnPremConfigurationCtrl {
     let errorDialog = this.$mdDialog.alert()
       .title('Update Configuration Aborted')
       .ok('Close');
-    if (properties.length == 1) {
+    if (properties.length === 1) {
       errorDialog.content(`The property ${properties[0]} is not a known configuration property name. The configuration was not updated.`);
     } else {
       errorDialog.content(`Some properties were not known configuration property names. The configuration was not updated. (properties: ${properties.join(', ')}).`);

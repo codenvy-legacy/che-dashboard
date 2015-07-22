@@ -36,7 +36,7 @@ class OnBoardRedirect {
    * @param path
    */
   checkPage(path) {
-    if ('app/onboard/onboard.html' == path) {
+    if ('app/onboard/onboard.html' === path) {
       return true;
     }
     return false;
@@ -60,7 +60,7 @@ class OnBoardRedirect {
 
     // Preferences say that flow hasn't been completed ?
     if (!preferences.onBoardingFlowCompleted || preferences.onBoardingFlowCompleted !== 'true') {
-      return {route:"/welcome"};
+      return {route:'/welcome'};
     }
     return {};
 

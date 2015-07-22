@@ -22,7 +22,7 @@ class LoginCtrl {
     this.$http = $http;
     this.$cookies = $cookies;
     this.$window = $window;
-    this.$timeout = $timeout
+    this.$timeout = $timeout;
     this.codenvyAPI = codenvyAPI;
     this.location = $location;
 
@@ -50,7 +50,7 @@ class LoginCtrl {
       }).then((response) => {
 
         this.$cookies.token = response.data.value;
-        this.$window.sessionStorage["codenvyToken"] = response.data.value;
+        this.$window.sessionStorage['codenvyToken'] = response.data.value;
         this.$cookies.refreshStatus = 'DISABLED';
 
         // update user
@@ -67,7 +67,7 @@ class LoginCtrl {
   refresh() {
 
     // refresh the home page
-    this.$location = "/"
+    this.$location = '/';
     this.$window.location = '/';
     this.$timeout(() =>  this.$window.location.reload(), 500);
 

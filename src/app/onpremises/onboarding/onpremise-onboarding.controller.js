@@ -47,7 +47,7 @@ class OnPremisesOnboardingCtrl {
     // First, set it to 'to-complete' image
     this.stepsIcons.set(stepNumber, 'assets/images/to-complete.svg');
 
-    if (stepNumber == 1) {
+    if (stepNumber === 1) {
       if (this.imsPropertiesApi.getProperty('onboardingCompleted') === 'true') {
         this.completed = true;
       } else {

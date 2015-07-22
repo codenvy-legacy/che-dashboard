@@ -101,7 +101,7 @@ class CodenvyInput {
     // search the input field
     var inputElement = element.find('input');
 
-    var tabIndex = undefined;
+    var tabIndex;
 
     keys.forEach((key) => {
 

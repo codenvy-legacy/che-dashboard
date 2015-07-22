@@ -34,7 +34,7 @@ class ProjectItemCtrl {
       return this.project.creationDate;
     }
     return this.profileCreationDate;
-  };
+  }
 
 
   redirectToProjectDetails() {

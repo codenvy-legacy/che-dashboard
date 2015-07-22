@@ -53,7 +53,7 @@ class YourInstallationCtrl {
     let deletePromise = this.imsArtifactApi.deleteDownloadedArtifact('codenvy', downloadedVersion);
 
     // remove existing versions
-    let promise = deletePromise.then(() => {this.imsArtifactApi.getDownloadedArtifactsList().then(result => this.updateDownloadedVersion(result))});
+    deletePromise.then(() => {this.imsArtifactApi.getDownloadedArtifactsList().then(result => this.updateDownloadedVersion(result));});
 
   }
 

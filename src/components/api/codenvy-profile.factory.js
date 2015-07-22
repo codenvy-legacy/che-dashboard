@@ -67,7 +67,7 @@ class CodenvyProfile {
    */
   updatePreferences(properties) {
     angular.extend(this.profilePreferences, properties);
-    let promise = this.profilePreferences.$save();
+    this.profilePreferences.$save();
   }
 
   /**

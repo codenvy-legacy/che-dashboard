@@ -37,13 +37,13 @@ class BalanceSimple {
   link($scope, element, attrs) {
     var t = this;
 
-    attrs.$observe('cdvyConsumed', function (newValue) {
+    attrs.$observe('cdvyConsumed', function () {
       if ($scope.consumed && $scope.provided) {
         t.initChart($scope);
       }
     });
 
-    attrs.$observe('cdvyProvided', function (newValue) {
+    attrs.$observe('cdvyProvided', function () {
       if ($scope.consumed && $scope.provided) {
         t.initChart($scope);
       }

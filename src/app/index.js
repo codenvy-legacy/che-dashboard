@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
-/*exported CodenvyAPI, CodeMirror, GitHub */
+/*exported CodenvyAPI, CodeMirror, GitHub, Colors, Countries, ComponentsConfig */
 
 var DEV = true;
 
@@ -172,18 +172,18 @@ class CheckLogin {
   }
 
   checkPage(path) {
-    if ('app/main/login.html' == path) {
+    if ('app/main/login.html' === path) {
       return true;
     }
     return false;
   }
 
 
-  checkRedirect(url) {
+  checkRedirect() {
     let user = this.codenvyUser.getUser();
     // User is not admin and user has no email it needs to be logged in
     if (!this.codenvyUser.isAdmin() && !user.email) {
-      return {route:"/login"};
+      return {route:'/login'};
     }
 
     return {};
@@ -208,36 +208,36 @@ module.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeo
     routingRedirect.addRouteCallback(new CheckLogin(codenvyUser));
   }
 
-  $rootScope.$on('$viewContentLoaded', function(event) {
+  $rootScope.$on('$viewContentLoaded', function() {
 
     $timeout(function() {
       $rootScope.waitingLoaded = true;
     }, 1000);
   });
 
-  $rootScope.$on('$routeChangeStart', (event, next,  previous, rejection)=> {
+  $rootScope.$on('$routeChangeStart', (event, next)=> {
     if (DEV) {
       console.log('$routeChangeStart event with route', next);
     }
   });
 
   // When a route is about to change, notify the routing redirect node
-  $rootScope.$on('$routeChangeSuccess', (event, next,  previous, rejection)=> {
+  $rootScope.$on('$routeChangeSuccess', (event, next)=> {
     if (next.resolve) {
       if (DEV) {
         console.log('$routeChangeSuccess event with route', next);
       }// check routes
       routingRedirect.check(event, next);
     }
-  })
+  });
 }]);
 
 // ask to add onboarding flow when we're on prod
 if (!DEV) {
-  module.run(function (onBoardRedirect) {
+  module.run(function (onBoardRedirect) { // jshint ignore:line
 
   });
-  module.run(function (onPremiseOnBoardingRedirect) {
+  module.run(function (onPremiseOnBoardingRedirect) { // jshint ignore:line
   });
 }
 
@@ -251,9 +251,9 @@ module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $l
       }
 
       //Do not add token on auth login
-      if (config.url.indexOf('/api/auth/login') === -1 && config.url.indexOf('api/') !== -1 && $window.sessionStorage["codenvyToken"]) {
+      if (config.url.indexOf('/api/auth/login') === -1 && config.url.indexOf('api/') !== -1 && $window.sessionStorage['codenvyToken']) {
         config.params = config.params || {};
-        angular.extend(config.params, {token: $window.sessionStorage["codenvyToken"]});
+        angular.extend(config.params, {token: $window.sessionStorage['codenvyToken']});
       }
       return config || $q.when(config);
     },
@@ -343,12 +343,12 @@ module.config(function($mdThemingProvider, jsonColors) {
       console.log('error, the color' + key + 'is undefined');
       return '#ff0000';
     }
-    if (color.indexOf('$') == 0) {
+    if (color.indexOf('$') === 0) {
       color = getColor(color);
     }
     return color;
 
-  }
+  };
 
 
   var codenvyMap = $mdThemingProvider.extendPalette('indigo', {
@@ -471,7 +471,7 @@ module.config(['$routeProvider', '$locationProvider', '$httpProvider', function 
 angular.module('ui.gravatar').config(['gravatarServiceProvider', function(gravatarServiceProvider) {
     gravatarServiceProvider.defaults = {
       size     : 43,
-      "default": 'mm'  // Mystery man as default for missing avatars
+      default: 'mm'  // Mystery man as default for missing avatars
     };
 
     // Use https endpoint

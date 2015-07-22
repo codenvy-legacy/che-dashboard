@@ -17,7 +17,7 @@ class AdminLinksCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor($location) {
+  constructor() {
     this.userLoginUrl = '/site/login';
     this.userCreateUrl = '/site/create-account';
   }
