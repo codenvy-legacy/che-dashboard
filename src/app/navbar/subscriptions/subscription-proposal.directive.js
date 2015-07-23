@@ -33,7 +33,10 @@ class SubscriptionProposal {
       buttonTitle: '@cdvyButtonTitle',
       proposalClick: '&',
       additionalButtonTitle: '@cdvyAdditionalButtonTitle',
-      additionalButtonClick: '&'
+      additionalButtonClick: '&',
+      price: '@',
+      priceUnit: '@',
+      priceDesc: '@'
     };
   }
 

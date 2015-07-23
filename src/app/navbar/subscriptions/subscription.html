@@ -21,9 +21,11 @@
                          cdvy-description="{{proposal.description}}"
                          cdvy-icon="{{proposal.icon}}"
                          cdvy-button-title="{{proposal.buttonTitle}}" proposal-click="proposal.buy()"
+                         price-unit="{{proposal.priceUnit}}" price-desc="{{proposal.priceDesc}}"
+                         price="{{proposal.price}}"
                          cdvy-additional-button-title="{{proposal.additionalButtonTitle}}" additional-button-click="proposal.additionalButtonClick()">
     <ul>
-      <li ng-repeat="item in proposal.content">{{item}}</li>
+      <li ng-repeat="item in proposal.content" ng-bind-html="item"></li>
     </ul>
   </subscription-proposal>
 </md-content>

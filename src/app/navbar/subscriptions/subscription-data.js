@@ -32,25 +32,41 @@ export var  subscriptionDetails = [
 export var subscriptionOffers = [
     {
       'type' : 'pay-as-you-go',
-      'title' : 'SAAS Pay-As-You-Go',
-      'description' : 'Our crazy fast cloud IDE and magical one-click automation hosted in our cloud.',
+      'title' : 'SaaS Pay-as-you-Go Account',
+      'description' : 'Self-service workspaces for 150K users and 400K projects.',
       'buttonTitle' : 'Add Credit Card',
       'icon' : 'assets/images/icon-saas.png',
+      price: '0.15',
+      priceUnit: '$',
+      priceDesc: 'per gigabyte hour',
       'content' : [
         'Unlimited workspaces, projects, developers and IDE time',
-        'Machines up to 4GB RAM',
+        'Machines up to 200GB RAM',
         'Always-on machines',
-        '20 GB hours free per month icon',
-        'Forum support'
+        '20 GB hours free per month',
+        'Billing starts after free GB hours',
+        '<a href="https://codenvy.com/technical-support" target="_blank">Premium support</a> and ' +
+        '<a href="https://codenvy.com/docs/ce-service-level-agreement.pdf" target="_blank">SLA</a>',
+        'Contact us for pre-paid discounts'
       ]
     },
     {
       'type' : 'on-prem',
       'title' : 'On-Prem',
-      'description' : 'All the power of Codenvy\'s Cloud behind your firewall, connected to your systems and processes.',
+      'description' : 'Workspaces behind your firewall connected to your systems.',
       'buttonTitle' : 'Learn More',
       'additionalButtonTitle' : 'Contact Sales',
-      'icon' : 'assets/images/icon-on-prem.png'
+      'icon' : 'assets/images/icon-on-prem.png',
+      price: '300',
+      priceUnit: '$',
+      priceDesc: 'per user per year',
+      content : [
+        'For private cloud or datacenter',
+        'Integrate with local systems',
+        'Add custom plugins',
+        'No data shared with Codenvy',
+        '<a href="https://codenvy.com/technical-support" target="_blank">Premium support</a>'
+      ]
     }
   ];
 

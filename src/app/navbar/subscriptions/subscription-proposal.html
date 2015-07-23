@@ -16,7 +16,16 @@
     <image src="{{icon}}" width="42px" class="subscription-proposal-image"></image>
     <p>{{description}}</p>
   </div>
-  <ng-transclude class="subscription-proposal-content"></ng-transclude>
+  <div layout="row" flex layout-align="left center">
+    <ng-transclude flex="50" class="subscription-proposal-content"></ng-transclude>
+    <div layout="column" flex="30">
+      <div layout="column" layout-align="center center">
+        <div class="subscription-proposal-price"><sup>{{priceUnit}}</sup>{{price}} </div>
+        <div class="subscription-proposal-price-description">{{priceDesc}}</div>
+      </div>
+    </div>
+  </div>
+
   <div layout="row" layout-sm="column" layout-align="center center">
     <cdvy-button-primary cdvy-button-title="{{buttonTitle}}" ng-click="proposalClick();"></cdvy-button-primary>
     <div ng-if="additionalButtonTitle" hide-sm class="subscription-proposal-button-space"></div>
