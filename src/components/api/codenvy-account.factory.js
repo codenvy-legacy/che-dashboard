@@ -26,6 +26,8 @@ class CodenvyAccount {
     // keep resource
     this.$resource = $resource;
     this.accounts = [];
+    this.accountsById = new Map();
+
     this.subscriptionsPerAccount = new Map();
     this.accountDetails = new Map();
 
@@ -63,11 +65,13 @@ class CodenvyAccount {
   fetchAccounts() {
     let promise = this.remoteAccountAPI.query().$promise;
     this.accounts = [];
+    this.accountsById.clear();
     // check if if was OK or not
     let parsedResultPromise = promise.then((data) => {
       data.forEach((membership) => {
         if (membership.roles.indexOf('account/owner') >= 0) {
           this.accounts.push(membership.accountReference);
+          this.accountsById.set(membership.accountReference.id, membership.accountReference);
         }
       });
       //TODO remove this part, when switch between accounts is ready:
@@ -76,6 +80,14 @@ class CodenvyAccount {
       }
     });
     return parsedResultPromise;
+  }
+
+  /**
+   * Gets the accounts per id
+   * @returns {Map}
+   */
+  getAccountsById() {
+    return this.accountsById;
   }
 
   /**

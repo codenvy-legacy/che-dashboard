@@ -24,6 +24,8 @@ class CodenvyWorkspace {
    * @ngInject for Dependency injection
    */
   constructor ($resource, $q) {
+    this.RESOURCES_LOCKED_PROPERTY = 'codenvy:resources_locked';
+    this.RESOURCES_USAGE_LIMIT = 'codenvy:resources_usage_limit';
 
     // keep resource
     this.$resource = $resource;
@@ -36,13 +38,19 @@ class CodenvyWorkspace {
     // per Id
     this.workspacesById = new Map();
 
+    // per account
+    this.workspacesPerAccount = new Map();
+
     // listeners if workspaces are changed/updated
     this.listeners = [];
 
     // remote call
     this.remoteWorkspaceAPI = this.$resource('/api/workspace/all', {}, {
+        listByAccountId: {method: 'GET', url: '/api/workspace/find/account?id=:accountId', isArray: true},
+        getDetails: {method: 'GET', url: '/api/workspace/:workspaceId'},
         addMember: {method: 'POST', url: '/api/workspace/:workspaceId/members'},
-        getMembers: {method: 'GET', url: '/api/workspace/:workspaceId/members', isArray: true}
+        getMembers: {method: 'GET', url: '/api/workspace/:workspaceId/members', isArray: true},
+        getRAM: {method: 'GET', url: 'api/runner/:workspaceId/resources'}
       }
     );
   }
@@ -70,6 +78,14 @@ class CodenvyWorkspace {
    */
   getWorkspacesById() {
     return this.workspacesById;
+  }
+
+  /**
+   * Gets the workspaces per account id
+   * @returns {Array}
+   */
+  getWorkspacesByAccountId(accountId) {
+    return this.workspacesPerAccount.get(accountId);
   }
 
   /**
@@ -108,6 +124,27 @@ class CodenvyWorkspace {
     return callbackPromises;
   }
 
+  fetchWorkspaceDetails(workspaceId) {
+    let promise = this.remoteWorkspaceAPI.getDetails({workspaceId : workspaceId}).$promise;
+    return promise;
+  }
+
+  /**
+   * Ask for loading the workspaces by account id in asynchronous way
+   * If there are no changes, it's not updated
+   */
+  fetchAccountWorkspaces(accountId) {
+    let query = this.remoteWorkspaceAPI.listByAccountId({accountId : accountId});
+    let promise = query.$promise;
+    let updatedPromise = promise.then((data) => {
+      this.workspacesPerAccount.set(accountId, data);
+    }, (error) => {
+      if (error.status !== 304) {
+        console.log(error);
+      }
+    });
+    return updatedPromise;
+  }
 
   /**
    * Adds for the given workspaceId the given role for the userId
@@ -136,8 +173,30 @@ class CodenvyWorkspace {
     return this.remoteWorkspaceAPI.getMembers({workspaceId: workspaceId}).$promise;
   }
 
+  /**
+   * Get RAM resources of a workspace: used and free RAM.
+   * @param workspaceId the workspace ID
+   * @returns {*|promise|n|N}
+   */
+  getRAMResources(workspaceId) {
+    return this.remoteWorkspaceAPI.getRAM({workspaceId: workspaceId}).$promise;
+  }
 
+  /**
+   * Returns given workspace's resources locked state.
+   * @returns {Boolean}
+   */
+  isWorkspaceResourcesLocked(workspace) {
+    return !!(workspace.attributes && workspace.attributes[this.RESOURCES_LOCKED_PROPERTY] && workspace.attributes[this.RESOURCES_LOCKED_PROPERTY] === 'true');
+  }
 
+  /**
+   * Returns given workspace's resources usage limit.
+   * @returns {Number}
+   */
+  getWorkspaceResourcesUsageLimit(workspace) {
+    return (workspace.attributes && workspace.attributes[this.RESOURCES_USAGE_LIMIT]) ? workspace.attributes[this.RESOURCES_USAGE_LIMIT] : undefined;
+  }
 }
 
 // Register this factory

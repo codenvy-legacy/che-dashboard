@@ -1,0 +1,47 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-list-item flex-gt-sm="100" ng-mouseover="hover=true" ng-mouseout="hover=false">
+  <div layout-gt-md="row" layout="column" flex="100" layout-align="start center"
+       class="workspace-item-row"
+       ng-click="workspaceItemCtrl.redirectToWorkspaceDetails();">
+    <div class="workspace-item-name" flex="20" >
+      <span>{{workspaceItemCtrl.workspace.name}}</span>
+      <i class="fa fa-clock-o workspace-item-temp" ng-if="workspaceItemCtrl.workspace.temporary"></i>
+    </div>
+    <div class="workspace-item-details" flex="10">{{workspaceItemCtrl.workspace.projects}}
+      {{workspaceItemCtrl.workspace.projects > 1 ? 'Projects' : 'Project'}}
+    </div>
+    <div class="workspace-item-details" flex="10">{{workspaceItemCtrl.workspace.members}}
+      {{workspaceItemCtrl.workspace.members > 1 ? 'Developers' : 'Developer'}}
+    </div>
+    <usage-chart ng-if="!workspaceItemCtrl.workspace.isLocked" flex="29" cdvy-label="ram"
+                 cdvy-used-color="#3b9275"
+                 cdvy-used="{{workspaceItemCtrl.workspace.usedRAM}}"
+                 cdvy-used-description="{{workspaceItemCtrl.workspace.usedRAM}}MB RAM Used"
+                 cdvy-provided="{{workspaceItemCtrl.workspace.allocatedRAM}}"
+                 cdvy-provided-description="{{workspaceItemCtrl.workspace.allocatedRAM}}MB RAM Allocated">
+    </usage-chart>
+    <div ng-if="workspaceItemCtrl.workspace.isLocked" flex="29">
+      <span class="workspace-resources-locked">Locked Resources</span>
+    </div>
+    <usage-chart ng-if="workspaceItemCtrl.workspace.providedResources" flex="27" cdvy-label="hours"
+                 cdvy-used="{{workspaceItemCtrl.workspace.usedResources}}"
+                 cdvy-used-description="{{workspaceItemCtrl.workspace.usedResources}}GB Hours Consumed"
+                 cdvy-provided="{{workspaceItemCtrl.workspace.providedResources}}"
+                 cdvy-provided-description="{{workspaceItemCtrl.workspace.providedResources}}GB Hours Allocated">
+    </usage-chart>
+    <div flex="27" ng-if="!workspaceItemCtrl.workspace.providedResources" ng-class="workspaceItemCtrl.workspace.usedResources > 0 ? 'workspace-consumed-value' : 'workspace-no-consumed-value'">
+      {{workspaceItemCtrl.workspace.usedResources > 0 ? workspaceItemCtrl.workspace.usedResources : 'No '}}GB Hours Consumed
+    </div>
+  </div>
+</cdvy-list-item>

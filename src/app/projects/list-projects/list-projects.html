@@ -45,8 +45,6 @@
                         ng-show="listProjectsCtrl.state == 'loading'"></md-progress-linear>
 
     <md-content flex>
-
-
       <div
         ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace | listProjectWorkspaceFilter:listProjectsCtrl.filtersWorkspaceSelected">
         <cdvy-list-title cdvy-icon="fa fa-folder">

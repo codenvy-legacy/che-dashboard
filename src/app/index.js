@@ -105,6 +105,10 @@ new FactoryConfig(instanceRegister);
 import ProjectsConfig from './projects/projects-config';
 new ProjectsConfig(instanceRegister);
 
+// import workspaces
+import WorkspacesConfig from './workspaces/workspaces-config';
+new WorkspacesConfig(instanceRegister);
+
 //import onpremise
 import OnPremisesConfig from './onpremises/onpremises-config';
 new OnPremisesConfig(instanceRegister);

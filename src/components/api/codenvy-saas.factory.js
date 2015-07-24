@@ -30,7 +30,7 @@ class CodenvySaas {
 
     // remote call
     this.remoteSaasAPI = this.$resource('/api/saas',{}, {
-      getUsedResources: {method: 'GET', url: '/api/resources/:accountId/used', isArray: true},
+      getUsedResources: {method: 'GET', url: '/api/resources/:accountId/used', isArray: true}, //TODO remove to account service
       getProvidedResources: {method: 'GET', url: '/api/saas/resources/:accountId/provided'}
     });
   }

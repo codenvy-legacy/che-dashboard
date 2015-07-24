@@ -1,0 +1,55 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar cdvy-title="All Workspaces"
+              cdvy-button-name="Add Workspace"
+              cdvy-button-href="#/create-workspace" cdvy-event-logger="workspaces/new.workspace"></cdvy-toolbar>
+
+<md-toolbar class="workspaces-list-header md-toolbar-tools" md-theme="toolbar-theme">
+  <cdvy-search flex cdvy-placeholder="Search for workspaces..."
+               ng-model="listWorkspacesCtrl.workspaceFilter.name"></cdvy-search>
+  <span flex></span>
+</md-toolbar>
+
+<md-content md-scroll-y flex layout="column" layout-align="center" md-theme="maincontent-theme">
+  <md-progress-linear md-mode="indeterminate" class="workspaces-list-progress"
+                      ng-show="listWorkspacesCtrl.state == 'loading'"></md-progress-linear>
+  <md-content flex class="workspace-list-content">
+  <div ng-repeat="(accountId, workspaces) in listWorkspacesCtrl.workspacesPerAccount">
+      <cdvy-list-title cdvy-icon="fa fa-folder" class="workspace-list-title">
+        <span class="workspace-list-title">Workspaces in your account ({{workspaces.length}})</span>
+        <span ng-show="workspaces.length == 0" class="workspace-list-empty">- No workspaces inside</span>
+        <span ng-show="(workspaces | filter:listWorkspacesCtrl.workspaceFilter).length == 0 &&
+              workspaces.length > 0" class="workspace-list-empty">- No workspaces found</span>
+      </cdvy-list-title>
+      <cdvy-list ng-show="(workspaces | filter:listWorkspacesCtrl.workspaceFilter).length > 0">
+        <cdvy-workspace-item ng-repeat="workspace in workspaces | filter:listWorkspacesCtrl.workspaceFilter"
+                             cdvy-workspace-item="workspace"></cdvy-workspace-item>
+      </cdvy-list>
+    </div>
+
+    <div>
+      <cdvy-list-title cdvy-icon="fa fa-folder-open" class="workspace-list-title">
+        <span class="workspace-list-title">Workspaces shared with you ({{listWorkspacesCtrl.userWorkspaces.length}})</span>
+        <span ng-show="listWorkspacesCtrl.userWorkspaces.length == 0" class="workspace-list-empty">- No workspaces inside</span>
+        <span ng-show="(listWorkspacesCtrl.userWorkspaces | filter:listWorkspacesCtrl.workspaceFilter).length == 0 &&
+              listWorkspacesCtrl.userWorkspaces.length > 0"
+              class="workspace-list-empty">- No workspaces found</span>
+      </cdvy-list-title>
+      <cdvy-list ng-show="(listWorkspacesCtrl.userWorkspaces | filter:listWorkspacesCtrl.workspaceFilter).length > 0">
+        <cdvy-workspace-item ng-repeat="workspace in listWorkspacesCtrl.userWorkspaces | filter:listWorkspacesCtrl.workspaceFilter"
+                           cdvy-workspace-item="workspace"></cdvy-workspace-item>
+      </cdvy-list>
+    </div>
+  </md-content>
+</md-content>
+
