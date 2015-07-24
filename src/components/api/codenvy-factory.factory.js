@@ -22,11 +22,14 @@ class CodenvyFactory {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource, codenvyUser) {
+  constructor($resource, $q, codenvyUser, lodash, codenvyAnalytics) {
     // keep resource
     this.$resource = $resource;
+    this.$q = $q;
 
     this.codenvyUser = codenvyUser;
+    this.lodash = lodash;
+    this.codenvyAnalytics = codenvyAnalytics;
 
     this.factories = [];
 
@@ -34,10 +37,9 @@ class CodenvyFactory {
 
     // remote call
     this.remoteFactoryFindAPI = this.$resource('/api/factory/find');
-    this.remoteFactoryAPI = this.$resource('/api/factory/:factoryId',  {factoryId:'@id'});
+    this.remoteFactoryAPI = this.$resource('/api/factory/:factoryId', {factoryId: '@id'});
 
   }
-
 
 
   /**
@@ -80,7 +82,7 @@ class CodenvyFactory {
    * If there are no changes, it's not updated
    */
   fetchFactories() {
-
+    var deferred = this.$q.defer();
     // get the Codenvy user.
     var user = this.codenvyUser.getUser();
 
@@ -91,7 +93,7 @@ class CodenvyFactory {
       var userId = user.id;
 
       // find the factories
-      let promise = this.remoteFactoryFindAPI.query({'creator.userId' : userId}).$promise;
+      let promise = this.remoteFactoryFindAPI.query({'creator.userId': userId}).$promise;
 
       // when find is there we can ask for each factory
       promise.then((remoteFactories) => {
@@ -101,7 +103,7 @@ class CodenvyFactory {
         this.factoriesById.clear();
 
         // Gets factory resource based on the factory ID
-        remoteFactories.forEach((factory) => {
+        remoteFactories.forEach((factory, index) => {
           // gets the factory id
           var factoryURL = factory.href.trim();
           let factoryId = this.getIDFromFactoryAPIURL(factoryURL);
@@ -111,13 +113,38 @@ class CodenvyFactory {
             let tmpFactory = this.fetchFactory(factoryId);
             let tmpFactoryPromise = tmpFactory.$promise;
             tmpFactoryPromise.then(() => {
+              let seeLink = this.lodash.find(tmpFactory.links, function (link) {
+                if (link.rel === 'create-project') return link;
+              });
+              tmpFactory.seeURL = seeLink ? seeLink.href : '';
+              tmpFactory.views = 0;
+              let factoryUsedPromise = this.codenvyAnalytics.getFactoryUsedFromUrl(factoryURL);
+              factoryUsedPromise.then((factoryUsed) => {
+                tmpFactory.views += parseInt(factoryUsed.value);
+                if (remoteFactories.length - index === 1) { //if last
+                  deferred.resolve();
+                }
+              }, (error) => {
+                deferred.reject(error);
+              });
               this.factories.push(tmpFactory);
               this.factoriesById.set(factoryId, tmpFactory);
+            }, (error) => {
+              deferred.reject(error);
             });
+          } else {
+            if (remoteFactories.length - index === 1) { //if last
+              deferred.resolve();
+            }
           }
         });
+      }, (error) => {
+        deferred.reject(error);
       });
+    }, (error) => {
+      deferred.reject(error);
     });
+    return deferred.promise;
   }
 
 }

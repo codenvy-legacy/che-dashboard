@@ -88,7 +88,7 @@ class ProjectDetailsCtrl {
       }
     }, (error) => {
       this.projectDetails.description = this.askedDescription;
-      this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Update information failed.');
+      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
       console.log('error', error);
     });
 

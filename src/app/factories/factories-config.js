@@ -10,28 +10,33 @@
  */
 'use strict';
 
-/* exported FactoriesCtrl, FactoryCtrl */
+/* exported ListFactoriesCtrl, FactoryCtrl, CodenvyFactoryItem */
 
-import FactoriesCtrl from './list-factories/factories.controller';
-import FactoryCtrl from './list-factories/factory.controller';
+import ListFactoriesCtrl from './list-factories/list-factories.controller';
+import FactoryDetailsCtrl from './factory-details/factory-details.controller';
+import CodenvyFactoryItem from './list-factories/factory-item/factory-item.directive';
 
 class FactoryConfig {
 
   constructor(register) {
-    register.controller('FactoriesCtrl', FactoriesCtrl);
-    register.controller('FactoryCtrl', FactoryCtrl);
+    register.controller('ListFactoriesCtrl', ListFactoriesCtrl);
+
+    register.controller('FactoryDetailsCtrl', FactoryDetailsCtrl);
+
+    register.directive('cdvyFactoryItem', CodenvyFactoryItem);
 
     // config routes
     register.app.config(function ($routeProvider) {
       $routeProvider.accessWhen('/factories', {
-        templateUrl: 'app/factories/list-factories/factories.html',
-        controller: 'FactoriesCtrl'
+        templateUrl: 'app/factories/list-factories/list-factories.html',
+        controller: 'ListFactoriesCtrl',
+        controllerAs: 'listFactoriesCtrl'
       })
         .accessWhen('/factory/:id', {
-          templateUrl: 'app/factories/list-factories/factory.html',
-          controller: 'FactoryCtrl'
+          templateUrl: 'app/factories/factory-details/factory-details.html',
+          controller: 'FactoryDetailsCtrl',
+          controllerAs: 'factoryDetailsCtrl'
         });
-
 
     })
     ;

@@ -14,7 +14,7 @@
  * Constroller for a factory.
  * @author Florent Benoit
  */
-class FactoryCtrl {
+class FactoryDetailsCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -36,5 +36,5 @@ class FactoryCtrl {
   }
 }
 
-export default FactoryCtrl;
+export default FactoryDetailsCtrl;
 

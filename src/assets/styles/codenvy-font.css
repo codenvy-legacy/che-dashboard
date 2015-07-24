@@ -28,34 +28,38 @@
 	content: "\E002";
 }
 
-.cdvyico-type-blank:before {
+.cdvyico-rocket-cdvyfont:before {
 	content: "\E003";
 }
 
-.cdvyico-type-cpp:before {
+.cdvyico-type-blank:before {
 	content: "\E004";
 }
 
-.cdvyico-type-go:before {
+.cdvyico-type-cpp:before {
 	content: "\E005";
 }
 
-.cdvyico-type-java:before {
+.cdvyico-type-go:before {
 	content: "\E006";
 }
 
-.cdvyico-type-javascript:before {
+.cdvyico-type-java:before {
 	content: "\E007";
 }
 
-.cdvyico-type-php:before {
+.cdvyico-type-javascript:before {
 	content: "\E008";
 }
 
-.cdvyico-type-python:before {
+.cdvyico-type-php:before {
 	content: "\E009";
 }
 
-.cdvyico-type-ruby:before {
+.cdvyico-type-python:before {
 	content: "\E00A";
+}
+
+.cdvyico-type-ruby:before {
+	content: "\E00B";
 }
