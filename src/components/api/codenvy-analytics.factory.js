@@ -25,8 +25,8 @@ class CodenvyAnalytics {
   constructor ($resource) {
     this.$resource = $resource;
     // remote call
-    this.remoteAnalytisAPI = this.$resource('api/analytics/log/',{}, {
-      log: {method: 'POST', url: 'api/analytics/log/dashboard-usage'}
+    this.remoteAnalytisAPI = this.$resource('/api/analytics/log/',{}, {
+      log: {method: 'POST', url: '/api/analytics/log/dashboard-usage'}
     });
   }
 
