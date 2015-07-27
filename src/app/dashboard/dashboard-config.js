@@ -11,10 +11,16 @@
 'use strict';
 
 import DashboardCtrl from './dashboard.controller';
+import DashboardLearnMoreCtrl from './learn-more/dashboard-learn-more.controller';
+import DashboardLearnMore from './learn-more/dashboard-learn-more.directive';
 
 class DashboardConfig {
 
   constructor(register) {
+
+    // learn-more
+    register.controller('DashboardLearnMoreCtrl', DashboardLearnMoreCtrl);
+    register.directive('dashboardLearnMore', DashboardLearnMore);
 
     // controller
     register.controller('DashboardCtrl', DashboardCtrl);

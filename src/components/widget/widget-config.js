@@ -11,9 +11,11 @@
 'use strict';
 
 /*exported CodenvyButtonPrimary, CodenvyButtonDefault, CodenvyButtonDanger, CodenvyButtonWarning, CodenvyList, CodenvyListItem, CodenvyListTitle,
- CodenvyHtmlSource, CodenvyInput, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton,
- CodenvyToggle, CodenvyToolbar, CodenvyLabel, CodenvyTextInfo, CodenvyLabelContainer, CodenvyLink, CodenvyButtonDropdownCtrl, CodenvyButtonDropdown,
- CodenvyPanelCtrl, CodenvyListItemChecked, CodenvySelect, CodenvyClipboard, CodenvyEmptyState, CodenvySearch, CodenvyEventLogger*/
+ CodenvyHtmlSource, CodenvyInput, CodenvyTab, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton,
+ CodenvyToggle, CodenvyToolbar, CodenvyLabel, CodenvyLabelContainer, CodenvyLink, CodenvyButtonDropdownCtrl, CodenvyButtonDropdown,
+ CodenvyPanelCtrl, CodenvyListItemChecked, CodenvySelect, CodenvyClipboard, CodenvyEmptyState, CodenvySearch, CodenvyEventLogger,
+ CodenvyLearnMoreCtrl, CodenvyLearnMore, CodenvyLearnMoreItem, CodenvyLearnMoreTemplate */
+
 import CodenvyButtonPrimary from './button/cdvy-button-primary.directive';
 import CodenvyButtonDanger from './button/cdvy-button-danger.directive';
 import CodenvyButtonDefault from './button/cdvy-button-default.directive';
@@ -52,6 +54,11 @@ import CodenvyLabel from './label/cdvy-label.directive';
 import CodenvyTextInfo from './text-info/cdvy-text-info.directive';
 
 import CodenvySelect from './select/cdvy-select.directive';
+
+import CodenvyLearnMoreCtrl from './learn-more/cdvy-learn-more.controller';
+import CodenvyLearnMore from './learn-more/cdvy-learn-more.directive';
+import CodenvyLearnMoreItem from './learn-more/cdvy-learn-more-item.directive';
+import CodenvyLearnMoreTemplate from './learn-more/cdvy-learn-more-template.directive';
 
 import CodenvyClipboard from './copy-clipboard/cdvy-clipboard.directive';
 

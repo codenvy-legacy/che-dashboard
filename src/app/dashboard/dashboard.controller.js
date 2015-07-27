@@ -10,12 +10,25 @@
  */
 'use strict';
 
-import Register from '../../components/utils/register';
-
+/**
+ * @ngdoc controller
+ * @name dashboard.controller:DashboardCtrl
+ * @description This class is handling the controller of the dashboard
+ * @author Florent Benoit
+ */
 class DashboardCtrl {
+
+
+  /**
+   * Default constructor
+   * @ngInject for Dependency injection
+   */
+  constructor() {
+
+  }
+
+
 }
 
 export default DashboardCtrl;
 
-
-Register.getInstance().controller('DashboardCtrl', DashboardCtrl);
