@@ -79,6 +79,11 @@ var instanceRegister = Register.getInstance();
 import NavbarConfig from './navbar/navbar-config';
 new NavbarConfig(instanceRegister);
 
+// import dashboard
+import DashboardConfig from './dashboard/dashboard-config';
+new DashboardConfig(instanceRegister);
+
+
 // import account config
 import AccountConfig from './navbar/account/account-config';
 new AccountConfig(instanceRegister);
@@ -124,10 +129,6 @@ if (DEV) {
 // config routes
 initModule.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
-/*    .accessWhen('/', {
-      templateUrl: 'app/dashboard/dashboard.html',
-      controller: 'DashboardCtrl'
-    })*/
     .accessWhen('/login', {
       templateUrl: 'app/main/login.html',
       controller: 'LoginCtrl',
@@ -440,6 +441,12 @@ initModule.config(function($mdThemingProvider, jsonColors) {
     .backgroundPalette('purple');
 
   $mdThemingProvider.theme('onboarding-theme')
+    .primaryPalette('codenvyNavyPalette')
+    .accentPalette('pink')
+    .warnPalette('red')
+    .backgroundPalette('purple');
+
+  $mdThemingProvider.theme('dashboard-theme')
     .primaryPalette('codenvyNavyPalette')
     .accentPalette('pink')
     .warnPalette('red')
