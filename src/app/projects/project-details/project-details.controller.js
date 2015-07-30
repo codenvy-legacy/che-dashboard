@@ -132,7 +132,7 @@ class ProjectDetailsCtrl {
         }
       }, (error) => {
         this.projectDetails.name = this.askedName;
-        this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Update information failed.');
+        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
         console.log('error', error);
       });
     } else {
@@ -153,7 +153,7 @@ class ProjectDetailsCtrl {
       this.askedVisibility = this.projectDetails.visibility;
     }, (error) => {
       this.projectDetails.visibility = this.askedVisibility;
-      this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Update visibility failed.');
+      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update visibility failed.');
       console.log('error', error);
     });
 

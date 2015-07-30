@@ -14,7 +14,8 @@
               cdvy-button-name="Create Factory"
               cdvy-button-href="#/factories/create-factory"></cdvy-toolbar>
 <md-toolbar class="factories-list-header md-toolbar-tools" md-theme="toolbar-theme">
-  <cdvy-search flex cdvy-placeholder="Search for factories" ng-model="listFactoriesCtrl.factoriesFilter.project.name"></cdvy-search>
+  <cdvy-search flex cdvy-placeholder="Search for factories"
+               ng-model="listFactoriesCtrl.factoriesFilter.originFactory.project.name"></cdvy-search>
   <span flex></span>
 
   <div class="md-toolbar-item md-tools" layout="row">
@@ -28,7 +29,7 @@
                       ng-if="listFactoriesCtrl.loading"></md-progress-linear>
   <md-content flex class="md-maincontent-theme-theme" ng-show="!listFactoriesCtrl.loading">
     <div class="factories-list-notification">
-      <span ng-show="listFactoriesCtrl.factories.length == 0" class="factories-list-empty">No factory</span>
+      <span ng-show="listFactoriesCtrl.factories.length == 0" class="factories-list-empty">No factories</span>
           <span
             ng-show="(listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter).length == 0 && listFactoriesCtrl.factories.length > 0"
             class="factories-list-empty">No factories found</span>

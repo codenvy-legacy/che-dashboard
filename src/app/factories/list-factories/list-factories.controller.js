@@ -21,22 +21,23 @@ class ListFactoriesCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($scope, codenvyAPI, codenvyNotification) {
-    this.codenvyAPI = codenvyAPI;
+  constructor(codenvyAPI, codenvyNotification) {
 
     this.dropDownOptionsList = [
       {
         name: 'Sort by views number', orderBy: 'views'
       }, {
-        name: 'Sort by creation date', orderBy: 'creator.created'
+        name: 'Sort by creation date', orderBy: 'originFactory.creator.created'
       }
     ];
 
     this.factoriesOrderBy = 'views';
 
     this.factoriesFilter = {
-      project: {
-        name: ''
+      originFactory: {
+        project: {
+          name: ''
+        }
       }
     };
 
@@ -44,21 +45,38 @@ class ListFactoriesCtrl {
 
     let codenvyFactory = codenvyAPI.getFactory();
 
+    let factoriesMap = codenvyFactory.getFactoriesMap();
+
+    this.factories = [];
+
+    factoriesMap.forEach((value)=> {
+      this.factories.push(value);
+    });
+
     // fetch factories when initializing
     let promise = codenvyFactory.fetchFactories();
 
     promise.then(() => {
+        // reset the list of factories
+        this.factories.length = 0;
+        factoriesMap.forEach((value)=> {
+          this.factories.push(value);
+        });
         this.loading = false;
       },
       (error) => {
         this.loading = false;
-        if (error.status !== 304) {
+        if (error.status === 304) {
+          this.factories.length = 0;
+
+          factoriesMap.forEach((value)=> {
+            this.factories.push(value);
+          });
+        } else {
           codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
           console.log('error', error);
         }
       });
-
-    this.factories = codenvyFactory.getFactories();
   }
 
   /**

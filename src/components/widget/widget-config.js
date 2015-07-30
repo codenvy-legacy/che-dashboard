@@ -12,7 +12,7 @@
 
 /*exported CodenvyButtonPrimary, CodenvyButtonDefault, CodenvyButtonDanger, CodenvyButtonWarning, CodenvyList, CodenvyListItem, CodenvyListTitle,
  CodenvyHtmlSource, CodenvyInput, CodenvyTab, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton,
- CodenvyToggle, CodenvyToolbar, CodenvyLabel, CodenvyLabelContainer, CodenvyLink, CodenvyButtonDropdownCtrl, CodenvyButtonDropdown,
+ CodenvyToggle, CodenvyToolbar, CodenvyLabel, CodenvyTextInfo, CodenvyLabelContainer, CodenvyLink, CodenvyButtonDropdownCtrl, CodenvyButtonDropdown,
  CodenvyPanelCtrl, CodenvyListItemChecked, CodenvySelect, CodenvyClipboard, CodenvyEmptyState, CodenvySearch, CodenvyEventLogger*/
 import CodenvyButtonPrimary from './button/cdvy-button-primary.directive';
 import CodenvyButtonDanger from './button/cdvy-button-danger.directive';
@@ -50,6 +50,8 @@ import CodenvyToggle from './toggle-button/cdvy-toggle.directive';
 import CodenvyToolbar from './toolbar/toolbar.directive';
 
 import CodenvyLabel from './label/cdvy-label.directive';
+
+import CodenvyTextInfo from './text-info/cdvy-text-info.directive';
 
 import CodenvySelect from './select/cdvy-select.directive';
 

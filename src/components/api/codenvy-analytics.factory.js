@@ -37,9 +37,12 @@ class CodenvyAnalytics {
   }
 
   logAction(action) {
-    let data = {params : {ACTION : action}};
+    let data = {params: {ACTION: action}};
     let promise = this.remoteAnalytisAPI.log(data).$promise;
-    promise.then(() => {}, (error) => {console.log(error);});
+    promise.then(() => {
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   getFactoryUsedFromUrl(factoryUrl) {

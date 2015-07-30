@@ -13,19 +13,20 @@
 <cdvy-list-item flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
   <div layout-gt-sm="row" flex="100" layout-align="start center" class="factory-list-row">
     <div class="factory-list-static-icon" layout-align="center center">
-      <cdvy-list-item-checked cdvy-icon="cdvyfont cdvyico-type-{{factory.project.type}} cdvyico-type-blank"
+      <cdvy-list-item-checked cdvy-icon="cdvyfont cdvyico-type-{{factory.originFactory.project.type}} cdvyico-type-blank"
                               class="factory-type-icon"
-                              cdvy-aria-label-checkbox="Factory {{factory.project.name}}"></cdvy-list-item-checked>
+                              cdvy-aria-label-checkbox="Factory {{factory.originFactory.project.name}}"></cdvy-list-item-checked>
     </div>
     <div flex="35" layout="column" layout-align-gt="start center" layout-align-md="start center" layout-align-sm="center center"
          ng-click="redirectToFactoryDetails()">
-      <div class="factory-name codenvy-hover">{{factory.id}}</div>
-      <div class="factory-details codenvy-hover"><b>{{factory.project.name}}</b> {{factory.project.description}}</div>
+      <div class="factory-name codenvy-hover">{{factory.originFactory.id}}</div>
+      <div class="factory-details codenvy-hover"><b>{{factory.originFactory.project.name}}</b> {{factory.originFactory.project.description}}
+      </div>
     </div>
     <div flex="15" class="factory-details" layout-align="center center">
         <span class="codenvy-hover"
-              tooltip="Created: {{factory.creator.created | amDateFormat:'dddd, MMMM Do, YYYY'}}"
-              am-time-ago="factory.creator.created"></span>
+              tooltip="Created: {{factory.originFactory.creator.created | amDateFormat:'dddd, MMMM Do, YYYY'}}"
+              am-time-ago="factory.originFactory.creator.created"></span>
     </div>
     <div flex="15" class="factory-details" layout-align="center center">
         <span class="codenvy-hover"

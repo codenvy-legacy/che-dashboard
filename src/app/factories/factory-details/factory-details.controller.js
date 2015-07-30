@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Constroller for a factory.
+ * Controller for a factory details.
  * @author Florent Benoit
  */
 class FactoryDetailsCtrl {
@@ -20,20 +20,29 @@ class FactoryDetailsCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor ($scope, $route, $filter, codenvyAPI) {
+  constructor($scope, $route, $filter, lodash, codenvyAPI) {
 
-    var codenvyFactory = codenvyAPI.getFactory();
+    let factoryId = $route.current.params.id;
 
-    $scope.factoryId = $route.current.params.id;
+    this.factory = null;
 
-    var factory = codenvyFactory.fetchFactory($scope.factoryId);
-    factory.$promise.then(() => {
-      $scope.factory = factory;
-      $scope.factoryContent = $filter('json')(factory, 2);
-    }, () => {$scope.factory = null;});
+    let promise = codenvyAPI.getFactory().fetchFactory(factoryId);
 
+    promise.then((factory) => {
+      this.factory = factory;
+      if (factory.originFactory) {
+        this.factoryContent = $filter('json')(factory.originFactory, 2);
+      }
+
+    });
+
+    this.toolbarIcons = [
+//      {name: 'favorite', font: 'material-design icon-ic_star_24px'},
+      {name: 'share', font: 'material-design icon-ic_share_24px'}
+    ];
 
   }
+
 }
 
 export default FactoryDetailsCtrl;

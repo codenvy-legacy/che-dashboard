@@ -13,15 +13,13 @@
 /* exported ListFactoriesCtrl, FactoryCtrl, CodenvyFactoryItem */
 
 import ListFactoriesCtrl from './list-factories/list-factories.controller';
-import FactoryDetailsCtrl from './factory-details/factory-details.controller';
 import CodenvyFactoryItem from './list-factories/factory-item/factory-item.directive';
+import FactoryDetailsConfig from './factory-details/factory-details-config';
 
 class FactoryConfig {
 
   constructor(register) {
     register.controller('ListFactoriesCtrl', ListFactoriesCtrl);
-
-    register.controller('FactoryDetailsCtrl', FactoryDetailsCtrl);
 
     register.directive('cdvyFactoryItem', CodenvyFactoryItem);
 
@@ -31,15 +29,13 @@ class FactoryConfig {
         templateUrl: 'app/factories/list-factories/list-factories.html',
         controller: 'ListFactoriesCtrl',
         controllerAs: 'listFactoriesCtrl'
-      })
-        .accessWhen('/factory/:id', {
-          templateUrl: 'app/factories/factory-details/factory-details.html',
-          controller: 'FactoryDetailsCtrl',
-          controllerAs: 'factoryDetailsCtrl'
-        });
+      });
 
-    })
-    ;
+    });
+
+    // config files
+    new FactoryDetailsConfig(register);
+
   }
 }
 

@@ -11,30 +11,27 @@
 'use strict';
 
 /**
- * Defines a directive for factory item in list.
+ * Defines a directive for displaying factory-information widget.
  * @author Oleksii Orel
  */
-class CodenvyFactoryItem {
+class FactoryInformation {
 
   /**
-   * Default constructor.
+   * Default constructor that is using resource
+   * @ngInject for Dependency injection
    */
   constructor() {
     this.restrict = 'E';
+
+    this.templateUrl = 'app/factories/factory-details/information-tab/factory-information/factory-information.html';
+    this.replace = false;
 
     // scope values
     this.scope = {
       factory: '=cdvyFactory'
     };
-    this.templateUrl = 'app/factories/list-factories/factory-item/factory-item.html';
-
-    this.controller = function ($scope, $location) {
-      $scope.redirectToFactoryDetails = function () {
-        $location.path('/factory/' + $scope.factory.originFactory.id);
-      }
-    };
   }
 
 }
 
-export default CodenvyFactoryItem;
+export default FactoryInformation;
