@@ -87,10 +87,10 @@ class ListProjectsCtrl {
   /**
    * Gets the name of the workspace based on its ID
    * @param workspaceId
-   * @returns {CodenvyWorkspaceReferenceBuilder.workspaceReference.name|*}
+   * @returns {CodenvyWorkspaceReferenceBuilder.name|*}
    */
   getWorkspaceName(workspaceId) {
-    return this.workspacesById.get(workspaceId).workspaceReference.name;
+    return this.workspacesById.get(workspaceId).name;
   }
 
   /**

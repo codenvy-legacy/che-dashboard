@@ -1,0 +1,62 @@
+<cdvy-toolbar cdvy-title="{{workspaceDetailsCtrl.workspaceDetails.name}}"
+              cdvy-title-icons-controller="workspaceDetailsCtrl"
+              cdvy-breadcrumb-title="All workspaces"
+              cdvy-breadcrumb-href="#/workspaces">
+</cdvy-toolbar>
+<md-progress-linear md-mode="indeterminate" ng-show="workspaceDetailsCtrl.loading"></md-progress-linear>
+
+<md-content md-scroll-y flex class="workspace-details-content" ng-if="workspaceDetailsCtrl.workspaceDetails"
+             md-theme="maincontent-theme">
+  <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="selectedIndex">
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-font-icon="material-design icon-ic_settings_24px" class="cdvy-tab-label-icon"></md-icon>
+        <span class="cdvy-tab-label-title">Settings</span>
+      </md-tab-label>
+      <md-tab-body>
+        <cdvy-panel cdvy-title="Workspace Information">
+          <ng-form name="workspaceInformationForm">
+            <cdvy-input cdvy-form="workspaceInformationForm"
+                        cdvy-name="name"
+                        cdvy-label-name="Name"
+                        cdvy-place-holder="Name of the workspace"
+                        ng-model="workspaceDetailsCtrl.newName"
+                        required
+                        ng-maxlength="128"
+                        ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+              <div ng-message="required">A name is required.</div>
+              <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
+              <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+              <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
+            </cdvy-input>
+          </ng-form>
+          <div layout="row" flex layout-align="space-around start">
+            <div flex="15"></div>
+            <cdvy-button-primary flex="85" ng-disabled="(workspaceInformationForm.$invalid || workspaceDetailsCtrl.newName === workspaceDetailsCtrl.workspaceDetails.name)"
+                               cdvy-button-title="Rename" name="updateButton" ng-click="workspaceDetailsCtrl.renameWorkspace(workspaceInformationForm.$valid)"/>
+          </div>
+        </cdvy-panel>
+        <cdvy-panel cdvy-title="Delete Workspace">
+          <div layout="row" flex layout-align="space-around start">
+            <label flex="15" class="workspace-details-description">
+              This is irreversible. Deleting your workspace will also delete its projects.
+            </label>
+            <div layout="column" flex="85">
+              <cdvy-button-danger cdvy-button-title="Delete" ng-click="workspaceDetailsCtrl.deleteWorkspace($event)"/>
+            </div>
+          </div>
+        </cdvy-panel>
+      </md-tab-body>
+    </md-tab>
+
+
+
+  </md-tabs>
+</md-content>
+
+
+<md-content ng-show="workspaceDetailsCtrl.invalidWorkspace">
+  {{workspaceDetailsCtrl.invalidWorkspace}}
+</md-content>
+
+

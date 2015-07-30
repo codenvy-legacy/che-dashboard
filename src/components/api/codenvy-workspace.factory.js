@@ -50,7 +50,9 @@ class CodenvyWorkspace {
         getDetails: {method: 'GET', url: '/api/workspace/:workspaceId'},
         addMember: {method: 'POST', url: '/api/workspace/:workspaceId/members'},
         getMembers: {method: 'GET', url: '/api/workspace/:workspaceId/members', isArray: true},
-        getRAM: {method: 'GET', url: 'api/runner/:workspaceId/resources'}
+        getRAM: {method: 'GET', url: 'api/runner/:workspaceId/resources'},
+        delete: {method: 'DELETE', url: '/api/workspace/:workspaceId'},
+        update: {method: 'POST', url : '/api/workspace/:workspaceId'}
       }
     );
   }
@@ -104,7 +106,7 @@ class CodenvyWorkspace {
         if (!workspace.workspaceReference.temporary) {
           remoteWorkspaces.push(workspace);
           this.workspaces.push(workspace);
-          this.workspacesById.set(workspace.workspaceReference.id, workspace);
+          this.workspacesById.set(workspace.workspaceReference.id, workspace.workspaceReference);
         }
       });
       return this.workspaces;
@@ -125,8 +127,19 @@ class CodenvyWorkspace {
   }
 
   fetchWorkspaceDetails(workspaceId) {
+    var defer = this.$q.defer();
+
     let promise = this.remoteWorkspaceAPI.getDetails({workspaceId : workspaceId}).$promise;
-    return promise;
+    promise.then((data) => {
+      this.workspacesById.set(workspaceId, data);
+      defer.resolve();
+    }, (error) => {
+      if (error.status !== 304) {
+        defer.reject(error);
+      }
+    });
+
+    return defer.promise;
   }
 
   /**
@@ -144,6 +157,28 @@ class CodenvyWorkspace {
       }
     });
     return updatedPromise;
+  }
+
+  /**
+   * Performs workspace rename by the given workspaceId and new name.
+   * @param workspaceId the workspace ID
+   * @param newName the new workspace name
+   * @returns {*|promise|n|N}
+   */
+  renameWorkspace(workspaceId, newName) {
+    let data = {name : newName};
+    let promise = this.remoteWorkspaceAPI.update({workspaceId : workspaceId}, data).$promise;
+    return promise;
+  }
+
+  /**
+   * Performs workspace deleting by the given workspaceId.
+   * @param workspaceId the workspace ID
+   * @returns {*|promise|n|N}
+   */
+  deleteWorkspace(workspaceId) {
+    let promise = this.remoteWorkspaceAPI.delete({workspaceId : workspaceId}).$promise;
+    return promise;
   }
 
   /**

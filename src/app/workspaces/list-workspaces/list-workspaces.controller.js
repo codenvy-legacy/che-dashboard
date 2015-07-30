@@ -92,10 +92,16 @@ class ListWorkspacesCtrl {
       //First check the list of already received workspace info:
       if (!this.workspacesById.get(workspace.workspaceReference.id)) {
         this.codenvyAPI.getWorkspace().fetchWorkspaceDetails(workspace.workspaceReference.id).then((data) => {
-          let userWorkspace = data;
+          let userWorkspace = this.codenvyAPI.getWorkspace().getWorkspacesById().get(workspace.workspaceReference.id);
           this.getWorkspaceInfo(userWorkspace);
           this.userWorkspaces.push(userWorkspace);
         });
+      } else {
+        let userWorkspace = this.workspacesById.get(workspace.workspaceReference.id);
+        let isShared = !this.workspacesPerAccount[userWorkspace.accountId];
+        if (isShared) {
+          this.userWorkspaces.push(userWorkspace);
+        }
       }
     });
 
