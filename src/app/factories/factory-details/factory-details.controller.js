@@ -20,20 +20,19 @@ class FactoryDetailsCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($scope, $route, $filter, lodash, codenvyAPI) {
+  constructor($route, codenvyAPI) {
 
     let factoryId = $route.current.params.id;
 
-    this.factory = null;
+    this.factory = codenvyAPI.getFactory().getFactoryById(factoryId);
 
     let promise = codenvyAPI.getFactory().fetchFactory(factoryId);
 
     promise.then((factory) => {
       this.factory = factory;
-      if (factory.originFactory) {
-        this.factoryContent = $filter('json')(factory.originFactory, 2);
-      }
-
+    }, (error) => {
+      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Get factory failed.');
+      console.log('error', error);
     });
 
     this.toolbarIcons = [

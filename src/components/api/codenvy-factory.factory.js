@@ -31,6 +31,7 @@ class CodenvyFactory {
     this.lodash = lodash;
     this.codenvyAnalytics = codenvyAnalytics;
 
+    this.factories = [];
     this.factoriesById = new Map();
 
     // remote call
@@ -41,6 +42,13 @@ class CodenvyFactory {
 
   }
 
+  /**
+   * Gets the factories of the current user
+   * @returns {Array}
+   */
+  getFactories() {
+    return this.factories;
+  }
 
   /**
    * Gets the factories of the current user
@@ -67,7 +75,13 @@ class CodenvyFactory {
         views: 0
       };
 
+      //update factories map
       this.factoriesById.set(factoryId, factory);
+      //update factories array
+      this.factories.length = 0;
+      this.factoriesById.forEach((value)=> {
+        this.factories.push(value);
+      });
 
       let viewsPromise = this.codenvyAnalytics.getFactoryUsedFromUrl(tmpFactory.id);
 
@@ -109,11 +123,40 @@ class CodenvyFactory {
       let factory = this.factoriesById.get(originFactory.id);
       if (factory) {
         factory.originFactory = originFactory;
+
+        //update factories map
         this.factoriesById.set(originFactory.id, factory);//set factory
+        //update factories array
+        this.factories.length = 0;
+        this.factoriesById.forEach((value)=> {
+          this.factories.push(value);
+        });
+
       } else {
         this.fetchFactory(originFactory.id)
       }
       deferred.resolve();
+    }, (error) => {
+      deferred.reject(error);
+    });
+    return deferred.promise;
+  }
+
+  setFactoryContent(factoryId, factoryContent) {
+    var deferred = this.$q.defer();
+
+    let promise = this.remoteFactoryAPI.put({factoryId: factoryId}, factoryContent).$promise;
+
+    // check if was OK or not
+    promise.then(() => {
+
+      let fetchFactoryPromise = this.fetchFactory(factoryId);
+
+      fetchFactoryPromise.then((factory) => {
+        deferred.resolve(factory);
+      }, (error) => {
+        deferred.reject(error);
+      });
     }, (error) => {
       deferred.reject(error);
     });
@@ -127,7 +170,15 @@ class CodenvyFactory {
 
     // check if was OK or not
     promise.then(() => {
+
+      //update factories map
       this.factoriesById.delete(factoryId);//remove factory
+      //update factories array
+      this.factories.length = 0;
+      this.factoriesById.forEach((value)=> {
+        this.factories.push(value);
+      });
+
       deferred.resolve();
     }, (error) => {
       deferred.reject(error);
@@ -174,7 +225,6 @@ class CodenvyFactory {
           deferred.resolve();
         }
 
-        var newFactoriesById = new Map();
         // Gets factory resource based on the factory ID
         remoteFactories.forEach((factory) => {
           pos--;
@@ -185,17 +235,16 @@ class CodenvyFactory {
           // there is a factory ID, so we can ask the factory details
           if (factoryId) {
             let tmpFactoryPromise = this.fetchFactory(factoryId);
-            tmpFactoryPromise.then((factory) => {
-              newFactoriesById.set(factoryId, factory);
+            tmpFactoryPromise.then(() => {
               if (pos === 0) { //if last
-                deferred.resolve(newFactoriesById);
+                deferred.resolve();
               }
             }, (error) => {
               deferred.reject(error);
             });
           } else {
             if (pos === 0) { //if last
-              deferred.resolve(newFactoriesById);
+              deferred.resolve();
             }
           }
         });

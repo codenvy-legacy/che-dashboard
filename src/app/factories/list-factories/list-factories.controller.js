@@ -45,34 +45,17 @@ class ListFactoriesCtrl {
 
     let codenvyFactory = codenvyAPI.getFactory();
 
-    let factoriesMap = codenvyFactory.getFactoriesMap();
-
-    this.factories = [];
-
-    factoriesMap.forEach((value)=> {
-      this.factories.push(value);
-    });
+    this.factories = codenvyFactory.getFactories();
 
     // fetch factories when initializing
     let promise = codenvyFactory.fetchFactories();
 
     promise.then(() => {
-        // reset the list of factories
-        this.factories.length = 0;
-        factoriesMap.forEach((value)=> {
-          this.factories.push(value);
-        });
         this.loading = false;
       },
       (error) => {
         this.loading = false;
-        if (error.status === 304) {
-          this.factories.length = 0;
-
-          factoriesMap.forEach((value)=> {
-            this.factories.push(value);
-          });
-        } else {
+        if (error.status !== 304) {
           codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
           console.log('error', error);
         }

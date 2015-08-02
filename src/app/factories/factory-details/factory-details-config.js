@@ -12,6 +12,7 @@
 
 import FactoryDetailsCtrl from '../factory-details/factory-details.controller';
 import InformationTabConfig from './information-tab/information-tab-config';
+import ConfigurationTabConfig from './configuration-tab/configuration-tab-config';
 
 
 class FactoryDetailsConfig {
@@ -22,15 +23,16 @@ class FactoryDetailsConfig {
     // config routes
     register.app.config(function ($routeProvider) {
       $routeProvider.accessWhen('/factory/:id', {
-          templateUrl: 'app/factories/factory-details/factory-details.html',
-          controller: 'FactoryDetailsCtrl',
-          controllerAs: 'factoryDetailsCtrl'
-        });
+        templateUrl: 'app/factories/factory-details/factory-details.html',
+        controller: 'FactoryDetailsCtrl',
+        controllerAs: 'factoryDetailsCtrl'
+      });
 
     });
 
     // config files
-    new  InformationTabConfig(register);
+    new InformationTabConfig(register);
+    new ConfigurationTabConfig(register);
 
   }
 }

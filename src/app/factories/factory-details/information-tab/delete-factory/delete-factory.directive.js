@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Defines a directive for displaying delete-factory widget.
+ * Defines a directive for displaying delete factory widget.
  * @author Oleksii Orel
  */
 class DeleteFactory {

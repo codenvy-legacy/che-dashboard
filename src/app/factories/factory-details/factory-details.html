@@ -48,14 +48,7 @@
         <span class="cdvy-tab-label-title">Configuration</span>
       </md-tab-label>
       <md-tab-body>
-
-        <div style="margin:15px">
-          <md-content layout="column" layout-fill style="padding:15px">
-            <h3>{{factoryId}}</h3>
-            <textarea ng-model="factoryDetailsCtrl.factoryContent" class="form-control" rows="15"></textarea>
-          </md-content>
-        </div>
-
+        <cdvy-factory-configuration cdvy-factory="factoryDetailsCtrl.factory"></cdvy-factory-configuration>
       </md-tab-body>
     </md-tab>
   </md-tabs>
