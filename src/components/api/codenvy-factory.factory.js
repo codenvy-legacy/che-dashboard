@@ -58,7 +58,12 @@ class CodenvyFactory {
     return this.factoriesById;
   }
 
-
+  /**
+   * Ask for loading the factory in asynchronous way
+   * If there are no changes, it's not updated
+   * @param factoryId the factory ID
+   * @returns {*|promise|n|N}
+   */
   fetchFactory(factoryId) {
     var deferred = this.$q.defer();
 
@@ -108,11 +113,20 @@ class CodenvyFactory {
     return deferred.promise;
   }
 
-
+  /**
+   * Get the factory from factoryMap by factoryId
+   * @param factoryId the factory ID
+   * @returns {Factory}
+   */
   getFactoryById(factoryId) {
     return this.factoriesById.get(factoryId);
   }
 
+  /**
+   * Set the factory
+   * @param originFactory
+   * @returns {*|promise|n|N}
+   */
   setFactory(originFactory) {
     var deferred = this.$q.defer();
 
@@ -142,6 +156,12 @@ class CodenvyFactory {
     return deferred.promise;
   }
 
+  /**
+   * Set the factory content by factoryId
+   * @param factoryId  the factory ID
+   * @param factoryContent  the factory content
+   * @returns {*|promise|n|N}
+   */
   setFactoryContent(factoryId, factoryContent) {
     var deferred = this.$q.defer();
 
@@ -163,7 +183,12 @@ class CodenvyFactory {
     return deferred.promise;
   }
 
-  removeFactoryById(factoryId) {
+  /**
+   * Performs factory deleting by the given factoryId.
+   * @param factoryId the factory ID
+   * @returns {*|promise|n|N}
+   */
+  deleteFactoryById(factoryId) {
     var deferred = this.$q.defer();
 
     let promise = this.remoteFactoryAPI.delete({factoryId: factoryId}).$promise;

@@ -42,6 +42,7 @@ class FactoryConfigurationCtrl {
     });
   }
 
+  //Update the factory information by factory Id.
   updateFactory(factoryId) {
     let promise = this.codenvyAPI.getFactory().fetchFactory(factoryId);
 
@@ -54,6 +55,7 @@ class FactoryConfigurationCtrl {
     });
   }
 
+  //Set factory content by factory Id.
   setFactoryContent(factoryId, factoryContent) {
     let promise = this.codenvyAPI.getFactory().setFactoryContent(factoryId, factoryContent);
 

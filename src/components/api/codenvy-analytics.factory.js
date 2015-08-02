@@ -45,6 +45,11 @@ class CodenvyAnalytics {
     });
   }
 
+  /**
+   * Get the factory used info for the factoryUrl
+   * @param factoryUrl the factory URL
+   * @returns {*|promise|n|N}
+   */
   getFactoryUsedFromUrl(factoryUrl) {
     return this.remoteAnalytisAPI.factory_used({factoryUrl: factoryUrl}).$promise;
   }

@@ -25,7 +25,7 @@ class FactoryRoutingCtrl {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
 
-    //set default value for factory workspace
+    //set default value for factory workspace.
     $scope.$watch('factoryRoutingCtrl.factory.originFactory.workspace', function (newWorkspace) {
       $scope.workspace = {
         type: newWorkspace && newWorkspace.type ? newWorkspace.type : 'temp',
@@ -34,18 +34,19 @@ class FactoryRoutingCtrl {
     });
   }
 
-  setFactoryWorkspace(workspace) {
+  //Set factory workspace.
+  setFactoryWorkspace(factoryWorkspace) {
     let factory = angular.copy(this.factory.originFactory);
 
-    factory.workspace = workspace;
+    factory.workspace = factoryWorkspace;
 
     let promise = this.codenvyAPI.getFactory().setFactory(factory);
 
     promise.then(() => {
-      this.factory.workspace = angular.copy(workspace);
+      this.factory.workspace = angular.copy(factoryWorkspace);
       this.codenvyNotification.showInfo('Factory workspace information successfully updated.');
     }, (error) => {
-      workspace = this.factory.originFactory.workspace;
+      factoryWorkspace = this.factory.originFactory.workspace;
       this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
       console.log('error', error);
     });
