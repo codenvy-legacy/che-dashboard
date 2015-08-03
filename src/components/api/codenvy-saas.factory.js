@@ -31,6 +31,7 @@ class CodenvySaas {
     // remote call
     this.remoteSaasAPI = this.$resource('/api/saas',{}, {
       getUsedResources: {method: 'GET', url: '/api/resources/:accountId/used', isArray: true}, //TODO remove to account service
+      redistributeResources: {method: 'POST', url: '/api/resources/:accountId'}, //TODO remove to account service
       getProvidedResources: {method: 'GET', url: '/api/saas/resources/:accountId/provided'}
     });
   }
@@ -50,6 +51,15 @@ class CodenvySaas {
 
   getUsedResources(accountId) {
     return this.usedResourcesPerAccount.get(accountId);
+  }
+
+  redistributeResources(accountId, workspaceId, resources) {
+    let data = [];
+    resources.workspaceId = workspaceId;
+    data.push(resources);
+
+    let promise = this.remoteSaasAPI.redistributeResources({accountId : accountId}, data).$promise;
+    return promise;
   }
 
   fetchProvidedResources(accountId) {

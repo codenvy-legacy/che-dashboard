@@ -73,9 +73,9 @@ class CodenvyInput {
           + ''
           + '    <div class="cdvy-input-desktop" hide-sm hide-md layout="column" flex>'
           + '<div layout="row" flex layout-align="space-around start">'
-          + ' <label flex="15" class="cdvy-input-desktop-label">' + labelName + ': </label>'
+          + ' <label flex="15" class="cdvy-input-desktop-label" ng-if="labelName">' + labelName + ': </label>'
           + ''
-          + '<div layout="column" class="cdvy-input-desktop-value-column" flex="85">'
+          + '<div layout="column" class="cdvy-input-desktop-value-column" flex="{{labelName ? 85 : 100}}">'
           + '<input type="text" placeholder="' + placeHolder + '" ng-trim="false" name="desk' + inputName + '"';
       if (attrs.cdvyPattern) {
           template = template + ' pattern="' + pattern + '"';

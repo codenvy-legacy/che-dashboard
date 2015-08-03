@@ -31,7 +31,8 @@ class UsageChart {
       usedDescription: '@cdvyUsedDescription',
       usedColor: '@cdvyUsedColor',
       provided: '@cdvyProvided',
-      providedDescription: '@cdvyProvidedDescription'
+      providedDescription: '@cdvyProvidedDescription',
+      large: '@cdvyLarge'
     };
 
   }
@@ -81,7 +82,7 @@ class UsageChart {
         display: false,
         position: 'right'
       },
-      innerRadius: '75%',
+      innerRadius: $scope.large ? '50%' : '75%',
       colors: [usedColor, '#d4d4d4']
     };
 

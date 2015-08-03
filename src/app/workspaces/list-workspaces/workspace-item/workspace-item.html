@@ -31,7 +31,7 @@
                  cdvy-provided="{{workspaceItemCtrl.workspace.allocatedRAM}}"
                  cdvy-provided-description="{{workspaceItemCtrl.workspace.allocatedRAM}}MB RAM Allocated">
     </usage-chart>
-    <div ng-if="workspaceItemCtrl.workspace.isLocked" flex="29">
+    <div ng-if="workspaceItemCtrl.workspace.isLocked" flex="29" layout="column" layout-align="center center">
       <span class="workspace-resources-locked">Locked Resources</span>
     </div>
     <usage-chart ng-if="workspaceItemCtrl.workspace.providedResources" flex="27" cdvy-label="hours"

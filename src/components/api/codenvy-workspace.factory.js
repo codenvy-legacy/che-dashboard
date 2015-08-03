@@ -41,6 +41,11 @@ class CodenvyWorkspace {
     // per account
     this.workspacesPerAccount = new Map();
 
+    // per workspace
+    this.ramResourcesById = new Map();
+    // per workspace
+    this.membersById = new Map();
+
     // listeners if workspaces are changed/updated
     this.listeners = [];
 
@@ -136,6 +141,8 @@ class CodenvyWorkspace {
     }, (error) => {
       if (error.status !== 304) {
         defer.reject(error);
+      } else {
+        defer.resolve();
       }
     });
 
@@ -203,9 +210,16 @@ class CodenvyWorkspace {
    * @param roles the array of roles to add
    * @returns {*|promise|n|N}
    */
-  getMembers(workspaceId) {
-    console.log('getting members of ', workspaceId);
-    return this.remoteWorkspaceAPI.getMembers({workspaceId: workspaceId}).$promise;
+  fetchMembers(workspaceId) {
+    let promise = this.remoteWorkspaceAPI.getMembers({workspaceId: workspaceId}).$promise;
+    let updatedPromise = promise.then((data) => {
+      this.membersById.set(workspaceId, data);
+    }, (error) => {
+      if (error.status !== 304) {
+        console.log(error);
+      }
+    });
+    return updatedPromise;
   }
 
   /**
@@ -213,8 +227,34 @@ class CodenvyWorkspace {
    * @param workspaceId the workspace ID
    * @returns {*|promise|n|N}
    */
+  fetchRAMResources(workspaceId) {
+    let promise = this.remoteWorkspaceAPI.getRAM({workspaceId: workspaceId}).$promise;
+    let updatedPromise = promise.then((data) => {
+      this.ramResourcesById.set(workspaceId, data);
+    }, (error) => {
+      if (error.status !== 304) {
+        console.log(error);
+      }
+    });
+    return updatedPromise;
+  }
+
+  /**
+   * Get RAM resources of a workspace: used and free RAM.
+   * @param workspaceId the workspace ID
+   * @returns {Object}
+   */
   getRAMResources(workspaceId) {
-    return this.remoteWorkspaceAPI.getRAM({workspaceId: workspaceId}).$promise;
+    return this.ramResourcesById.get(workspaceId);
+  }
+
+  /**
+   * Get workspace members.
+   * @param workspaceId the workspace ID
+   * @returns {Array}
+   */
+  getMembers(workspaceId) {
+    return this.membersById.get(workspaceId);
   }
 
   /**

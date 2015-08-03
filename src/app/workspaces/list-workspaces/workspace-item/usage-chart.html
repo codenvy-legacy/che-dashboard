@@ -1,4 +1,4 @@
-<div layout="row" layout-align="start center" class="usage-chart-container">
+<div layout="row" layout-align="start center" ng-class="large ? 'usage-chart-container usage-chart-large' : 'usage-chart-container usage-chart-small'">
   <div class="usage-chart-label">{{label}}</div>
   <div ng-if="loaded" ac-chart="'pie'" ac-data="data" id="usage-chart" ac-config="config" class="usage-chart"></div>
   <div layout="column" layout-align="center start">

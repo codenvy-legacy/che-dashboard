@@ -14,7 +14,7 @@
         <span class="cdvy-tab-label-title">Settings</span>
       </md-tab-label>
       <md-tab-body>
-        <cdvy-panel cdvy-title="Workspace Information">
+        <cdvy-panel cdvy-title="Workspace Information" class="workspace-details-content">
           <ng-form name="workspaceInformationForm">
             <cdvy-input cdvy-form="workspaceInformationForm"
                         cdvy-name="name"
@@ -36,7 +36,7 @@
                                cdvy-button-title="Rename" name="updateButton" ng-click="workspaceDetailsCtrl.renameWorkspace(workspaceInformationForm.$valid)"/>
           </div>
         </cdvy-panel>
-        <cdvy-panel cdvy-title="Delete Workspace">
+        <cdvy-panel cdvy-title="Delete Workspace" class="workspace-details-content">
           <div layout="row" flex layout-align="space-around start">
             <label flex="15" class="workspace-details-description">
               This is irreversible. Deleting your workspace will also delete its projects.
@@ -51,6 +51,15 @@
     <md-tab>
       <md-tab-label>
         <md-icon md-font-icon="material-design icon-ic_settings_24px" class="cdvy-tab-label-icon"></md-icon>
+        <span class="cdvy-tab-label-title">Resources</span>
+      </md-tab-label>
+      <md-tab-body>
+        <workspace-details-resources></workspace-details-resources>
+      </md-tab-body>
+    </md-tab>
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-font-icon="material-design icon-ic_inbox_24px" class="cdvy-tab-label-icon"></md-icon>
         <span class="cdvy-tab-label-title">Projects</span>
       </md-tab-label>
       <md-tab-body>

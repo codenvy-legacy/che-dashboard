@@ -77,7 +77,6 @@ class CodenvyProject {
    * @param workspaces the array of workspaces that are now used
    */
   onChangeWorkspaces(workspaces) {
-
     var promises = [];
 
     // well we need to clear globally the current projects
@@ -127,10 +126,10 @@ class CodenvyProject {
    * @param workspace
    */
   fetchProjectsForWorkspaceId(workspaceId) {
+    var defer = this.$q.defer();
 
     let promise = this.remoteProjectsAPI.query({workspaceId: workspaceId}).$promise;
-    let downloadProjectPromise = promise.then((projectReferences) => {
-
+    promise.then((projectReferences) => {
       var remoteProjects = [];
       projectReferences.forEach((projectReference) => {
         remoteProjects.push(projectReference);
@@ -151,9 +150,16 @@ class CodenvyProject {
         });
 
       }
+      defer.resolve();
+    }, (error) => {
+      if (error.status !== 304) {
+        defer.reject(error);
+      } else {
+        defer.resolve();
+      }
     });
 
-    return downloadProjectPromise;
+    return defer.promise;
   }
 
 

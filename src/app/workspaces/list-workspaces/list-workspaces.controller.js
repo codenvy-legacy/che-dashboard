@@ -91,7 +91,7 @@ class ListWorkspacesCtrl {
     workspaces.forEach((workspace) => {
       //First check the list of already received workspace info:
       if (!this.workspacesById.get(workspace.workspaceReference.id)) {
-        this.codenvyAPI.getWorkspace().fetchWorkspaceDetails(workspace.workspaceReference.id).then((data) => {
+        this.codenvyAPI.getWorkspace().fetchWorkspaceDetails(workspace.workspaceReference.id).then(() => {
           let userWorkspace = this.codenvyAPI.getWorkspace().getWorkspacesById().get(workspace.workspaceReference.id);
           this.getWorkspaceInfo(userWorkspace);
           this.userWorkspaces.push(userWorkspace);
@@ -125,7 +125,7 @@ class ListWorkspacesCtrl {
   //Represents given account resources as a map with workspace id as a key.
   processUsedResources(resources) {
     resources.forEach((resource) => {
-      this.workspaceUsedResources.set(resource.workspaceId, resource.memory);
+      this.workspaceUsedResources.set(resource.workspaceId, resource.memory.toFixed(2));
     });
   }
 
@@ -136,34 +136,35 @@ class ListWorkspacesCtrl {
 
     workspace.isLocked = this.codenvyAPI.getWorkspace().isWorkspaceResourcesLocked(workspace);
     workspace.usedResources = this.workspaceUsedResources.get(workspace.id);
-    workspace.usedResources = workspace.usedResources ? workspace.usedResources.toFixed(2) : workspace.usedResources;
 
-    let projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
-
-    let promiseMembers = this.codenvyAPI.getWorkspace().getMembers(workspace.id);
+    let promiseMembers = this.codenvyAPI.getWorkspace().fetchMembers(workspace.id);
     promises.push(promiseMembers);
 
     //No access to runner resources if workspace is locked:
     if (!workspace.isLocked) {
-      let promiseResources = this.codenvyAPI.getWorkspace().getRAMResources(workspace.id);
+      let promiseResources = this.codenvyAPI.getWorkspace().fetchRAMResources(workspace.id);
       promises.push(promiseResources);
     }
 
-    if (!projectsPerWorkspace[workspace.id]) {
+    let projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
+    if (!projectsPerWorkspace && !projectsPerWorkspace[workspace.id]) {
       let promiseProjectsNumber = this.codenvyAPI.getProject().fetchProjectsForWorkspaceId(workspace.id);
       promises.push(promiseProjectsNumber);
     }
 
     workspace.providedResources = this.codenvyAPI.getWorkspace().getWorkspaceResourcesUsageLimit(workspace);
-
-    this.$q.all(promises).then((data) => {
-      workspace.projects = projectsPerWorkspace[workspace.id].length;
-      workspace.members = data[0].length;//first promise data is workspace's members list
+    this.$q.all(promises).then(() => {
+      let projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
+      workspace.projects = projectsPerWorkspace[workspace.id] ? projectsPerWorkspace[workspace.id].length : undefined;
+      workspace.members = this.codenvyAPI.getWorkspace().getMembers(workspace.id).length;
 
       if (!workspace.isLocked) {
-        workspace.usedRAM = data[1].usedMemory; //second promise data is workspace RAM
-        workspace.allocatedRAM = data[1].totalMemory;
+        let ramResources = this.codenvyAPI.getWorkspace().getRAMResources(workspace.id);
+        workspace.usedRAM = ramResources.usedMemory;
+        workspace.allocatedRAM = ramResources.totalMemory;
       }
+    }, (error) => {
+      console.log(error);
     });
   }
 }

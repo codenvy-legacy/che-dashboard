@@ -12,19 +12,19 @@
 
 /**
  * @ngdoc directive
- * @name workspaces.details.directive:workspaceDetailsProjects
+ * @name workspaces.details.directive:workspaceResourcesProjects
  * @restrict E
  * @element
  *
  * @description
- * <workspace-details-project></workspace-details-projects>` for displaying workspace projects entry.
+ * <workspace-details-resources></workspace-details-resources>` for displaying workspace resources entry.
  *
  * @usage
- *   <workspace-details-project></workspace-details-project>
+ *   <workspace-details-resources></workspace-details-resources>
  *
  * @author Ann Shumilova
  */
-class WorkspaceDetailsProjects {
+class WorkspaceDetailsResources {
 
   /**
    * Default constructor that is using resource
@@ -32,14 +32,14 @@ class WorkspaceDetailsProjects {
    */
   constructor () {
     this.restrict = 'E';
-    this.templateUrl = 'app/workspaces/workspace-details/workspace-projects/workspace-details-projects.html';
+    this.templateUrl = 'app/workspaces/workspace-details/resources/workspace-details-resources.html';
 
-    this.controller = 'WorkspaceDetailsProjectsCtrl';
-    this.controllerAs = 'workspaceDetailsProjectsCtrl';
+    this.controller = 'WorkspaceDetailsResourcesCtrl';
+    this.controllerAs = 'workspaceDetailsResourcesCtrl';
     this.bindToController = true;
   }
 
 }
 
-export default WorkspaceDetailsProjects;
+export default WorkspaceDetailsResources;
 
