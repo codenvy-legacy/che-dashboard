@@ -16,6 +16,8 @@ import CodenvyWorkspaceItem from './list-workspaces/workspace-item/workspace-ite
 import UsageChart from './list-workspaces/workspace-item/usage-chart.directive';
 import WorkspaceItemCtrl from './list-workspaces/workspace-item/workspace-item.controller';
 import WorkspaceDetailsCtrl from './workspace-details/workspace-details.controller';
+import WorkspaceDetailsProjectsCtrl from './workspace-details/workspace-projects/workspace-details-projects.controller';
+import WorkspaceDetailsProjects from './workspace-details/workspace-projects/workspace-details-projects.directive';
 
 /**
  * @ngdoc controller
@@ -31,6 +33,8 @@ class WorkspacesConfig {
     register.controller('WorkspaceItemCtrl', WorkspaceItemCtrl);
     register.directive('usageChart', UsageChart);
     register.controller('WorkspaceDetailsCtrl', WorkspaceDetailsCtrl);
+    register.controller('WorkspaceDetailsProjectsCtrl', WorkspaceDetailsProjectsCtrl);
+    register.directive('workspaceDetailsProjects', WorkspaceDetailsProjects);
 
     // config routes
     register.app.config(function ($routeProvider) {

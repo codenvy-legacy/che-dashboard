@@ -45,6 +45,8 @@ class WorkspaceDetailsCtrl {
     } else {
       this.updateWorkspaceData();
     }
+
+
   }
 
   //Update the workspace data to be displayed.

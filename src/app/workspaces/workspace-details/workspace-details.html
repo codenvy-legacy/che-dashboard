@@ -5,7 +5,7 @@
 </cdvy-toolbar>
 <md-progress-linear md-mode="indeterminate" ng-show="workspaceDetailsCtrl.loading"></md-progress-linear>
 
-<md-content md-scroll-y flex class="workspace-details-content" ng-if="workspaceDetailsCtrl.workspaceDetails"
+<md-content md-scroll-y flex ng-if="workspaceDetailsCtrl.workspaceDetails"
              md-theme="maincontent-theme">
   <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="selectedIndex">
     <md-tab>
@@ -48,9 +48,15 @@
         </cdvy-panel>
       </md-tab-body>
     </md-tab>
-
-
-
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-font-icon="material-design icon-ic_settings_24px" class="cdvy-tab-label-icon"></md-icon>
+        <span class="cdvy-tab-label-title">Projects</span>
+      </md-tab-label>
+      <md-tab-body>
+        <workspace-details-projects></workspace-details-projects>
+      </md-tab-body>
+    </md-tab>
   </md-tabs>
 </md-content>
 

@@ -29,7 +29,7 @@
               am-time-ago="projectItemCtrl.getProjectModificationDate()"></span>
     </div>
     <div flex="10" layout="row" layout-align="center center" ng-click="projectItemCtrl.redirectToProjectDetails()">
-      <md-icon class="codenvy-hover"
+      <md-icon class="codenvy-hover project-details-icon"
                tooltip="{{projectItemCtrl.project.visibility=='public'?'Public':'Private'}}"
                md-font-icon="material-design {{projectItemCtrl.project.visibility=='public'?'icon-ic_lock_open_24px':'icon-ic_lock_24px'}}">
       </md-icon>
