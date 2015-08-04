@@ -31,7 +31,10 @@ class BalanceExtened {
       provided: '@cdvyProvided',
       providedDescription: '@cdvyProvidedDescription',
       charged: '@cdvyCharged',
-      chargedDescription: '@cdvyChargedDescription'
+      chargedDescription: '@cdvyChargedDescription',
+      layout: '@cdvyLayout',
+      layoutAlign: '@cdvyLayoutAlign'
+
     };
 
   }
@@ -92,6 +95,8 @@ class BalanceExtened {
         tooltip: dataYPercents +'%'
       }]
     };
+    $scope.chartEnabled = true;
+
   }
 }
 

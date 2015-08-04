@@ -29,7 +29,9 @@ class BalanceSimple {
       consumed: '@cdvyConsumed',
       consumedDescription: '@cdvyConsumedDescription',
       provided: '@cdvyProvided',
-      providedDescription: '@cdvyProvidedDescription'
+      providedDescription: '@cdvyProvidedDescription',
+      layout: '@cdvyLayout',
+      layoutAlign: '@cdvyLayoutAlign'
     };
 
   }
@@ -80,6 +82,8 @@ class BalanceSimple {
         tooltip: 'Available (' + availablePercents + '%)'
       }]
     };
+    $scope.chartEnabled = true;
+
   }
 }
 

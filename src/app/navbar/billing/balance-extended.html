@@ -1,5 +1,5 @@
-<div layout="row" layout-align="center end">
-  <div ac-chart="'pie'" ac-data="data" id='chart' ac-config="config" class="balance-extended-chart"></div>
+<div layout="{{layout}}" layout-align="{{layoutAlign}}">
+  <div ng-if="chartEnabled" ac-chart="'pie'" ac-data="data" id='chart' ac-config="config" class="balance-extended-chart"></div>
   <div layout="column">
     <div class="balance-extended-consumed-value">{{consumedDescription}}</div>
     <div class="balance-extended-separator"></div>
