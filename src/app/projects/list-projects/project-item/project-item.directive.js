@@ -28,7 +28,9 @@ class CodenvyProjectItem {
     this.scope = {
       workspaceId: '=cdvyProjectItemWorkspaceId',
       project: '=cdvyProjectItemProject',
-      profileCreationDate: '=cdvyProfileCreationDate'
+      profileCreationDate: '=cdvyProfileCreationDate',
+      isDisplayWorkspace: '=cdvyDisplayWorkspace',
+      isSelectable: '=cdvySelectable'
     };
 
     this.templateUrl = 'app/projects/list-projects/project-item/project-item.html';
