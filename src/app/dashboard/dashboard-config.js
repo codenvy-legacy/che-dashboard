@@ -15,10 +15,16 @@ import DashboardLearnMoreCtrl from './learn-more/dashboard-learn-more.controller
 import DashboardLearnMore from './learn-more/dashboard-learn-more.directive';
 import DashboardLastProjectsCtrl from './last-projects/last-projects.controller';
 import DashboardLastProjects from './last-projects/last-projects.directive';
+import DashboardOverviewCtrl from './overview/overview.controller';
+import DashboardOverview from './overview/overview.directive';
 
 class DashboardConfig {
 
   constructor(register) {
+
+    // overview
+    register.controller('DashboardOverviewCtrl', DashboardOverviewCtrl);
+    register.directive('dashboardOverview', DashboardOverview);
 
 
     // last projects

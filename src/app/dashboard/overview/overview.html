@@ -1,0 +1,60 @@
+<cdvy-box >
+  <div layout="row" layout-align="space-around start" flex ng-controller="BillingCtrl as billingCtrl">
+    <div layout-align="center center">
+      <div class="dashboard-overview-title dashboard-overview-gbh" flex>Gigabyte Hours</div>
+      <balance-simple ng-if="billingCtrl.isFreeAccount"
+                      cdvy-layout="column"
+                      cdvy-layout-align="center center"
+                      cdvy-consumed="{{billingCtrl.usedGBH}}"
+                      cdvy-provided="{{billingCtrl.providedResources.freeAmount}}"
+                      cdvy-consumed-description="{{billingCtrl.usedGBH}} GB hours Consumed"
+                      cdvy-provided-description="{{billingCtrl.providedResources.freeAmount}} GB hours Free">
+      </balance-simple>
+      <balance-simple ng-if="billingCtrl.providedResources.prepaidAmount"
+                      cdvy-layout="column"
+                      cdvy-layout-align="center center"
+                      cdvy-consumed="{{billingCtrl.usedGBH}}"
+                      cdvy-provided="{{billingCtrl.providedResources.prepaidAmount + billingCtrl.providedResources.freeAmount}}"
+                      cdvy-consumed-description="{{billingCtrl.usedGBH}} GB hours Consumed"
+                      cdvy-provided-description="{{billingCtrl.providedResources.prepaidAmount + billingCtrl.providedResources.freeAmount}} GB hours Allocated">
+
+      </balance-simple>
+      <balance-extended ng-if="billingCtrl.isPayAsYouGo"
+                        cdvy-layout="column"
+                        cdvy-layout-align="center center"
+                        cdvy-consumed="{{billingCtrl.usedGBH}}"
+                        cdvy-provided="{{billingCtrl.providedResources.freeAmount}}"
+                        cdvy-consumed-description="{{billingCtrl.usedGBH}} GB hours Consumed"
+                        cdvy-provided-description="{{billingCtrl.providedResources.freeAmount}} GB hours Free"
+                        cdvy-charged="{{billingCtrl.chargedGBH}}"
+                        cdvy-charged-description="{{billingCtrl.chargedGBH}} GB hours Charged">
+      </balance-extended>
+    </div>
+    <div layout-align="center center" class="dashboard-overview-runners">
+      <div class="dashboard-overview-title" flex>Runners</div>
+      <div class="dashboard-overview-runner-number">{{dashboardOverviewCtrl.getProcesses()}}</div>
+      <div class="dashboard-overview-runner-desc">Active runners</div>
+    </div>
+
+    <div layout-align="center center" class="dashboard-overview-charges" ng-controller="CreditcardCtrl as creditCardCtrl">
+      <div class="dashboard-overview-title" flex>Charges</div>
+      <div class="dashboard-overview-desc-add-card" ng-if="creditCardCtrl.creditCards.length == 0 && creditCardCtrl.loadedCreditCards">
+        <div class="dashboard-overview-desc">Remove limits and get unlimited RAM with a Pay As You Go account by adding a credit card</div>
+        <cdvy-button-warning cdvy-button-title="Add"
+                             cdvy-button-icon="fa fa-credit-card"
+                             tooltip="Remove limits by adding a credit card"
+                             ng-click="dashboardOverviewCtrl.addCreditCard();">
+        </cdvy-button-warning>
+      </div>
+      <div class="dashboard-overview-desc-last-invoice" ng-if="creditCardCtrl.creditCards.length > 0">
+        <div ng-if="billingCtrl.invoices.length > 0">
+          <div class="dashboard-overview-charges-total" ng-init="invoice = billingCtrl.invoices[0]">${{invoice.total}}</div>
+        </div>
+        <div class="dashboard-overview-charges-total-desc">Last invoice</div>
+        <div ng-if="billingCtrl.invoices.length == 0">
+          <div class="dashboard-overview-charges-total-desc">No invoice</div>
+        </div>
+      </div>
+    </div>
+
+</cdvy-box>
