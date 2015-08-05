@@ -15,6 +15,7 @@
 import ListFactoriesCtrl from './list-factories/list-factories.controller';
 import CodenvyFactoryItem from './list-factories/factory-item/factory-item.directive';
 import FactoryDetailsConfig from './factory-details/factory-details-config';
+import CreateFactoryConfig from './create-factory/create-factory-config';
 
 class FactoryConfig {
 
@@ -35,6 +36,7 @@ class FactoryConfig {
 
     // config files
     new FactoryDetailsConfig(register);
+    new CreateFactoryConfig(register);
 
   }
 }

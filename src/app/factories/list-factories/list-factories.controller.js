@@ -41,7 +41,7 @@ class ListFactoriesCtrl {
       }
     };
 
-    this.loading = true;
+    this.isLoading = true;
 
     let codenvyFactory = codenvyAPI.getFactory();
 
@@ -51,10 +51,10 @@ class ListFactoriesCtrl {
     let promise = codenvyFactory.fetchFactories();
 
     promise.then(() => {
-        this.loading = false;
+        this.isLoading = false;
       },
       (error) => {
-        this.loading = false;
+        this.isLoading = false;
         if (error.status !== 304) {
           codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
           console.log('error', error);

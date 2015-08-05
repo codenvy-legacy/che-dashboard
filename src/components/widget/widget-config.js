@@ -11,7 +11,7 @@
 'use strict';
 
 /*exported CodenvyButtonPrimary, CodenvyButtonDefault, CodenvyButtonDanger, CodenvyButtonWarning, CodenvyList, CodenvyListItem, CodenvyListTitle,
- CodenvyHtmlSource, CodenvyInput, CodenvyTab, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton,
+ CodenvyHtmlSource, CodenvyInput, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton,
  CodenvyToggle, CodenvyToolbar, CodenvyLabel, CodenvyTextInfo, CodenvyLabelContainer, CodenvyLink, CodenvyButtonDropdownCtrl, CodenvyButtonDropdown,
  CodenvyPanelCtrl, CodenvyListItemChecked, CodenvySelect, CodenvyClipboard, CodenvyEmptyState, CodenvySearch, CodenvyEventLogger*/
 import CodenvyButtonPrimary from './button/cdvy-button-primary.directive';
@@ -27,8 +27,6 @@ import CodenvyButtonDropdown from './button-dropdown/cdvy-button-dropdown.direct
 import CodenvyHtmlSource from './html-source/cdvy-html-source.directive';
 
 import CodenvyInput from './input/cdvy-input.directive';
-
-import CodenvyTab from './tab/cdvy-tab.directive';
 
 import CodenvyPanelCtrl from './panel/cdvy-panel.controller';
 import CodenvyPanel from './panel/cdvy-panel.directive';

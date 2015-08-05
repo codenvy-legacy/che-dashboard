@@ -33,13 +33,64 @@ class CodenvyFactory {
 
     this.factories = [];
     this.factoriesById = new Map();
+    this.factoryContentsByProjectKey = new Map();// ProjectKey = project.workspaceId + project.name
 
     // remote call
     this.remoteFactoryFindAPI = this.$resource('/api/factory/find');
     this.remoteFactoryAPI = this.$resource('/api/factory/:factoryId', {factoryId: '@id'}, {
-      put: {method: 'PUT', url: '/api/factory/:factoryId'}
+      put: {method: 'PUT', url: '/api/factory/:factoryId'},
+      getFactoryContentFromProject: {method: 'GET', url: '/api/factory/:workspaceId/:projectPath'},
+      createFactoryByContent: {
+        method: 'POST', url: '/api/factory', isArray: false,
+        headers: {'Content-Type': undefined}, transformRequest: angular.identity
+      }
     });
 
+  }
+
+  /**
+   * Get factory from project
+   * @param workspaceId  the workspace ID
+   * @param projectPath  the project path
+   * @returns {*|promise|n|N}
+   */
+  getFactoryContentFromProject(project) {
+    var deferred = this.$q.defer();
+
+    let factoryContent = this.factoryContentsByProjectKey.get(project.workspaceId + project.name);
+    if (factoryContent) {
+      deferred.resolve(factoryContent);
+    }
+
+    let promise = this.remoteFactoryAPI.getFactoryContentFromProject({
+      workspaceId: project.workspaceId,
+      projectPath: project.name
+    }).$promise;
+
+    promise.then((factoryContent) => {
+      //update factoryContents map
+      this.factoryContentsByProjectKey.set(project.workspaceId + project.name, factoryContent);
+      deferred.resolve(factoryContent);
+    }, (error) => {
+      if (error.status !== 304) {
+        deferred.reject(error);
+      }
+    });
+
+    return deferred.promise;
+  }
+
+  /**
+   * Create factory by content
+   * @param factoryContent  the factory content
+   * @returns {*|promise|n|N}
+   */
+  createFactoryByContent(factoryContent) {
+
+    var formDataObject = new FormData();
+    formDataObject.append("factoryUrl", factoryContent);
+
+    return this.remoteFactoryAPI.createFactoryByContent({}, formDataObject).$promise;
   }
 
   /**

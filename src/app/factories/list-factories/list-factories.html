@@ -26,8 +26,8 @@
 </md-toolbar>
 <md-content layout="column" layout-fill class="factories-list-factories ng-scope md-maincontent-theme-theme">
   <md-progress-linear md-mode="indeterminate" class="factories-list-factories-progress"
-                      ng-if="listFactoriesCtrl.loading"></md-progress-linear>
-  <md-content flex class="md-maincontent-theme-theme" ng-show="!listFactoriesCtrl.loading">
+                      ng-if="listFactoriesCtrl.isLoading"></md-progress-linear>
+  <md-content flex class="md-maincontent-theme-theme" ng-show="!listFactoriesCtrl.isLoading">
     <div class="factories-list-notification">
       <span ng-show="listFactoriesCtrl.factories.length == 0" class="factories-list-empty">No factories</span>
           <span
