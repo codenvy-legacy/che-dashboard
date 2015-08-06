@@ -28,8 +28,8 @@ class FactoryRoutingCtrl {
     //set default value for factory workspace.
     $scope.$watch('factoryRoutingCtrl.factory.originFactory.workspace', function (newWorkspace) {
       $scope.workspace = {
-        type: newWorkspace && newWorkspace.type ? newWorkspace.type : 'temp',
-        location: newWorkspace && newWorkspace.location ? newWorkspace.location : 'owner'
+        type: newWorkspace && newWorkspace.type ? newWorkspace.type : 'named',
+        location: newWorkspace && newWorkspace.location ? newWorkspace.location : 'acceptor'
       };
     });
   }
