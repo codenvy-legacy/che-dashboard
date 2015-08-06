@@ -39,21 +39,22 @@ class FactoryFromProjectCtrl {
 
     promise.then(() => {
         this.isLoading = false;
-        this.workspaces = this.workspace.getWorkspaces();
-        this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
-        this.setAllFiltersWorkspaces(true);
-        this.isAllWorkspaces = true;
+        this.updateData();
       },
       (error) => {
         this.isLoading = false;
         if (error.status === 304) {
-          this.workspaces = this.workspace.getWorkspaces();
-          this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
-          this.setAllFiltersWorkspaces(true);
-          this.isAllWorkspaces = true;
+          this.updateData();
         }
       });
 
+  }
+
+  updateData() {
+    this.workspaces = this.workspace.getWorkspaces();
+    this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
+    this.setAllFiltersWorkspaces(true);
+    this.isAllWorkspaces = true;
   }
 
   /**
@@ -61,15 +62,21 @@ class FactoryFromProjectCtrl {
    * @param project is selected project
    */
   getFactoryContentFromProject(project) {
-    this.isLoading = true;
+    let factoryContent = this.codenvyAPI.getFactory().getFactoryContentFromProject(project);
+    if (factoryContent) {
+      this.factoryContent = this.$filter('json')(factoryContent, 2);
+      return;
+    }
 
-    let promise = this.codenvyAPI.getFactory().getFactoryContentFromProject(project);
+    this.isImporting = true;
+
+    let promise = this.codenvyAPI.getFactory().fetchFactoryContentFromProject(project);
 
     promise.then((factoryContent) => {
-      this.isLoading = false;
+      this.isImporting = false;
       this.factoryContent = this.$filter('json')(factoryContent, 2);
     }, (error) => {
-      this.isLoading = false;
+      this.isImporting = false;
       this.factoryContent = null;
       this.codenvyNotification.showError(error.data.message ? error.data.message : 'Get factory configuration failed.');
       console.log('error', error);

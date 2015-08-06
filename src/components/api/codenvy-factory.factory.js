@@ -35,7 +35,7 @@ class CodenvyFactory {
     this.factoriesById = new Map();
     this.factoryContentsByProjectKey = new Map();// ProjectKey = project.workspaceId + project.name
 
-    // remote call
+    // remote calls
     this.remoteFactoryFindAPI = this.$resource('/api/factory/find');
     this.remoteFactoryAPI = this.$resource('/api/factory/:factoryId', {factoryId: '@id'}, {
       put: {method: 'PUT', url: '/api/factory/:factoryId'},
@@ -49,12 +49,12 @@ class CodenvyFactory {
   }
 
   /**
-   * Get factory from project
-   * @param workspaceId  the workspace ID
-   * @param projectPath  the project path
+   * Ask for loading the factory content in asynchronous way
+   * If there are no changes, it's not updated
+   * @param project
    * @returns {*|promise|n|N}
    */
-  getFactoryContentFromProject(project) {
+  fetchFactoryContentFromProject(project) {
     var deferred = this.$q.defer();
 
     let factoryContent = this.factoryContentsByProjectKey.get(project.workspaceId + project.name);
@@ -72,12 +72,25 @@ class CodenvyFactory {
       this.factoryContentsByProjectKey.set(project.workspaceId + project.name, factoryContent);
       deferred.resolve(factoryContent);
     }, (error) => {
-      if (error.status !== 304) {
+      if (error.status === 304) {
+        let findFactoryContent = this.factoryContentsByProjectKey.get(project.workspaceId + project.name);
+        deferred.resolve(findFactoryContent);
+      } else {
         deferred.reject(error);
       }
     });
 
     return deferred.promise;
+  }
+
+  /**
+   * Get factory from project
+   * @param project
+   * @return the factory content
+   * @returns {factoryContent}
+   */
+  getFactoryContentFromProject(project) {
+    return this.factoryContentsByProjectKey.get(project.workspaceId + project.name);
   }
 
   /**
@@ -167,7 +180,7 @@ class CodenvyFactory {
   /**
    * Get the factory from factoryMap by factoryId
    * @param factoryId the factory ID
-   * @returns {Factory}
+   * @returns {factory}
    */
   getFactoryById(factoryId) {
     return this.factoriesById.get(factoryId);

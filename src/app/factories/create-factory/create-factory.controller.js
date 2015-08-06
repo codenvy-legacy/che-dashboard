@@ -25,7 +25,7 @@ class CreateFactoryCtrl {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
 
-    this.isLoading = true;
+    this.isLoading = false;
     this.isImporting = false;
 
     this.factoryContent = null;

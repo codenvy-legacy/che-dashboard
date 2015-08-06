@@ -34,6 +34,7 @@ class FactoryFromProject {
     // scope values
     this.scope = {
       isLoading: '=cdvyIsLoading',
+      isImporting: '=cdvyIsImporting',
       factoryContent: "=cdvyFactoryContent"
     };
   }
