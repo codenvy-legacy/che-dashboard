@@ -20,6 +20,9 @@ import WorkspaceDetailsProjectsCtrl from './workspace-details/workspace-projects
 import WorkspaceDetailsProjects from './workspace-details/workspace-projects/workspace-details-projects.directive';
 import WorkspaceDetailsResourcesCtrl from './workspace-details/resources/workspace-details-resources.controller';
 import WorkspaceDetailsResources from './workspace-details/resources/workspace-details-resources.directive';
+import WorkspaceDetailsMembersCtrl from './workspace-details/members/workspace-details-members.controller';
+import WorkspaceDetailsMembers from './workspace-details/members/workspace-details-members.directive';
+import WorkspaceDetailsMembersDialogAddCtrl from './workspace-details/members/workspace-details-members-dialog-add.controller';
 
 /**
  * @ngdoc controller
@@ -42,6 +45,10 @@ class WorkspacesConfig {
 
     register.controller('WorkspaceDetailsResourcesCtrl', WorkspaceDetailsResourcesCtrl);
     register.directive('workspaceDetailsResources', WorkspaceDetailsResources);
+
+    register.controller('WorkspaceDetailsMembersCtrl', WorkspaceDetailsMembersCtrl);
+    register.controller('WorkspaceDetailsMembersDialogAddCtrl', WorkspaceDetailsMembersDialogAddCtrl);
+    register.directive('workspaceDetailsMembers', WorkspaceDetailsMembers);
 
     // config routes
     register.app.config(function ($routeProvider) {

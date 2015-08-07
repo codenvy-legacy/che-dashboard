@@ -54,6 +54,7 @@ class CodenvyWorkspace {
         listByAccountId: {method: 'GET', url: '/api/workspace/find/account?id=:accountId', isArray: true},
         getDetails: {method: 'GET', url: '/api/workspace/:workspaceId'},
         addMember: {method: 'POST', url: '/api/workspace/:workspaceId/members'},
+        deleteMember: {method: 'DELETE', url: '/api/workspace/:workspaceId/members/:userId'},
         getMembers: {method: 'GET', url: '/api/workspace/:workspaceId/members', isArray: true},
         getRAM: {method: 'GET', url: 'api/runner/:workspaceId/resources'},
         delete: {method: 'DELETE', url: '/api/workspace/:workspaceId'},
@@ -220,6 +221,17 @@ class CodenvyWorkspace {
       }
     });
     return updatedPromise;
+  }
+
+  /**
+   * Performs workspace's member deleting by the given workspaceId and userId.
+   * @param workspaceId the workspace ID
+   * @param workspaceId the user ID
+   * @returns {*|promise|n|N}
+   */
+  deleteMember(workspaceId, userId) {
+    let promise = this.remoteWorkspaceAPI.deleteMember({workspaceId : workspaceId, userId: userId}).$promise;
+    return promise;
   }
 
   /**

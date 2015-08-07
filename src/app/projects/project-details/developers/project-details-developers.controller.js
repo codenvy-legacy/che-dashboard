@@ -128,13 +128,14 @@ class ProjectDetailsDevelopersCtrl {
 
 
 
-    let promiseMembers = this.codenvyAPI.getWorkspace().getMembers(this.workspaceId);
-    let promiseCheckMember = promiseMembers.then((data) => {
+    let promiseMembers = this.codenvyAPI.getWorkspace().fetchMembers(this.workspaceId);
+    let promiseCheckMember = promiseMembers.then(() => {
+      let members = this.codenvyAPI.getWorkspace().getMembers(this.workspaceId);
       // check if userId is there or not
       let existMember = false;
       var i;
-      for (i = 0; i < data.length; i++) {
-        if (user.id === data[i].userId) {
+      for (i = 0; i < members.length; i++) {
+        if (user.id === members[i].userId) {
           existMember = true;
         }
       }
