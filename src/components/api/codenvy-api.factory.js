@@ -11,7 +11,7 @@
 'use strict';
 /*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
  CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
- CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyAnalyticsSession */
+ CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, codenvyFactoryTemplate, CodenvyAnalyticsSession */
 
 
 import Register from '../utils/register';
@@ -33,6 +33,7 @@ import CodenvyProjectTemplate from './codenvy-project-template.factory';
 import CodenvyWebsocket from './codenvy-websocket.factory';
 import CodenvyGit from './codenvy-git.factory';
 import CodenvySvn from './codenvy-svn.factory';
+import CodenvyFactoryTemplate from './codenvy-factory-template.factory';
 import CodenvyAnalyticsSession from './codenvy-analytics-session.factory';
 
 /**
@@ -47,7 +48,8 @@ class CodenvyAPI {
    * @ngInject for Dependency injection
    */
   constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
-              codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyAnalyticsSession) {
+              codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyFactoryTemplate,
+              codenvyAnalyticsSession) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
@@ -62,6 +64,7 @@ class CodenvyAPI {
     this.codenvyWebsocket = codenvyWebsocket;
     this.codenvyGit = codenvyGit;
     this.codenvySvn = codenvySvn;
+    this.codenvyFactoryTemplate = codenvyFactoryTemplate;
     this.codenvyAnalyticsSession = codenvyAnalyticsSession;
 
     // register listener of projects onto workspaces
@@ -84,7 +87,7 @@ class CodenvyAPI {
    * The Codenvy Saas API
    * @returns {CodenvyAPI.codenvySaas|*}
    */
-    getSaas() {
+  getSaas() {
     return this.codenvySaas;
   }
 
@@ -118,6 +121,14 @@ class CodenvyAPI {
    */
   getFactory() {
     return this.codenvyFactory;
+  }
+
+  /**
+   * The Codenvy Factory Template API
+   * @returns {codenvyFactoryTemplate|*}
+   */
+  getFactoryTemplate() {
+    return this.codenvyFactoryTemplate;
   }
 
   /**

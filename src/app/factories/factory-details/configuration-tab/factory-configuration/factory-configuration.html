@@ -11,24 +11,24 @@
 
 -->
 <cdvy-panel cdvy-title="Factory Configuration">
-  <div class="factory-configuration-panel" ng-if="factoryContent">
+  <div class="factory-configuration-panel" ng-if="factoryConfigurationCtrl.factoryContent">
     <md-content layout="column" layout-fill>
       <div class="json-editor">
-        <textarea ui-codemirror ng-model="factoryContent"></textarea>
+        <textarea ui-codemirror ng-model="factoryConfigurationCtrl.factoryContent"></textarea>
       </div>
     </md-content>
     <a href="http://docs.codenvy.com/user/factories/#configuration-reference" target="_blank">Factory reference documentation</a>
 
-    <div>
+    <div class="configuration-panel-button">
           <span>
             <cdvy-button-default cdvy-button-title="Reload"
                                  cdvy-event-logger="factory-details/information-tab/delete-factory"
-                                 ng-click="factoryConfigurationCtrl.updateFactory(factoryId)"/>
+                                 ng-click="factoryConfigurationCtrl.updateFactory(factoryConfigurationCtrl.factoryId)"/>
           </span>
           <span>
             <cdvy-button-primary cdvy-button-title="Update"
                                  cdvy-event-logger="factory-details/information-tab/delete-factory"
-                                 ng-click="factoryConfigurationCtrl.setFactoryContent(factoryId, factoryContent)"/>
+                                 ng-click="factoryConfigurationCtrl.setFactoryContent(factoryConfigurationCtrl.factoryId, factoryConfigurationCtrl.factoryContent)"/>
           </span>
     </div>
   </div>

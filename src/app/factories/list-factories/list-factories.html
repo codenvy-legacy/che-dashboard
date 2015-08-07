@@ -28,17 +28,22 @@
   <md-progress-linear md-mode="indeterminate" class="factories-list-factories-progress"
                       ng-if="listFactoriesCtrl.isLoading"></md-progress-linear>
   <md-content flex class="md-maincontent-theme-theme" ng-show="!listFactoriesCtrl.isLoading">
-    <div class="factories-list-notification">
-      <span ng-show="listFactoriesCtrl.factories.length == 0" class="factories-list-empty">No factories</span>
-          <span
-            ng-show="(listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter).length == 0 && listFactoriesCtrl.factories.length > 0"
-            class="factories-list-empty">No factories found</span>
+    <div ng-if="listFactoriesCtrl.factories.length === 0" layout="row" layout-align="center center" class="empty-state">
+      <cdvy-empty-state cdvy-value="There are no factories yet."
+                        cdvy-prompt="You can add a factory."
+                        cdvy-icon-class="cdvyfont cdvyico-rocket-cdvyfont icon"></cdvy-empty-state>
     </div>
-    <cdvy-list ng-show="(listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter).length > 0">
-      <cdvy-factory-item
-        ng-repeat="factory in listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter | orderBy:listFactoriesCtrl.factoriesOrderBy"
-        cdvy-factory="factory"></cdvy-factory-item>
-    </cdvy-list>
-
+    <div ng-if="listFactoriesCtrl.factories.length > 0">
+      <div class="factories-list-notification">
+      <span
+        ng-show="(listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter).length === 0 && listFactoriesCtrl.factories.length > 0"
+        class="factories-list-empty">No factories found</span>
+      </div>
+      <cdvy-list ng-show="(listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter).length > 0">
+        <cdvy-factory-item
+          ng-repeat="factory in listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter | orderBy:listFactoriesCtrl.factoriesOrderBy"
+          cdvy-factory="factory"></cdvy-factory-item>
+      </cdvy-list>
+    </div>
   </md-content>
 </md-content>

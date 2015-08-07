@@ -37,7 +37,7 @@ class FactoryDetailsCtrl {
 
     this.toolbarIcons = [
 //      {name: 'favorite', font: 'material-design icon-ic_star_24px'},
-      {name: 'share', font: 'material-design icon-ic_share_24px'}
+//      {name: 'share', font: 'material-design icon-ic_share_24px'}
     ];
 
   }

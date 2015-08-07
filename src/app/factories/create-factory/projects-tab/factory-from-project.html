@@ -12,7 +12,7 @@
 -->
 <div class="factory-from-project-workspace-filter">
   <div layout="row" layout-align="start center">
-    <div flex="20" layout="row" layout-align="center center">Filter workspaces:</div>
+    <div flex="20" layout="row" layout-align="start center">Filter workspaces:</div>
     <div flex="80" layout="row" layout-align="start center" layout-wrap>
       <md-checkbox ng-click="factoryFromProjectCtrl.setAllFiltersWorkspaces(!factoryFromProjectCtrl.isAllWorkspaces)"
                    ng-model="factoryFromProjectCtrl.isAllWorkspaces"
@@ -38,9 +38,8 @@
                ng-model="factoryFromProjectCtrl.projectFilter.name"></cdvy-search>
   <div
     ng-repeat="(workspaceId, projects) in factoryFromProjectCtrl.projectsPerWorkspace | listProjectWorkspaceFilter:factoryFromProjectCtrl.filtersWorkspaceSelected">
-    <cdvy-list-title cdvy-icon="fa fa-folder">
+    <cdvy-list-title ng-if="!factoryFromProjectCtrl.isEmpty(workspaceId, projects)" cdvy-icon="fa fa-folder">
       <span class="projects-list-workspace-name">{{factoryFromProjectCtrl.getWorkspaceName(workspaceId)}}</span>
-      <span ng-show="projects.length == 0" class="project-list-empty">- No projects inside</span>
                   <span ng-show="(projects | filter:factoryFromProjectCtrl.projectFilter).length == 0 && projects.length > 0"
                         class="project-list-empty">- No projects found</span>
     </cdvy-list-title>
@@ -48,6 +47,7 @@
       <cdvy-list-item ng-repeat="project in projects | filter:factoryFromProjectCtrl.projectFilter"
                       flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
         <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row"
+             ng-class="{'cdvy-selecter-active' : project === factoryFromProjectCtrl.selectedProject}"
              ng-click="factoryFromProjectCtrl.getFactoryContentFromProject(project)">
           <div class="project-list-static-icon" layout-align="center center">
             <div class="project-type-icon">

@@ -87,7 +87,7 @@ class CodenvyFactory {
    * Get factory from project
    * @param project
    * @return the factory content
-   * @returns {factoryContent}
+   * @returns factoryContent
    */
   getFactoryContentFromProject(project) {
     return this.factoryContentsByProjectKey.get(project.workspaceId + project.name);
@@ -180,7 +180,7 @@ class CodenvyFactory {
   /**
    * Get the factory from factoryMap by factoryId
    * @param factoryId the factory ID
-   * @returns {factory}
+   * @returns factory
    */
   getFactoryById(factoryId) {
     return this.factoriesById.get(factoryId);

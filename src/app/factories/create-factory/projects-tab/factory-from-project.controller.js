@@ -62,6 +62,7 @@ class FactoryFromProjectCtrl {
    * @param project is selected project
    */
   getFactoryContentFromProject(project) {
+    this.selectedProject = project;
     let factoryContent = this.codenvyAPI.getFactory().getFactoryContentFromProject(project);
     if (factoryContent) {
       this.factoryContent = this.$filter('json')(factoryContent, 2);
@@ -107,12 +108,26 @@ class FactoryFromProjectCtrl {
   /**
    * Get the workspace name by ID
    * @param workspaceId
-   * @returns {CodenvyWorkspaceReferenceBuilder.workspaceReference.name|*}
+   * @returns workspace name
    */
   getWorkspaceName(workspaceId) {
     return this.workspacesById.get(workspaceId).workspaceReference.name;
   }
 
+  /**
+   * Check workspace empty state
+   * @param workspaceId
+   * @param projects
+   * @returns empty state
+   */
+  isEmpty(workspaceId, projects) {
+    if (projects && projects.length > 0) {
+      return false;
+    }
+    this.filtersWorkspaceSelected[workspaceId] = false;
+    this.isAllWorkspaces = false;
+    return true;
+  }
 
 }
 

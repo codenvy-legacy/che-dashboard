@@ -16,13 +16,15 @@ import CreateFactoryCtrl from '../create-factory/create-factory.controller';
 
 import FactoryFromProjectCtrl from '../create-factory/projects-tab/factory-from-project.controller';
 import FactoryFromProject from '../create-factory/projects-tab/factory-from-project.directive';
-
+import FactoryFromTemplate from '../create-factory/template-tab/factory-from-template.directive';
 
 class CreateFactoryConfig {
 
   constructor(register) {
 
     register.controller('CreateFactoryCtrl', CreateFactoryCtrl);
+
+    register.directive('cdvyFactoryFromTemplate', FactoryFromTemplate);
 
     register.controller('FactoryFromProjectCtrl', FactoryFromProjectCtrl);
     register.directive('cdvyFactoryFromProject', FactoryFromProject);

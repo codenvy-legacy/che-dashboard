@@ -21,25 +21,32 @@ class FactoryConfigurationCtrl {
    * @ngInject for Dependency injection
    */
   constructor($route, $scope, $filter, codenvyAPI, codenvyNotification) {
-    this.$scope = $scope;
+    this.$filter = $filter;
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
 
-    $scope.factoryId = $route.current.params.id;
+    this.factoryId = $route.current.params.id;
+
+    var ctrl = this;
 
     $scope.$watch('factoryConfigurationCtrl.factory.originFactory', function (newOriginFactory) {
       if (!newOriginFactory) {
         return;
       }
-
-      let originFactory = angular.copy(newOriginFactory);
-
-      if (originFactory.links) {
-        // remove links for display (links are automatically generated so no need to display them)
-        delete originFactory.links;
-      }
-      $scope.factoryContent = $filter('json')(originFactory, 2);
+      ctrl.updateFactoryContent(newOriginFactory);
     });
+  }
+
+  //Update the factory content from origin factory.
+  updateFactoryContent(originFactory) {
+    let copyOriginFactory = angular.copy(originFactory);
+
+    if (copyOriginFactory.links) {
+      // remove links for display (links are automatically generated so no need to display them)
+      delete copyOriginFactory.links;
+    }
+    this.originFactoryContent = copyOriginFactory;
+    this.factoryContent = this.$filter('json')(this.originFactoryContent, 2);
   }
 
   //Update the factory information by factory Id.
@@ -47,6 +54,9 @@ class FactoryConfigurationCtrl {
     let promise = this.codenvyAPI.getFactory().fetchFactory(factoryId);
 
     promise.then((factory) => {
+      if (factory.originFactory) {
+        this.updateFactoryContent(factory.originFactory);
+      }
       this.factory = factory;
       this.codenvyNotification.showInfo('Factory information successfully updated.');
     }, (error) => {
@@ -63,6 +73,7 @@ class FactoryConfigurationCtrl {
       this.factory = factory;
       this.codenvyNotification.showInfo('Factory information successfully updated.');
     }, (error) => {
+      this.factoryContent = this.$filter('json')(this.originFactoryContent, 2);
       this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
       console.log('error', error);
     });

@@ -43,20 +43,20 @@
             <span class="cdvy-tab-label-title">Template</span>
           </md-tab-label>
           <md-tab-body>
-            <p style="padding:25px; font-size: 18px;">Test 'Template' tab</p>
+            <cdvy-factory-from-template cdvy-factory-content="createFactoryCtrl.factoryContent"
+                                        cdvy-is-importing="createFactoryCtrl.isImporting"></cdvy-factory-from-template>
           </md-tab-body>
         </md-tab>
       </md-tabs>
     </cdvy-panel>
 
 
-    <cdvy-panel cdvy-title="Factory Configuration">
+    <cdvy-panel cdvy-title="Factory Configuration" ng-class="{ 'disabled-state': !createFactoryCtrl.factoryContent }">
       <div class="factory-configuration-panel">
         <md-content layout="column" layout-fill>
           <div class="json-editor" ng-if="createFactoryCtrl.factoryContent">
             <textarea ui-codemirror ng-model="createFactoryCtrl.factoryContent"></textarea>
           </div>
-          <p ng-if="!createFactoryCtrl.factoryContent">No content found</p>
         </md-content>
         <a href="http://docs.codenvy.com/user/factories/#configuration-reference" target="_blank">Factory reference documentation</a>
       </div>
