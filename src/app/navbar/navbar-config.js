@@ -16,16 +16,20 @@ import NavBarSelected from '../navbar/navbar-selected.directive.js';
 import UdBetaWidget from '../navbar/ud-beta-widget.directive.js';
 import HelpCtrl from '../navbar/help/help.controller.js';
 import HelpWidget from '../navbar/help/help.directive.js';
+import LogoutCtrl from '../navbar/logout/logout.controller.js';
+import LogoutWidget from '../navbar/logout/logout.directive.js';
 
 class NavbarConfig {
 
   constructor(register) {
     register.controller('NavbarCtrl', NavBarCtrl);
     register.controller('HelpCtrl', HelpCtrl);
+    register.controller('LogoutCtrl', LogoutCtrl);
     register.directive('cdvyNavBar', NavBar);
     register.directive('navBarSelected', NavBarSelected);
     register.directive('udBetaWidget', UdBetaWidget);
     register.directive('helpWidget', HelpWidget);
+    register.directive('logoutWidget', LogoutWidget);
   }
 }
 

@@ -109,7 +109,17 @@
 
       <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
 
-      <help-widget></help-widget>
+      <div class="help-menu" ng-show="navbarCtrl.isSimpleUser()">
+        <section class="left-sidebar-menu" layout="column" layout-align="center center">
+          <md-list layout="row" >
+            <md-list-item>
+              <help-widget></help-widget>
+              <logout-widget></logout-widget>
+            </md-list-item>
+          </md-list>
+        </section>
+      </div>
+
 
     </div>
   </md-toolbar>
