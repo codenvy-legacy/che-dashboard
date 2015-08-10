@@ -14,14 +14,14 @@
 var DEV = true;
 
 // init module
-let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute',
+let initModule = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute',
   'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter',
   'ngDropdowns', 'ui.gravatar', 'ngLodash', 'braintree-angular', 'angularCharts', 'ngPasswordStrength', 'ngClipboard',
   'gavruk.card']);
 
 
 // add a global resolve flag on all routes (user needs to be resolved first)
-module.config(['$routeProvider', function ($routeProvider) {
+initModule.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.accessWhen = function(path, route) {
     route.resolve || (route.resolve = {});
     route.resolve.app = ['codenvyUser', function (codenvyUser) {
@@ -112,17 +112,17 @@ new OnBoardConfig(instanceRegister);
 
 
 // and setup controllers
-module.controller('DashboardCtrl', DashboardCtrl)
+initModule.controller('DashboardCtrl', DashboardCtrl)
   .controller('LoginCtrl', LoginCtrl);
 
 if (DEV) {
-  module.controller('DemoComponentsCtrl', DemoComponentsCtrl)
+  initModule.controller('DemoComponentsCtrl', DemoComponentsCtrl)
         .controller('ResetServerPropsCtrl', ResetServerPropsCtrl);
 }
 
 
 // config routes
-module.config(['$routeProvider', function ($routeProvider) {
+initModule.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
 /*    .accessWhen('/', {
       templateUrl: 'app/dashboard/dashboard.html',
@@ -197,7 +197,7 @@ class CheckLogin {
 /**
  * Setup route redirect module
  */
-module.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', function ($rootScope, $location, routingRedirect, codenvyUser, $timeout) {
+initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', function ($rootScope, $location, routingRedirect, codenvyUser, $timeout) {
 
   $rootScope.waitingLoaded = false;
 
@@ -234,15 +234,15 @@ module.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeo
 
 // ask to add onboarding flow when we're on prod
 if (!DEV) {
-  module.run(function (onBoardRedirect) { // jshint ignore:line
+  initModule.run(function (onBoardRedirect) { // jshint ignore:line
 
   });
-  module.run(function (onPremiseOnBoardingRedirect) { // jshint ignore:line
+  initModule.run(function (onPremiseOnBoardingRedirect) { // jshint ignore:line
   });
 }
 
 // add interceptors
-module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $log) {
+initModule.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $log) {
   return {
     request: function(config) {
       //remove prefix url
@@ -276,7 +276,7 @@ module.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $l
 });
 
 // add interceptors
-module.factory('ETagInterceptor', function ($window, $cookies, $q) {
+initModule.factory('ETagInterceptor', function ($window, $cookies, $q) {
 
   var etagMap = {};
 
@@ -317,7 +317,7 @@ module.factory('ETagInterceptor', function ($window, $cookies, $q) {
 
 
 // add interceptors
-module.factory('LogInterceptor', function ($q) {
+initModule.factory('LogInterceptor', function ($q) {
 
 
   return {
@@ -333,7 +333,7 @@ module.factory('LogInterceptor', function ($q) {
 });
 
 
-module.config(function($mdThemingProvider, jsonColors) {
+initModule.config(function($mdThemingProvider, jsonColors) {
 
   var codenvyColors = angular.fromJson(jsonColors);
   var getColor = function(key) {
@@ -453,11 +453,11 @@ module.config(function($mdThemingProvider, jsonColors) {
 
 });
 
-module.constant('userDashboardConfig', {
+initModule.constant('userDashboardConfig', {
   developmentMode: DEV
 });
 
-module.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+initModule.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
   if (DEV) {
     $httpProvider.interceptors.push('AuthInterceptor');
