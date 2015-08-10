@@ -11,6 +11,7 @@
 'use strict';
 
 import DeleteFactory from '../information-tab/delete-factory/delete-factory.directive';
+import FactoryInformationCtrl from '../information-tab/factory-information/factory-information.controller';
 import FactoryInformation from '../information-tab/factory-information/factory-information.directive';
 import FactoryRoutingCtrl from '../information-tab/factory-routing/factory-routing.controller';
 import FactoryRouting from '../information-tab/factory-routing/factory-routing.directive';
@@ -22,6 +23,7 @@ class InformationTabConfig {
     register.directive('cdvyDeleteFactory', DeleteFactory);
 
     register.directive('cdvyFactoryInformation', FactoryInformation);
+    register.controller('FactoryInformationCtrl', FactoryInformationCtrl);
 
     register.controller('FactoryRoutingCtrl', FactoryRoutingCtrl);
     register.directive('cdvyFactoryRouting', FactoryRouting);

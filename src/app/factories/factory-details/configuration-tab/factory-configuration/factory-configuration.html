@@ -26,7 +26,8 @@
                                  ng-click="factoryConfigurationCtrl.updateFactory(factoryConfigurationCtrl.factoryId)"/>
           </span>
           <span>
-            <cdvy-button-primary cdvy-button-title="Update"
+            <cdvy-button-primary ng-disabled="factoryConfigurationCtrl.factoryContent === factoryConfigurationCtrl.$filter('json')(factoryConfigurationCtrl.originFactoryContent, 2);"
+                                 cdvy-button-title="Update"
                                  cdvy-event-logger="factory-details/information-tab/delete-factory"
                                  ng-click="factoryConfigurationCtrl.setFactoryContent(factoryConfigurationCtrl.factoryId, factoryConfigurationCtrl.factoryContent)"/>
           </span>

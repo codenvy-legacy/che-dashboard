@@ -133,10 +133,22 @@ class CodenvyFactory {
 
     let promise = this.remoteFactoryAPI.get({factoryId: factoryId}).$promise;
     promise.then((tmpFactory) => {
+      if (!tmpFactory) {
+        deferred.resolve(tmpFactory);
+        return;
+      }
 
       let seeLink = this.lodash.find(tmpFactory.links, function (link) {
         if (link.rel === 'create-project') return link;
       });
+
+      //set default fields
+      if (!tmpFactory.project || !tmpFactory.project.name) {
+        if (!tmpFactory.project) {
+          tmpFactory.project = {};
+        }
+        tmpFactory.project.name = "";
+      }
 
       let factory = {
         originFactory: tmpFactory,

@@ -26,6 +26,11 @@ class FactoryInformation {
     this.templateUrl = 'app/factories/factory-details/information-tab/factory-information/factory-information.html';
     this.replace = false;
 
+    this.controller = 'FactoryInformationCtrl';
+    this.controllerAs = 'factoryInformationCtrl';
+
+    this.bindToController = true;
+
     // scope values
     this.scope = {
       factory: '=cdvyFactory'
