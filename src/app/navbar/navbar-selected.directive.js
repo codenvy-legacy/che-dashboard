@@ -26,19 +26,25 @@ class NavBarSelected {
     this.$rootScope = $rootScope;
     this.restrict = 'A';
     this.replace = false;
+    this.controller = 'NavBarSelectedCtrl';
+    this.controllerAs = 'navBarSelectedCtrl';
+    this.bindToController = true;
   }
 
 
   /**
    * Monitor click
    */
-  link($scope, element) {
+  link($scope, element, attrs, controller) {
     element.bind('click', () => {
 
       // if there is a previous selected element, unselect it
       if (this.$rootScope.selectedNavBarElement) {
         this.$rootScope.selectedNavBarElement.removeClass('cdvy-navbar-selected');
       }
+
+      controller.close();
+
       // select the new element
       this.$rootScope.selectedNavBarElement = element;
       // add the class
