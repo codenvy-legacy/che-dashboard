@@ -11,7 +11,7 @@
 'use strict';
 /*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
  CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
- CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn */
+ CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyAnalyticsSession */
 
 
 import Register from '../utils/register';
@@ -33,6 +33,7 @@ import CodenvyProjectTemplate from './codenvy-project-template.factory';
 import CodenvyWebsocket from './codenvy-websocket.factory';
 import CodenvyGit from './codenvy-git.factory';
 import CodenvySvn from './codenvy-svn.factory';
+import CodenvyAnalyticsSession from './codenvy-analytics-session.factory';
 
 /**
  * This class is providing the entry point for accessing to Codenvy API
@@ -46,7 +47,7 @@ class CodenvyAPI {
    * @ngInject for Dependency injection
    */
   constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
-              codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn) {
+              codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyAnalyticsSession) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
@@ -61,6 +62,7 @@ class CodenvyAPI {
     this.codenvyWebsocket = codenvyWebsocket;
     this.codenvyGit = codenvyGit;
     this.codenvySvn = codenvySvn;
+    this.codenvyAnalyticsSession = codenvyAnalyticsSession;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);

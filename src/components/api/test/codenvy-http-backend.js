@@ -87,6 +87,7 @@ class CodenvyHttpBackend {
       this.httpBackend.when('GET', '/api/project/' + key.workspaceId + '/permissions/' + key.projectName).respond(this.projectPermissionsMap.get(key));
     }
 
+    this.httpBackend.when('POST', '/api/analytics/log/session-usage').respond();
 
   }
 
