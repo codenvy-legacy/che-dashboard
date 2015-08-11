@@ -25,7 +25,7 @@
           <md-tab-body>
             <cdvy-factory-from-project cdvy-factory-content="createFactoryCtrl.factoryContent"
                                        cdvy-is-loading="createFactoryCtrl.isLoading"
-                                       cdvy-is-importing="createFactoryCtrl.isImporting"></cdvy-factory-from-project>
+                                       cdvy-is-importing="createFactoryCtrl.isImporting"/>
           </md-tab-body>
         </md-tab>
         <md-tab>
@@ -34,7 +34,8 @@
             <span class="cdvy-tab-label-title">Config File</span>
           </md-tab-label>
           <md-tab-body>
-            <p style="padding:25px; font-size: 18px;">Test 'Config File' tab</p>
+            <cdvy-factory-from-file cdvy-factory-content="createFactoryCtrl.factoryContent"
+                                    cdvy-is-importing="createFactoryCtrl.isImporting"/>
           </md-tab-body>
         </md-tab>
         <md-tab>
@@ -44,13 +45,11 @@
           </md-tab-label>
           <md-tab-body>
             <cdvy-factory-from-template cdvy-factory-content="createFactoryCtrl.factoryContent"
-                                        cdvy-is-importing="createFactoryCtrl.isImporting"></cdvy-factory-from-template>
+                                        cdvy-is-importing="createFactoryCtrl.isImporting"/>
           </md-tab-body>
         </md-tab>
       </md-tabs>
     </cdvy-panel>
-
-
     <cdvy-panel cdvy-title="Factory Configuration" ng-class="{ 'disabled-state': !createFactoryCtrl.factoryContent }">
       <div class="factory-configuration-panel">
         <md-content layout="column" layout-fill>
@@ -61,18 +60,14 @@
         <a href="http://docs.codenvy.com/user/factories/#configuration-reference" target="_blank">Factory reference documentation</a>
       </div>
     </cdvy-panel>
-
-
     <div ng-show="createFactoryCtrl.isImporting" layout="column" layout-align="center center">
-      <md-progress-circular class="md-hue-2" md-mode="indeterminate" md-theme="default"></md-progress-circular>
+      <md-progress-circular class="md-hue-2" md-mode="indeterminate" md-theme="default"/>
       <span>{{createFactoryCtrl.importingData}}</span>
     </div>
-
     <cdvy-button-primary id="create-project-button-import"
                          cdvy-button-title="Create Factory"
                          ng-click="createFactoryCtrl.createFactoryByContent(createFactoryCtrl.factoryContent)"
                          ng-disabled="!createFactoryCtrl.factoryContent || createFactoryCtrl.isImporting || createFactoryCtrl.isLoading"
-                         class="projects-create-project-button"
-      ></cdvy-button-primary>
+                         class="projects-create-project-button"/>
   </div>
 </md-content>

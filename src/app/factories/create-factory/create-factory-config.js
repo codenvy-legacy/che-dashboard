@@ -13,9 +13,10 @@
 
 import CreateFactoryCtrl from '../create-factory/create-factory.controller';
 
-
 import FactoryFromProjectCtrl from '../create-factory/projects-tab/factory-from-project.controller';
 import FactoryFromProject from '../create-factory/projects-tab/factory-from-project.directive';
+import FactoryFromFileCtrl from '../create-factory/config-file-tab/factory-from-file.controller';
+import FactoryFromFile from '../create-factory/config-file-tab/factory-from-file.directive';
 import FactoryFromTemplate from '../create-factory/template-tab/factory-from-template.directive';
 
 class CreateFactoryConfig {
@@ -24,10 +25,13 @@ class CreateFactoryConfig {
 
     register.controller('CreateFactoryCtrl', CreateFactoryCtrl);
 
-    register.directive('cdvyFactoryFromTemplate', FactoryFromTemplate);
-
     register.controller('FactoryFromProjectCtrl', FactoryFromProjectCtrl);
     register.directive('cdvyFactoryFromProject', FactoryFromProject);
+
+    register.controller('FactoryFromFileCtrl', FactoryFromFileCtrl);
+    register.directive('cdvyFactoryFromFile', FactoryFromFile);
+
+    register.directive('cdvyFactoryFromTemplate', FactoryFromTemplate);
 
     // config routes
     register.app.config(function ($routeProvider) {

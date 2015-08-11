@@ -1,0 +1,24 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<div class="factory-from-file" layout="row" flex layout-align="start center">
+  <label flex="15">File: </label>
+
+  <div layout="row" flex="85">
+    <button ng-disabled="factoryFromFileCtrl.uploader.queue.length > 0 || factoryFromFileCtrl.uploader.isUploading" tabindex="0"
+            md-theme="default" ng-click="clickUpload()"
+            class="md-accent md-raised md-hue-2 md-button md-default-theme">
+      <span class="ng-scope">Upload file</span>
+    </button>
+    <input type="file" accept="application/json" uploader="factoryFromFileCtrl.uploader" nv-file-select/>
+  </div>
+</div>
