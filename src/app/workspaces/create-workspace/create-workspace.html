@@ -1,0 +1,64 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar cdvy-title="New Workspace"></cdvy-toolbar>
+
+<md-content md-scroll-y flex md-theme="maincontent-theme">
+  <ng-form name="workspaceInformationForm">
+    <cdvy-panel cdvy-title="Workspace Information">
+      <cdvy-input cdvy-form="workspaceInformationForm"
+                  cdvy-name="name"
+                  cdvy-label-name="Name"
+                  cdvy-place-holder="Name of the workspace"
+                  ng-model="createWorkspaceCtrl.workspace.name"
+                  required
+                  ng-minlength="3"
+                  ng-maxlength="20"
+                  ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+        <div ng-message="required">A name is required.</div>
+        <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
+        <div ng-message="minlength">The name has to be more then 3 characters long.</div>
+        <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
+      </cdvy-input>
+      <div class="create-workspace-input-with-description" layout="column">
+        <cdvy-input cdvy-form="workspaceInformationForm"
+                    cdvy-name="ram"
+                    cdvy-label-name="RAM Allocated"
+                    cdvy-place-holder="No RAM allocated"
+                    ng-model="createWorkspaceCtrl.workspace.ram"
+                    ng-pattern="/^(?:\d{0,10})$/">
+        </cdvy-input>
+        <div class="create-workspace-description">MB value</div>
+      </div>
+
+      <cdvy-label-container cdvy-label-name="Account" class="create-workspace-space-top" ng-if="createWorkspaceCtrl.accounts > 1">
+        <md-select class="create-workspace-select"
+                   placeholder="Select an account"
+                   ng-model="createWorkspaceCtrl.account">
+          <md-option ng-repeat="account in createWorkspaceCtrl.accounts" ng-value="account">{{account.name}}</md-option>
+        </md-select>
+      </cdvy-label-container>
+    </cdvy-panel>
+  </ng-form>
+
+  <cdvy-panel cdvy-title="Developers">
+    <workspace-details-members class="create-workspace-members" ng-controller="CreateWorkspaceAddMemberCtrl as workspaceMembersCtrl"
+                               ng-init="workspaceMembersCtrl.members = createWorkspaceCtrl.members"></workspace-details-members>
+  </cdvy-panel>
+  <cdvy-button-primary id="create-project-button-import"
+                       cdvy-button-title="Create Workspace"
+                       ng-click="createWorkspaceCtrl.createWorkspace()"
+                       ng-disabled="workspaceInformationForm.$invalid">
+  </cdvy-button-primary>
+
+</md-content>
+

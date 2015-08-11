@@ -57,6 +57,7 @@ class CodenvyWorkspace {
         deleteMember: {method: 'DELETE', url: '/api/workspace/:workspaceId/members/:userId'},
         getMembers: {method: 'GET', url: '/api/workspace/:workspaceId/members', isArray: true},
         getRAM: {method: 'GET', url: 'api/runner/:workspaceId/resources'},
+        create: {method: 'POST', url: '/api/workspace'},
         delete: {method: 'DELETE', url: '/api/workspace/:workspaceId'},
         update: {method: 'POST', url : '/api/workspace/:workspaceId'}
       }
@@ -148,6 +149,13 @@ class CodenvyWorkspace {
     });
 
     return defer.promise;
+  }
+
+  createWorkspace(accountId, workspaceName) {
+    let data = {accountId: accountId, name: workspaceName};
+
+    let promise = this.remoteWorkspaceAPI.create(data).$promise;
+    return promise;
   }
 
   /**

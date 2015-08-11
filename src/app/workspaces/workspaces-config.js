@@ -13,6 +13,8 @@
 
 import ListWorkspacesCtrl from './list-workspaces/list-workspaces.controller';
 import CodenvyWorkspaceItem from './list-workspaces/workspace-item/workspace-item.directive';
+import CreateWorkspaceCtrl from './create-workspace/create-workspace.controller';
+import CreateWorkspaceAddMemberCtrl from './create-workspace/create-workspace-add-member.controller';
 import UsageChart from './list-workspaces/workspace-item/usage-chart.directive';
 import WorkspaceItemCtrl from './list-workspaces/workspace-item/workspace-item.controller';
 import WorkspaceDetailsCtrl from './workspace-details/workspace-details.controller';
@@ -34,6 +36,9 @@ class WorkspacesConfig {
 
   constructor(register) {
     register.controller('ListWorkspacesCtrl', ListWorkspacesCtrl);
+    register.controller('CreateWorkspaceCtrl', CreateWorkspaceCtrl);
+    register.controller('CreateWorkspaceAddMemberCtrl', CreateWorkspaceAddMemberCtrl);
+
     register.directive('cdvyWorkspaceItem', CodenvyWorkspaceItem);
     register.controller('WorkspaceItemCtrl', WorkspaceItemCtrl);
     register.directive('usageChart', UsageChart);
@@ -56,13 +61,17 @@ class WorkspacesConfig {
         templateUrl: 'app/workspaces/list-workspaces/list-workspaces.html',
         controller: 'ListWorkspacesCtrl',
         controllerAs: 'listWorkspacesCtrl'
-      }).
-        accessWhen('/workspace/:workspaceId', {
+      })
+      .accessWhen('/workspace/:workspaceId', {
           templateUrl: 'app/workspaces/workspace-details/workspace-details.html',
           controller: 'WorkspaceDetailsCtrl',
           controllerAs: 'workspaceDetailsCtrl'
         })
-      ;
+      .accessWhen('/create-workspace', {
+          templateUrl: 'app/workspaces/create-workspace/create-workspace.html',
+          controller: 'CreateWorkspaceCtrl',
+          controllerAs: 'createWorkspaceCtrl'
+        });
     });
   }
 }

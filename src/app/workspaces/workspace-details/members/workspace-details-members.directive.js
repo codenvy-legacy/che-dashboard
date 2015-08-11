@@ -33,10 +33,6 @@ class WorkspaceDetailsMembers {
   constructor () {
     this.restrict = 'E';
     this.templateUrl = 'app/workspaces/workspace-details/members/workspace-details-members.html';
-
-    this.controller = 'WorkspaceDetailsMembersCtrl';
-    this.controllerAs = 'workspaceDetailsMembersCtrl';
-    this.bindToController = true;
   }
 
 }

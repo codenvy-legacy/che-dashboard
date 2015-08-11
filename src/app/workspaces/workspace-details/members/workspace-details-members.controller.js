@@ -143,8 +143,6 @@ class WorkspaceDetailsMembersCtrl {
     }, (error) => {
       this.codenvyNotification.showError(error.data.message !== null ? error.data.message : '.');
     });
-
-
   }
 
   addMember(userId, roles) {
