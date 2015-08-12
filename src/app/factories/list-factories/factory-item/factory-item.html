@@ -21,7 +21,7 @@
          ng-click="redirectToFactoryDetails()">
       <div class="factory-name  codenvy-hover">
         <span ng-if="factory.originFactory.project.name || factory.originFactory.project.description">
-          <b>{{factory.originFactory.project.name}}</b> {{factory.originFactory.project.description}}
+          {{factory.originFactory.project.name}}<span class="factory-details">{{factory.originFactory.project.description}}</span>
         </span>
         <span ng-if="!factory.originFactory.project.name && !factory.originFactory.project.description">
           {{factory.originFactory.source.project.location}}
