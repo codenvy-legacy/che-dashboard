@@ -24,13 +24,17 @@ class CodenvyFactoryItem {
 
     // scope values
     this.scope = {
-      factory: '=cdvyFactory'
+      factory: '=cdvyFactory',
+      isChecked: '=cdvyChecked'
     };
     this.templateUrl = 'app/factories/list-factories/factory-item/factory-item.html';
 
     this.controller = function ($scope, $location) {
       $scope.redirectToFactoryDetails = function () {
         $location.path('/factory/' + $scope.factory.originFactory.id);
+      };
+      $scope.setChecked = function (isChecked) {
+        $scope.isChecked = isChecked ? true : false;
       };
     };
   }

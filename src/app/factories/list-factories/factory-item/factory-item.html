@@ -13,9 +13,13 @@
 <cdvy-list-item flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
   <div layout-gt-sm="row" flex="100" layout-align="start center" class="factory-list-row">
     <div class="factory-list-static-icon" layout-align="center center">
-      <cdvy-list-item-checked cdvy-icon="cdvyfont cdvyico-type-{{factory.originFactory.project.type}} cdvyico-type-blank"
-                              class="factory-type-icon"
-                              cdvy-aria-label-checkbox="Factory {{factory.originFactory.project.name}}"></cdvy-list-item-checked>
+      <div layout="row" layout-align="center center" class="cdvy-list-item-checkbox-main factory-type-icon">
+        <md-checkbox type="checkbox"
+                     ng-model="bindVal"
+                     ng-change="setChecked(bindVal)"
+                     class="cdvy-list-item-checkbox"></md-checkbox>
+        <md-icon md-font-icon="cdvyfont cdvyico-type-{{factory.originFactory.project.type}} cdvyico-type-blank"></md-icon>
+      </div>
     </div>
     <div flex="50" layout="column" layout-align-gt="start center" layout-align-md="start center" layout-align-sm="center center"
          ng-click="redirectToFactoryDetails()">
