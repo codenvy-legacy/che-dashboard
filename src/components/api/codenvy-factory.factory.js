@@ -41,8 +41,11 @@ class CodenvyFactory {
       put: {method: 'PUT', url: '/api/factory/:factoryId'},
       getFactoryContentFromProject: {method: 'GET', url: '/api/factory/:workspaceId/:projectPath'},
       createFactoryByContent: {
-        method: 'POST', url: '/api/factory', isArray: false,
-        headers: {'Content-Type': undefined}, transformRequest: angular.identity
+        method: 'POST',
+        url: '/api/factory',
+        isArray: false,
+        headers: {'Content-Type': undefined},
+        transformRequest: angular.identity
       }
     });
 
@@ -101,7 +104,7 @@ class CodenvyFactory {
   createFactoryByContent(factoryContent) {
 
     var formDataObject = new FormData();
-    formDataObject.append("factoryUrl", factoryContent);
+    formDataObject.append('factoryUrl', factoryContent);
 
     return this.remoteFactoryAPI.createFactoryByContent({}, formDataObject).$promise;
   }
@@ -139,7 +142,9 @@ class CodenvyFactory {
       }
 
       let seeLink = this.lodash.find(tmpFactory.links, function (link) {
-        if (link.rel === 'create-project') return link;
+        if (link.rel === 'create-project') {
+          return link;
+        }
       });
 
       //set default fields
@@ -147,7 +152,7 @@ class CodenvyFactory {
         if (!tmpFactory.project) {
           tmpFactory.project = {};
         }
-        tmpFactory.project.name = "";
+        tmpFactory.project.name = '';
       }
 
       let factory = {
@@ -223,7 +228,7 @@ class CodenvyFactory {
         });
 
       } else {
-        this.fetchFactory(originFactory.id)
+        this.fetchFactory(originFactory.id);
       }
       deferred.resolve();
     }, (error) => {

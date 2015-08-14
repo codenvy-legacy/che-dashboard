@@ -49,7 +49,7 @@ class FactoryFromTemplate {
           console.log('error', error);
         });
 
-      }
+      };
     };
 
     // scope values

@@ -68,7 +68,7 @@ class ListFactoriesCtrl {
    */
   dropDownSelected(selected) {
     if (selected.orderBy) {
-      this.factoriesOrderBy = this.factoriesOrderBy === selected.orderBy ? "-" + selected.orderBy : selected.orderBy;
+      this.factoriesOrderBy = this.factoriesOrderBy === selected.orderBy ? '-' + selected.orderBy : selected.orderBy;
     }
   }
 

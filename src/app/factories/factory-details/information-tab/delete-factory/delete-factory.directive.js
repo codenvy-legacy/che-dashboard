@@ -46,7 +46,7 @@ class DeleteFactory {
             console.log('error', error);
           });
         });
-      }
+      };
     };
 
     // scope values

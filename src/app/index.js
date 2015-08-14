@@ -17,7 +17,7 @@ var DEV = true;
 let initModule = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute',
   'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter',
   'ngDropdowns', 'ui.gravatar', 'ngLodash', 'braintree-angular', 'angularCharts', 'ngPasswordStrength', 'ngClipboard',
-  'gavruk.card', 'uuid4','angularFileUpload']);
+  'gavruk.card', 'uuid4', 'angularFileUpload']);
 
 
 // add a global resolve flag on all routes (user needs to be resolved first)

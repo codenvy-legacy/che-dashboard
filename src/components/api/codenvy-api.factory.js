@@ -11,7 +11,7 @@
 'use strict';
 /*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
  CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
- CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, codenvyFactoryTemplate, CodenvyAnalyticsSession */
+ CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession */
 
 
 import Register from '../utils/register';
@@ -125,7 +125,7 @@ class CodenvyAPI {
 
   /**
    * The Codenvy Factory Template API
-   * @returns {codenvyFactoryTemplate|*}
+   * @returns {CodenvyFactoryTemplate|*}
    */
   getFactoryTemplate() {
     return this.codenvyFactoryTemplate;

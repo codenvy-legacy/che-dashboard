@@ -28,12 +28,10 @@ class CodenvyAnalytics {
     // remote call
     this.remoteAnalytisAPI = this.$resource('/api/analytics/log/',{}, {
       log: {method: 'POST', url: '/api/analytics/log/dashboard-usage'},
-      factory_used: {method: 'GET', url: 'api/analytics/metric/factory_used?factory=:factoryUrl'},
+      factory_used: {method: 'GET', url: 'api/analytics/public-metric/factory_used?factory=:factoryUrl'},
       sessionUsage: {method: 'POST', url: '/api/analytics/log/session-usage'}
     });
-
-
-
+    
   }
 
   logAction(action) {

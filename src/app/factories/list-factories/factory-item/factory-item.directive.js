@@ -31,7 +31,7 @@ class CodenvyFactoryItem {
     this.controller = function ($scope, $location) {
       $scope.redirectToFactoryDetails = function () {
         $location.path('/factory/' + $scope.factory.originFactory.id);
-      }
+      };
     };
   }
 

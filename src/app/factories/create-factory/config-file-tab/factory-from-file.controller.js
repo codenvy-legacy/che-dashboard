@@ -20,7 +20,7 @@ class FactoryFromFileCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($scope, $filter, codenvyAPI, codenvyNotification, FileUploader) {
+  constructor($filter, codenvyAPI, codenvyNotification, FileUploader) {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
 
@@ -86,7 +86,7 @@ class FactoryFromFileCtrl {
       reader.onerror = function (error) {
         ctrl.codenvyNotification.showError(error.data.message ? error.data.message : 'Error reading file.');
         console.log('Error reading file');
-      }
+      };
     };
 
     this.factoryContent = null;

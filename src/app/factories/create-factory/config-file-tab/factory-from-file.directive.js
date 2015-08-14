@@ -34,7 +34,7 @@ class FactoryFromFile {
     // scope values
     this.scope = {
       isImporting: '=cdvyIsImporting',
-      factoryContent: "=cdvyFactoryContent"
+      factoryContent: '=cdvyFactoryContent'
     };
   }
 
