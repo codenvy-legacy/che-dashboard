@@ -30,16 +30,6 @@ class CreateWorkspaceAddMemberCtrl {
     this.codenvyNotification = codenvyNotification;
   }
 
-  getRole(roles) {
-    let str = '';
-
-    roles.forEach((role) => {
-      str += role.replace('workspace/', ' ');
-    });
-
-    return str;
-  }
-
   widthGtSm() {
     return this.$mdMedia('gt-sm');
   }
@@ -65,15 +55,12 @@ class CreateWorkspaceAddMemberCtrl {
    * @param userEmailToAdd the user to add
    * @param permissionsToSet the roles to add
    */
-  callbackMemberAdd(email, role) {
+  callbackMemberAdd(email, roles) {
     let isAlreadyAdded = this.isAlreadyAdded(email);
     if (isAlreadyAdded) {
       this.codenvyNotification.showInfo('You already have ' + email + ' in the list.');
       return;
     }
-
-    let roles = [];
-    roles.push(role);
 
     let user = this.codenvyAPI.getUser().getUserFromEmail(email);
     if (user) {
@@ -109,7 +96,7 @@ class CreateWorkspaceAddMemberCtrl {
 
   addMember(user, roles) {
     user.roles = roles;
-    user.role = this.getRole(roles);
+    user.role = this.codenvyAPI.getUser().getDisplayRole(roles);
     user.name = '';
     this.members.push(user);
   }

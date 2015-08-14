@@ -157,6 +157,19 @@ class CodenvyUser {
   }
 
 
+  /**
+   * Forms the string to display from list of roles.
+   * @returns {String}
+   */
+  getDisplayRole(roles) {
+    let str = '';
+
+    roles.forEach((role) => {
+      str += role.replace('workspace/', ' ');
+    });
+
+    return str;
+  }
 
 }
 

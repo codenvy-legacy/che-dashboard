@@ -47,7 +47,7 @@ class WorkspaceDetailsMembersCtrl {
     var promises = [];
 
     this.members.forEach((member) => {
-      member.role = this.getRole(member.roles);
+      member.role = this.codenvyAPI.getUser().getDisplayRole(member.roles);
 
       let user = this.codenvyAPI.getUser().getUserFromId(member.userId);
       if (user) {
@@ -93,16 +93,6 @@ class WorkspaceDetailsMembersCtrl {
     return firstName + ' ' + lastName;
   }
 
-  getRole(roles) {
-    let str = '';
-
-    roles.forEach((role) => {
-      str += role.replace('workspace/', ' ');
-    });
-
-    return str;
-  }
-
   widthGtSm() {
     return this.$mdMedia('gt-sm');
   }
@@ -128,10 +118,7 @@ class WorkspaceDetailsMembersCtrl {
    * @param userEmailToAdd the user to add
    * @param permissionsToSet the roles to add
    */
-  callbackMemberAdd(email, role) {
-    let roles = [];
-    roles.push(role);
-
+  callbackMemberAdd(email, roles) {
     let promiseGetUserByEmail = this.codenvyAPI.getUser().fetchUserEmail(email);
     promiseGetUserByEmail.then(() => {
       var user = this.codenvyAPI.getUser().getUserFromEmail(email);

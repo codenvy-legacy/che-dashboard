@@ -29,6 +29,7 @@ class WorkspaceDetailsMembersDialogAddCtrl {
     this.roles.push({name : 'Admin', id: 'workspace/admin'});
     this.roles.push({name : 'Developer', id: 'workspace/developer'});
     this.roles.push({name : 'Stakeholder', id: 'workspace/stakeholder'});
+    this.roles.push({name : 'Admin Developer', id: 'workspace/admin+developer'});
 
     this.userRole = this.roles[0].id;
   }
@@ -38,7 +39,15 @@ class WorkspaceDetailsMembersDialogAddCtrl {
    */
   add() {
     this.$mdDialog.hide();
-    this.callbackController.callbackMemberAdd(this.userEmail, this.userRole);
+    let roles = [];
+    if (this.userRole === 'workspace/admin+developer') {
+      roles.push('workspace/admin');
+      roles.push('workspace/developer');
+    } else {
+      roles.push(this.userRole);
+    }
+
+    this.callbackController.callbackMemberAdd(this.userEmail, roles);
   }
 
 
