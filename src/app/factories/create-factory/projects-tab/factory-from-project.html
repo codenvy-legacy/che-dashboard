@@ -1,0 +1,68 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<div class="factory-from-project-workspace-filter">
+  <div layout="row" layout-align="start center">
+    <div flex="20" layout="row" layout-align="start center">Filter workspaces:</div>
+    <div flex="80" layout="row" layout-align="start center" layout-wrap>
+      <md-checkbox ng-click="factoryFromProjectCtrl.setAllFiltersWorkspaces(!factoryFromProjectCtrl.isAllWorkspaces)"
+                   ng-model="factoryFromProjectCtrl.isAllWorkspaces"
+                   aria-label="All workspaces">All
+      </md-checkbox>
+    </div>
+  </div>
+  <div layout="row" layout-align="start center">
+    <div flex="20" layout="row" layout-align="center center"></div>
+    <div flex="80" layout="row" layout-align="start center" layout-wrap>
+      <div class="workspace-selector" ng-class="{ 'greyed': factoryFromProjectCtrl.isAllWorkspaces }"
+           ng-repeat="workspace in factoryFromProjectCtrl.workspaces">
+        <md-checkbox ng-change="factoryFromProjectCtrl.updateIsAllWorkspaces()"
+                     ng-model="factoryFromProjectCtrl.filtersWorkspaceSelected[workspace.workspaceReference.id]"
+                     aria-label="Workspace {{workspace.workspaceReference.name}}">{{workspace.workspaceReference.name}}
+        </md-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<md-content class="factory-from-project" flex>
+  <cdvy-search cdvy-placeholder="Search for projects"
+               ng-model="factoryFromProjectCtrl.projectFilter.name"></cdvy-search>
+  <div
+    ng-repeat="(workspaceId, projects) in factoryFromProjectCtrl.projectsPerWorkspace | listProjectWorkspaceFilter:factoryFromProjectCtrl.filtersWorkspaceSelected">
+    <cdvy-list-title ng-if="!factoryFromProjectCtrl.isEmpty(workspaceId, projects)" cdvy-icon="fa fa-folder">
+      <span class="projects-list-workspace-name">{{factoryFromProjectCtrl.getWorkspaceName(workspaceId)}}</span>
+                  <span ng-show="(projects | filter:factoryFromProjectCtrl.projectFilter).length == 0 && projects.length > 0"
+                        class="project-list-empty">- No projects found</span>
+    </cdvy-list-title>
+    <cdvy-list ng-show="(projects | filter:factoryFromProjectCtrl.projectFilter).length > 0">
+      <cdvy-list-item ng-repeat="project in projects | filter:factoryFromProjectCtrl.projectFilter"
+                      flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
+        <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row"
+             ng-class="{'cdvy-selecter-active' : project === factoryFromProjectCtrl.selectedProject}"
+             ng-click="factoryFromProjectCtrl.getFactoryContentFromProject(project)">
+          <div class="project-list-static-icon" layout-align="center center">
+            <div class="project-type-icon">
+              <md-icon md-font-icon="cdvyfont cdvyico-type-{{project.type}} cdvyico-type-blank"></md-icon>
+            </div>
+          </div>
+          <div flex layout="column"
+               layout-align-gt="start center"
+               layout-align-sm="center center">
+            <div class="project-name"><a class="codenvy-hover">{{project.name}}</a>
+            </div>
+            <div class="project-details">{{project.description}}</div>
+          </div>
+        </div>
+      </cdvy-list-item>
+    </cdvy-list>
+  </div>
+</md-content>

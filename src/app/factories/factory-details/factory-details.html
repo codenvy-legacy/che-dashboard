@@ -1,0 +1,55 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar cdvy-title="{{factoryDetailsCtrl.factory.originFactory.project.name}}"
+              cdvy-title-icons-controller="factoryDetailsCtrl"
+              cdvy-button-name="Open in IDE"
+              cdvy-button-href="{{factoryDetailsCtrl.factory.seeURL}}"
+              cdvy-button-href-target="_blank"
+              cdvy-breadcrumb-title="All factories"
+              cdvy-breadcrumb-href="#/factories">
+</cdvy-toolbar>
+<md-content layout="column" layout-fill class="factory-details ng-scope md-maincontent-theme-theme">
+  <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="selectedIndex" class="project-details-menu">
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-font-icon="material-design icon-ic_bookmark_24px" class="cdvy-tab-label-icon"></md-icon>
+        <span class="cdvy-tab-label-title">Information</span>
+      </md-tab-label>
+      <md-tab-body>
+        <cdvy-factory-information cdvy-factory="factoryDetailsCtrl.factory"></cdvy-factory-information>
+        <cdvy-factory-routing cdvy-factory="factoryDetailsCtrl.factory"></cdvy-factory-routing>
+        <cdvy-delete-factory cdvy-factory="factoryDetailsCtrl.factory"></cdvy-delete-factory>
+      </md-tab-body>
+    </md-tab>
+    <!--
+            <md-tab>
+              <md-tab-label>
+                <md-icon md-font-icon="material-design icon-ic_memory_24px" class="cdvy-tab-label-icon"></md-icon>
+                <span class="cdvy-tab-label-title">Resources</span>
+              </md-tab-label>
+              <md-tab-body>
+                <p style="padding:15px; font-size: 18px;">Test</p>
+              </md-tab-body>
+            </md-tab>
+    -->
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-font-icon="material-design icon-ic_settings_24px" class="cdvy-tab-label-icon"></md-icon>
+        <span class="cdvy-tab-label-title">Configuration</span>
+      </md-tab-label>
+      <md-tab-body>
+        <cdvy-factory-configuration cdvy-factory="factoryDetailsCtrl.factory"></cdvy-factory-configuration>
+      </md-tab-body>
+    </md-tab>
+  </md-tabs>
+</md-content>

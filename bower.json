@@ -31,10 +31,11 @@
     "ng-lodash": "~0.2.3",
     "ng-password-strength": "~0.1.0",
     "zeroclipboard": "~2.2.0",
-    "angular-tooltips": "~0.1.8",
-    "angular-uuid4": "~0.3.0"
+    "angular-uuid4": "~0.3.0",
+    "angular-file-upload": "~2.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+  },
   "resolutions": {
     "angular": "~1.4.3"
   },

@@ -80,17 +80,22 @@ class CodenvyProfile {
 
   /**
    * Gets the full name if it possible
-   * @return full name or blank
+   * @returns {string} full name
    */
-  getFullName() {
-    if(!this.profile.attributes){
-      this.fullName = '';
-    } else {
-      var firstName = !this.profile.attributes.firstName ? '': this.profile.attributes.firstName;
-      var lastName = !this.profile.attributes.lastName ? '': this.profile.attributes.lastName;
-      this.fullName = firstName + ' ' + lastName;
+  getFullName(attributes) {
+    if(!attributes) {
+      return '';
     }
-    return this.fullName;
+    let firstName = attributes.firstName;
+    if (!firstName) {
+      firstName = '';
+    }
+    let lastName = attributes.lastName;
+    if (!lastName) {
+      lastName = '';
+    }
+
+    return firstName + ' ' + lastName;
   }
 
   /**

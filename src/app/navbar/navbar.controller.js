@@ -16,7 +16,7 @@ class NavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($scope, $mdSidenav, userDashboardConfig, codenvyAPI, onBoarding) {
+  constructor($mdSidenav, userDashboardConfig, codenvyAPI, onBoarding) {
     this.mdSidenav = $mdSidenav;
     this.codenvyAPI = codenvyAPI;
     this.onBoarding = onBoarding;
@@ -31,14 +31,14 @@ class NavBarCtrl {
     });
 
     this.profile = codenvyAPI.getProfile().getProfile();
-    this.profile.$promise.then(() => this.updateData(),() => this.updateData());
-
-    this.fullName = '';
-    this.email = '';
-
+    if(this.profile.attributes){
+      this.updateData();
+    } else {
+      let promise = codenvyAPI.getProfile().fetchProfile();
+      promise.then(() => this.updateData(),() => this.updateData());
+    }
     this.onpremAdminExpanded = true;
     this.updated = false;
-
   }
 
   /**
@@ -46,11 +46,12 @@ class NavBarCtrl {
    */
   updateData() {
     this.updated = true;
-    if(!this.profile.attributes) {
+    let attributes = this.profile.attributes;
+    if(!attributes) {
       return;
     }
-    this.fullName = this.codenvyAPI.getProfile().getFullName();
-    this.email = this.profile.attributes.email;
+    this.fullName = this.codenvyAPI.getProfile().getFullName(attributes);
+    this.email = attributes.email;
   }
 
   updateAdminRole() {

@@ -33,7 +33,7 @@
                           ng-show="navbarCtrl.displayLoginItem">
               <md-button nav-bar-selected flex ng-href="#/login" layout-align="left">
                 <div class="navbar-item" layout="row" layout-align="start center">
-                  <i class="fa fa-user fa-lg icon">&nbsp;</i>
+                  <i class="fa fa-user icon">&nbsp;</i>
                   <span>Login</span>
                 </div>
               </md-button>
@@ -42,7 +42,7 @@
             <md-list-item flex class="navbar-subsection-item">
               <md-button nav-bar-selected flex ng-href="#/" layout-align="left">
                 <div class="navbar-item" layout="row" layout-align="start center">
-                  <i class="fa fa-th-large fa-lg icon">&nbsp;</i>
+                  <i class="fa fa-th-large icon">&nbsp;</i>
                   <span>Dashboard</span>
                 </div>
               </md-button>
@@ -50,21 +50,19 @@
             <md-list-item flex class="navbar-subsection-item">
               <md-button nav-bar-selected flex ng-href="#/projects" layout-align="left" cdvy-event-logger="projects">
                 <div class="navbar-item" layout="row" layout-align="start center">
-                  <i class="fa fa-folder-open fa-lg icon">&nbsp;</i>
+                  <i class="fa fa-folder-open icon">&nbsp;</i>
                   <span>Projects</span>
                 </div>
               </md-button>
             </md-list-item>
-            <!--
             <md-list-item flex class="navbar-subsection-item">
-              <md-button nav-bar-selected flex ng-href="#/factories" layout-align="left">
+              <md-button nav-bar-selected flex ng-href="#/factories" layout-align="left" cdvy-event-logger="factories">
                 <div class="navbar-item" layout="row" layout-align="start center">
-                  <i class="fa fa-tasks fa-lg icon">&nbsp;</i>
+                  <i class="cdvyfont cdvyico-rocket-cdvyfont icon">&nbsp;</i>
                   <span>Factories</span>
                 </div>
               </md-button>
             </md-list-item>
-            -->
           </md-list>
         </section>
       </div>
@@ -96,7 +94,9 @@
             </md-list-item>
             <md-list-item flex class="navbar-subsection-item">
               <md-button nav-bar-selected flex ng-href="#/billing" layout-align="left">
-                <div class="navbar-item" layout="row" layout-align="start center" cdvy-event-logger="billing-and-invoices">Billing and Invoices</div>
+                <div class="navbar-item" layout="row" layout-align="start center" cdvy-event-logger="billing-and-invoices">Billing and
+                  Invoices
+                </div>
               </md-button>
             </md-list-item>
           </md-list>
@@ -127,7 +127,6 @@
   <div class="navbar-beta-widget" ng-show="navbarCtrl.isSimpleUser()">
     <ud-beta-widget></ud-beta-widget>
   </div>
-
 
 
 </div>

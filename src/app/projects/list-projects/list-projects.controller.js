@@ -22,17 +22,17 @@ class ListProjectsCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI) {
+  constructor(codenvyAPI) {
     this.codenvyAPI = codenvyAPI;
     this.workspace = codenvyAPI.getWorkspace();
 
     this.state = 'loading';
 
     this.filtersWorkspaceSelected = {};
-    this.projectFilter = {name : ''};
+    this.projectFilter = {name: ''};
 
     // fetch workspaces when initializing
-    let promise = this.workspace.fetchWorkspaces();
+    let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
 
     promise.then(() => {
         this.updateData();
@@ -58,12 +58,12 @@ class ListProjectsCtrl {
 
     this.dropDownOptionsList = [
       /*{
-        name: 'Bulk Edit'
-      },*/ {
+       name: 'Bulk Edit'
+       },*/ {
         name: 'Filter Workspace', id: 'workspaceFilter'
       }/*, {
-        name: 'Favorited Projects'
-      }*/
+       name: 'Favorited Projects'
+       }*/
     ];
 
     // by default, the workspace filter is hidden
@@ -100,7 +100,7 @@ class ListProjectsCtrl {
   dropDownSelected(selected) {
     // hit the workspace filter
     if ('workspaceFilter' === selected.id) {
-        this.displayWorkspaceFilter = true;
+      this.displayWorkspaceFilter = true;
     }
   }
 

@@ -28,17 +28,28 @@ class CodenvyAnalytics {
     // remote call
     this.remoteAnalytisAPI = this.$resource('/api/analytics/log/',{}, {
       log: {method: 'POST', url: '/api/analytics/log/dashboard-usage'},
+      factory_used: {method: 'GET', url: 'api/analytics/public-metric/factory_used?factory=:factoryUrl'},
       sessionUsage: {method: 'POST', url: '/api/analytics/log/session-usage'}
     });
-
-
-
+    
   }
 
   logAction(action) {
-    let data = {params : {ACTION : action}};
+    let data = {params: {ACTION: action}};
     let promise = this.remoteAnalytisAPI.log(data).$promise;
-    promise.then(() => {}, (error) => {console.log(error);});
+    promise.then(() => {
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  /**
+   * Get the factory used info for the factoryUrl
+   * @param factoryUrl the factory URL
+   * @returns {*|promise|n|N}
+   */
+  getFactoryUsedFromUrl(factoryUrl) {
+    return this.remoteAnalytisAPI.factory_used({factoryUrl: factoryUrl}).$promise;
   }
 
   logSession(id) {

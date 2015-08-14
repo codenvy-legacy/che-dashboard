@@ -1,0 +1,73 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar cdvy-title="New Factory"></cdvy-toolbar>
+
+<md-content md-scroll-y flex md-theme="maincontent-theme">
+  <md-progress-linear md-mode="indeterminate" class="create-factory-progress" ng-show="createFactoryCtrl.isLoading"></md-progress-linear>
+  <div class="create-factory" ng-hide="createFactoryCtrl.isLoading">
+    <cdvy-panel cdvy-title="Select Source">
+      <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="selectedIndex" class="project-details-menu">
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-font-icon="fa fa-folder-open" class="cdvy-tab-label-icon"></md-icon>
+            <span class="cdvy-tab-label-title">Projects</span>
+          </md-tab-label>
+          <md-tab-body>
+            <cdvy-factory-from-project cdvy-factory-content="createFactoryCtrl.factoryContent"
+                                       cdvy-is-loading="createFactoryCtrl.isLoading"
+                                       cdvy-is-importing="createFactoryCtrl.isImporting"/>
+          </md-tab-body>
+        </md-tab>
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-font-icon="fa fa-download" class="cdvy-tab-label-icon"></md-icon>
+            <span class="cdvy-tab-label-title">Config File</span>
+          </md-tab-label>
+          <md-tab-body>
+            <cdvy-factory-from-file cdvy-factory-content="createFactoryCtrl.factoryContent"
+                                    cdvy-is-importing="createFactoryCtrl.isImporting"/>
+          </md-tab-body>
+        </md-tab>
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-font-icon="fa fa-magic" class="cdvy-tab-label-icon"></md-icon>
+            <span class="cdvy-tab-label-title">Template</span>
+          </md-tab-label>
+          <md-tab-body>
+            <cdvy-factory-from-template cdvy-factory-content="createFactoryCtrl.factoryContent"
+                                        cdvy-is-importing="createFactoryCtrl.isImporting"/>
+          </md-tab-body>
+        </md-tab>
+      </md-tabs>
+    </cdvy-panel>
+    <cdvy-panel cdvy-title="Factory Configuration" ng-class="{ 'disabled-state': !createFactoryCtrl.factoryContent }">
+      <div class="factory-configuration-panel">
+        <md-content layout="column" layout-fill>
+          <div class="json-editor" ng-if="createFactoryCtrl.factoryContent">
+            <textarea ui-codemirror ng-model="createFactoryCtrl.factoryContent"></textarea>
+          </div>
+        </md-content>
+        <a href="http://docs.codenvy.com/user/factories/#configuration-reference" target="_blank">Factory reference documentation</a>
+      </div>
+    </cdvy-panel>
+    <div ng-show="createFactoryCtrl.isImporting" layout="column" layout-align="center center">
+      <md-progress-circular class="md-hue-2" md-mode="indeterminate" md-theme="default"/>
+      <span>{{createFactoryCtrl.importingData}}</span>
+    </div>
+    <cdvy-button-primary id="create-project-button-import"
+                         cdvy-button-title="Create Factory"
+                         ng-click="createFactoryCtrl.createFactoryByContent(createFactoryCtrl.factoryContent)"
+                         ng-disabled="!createFactoryCtrl.factoryContent || createFactoryCtrl.isImporting || createFactoryCtrl.isLoading"
+                         class="projects-create-project-button"/>
+  </div>
+</md-content>
