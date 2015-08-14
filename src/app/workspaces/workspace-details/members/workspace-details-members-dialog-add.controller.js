@@ -28,6 +28,7 @@ class WorkspaceDetailsMembersDialogAddCtrl {
     this.roles = [];
     this.roles.push({name : 'Admin', id: 'workspace/admin'});
     this.roles.push({name : 'Developer', id: 'workspace/developer'});
+    this.roles.push({name : 'Stakeholder', id: 'workspace/stakeholder'});
 
     this.userRole = this.roles[0].id;
   }
