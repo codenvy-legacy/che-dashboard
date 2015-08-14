@@ -43,7 +43,7 @@
     </cdvy-input>
     <div layout="row">
       <div layout="column" flex="15">
-        <span>Workspace Usage Limit:</span>
+        <span>Usage Limits:</span>
         <span class="workspace-details-description workspace-details-space-top">Limit usage of the workspace's resources</span>
       </div>
       <div layout="column" flex="85">
@@ -55,7 +55,7 @@
         <div ng-style="{'visibility': active?'visible':'hidden'}">
           <cdvy-input cdvy-form="workspaceResourcesForm"
                       cdvy-name="limit"
-                      cdvy-place-holder="No Limit"
+                      cdvy-place-holder="Define the GBH cap for the workspace"
                       ng-model="workspaceDetailsResourcesCtrl.newLimit"
                       ng-pattern="/^(\d+\.?\d{0,4}|\.\d{1,4})$/">
           </cdvy-input>
