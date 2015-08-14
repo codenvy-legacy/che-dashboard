@@ -20,7 +20,7 @@ class CreateProjectCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $filter, $timeout, $location, $mdDialog, $rootScope) {
+  constructor (codenvyAPI, $routeParams, $filter, $timeout, $location, $mdDialog, $rootScope) {
     this.codenvyAPI = codenvyAPI;
     this.$timeout = $timeout;
     this.$location = $location;
@@ -33,6 +33,34 @@ class CreateProjectCtrl {
     // keep references on workspaces and projects
     this.workspaces = [];
 
+    //search the selected tab
+    let routeParams = $routeParams.tabName;
+    if (!routeParams) {
+      this.selectedTabIndex = 0;
+    } else {
+      switch (routeParams) {
+        case 'blank':
+          this.selectedTabIndex = 0;
+          break;
+        case 'samples':
+          this.selectedTabIndex = 1;
+          break;
+        case 'git':
+          this.selectedTabIndex = 2;
+          break;
+        case 'github':
+          this.selectedTabIndex = 3;
+          break;
+        case 'zip':
+          this.selectedTabIndex = 4;
+          break;
+        case 'config':
+          this.selectedTabIndex = 2;
+          break;
+        default:
+          $location.path('/create-project');
+      }
+    }
 
     // Text that will be used by the websocket processing when performing import
     this.importingData = '';

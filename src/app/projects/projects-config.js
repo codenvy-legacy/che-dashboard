@@ -72,6 +72,12 @@ class ProjectConfig {
     register.controller('ProjectItemCtrl', ProjectItemCtrl);
 
 
+    let locationCreateProjectProvider = {
+      templateUrl: 'app/projects/create-project/create-project.html',
+      controller: 'CreateProjectCtrl',
+      controllerAs: 'createProjectCtrl'
+    };
+
     // config routes
     register.app.config(function ($routeProvider) {
       $routeProvider.accessWhen('/projects', {
@@ -84,11 +90,8 @@ class ProjectConfig {
           controller: 'ProjectDetailsCtrl',
           controllerAs: 'projectDetailsCtrl'
         })
-        .accessWhen('/create-project', {
-          templateUrl: 'app/projects/create-project/create-project.html',
-          controller: 'CreateProjectCtrl',
-          controllerAs: 'createProjectCtrl'
-        });
+        .accessWhen('/create-project', locationCreateProjectProvider)
+        .accessWhen('/create-project/:tabName', locationCreateProjectProvider);
 
     });
 
