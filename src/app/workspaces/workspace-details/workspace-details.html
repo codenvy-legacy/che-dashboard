@@ -48,13 +48,13 @@
         </cdvy-panel>
       </md-tab-body>
     </md-tab>
-    <md-tab>
+    <md-tab ng-click="allowShowResources = true;">
       <md-tab-label>
         <md-icon md-font-icon="material-design icon-ic_settings_24px" class="cdvy-tab-label-icon"></md-icon>
         <span class="cdvy-tab-label-title">Resources</span>
       </md-tab-label>
       <md-tab-body>
-        <workspace-details-resources></workspace-details-resources>
+        <workspace-details-resources ng-if="allowShowResources"></workspace-details-resources>
       </md-tab-body>
     </md-tab>
     <md-tab>

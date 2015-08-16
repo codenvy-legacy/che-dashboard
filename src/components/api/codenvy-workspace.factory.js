@@ -107,12 +107,19 @@ class CodenvyWorkspace {
     let updatedPromise = promise.then((data) => {
       var remoteWorkspaces = [];
       this.workspaces.length = 0;
+      //TODO It's a fix used not to loose account ID of the workspace.
+      //Can be removed, when API will return accountId in the list of user workspaces response:
+      var copyWorkspaceById = new Map();
+      angular.copy(this.workspacesById, copyWorkspaceById);
+
       this.workspacesById.clear();
       // add workspace if not temporary
       data.forEach((workspace) => {
         if (!workspace.workspaceReference.temporary) {
           remoteWorkspaces.push(workspace);
           this.workspaces.push(workspace);
+          workspace.workspaceReference.accountId = copyWorkspaceById.get(workspace.workspaceReference.id) ?
+            copyWorkspaceById.get(workspace.workspaceReference.id).accountId : undefined;
           this.workspacesById.set(workspace.workspaceReference.id, workspace.workspaceReference);
         }
       });

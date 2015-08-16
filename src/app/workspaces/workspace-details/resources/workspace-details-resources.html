@@ -11,8 +11,12 @@
 
 -->
 <cdvy-panel cdvy-title="Monitoring">
-  <div layout="row" layout-sm="column" layout-align="center center">
-    <div ng-if="workspaceDetailsResourcesCtrl.workspace.isLocked">LOCKED</div>
+  <div layout="row" layout-sm="column" layout-align="start center">
+    <div ng-if="workspaceDetailsResourcesCtrl.workspace.isLocked" flex="50"
+         class="workspace-details-locked-resources" layout="row" layout-align="start center">
+      <md-icon md-font-icon="fa-ban" class="fa"></md-icon>
+      <span>Your resources are locked.</span>
+    </div>
     <usage-chart ng-if="!workspaceDetailsResourcesCtrl.workspace.isLocked" flex="50" flex-sm="100" cdvy-label="ram"
                  cdvy-large="true"
                  cdvy-used-color="#3b9275"
@@ -21,16 +25,18 @@
                  cdvy-provided="{{workspaceDetailsResourcesCtrl.workspace.allocatedRAM}}"
                  cdvy-provided-description="{{workspaceDetailsResourcesCtrl.workspace.allocatedRAM}}MB RAM Allocated">
     </usage-chart>
-    <usage-chart ng-if="workspaceDetailsResourcesCtrl.workspace.providedResources" flex="50" flex-sm="100" cdvy-label="hours"
+    <usage-chart ng-hide=!workspaceDetailsResourcesCtrl.isProvidedResources() flex="50" flex-sm="100" cdvy-label="hours"
                  cdvy-large="true"
                  cdvy-used="{{workspaceDetailsResourcesCtrl.workspace.usedResources}}"
                  cdvy-used-description="{{workspaceDetailsResourcesCtrl.workspace.usedResources}}GB Hours Used"
                  cdvy-provided="{{workspaceDetailsResourcesCtrl.workspace.providedResources}}"
                  cdvy-provided-description="{{workspaceDetailsResourcesCtrl.workspace.providedResources}}GB Hours Allocated">
     </usage-chart>
+    <div ng-if="!workspaceDetailsResourcesCtrl.isProvidedResources() && workspaceDetailsResourcesCtrl.workspace.usedResources" flex="50"
+         layout="row" layout-align="start center" class="workspace-details-consumed-resources">
+      <span>You consumed {{workspaceDetailsResourcesCtrl.workspace.usedResources}} GB hours</span>
+    </div>
   </div>
-
-
 </cdvy-panel>
 <cdvy-panel cdvy-title="Configuration">
   <ng-form name="workspaceResourcesForm">
@@ -49,8 +55,8 @@
       <div layout="column" flex="85">
         <div ng-style="{'visibility': active?'visible':'hidden'}"
              class="workspace-details-description workspace-details-active-label">Activate</div>
-        <md-switch ng-model="active" ng-init="active = (!angular.isUndefined(workspaceDetailsResourcesCtrl.workspace.providedResources) && workspaceDetailsResourcesCtrl.workspace.providedResources > 0)"
-                   class="workspace-details-switcher">
+        <md-switch ng-model="active" ng-init="active = !angular.isUndefined(workspaceDetailsResourcesCtrl.workspace.providedResources)"
+                   class="workspace-details-switcher" ng-change="workspaceDetailsResourcesCtrl.checkLimit(active);">
         </md-switch>
         <div ng-style="{'visibility': active?'visible':'hidden'}">
           <cdvy-input cdvy-form="workspaceResourcesForm"

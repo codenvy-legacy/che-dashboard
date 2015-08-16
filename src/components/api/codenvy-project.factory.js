@@ -80,7 +80,7 @@ class CodenvyProject {
     var promises = [];
 
     // well we need to clear globally the current projects
-    this.projectsPerWorkspaceMap.clear();
+    //TODO this.projectsPerWorkspaceMap.clear();
     for (var member in this.projectsPerWorkspace) {
       delete this.projectsPerWorkspace[member];
     }
@@ -126,10 +126,8 @@ class CodenvyProject {
    * @param workspace
    */
   fetchProjectsForWorkspaceId(workspaceId) {
-    var defer = this.$q.defer();
-
     let promise = this.remoteProjectsAPI.query({workspaceId: workspaceId}).$promise;
-    promise.then((projectReferences) => {
+    let updatedPromise = promise.then((projectReferences) => {
       var remoteProjects = [];
       projectReferences.forEach((projectReference) => {
         remoteProjects.push(projectReference);
@@ -148,18 +146,14 @@ class CodenvyProject {
         projects.forEach((project) => {
           this.projects.push(project);
         });
-
       }
-      defer.resolve();
     }, (error) => {
       if (error.status !== 304) {
-        defer.reject(error);
-      } else {
-        defer.resolve();
+        console.log(error);
       }
     });
 
-    return defer.promise;
+    return updatedPromise;
   }
 
 

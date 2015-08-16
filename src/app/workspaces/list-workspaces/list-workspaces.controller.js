@@ -147,14 +147,15 @@ class ListWorkspacesCtrl {
     }
 
     let projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
-    if (!projectsPerWorkspace && !projectsPerWorkspace[workspace.id]) {
+    if (!projectsPerWorkspace || !projectsPerWorkspace[workspace.id]) {
       let promiseProjectsNumber = this.codenvyAPI.getProject().fetchProjectsForWorkspaceId(workspace.id);
       promises.push(promiseProjectsNumber);
     }
 
     workspace.providedResources = this.codenvyAPI.getWorkspace().getWorkspaceResourcesUsageLimit(workspace);
     this.$q.all(promises).then(() => {
-      let projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
+      projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
+
       workspace.projects = projectsPerWorkspace[workspace.id] ? projectsPerWorkspace[workspace.id].length : undefined;
       workspace.members = this.codenvyAPI.getWorkspace().getMembers(workspace.id).length;
 
