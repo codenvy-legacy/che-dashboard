@@ -21,18 +21,13 @@ class ListFactoriesCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($mdDialog, codenvyAPI, codenvyNotification) {
-    this.$mdDialog = $mdDialog;
-    this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+  constructor(codenvyAPI, codenvyNotification) {
 
     this.dropDownOptionsList = [
       {
         name: 'Sort by views number', orderBy: 'views'
       }, {
         name: 'Sort by creation date', orderBy: 'originFactory.creator.created'
-      }, {
-        name: 'Delete all selected factories', deleteAll: 'true'
       }
     ];
 
@@ -45,8 +40,6 @@ class ListFactoriesCtrl {
         }
       }
     };
-
-    this.factoriesSelectedStatus = {};
 
     this.isLoading = true;
 
@@ -70,76 +63,12 @@ class ListFactoriesCtrl {
   }
 
   /**
-   * Delete all selected factories
-   * @param event
-   */
-  deleteSelectedFactories(event) {
-    let filtersFactorySelectedKeys = Object.keys(this.factoriesSelectedStatus);
-    let deletedFactoriesId = [];
-    if (filtersFactorySelectedKeys.length) {
-      var ctrl = this;
-      filtersFactorySelectedKeys.forEach(function (key) {
-        if (ctrl.factoriesSelectedStatus[key] === true) {
-          deletedFactoriesId.push(key);
-        }
-      });
-      if (deletedFactoriesId.length) {
-        let confirmTitle = 'Would you like to delete ';
-        if (deletedFactoriesId.length > 1) {
-          confirmTitle += 'these ' + deletedFactoriesId.length + ' factories?';
-        } else {
-          confirmTitle += 'this selected factory?';
-        }
-        let confirm = this.$mdDialog.confirm()
-          .title(confirmTitle)
-          .content('Please confirm for the removal.')
-          .ariaLabel('Remove selected factories')
-          .ok('Delete!')
-          .cancel('Cancel')
-          .clickOutsideToClose(true)
-          .targetEvent(event);
-        this.$mdDialog.show(confirm).then(() => {
-          var queueLenth = deletedFactoriesId.length;
-          var isError = false;
-          deletedFactoriesId.forEach((factoryId) => {
-            // remove it !
-            let promise = this.codenvyAPI.getFactory().deleteFactoryById(factoryId);
-            promise.then(() => {
-              queueLenth--;
-              if (!queueLenth) {
-                if (isError) {
-                  this.codenvyNotification.showError('Delete failed.');
-                } else {
-                  this.codenvyNotification.showInfo('Has been successfully removed.');
-                }
-              }
-            }, (error) => {
-              queueLenth--;
-              if (!queueLenth) {
-                this.codenvyNotification.showError('Delete failed.');
-              }
-              console.log('error', error);
-            });
-          });
-        });
-      } else {
-        this.codenvyNotification.showError('No selected factories.');
-      }
-    } else {
-      this.codenvyNotification.showError('No selected factories.');
-    }
-  }
-
-  /**
    * Callback called when the dropdown is called
-   * @param selected
-   * @param event
+   * @param selected the selected element
    */
-  dropDownSelected(selected, event) {
+  dropDownSelected(selected) {
     if (selected.orderBy) {
       this.factoriesOrderBy = this.factoriesOrderBy === selected.orderBy ? '-' + selected.orderBy : selected.orderBy;
-    } else if (selected.deleteAll) {
-      this.deleteSelectedFactories(event);
     }
   }
 

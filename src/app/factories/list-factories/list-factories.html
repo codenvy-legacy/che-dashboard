@@ -20,7 +20,7 @@
 
   <div class="md-toolbar-item md-tools" layout="row">
     <i class="factories-list-factories-cog material-design icon-ic_filter_list_24px" dropdown-menu="listFactoriesCtrl.dropDownOptionsList"
-       dropdown-model="selected" dropdown-onchange="listFactoriesCtrl.dropDownSelected(selected, $event)"
+       dropdown-model="listFactoriesCtrl.dropDownValue" dropdown-onchange="listFactoriesCtrl.dropDownSelected(selected)"
        dropdown-item-label='name' cdvy-event-logger="factories/orderBy"></i>
   </div>
 </md-toolbar>
@@ -42,7 +42,7 @@
       <cdvy-list ng-show="(listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter).length > 0">
         <cdvy-factory-item
           ng-repeat="factory in listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter | orderBy:listFactoriesCtrl.factoriesOrderBy"
-          cdvy-factory="factory" cdvy-checked="listFactoriesCtrl.factoriesSelectedStatus[factory.originFactory.id]"/>
+          cdvy-factory="factory"></cdvy-factory-item>
       </cdvy-list>
     </div>
   </md-content>
