@@ -22,16 +22,19 @@ class CodenvyAnalytics {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource, $cookies) {
+  constructor($resource, $cookies) {
     this.$resource = $resource;
     this.$cookies = $cookies;
     // remote call
-    this.remoteAnalytisAPI = this.$resource('/api/analytics/log/',{}, {
+    this.remoteAnalytisAPI = this.$resource('/api/analytics/log/', {}, {
       log: {method: 'POST', url: '/api/analytics/log/dashboard-usage'},
-      factory_used: {method: 'GET', url: 'api/analytics/public-metric/factory_used?factory=:factoryUrl'},
+      factory_used: {
+        method: 'GET',
+        url: 'api/analytics/public-metric/factory_used?factory=https%3A%2F%2Fcodenvy.com%2Ffactory%3Fid%3D:factoryUrl'
+      },
       sessionUsage: {method: 'POST', url: '/api/analytics/log/session-usage'}
     });
-    
+
   }
 
   logAction(action) {
@@ -53,12 +56,17 @@ class CodenvyAnalytics {
   }
 
   logSession(id) {
-    let data = {params : {
-      'SESSION-ID': id,
-      'WINDOW': 'DASHBOARD'
-    }};
+    let data = {
+      params: {
+        'SESSION-ID': id,
+        'WINDOW': 'DASHBOARD'
+      }
+    };
     let promise = this.remoteAnalytisAPI.sessionUsage(data).$promise;
-    promise.then(() => {}, (error) => {console.log(error);});
+    promise.then(() => {
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 }
