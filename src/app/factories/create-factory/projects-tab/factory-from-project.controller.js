@@ -25,8 +25,9 @@ class FactoryFromProjectCtrl {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
 
-    this.workspace = codenvyAPI.getWorkspace();
-    this.workspacesById = this.workspace.getWorkspacesById();
+    this.workspaces = codenvyAPI.getWorkspace().getWorkspaces();
+    this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
+    this.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
 
     this.filtersWorkspaceSelected = {};
 
@@ -51,8 +52,6 @@ class FactoryFromProjectCtrl {
   }
 
   updateData() {
-    this.workspaces = this.workspace.getWorkspaces();
-    this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
     this.setAllFiltersWorkspaces(true);
     this.isAllWorkspaces = true;
   }
@@ -108,17 +107,21 @@ class FactoryFromProjectCtrl {
   /**
    * Get the workspace name by ID
    * @param workspaceId
-   * @returns workspace name
+   * @returns {String} workspace name
    */
   getWorkspaceName(workspaceId) {
-    return this.workspacesById.get(workspaceId).name;
+    let workspace = this.workspacesById.get(workspaceId);
+    if (workspace && workspace.name) {
+      return workspace.name;
+    }
+    return '';
   }
 
   /**
    * Check workspace empty state
    * @param workspaceId
    * @param projects
-   * @returns empty state
+   * @returns {boolean}empty state
    */
   isEmpty(workspaceId, projects) {
     if (projects && projects.length > 0) {

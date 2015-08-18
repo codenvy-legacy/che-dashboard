@@ -25,29 +25,11 @@ class DeleteFactory {
 
     this.templateUrl = 'app/factories/factory-details/information-tab/delete-factory/delete-factory.html';
     this.replace = false;
-    this.controller = function ($scope, $location, $mdDialog, codenvyAPI, codenvyNotification) {
-      //Perform factory deletion.
-      $scope.deleteFactory = function (event) {
-        let confirm = $mdDialog.confirm()
-          .title('Would you like to delete the factory ' + $scope.factory.originFactory.project.name + '?')
-          .content('Please confirm for the factory removal.')
-          .ariaLabel('Remove factory')
-          .ok('Delete it!')
-          .cancel('Cancel')
-          .clickOutsideToClose(true)
-          .targetEvent(event);
-        $mdDialog.show(confirm).then(() => {
-          // remove it !
-          let promise = codenvyAPI.getFactory().deleteFactoryById($scope.factory.originFactory.id);
-          promise.then(() => {
-            $location.path('/factories');
-          }, (error) => {
-            codenvyNotification.showError(error.data.message ? error.data.message : 'Delete failed.');
-            console.log('error', error);
-          });
-        });
-      };
-    };
+
+    this.controller = 'DeleteFactoryCtrl';
+    this.controllerAs = 'deleteFactoryCtrl';
+
+    this.bindToController = true;
 
     // scope values
     this.scope = {

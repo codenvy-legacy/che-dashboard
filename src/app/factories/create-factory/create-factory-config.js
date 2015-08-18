@@ -17,6 +17,7 @@ import FactoryFromProjectCtrl from '../create-factory/projects-tab/factory-from-
 import FactoryFromProject from '../create-factory/projects-tab/factory-from-project.directive';
 import FactoryFromFileCtrl from '../create-factory/config-file-tab/factory-from-file.controller';
 import FactoryFromFile from '../create-factory/config-file-tab/factory-from-file.directive';
+import FactoryFromTemplateCtrl from '../create-factory/template-tab/factory-from-template.controller';
 import FactoryFromTemplate from '../create-factory/template-tab/factory-from-template.directive';
 
 class CreateFactoryConfig {
@@ -31,6 +32,7 @@ class CreateFactoryConfig {
     register.controller('FactoryFromFileCtrl', FactoryFromFileCtrl);
     register.directive('cdvyFactoryFromFile', FactoryFromFile);
 
+    register.controller('FactoryFromTemplateCtrl', FactoryFromTemplateCtrl);
     register.directive('cdvyFactoryFromTemplate', FactoryFromTemplate);
 
     // config routes

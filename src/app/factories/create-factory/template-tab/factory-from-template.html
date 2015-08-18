@@ -14,11 +14,11 @@
   <label flex="15">Select Template: </label>
 
   <div layout="column" flex="85">
-    <cdvy-toggle ng-model="templateName">
-      <cdvy-toggle-button ng-click="getFactoryTemplate(templateName)"
+    <cdvy-toggle ng-model="factoryFromTemplateCtrl.templateName">
+      <cdvy-toggle-button ng-click="factoryFromTemplateCtrl.getFactoryTemplate(factoryFromTemplateCtrl.templateName)"
                           cdvy-font-icon="material-design icon-ic_unfold_less_24px"
                           cdvy-title="minimal"></cdvy-toggle-button>
-      <cdvy-toggle-button ng-click="getFactoryTemplate(templateName)"
+      <cdvy-toggle-button ng-click="factoryFromTemplateCtrl.getFactoryTemplate(factoryFromTemplateCtrl.templateName)"
                           cdvy-font-icon="material-design icon-ic_unfold_more_24px"
                           cdvy-title="complete"></cdvy-toggle-button>
     </cdvy-toggle>

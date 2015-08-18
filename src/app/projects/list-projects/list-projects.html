@@ -10,55 +10,55 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-  <cdvy-toolbar cdvy-title="All projects"
-                cdvy-button-name="New Project"
-                cdvy-button-href="#/create-project" cdvy-event-logger="projects/new.project"></cdvy-toolbar>
+<cdvy-toolbar cdvy-title="All projects"
+              cdvy-button-name="New Project"
+              cdvy-button-href="#/create-project" cdvy-event-logger="projects/new.project"></cdvy-toolbar>
 
-  <md-toolbar class="projects-list-header md-toolbar-tools" md-theme="toolbar-theme">
-    <cdvy-search flex cdvy-placeholder="Search for projects" ng-model="listProjectsCtrl.projectFilter.name"></cdvy-search>
-    <span flex></span>
+<md-toolbar class="projects-list-header md-toolbar-tools" md-theme="toolbar-theme">
+  <cdvy-search flex cdvy-placeholder="Search for projects" ng-model="listProjectsCtrl.projectFilter.name"></cdvy-search>
+  <span flex></span>
 
-    <div class="md-toolbar-item md-tools" layout="row">
-      <i class="projects-list-projects-cog material-design icon-ic_filter_list_24px" dropdown-menu="listProjectsCtrl.dropDownOptionsList"
-         dropdown-model="listProjectsCtrl.dropDownValue" dropdown-onchange="listProjectsCtrl.dropDownSelected(selected)"
-         dropdown-item-label='name' cdvy-event-logger="projects/filter"></i>
-    </div>
-  </md-toolbar>
-  <div ng-if="listProjectsCtrl.displayWorkspaceFilter" class="projects-filter-animation projects-filter-panel" layout="row"
-       layout-align="start center">
-    <div class="projects-list-projects-filter-workspace-label">Filter workspaces:</div>
-    <div flex="60" layout="row" layout-align="start center" layout-wrap>
-      <div class="projects-list-projects-select-workspace" ng-repeat="workspace in listProjectsCtrl.workspaces">
-        <md-checkbox ng-model="listProjectsCtrl.filtersWorkspaceSelected[workspace.workspaceReference.id]"
-                     aria-label="Workspace {{workspace.workspaceReference.name}}">{{workspace.workspaceReference.name}}
-        </md-checkbox>
-      </div>
-    </div>
-    <div flex layout="row" layout-wrap layout-align="end center"><span class="projects-list-projects-filter-action"
-                                                                       ng-click="listProjectsCtrl.resetWorkspaceFilter()">Clear</span><i
-      ng-click="listProjectsCtrl.hideWorkspaceFilter()"
-      class="projects-list-projects-filter-action-icon material-design icon-ic_close_24px"></i></div>
+  <div class="md-toolbar-item md-tools" layout="row">
+    <i class="projects-list-projects-cog material-design icon-ic_filter_list_24px" dropdown-menu="listProjectsCtrl.dropDownOptionsList"
+       dropdown-model="listProjectsCtrl.dropDownValue" dropdown-onchange="listProjectsCtrl.dropDownSelected(selected)"
+       dropdown-item-label='name' cdvy-event-logger="projects/filter"></i>
   </div>
+</md-toolbar>
+<div ng-if="listProjectsCtrl.displayWorkspaceFilter" class="projects-filter-animation projects-filter-panel" layout="row"
+     layout-align="start center">
+  <div class="projects-list-projects-filter-workspace-label">Filter workspaces:</div>
+  <div flex="60" layout="row" layout-align="start center" layout-wrap>
+    <div class="projects-list-projects-select-workspace" ng-repeat="workspace in listProjectsCtrl.workspaces">
+      <md-checkbox ng-model="listProjectsCtrl.filtersWorkspaceSelected[workspace.workspaceReference.id]"
+                   aria-label="Workspace {{workspace.workspaceReference.name}}">{{workspace.workspaceReference.name}}
+      </md-checkbox>
+    </div>
+  </div>
+  <div flex layout="row" layout-wrap layout-align="end center"><span class="projects-list-projects-filter-action"
+                                                                     ng-click="listProjectsCtrl.resetWorkspaceFilter()">Clear</span><i
+    ng-click="listProjectsCtrl.hideWorkspaceFilter()"
+    class="projects-list-projects-filter-action-icon material-design icon-ic_close_24px"></i></div>
+</div>
 
-  <md-content md-scroll-y flex layout="column" layout-align="center" class="projects-list-projects" md-theme="maincontent-theme">
-    <md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress"
-                        ng-show="listProjectsCtrl.state == 'loading'"></md-progress-linear>
+<md-content md-scroll-y flex layout="column" layout-align="center" class="projects-list-projects" md-theme="maincontent-theme">
+  <md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress"
+                      ng-show="listProjectsCtrl.isLoading"></md-progress-linear>
 
-    <md-content flex>
-      <div
-        ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace | listProjectWorkspaceFilter:listProjectsCtrl.filtersWorkspaceSelected">
-        <cdvy-list-title cdvy-icon="fa fa-folder">
-          <span class="projects-list-workspace-name">{{listProjectsCtrl.getWorkspaceName(workspaceId)}}</span>
-          <span ng-show="projects.length == 0" class="project-list-empty">- No projects inside</span>
-          <span ng-show="(projects | filter:listProjectsCtrl.projectFilter).length == 0 && projects.length > 0" class="project-list-empty">- No projects found</span>
-        </cdvy-list-title>
-        <cdvy-list ng-show="(projects | filter:listProjectsCtrl.projectFilter).length > 0">
-          <cdvy-project-item ng-repeat="project in projects | filter:listProjectsCtrl.projectFilter"
-                             cdvy-selectable="true"
-                             cdvy-project-item-workspace-id="workspaceId"
-                             cdvy-project-item-project="project"
-                             cdvy-profile-creation-date="listProjectsCtrl.profileCreationDate"></cdvy-project-item>
-        </cdvy-list>
-      </div>
-    </md-content>
+  <md-content flex>
+    <div
+      ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace | listProjectWorkspaceFilter:listProjectsCtrl.filtersWorkspaceSelected">
+      <cdvy-list-title cdvy-icon="fa fa-folder">
+        <span class="projects-list-workspace-name">{{listProjectsCtrl.getWorkspaceName(workspaceId)}}</span>
+        <span ng-show="projects.length == 0" class="project-list-empty">- No projects inside</span>
+        <span ng-show="(projects | filter:listProjectsCtrl.projectFilter).length == 0 && projects.length > 0" class="project-list-empty">- No projects found</span>
+      </cdvy-list-title>
+      <cdvy-list ng-show="(projects | filter:listProjectsCtrl.projectFilter).length > 0">
+        <cdvy-project-item ng-repeat="project in projects | filter:listProjectsCtrl.projectFilter"
+                           cdvy-selectable="true"
+                           cdvy-project-item-workspace-id="workspaceId"
+                           cdvy-project-item-project="project"
+                           cdvy-profile-creation-date="listProjectsCtrl.profileCreationDate"></cdvy-project-item>
+      </cdvy-list>
+    </div>
   </md-content>
+</md-content>

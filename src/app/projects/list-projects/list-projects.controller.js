@@ -31,19 +31,23 @@ class ListProjectsCtrl {
     this.filtersWorkspaceSelected = {};
     this.projectFilter = {name: ''};
 
+    this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
+    this.workspaces = codenvyAPI.getWorkspace().getWorkspaces();
+    this.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
+
+    this.isLoading = true;
     // fetch workspaces when initializing
     let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
 
     promise.then(() => {
         this.updateData();
+        this.isLoading = false;
       },
       (error) => {
+        this.isLoading = false;
         if (error.status === 304) {
-          // ok
           this.updateData();
-          return;
         }
-        this.state = 'error';
       });
 
     let profilePreferences = codenvyAPI.getProfile().getPreferences();
@@ -72,16 +76,10 @@ class ListProjectsCtrl {
   }
 
   updateData() {
-    this.workspacesById = this.workspace.getWorkspacesById();
-    this.workspaces = this.workspace.getWorkspaces();
-
     // init the filters of workspaces
     this.workspaces.forEach((workspace) => {
       this.filtersWorkspaceSelected[workspace.workspaceReference.id] = true;
     });
-
-    this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
-    this.state = 'loaded';
   }
 
   /**

@@ -22,17 +22,19 @@ class CodenvyFactoryItem {
   constructor() {
     this.restrict = 'E';
 
+    this.templateUrl = 'app/factories/list-factories/factory-item/factory-item.html';
+    this.replace = false;
+
+    this.controller = 'FactoryItemCtrl';
+    this.controllerAs = 'factoryItemCtrl';
+
+    this.bindToController = true;
+
     // scope values
     this.scope = {
       factory: '=cdvyFactory'
     };
-    this.templateUrl = 'app/factories/list-factories/factory-item/factory-item.html';
 
-    this.controller = function ($scope, $location) {
-      $scope.redirectToFactoryDetails = function () {
-        $location.path('/factory/' + $scope.factory.originFactory.id);
-      };
-    };
   }
 
 }

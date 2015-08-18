@@ -13,6 +13,7 @@
 /* exported ListFactoriesCtrl, FactoryCtrl, CodenvyFactoryItem */
 
 import ListFactoriesCtrl from './list-factories/list-factories.controller';
+import FactoryItemCtrl from './list-factories/factory-item/factory-item.controller';
 import CodenvyFactoryItem from './list-factories/factory-item/factory-item.directive';
 import FactoryDetailsConfig from './factory-details/factory-details-config';
 import CreateFactoryConfig from './create-factory/create-factory-config';
@@ -22,6 +23,7 @@ class FactoryConfig {
   constructor(register) {
     register.controller('ListFactoriesCtrl', ListFactoriesCtrl);
 
+    register.controller('FactoryItemCtrl', FactoryItemCtrl);
     register.directive('cdvyFactoryItem', CodenvyFactoryItem);
 
     // config routes

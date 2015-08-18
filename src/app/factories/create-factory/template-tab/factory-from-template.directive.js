@@ -25,32 +25,11 @@ class FactoryFromTemplate {
 
     this.templateUrl = 'app/factories/create-factory/template-tab/factory-from-template.html';
     this.replace = false;
-    this.controller = function ($scope, $filter, codenvyAPI, codenvyNotification) {
-      //Perform factory deletion.
-      $scope.getFactoryTemplate = function (templateName) {
 
-        let factoryContent = codenvyAPI.getFactoryTemplate().getFactoryTemplate(templateName);
+    this.controller = 'FactoryFromTemplateCtrl';
+    this.controllerAs = 'factoryFromTemplateCtrl';
 
-        if (factoryContent) {
-          $scope.factoryContent = $filter('json')(factoryContent, 2);
-          return;
-        }
-
-        $scope.isImporting = true;
-        // fetch it !
-        let promise = codenvyAPI.getFactoryTemplate().fetchFactoryTemplate(templateName);
-
-        promise.then((factoryContent) => {
-          $scope.isImporting = false;
-          $scope.factoryContent = $filter('json')(factoryContent, 2);
-        }, (error) => {
-          $scope.isImporting = false;
-          codenvyNotification.showError(error.data.message ? error.data.message : 'Fail to get factory template.');
-          console.log('error', error);
-        });
-
-      };
-    };
+    this.bindToController = true;
 
     // scope values
     this.scope = {
