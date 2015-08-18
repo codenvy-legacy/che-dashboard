@@ -111,7 +111,7 @@ class FactoryFromProjectCtrl {
    * @returns workspace name
    */
   getWorkspaceName(workspaceId) {
-    return this.workspacesById.get(workspaceId).workspaceReference.name;
+    return this.workspacesById.get(workspaceId).name;
   }
 
   /**
