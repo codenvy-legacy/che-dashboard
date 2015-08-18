@@ -56,7 +56,7 @@ class CodenvyWorkspace {
         addMember: {method: 'POST', url: '/api/workspace/:workspaceId/members'},
         deleteMember: {method: 'DELETE', url: '/api/workspace/:workspaceId/members/:userId'},
         getMembers: {method: 'GET', url: '/api/workspace/:workspaceId/members', isArray: true},
-        getRAM: {method: 'GET', url: 'api/runner/:workspaceId/resources'},
+        getRAM: {method: 'GET', url: '/api/runner/:workspaceId/resources'},
         create: {method: 'POST', url: '/api/workspace'},
         delete: {method: 'DELETE', url: '/api/workspace/:workspaceId'},
         update: {method: 'POST', url : '/api/workspace/:workspaceId'}

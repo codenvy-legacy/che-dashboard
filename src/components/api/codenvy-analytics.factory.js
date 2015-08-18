@@ -30,7 +30,7 @@ class CodenvyAnalytics {
       log: {method: 'POST', url: '/api/analytics/log/dashboard-usage'},
       factory_used: {
         method: 'GET',
-        url: 'api/analytics/public-metric/factory_used?factory=https%3A%2F%2Fcodenvy.com%2Ffactory%3Fid%3D:factoryUrl'
+        url: '/api/analytics/public-metric/factory_used?factory=https%3A%2F%2Fcodenvy.com%2Ffactory%3Fid%3D:factoryUrl'
       },
       sessionUsage: {method: 'POST', url: '/api/analytics/log/session-usage'}
     });
