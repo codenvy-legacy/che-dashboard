@@ -41,19 +41,12 @@ class CodenvyNotification {
       '<span flex><b>Failed!</b> ' + text + '</span>' +
       '<md-button ng-click="hideNotification()">Close</md-button>' +
       '</md-toast>',
-      controller: function ($scope, codenvyNotification) {
-        $scope.hideNotification = function () {
-          codenvyNotification.hide();
-        };
+      controller: ($scope) => {
+        $scope.hideNotification = this.$mdToast.hide;
       },
       hideDelay: 20000
     });
   }
-
-  hide() {
-    this.$mdToast.hide();
-  }
-
 }
 
 export default CodenvyNotification;
