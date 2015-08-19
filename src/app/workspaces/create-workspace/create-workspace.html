@@ -14,7 +14,7 @@
 
 <md-content md-scroll-y flex md-theme="maincontent-theme">
   <ng-form name="workspaceInformationForm">
-    <cdvy-panel cdvy-title="Workspace Information">
+    <cdvy-panel cdvy-title="Information">
       <cdvy-input cdvy-form="workspaceInformationForm"
                   cdvy-name="name"
                   cdvy-label-name="Name"
@@ -50,7 +50,7 @@
     </cdvy-panel>
   </ng-form>
 
-  <cdvy-panel cdvy-title="Developers">
+  <cdvy-panel cdvy-title="Members">
     <workspace-details-members class="create-workspace-members" ng-controller="CreateWorkspaceAddMemberCtrl as workspaceMembersCtrl"
                                ng-init="workspaceMembersCtrl.members = createWorkspaceCtrl.members"></workspace-details-members>
   </cdvy-panel>
