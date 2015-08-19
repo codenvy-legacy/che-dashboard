@@ -97,8 +97,7 @@ class DashboardLearnMoreCtrl {
    * @returns {*}
    */
   addGuidedTourProject(workspaceId) {
-    // let promise = this.$http.get('https://dockerfiles.codenvycorp.com/guided-tour/getting-started/getting-started-factory.json');
-    let promise = this.$http.get('assets/html/getting-started-factory.json');
+    let promise = this.$http.get('https://dockerfiles.codenvycorp.com/guided-tour/getting-started/getting-started-factory.json');
 
     let dataPromise = promise.then((response) => {
       return this.codenvyProject.importProject(workspaceId, 'getting-started-guided-tour', response.data);

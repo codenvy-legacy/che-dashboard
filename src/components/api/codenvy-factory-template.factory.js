@@ -32,7 +32,7 @@ class CodenvyFactoryTemplate {
     this.factoryTemplatesByName = new Map();
 
     // remote call
-    this.remoteFactoryTemplateAPI = this.$resource('https://rawgit.com/codenvy/factories/factory-2.0/templates/:fileName');
+    this.remoteFactoryTemplateAPI = this.$resource('https://dockerfiles.codenvycorp.com/templates/:fileName');
   }
 
   /**
