@@ -47,7 +47,6 @@
       <cdvy-list-item ng-repeat="project in projects | filter:factoryFromProjectCtrl.projectFilter"
                       flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
         <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row"
-             ng-class="{'cdvy-selecter-active' : project === factoryFromProjectCtrl.selectedProject}"
              ng-click="factoryFromProjectCtrl.getFactoryContentFromProject(project)">
           <div class="project-list-static-icon" layout-align="center center">
             <div class="project-type-icon">
