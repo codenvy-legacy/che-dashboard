@@ -10,6 +10,8 @@
  */
 'use strict';
 
+/* global FormData */
+
 import Register from '../utils/register.js';
 
 /**

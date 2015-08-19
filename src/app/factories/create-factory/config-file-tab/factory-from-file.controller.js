@@ -10,6 +10,8 @@
  */
 'use strict';
 
+/* global FileReader */
+
 /**
  * Controller for upload factory from the file.
  * @author Oleksii Orel
