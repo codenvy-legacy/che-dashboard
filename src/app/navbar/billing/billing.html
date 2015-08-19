@@ -23,8 +23,8 @@
                       cdvy-layout-align="center start"
                       cdvy-consumed="{{billingCtrl.usedGBH}}"
                       cdvy-provided="{{billingCtrl.providedResources.freeAmount}}"
-                      cdvy-consumed-description="{{billingCtrl.usedGBH}} GB hours Consumed"
-                      cdvy-provided-description="{{billingCtrl.providedResources.freeAmount}} GB hours Free">
+                      cdvy-consumed-description="{{billingCtrl.usedGBH}} GB hours consumed"
+                      cdvy-provided-description="{{billingCtrl.providedResources.freeAmount}} GB hours free per month">
 
       </balance-simple>
       <balance-simple ng-if="billingCtrl.providedResources.prepaidAmount"
@@ -32,8 +32,8 @@
                       cdvy-layout-align="center start"
                       cdvy-consumed="{{billingCtrl.usedGBH}}"
                       cdvy-provided="{{billingCtrl.providedResources.prepaidAmount + billingCtrl.providedResources.freeAmount}}"
-                      cdvy-consumed-description="{{billingCtrl.usedGBH}} GB hours Consumed"
-                      cdvy-provided-description="{{billingCtrl.providedResources.prepaidAmount + billingCtrl.providedResources.freeAmount}} GB hours Allocated">
+                      cdvy-consumed-description="{{billingCtrl.usedGBH}} GB hours consumed"
+                      cdvy-provided-description="{{billingCtrl.providedResources.prepaidAmount + billingCtrl.providedResources.freeAmount}} GB hours allocated">
 
       </balance-simple>
       <balance-extended ng-if="billingCtrl.isPayAsYouGo"
@@ -41,10 +41,10 @@
                         cdvy-layout-align="center end"
                         cdvy-consumed="{{billingCtrl.usedGBH}}"
                         cdvy-provided="{{billingCtrl.providedResources.freeAmount}}"
-                        cdvy-consumed-description="{{billingCtrl.usedGBH}}GB hours Consumed"
-                        cdvy-provided-description="{{billingCtrl.providedResources.freeAmount}} GB hours Free"
+                        cdvy-consumed-description="{{billingCtrl.usedGBH}}GB hours consumed"
+                        cdvy-provided-description="{{billingCtrl.providedResources.freeAmount}} GB hours free per month"
                         cdvy-charged="{{billingCtrl.chargedGBH}}"
-                        cdvy-charged-description="{{billingCtrl.chargedGBH}} GB hours Charged">
+                        cdvy-charged-description="{{billingCtrl.chargedGBH}} GB hours charged">
       </balance-extended>
     </div>
   </cdvy-panel>
