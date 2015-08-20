@@ -30,9 +30,10 @@ class AccountProfile {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor () {
-    this.restrict='E';
+  constructor() {
+    this.restrict = 'E';
     this.templateUrl = 'app/navbar/account/profile/account-profile.html';
+    this.replace = false;
 
     this.controller = 'AccountProfileCtrl';
     this.controllerAs = 'accountProfileCtrl';
