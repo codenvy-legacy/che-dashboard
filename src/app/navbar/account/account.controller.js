@@ -17,27 +17,20 @@ class AccountCtrl {
    * @ngInject for Dependency injection
    * @author Oleksii Orel
    */
-  constructor($scope, $routeParams, $location, codenvyAPI, codenvyNotification) {
+  constructor($routeParams, $location, codenvyAPI, codenvyNotification) {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
 
     this.profile = this.codenvyAPI.getProfile().getProfile();
 
-    this.requestedAttributes = {};
+    this.profileAttributes = {};
+
     //copy the profile attribute if it exist
     if (this.profile.attributes) {
-      this.requestedAttributes = angular.copy(this.profile.attributes);
+      this.profileAttributes = angular.copy(this.profile.attributes);
+    } else {
+      this.updateProfile();
     }
-
-    //copy the profile attribute when we receive it in the first time
-    $scope.$watch('accountCtrl.profile.attributes', (newVal, oldVal) => {
-      if (!newVal) {
-        return;
-      }
-      if (!oldVal) {
-        this.requestedAttributes = angular.copy(newVal);
-      }
-    }, true);
 
     //search the selected tab
     let routeParams = $routeParams.tabName;
@@ -63,20 +56,29 @@ class AccountCtrl {
 
   }
 
+
+  /**
+   * Check if profile attributes have changed
+   * @returns {boolean}
+   */
   isAttributesChanged() {
-    return !angular.equals(this.profile.attributes, this.requestedAttributes);
+    return !angular.equals(this.profile.attributes, this.profileAttributes);
   }
 
   /**
    * Update current profile
    */
-  //TODO: Add onclick event to md-tab elements
   updateProfile() {
-    this.codenvyAPI.getProfile().fetchProfile();
+    let promises = this.codenvyAPI.getProfile().fetchProfile();
+
+    promises.then(() => {
+      let temp = angular.copy(this.profile.attributes);
+      this.profileAttributes = temp;
+    });
   }
 
   /**
-   * set profile attributes
+   * Set profile attributes
    */
   setProfileAttributes(isInputFormValid) {
     if (!isInputFormValid) {
@@ -84,20 +86,16 @@ class AccountCtrl {
     }
 
     if (this.isAttributesChanged()) {
-      let promise = this.codenvyAPI.getProfile().setAttributes(this.profile.attributes);
+      let promise = this.codenvyAPI.getProfile().setAttributes(this.profileAttributes);
 
       promise.then(() => {
         this.codenvyNotification.showInfo('Profile successfully updated.');
-        this.requestedAttributes = angular.copy(this.profile.attributes);
+        this.profile.attributes = angular.copy(this.profileAttributes);
       }, (error) => {
         if (error.status === 304) {
-          if (this.profile.attributes) {
-            this.requestedAttributes = angular.copy(this.profile.attributes);
-          }
+          this.profile.attributes = angular.copy(this.profileAttributes);
         } else {
-          if (this.requestedAttributes) {
-            this.profile.attributes = angular.copy(this.requestedAttributes);
-          }
+          this.profileAttributes = angular.copy(this.profile.attributes);
           this.codenvyNotification.showError(error.data.message ? error.data.message : 'Profile update failed.');
           console.log('error', error);
         }
@@ -107,7 +105,7 @@ class AccountCtrl {
   }
 
   /**
-   * set new password
+   * Set new password
    */
   setPassword(password) {
     if (!password) {
