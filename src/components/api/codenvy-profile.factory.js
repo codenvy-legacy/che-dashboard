@@ -22,14 +22,14 @@ class CodenvyProfile {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource, $q) {
+  constructor($resource, $q) {
 
     // keep resource
     this.$resource = $resource;
     this.$q = $q;
 
     // remote call
-    this.remoteProfileAPI = this.$resource('/api/profile',{}, {
+    this.remoteProfileAPI = this.$resource('/api/profile', {}, {
       getById: {method: 'GET', url: '/api/profile/:userId'},
       setAttributes: {method: 'POST', url: '/api/profile'}
     });
@@ -40,7 +40,9 @@ class CodenvyProfile {
     this.profileIdMap = new Map();
 
     // fetch the profile when we're initialized
-    this.fetchProfile();
+    if (!this.profile || !this.profilePreferences) {
+      this.fetchProfile();
+    }
   }
 
 
@@ -83,7 +85,7 @@ class CodenvyProfile {
    * @returns {string} full name
    */
   getFullName(attributes) {
-    if(!attributes) {
+    if (!attributes) {
       return '';
     }
     let firstName = attributes.firstName;
@@ -102,8 +104,17 @@ class CodenvyProfile {
    * Gets the profile data
    */
   fetchProfile() {
-    this.profile = this.remoteProfileAPI.get();
-    let profilePromise = this.profile.$promise;
+    let profile = this.remoteProfileAPI.get();
+    if (!this.profile) {
+      this.profile = profile;
+    }
+
+    let profilePromise = profile.$promise;
+
+    profilePromise.then((profile) => {
+      this.profile = profile;
+      this.profileIdMap.set(profile.userId, profile);
+    });
     this.profilePreferences = this.remoteProfilePreferencesAPI.get();
     let profilePrefsPromise = this.profilePreferences.$promise;
 

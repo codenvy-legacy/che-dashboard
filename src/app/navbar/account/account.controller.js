@@ -56,6 +56,28 @@ class AccountCtrl {
 
   }
 
+  /**
+   * Update current profile
+   */
+  updateProfile() {
+    this.codenvyAPI.getProfile().fetchProfile().then((allResources) => {
+      if (allResources.length > 0) {
+        let profile = allResources[0];
+
+        profile.$promise.then(() => {
+          if (this.profile && this.profile.attributes) {
+            this.profileAttributes = angular.copy(this.profile.attributes);
+          }
+        }, (error) => {
+          if (error.status === 304) {
+            if (this.profile && this.profile.attributes) {
+              this.profileAttributes = angular.copy(this.profile.attributes);
+            }
+          }
+        });
+      }
+    });
+  }
 
   /**
    * Check if profile attributes have changed
@@ -63,18 +85,6 @@ class AccountCtrl {
    */
   isAttributesChanged() {
     return !angular.equals(this.profile.attributes, this.profileAttributes);
-  }
-
-  /**
-   * Update current profile
-   */
-  updateProfile() {
-    let promises = this.codenvyAPI.getProfile().fetchProfile();
-
-    promises.then(() => {
-      let temp = angular.copy(this.profile.attributes);
-      this.profileAttributes = temp;
-    });
   }
 
   /**

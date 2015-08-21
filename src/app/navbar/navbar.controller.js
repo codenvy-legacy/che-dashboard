@@ -21,7 +21,7 @@ class NavBarCtrl {
     this.codenvyAPI = codenvyAPI;
     this.onBoarding = onBoarding;
     this.codenvyUser = codenvyAPI.getUser();
-    this.links =[{href:'#/projects', name:'List Projects'}];
+    this.links = [{href: '#/projects', name: 'List Projects'}];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
 
@@ -31,11 +31,11 @@ class NavBarCtrl {
     });
 
     this.profile = codenvyAPI.getProfile().getProfile();
-    if(this.profile.attributes){
+    if (this.profile.attributes) {
       this.updateData();
     } else {
       let promise = codenvyAPI.getProfile().fetchProfile();
-      promise.then(() => this.updateData(),() => this.updateData());
+      promise.then(() => this.updateData(), () => this.updateData());
     }
     this.onpremAdminExpanded = true;
     this.updated = false;
@@ -47,10 +47,9 @@ class NavBarCtrl {
   updateData() {
     this.updated = true;
     let attributes = this.profile.attributes;
-    if(!attributes) {
+    if (!attributes) {
       return;
     }
-    this.fullName = this.codenvyAPI.getProfile().getFullName(attributes);
     this.email = attributes.email;
   }
 
