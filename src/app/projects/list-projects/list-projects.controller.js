@@ -22,14 +22,14 @@ class ListProjectsCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI) {
+  constructor($mdDialog, codenvyAPI, codenvyNotification) {
+    this.$mdDialog = $mdDialog;
     this.codenvyAPI = codenvyAPI;
-    this.workspace = codenvyAPI.getWorkspace();
-
-    this.state = 'loading';
+    this.codenvyNotification = codenvyNotification;
 
     this.filtersWorkspaceSelected = {};
     this.projectFilter = {name: ''};
+    this.projectsSelectedStatus = {};
 
     this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
     this.workspaces = codenvyAPI.getWorkspace().getWorkspaces();
@@ -59,6 +59,8 @@ class ListProjectsCtrl {
        name: 'Bulk Edit'
        },*/ {
         name: 'Filter Workspace', id: 'workspaceFilter'
+      }, {
+        name: 'Delete all selected projects', deleteAll: 'true'
       }/*, {
        name: 'Favorited Projects'
        }*/
@@ -88,10 +90,13 @@ class ListProjectsCtrl {
   /**
    * Callback called when the dropdown on the list projects is called
    * @param selected the selected element
+   * @param event the $event
    */
-  dropDownSelected(selected) {
+  dropDownSelected(selected, event) {
     // hit the workspace filter
-    if ('workspaceFilter' === selected.id) {
+    if (selected.deleteAll) {
+      this.deleteSelectedFactories(event);
+    } else if ('workspaceFilter' === selected.id) {
       this.displayWorkspaceFilter = true;
     }
   }
@@ -112,6 +117,75 @@ class ListProjectsCtrl {
     keys.forEach((key) => {
       this.filtersWorkspaceSelected[key] = true;
     });
+  }
+
+  /**
+   * Delete all selected projects
+   * @param event
+   */
+  deleteSelectedFactories(event) {
+    let projectsSelectedStatusKeys = Object.keys(this.projectsSelectedStatus);
+    let checkedProjectsKeys = [];
+
+    if (projectsSelectedStatusKeys.length) {
+
+      var ctrl = this;
+      projectsSelectedStatusKeys.forEach(function (key) {
+        if (ctrl.projectsSelectedStatus[key] === true) {
+          checkedProjectsKeys.push(key);
+        }
+      });
+      var queueLenth = checkedProjectsKeys.length;
+      if (queueLenth) {
+        let confirmTitle = 'Would you like to delete ';
+        if (queueLenth > 1) {
+          confirmTitle += 'these ' + queueLenth + ' projects?';
+        } else {
+          confirmTitle += 'this selected project?';
+        }
+        let confirm = this.$mdDialog.confirm()
+          .title(confirmTitle)
+          .content('Please confirm for the removal.')
+          .ariaLabel('Remove projects')
+          .ok('Delete!')
+          .cancel('Cancel')
+          .clickOutsideToClose(true)
+          .targetEvent(event);
+        this.$mdDialog.show(confirm).then(() => {
+          var isError = false;
+          checkedProjectsKeys.forEach((key) => {
+            // remove it !
+            var partsArray = key.split('/');
+            if (partsArray.length === 2) {
+              this.projectsSelectedStatus[key] = false;
+              let promise = this.codenvyAPI.getProject().remove(partsArray[0], partsArray[1]);
+              promise.then(() => {
+                queueLenth--;
+                if (!queueLenth) {
+                  if (isError) {
+                    this.codenvyNotification.showError('Delete failed.');
+                  } else {
+                    this.codenvyNotification.showInfo('Has been successfully removed.');
+                  }
+                }
+              }, (error) => {
+                queueLenth--;
+                if (!queueLenth) {
+                  this.codenvyNotification.showError('Delete failed.');
+                }
+                console.log('error', error);
+              });
+            } else {
+              this.codenvyNotification.showError('No such project.');
+            }
+          });
+        });
+      } else {
+        this.codenvyNotification.showError('No selected projects.');
+      }
+    } else {
+      this.codenvyNotification.showError('No selected projects.');
+    }
   }
 }
 

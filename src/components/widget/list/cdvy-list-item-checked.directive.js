@@ -22,15 +22,18 @@ class CodenvyListItemChecked {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor () {
+  constructor() {
     this.restrict = 'E';
     this.replace = true;
     this.transclude = true;
     this.templateUrl = 'components/widget/list/cdvy-list-item-checked.html';
 
+    // we require ngModel as we want to use it inside our directive
+    this.require = ['ngModel'];
+
     // scope values
     this.scope = {
-      valueModel : '=?ngModel',
+      valueModel: '=?ngModel',
       icon: '@cdvyIcon',
       ariaLabel: '@cdvyAriaLabelCheckbox'
     };

@@ -13,7 +13,10 @@
 <cdvy-list-item flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
   <div layout-gt-sm="row" flex="100" layout-align="start center" class="project-list-row">
     <div class="project-list-static-icon" layout-align="center center">
-      <cdvy-list-item-checked ng-show="projectItemCtrl.isSelectable" cdvy-icon="cdvyfont cdvyico-type-{{projectItemCtrl.project.type}} cdvyico-type-blank" class="project-type-icon"
+      <cdvy-list-item-checked class="project-type-icon"
+                              ng-model="projectItemCtrl.isSelect"
+                              ng-show="projectItemCtrl.isSelectable"
+                              cdvy-icon="cdvyfont cdvyico-type-{{projectItemCtrl.project.type}} cdvyico-type-blank"
                               cdvy-aria-label-checkbox="Project {{projectItemCtrl.project.name}}"></cdvy-list-item-checked>
       <md-icon ng-hide="projectItemCtrl.isSelectable" md-font-icon="cdvyfont cdvyico-type-{{projectItemCtrl.project.type}} cdvyico-type-blank"></md-icon>
     </div>

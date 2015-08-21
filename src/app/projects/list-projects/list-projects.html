@@ -54,6 +54,7 @@
       </cdvy-list-title>
       <cdvy-list ng-show="(projects | filter:listProjectsCtrl.projectFilter).length > 0">
         <cdvy-project-item ng-repeat="project in projects | filter:listProjectsCtrl.projectFilter"
+                           ng-model="listProjectsCtrl.projectsSelectedStatus[project.workspaceId + project.path]"
                            cdvy-selectable="true"
                            cdvy-project-item-workspace-id="workspaceId"
                            cdvy-project-item-project="project"

@@ -24,13 +24,17 @@ class CodenvyProjectItem {
   constructor() {
     this.restrict = 'E';
 
+    // we require ngModel as we want to use it inside our directive
+    this.require = ['ngModel'];
+
     // scope values
     this.scope = {
       workspaceId: '=cdvyProjectItemWorkspaceId',
       project: '=cdvyProjectItemProject',
       profileCreationDate: '=cdvyProfileCreationDate',
       isDisplayWorkspace: '=cdvyDisplayWorkspace',
-      isSelectable: '=cdvySelectable'
+      isSelectable: '=cdvySelectable',
+      isSelect: '=?ngModel'
     };
 
     this.templateUrl = 'app/projects/list-projects/project-item/project-item.html';
