@@ -20,7 +20,8 @@
 
   <div class="md-toolbar-item md-tools" layout="row">
     <i class="factories-list-factories-cog material-design icon-ic_filter_list_24px" dropdown-menu="listFactoriesCtrl.dropDownOptionsList"
-       dropdown-model="listFactoriesCtrl.dropDownValue" dropdown-onchange="listFactoriesCtrl.dropDownSelected(selected)"
+       dropdown-model="listFactoriesCtrl.dropDownValue"
+       dropdown-onchange="listFactoriesCtrl.dropDownSelected(selected, $event)"
        dropdown-item-label='name' cdvy-event-logger="factories/orderBy"></i>
   </div>
 </md-toolbar>
@@ -28,7 +29,7 @@
   <md-progress-linear md-mode="indeterminate" class="factories-list-factories-progress"
                       ng-if="listFactoriesCtrl.isLoading"></md-progress-linear>
   <md-content flex class="md-maincontent-theme-theme" ng-show="!listFactoriesCtrl.isLoading">
-    <div ng-if="listFactoriesCtrl.factories.length === 0" layout="row" layout-align="center center" class="empty-state">
+    <div ng-if="listFactoriesCtrl.factories.length === 0" layout="row" layout-align="center center">
       <cdvy-empty-state cdvy-value="There are no factories yet."
                         cdvy-prompt="You can add a factory."
                         cdvy-icon-class="cdvyfont cdvyico-rocket-cdvyfont icon"></cdvy-empty-state>
@@ -42,7 +43,7 @@
       <cdvy-list ng-show="(listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter).length > 0">
         <cdvy-factory-item
           ng-repeat="factory in listFactoriesCtrl.factories | filter:listFactoriesCtrl.factoriesFilter | orderBy:listFactoriesCtrl.factoriesOrderBy"
-          cdvy-factory="factory"></cdvy-factory-item>
+          cdvy-factory="factory" ng-model="listFactoriesCtrl.factoriesSelectedStatus[factory.originFactory.id]"/>
       </cdvy-list>
     </div>
   </md-content>

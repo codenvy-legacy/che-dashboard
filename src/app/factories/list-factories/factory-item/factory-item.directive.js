@@ -30,9 +30,14 @@ class CodenvyFactoryItem {
 
     this.bindToController = true;
 
+    // we require ngModel as we want to use it inside our directive
+    this.require = ['ngModel'];
+
     // scope values
     this.scope = {
-      factory: '=cdvyFactory'
+      factory: '=cdvyFactory',
+      isChecked: '=cdvyChecked',
+      isSelect: '=?ngModel'
     };
 
   }
