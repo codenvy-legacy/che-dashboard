@@ -24,8 +24,8 @@ let initModule = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngT
 initModule.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.accessWhen = function(path, route) {
     route.resolve || (route.resolve = {});
-    route.resolve.app = ['codenvyUser', function (codenvyUser) {
-      return codenvyUser.fetchUser();
+    route.resolve.app = ['$q', 'codenvyProfile', 'codenvyUser', function ($q, codenvyProfile, codenvyUser) {
+        return $q.all([codenvyUser.fetchUser(), codenvyProfile.fetchProfile()]);
     }];
 
     // add fetch of the onboarding flag for onpremises route
@@ -41,8 +41,8 @@ initModule.config(['$routeProvider', function ($routeProvider) {
 
   $routeProvider.accessOtherWise = function(route) {
     route.resolve || (route.resolve = {});
-    route.resolve.app = ['codenvyUser', function (codenvyUser) {
-      return codenvyUser.fetchUser();
+    route.resolve.app = ['$q', 'codenvyProfile', 'codenvyUser', function ($q, codenvyProfile, codenvyUser) {
+      return $q.all([codenvyUser.fetchUser(), codenvyProfile.fetchProfile()]);
     }];
     return $routeProvider.otherwise(route);
   };
