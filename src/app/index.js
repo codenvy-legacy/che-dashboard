@@ -25,7 +25,24 @@ initModule.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.accessWhen = function(path, route) {
     route.resolve || (route.resolve = {});
     route.resolve.app = ['$q', 'codenvyProfile', 'codenvyUser', function ($q, codenvyProfile, codenvyUser) {
-      return $q.all([codenvyUser.fetchUser(), codenvyProfile.fetchPreferences()]);
+      var deferred = $q.defer();
+
+      codenvyUser.fetchUser().then(() => {
+        let profilePreferences = codenvyProfile.getPreferences();
+        if (profilePreferences && profilePreferences.$resolved) {
+          deferred.resolve();
+        } else {
+          profilePreferences.$promise.then(() => {
+            deferred.resolve();
+          }, (error)=> {
+            deferred.reject(error);
+          });
+        }
+      }, (error)=> {
+        deferred.reject(error);
+      });
+
+      return deferred.promise;
     }];
 
     // add fetch of the onboarding flag for onpremises route
@@ -42,7 +59,24 @@ initModule.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.accessOtherWise = function(route) {
     route.resolve || (route.resolve = {});
     route.resolve.app = ['$q', 'codenvyProfile', 'codenvyUser', function ($q, codenvyProfile, codenvyUser) {
-      return $q.all([codenvyUser.fetchUser(), codenvyProfile.fetchPreferences()]);
+      var deferred = $q.defer();
+
+      codenvyUser.fetchUser().then(() => {
+        let profilePreferences = codenvyProfile.getPreferences();
+        if (profilePreferences && profilePreferences.$resolved) {
+          deferred.resolve();
+        } else {
+          profilePreferences.$promise.then(() => {
+            deferred.resolve();
+          }, (error)=> {
+            deferred.reject(error);
+          });
+        }
+      }, (error)=> {
+        deferred.reject(error);
+      });
+
+      return deferred.promise;
     }];
     return $routeProvider.otherwise(route);
   };
