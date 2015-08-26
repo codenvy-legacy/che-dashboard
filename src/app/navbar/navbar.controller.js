@@ -32,25 +32,13 @@ class NavBarCtrl {
 
     this.profile = codenvyAPI.getProfile().getProfile();
     if (this.profile.attributes) {
-      this.updateData();
+      this.email = this.profile.attributes.email;
     } else {
-      let promise = codenvyAPI.getProfile().fetchProfile();
-      promise.then(() => this.updateData(), () => this.updateData());
+      this.profile.$promise.then(() => {
+        this.email = this.profile.attributes ? this.profile.attributes.email : null;
+      });
     }
     this.onpremAdminExpanded = true;
-    this.updated = false;
-  }
-
-  /**
-   * Update current full name and email
-   */
-  updateData() {
-    this.updated = true;
-    let attributes = this.profile.attributes;
-    if (!attributes) {
-      return;
-    }
-    this.email = attributes.email;
   }
 
   updateAdminRole() {

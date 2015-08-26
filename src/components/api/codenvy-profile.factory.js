@@ -22,11 +22,10 @@ class CodenvyProfile {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($resource, $q) {
+  constructor($resource) {
 
     // keep resource
     this.$resource = $resource;
-    this.$q = $q;
 
     // remote call
     this.remoteProfileAPI = this.$resource('/api/profile', {}, {
@@ -40,9 +39,10 @@ class CodenvyProfile {
     this.profileIdMap = new Map();
 
     // fetch the profile when we're initialized
-    if (!this.profile || !this.profilePreferences) {
       this.fetchProfile();
-    }
+
+    // fetch the profilePreferences when we're initialized
+      this.fetchPreferences();
   }
 
 
@@ -105,20 +105,42 @@ class CodenvyProfile {
    */
   fetchProfile() {
     let profile = this.remoteProfileAPI.get();
+    // if we don't yet have data
     if (!this.profile) {
+      // set  profile for using promise in controllers during first request
       this.profile = profile;
     }
 
     let profilePromise = profile.$promise;
 
     profilePromise.then((profile) => {
+      // update profile data if we have new value
       this.profile = profile;
       this.profileIdMap.set(profile.userId, profile);
     });
-    this.profilePreferences = this.remoteProfilePreferencesAPI.get();
+
+    return profilePromise;
+  }
+
+  /**
+   * Gets the preferences data
+   */
+  fetchPreferences() {
+    let profilePreferences = this.remoteProfilePreferencesAPI.get();
+    // if we don't yet have data
+    if (!this.profilePreferences) {
+      // set profilePreferences for using promise in controllers during first request
+      this.profilePreferences = profilePreferences;
+    }
+
     let profilePrefsPromise = this.profilePreferences.$promise;
 
-    return this.$q.all([profilePromise, profilePrefsPromise]);
+    profilePrefsPromise.then((profilePreferences) => {
+      // update profilePreferences data if we have new value
+      this.profilePreferences = profilePreferences;
+    });
+
+    return profilePrefsPromise;
   }
 
   /**

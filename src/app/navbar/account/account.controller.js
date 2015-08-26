@@ -29,7 +29,9 @@ class AccountCtrl {
     if (this.profile.attributes) {
       this.profileAttributes = angular.copy(this.profile.attributes);
     } else {
-      this.updateProfile();
+      this.profile.$promise.then(() => {
+        this.profileAttributes = angular.copy(this.profile.attributes);
+      });
     }
 
     //search the selected tab
@@ -54,29 +56,6 @@ class AccountCtrl {
 
     this.resetPasswordForm = false;
 
-  }
-
-  /**
-   * Update current profile
-   */
-  updateProfile() {
-    this.codenvyAPI.getProfile().fetchProfile().then((allResources) => {
-      if (allResources.length > 0) {
-        let profile = allResources[0];
-
-        profile.$promise.then(() => {
-          if (this.profile && this.profile.attributes) {
-            this.profileAttributes = angular.copy(this.profile.attributes);
-          }
-        }, (error) => {
-          if (error.status === 304) {
-            if (this.profile && this.profile.attributes) {
-              this.profileAttributes = angular.copy(this.profile.attributes);
-            }
-          }
-        });
-      }
-    });
   }
 
   /**

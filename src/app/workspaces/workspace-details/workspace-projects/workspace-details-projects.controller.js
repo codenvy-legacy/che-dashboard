@@ -30,13 +30,7 @@ class WorkspaceDetailsProjectsCtrl {
 
     let profilePreferences = codenvyAPI.getProfile().getPreferences();
 
-    if (profilePreferences['codenvy:created']) {
-      this.profileCreationDate = profilePreferences['codenvy:created'];
-    } else {
-      this.codenvyAPI.getProfile().fetchProfile().then(() => {
-        this.profileCreationDate = profilePreferences['codenvy:created'];
-      });
-    }
+    this.profileCreationDate = profilePreferences['codenvy:created'];
 
     this.projects = this.codenvyAPI.getProject().getProjectsByWorkspaceMap().get(this.workspaceId);
     if (!this.projects) {
