@@ -94,14 +94,16 @@
                 <div class="navbar-item" layout="row" layout-align="start center">Account</div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item">
+            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isSubscriptionServiceAvailable">
               <md-button nav-bar-selected flex ng-href="#/subscriptions" layout-align="left">
-                <div class="navbar-item" layout="row" layout-align="start center" cdvy-event-logger="subscriptions">Subscriptions</div>
+                <div class="navbar-item" layout="row" layout-align="start center"
+                     cdvy-event-logger="subscriptions">Subscriptions</div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item">
+            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isInvoiceServiceAvailable">
               <md-button nav-bar-selected flex ng-href="#/billing" layout-align="left">
-                <div class="navbar-item" layout="row" layout-align="start center" cdvy-event-logger="billing-and-invoices">Billing and
+                <div class="navbar-item" layout="row" layout-align="start center"
+                     cdvy-event-logger="billing-and-invoices">Billing and
                   Invoices
                 </div>
               </md-button>

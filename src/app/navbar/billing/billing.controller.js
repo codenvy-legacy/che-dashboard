@@ -86,8 +86,8 @@ class BillingCtrl {
     this.usedGBH = 0;
     this.chargedGBH = 0;
 
-    this.codenvyAPI.getSaas().fetchUsedResources(currentAccount.id).then(() => {
-      let resources = this.codenvyAPI.getSaas().getUsedResources(currentAccount.id);
+    this.codenvyAPI.getAccount().fetchUsedResources(currentAccount.id).then(() => {
+      let resources = this.codenvyAPI.getAccount().getUsedResources(currentAccount.id);
       this.usedGBH = this.countUsedGBH(resources);
       this.getProvided(currentAccount);
     });

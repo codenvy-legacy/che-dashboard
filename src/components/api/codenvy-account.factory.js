@@ -30,16 +30,23 @@ class CodenvyAccount {
 
     this.subscriptionsPerAccount = new Map();
     this.accountDetails = new Map();
+    this.usedResourcesPerAccount = new Map();
 
     // remote call
-    this.remoteAccountAPI = this.$resource('/api/account',{}, {
+    this.remoteAccountAPI = this.$resource('/api/account', {}, {
       getByID: {method: 'GET', url: '/api/account/:accountId'},
       getSubscriptions: {method: 'GET', url: '/api/subscription/find/account?id=:accountId', isArray: true},
-      addSubscription: {method: 'POST', url: '/api/subscription'}
+      addSubscription: {method: 'POST', url: '/api/subscription'},
+      getUsedResources: {method: 'GET', url: '/api/resources/:accountId/used', isArray: true},
+      redistributeResources: {method: 'POST', url: '/api/resources/:accountId'}
     });
 
     // fetch the accounts when we're initialized
     this.fetchAccounts();
+  }
+
+  getSubscriptionServicePath() {
+    return 'subscription';
   }
 
   getSaasServiceId() {
@@ -141,7 +148,31 @@ class CodenvyAccount {
     return this.remoteAccountAPI.addSubscription(data).$promise;
   }
 
+  fetchUsedResources(accountId) {
+    let promise = this.remoteAccountAPI.getUsedResources({accountId : accountId}).$promise;
+    // check if if was OK or not
+    let parsedResultPromise = promise.then((data) => {
+      this.usedResourcesPerAccount.set(accountId, data);
+    }, (error) => {
+      if (error.status !== 304) {
+        console.log(error);
+      }
+    });
+    return parsedResultPromise;
+  }
 
+  getUsedResources(accountId) {
+    return this.usedResourcesPerAccount.get(accountId);
+  }
+
+  redistributeResources(accountId, workspaceId, resources) {
+    let data = [];
+    resources.workspaceId = workspaceId;
+    data.push(resources);
+
+    let promise = this.remoteAccountAPI.redistributeResources({accountId : accountId}, data).$promise;
+    return promise;
+  }
 }
 
 // Register this factory

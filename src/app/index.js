@@ -34,11 +34,11 @@ initModule.config(['$routeProvider', function ($routeProvider) {
         } else {
           profilePreferences.$promise.then(() => {
             deferred.resolve();
-          }, (error)=> {
+          }, (error) => {
             deferred.reject(error);
           });
         }
-      }, (error)=> {
+      }, (error) => {
         deferred.reject(error);
       });
 
@@ -68,11 +68,11 @@ initModule.config(['$routeProvider', function ($routeProvider) {
         } else {
           profilePreferences.$promise.then(() => {
             deferred.resolve();
-          }, (error)=> {
+          }, (error) => {
             deferred.reject(error);
           });
         }
-      }, (error)=> {
+      }, (error) => {
         deferred.reject(error);
       });
 
@@ -261,13 +261,17 @@ initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$t
   });
 
   // When a route is about to change, notify the routing redirect node
-  $rootScope.$on('$routeChangeSuccess', (event, next)=> {
+  $rootScope.$on('$routeChangeSuccess', (event, next) => {
     if (next.resolve) {
       if (DEV) {
         console.log('$routeChangeSuccess event with route', next);
       }// check routes
       routingRedirect.check(event, next);
     }
+  });
+
+  $rootScope.$on('$routeChangeError', () => {
+    $location.path('/');
   });
 }]);
 

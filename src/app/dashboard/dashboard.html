@@ -12,7 +12,7 @@
 -->
 <cdvy-toolbar cdvy-title="Dashboard"  theme="dashboard-theme"></cdvy-toolbar>
 <md-content layout="column" class="dashboard-content" md-scroll-y flex>
-  <dashboard-overview></dashboard-overview>
+  <dashboard-overview ng-if="dashboardCtrl.isSaasServiceAvailable"></dashboard-overview>
 
   <dashboard-learn-more></dashboard-learn-more>
 

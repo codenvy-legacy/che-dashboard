@@ -55,7 +55,7 @@ class AccountCtrl {
     }
 
     this.resetPasswordForm = false;
-
+    this.isCreditCardServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getCreditCardServicePath());
   }
 
   /**

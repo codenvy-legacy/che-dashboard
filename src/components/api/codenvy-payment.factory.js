@@ -43,6 +43,14 @@ class CodenvyPayment {
 
   }
 
+  getCreditCardServicePath() {
+    return 'creditcard';
+  }
+
+  getInvoiceServicePath() {
+    return 'invoice';
+  }
+
   /**
    * Gets credit cards list
    */

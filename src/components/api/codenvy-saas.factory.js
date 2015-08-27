@@ -25,41 +25,17 @@ class CodenvySaas {
   constructor ($resource) {
     // keep resource
     this.$resource = $resource;
-    this.usedResourcesPerAccount = new Map();
+
     this.providedResourcesPerAccount = new Map();
 
     // remote call
-    this.remoteSaasAPI = this.$resource('/api/saas',{}, {
-      getUsedResources: {method: 'GET', url: '/api/resources/:accountId/used', isArray: true}, //TODO remove to account service
-      redistributeResources: {method: 'POST', url: '/api/resources/:accountId'}, //TODO remove to account service
+    this.remoteSaasAPI = this.$resource('/api/saas', {}, {
       getProvidedResources: {method: 'GET', url: '/api/saas/resources/:accountId/provided'}
     });
   }
 
-  fetchUsedResources(accountId) {
-    let promise = this.remoteSaasAPI.getUsedResources({accountId : accountId}).$promise;
-    // check if if was OK or not
-    let parsedResultPromise = promise.then((data) => {
-      this.usedResourcesPerAccount.set(accountId, data);
-    }, (error) => {
-      if (error.status !== 304) {
-        console.log(error);
-      }
-    });
-    return parsedResultPromise;
-  }
-
-  getUsedResources(accountId) {
-    return this.usedResourcesPerAccount.get(accountId);
-  }
-
-  redistributeResources(accountId, workspaceId, resources) {
-    let data = [];
-    resources.workspaceId = workspaceId;
-    data.push(resources);
-
-    let promise = this.remoteSaasAPI.redistributeResources({accountId : accountId}, data).$promise;
-    return promise;
+  getSaasServicePath() {
+    return 'saas';
   }
 
   fetchProvidedResources(accountId) {

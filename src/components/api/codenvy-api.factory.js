@@ -11,7 +11,7 @@
 'use strict';
 /*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
  CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
- CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession, CodenvyRunner */
+ CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession, CodenvyRunner, CodenvyService*/
 
 
 import Register from '../utils/register';
@@ -36,6 +36,7 @@ import CodenvyRunner from './codenvy-runner.factory';
 import CodenvySvn from './codenvy-svn.factory';
 import CodenvyFactoryTemplate from './codenvy-factory-template.factory';
 import CodenvyAnalyticsSession from './codenvy-analytics-session.factory';
+import CodenvyService from './codenvy-service.factory';
 
 /**
  * This class is providing the entry point for accessing to Codenvy API
@@ -50,7 +51,7 @@ class CodenvyAPI {
    */
   constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
               codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyFactoryTemplate,
-              codenvyAnalyticsSession, codenvyRunner) {
+              codenvyAnalyticsSession, codenvyRunner, codenvyService) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
@@ -68,10 +69,14 @@ class CodenvyAPI {
     this.codenvyFactoryTemplate = codenvyFactoryTemplate;
     this.codenvyAnalyticsSession = codenvyAnalyticsSession;
     this.codenvyRunner = codenvyRunner;
+    this.codenvyService = codenvyService;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
   }
+
+
+
 
   /**
    * The Codenvy Account API
@@ -197,6 +202,13 @@ class CodenvyAPI {
     return this.codenvySvn;
   }
 
+  /**
+   * The Codenvy Services API
+   * @returns {CodenvyService|*}
+   */
+  getService() {
+    return this.codenvyService;
+  }
 }
 
 export default CodenvyAPI;

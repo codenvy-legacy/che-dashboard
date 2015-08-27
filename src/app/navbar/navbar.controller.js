@@ -30,6 +30,13 @@ class NavBarCtrl {
       this.updateAdminRole();
     });
 
+    let promiseService = this.codenvyAPI.getService().fetchServices();
+    promiseService.then(() => {
+      this.isInvoiceServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getInvoiceServicePath());
+      this.isSubscriptionServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getAccount().getSubscriptionServicePath());
+    });
+
+
     this.profile = codenvyAPI.getProfile().getProfile();
     if (this.profile.attributes) {
       this.email = this.profile.attributes.email;

@@ -23,10 +23,23 @@ class BillingConfig {
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.when('/billing', {
+      $routeProvider.accessWhen('/billing', {
           templateUrl: 'app/navbar/billing/billing.html',
           controller: 'BillingCtrl',
-          controllerAs: 'billingCtrl'
+          controllerAs: 'billingCtrl',
+          resolve: {
+            check: function ($q, codenvyService) {
+              var defer = $q.defer();
+              codenvyService.fetchServices().then(() => {
+                if (codenvyService.isServiceAvailable('saas')) {
+                  defer.resolve();
+                } else {
+                  defer.reject();
+                }
+              });
+              return defer.promise;
+            }
+          }
         });
     });
   }

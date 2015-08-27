@@ -32,7 +32,8 @@
         </cdvy-panel>
       </md-tab-body>
     </md-tab>
-    <md-tab cdvy-event-logger="account/billing">
+
+    <md-tab cdvy-event-logger="account/billing" ng-if="accountCtrl.isCreditCardServiceAvailable">
       <md-tab-label>
         <md-icon md-font-icon="material-design icon-ic_credit_card_24px" class="cdvy-tab-label-icon"></md-icon>
         <span class="cdvy-tab-label-title">Billing</span>

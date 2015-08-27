@@ -27,10 +27,23 @@ class SubscriptionConfig {
     // config routes
     register.app.config(function ($routeProvider) {
       $routeProvider.accessWhen('/subscriptions', {
-          templateUrl: 'app/navbar/subscriptions/subscription.html',
-          controller: 'SubscriptionCtrl',
-          controllerAs: 'subscriptionCtrl'
-        });
+        templateUrl: 'app/navbar/subscriptions/subscription.html',
+        controller: 'SubscriptionCtrl',
+        controllerAs: 'subscriptionCtrl',
+        resolve: {
+          check: function ($q, codenvyService) {
+            var defer = $q.defer();
+            codenvyService.fetchServices().then(() => {
+              if (codenvyService.isServiceAvailable('subscription')) {
+                defer.resolve();
+              } else {
+                defer.reject();
+              }
+            });
+            return defer.promise;
+          }
+        }
+      });
     });
   }
 }
