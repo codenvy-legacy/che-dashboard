@@ -75,7 +75,7 @@ class CreateWorkspaceAddMemberCtrl {
           this.codenvyNotification.showError('User with email: ' + email + ' not found.');
         }
       }, (error) => {
-        this.codenvyNotification.showError(error.data.message !== null ? error.data.message : '.');
+        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Failed to add member ' + email + '.');
       });
     }
   }

@@ -22,8 +22,9 @@ class CreateWorkspaceCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $q, $location) {
+  constructor (codenvyAPI, $q, $location, codenvyNotification) {
     this.codenvyAPI = codenvyAPI;
+    this.codenvyNotification = codenvyNotification;
     this.$q = $q;
     this.$location = $location;
     this.workspace = {};
@@ -46,11 +47,11 @@ class CreateWorkspaceCtrl {
     let promises = [];
 
     let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(this.account.id, this.workspace.name);
-    let resourcesPromise = creationPromise.then((data) => {
+    creationPromise.then((data) => {
       if (this.workspace.ram && this.workspace.ram > 0) {
         let resources = {};
         resources.runnerRam = this.workspace.ram;
-        let redistributePromise = this.codenvyAPI.getSaas().redistributeResources(data.accountId, data.id, resources);
+        let redistributePromise = this.codenvyAPI.getAccount().redistributeResources(data.accountId, data.id, resources);
         promises.push(redistributePromise);
       }
 
@@ -58,14 +59,17 @@ class CreateWorkspaceCtrl {
         let addMemberPromise = this.codenvyAPI.getWorkspace().addMember(data.id, member.id, member.roles);
         promises.push(addMemberPromise);
       });
-    });
 
-    promises.push(resourcesPromise);
-
-
-
-    this.$q.all(promises).then(() => {
-      this.$location.path('/workspaces');
+      this.$q.all(promises).then(() => {
+        this.$location.path('/workspaces');
+      }, (error) => {
+        let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
+        errorMessage = errorMessage.replace(data.id, data.name);
+        this.codenvyNotification.showError(errorMessage);
+        this.$location.path('/workspaces');
+      });
+    }, (error) => {
+      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Error during workspace creation.');
     });
   }
 }

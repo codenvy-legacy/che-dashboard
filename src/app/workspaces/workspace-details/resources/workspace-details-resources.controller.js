@@ -49,9 +49,9 @@ class WorkspaceDetailsResourcesCtrl {
   getWorkspaceInfo() {
     this.workspace = this.codenvyAPI.getWorkspace().getWorkspacesById().get(this.workspaceId);
 
-    let usedResourcesPromise = this.codenvyAPI.getSaas().fetchUsedResources(this.workspace.accountId);
+    let usedResourcesPromise = this.codenvyAPI.getAccount().fetchUsedResources(this.workspace.accountId);
     usedResourcesPromise.then(() => {
-      let resources = this.codenvyAPI.getSaas().getUsedResources(this.workspace.accountId);
+      let resources = this.codenvyAPI.getAccount().getUsedResources(this.workspace.accountId);
       resources.forEach((resource) => {
         if (resource.workspaceId === this.workspaceId) {
           this.workspace.usedResources = resource.memory.toFixed(2);
@@ -115,13 +115,13 @@ class WorkspaceDetailsResourcesCtrl {
       resources.resourcesUsageLimit = this.newLimit ? this.newLimit : -1;
     }
 
-    let promise = this.codenvyAPI.getSaas().redistributeResources(this.workspace.accountId, this.workspaceId, resources);
+    let promise = this.codenvyAPI.getAccount().redistributeResources(this.workspace.accountId, this.workspaceId, resources);
     promise.then(() => {
       this.codenvyNotification.showInfo('Workspace resources is successfully updated.');
       this.workspace.allocatedRAM = angular.copy(this.newRAM);
       this.workspace.providedResources = angular.copy(this.newLimit);
     }, (error) => {
-      let errorMessage = error.data.message !== null ? error.data.message : 'Update workspace resources failed.';
+      let errorMessage = error.data.message ? error.data.message : 'Update workspace resources failed.';
       errorMessage = errorMessage.replace(this.workspaceId, this.workspace.name);
       this.codenvyNotification.showError(errorMessage);
       console.log('error', error);

@@ -78,7 +78,7 @@ class ListWorkspacesCtrl {
       let workspacesPromise = this.codenvyAPI.getWorkspace().fetchAccountWorkspaces(account.id);
       promises.push(workspacesPromise);
       //Retrieving used resources of account's workspaces:
-      let usedResourcesPromise = this.codenvyAPI.getSaas().fetchUsedResources(account.id);
+      let usedResourcesPromise = this.codenvyAPI.getAccount().fetchUsedResources(account.id);
       promises.push(usedResourcesPromise);
     });
     return this.$q.all(promises);
@@ -112,7 +112,7 @@ class ListWorkspacesCtrl {
     this.workspaceUsedResources.clear();
     let accounts = this.codenvyAPI.getAccount().getAccounts();
     accounts.forEach((account) => {
-      this.processUsedResources(this.codenvyAPI.getSaas().getUsedResources(account.id));
+      this.processUsedResources(this.codenvyAPI.getAccount().getUsedResources(account.id));
       let workspaces = this.codenvyAPI.getWorkspace().getWorkspacesByAccountId(account.id);
       workspaces.forEach((workspace) => {
         this.getWorkspaceInfo(workspace);
