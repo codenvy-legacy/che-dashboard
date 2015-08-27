@@ -1,0 +1,28 @@
+<md-dialog class="team-add-member-dialog">
+  <form name="addingMemberForm">
+    <md-dialog-content>
+
+      <cdvy-input focusable
+                  cdvy-name="email"
+                  cdvy-form="addingMemberForm"
+                  cdvy-label-name="Email"
+                  cdvy-place-holder="Email"
+                  type="email"
+                  required
+                  ng-model="teamMembersDialogAddCtrl.userEmail">
+        <div ng-message="required">Email is required.</div>
+        <div ng-message="email">Enter a valid email address.</div>
+      </cdvy-input>
+      <cdvy-select cdvy-label-name="Role"
+                   cdvy-option-values="teamMembersDialogAddCtrl.roles"
+                   cdvy-place-holder="Select role"
+                   cdvy-size="3"
+                   cdvy-value="teamMembersDialogAddCtrl.userRole">
+      </cdvy-select>
+    </md-dialog-content>
+    <div class="md-actions">
+      <md-button ng-click="teamMembersDialogAddCtrl.abort()" tabindex="0" type="button">Cancel</md-button>
+      <md-button class="md-primary" ng-click="teamMembersDialogAddCtrl.add()" ng-disabled="addingMemberForm.$invalid">Add</md-button>
+    </div>
+  </form>
+</md-dialog>

@@ -30,12 +30,16 @@ class CodenvyAccount {
 
     this.subscriptionsPerAccount = new Map();
     this.accountDetails = new Map();
+    this.accountMembers = new Map();
     this.usedResourcesPerAccount = new Map();
 
     // remote call
     this.remoteAccountAPI = this.$resource('/api/account', {}, {
       getByID: {method: 'GET', url: '/api/account/:accountId'},
       getSubscriptions: {method: 'GET', url: '/api/subscription/find/account?id=:accountId', isArray: true},
+      getMembers: {method: 'GET', url: '/api/account/:accountId/members', isArray: true},
+      addMember: {method: 'POST', url: '/api/account/:accountId/members'},
+      deleteMember: {method: 'DELETE', url: '/api/account/:accountId/members/:userId'},
       addSubscription: {method: 'POST', url: '/api/subscription'},
       getUsedResources: {method: 'GET', url: '/api/resources/:accountId/used', isArray: true},
       redistributeResources: {method: 'POST', url: '/api/resources/:accountId'}
@@ -120,6 +124,36 @@ class CodenvyAccount {
       this.accountDetails.set(accountId, data);
     });
     return parsedResultPromise;
+  }
+
+  fetchAccountMembers(accountId) {
+    let promise = this.remoteAccountAPI.getMembers({accountId : accountId}).$promise;
+    // check if if was OK or not
+    let parsedResultPromise = promise.then((data) => {
+      this.accountMembers.set(accountId, data);
+    }, (error) => {
+      if (error.status !== 304) {
+        console.log(error);
+      }
+    });
+    return parsedResultPromise;
+  }
+
+  getAccountMembers(accountId) {
+    return this.accountMembers.get(accountId);
+  }
+
+  addAccountMember(accountId, userId, roles) {
+    let data = {};
+    data.userId = userId;
+    data.roles = roles;
+    let promise = this.remoteAccountAPI.addMember({accountId : accountId}, data).$promise;
+    return promise;
+  }
+
+  deleteAccountMember(accountId, userId) {
+    let promise = this.remoteAccountAPI.deleteMember({accountId : accountId, userId: userId}).$promise;
+    return promise;
   }
 
   getAccountDetails(accountId) {

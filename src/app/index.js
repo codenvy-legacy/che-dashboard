@@ -131,6 +131,10 @@ new SubscriptionConfig(instanceRegister);
 import BillingConfig from './navbar/billing/billing-config';
 new BillingConfig(instanceRegister);
 
+// import team config
+import TeamConfig from './navbar/team/team-config';
+new TeamConfig(instanceRegister);
+
 // import factories
 import FactoryConfig from './factories/factories-config';
 new FactoryConfig(instanceRegister);

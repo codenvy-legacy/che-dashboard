@@ -165,7 +165,9 @@ class CodenvyUser {
     let str = '';
 
     roles.forEach((role) => {
-      str += role.replace('workspace/', ' ');
+      let parts = role.split('/');
+      str += parts && parts.length > 1 ? parts[1] : role;
+      str += ' ';
     });
 
     return str;
