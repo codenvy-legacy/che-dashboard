@@ -61,7 +61,7 @@
           <create-project-zip class="projects-create-project-tab" layout="column"></create-project-zip>
         </md-tab-body>
       </md-tab>
-      <md-tab md-on-select="createProjectCtrl.refreshCM(); $parent.createProjectCtrl.setCurrentTab('config')" cdvy-event-logger="new.project/config">
+      <md-tab md-on-select="createProjectCtrl.setCurrentTab('config')" cdvy-event-logger="new.project/config">
         <md-tab-label>
           <md-icon md-font-icon="fa-download" class="fa cdvy-tab-label-icon"></md-icon>
           <span class="cdvy-tab-label-title">Configuration File</span>
@@ -80,7 +80,8 @@
                   cdvy-name="name"
                   cdvy-label-name="Name"
                   cdvy-place-holder="Name of the project"
-                  ng-model="createProjectCtrl.importProjectData.project.name"
+                  ng-change="createProjectCtrl.checkChangeableNameStatus()"
+                  ng-model="createProjectCtrl.projectName"
                   required
                   unique-project-name="createProjectCtrl.workspaceSelected"
                   ng-maxlength="128"
@@ -95,7 +96,8 @@
                   cdvy-name="description"
                   cdvy-label-name="Description"
                   cdvy-place-holder="Description of the project"
-                  ng-model="createProjectCtrl.importProjectData.project.description"
+                  ng-change="createProjectCtrl.checkChangeableDescriptionStatus()"
+                  ng-model="createProjectCtrl.projectDescription"
                   ng-maxlength="256">
         <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
         <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
@@ -132,7 +134,7 @@
   <cdvy-button-primary id="create-project-button-import"
                        cdvy-button-title="Create Project"
                        ng-click="!createProjectCtrl.checkValidFormState() || createProjectCtrl.import()"
-                       ng-disabled="!createProjectCtrl.checkValidFormState() || createProjectCtrl.isImporting()"
+                       ng-disabled="!createProjectCtrl.checkValidFormState() || !createProjectCtrl.isReadyToCreate()"
                        class="projects-create-project-button"
     ></cdvy-button-primary>
 

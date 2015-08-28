@@ -38,7 +38,8 @@ class CodenvyInput {
       labelName:'@cdvyLabelName',
       placeHolder:'@cdvyPlaceHolder',
       pattern: '@cdvyPattern',
-      myForm: '=cdvyForm'
+      myForm: '=cdvyForm',
+      isChanged: '&ngChange'
     };
 
   }
@@ -114,7 +115,12 @@ class CodenvyInput {
         return;
       }
       // avoid model
-      if (key.indexOf('ngModel') === 0) {
+      if ('ngModel' === key) {
+        return;
+      }
+      // add ng-change attr if it exist in the parent element
+      if ('ngChange' === key) {
+        inputElement.attr('data-ng-change', 'isChanged()');
         return;
       }
       var value = attrs[key];

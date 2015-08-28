@@ -20,11 +20,12 @@ class CreateProjectCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $routeParams, $filter, $timeout, $location, $mdDialog, $rootScope) {
+  constructor (codenvyAPI, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope) {
     this.codenvyAPI = codenvyAPI;
     this.$timeout = $timeout;
     this.$location = $location;
     this.$mdDialog = $mdDialog;
+    this.$scope = $scope;
     this.$rootScope = $rootScope;
 
     // subitem not yet completed
@@ -88,23 +89,7 @@ class CreateProjectCtrl {
     this.forms = new Map();
 
     // JSON used for import data
-    this.importProjectData = {
-      source: {
-        project: {
-          location: '',
-          type: ''
-        }
-      },
-      project: {
-        name: '',
-        description: '',
-        type: 'blank',
-        visibility: 'public'
-      }
-    };
-
-    // by default project type is git
-    this.importProjectData.source.project.type = 'git';
+    this.importProjectData = this.getDefaultProjectJson();
 
     this.jsonConfig = {};
     this.jsonConfig.content = '{}';
@@ -114,17 +99,81 @@ class CreateProjectCtrl {
       // ignore the error
     }
 
-
-
     $rootScope.$on('create-project-blank:initialized', () => {
       this.projectBlankCompleted = true;
     });
 
+    // sets isReady status after selection
+    $rootScope.$on('create-project-github:selected', () => {
+      if(!this.isReady && this.currentTab === 'github'){
+        this.isReady = true;
+      }
+    });
+    $rootScope.$on('create-project-samples:selected', () => {
+      if(!this.isReady && this.currentTab === 'samples') {
+        this.isReady = true;
+      }
+    });
+
+    this.isChangeableName = true;
+    this.isChangeableDescription = true;
+
+    $scope.$watch('createProjectCtrl.importProjectData.project.name', (newProjectName) => {
+      if (!this.isChangeableName) {
+        return;
+      }
+      this.projectName = newProjectName;
+    });
+    $scope.$watch('createProjectCtrl.importProjectData.project.description', (newProjectDescription) => {
+      if (!this.isChangeableDescription) {
+        return;
+      }
+      this.projectDescription = newProjectDescription;
+    });
 
     this.importing = false;
 
   }
 
+  /**
+   * Gets default project JSON used for import data
+   */
+  getDefaultProjectJson() {
+    return {
+      source: {
+        project: {
+          location: ''
+        }
+      },
+      project: {
+        name: '',
+        description: '',
+        visibility: 'public'
+      }
+    };
+  }
+
+  /**
+   * Check changeable status for project name field
+   */
+  checkChangeableNameStatus() {
+    if ('config' === this.currentTab) {
+      this.importProjectData.project.name = angular.copy(this.projectName);
+      return;
+    }
+    this.isChangeableName = this.projectName === this.importProjectData.project.name;
+  }
+
+  /**
+   * Check changeable status for project description field
+   */
+  checkChangeableDescriptionStatus() {
+      if ('config' === this.currentTab) {
+        this.importProjectData.project.description = angular.copy(this.projectDescription);
+        return;
+      }
+      this.isChangeableDescription = this.projectDescription === this.importProjectData.project.description;
+  }
 
   /**
    * Fetching operation has been done, so get workspaces and websocket connection
@@ -216,11 +265,28 @@ class CreateProjectCtrl {
    */
   setCurrentTab(tab) {
     this.currentTab = tab;
-    if ('zip' === tab) {
-      this.importProjectData.source.project.type = 'zip';
-    } else if ('git' === tab) {
+    this.importProjectData = this.getDefaultProjectJson();
+
+    if ('blank' === tab) {
+      this.importProjectData.project.type = 'blank';
+    } else if ('git' === tab || 'github' === tab) {
       this.importProjectData.source.project.type = 'git';
+    } else if ('zip' === tab) {
+      this.importProjectData.project.type = '';
+    } else if ('config' === tab) {
+      this.importProjectData.project.type = 'blank';
+      this.importProjectData.source.project.type = 'git';
+      // set name and description from input fields into object
+      if (!this.isChangeableDescription) {
+        this.importProjectData.project.description = angular.copy(this.projectDescription);
+      }
+      if (!this.isChangeableName) {
+        this.importProjectData.project.name = angular.copy(this.projectName);
+      }
+      this.refreshCM();
     }
+    // github and samples tabs have broadcast selection events for isReady status
+    this.isReady = !('github' === tab || 'samples' === tab);
   }
 
   /**
@@ -229,6 +295,13 @@ class CreateProjectCtrl {
   import() {
     var promise;
 
+    // set name and description for imported project
+    if (!this.isChangeableDescription) {
+      this.importProjectData.project.description = angular.copy(this.projectDescription);
+    }
+    if (!this.isChangeableName) {
+      this.importProjectData.project.name = angular.copy(this.projectName);
+    }
     // check workspace is selected
     if (!this.workspaceSelected || !this.workspaceSelected.workspaceReference) {
       this.$mdDialog.show(
@@ -251,7 +324,7 @@ class CreateProjectCtrl {
 
 
     // select mode (create or import)
-    if (this.currentTab === 'blank') {
+    if (this.currentTab === 'blank' || this.currentTab === 'config') {
       // no source, data is .project subpart
       promise = this.codenvyAPI.getProject().createProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData.project);
       mode = 'createProject';
@@ -261,9 +334,6 @@ class CreateProjectCtrl {
       this.messageBus.subscribe(channel, (message) => {
         this.importingData = message.line;
       });
-      // no type when importing
-      delete this.importProjectData.project.type;
-
       promise = this.codenvyAPI.getProject().importProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData);
     }
     promise.then((data) => {
@@ -342,6 +412,9 @@ class CreateProjectCtrl {
     return this.importing;
   }
 
+  isReadyToCreate() {
+    return !this.importing && this.isReady;
+  }
 
 }
 

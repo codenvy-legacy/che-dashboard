@@ -21,8 +21,9 @@ class CreateProjectGithubCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $http, $q, $window, $location, $browser, $modal, $filter, GitHub, githubPopup, gitHubTokenStore, githubOrganizationNameResolver) {
+  constructor (codenvyAPI, $rootScope, $http, $q, $window, $location, $browser, $modal, $filter, GitHub, githubPopup, gitHubTokenStore, githubOrganizationNameResolver) {
     this.$http = $http;
+    this.$rootScope = $rootScope;
     this.$q = $q;
     this.$window = $window;
     this.$location = $location;
@@ -50,8 +51,6 @@ class CreateProjectGithubCtrl {
     this.gitHubRepositories = [];
 
     this.state = 'IDLE';
-
-
   }
 
   askLoad() {
@@ -159,6 +158,8 @@ class CreateProjectGithubCtrl {
 
   selectRepository(gitHubRepository) {
     this.selectedRepository = gitHubRepository;
+    // broadcast event
+    this.$rootScope.$broadcast('create-project-github:selected');
   }
 
 

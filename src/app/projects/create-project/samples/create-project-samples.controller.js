@@ -20,7 +20,8 @@ class CreateProjectSamplesCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI) {
+  constructor($rootScope, codenvyAPI) {
+    this.$rootScope = $rootScope;
     this.codenvyAPI = codenvyAPI;
 
     // ask to load codenvy templates
@@ -61,7 +62,7 @@ class CreateProjectSamplesCtrl {
     createProjectCtrl.importProjectData.source.project.parameters = template.source.parameters;
     // update name, type, description
     createProjectCtrl.importProjectData.project.description = template.description;
-    createProjectCtrl.importProjectData.project.type = template.type;
+    createProjectCtrl.importProjectData.project.type = template.projectType;
 
     var name = template.displayName;
     // strip space
@@ -70,7 +71,8 @@ class CreateProjectSamplesCtrl {
     name = name.replace(/\./g, '_');
     createProjectCtrl.importProjectData.project.name = name;
 
-
+    // broadcast event
+    this.$rootScope.$broadcast('create-project-samples:selected');
   }
 
 
