@@ -31,6 +31,7 @@ class CreateWorkspaceCtrl {
     this.members = [];
 
     this.workspace.ram = 4000;
+    this.addCurrentUser();
 
     if (this.codenvyAPI.getAccount().getAccounts().length > 0) {
       this.accounts = this.codenvyAPI.getAccount().getAccounts();
@@ -41,6 +42,19 @@ class CreateWorkspaceCtrl {
         this.account = this.accounts[0];
       });
     }
+
+
+  }
+
+  addCurrentUser() {
+    let currentUser = this.codenvyAPI.getUser().getUser();
+    let roles = [];
+    roles.push('workspace/admin');
+    roles.push('workspace/developer');
+    
+    currentUser.name = '';
+    currentUser.role = this.codenvyAPI.getUser().getDisplayRole(roles);
+    this.members.push(currentUser);
   }
 
   createWorkspace() {
