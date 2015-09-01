@@ -37,7 +37,7 @@ class AddCreditcardCtrl {
     };
 
     this.options = {
-      debug: true,
+      debug: false,
       formatting: true
     };
 
