@@ -10,7 +10,7 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="Welcome" cdvy-subheader-title="Setup your account in 4 steps..." theme="onboarding-theme"></cdvy-toolbar>
+<cdvy-toolbar cdvy-title="Welcome" cdvy-subheader-title="Setup your account in {{onBoardCtrl.isCreditCardServiceAvailable ? 4 : 3}} steps..." theme="onboarding-theme"></cdvy-toolbar>
 
 <md-content class="onboarding-content" md-scroll-y flex>
   <div class="onboarding-first-panel" md-theme="onboarding-theme">
@@ -51,7 +51,7 @@
   </cdvy-panel>
 
   <div class="onboard-separator" layout="row" layout-align="center center">
-    <md-icon md-svg-src="assets/images/next-step-separator.svg"></md-icon>
+    <md-icon md-svg-src="assets/images/next-step-separator.svg" ng-if="onBoardCtrl.isCreditCardServiceAvailable"></md-icon>
   </div>
 
   <cdvy-panel class="onboard-panel"
@@ -61,7 +61,7 @@
               cdvy-title="Step 3 - Add a credit card (optional)"
               cdvy-collapse="true"
               cdvy-panel-id="onboarding-step3"
-              ng-init="onBoardCtrl.initStep(3)">
+              ng-init="onBoardCtrl.initStep(3)" ng-if="onBoardCtrl.isCreditCardServiceAvailable">
     <ng-form name="creditCardInformationForm" id="creditCardInformationForm">
       <div layout="row" layout-align="start start" ng-controller="CreditcardCtrl as creditCardCtrl">
         <image class="onboard-image-panel" src="assets/images/creditcard.svg"></image>
@@ -99,7 +99,7 @@
               ng-class="onBoardCtrl.currentStep >= 4 ? 'onboard-panel-step-enabled' : 'onboard-panel-step-disabled'"
               cdvy-toggle="true"
               cdvy-title-svg-icon="assets/images/to-complete.svg"
-              cdvy-title="Step 4 - Create project"
+              cdvy-title="Step {{onBoardCtrl.isCreditCardServiceAvailable ? 4 : 3}} - Create project"
               cdvy-collapse="true"
               cdvy-panel-id="onboarding-step4">
     <ng-form name="creditCardForm" >

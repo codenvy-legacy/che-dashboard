@@ -37,6 +37,7 @@ class OnBoardCtrl {
 
     this.devMode = userDashboardConfig.developmentMode;
 
+    this.isCreditCardServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getCreditCardServicePath());
   }
 
 
@@ -139,6 +140,10 @@ class OnBoardCtrl {
 
     // go to the next step
     this.nextStep();
+
+    if (!this.isCreditCardServiceAvailable) {
+      this.skipCreditCard();
+    }
   }
 
   /**
