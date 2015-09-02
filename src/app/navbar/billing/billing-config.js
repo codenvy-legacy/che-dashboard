@@ -28,7 +28,7 @@ class BillingConfig {
           controller: 'BillingCtrl',
           controllerAs: 'billingCtrl',
           resolve: {
-            check: function ($q, codenvyService) {
+            check: ['$q', 'codenvyService', function ($q, codenvyService) {
               var defer = $q.defer();
               codenvyService.fetchServices().then(() => {
                 if (codenvyService.isServiceAvailable('saas')) {
@@ -38,7 +38,7 @@ class BillingConfig {
                 }
               });
               return defer.promise;
-            }
+            }]
           }
         });
     });

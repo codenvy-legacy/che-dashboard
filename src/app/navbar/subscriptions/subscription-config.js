@@ -31,7 +31,7 @@ class SubscriptionConfig {
         controller: 'SubscriptionCtrl',
         controllerAs: 'subscriptionCtrl',
         resolve: {
-          check: function ($q, codenvyService) {
+          check: ['$q', 'codenvyService', function ($q, codenvyService) {
             var defer = $q.defer();
             codenvyService.fetchServices().then(() => {
               if (codenvyService.isServiceAvailable('subscription')) {
@@ -41,7 +41,7 @@ class SubscriptionConfig {
               }
             });
             return defer.promise;
-          }
+          }]
         }
       });
     });
