@@ -46,6 +46,16 @@
             </div>
           </div>
         </cdvy-panel>
+        <cdvy-panel cdvy-title="Leave Workspace" class="workspace-details-content" ng-if="workspaceDetailsCtrl.isMember">
+          <div layout="row" flex layout-align="space-around start">
+            <label flex="15" class="workspace-details-description">
+              This operation removes you as a workspace member.
+            </label>
+            <div layout="column" flex="85">
+              <cdvy-button-default cdvy-button-title="Leave" ng-click="workspaceDetailsCtrl.leaveWorkspace($event)"/>
+            </div>
+          </div>
+        </cdvy-panel>
       </md-tab-body>
     </md-tab>
     <md-tab ng-click="allowShowResources = true;">

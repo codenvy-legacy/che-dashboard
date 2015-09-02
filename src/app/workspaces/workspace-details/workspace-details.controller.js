@@ -27,6 +27,7 @@ class WorkspaceDetailsCtrl {
     this.$location = $location;
 
     this.workspaceId = $route.current.params.workspaceId;
+    this.currentUser = this.codenvyAPI.getUser().getUser();
 
     this.loading = true;
 
@@ -45,8 +46,7 @@ class WorkspaceDetailsCtrl {
     } else {
       this.updateWorkspaceData();
     }
-
-
+    this.getMembers();
   }
 
   //Update the workspace data to be displayed.
@@ -56,9 +56,39 @@ class WorkspaceDetailsCtrl {
     this.newName = angular.copy(this.workspaceDetails.name);
   }
 
+  getMembers() {
+    this.members = this.codenvyAPI.getWorkspace().getMembers(this.workspaceId);
+    if (!this.members) {
+      let promise = this.codenvyAPI.getWorkspace().fetchMembers(this.workspaceId);
+      promise.then(() => {
+        this.members = this.codenvyAPI.getWorkspace().getMembers(this.workspaceId);
+        this.isMember = this.isMember();
+      });
+    } else {
+      this.isMember = this.isMember();
+    }
+  }
+
+  isMember() {
+    if (!this.members || this.members.length === 0) {
+      return false;
+    }
+
+    let found = false;
+    for (var i = 0; i < this.members.length; i++) {
+      if (this.members[i].userId === this.currentUser.id) {
+        found = true;
+        break;
+      }
+    }
+    return found;
+  }
+
   //Rename the workspace.
   renameWorkspace(isValidName) {
-    if (!isValidName) {return;}
+    if (!isValidName) {
+      return;
+    }
 
     this.isLoading = true;
 
@@ -89,6 +119,27 @@ class WorkspaceDetailsCtrl {
         this.$location.path('/workspaces');
       }, (error) => {
         this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Delete workspace failed.');
+        console.log('error', error);
+      });
+    });
+  }
+
+  //Perform workspace deletion.
+  leaveWorkspace(event) {
+    var confirm = this.$mdDialog.confirm()
+      .title('Would you like to leave the workspace ' + this.workspaceDetails.name)
+      .content('Please confirm for leaving the workspace.')
+      .ariaLabel('Leave workspace')
+      .ok('Leave it!')
+      .cancel('Cancel')
+      .clickOutsideToClose(true)
+      .targetEvent(event);
+    this.$mdDialog.show(confirm).then(() => {
+      let promise = this.codenvyAPI.getWorkspace().deleteMember(this.workspaceId, this.currentUser.id);
+      promise.then(() => {
+        this.$location.path('/workspaces');
+      }, (error) => {
+        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Leave workspace failed.');
         console.log('error', error);
       });
     });
