@@ -81,9 +81,7 @@ class CodenvyProject {
 
     // well we need to clear globally the current projects
     //TODO this.projectsPerWorkspaceMap.clear();
-    for (var member in this.projectsPerWorkspace) {
-      delete this.projectsPerWorkspace[member];
-    }
+
     this.workspaces.length = 0;
     // for each workspace
     workspaces.forEach((workspace) => {
@@ -120,6 +118,9 @@ class CodenvyProject {
 
   }
 
+  onDeleteWorkspace(workspaceId) {
+    delete this.projectsPerWorkspace[workspaceId];
+  }
 
   /**
    * Fetch the projects for the given workspace

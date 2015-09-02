@@ -200,8 +200,18 @@ class CodenvyWorkspace {
    * @returns {*|promise|n|N}
    */
   deleteWorkspace(workspaceId) {
+    var defer = this.$q.defer();
     let promise = this.remoteWorkspaceAPI.delete({workspaceId : workspaceId}).$promise;
-    return promise;
+    promise.then(() => {
+      this.listeners.forEach((listener) => {
+        listener.onDeleteWorkspace(workspaceId);
+      });
+      defer.resolve();
+    }, (error) => {
+        defer.reject(error);
+      });
+
+    return defer.promise;
   }
 
   /**

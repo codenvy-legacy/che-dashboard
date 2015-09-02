@@ -30,10 +30,9 @@ class ListProjectsCtrl {
     this.filtersWorkspaceSelected = {};
     this.projectFilter = {name: ''};
     this.projectsSelectedStatus = {};
-
     this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
-    this.workspaces = codenvyAPI.getWorkspace().getWorkspaces();
-    this.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
+
+
 
     this.isLoading = true;
     // fetch workspaces when initializing
@@ -55,9 +54,7 @@ class ListProjectsCtrl {
     this.profileCreationDate = profilePreferences['codenvy:created'];
 
     this.dropDownOptionsList = [
-      /*{
-       name: 'Bulk Edit'
-       },*/ {
+      {
         name: 'Filter Workspace', id: 'workspaceFilter'
       }, {
         name: 'Delete all selected projects', deleteAll: 'true'
@@ -72,6 +69,8 @@ class ListProjectsCtrl {
   }
 
   updateData() {
+    this.workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
+    this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
     // init the filters of workspaces
     this.workspaces.forEach((workspace) => {
       this.filtersWorkspaceSelected[workspace.workspaceReference.id] = true;
