@@ -12,11 +12,17 @@
 -->
 <cdvy-toolbar cdvy-title="Team Members"></cdvy-toolbar>
 <md-toolbar class="md-toolbar-tools" md-theme="toolbar-theme">
-  <md-select placeholder="Select an account" class="team-members-account"
+
+  <div layout="row" flex layout-align="start center" class="team-members-account-container">
+    <div class="team-members-account-label">
+      Manage team of account:
+    </div>
+    <md-select placeholder="Select an account" class="team-members-account"
                ng-model="teamCtrl.account" ng-change="teamCtrl.getAccountMembers()">
-    <md-option ng-repeat="account in teamCtrl.accounts" ng-value="account" >{{account.name}}</md-option>
-  </md-select>
-  </cdvy-label-container>
+      <md-option ng-repeat="account in teamCtrl.accounts" ng-value="account" >{{account.name}}</md-option>
+    </md-select>
+  </div>
+
   <span flex></span>
 </md-toolbar>
 <md-content md-scroll-y flex md-theme="maincontent-theme">
