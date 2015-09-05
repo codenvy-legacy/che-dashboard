@@ -62,7 +62,7 @@ class CodenvySelect {
         return;
       }
       // avoid model
-      if (key.indexOf('ngModel') === 0) {
+      if (key === 'ngModel') {
         return;
       }
       var value = attrs[key];
@@ -90,38 +90,33 @@ class CodenvySelect {
     // search the select field
     var selectElements = element.find('select');
 
-    $scope.$watch('myForm.desk' + $scope.selectName + '.$pristine', (isPristine) => {
-      if (isPristine) {
-        element.addClass('desktop-pristine');
+    let optionValuesContent = '';
+    $scope.optionValues.forEach((optionValue) => {
+      optionValuesContent += '<option  value=\'' + (optionValue.id ? optionValue.id : optionValue.name) + '\'>' + optionValue.name + '</option>';
+    });
+    // Append the value elements in the select element. The operation is performed after rendering the page.
+    // It is important for the speed of loading
+    selectElements.append(optionValuesContent);
+
+    $scope.$watch('value', (newVal) => {
+      if (newVal === '' || typeof newVal === 'undefined') {
+        selectElements.addClass('disabled');
       } else {
-        element.removeClass('desktop-pristine');
+        selectElements.removeClass('disabled');
       }
+      if ($scope.valueModel !== newVal) {
+        angular.forEach(selectElements, function (selectElement) {
+          //Sets current value
+          selectElement.value = $scope.value;
+        });
+      }
+    });
 
-      $scope.$watch('valueModel', (newVal) => {
-        if (typeof newVal === 'undefined') {
-          return;
-        }
-
+    $scope.$watch('valueModel', (newVal) => {
+      if (typeof newVal !== 'undefined' && $scope.value !== newVal) {
         $scope.value = newVal;
         $scope.hideOptions();
-
-        angular.forEach(selectElements, function (selectElement) {
-          selectElement.className = newVal === '' ? 'disabled' : '';
-        });
-      });
-
-      let content = '';
-      $scope.optionValues.forEach((optionValue) => {
-        content += '<option  value=\'' + (optionValue.id ? optionValue.id : optionValue.name) + '\'>' + optionValue.name + '</option>';
-      });
-
-      // Append the value elements in the select element
-      selectElements.append(content);
-
-      angular.forEach(selectElements, function (selectElement) {
-        selectElement.value = $scope.value;
-      });
-
+      }
     });
 
     $scope.showOptions = function () {
