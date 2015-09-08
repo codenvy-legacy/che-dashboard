@@ -97,6 +97,13 @@ class CodenvySelect {
     // Append the value elements in the select element. The operation is performed after rendering the page.
     // It is important for the speed of loading
     selectElements.append(optionValuesContent);
+    //update current state when widget is ready
+    if ($scope.value) {
+      angular.forEach(selectElements, (selectElement) => {
+        //Sets current value
+        selectElement.value = $scope.value;
+      });
+    }
 
     $scope.$watch('value', (newVal) => {
       if (newVal === '' || typeof newVal === 'undefined') {
@@ -105,7 +112,7 @@ class CodenvySelect {
         selectElements.removeClass('disabled');
       }
       if ($scope.valueModel !== newVal) {
-        angular.forEach(selectElements, function (selectElement) {
+        angular.forEach(selectElements, (selectElement) => {
           //Sets current value
           selectElement.value = $scope.value;
         });
