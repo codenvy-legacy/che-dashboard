@@ -14,7 +14,6 @@ import NavBarCtrl from '../navbar/navbar.controller';
 import NavBar from '../navbar/navbar.directive.js';
 import NavBarSelectedCtrl from '../navbar/navbar-selected.controller.js';
 import NavBarSelected from '../navbar/navbar-selected.directive.js';
-import UdBetaWidget from '../navbar/ud-beta-widget.directive.js';
 import HelpCtrl from '../navbar/help/help.controller.js';
 import HelpWidget from '../navbar/help/help.directive.js';
 import LogoutCtrl from '../navbar/logout/logout.controller.js';
@@ -29,7 +28,6 @@ class NavbarConfig {
     register.controller('NavBarSelectedCtrl', NavBarSelectedCtrl);
     register.directive('cdvyNavBar', NavBar);
     register.directive('navBarSelected', NavBarSelected);
-    register.directive('udBetaWidget', UdBetaWidget);
     register.directive('helpWidget', HelpWidget);
     register.directive('logoutWidget', LogoutWidget);
   }
