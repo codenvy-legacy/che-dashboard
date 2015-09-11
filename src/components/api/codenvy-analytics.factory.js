@@ -30,7 +30,7 @@ class CodenvyAnalytics {
       log: {method: 'POST', url: '/api/analytics/log/dashboard-usage'},
       factory_used: {
         method: 'GET',
-        url: '/api/analytics/public-metric/factory_used?factory=https%3A%2F%2Fcodenvy.com%2Ffactory%3Fid%3D:factoryUrl'
+        url: '/api/analytics/public-metric/factory_used?factory_id=:factoryId'
       },
       sessionUsage: {method: 'POST', url: '/api/analytics/log/session-usage'}
     });
@@ -47,12 +47,12 @@ class CodenvyAnalytics {
   }
 
   /**
-   * Get the factory used info for the factoryUrl
-   * @param factoryUrl the factory URL
+   * Get the factory used info for the factoryIdgulp serve
+   * @param factoryId the factory Id
    * @returns {*|promise|n|N}
    */
-  getFactoryUsedFromUrl(factoryUrl) {
-    return this.remoteAnalytisAPI.factory_used({factoryUrl: factoryUrl}).$promise;
+  getFactoryUsedFromId(factoryId) {
+    return this.remoteAnalytisAPI.factory_used({factoryId: factoryId}).$promise;
   }
 
   logSession(id) {

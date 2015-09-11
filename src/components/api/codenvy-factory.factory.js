@@ -171,7 +171,7 @@ class CodenvyFactory {
         this.factories.push(value);
       });
 
-      let viewsPromise = this.codenvyAnalytics.getFactoryUsedFromUrl(tmpFactory.id);
+      let viewsPromise = this.codenvyAnalytics.getFactoryUsedFromId(tmpFactory.id);
 
       viewsPromise.then((factoryUsed) => {
         factory.views += parseInt(factoryUsed.value);
@@ -183,7 +183,7 @@ class CodenvyFactory {
       if (error.status === 304) {
         let findFactory = this.factoriesById.get(factoryId);
         if (findFactory) {
-          let viewsPromise = this.codenvyAnalytics.getFactoryUsedFromUrl(factoryId);
+          let viewsPromise = this.codenvyAnalytics.getFactoryUsedFromId(factoryId);
           viewsPromise.then((factoryUsed) => {
             findFactory.views = parseInt(factoryUsed.value);
           });
