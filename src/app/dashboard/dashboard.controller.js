@@ -23,30 +23,8 @@ class DashboardCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, codenvyUser, imsPropertiesApi, imsEventLoggingApi) {
+  constructor(codenvyAPI) {
     this.isSaasServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getSaas().getSaasServicePath());
-    this.imsPropertiesApi = imsPropertiesApi;
-    this.imsEventLoggingApi = imsEventLoggingApi;
-    this.codenvyUser = codenvyUser;
-
-    this.logEventOnAdminFirstLogin();
-  }
-
-  /**
-   * Log specific event if it is first admin login.
-   */
-  logEventOnAdminFirstLogin() {
-    if (this.codenvyUser.isAdmin()) {
-      let property = this.imsPropertiesApi.getProperty('firstAdminLoginDone');
-      if (!property || property !== 'true') {
-        let promise = this.imsEventLoggingApi.logSaasCdecFirstLoginEvent();
-        promise.then(() => {
-          this.imsPropertiesApi.storeProperty('firstAdminLoginDone', 'true');
-        }, (error) => {
-            console.log('error', error);
-        });
-      }
-    }
   }
 }
 
