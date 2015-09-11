@@ -26,6 +26,8 @@ class DashboardCtrl {
   constructor(codenvyAPI) {
     this.isSaasServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getSaas().getSaasServicePath());
   }
+
+
 }
 
 export default DashboardCtrl;
