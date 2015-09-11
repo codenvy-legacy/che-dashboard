@@ -17,4 +17,5 @@ import './ims-subscription.factory';
 import './ims-update.factory';
 import './ims-nodes.factory';
 import './ims-properties.factory';
+import './ims-eventlogging.factory';
 

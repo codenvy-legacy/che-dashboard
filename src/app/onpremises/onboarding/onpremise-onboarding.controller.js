@@ -16,9 +16,10 @@ class OnPremisesOnboardingCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, imsPropertiesApi, $rootScope, $location, userDashboardConfig) {
+  constructor(codenvyAPI, imsPropertiesApi, imsEventLoggingApi, $rootScope, $location, userDashboardConfig) {
     this.codenvyAPI = codenvyAPI;
     this.imsPropertiesApi = imsPropertiesApi;
+    this.imsEventLoggingApi = imsEventLoggingApi;
     this.$rootScope = $rootScope;
     this.$location = $location;
     this.stepsIcons = new Map();
@@ -26,8 +27,8 @@ class OnPremisesOnboardingCtrl {
     this.completed = false;
     this.devMode = userDashboardConfig.developmentMode;
     this.agreementButtonEnabled = true;
+    this.logEventOnFirstLogin();
   }
-
 
   /**
    * Gets the icon for the provided step
@@ -117,6 +118,21 @@ class OnPremisesOnboardingCtrl {
 
   inDevelopmentMode() {
     return this.devMode;
+  }
+
+ /**
+   * Log specific event if it is first admin login.
+   */
+  logEventOnFirstLogin() {
+    let property = this.imsPropertiesApi.getProperty('firstAdminLoginDone');
+    if (!property || property !== 'true') {
+      let promise = this.imsEventLoggingApi.logSaasCdecFirstLoginEvent();
+      promise.then(() => {
+        this.imsPropertiesApi.storeProperty('firstAdminLoginDone', 'true');
+      }, (error) => {
+          console.log('error', error);
+      });
+    }
   }
 }
 
