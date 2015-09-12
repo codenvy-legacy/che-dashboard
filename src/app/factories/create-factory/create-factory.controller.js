@@ -50,7 +50,6 @@ class CreateFactoryCtrl {
       this.$location.path('/factory/' + factory.id);
     }, (error) => {
       this.isImporting = false;
-      this.factoryContent = null;
       this.codenvyNotification.showError(error.data.message ? error.data.message : 'Create factory failed.');
       console.log('error', error);
     });

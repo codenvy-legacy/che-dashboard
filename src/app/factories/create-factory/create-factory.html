@@ -53,7 +53,7 @@
     <cdvy-panel cdvy-title="Factory Configuration" ng-class="{ 'disabled-state': !createFactoryCtrl.factoryContent }">
       <div class="factory-configuration-panel">
         <md-content layout="column" layout-fill>
-          <div class="json-editor" ng-if="createFactoryCtrl.factoryContent">
+          <div class="json-editor" ng-if="createFactoryCtrl.factoryContent !== null">
             <textarea ui-codemirror ng-model="createFactoryCtrl.factoryContent"></textarea>
           </div>
         </md-content>
