@@ -33,7 +33,7 @@
                       cdvy-consumed="{{billingCtrl.usedGBH}}"
                       cdvy-provided="{{billingCtrl.providedResources.prepaidAmount + billingCtrl.providedResources.freeAmount}}"
                       cdvy-consumed-description="{{billingCtrl.usedGBH}} GB hours consumed"
-                      cdvy-provided-description="{{billingCtrl.providedResources.prepaidAmount + billingCtrl.providedResources.freeAmount}} GB hours allocated">
+                      cdvy-provided-description="{{billingCtrl.providedResources.prepaidAmount + billingCtrl.providedResources.freeAmount}} GB hours prepaid this month">
 
       </balance-simple>
       <balance-extended ng-if="billingCtrl.isPayAsYouGo"

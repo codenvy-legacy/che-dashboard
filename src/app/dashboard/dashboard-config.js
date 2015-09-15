@@ -43,7 +43,16 @@ class DashboardConfig {
       $routeProvider.accessWhen('/', {
         templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardCtrl',
-        controllerAs: 'dashboardCtrl'
+        controllerAs: 'dashboardCtrl',
+        resolve: {
+          check: ['$q', 'codenvyService', function ($q, codenvyService) {
+            var defer = $q.defer();
+            codenvyService.fetchServices().then(() => {
+              defer.resolve();
+            });
+            return defer.promise;
+          }]
+        }
       });
     })
     ;
