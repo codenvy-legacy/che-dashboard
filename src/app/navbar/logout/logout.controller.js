@@ -38,7 +38,7 @@ class LogoutCtrl {
     let data = {token: this.$cookies['session-access-key']};
     let promise = this.logoutAPI.save(data).$promise;
     promise.then(() => {
-      this.$window.location.href = '/';
+      this.$window.location.href = '/site/login';
     });
 
   }
