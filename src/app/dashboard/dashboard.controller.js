@@ -15,6 +15,7 @@
  * @name dashboard.controller:DashboardCtrl
  * @description This class is handling the controller of the dashboard
  * @author Florent Benoit
+ * @author Oleksii Orel
  */
 class DashboardCtrl {
 
@@ -23,8 +24,23 @@ class DashboardCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI) {
+  constructor($rootScope, codenvyAPI, $timeout) {
     this.isSaasServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getSaas().getSaasServicePath());
+    this.isContentDisplayed = true;
+
+    var isFirstLoad = true;
+
+    $rootScope.$on('dashboard-button:clicked', () => {
+      if(!isFirstLoad){
+        //Update some including widgets if second time clicked
+        this.isContentDisplayed = false;
+        $timeout( () => {
+          this.isContentDisplayed = true;
+        }, 100);
+      }
+      isFirstLoad=false;
+    });
+
   }
 
 

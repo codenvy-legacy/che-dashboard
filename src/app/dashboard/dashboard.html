@@ -10,12 +10,11 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="Dashboard"  theme="dashboard-theme"></cdvy-toolbar>
+<cdvy-toolbar cdvy-title="Dashboard" theme="dashboard-theme"></cdvy-toolbar>
 <md-content layout="column" class="dashboard-content" md-scroll-y flex>
-  <dashboard-overview ng-if="dashboardCtrl.isSaasServiceAvailable"></dashboard-overview>
-
-  <dashboard-learn-more></dashboard-learn-more>
-
-  <dashboard-last-projects></dashboard-last-projects>
-
+  <div ng-if="dashboardCtrl.isContentDisplayed">
+    <dashboard-overview ng-if="dashboardCtrl.isSaasServiceAvailable"></dashboard-overview>
+    <dashboard-learn-more></dashboard-learn-more>
+    <dashboard-last-projects></dashboard-last-projects>
+  </div>
 </md-content>

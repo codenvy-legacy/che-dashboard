@@ -16,7 +16,8 @@ class NavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($mdSidenav, userDashboardConfig, codenvyAPI, onBoarding) {
+  constructor($rootScope, $mdSidenav, userDashboardConfig, codenvyAPI, onBoarding) {
+    this.$rootScope = $rootScope;
     this.mdSidenav = $mdSidenav;
     this.codenvyAPI = codenvyAPI;
     this.onBoarding = onBoarding;
