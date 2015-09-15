@@ -157,10 +157,11 @@ class CodenvyFactory {
         tmpFactory.project.name = '';
       }
 
+      let findFactory = this.factoriesById.get(factoryId);
       let factory = {
         originFactory: tmpFactory,
         seeURL: seeLink ? seeLink.href : '',
-        views: 0
+        views: findFactory && findFactory.views ? findFactory.views : 0
       };
 
       //update factories map
@@ -174,10 +175,14 @@ class CodenvyFactory {
       let viewsPromise = this.codenvyAnalytics.getFactoryUsedFromId(tmpFactory.id);
 
       viewsPromise.then((factoryUsed) => {
-        factory.views += parseInt(factoryUsed.value);
+        factory.views = parseInt(factoryUsed.value);
         deferred.resolve(factory);
       }, (error) => {
-        deferred.reject(error);
+        if (error.status === 304) {
+          deferred.resolve(factory);
+        } else {
+          deferred.reject(error);
+        }
       });
     }, (error) => {
       if (error.status === 304) {
