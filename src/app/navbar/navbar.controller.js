@@ -16,8 +16,9 @@ class NavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($mdSidenav, userDashboardConfig, codenvyAPI, onBoarding) {
+  constructor($mdSidenav, userDashboardConfig, codenvyAPI, onBoarding, $route) {
     this.mdSidenav = $mdSidenav;
+    this.$route = $route;
     this.codenvyAPI = codenvyAPI;
     this.onBoarding = onBoarding;
     this.codenvyUser = codenvyAPI.getUser();
@@ -50,6 +51,10 @@ class NavBarCtrl {
 
   updateAdminRole() {
     this.admin = this.codenvyUser.isAdmin();
+  }
+
+  reload() {
+    this.$route.reload();
   }
 
   /**
