@@ -55,7 +55,6 @@ class CreateProjectSamplesCtrl {
    * @param createProjectCtrl callback controller
    */
   selectTemplate(template, createProjectCtrl) {
-
     // update source details
     createProjectCtrl.importProjectData.source.project.type = template.source.type;
     createProjectCtrl.importProjectData.source.project.location = template.source.location;
@@ -63,6 +62,8 @@ class CreateProjectSamplesCtrl {
     // update name, type, description
     createProjectCtrl.importProjectData.project.description = template.description;
     createProjectCtrl.importProjectData.project.type = template.projectType;
+    createProjectCtrl.importProjectData.project.runners = template.runners;
+    createProjectCtrl.importProjectData.project.builders = template.builders;
 
     var name = template.displayName;
     // strip space
