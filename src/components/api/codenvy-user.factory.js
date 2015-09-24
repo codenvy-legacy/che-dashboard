@@ -120,6 +120,7 @@ class CodenvyUser {
   fetchUserEmail(userEmail) {
     let promise = this.remoteUserAPI.findByEmail({userEmail: userEmail}).$promise;
     let parsedResultPromise = promise.then((user) => {
+      this.useridMap.set(user.id, user);
       this.userEmailMap.set(userEmail, user);
     });
 

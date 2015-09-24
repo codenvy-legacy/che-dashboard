@@ -23,7 +23,7 @@ class CodenvyWorkspace {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource, $q) {
+  constructor ($resource, $q, codenvyAnalytics, codenvyUser) {
     this.RESOURCES_LOCKED_PROPERTY = 'codenvy:resources_locked';
     this.RESOURCES_USAGE_LIMIT = 'codenvy:resources_usage_limit';
 
@@ -31,6 +31,10 @@ class CodenvyWorkspace {
     this.$resource = $resource;
 
     this.$q = $q;
+
+    this.codenvyAnalytics = codenvyAnalytics;
+
+    this.codenvyUser = codenvyUser;
 
     // current list of workspaces
     this.workspaces = [];
@@ -225,7 +229,10 @@ class CodenvyWorkspace {
     let data = {};
     data.userId = userId;
     data.roles = roles;
-
+    let user  = this.codenvyUser.getUserFromId(userId);
+    if(user && user.email) {
+      this.codenvyAnalytics.userInviteAction(workspaceId, user.email);
+    }
     return this.remoteWorkspaceAPI.addMember({workspaceId: workspaceId}, data).$promise;
   }
 

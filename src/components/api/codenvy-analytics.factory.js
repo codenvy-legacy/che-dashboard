@@ -28,6 +28,7 @@ class CodenvyAnalytics {
     // remote call
     this.remoteAnalytisAPI = this.$resource('/api/analytics/log/', {}, {
       log: {method: 'POST', url: '/api/analytics/log/dashboard-usage'},
+      user_invite: {method: 'POST', url: '/api/analytics/log/user-invite'},
       factory_used: {
         method: 'GET',
         url: '/api/analytics/public-metric/factory_used?factory_id=:factoryId'
@@ -35,6 +36,12 @@ class CodenvyAnalytics {
       sessionUsage: {method: 'POST', url: '/api/analytics/log/session-usage'}
     });
 
+  }
+
+  // need to send to analytics an event
+  userInviteAction(workspaceId, email) {
+    let data = {params: {'WS':workspaceId, 'EMAIL': email}};
+    return this.remoteAnalytisAPI.user_invite(data).$promise;
   }
 
   logAction(action) {
