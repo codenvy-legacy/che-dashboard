@@ -116,10 +116,10 @@
           </md-list>
         </section>
       </div>
-      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.userIsAdmin()"></md-divider>
+      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.userIsAdmin() && navbarCtrl.hasOnPremiseAPI()"></md-divider>
 
-      <cdvy-navbar-admin class="admin-navbar-menu" ng-show="navbarCtrl.userIsAdmin()"></cdvy-navbar-admin>
-      <cdvy-admin-links class="admin-navbar-menu" ng-if="navbarCtrl.userIsAdmin()"></cdvy-admin-links>
+      <cdvy-navbar-admin class="admin-navbar-menu" ng-show="navbarCtrl.userIsAdmin() && navbarCtrl.hasOnPremiseAPI()"></cdvy-navbar-admin>
+      <cdvy-admin-links class="admin-navbar-menu" ng-if="navbarCtrl.userIsAdmin() && navbarCtrl.hasOnPremiseAPI()"></cdvy-admin-links>
 
       <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
 

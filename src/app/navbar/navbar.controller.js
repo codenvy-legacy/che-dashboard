@@ -16,16 +16,17 @@ class NavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($mdSidenav, userDashboardConfig, codenvyAPI, onBoarding, $route) {
+  constructor($mdSidenav, userDashboardConfig, codenvyAPI, onBoarding, $route, imsArtifactApi) {
     this.mdSidenav = $mdSidenav;
     this.$route = $route;
     this.codenvyAPI = codenvyAPI;
     this.onBoarding = onBoarding;
+    this.imsArtifactApi = imsArtifactApi;
     this.codenvyUser = codenvyAPI.getUser();
     this.links = [{href: '#/projects', name: 'List Projects'}];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
-
+    this.onPremise = false;
     let promiseUser = this.codenvyUser.fetchUser();
     promiseUser.then(() => {
       this.updateAdminRole();
@@ -52,7 +53,20 @@ class NavBarCtrl {
   }
 
   updateAdminRole() {
+    // if admin, check if IM API is there
+    if (this.codenvyUser.isAdmin()) {
+      let promise = this.imsArtifactApi.getDownloadedArtifactsList();
+      promise.then(()=> {
+        this.onPremise = true;
+      }, () => {
+        this.onPremise = false;
+      });
+    }
     this.admin = this.codenvyUser.isAdmin();
+  }
+
+  hasOnPremiseAPI() {
+    return this.onPremise;
   }
 
   reload() {
@@ -71,7 +85,7 @@ class NavBarCtrl {
   }
 
   isSimpleUser() {
-    return !this.codenvyUser.isAdmin();
+    return this.codenvyUser.isUser();
   }
 
   flipOnpremAdminExpanded() {

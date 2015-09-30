@@ -51,7 +51,7 @@ class OnPremiseOnBoardingRedirect {
 
     let user = this.codenvyAPI.getUser();
     // if user is simple user, nothing to display
-    if (!user.isAdmin()) {
+    if (user.isUser()) {
       return {};
     }
 
