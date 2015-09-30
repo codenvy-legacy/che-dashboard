@@ -44,6 +44,8 @@ class NavBarCtrl {
     } else {
       this.profile.$promise.then(() => {
         this.email = this.profile.attributes ? this.profile.attributes.email : null;
+      }, () => {
+        this.email = 'N/A ';
       });
     }
     this.onpremAdminExpanded = true;
