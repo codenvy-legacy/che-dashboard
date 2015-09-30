@@ -23,10 +23,12 @@ class DashboardOverviewCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($location, codenvyRunner) {
+  constructor($location, codenvyRunner, codenvyAPI) {
     this.$location = $location;
     this.codenvyRunner = codenvyRunner;
     this.codenvyRunner.fetchProcesses();
+
+    this.isSaasServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getSaas().getSaasServicePath());
 
   }
 

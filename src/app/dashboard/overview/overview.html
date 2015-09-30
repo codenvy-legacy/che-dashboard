@@ -1,6 +1,6 @@
 <cdvy-box >
   <div layout="row" layout-align="space-around start" flex ng-controller="BillingCtrl as billingCtrl">
-    <div layout-align="center center" class="dashboard-overview-gbh">
+    <div ng-if="dashboardCtrl.isSaasServiceAvailable" layout-align="center center" class="dashboard-overview-gbh">
       <div class="dashboard-overview-title" flex>Gigabyte Hours</div>
       <div class="dashboard-overview-number">{{billingCtrl.usedGBH}}</div>
       <div>GBH consumed this month {{billingCtrl.providedResources.prepaidAmount ? 'out of' : ''}}</div>
@@ -22,7 +22,7 @@
       <div class="dashboard-overview-runner-desc">Active runners</div>
     </div>
 
-    <div layout-align="center center" class="dashboard-overview-charges" ng-controller="CreditcardCtrl as creditCardCtrl">
+    <div ng-if="dashboardCtrl.isSaasServiceAvailable" layout-align="center center" class="dashboard-overview-charges" ng-controller="CreditcardCtrl as creditCardCtrl">
       <div class="dashboard-overview-title" flex>Charges</div>
       <div class="dashboard-overview-desc-add-card" ng-if="creditCardCtrl.creditCards.length == 0 && creditCardCtrl.loadedCreditCards">
         <div class="dashboard-overview-desc">Remove limits and get unlimited RAM with a Pay As You Go account by adding a credit card</div>
@@ -42,5 +42,6 @@
         </div>
       </div>
     </div>
+  </div>
 
 </cdvy-box>
