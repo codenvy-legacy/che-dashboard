@@ -90,6 +90,7 @@ class CodenvyUser {
 
     // check admin or not
     let isAdminPromise = this.fetchIsUserInRole('admin', 'system', '');
+    let isUserPromise = this.fetchIsUserInRole('user', 'system', '');
 
     let promise = this.user.$promise;
     // check if if was OK or not
@@ -98,7 +99,7 @@ class CodenvyUser {
     }, () => {
       this.isLogged = false;
     });
-    this.userPromise = this.$q.all([updatePromise, isAdminPromise]);
+    this.userPromise = this.$q.all([updatePromise, isUserPromise, isAdminPromise]);
     return this.userPromise;
   }
 
@@ -154,6 +155,15 @@ class CodenvyUser {
    */
   isAdmin() {
     let userInRole = this.isUserInRoleMap.get('system/admin:');
+    return userInRole && userInRole.isInRole;
+  }
+
+  /**
+   * Check if user is user or not by checking the user role
+   * @returns {*}
+   */
+  isUser() {
+    let userInRole = this.isUserInRoleMap.get('system/user:');
     return userInRole && userInRole.isInRole;
   }
 
