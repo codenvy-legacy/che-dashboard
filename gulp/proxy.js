@@ -22,7 +22,7 @@ var serverOptions = {
 
 var options = minimist(process.argv.slice(2), serverOptions);
 
-var patterns = ['/api', '/ws', '/datasource', '/java-ca', '/im'];
+var patterns = ['/api', '/ws', '/datasource', '/java-ca', '/im', '/che'];
 
 var proxies = []
 
@@ -31,6 +31,8 @@ patterns.forEach(function(pattern) {
   var proxyOptions = url.parse(options.server + pattern);
   if (pattern === '/im') {
     proxyOptions.route = '/im';
+  } else if (pattern === '/che') {
+    proxyOptions.route = '/che';
   } else {
     proxyOptions.route = '/api';
   }
