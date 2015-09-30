@@ -28,6 +28,7 @@ class CodenvyAnalyticsSession {
    */
   constructor ($interval, uuid4, codenvyAnalytics, $window) {
     this.$interval = $interval;
+    this.uuid4 = uuid4;
     this.codenvyAnalytics = codenvyAnalytics;
 
     this.$window = $window;
@@ -37,6 +38,7 @@ class CodenvyAnalyticsSession {
     this.updateUsageTime();
 
     this.TTL = 60000; // 1mn
+    this.RENEW_TTL = 600000; // 10mn
 
     // init the events
     this.initEvents();
@@ -56,7 +58,9 @@ class CodenvyAnalyticsSession {
     var chkevent = this.$window.attachEvent ? 'onbeforeunload' : 'beforeunload';
 
     myEvent(chkevent, () =>  {
-      this.onWindowClose();
+      // always log session when closing tab
+      this.codenvyAnalytics.logSession(this.uuid);
+      return;
     });
 
     this.$window.onfocus = () => {
@@ -70,15 +74,6 @@ class CodenvyAnalyticsSession {
     };
 
   }
-
-  /**
-   * Action to perform when window is closing
-   */
-  onWindowClose() {
-    // notify the analytics with usage
-    this.logSessionUsageEvent(true);
-  }
-
 
   /**
    * Update last usage time with current date
@@ -95,6 +90,7 @@ class CodenvyAnalyticsSession {
     return new Date().getTime()  - this.lastUsageTime;
   }
 
+
   /**
    * True if user is usage time idle is > TTL
    * @returns {boolean}
@@ -103,12 +99,20 @@ class CodenvyAnalyticsSession {
     return this.getIdleUsageTime() > this.TTL;
   }
 
+
   /**
    * Log the current session usage.
    * If force, always log. Else, log only if delta > TTL
    * @param force
    */
   logSessionUsageEvent(force) {
+    // Change session ID if idle since a long time
+    if (this.active && this.getIdleUsageTime() > this.RENEW_TTL) {
+      // generate a new id and force to log a new event
+      this.uuid = this.uuid4.generate();
+      force = true;
+    }
+
     if (force || (this.active && this.idleDelay())) {
       this.codenvyAnalytics.logSession(this.uuid);
       this.updateUsageTime();
