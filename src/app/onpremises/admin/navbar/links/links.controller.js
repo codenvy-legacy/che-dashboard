@@ -19,7 +19,7 @@ class AdminLinksCtrl {
    */
   constructor() {
     this.userLoginUrl = '/site/login';
-    this.userCreateUrl = '/site/create-account';
+    this.userCreateUrl = '/site/create-account?account=new';
   }
 }
 
