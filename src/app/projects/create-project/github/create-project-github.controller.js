@@ -89,11 +89,11 @@ class CreateProjectGithubCtrl {
   }
 
   getAndStoreRemoteToken()  {
-    return this.$http({method: 'GET', url: '/api/oauth/token?provider_id=github'}).then( (result) => {
+    return this.$http({method: 'GET', url: '/api/oauth/token?oauth_provider=github'}).then( (result) => {
       if (!result.data) {
         return false;
       }
-      this.gitHubTokenStore.setToken(result.data);
+      this.gitHubTokenStore.setToken(result.data.token);
       this.$http({method: 'POST', url: '/api/github/ssh/generate'});
       this.askLoad();
       return true;
