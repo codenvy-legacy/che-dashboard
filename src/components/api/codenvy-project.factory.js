@@ -174,6 +174,10 @@ class CodenvyProject {
    * @returns {$promise|*|T.$promise}
    */
   importProject(workspaceId, path, data) {
+    // remove unused description because we cannot set project description without project type
+    if ((!data.project.type || data.project.type.length === 0) && data.project.description) {
+      delete(data.project.description);
+    }
     let promise = this.remoteProjectsAPI.import({workspaceId: workspaceId, path: path}, data).$promise;
     // update projects as well
     promise.then(this.fetchProjectsForWorkspaceId(workspaceId));

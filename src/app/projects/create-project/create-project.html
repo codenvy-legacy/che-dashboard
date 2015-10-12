@@ -12,7 +12,8 @@
 -->
 <cdvy-toolbar cdvy-title="New Project"></cdvy-toolbar>
 
-<md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress" ng-hide="createProjectCtrl.projectBlankCompleted" ></md-progress-linear>
+<md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress"
+                    ng-hide="createProjectCtrl.projectBlankCompleted"></md-progress-linear>
 <md-content md-scroll-y flex class="projects-create-project" md-theme="maincontent-theme" ng-show="createProjectCtrl.projectBlankCompleted">
   <cdvy-panel cdvy-title="Select Source">
     <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedTabIndex">
@@ -92,17 +93,18 @@
         <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
         <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
       </cdvy-input>
-      <cdvy-input cdvy-form="projectInformationForm"
-                  cdvy-name="description"
-                  cdvy-label-name="Description"
-                  cdvy-place-holder="Description of the project"
-                  ng-change="createProjectCtrl.checkChangeableDescriptionStatus()"
-                  ng-model="createProjectCtrl.projectDescription"
-                  ng-maxlength="256">
-        <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
-        <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
-      </cdvy-input>
-
+      <div ng-show="createProjectCtrl.importProjectData.project.type && createProjectCtrl.importProjectData.project.type.length > 0">
+        <cdvy-input cdvy-form="projectInformationForm"
+                    cdvy-name="description"
+                    cdvy-label-name="Description"
+                    cdvy-place-holder="Description of the project"
+                    ng-change="createProjectCtrl.checkChangeableDescriptionStatus()"
+                    ng-model="createProjectCtrl.projectDescription"
+                    ng-maxlength="256">
+          <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
+          <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
+        </cdvy-input>
+      </div>
 
       <cdvy-label-container cdvy-label-name="Workspace">
         <md-select class="create-project-select"
