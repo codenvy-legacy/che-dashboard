@@ -10,23 +10,22 @@
  */
 'use strict';
 
-import OnBoardCtrl from './onboard.controller';
-import OnBoardRedirect from './onboard-redirect.factory';
+/* exported PluginFilter */
 
-class OnBoardConfig {
-
+import AdminPluginsCtrl from './plugins.controller';
+import PluginFilter from './plugins-filter';
+class AdminsPluginsConfig {
 
   constructor(register) {
-    register.controller('OnBoardCtrl', OnBoardCtrl);
-    register.factory('onBoardRedirect', OnBoardRedirect);
+    register.controller('AdminPluginsCtrl', AdminPluginsCtrl);
 
 
     // config routes
     register.app.config(function ($routeProvider) {
-      $routeProvider.accessWhen('/welcome', {
-        templateUrl: 'app/onboard/onboard.html',
-        controller: 'OnBoardCtrl',
-        controllerAs: 'onBoardCtrl'
+      $routeProvider.accessWhen('/admin/plugins', {
+        templateUrl: 'app/admin/plugins/plugins.html',
+        controller: 'AdminPluginsCtrl',
+        controllerAs: 'adminPluginsCtrl'
       });
     })
     ;
@@ -34,4 +33,4 @@ class OnBoardConfig {
 }
 
 
-export default OnBoardConfig;
+export default AdminsPluginsConfig;

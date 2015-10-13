@@ -11,7 +11,8 @@
 'use strict';
 /*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
  CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
- CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession, CodenvyRunner, CodenvyService*/
+ CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession, CodenvyRunner,
+ CodenvyService, CodenvyAdminPlugins, CodenvyAdminService */
 
 
 import Register from '../utils/register';
@@ -37,6 +38,9 @@ import CodenvySvn from './codenvy-svn.factory';
 import CodenvyFactoryTemplate from './codenvy-factory-template.factory';
 import CodenvyAnalyticsSession from './codenvy-analytics-session.factory';
 import CodenvyService from './codenvy-service.factory';
+import CodenvyAdminPlugins from './codenvy-admin-plugins.factory';
+import CodenvyAdminService from './codenvy-admin-service.factory';
+
 
 /**
  * This class is providing the entry point for accessing to Codenvy API
@@ -51,7 +55,7 @@ class CodenvyAPI {
    */
   constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
               codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyFactoryTemplate,
-              codenvyAnalyticsSession, codenvyRunner, codenvyService) {
+              codenvyAnalyticsSession, codenvyRunner, codenvyService, codenvyAdminPlugins, codenvyAdminService) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
@@ -70,6 +74,8 @@ class CodenvyAPI {
     this.codenvyAnalyticsSession = codenvyAnalyticsSession;
     this.codenvyRunner = codenvyRunner;
     this.codenvyService = codenvyService;
+    this.codenvyAdminPlugins = codenvyAdminPlugins;
+    this.codenvyAdminService = codenvyAdminService;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
@@ -208,6 +214,23 @@ class CodenvyAPI {
    */
   getService() {
     return this.codenvyService;
+  }
+
+  /**
+   * The Codenvy Admin Services API
+   * @returns {CodenvyAdminService|*}
+   */
+  getAdminService() {
+    return this.codenvyAdminService;
+  }
+
+
+  /**
+   * The Codenvy Admin plugins API
+   * @returns {CodenvyAdminPlugins|*}
+   */
+  getAdminPlugins() {
+    return this.codenvyAdminPlugins;
   }
 }
 
