@@ -14,7 +14,9 @@
  CodenvyHtmlSource, CodenvyInput, CodenvyTab, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton,
  CodenvyToggle, CodenvyToolbar, CodenvyLabel, CodenvyLabelContainer, CodenvyLink, CodenvyButtonDropdownCtrl, CodenvyButtonDropdown,
  CodenvyPanelCtrl, CodenvyListItemChecked, CodenvySelect, CodenvyClipboard, CodenvyEmptyState, CodenvySearch, CodenvyEventLogger,
- CodenvyLearnMoreCtrl, CodenvyLearnMore, CodenvyLearnMoreItem, CodenvyLearnMoreTemplate, CodenvyBoxCtrl, CodenvyBox, CodenvyTextInfo */
+ CodenvyLearnMoreCtrl, CodenvyLearnMore, CodenvyLearnMoreItem, CodenvyLearnMoreTemplate, CodenvyBoxCtrl, CodenvyBox, CodenvyTextInfo,
+ CodenvyDropzoneCtrl, CodenvyDropzone */
+
 import CodenvyButtonPrimary from './button/cdvy-button-primary.directive';
 import CodenvyButtonDanger from './button/cdvy-button-danger.directive';
 import CodenvyButtonDefault from './button/cdvy-button-default.directive';
@@ -23,6 +25,10 @@ import CodenvyButtonWarning from './button/cdvy-button-warning.directive';
 
 import CodenvyBoxCtrl from './box/cdvy-box.controller';
 import CodenvyBox from './box/cdvy-box.directive';
+
+import CodenvyDropzoneCtrl from './dropzone/cdvy-dropzone.controller';
+import CodenvyDropzone from './dropzone/cdvy-dropzone.directive';
+
 
 import CodenvyLink from './link/cdvy-link.directive';
 
