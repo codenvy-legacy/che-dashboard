@@ -156,6 +156,9 @@ new OnPremisesConfig(instanceRegister);
 import OnBoardConfig from './onboard/onboard-config';
 new OnBoardConfig(instanceRegister);
 
+// import admin
+import AdminsConfig from './admin/admin-config';
+new AdminsConfig(instanceRegister);
 
 
 // and setup controllers

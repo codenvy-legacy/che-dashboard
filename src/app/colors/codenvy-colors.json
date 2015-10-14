@@ -11,6 +11,7 @@
   "$clear-foggy-sky-color": "#AEB0B2",
   "$red-lipstick-color": "#DB4437",
   "$cat-gray-color": "#E4E4E4",
-  "$mouse-gray-color": "#D3D3D3"
+  "$mouse-gray-color": "#D3D3D3",
+  "$light-gray-color": "#F1F1F1"
 }
 

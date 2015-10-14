@@ -40,6 +40,13 @@ class NavBarCtrl {
       this.isFactoryServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getFactory().getFactoryServicePath());
     });
 
+    let promiseAdminService = this.codenvyAPI.getAdminService().fetchServices();
+    promiseAdminService.then(() => {
+      this.isAdminServiceAvailable = codenvyAPI.getAdminService().isAdminServiceAvailable();
+      this.isAdminPluginServiceAvailable = codenvyAPI.getAdminService().isServiceAvailable(codenvyAPI.getAdminPlugins().getPluginsServicePath());
+    });
+
+
 
     this.profile = codenvyAPI.getProfile().getProfile();
     if (this.profile.attributes) {

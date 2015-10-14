@@ -73,6 +73,32 @@
           </md-list>
         </section>
       </div>
+
+      <md-divider ng-show="navbarCtrl.isAdminServiceAvailable" md-theme="factory-theme"></md-divider>
+      <div ng-show="navbarCtrl.isAdminServiceAvailable" class="admin-navbar-menu"
+            ng-init="configMenuIsExpand=true">
+        <div class="navbar-identity"
+             flex layout="row" layout-align="start center" ng-click="configMenuIsExpand=!configMenuIsExpand">
+      <span flex layout="row" layout-align="start center" layout-padding>
+        <i class="material-design icon-ic_build_24px">&nbsp;</i>
+        <span flex class="navbar-title">Configuration</span>
+      </span>
+          <i class="material-design md-tab-themed" ng-class="configMenuIsExpand ? 'icon-ic_expand_less_24px' : 'icon-ic_expand_more_24px'">&nbsp;</i>
+        </div>
+        <section class="animation navbar-subsection"
+                 flex layout="column" layout-align="center start" layout-fill
+                 class="animation"
+                 ng-if="configMenuIsExpand">
+          <md-list layout="column" flex>
+            <md-list-item ng-show="navbarCtrl.isAdminPluginServiceAvailable" flex class="navbar-subsection-item">
+              <md-button nav-bar-selected flex ng-href="#/admin/plugins" layout-align="left" cdvy-event-logger="account" ng-click="navbarCtrl.reload()">
+                <div class="navbar-item" layout="row" layout-align="start center">Plug-Ins</div>
+              </md-button>
+            </md-list-item>
+          </md-list>
+        </section>
+      </div>
+
       <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
       <div class="admin-navbar-menu"
            ng-show="navbarCtrl.profile.attributes && navbarCtrl.isSimpleUser()" ng-init="isExpand=true">

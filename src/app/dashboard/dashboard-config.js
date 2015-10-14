@@ -45,10 +45,14 @@ class DashboardConfig {
         controller: 'DashboardCtrl',
         controllerAs: 'dashboardCtrl',
         resolve: {
-          check: ['$q', 'codenvyService', function ($q, codenvyService) {
+          check: ['$q', 'codenvyService', 'codenvyAdminService', function ($q, codenvyService, codenvyAdminService) {
             var defer = $q.defer();
             codenvyService.fetchServices().then(() => {
-              defer.resolve();
+              codenvyAdminService.fetchServices().then(() => {
+                defer.resolve();
+              }, () => {
+                defer.resolve();
+              });
             });
             return defer.promise;
           }]
@@ -58,6 +62,7 @@ class DashboardConfig {
     ;
   }
 }
+
 
 
 export default DashboardConfig;
