@@ -54,6 +54,14 @@ class CodenvyFactory {
   }
 
   /**
+   * Gets the factory service path.
+   * @returns {string}
+   */
+  getFactoryServicePath() {
+    return 'factory';
+  }
+
+  /**
    * Ask for loading the factory content in asynchronous way
    * If there are no changes, it's not updated
    * @param project

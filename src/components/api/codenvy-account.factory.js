@@ -69,6 +69,9 @@ class CodenvyAccount {
     return 'prepaid';
   }
 
+  getAccountServicePath() {
+    return 'account';
+  }
 
   /**
    * Gets the user data

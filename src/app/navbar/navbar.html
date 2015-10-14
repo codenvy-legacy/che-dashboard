@@ -54,7 +54,7 @@
                 </div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item">
+            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isAccountServiceAvailable">
               <md-button nav-bar-selected flex ng-href="#/workspaces" layout-align="left" cdvy-event-logger="workspaces" ng-click="navbarCtrl.reload()">
                 <div class="navbar-item" layout="row" layout-align="start center">
                   <i class="fa fa-server fa-lg icon">&nbsp;</i>
@@ -62,7 +62,7 @@
                 </div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item">
+            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isFactoryServiceAvailable">
               <md-button nav-bar-selected flex ng-href="#/factories" layout-align="left" cdvy-event-logger="factories" ng-click="navbarCtrl.reload()">
                 <div class="navbar-item" layout="row" layout-align="start center">
                   <i class="cdvyfont cdvyico-rocket-cdvyfont icon">&nbsp;</i>
@@ -94,7 +94,7 @@
                 <div class="navbar-item" layout="row" layout-align="start center">Account</div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item">
+            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isAccountServiceAvailable">
               <md-button nav-bar-selected flex ng-href="#/team" layout-align="left" cdvy-event-logger="team" ng-click="navbarCtrl.reload()">
                 <div class="navbar-item" layout="row" layout-align="start center">Team</div>
               </md-button>
@@ -123,7 +123,7 @@
 
       <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
 
-      <div class="help-menu" ng-show="navbarCtrl.isSimpleUser()">
+      <div class="help-menu" ng-show="navbarCtrl.isSimpleUser() && !navbarCtrl.userIsAdmin()">
         <section class="left-sidebar-menu" layout="column" layout-align="center center">
           <md-list layout="row">
             <md-list-item>

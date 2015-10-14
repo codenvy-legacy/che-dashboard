@@ -36,6 +36,8 @@ class NavBarCtrl {
     promiseService.then(() => {
       this.isInvoiceServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getInvoiceServicePath());
       this.isSubscriptionServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getAccount().getSubscriptionServicePath());
+      this.isAccountServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getAccount().getAccountServicePath());
+      this.isFactoryServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getFactory().getFactoryServicePath());
     });
 
 
