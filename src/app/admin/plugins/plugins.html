@@ -18,7 +18,7 @@
     <div class="plugins-panel-subtitle">Plug-ins that are packaged and linked in this Che assembly.</div>
 
     <div class="plugins-nothing-now" ng-show="(adminPluginsCtrl.plugins | filter: { status: 'INSTALLED' }).length == 0">
-      No plugins installed yet.
+      No user plug-ins are currently installed in this Che assembly.
     </div>
 
     <div ng-show="(adminPluginsCtrl.plugins | filter: { status: 'INSTALLED' }).length > 0">
@@ -74,10 +74,6 @@
     </div>
 
 
-    <div ng-show="((adminPluginsCtrl.plugins | filter: { status: 'AVAILABLE' }).length == 0) && ((adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }).length == 0)">
-      Drop a plug-in to install. Plug-ins can be found at <a href="https://github.com/codenvy/che-plugins/blob/master/README.md" target="_blank">https://github.com/codenvy/che-plugins/blob/master/README.md</a>
-    </div>
-
     <div ng-show="((adminPluginsCtrl.plugins | filter: { status: 'AVAILABLE' }).length > 0) || ((adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }).length > 0)">
 
       <table flex class="plugins-table">
@@ -95,8 +91,8 @@
           <td>{{plugin.version}}</td>
           <td>{{plugin.category}}</td>
           <td>
-            <cdvy-link cdvy-no-padding ng-click="adminPluginsCtrl.install(plugin.name)" cdvy-link-text="Stage"></cdvy-link>
-            <cdvy-link cdvy-no-padding ng-click="adminPluginsCtrl.remove($event, plugin.name)" cdvy-link-text="Delete"></cdvy-link>
+            <cdvy-link ng-click="adminPluginsCtrl.install(plugin.name)" cdvy-link-text="Stage"></cdvy-link>
+            <cdvy-link ng-click="adminPluginsCtrl.remove($event, plugin.name)" cdvy-link-text="Delete"></cdvy-link>
           </td>
         <tr>
         <tr ng-repeat="plugin in adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }">
@@ -111,7 +107,7 @@
 
 
       <div class="plugins-review-box" ng-show="(adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }).length > 0">
-      {{(adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }).length}} Staged changes on available plug-ins: <cdvy-link cdvy-no-padding ng-click="adminPluginsCtrl.scrollToStaged()" cdvy-link-text="Review"></cdvy-link>
+      {{(adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }).length}} staged changes on available plug-ins: <cdvy-link ng-click="adminPluginsCtrl.scrollToStaged()" cdvy-link-text="Review"></cdvy-link>
       </div>
 
 
@@ -121,10 +117,10 @@
 
   <a id="plugin-staged"></a>
   <cdvy-panel cdvy-title="Staged">
-    <div class="plugins-panel-subtitle">Plug-ins that will be packaged and linked into this Che assembly</div>
+    <div class="plugins-panel-subtitle">Plug-ins that will be packaged and linked into this Che assembly.</div>
 
     <div class="plugins-nothing-now" ng-show="(adminPluginsCtrl.plugins | filterStagedPlugins).length == 0">
-      No staged plug-in. Install or Uninstall plug-ins.
+      There are no plug-ins currently staged.
     </div>
 
     <div ng-show="(adminPluginsCtrl.plugins | filterStagedPlugins).length > 0">
