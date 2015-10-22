@@ -107,10 +107,11 @@
 
 
       <div class="plugins-review-box" ng-show="(adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }).length > 0">
-      {{(adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }).length}} staged changes on available plug-ins: <cdvy-link ng-click="adminPluginsCtrl.scrollToStaged()" cdvy-link-text="Review"></cdvy-link>
+        <ng-pluralize count="(adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }).length"
+                      when="{'one': '{} staged change',
+                       'other': '{} staged changes'}">
+        </ng-pluralize> on available plug-ins:&nbsp;<cdvy-link ng-click="adminPluginsCtrl.scrollToStaged()" cdvy-link-text="Review"></cdvy-link>
       </div>
-
-
     </div>
 
   </cdvy-panel>

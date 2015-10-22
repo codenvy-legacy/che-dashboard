@@ -66,8 +66,8 @@ class AdminPluginsCtrl {
   remove(event, pluginName) {
 
     let confirm = this.$mdDialog.confirm()
-      .title('Would you like to remove the plug-in ' + pluginName + '?')
-      .content('Please confirm for the plug-in removal.')
+      .title('Would you like to remove plug-in ' + pluginName + '?')
+      .content('')
       .ariaLabel('Remove plug-in')
       .ok('Delete it!')
       .cancel('Cancel')
