@@ -162,8 +162,7 @@ class AdminPluginsCtrl {
 
   dropzoneAcceptURL(url) {
 
-
-    if (!url.startsWith('http://eclipse.org/che/?install')) {
+    if (!url.startsWith('upload:') && !url.startsWith('http://eclipse.org/che/?install')) {
       let deferred = this.$q.defer();
       deferred.reject({data: {message:'The plugin URL is invalid'}});
       return deferred.promise;
@@ -182,10 +181,13 @@ class AdminPluginsCtrl {
   }
 
 
-
-
-
+  /**
+   * Gets the plugin URI based on groupId, etc or if not found return the input URL
+   * @param uri
+   * @returns {*}
+   */
   getPluginReference(uri) {
+
     var query = uri;
     var result = {};
     query.split('&').forEach(function(part) {
@@ -193,7 +195,7 @@ class AdminPluginsCtrl {
       result[item[0]] = decodeURIComponent(item[1]);
     });
 
-    return result.uri || null;
+    return result.uri || uri;
   }
 
 

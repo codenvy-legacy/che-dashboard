@@ -10,6 +10,7 @@
  */
 'use strict';
 
+/*global FormData, XMLHttpRequest */
 
 import Register from '../../utils/register';
 
@@ -33,12 +34,36 @@ class CodenvyDropZoneCtrl {
     this.errorMessage = null;
   }
 
-
-
-
   dropCallback(evt) {
     evt.stopPropagation();
     evt.preventDefault();
+
+    // handle files
+    var files = evt.dataTransfer.files;
+    if (files.length > 0) {
+      // needs to upload the file
+      let formData = new FormData();
+      for (var i = 0; i < files.length; i++) {
+        formData.append('uploadedFile', files[i]);
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.upload.addEventListener('progress', (evt) => {
+        this.uploadProgress(evt, files);
+      });
+      xhr.upload.addEventListener('load', (evt) => {
+        this.uploadLoad(evt, files);
+      });
+      xhr.upload.addEventListener('error', (evt) => {
+        this.uploadError(evt, files);
+      });
+      xhr.upload.addEventListener('abort', (evt) => {
+        this.uploadAbort(evt, files);
+      });
+      xhr.open('POST', '/admin/upload');
+      xhr.send(formData);
+      return;
+    }
 
     var url = evt.dataTransfer.getData('URL');
     if (url == null) {
@@ -47,6 +72,17 @@ class CodenvyDropZoneCtrl {
       });
       return;
     }
+
+    this.handleUrl(url);
+
+  }
+
+
+  /**
+   * Handle the url during the drop
+   * @param url
+   */
+  handleUrl(url) {
 
     let delegateController = this.$scope.codenvyDropZoneCtrl.callbackController;
 
@@ -71,6 +107,50 @@ class CodenvyDropZoneCtrl {
       }
     });
 
+  }
+
+
+  /**
+   * Callback when we have the progress status
+   */
+  uploadProgress(evt) {
+    this.$scope.$apply(() => {
+      if (evt.lengthComputable) {
+        this.progressUploadPercent = Math.round(evt.loaded * 100 / evt.total);
+      }
+    });
+  }
+
+  /**
+   * Callback when upload to the remote servlet has been done
+   */
+  uploadLoad(evt, files) {
+    // upload is OK then we need to upload every files
+    for (var i = 0; i < files.length; i++) {
+      this.handleUrl('upload:' + files[i].name);
+    }
+  }
+
+  /**
+   * Callback when we have the error
+   */
+  uploadError() {
+    this.$scope.$apply(() => {
+      this.waitingDrop = false;
+      this.dropClass = this.HOVER_KO_CLASS;
+      this.errorMessage = 'Unable to upload files';
+    });
+  }
+
+  /**
+   * Callback when we have aborting of the upload
+   */
+  uploadAbort() {
+    this.$scope.$apply(() => {
+      this.waitingDrop = false;
+      this.dropClass = this.HOVER_KO_CLASS;
+      this.errorMessage = 'Unable to upload files';
+    });
   }
 
 
