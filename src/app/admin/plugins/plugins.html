@@ -157,13 +157,13 @@
       <div class="plugins-build-failed" ng-show="adminPluginsCtrl.buildCheFailed">Build of Che App failed. See log below</div>
       <div layout="row" ng-show="adminPluginsCtrl.displayReloadChe">
         <cdvy-button-default ng-click="adminPluginsCtrl.reloadChe()" cdvy-button-title="Reload Eclipse Che"></cdvy-button-default>
-        <div ng-show="adminPluginsCtrl.reloadcheInProgress"><md-progress-circular md-theme="maincontent-theme" md-mode="indeterminate"></md-progress-circular></div>
+        <div ng-show="adminPluginsCtrl.reloadcheInProgress"><md-progress-circular md-diameter="25" md-theme="maincontent-theme" md-mode="indeterminate"></md-progress-circular></div>
       </div>
       <div layout="row" layout-align="start center" ng-show="adminPluginsCtrl.buildInProgress">
         <div class="plugin-install-build-label">Building...</div>
-        <div><md-progress-circular md-theme="maincontent-theme" md-mode="indeterminate"></md-progress-circular></div>
+        <div><md-progress-circular md-diameter="25" md-theme="maincontent-theme" md-mode="indeterminate"></md-progress-circular></div>
       </div>
-      <div layout="column" ng-hide="adminPluginsCtrl.displayReloadChe">
+      <div layout="column">
         <cdvy-button-default ng-show="adminPluginsCtrl.currentBuildLog.length > 0" ng-click="adminPluginsCtrl.toggleDisplayLog()" cdvy-button-title="{{adminPluginsCtrl.displayLog ? 'Hide Log' : 'Show Build Log'}}"></cdvy-button-default>
         <div ng-show="adminPluginsCtrl.displayLog && adminPluginsCtrl.currentBuildLog.length > 0" class="plugins-install-output" ng-bind-html="adminPluginsCtrl.currentBuildLog">
         </div>
