@@ -385,9 +385,9 @@ initModule.factory('LogInterceptor', function ($q) {
 
 initModule.config(function($mdThemingProvider, jsonColors) {
 
-  var codenvyColors = angular.fromJson(jsonColors);
+  var cheColors = angular.fromJson(jsonColors);
   var getColor = function(key) {
-    var color = codenvyColors[key];
+    var color = cheColors[key];
     if (!color) {
       // return a flashy red color if color is undefined
       console.log('error, the color' + key + 'is undefined');
@@ -401,46 +401,45 @@ initModule.config(function($mdThemingProvider, jsonColors) {
   };
 
 
-  var codenvyMap = $mdThemingProvider.extendPalette('indigo', {
+  var cheMap = $mdThemingProvider.extendPalette('indigo', {
     '500': getColor('$dark-menu-color'),
     '300' : 'D0D0D0'
   });
-  $mdThemingProvider.definePalette('codenvy', codenvyMap);
+  $mdThemingProvider.definePalette('che', cheMap);
 
-  var codenvyDangerMap = $mdThemingProvider.extendPalette('red', {
+  var cheDangerMap = $mdThemingProvider.extendPalette('red', {
   });
-  $mdThemingProvider.definePalette('codenvyDanger', codenvyDangerMap);
+  $mdThemingProvider.definePalette('cheDanger', cheDangerMap);
 
-  var codenvyWarningMap = $mdThemingProvider.extendPalette('orange', {
+  var cheWarningMap = $mdThemingProvider.extendPalette('orange', {
     'contrastDefaultColor': 'light'
   });
-  $mdThemingProvider.definePalette('codenvyWarning', codenvyWarningMap);
+  $mdThemingProvider.definePalette('cheWarning', cheWarningMap);
 
-  var codenvyDefaultMap = $mdThemingProvider.extendPalette('blue', {
-    'A400'  : '538DAB'/*,
-     '700': '538DAB'*/
+  var cheDefaultMap = $mdThemingProvider.extendPalette('blue', {
+    'A400'  : getColor('$che-medium-blue-color')
   });
-  $mdThemingProvider.definePalette('codenvyDefault', codenvyDefaultMap);
+  $mdThemingProvider.definePalette('cheDefault', cheDefaultMap);
 
 
-  var codenvyAccentMap = $mdThemingProvider.extendPalette('green', {
-    '700' : getColor('$codenvy-green-color'),
-    'A400': getColor('$codenvy-green-color'),
-    'A200': getColor('$codenvy-green-color'),
+  var cheAccentMap = $mdThemingProvider.extendPalette('blue', {
+    '700' : getColor('$che-medium-blue-color'),
+    'A400': getColor('$che-medium-blue-color'),
+    'A200': getColor('$che-medium-blue-color'),
     'contrastDefaultColor': 'light'
   });
-  $mdThemingProvider.definePalette('codenvyAccent', codenvyAccentMap);
+  $mdThemingProvider.definePalette('cheAccent', cheAccentMap);
 
 
-  var codenvyNavyPalette = $mdThemingProvider.extendPalette('purple', {
-    '500' : '0D4269',
+  var cheNavyPalette = $mdThemingProvider.extendPalette('purple', {
+    '500' : getColor('$che-navy-color'),
     'contrastDefaultColor': 'light'
   });
-  $mdThemingProvider.definePalette('codenvyNavyPalette', codenvyNavyPalette);
+  $mdThemingProvider.definePalette('cheNavyPalette', cheNavyPalette);
 
 
   var toolbarPrimaryPalette = $mdThemingProvider.extendPalette('purple', {
-    '500' : '558daa',
+    '500' : getColor('$che-navy-color'),
     'contrastDefaultColor': 'light'
   });
   $mdThemingProvider.definePalette('toolbarPrimaryPalette', toolbarPrimaryPalette);
@@ -452,31 +451,31 @@ initModule.config(function($mdThemingProvider, jsonColors) {
   });
   $mdThemingProvider.definePalette('toolbarAccentPalette', toolbarAccentPalette);
 
-  var codenvyGreyPalette = $mdThemingProvider.extendPalette('grey', {
+  var cheGreyPalette = $mdThemingProvider.extendPalette('grey', {
     'A100' : 'efefef',
     'contrastDefaultColor': 'light'
   });
-  $mdThemingProvider.definePalette('codenvyGrey', codenvyGreyPalette);
+  $mdThemingProvider.definePalette('cheGrey', cheGreyPalette);
 
   $mdThemingProvider.theme('danger')
-    .primaryPalette('codenvy')
-    .accentPalette('codenvyDanger')
+    .primaryPalette('che')
+    .accentPalette('cheDanger')
     .backgroundPalette('grey');
 
   $mdThemingProvider.theme('warning')
-    .primaryPalette('codenvy')
-    .accentPalette('codenvyWarning')
+    .primaryPalette('che')
+    .accentPalette('cheWarning')
     .backgroundPalette('grey');
 
 
   $mdThemingProvider.theme('cdvydefault')
-    .primaryPalette('codenvy')
-    .accentPalette('codenvyDefault')
+    .primaryPalette('che')
+    .accentPalette('cheDefault')
     .backgroundPalette('grey');
 
   $mdThemingProvider.theme('default')
-    .primaryPalette('codenvy')
-    .accentPalette('codenvyAccent')
+    .primaryPalette('che')
+    .accentPalette('cheAccent')
     .backgroundPalette('grey');
 
   $mdThemingProvider.theme('toolbar-theme')
@@ -490,21 +489,21 @@ initModule.config(function($mdThemingProvider, jsonColors) {
     .backgroundPalette('purple');
 
   $mdThemingProvider.theme('onboarding-theme')
-    .primaryPalette('codenvyNavyPalette')
+    .primaryPalette('cheNavyPalette')
     .accentPalette('pink')
     .warnPalette('red')
     .backgroundPalette('purple');
 
   $mdThemingProvider.theme('dashboard-theme')
-    .primaryPalette('codenvyNavyPalette')
+    .primaryPalette('cheNavyPalette')
     .accentPalette('pink')
     .warnPalette('red')
     .backgroundPalette('purple');
 
   $mdThemingProvider.theme('maincontent-theme')
-    .primaryPalette('codenvy')
-    .accentPalette('codenvyAccent')
-    .backgroundPalette('codenvyGrey');
+    .primaryPalette('che')
+    .accentPalette('cheAccent')
+    .backgroundPalette('cheGrey');
 
 
 });
