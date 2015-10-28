@@ -1,9 +1,9 @@
 {
-  "name": "userDashboard",
-  "version": "2.0.0",
+  "name": "dashboard",
+  "version": "2.1.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/codenvy/user-dashboard.git"
+    "url": "git://github.com/codenvy/dashboard.git"
   },
   "devDependencies": {
     "browser-sync": "~1.7.1",
