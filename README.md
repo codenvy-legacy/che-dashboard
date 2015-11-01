@@ -1,5 +1,4 @@
 # Eclipse Che Dashboard
-==========================
 [![Join the chat at https://gitter.im/eclipse/che](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/eclipse/che?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Eclipse License](http://img.shields.io/badge/license-Eclipse-blue.svg)](https://github.com/codenvy/che/blob/master/LICENSE)
