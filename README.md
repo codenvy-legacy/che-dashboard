@@ -1,9 +1,14 @@
+# Eclipse Che Dashboard
+==========================
+[![Join the chat at https://gitter.im/eclipse/che](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/eclipse/che?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![Eclipse License](http://img.shields.io/badge/license-Eclipse-blue.svg)](https://github.com/codenvy/che/blob/master/LICENSE)
+[![latest 3.x](https://img.shields.io/badge/latest stable-2.x-green.svg)](https://github.com/codenvy/dashboard/tree/master)
+[![latest 4.x](https://img.shields.io/badge/latest dev-3.x-yellowgreen.svg)](https://github.com/codenvy/dashboard/tree/3.0)
+
+
 [![Contribute](https://rawgit.com/slemeur/4a900bb68300a2643679/raw/1ad2c6d784c92fc21886c765bc6315a1f2ee690c/codenvy-contribute.svg)](https://codenvy.com/f?id=qqep9h70k6c47de1)
 
-
-
-Codenvy Dashboard V2
-==========================
 
 #Requirements
 
