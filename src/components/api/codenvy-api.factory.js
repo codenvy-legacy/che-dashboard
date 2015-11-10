@@ -12,7 +12,7 @@
 /*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
  CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
  CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession, CodenvyRunner,
- CodenvyService, CodenvyAdminPlugins, CodenvyAdminService */
+ CodenvyService, CodenvyAdminPlugins, CodenvyAdminService, CodenvyRecipe */
 
 
 import Register from '../utils/register';
@@ -40,6 +40,7 @@ import CodenvyAnalyticsSession from './codenvy-analytics-session.factory';
 import CodenvyService from './codenvy-service.factory';
 import CodenvyAdminPlugins from './codenvy-admin-plugins.factory';
 import CodenvyAdminService from './codenvy-admin-service.factory';
+import CodenvyRecipe from './codenvy-recipe.factory';
 
 
 /**
@@ -55,7 +56,7 @@ class CodenvyAPI {
    */
   constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
               codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyFactoryTemplate,
-              codenvyAnalyticsSession, codenvyRunner, codenvyService, codenvyAdminPlugins, codenvyAdminService) {
+              codenvyAnalyticsSession, codenvyRunner, codenvyService, codenvyAdminPlugins, codenvyAdminService, codenvyRecipe) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
@@ -76,6 +77,7 @@ class CodenvyAPI {
     this.codenvyService = codenvyService;
     this.codenvyAdminPlugins = codenvyAdminPlugins;
     this.codenvyAdminService = codenvyAdminService;
+    this.codenvyRecipe = codenvyRecipe;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
@@ -231,6 +233,14 @@ class CodenvyAPI {
    */
   getAdminPlugins() {
     return this.codenvyAdminPlugins;
+  }
+
+  /**
+   * The Codenvy Recipe API
+   * @returns {CodenvyAPI.codenvyRecipe|*}
+   */
+  getRecipe() {
+    return this.codenvyRecipe;
   }
 }
 
