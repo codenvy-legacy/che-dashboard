@@ -10,69 +10,99 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="New Project"></cdvy-toolbar>
+<cdvy-toolbar cdvy-title="New Project">
+
+</cdvy-toolbar>
 
 <md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress"
                     ng-hide="createProjectCtrl.projectBlankCompleted"></md-progress-linear>
-<md-content md-scroll-y flex class="projects-create-project" md-theme="maincontent-theme" ng-show="createProjectCtrl.projectBlankCompleted">
-  <cdvy-panel cdvy-title="Select Source">
-    <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedTabIndex">
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('blank')" cdvy-event-logger="new.project/empty">
-        <md-tab-label>
-          <md-icon md-font-icon="material-design  icon-ic_developer_mode_24px" class="cdvy-tab-label-icon"></md-icon>
-          <span class="cdvy-tab-label-title">Empty Project</span>
-        </md-tab-label>
-        <md-tab-body>
-          <create-project-blank class="projects-create-project-tab" layout="row" layout-wrap></create-project-blank>
-        </md-tab-body>
-      </md-tab>
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('samples')" cdvy-event-logger="new.project/samples">
-        <md-tab-label>
-          <md-icon md-font-icon="fa-magic" class="fa cdvy-tab-label-icon"></md-icon>
-          <span class="cdvy-tab-label-title">Samples</span>
-        </md-tab-label>
-        <md-tab-body>
-          <create-project-samples class="projects-create-project-tab" layout="row" layout-wrap></create-project-samples>
-        </md-tab-body>
-      </md-tab>
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('git')" cdvy-event-logger="new.project/git">
-        <md-tab-label>
-          <md-icon md-font-icon="fa-git" class="fa cdvy-tab-label-icon"></md-icon>
-          <span class="cdvy-tab-label-title">Git Repository</span>
-        </md-tab-label>
-        <md-tab-body>
-          <create-project-git class="projects-create-project-tab" layout="column"></create-project-git>
-        </md-tab-body>
-      </md-tab>
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('github')" cdvy-event-logger="new.project/github">
-        <md-tab-label>
-          <md-icon md-font-icon="fa-github" class="fa cdvy-tab-label-icon"></md-icon>
-          <span class="cdvy-tab-label-title">Github</span>
-        </md-tab-label>
-        <md-tab-body>
-          <create-project-github class="projects-create-project-tab" layout="column"></create-project-github>
-        </md-tab-body>
-      </md-tab>
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('zip')" cdvy-event-logger="new.project/zip">
-        <md-tab-label>
-          <md-icon md-font-icon="fa-file-archive-o" class="fa cdvy-tab-label-icon"></md-icon>
-          <span class="cdvy-tab-label-title">Zip</span>
-        </md-tab-label>
-        <md-tab-body>
-          <create-project-zip class="projects-create-project-tab" layout="column"></create-project-zip>
-        </md-tab-body>
-      </md-tab>
-      <md-tab md-on-select="createProjectCtrl.setCurrentTab('config')" cdvy-event-logger="new.project/config">
-        <md-tab-label>
-          <md-icon md-font-icon="fa-download" class="fa cdvy-tab-label-icon"></md-icon>
-          <span class="cdvy-tab-label-title">Configuration File</span>
-        </md-tab-label>
-        <md-tab-body>
-          <create-project-conf-file class="projects-create-project-tab" layout="column" layout-fill></create-project-conf-file>
-        </md-tab-body>
-      </md-tab>
-    </md-tabs>
-  </cdvy-panel>
+
+
+<md-content md-scroll-y flex class="projects-create-project" ng-show="createProjectCtrl.projectBlankCompleted" md-theme="maincontent-theme">
+    <cdvy-panel cdvy-title="Select Source">
+        <md-radio-group ng-model="createProjectCtrl.selectSourceOption">
+            <md-radio-button value="select-source-new">New from blank, template, or sample project</md-radio-button>
+            <md-radio-button value="select-source-existing">Import existing project</md-radio-button>
+        </md-radio-group>
+
+
+        <div ng-show="createProjectCtrl.selectSourceOption === 'select-source-existing'">
+            <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedTabIndex">
+                <md-tab md-on-select="createProjectCtrl.setCurrentTab('git')" cdvy-event-logger="new.project/git">
+                    <md-tab-label>
+                        <md-icon md-font-icon="fa-git" class="fa cdvy-tab-label-icon"></md-icon>
+                        <span class="cdvy-tab-label-title">Git Repository</span>
+                    </md-tab-label>
+                    <md-tab-body>
+                        <create-project-git class="projects-create-project-tab" layout="column"></create-project-git>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab md-on-select="createProjectCtrl.setCurrentTab('github')" cdvy-event-logger="new.project/github">
+                    <md-tab-label>
+                        <md-icon md-font-icon="fa-github" class="fa cdvy-tab-label-icon"></md-icon>
+                        <span class="cdvy-tab-label-title">Github</span>
+                    </md-tab-label>
+                    <md-tab-body>
+                        <create-project-github class="projects-create-project-tab" layout="column"></create-project-github>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab md-on-select="createProjectCtrl.setCurrentTab('zip')" cdvy-event-logger="new.project/zip">
+                    <md-tab-label>
+                        <md-icon md-font-icon="fa-file-archive-o" class="fa cdvy-tab-label-icon"></md-icon>
+                        <span class="cdvy-tab-label-title">Zip</span>
+                    </md-tab-label>
+                    <md-tab-body>
+                        <create-project-zip class="projects-create-project-tab" layout="column"></create-project-zip>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </div>
+
+    </cdvy-panel>
+
+
+    <cdvy-panel cdvy-title="Select Workspace">
+        <ng-form name="workspaceInformationForm">
+        <md-radio-group ng-model="createProjectCtrl.selectWorkspaceOption">
+            <md-radio-button value="select-workspace-create">Create new
+            </md-radio-button>
+
+            <cdvy-input cdvy-form="workspaceInformationForm"
+                        cdvy-name="name"
+                        cdvy-place-holder="Name of the workspace"
+                        ng-model="createProjectCtrl.workspaceName"
+                        required
+                        ng-minlength="3"
+                        ng-maxlength="20"
+                        ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+                <div ng-message="required">A name is required.</div>
+                <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
+                <div ng-message="minlength">The name has to be more then 3 characters long.</div>
+                <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
+            </cdvy-input>
+
+            <md-radio-button ng-show="createProjectCtrl.workspaces.length > 0" value="select-workspace-use-existing">Use existing</md-radio-button>
+        </md-radio-group>
+            </ng-form>
+
+
+        <cdvy-label-container ng-show="createProjectCtrl.selectWorkspaceOption === 'select-workspace-use-existing'" cdvy-label-name="Workspace">
+            <md-select class="create-project-select"
+                       placeholder="Select a workspace"
+                       ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
+                       ng-model="createProjectCtrl.workspaceSelected">
+                <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.name}}</md-option>
+            </md-select>
+        </cdvy-label-container>
+
+
+    </cdvy-panel>
+
+
+
+    <cdvy-panel cdvy-title="Select Stack">
+        <create-project-blank class="projects-create-project-tab" layout="row" layout-wrap></create-project-blank>
+    </cdvy-panel>
 
   <ng-form name="projectInformationForm">
     <cdvy-panel cdvy-title="Project Information" ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);">
@@ -105,16 +135,6 @@
           <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
         </cdvy-input>
       </div>
-
-      <cdvy-label-container cdvy-label-name="Workspace">
-        <md-select class="create-project-select"
-                   placeholder="Select a workspace"
-                   ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
-                   ng-model="createProjectCtrl.workspaceSelected">
-          <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.workspaceReference.name}}</md-option>
-        </md-select>
-      </cdvy-label-container>
-
       <div layout="row" flex layout-align="space-around center">
         <label flex="15" >Visibility: </label>
         <div layout="column" flex="85">

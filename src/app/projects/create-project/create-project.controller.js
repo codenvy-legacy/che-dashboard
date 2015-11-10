@@ -27,12 +27,19 @@ class CreateProjectCtrl {
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
     this.$rootScope = $rootScope;
+    this.messageBus = [];
 
     // subitem not yet completed
     this.projectBlankCompleted = false;
 
     // keep references on workspaces and projects
     this.workspaces = [];
+
+    // default options
+    this.selectSourceOption = 'select-source-new';
+    this.selectWorkspaceOption = 'select-workspace-create';
+
+    this.generateWorkspaceName();
 
     //search the selected tab
     let routeParams = $routeParams.tabName;
@@ -61,6 +68,7 @@ class CreateProjectCtrl {
         default:
           $location.path('/create-project');
       }
+
     }
 
     // Text that will be used by the websocket processing when performing import
@@ -119,6 +127,11 @@ class CreateProjectCtrl {
     this.isChangeableDescription = true;
 
     $scope.$watch('createProjectCtrl.importProjectData.project.name', (newProjectName) => {
+
+      if (newProjectName === '') {
+        return;
+      }
+
       if (!this.isChangeableName) {
         return;
       }
@@ -134,6 +147,7 @@ class CreateProjectCtrl {
     this.importing = false;
 
   }
+
 
   /**
    * Gets default project JSON used for import data
@@ -181,13 +195,14 @@ class CreateProjectCtrl {
   updateData() {
 
     this.workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
-    this.workspaceSelected = this.workspaces[0];
 
     // generate project name
     this.generateProjectName(true);
 
     // init WS bus
-    this.messageBus = this.codenvyAPI.getWebsocket().getBus(this.workspaceSelected.workspaceReference.id);
+    this.workspaces.forEach((workspace) => {
+      this.messageBus[workspace.id] = this.codenvyAPI.getWebsocket().getBus(workspace.id);
+    });
 
 
   }
@@ -231,13 +246,14 @@ class CreateProjectCtrl {
    */
   checkValidFormState() {
     // check project information form and selected tab form
-    var currentForm = this.forms.get(this.currentTab);
 
-
-    if (currentForm) {
-      return this.projectInformationForm && this.projectInformationForm.$valid && currentForm.$valid;
-    } else {
+    if (this.selectSourceOption === 'select-source-new') {
       return this.projectInformationForm && this.projectInformationForm.$valid;
+    } else if (this.selectSourceOption === 'select-source-existing') {
+      var currentForm = this.forms.get(this.currentTab);
+      if (currentForm) {
+        return this.projectInformationForm && this.projectInformationForm.$valid && currentForm.$valid;
+      }
     }
   }
 
@@ -302,68 +318,125 @@ class CreateProjectCtrl {
     if (!this.isChangeableName) {
       this.importProjectData.project.name = angular.copy(this.projectName);
     }
+
+
     // check workspace is selected
-    if (!this.workspaceSelected || !this.workspaceSelected.workspaceReference) {
+    if (!this.workspaceSelected) {
+
+      // TODO: for now, this is not yet working to create workspace and start it, so display an error
       this.$mdDialog.show(
-        this.$mdDialog.alert()
-          .title('No workspace selected')
-          .content('No workspace is selected')
-          .ariaLabel('Project creation')
-          .ok('OK')
+          this.$mdDialog.alert()
+              .title('No workspace selected')
+              .content('No workspace is selected. For now it only works for existing workspaces from dashboard. Please select existing workspace and not create new.')
+              .ariaLabel('Project creation')
+              .ok('OK')
       );
       return;
-    }
-
-    // mode
-    this.importing = true;
-
-    var mode = '';
-
-    // websocket channel
-    var channel = 'importProject:output:' + this.workspaceSelected.workspaceReference.id + ':' + this.importProjectData.project.name;
-
-
-    // select mode (create or import)
-    if (this.currentTab === 'blank' || this.currentTab === 'config') {
-      // no source, data is .project subpart
-      promise = this.codenvyAPI.getProject().createProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData.project);
-      mode = 'createProject';
     } else {
-      mode = 'importProject';
-      // on import
-      this.messageBus.subscribe(channel, (message) => {
-        this.importingData = message.line;
-      });
-      promise = this.codenvyAPI.getProject().importProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData);
-    }
-    promise.then((data) => {
-      this.importing = false;
-      this.importingData = '';
+      // mode
+      this.importing = true;
 
-      if (mode === 'importProject') {
-        data = data.projectDescriptor;
+
+      var mode = '';
+
+      // websocket channel
+      var channel = 'importProject:output:' + this.workspaceSelected.id + ':' + this.importProjectData.project.name;
+
+
+      // select mode (create or import)
+      if (this.selectSourceOption === 'select-source-new') {
+        //this.currentTab === 'blank' || this.currentTab === 'config'
+
+        this.importProjectData.project.type = 'blank';
+        this.importProjectData.project.name = this.projectName;
+
+        // no source, data is .project subpart
+        promise = this.codenvyAPI.getProject().createProject(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData.project);
+        mode = 'createProject';
+      } else {
+        mode = 'importProject';
+        // on import
+        this.messageBus[this.workspaceSelected.id].subscribe(channel, (message) => {
+          this.importingData = message.line;
+        });
+        promise = this.codenvyAPI.getProject().importProject(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData);
       }
+      promise.then((data) => {
+        this.importing = false;
+        this.importingData = '';
 
-      // need to redirect to the project details as it has been created !
-      this.$location.path('project/' + data.workspaceId + '/' + data.name);
+        if (mode === 'importProject') {
+          data = data.projectDescriptor;
+        }
 
-      this.messageBus.unsubscribe(channel);
+        // need to redirect to the project details as it has been created !
+        this.$location.path('project/' + data.workspaceId + '/' + data.name);
 
-    }, (error) => {
-      this.messageBus.unsubscribe(channel);
-      this.importing = false;
-      this.importingData = '';
-      // need to show the error
-      this.$mdDialog.show(
-        this.$mdDialog.alert()
-          .title('Error while creating the project')
-          .content(error.statusText + ': ' + error.data.message)
-          .ariaLabel('Project creation')
-          .ok('OK')
-      );
-    });
+        this.messageBus[this.workspaceSelected.id].unsubscribe(channel);
+
+      }, (error) => {
+        this.messageBus[this.workspaceSelected.id].unsubscribe(channel);
+        this.importing = false;
+        this.importingData = '';
+        // need to show the error
+        this.$mdDialog.show(
+            this.$mdDialog.alert()
+                .title('Error while creating the project')
+                .content(error.statusText + ': ' + error.data.message)
+                .ariaLabel('Project creation')
+                .ok('OK')
+        );
+      });
+
+    }
+
+    // dummy check as it is not yet implemented
+    if ('new-usage' === true) {
+
+      // recipe url
+
+      //TODO: no account in che ? it's null when testing on localhost
+      let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl);
+      creationPromise.then((data) => {
 
 
+        // then we've to start workspace
+        let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id);
+
+        startWorkspacePromise.then((data) => {
+
+          this.importProjectData.project.type = 'blank';
+          this.importProjectData.project.name = this.projectName;
+
+          // no source, data is .project subpart
+          promise = this.codenvyAPI.getProject().createProject(data.id, this.importProjectData.project.name, this.importProjectData.project);
+          mode = 'createProject';
+
+
+          promise.then((data) => {
+            this.importing = false;
+            this.importingData = '';
+
+            // need to redirect to the project details as it has been created !
+            this.$location.path('project/' + data.workspaceId + '/' + data.name);
+
+          }, (error) => {
+            this.importing = false;
+            this.importingData = '';
+            // need to show the error
+            this.$mdDialog.show(
+                this.$mdDialog.alert()
+                    .title('Error while creating the project')
+                    .content(error.statusText + ': ' + error.data.message)
+                    .ariaLabel('Project creation')
+                    .ok('OK')
+            );
+          });
+        });
+
+      });
+
+    }
   }
 
 
@@ -372,7 +445,6 @@ class CreateProjectCtrl {
    * @param firstInit on first init, user do not have yet initialized something
    */
   generateProjectName(firstInit) {
-
     // name has not been modified by the user
     if (firstInit || (this.projectInformationForm['deskname'].$pristine && this.projectInformationForm.name.$pristine)) {
       // generate a name
@@ -389,9 +461,20 @@ class CreateProjectCtrl {
 
       this.importProjectData.project.name = name;
 
-
     }
 
+  }
+
+
+
+  /**
+   * Generates a default workspace name
+   */
+  generateWorkspaceName() {
+      // starts with wksp
+      var name = 'wksp';
+      name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)); // jshint ignore:line
+      this.workspaceName = name;
   }
 
 
@@ -400,8 +483,8 @@ class CreateProjectCtrl {
    * @param name
    * @param valueSelected
    */
-  cdvySelecter(name, valueSelected) {
-    this.importProjectData.project.type = valueSelected;
+  cdvySimpleSelecter(name) {
+    this.importProjectData.project.type = name;
 
     // generate name
     this.generateProjectName();

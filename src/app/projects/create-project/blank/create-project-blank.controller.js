@@ -24,36 +24,65 @@ class CreateProjectBlankCtrl {
     this.codenvyAPI = codenvyAPI;
     this.$rootScope = $rootScope;
 
+    this.typesByCategory = [];
+    this.typesByCategory.push('java');
 
-    // get project types
-    let promiseTypes = codenvyAPI.getProjectType().fetchTypes();
+    // broadcast event
+    this.$rootScope.$broadcast('create-project-blank:initialized');
 
-    // update types
-    promiseTypes.then(() => {
-        this.updateTypes();
-      },
-      (error) => {
-        if (error.status === 304) {
-          // ok
-          this.updateTypes();
-          return;
-        }
-        this.state = 'error';
-      });
+    this.recipes = [];
+
+    this.selectStackOption = 'select-default-stack';
+
+    let promise = codenvyAPI.getRecipe().fetchRecipes();
+    promise.then(() => {
+          this.updateData();
+        },
+        (error) => {
+          // etag handling so also retrieve last data that were fetched before
+          if (error.status === 304) {
+            // ok
+            this.updateData();
+          }
+        });
 
   }
 
+  updateData() {
+    this.recipes.length = 0;
+
+    var remoteRecipes = this.codenvyAPI.getRecipe().getRecipes();
+    // init WS bus
+    remoteRecipes.forEach((recipe) => {
+      this.recipes.push(recipe);
+    });
+
+    this.initDefaultRecipe();
+  }
+
+
+  selectRecipe(recipe, controller) {
+    // first link of recipe is the recipe URL
+    controller.recipeUrl = recipe.links[0].href;
+  }
+
+
+  initCallbackController(controller) {
+    this.callbackController = controller;
+    this.initDefaultRecipe();
+  }
+
   /**
-   * Update the project types. (Callback of a promise)
+   * Init default recipe only if controller is here and if recipes have been analyzed
    */
-  updateTypes() {
-    let rawTypesByCategory = this.codenvyAPI.getProjectType().getTypesByCategory();
-    this.typesByCategory = [];
-    for (let categoryName in rawTypesByCategory) {
-      this.typesByCategory.push({ category: categoryName, types: rawTypesByCategory[categoryName] });
+  initDefaultRecipe() {
+    if (!this.callbackController) {
+      return;
     }
-    // broadcast event
-    this.$rootScope.$broadcast('create-project-blank:initialized');
+    if (this.recipes.length > 0) {
+      // init recipe URL with first recipe
+      this.callbackController.recipeUrl = this.recipes[0].links[0].href;
+    }
 
   }
 

@@ -63,7 +63,9 @@ class CodenvyWorkspace {
         getRAM: {method: 'GET', url: '/api/runner/:workspaceId/resources'},
         create: {method: 'POST', url: '/api/workspace/config?account=:accountId'},
         delete: {method: 'DELETE', url: '/api/workspace/:workspaceId'},
-        update: {method: 'POST', url : '/api/workspace/:workspaceId'}
+        update: {method: 'POST', url : '/api/workspace/:workspaceId'},
+        addProject: {method: 'POST', url : '/api/workspace/:workspaceId/project'},
+        startWorkspace: {method: 'POST', url : '/api/workspace/:workspaceId/runtime?environment=:workspaceId'}
       }
     );
   }
@@ -163,6 +165,16 @@ class CodenvyWorkspace {
     return defer.promise;
   }
 
+  /**
+   * Adds a project on the workspace
+   * @param workspaceId the workspace ID required to add a project
+   * @param project the project JSON entry to add
+   * @returns {*}
+   */
+  addProject(workspaceId, project) {
+    let promise = this.remoteWorkspaceAPI.addProject({workspaceId : workspaceId}, project).$promise;
+    return promise;
+  }
 
 
   createWorkspace(accountId, workspaceName, recipeUrl) {
@@ -170,35 +182,43 @@ class CodenvyWorkspace {
 
 
     let data = {
-      "environments": {
+      'environments': {
+
       },
-      "name": workspaceName,
-      "attributes": {},
-      "projects": [],
-      "defaultEnvName": workspaceName,
-      "description": null,
-      "commands": [],
-      "links": []
+      'name': workspaceName,
+      'attributes': {},
+      'projects': [],
+      'defaultEnvName': workspaceName,
+      'description': null,
+      'commands': [],
+      'links': []
     };
 
 
-    let envData = {
-      "name": workspaceName,
-        "recipe": null,
-        "machineConfigs": [{
-      "name": "dev-machine",
-      "limits": {"memory": 2048},
-      "type": "docker",
-      "source": {"location": "http://localhost:8080/che/api/recipe/recipe_ubuntu/script", "type": "recipe"},
-      "dev": true
-    }]
-    };
+    let envEntry = {
+        'name': workspaceName,
+        'recipe': null,
+        'machineConfigs': [{
+          'name': 'dev-machine',
+          'limits': {'memory': 2048},
+          'type': 'docker',
+          'source': {'location': recipeUrl, 'type': 'recipe'},
+          'dev': true
+        }]
+      };
 
-    data.environments[workspaceName] = envData;
+    data.environments[workspaceName] = envEntry;
+
 
     let promise = this.remoteWorkspaceAPI.create({accountId : accountId}, data).$promise;
     return promise;
   }
+
+  startWorkspace(workspaceId) {
+    let promise = this.remoteWorkspaceAPI.startWorkspace({workspaceId : workspaceId}, {}).$promise;
+    return promise;
+  }
+
 
   /**
    * Ask for loading the workspaces by account id in asynchronous way
