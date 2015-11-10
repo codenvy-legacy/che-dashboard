@@ -58,16 +58,16 @@ class CodenvyProject {
     this.projectDetailsMap = new Map();
 
     // remote call
-    this.remoteProjectsAPI = this.$resource('/api/project/:workspaceId', {workspaceId: '@id'}, {
-      import: {method: 'POST', url: '/api/project/:workspaceId/import/:path'},
-      create: {method: 'POST', url: '/api/project/:workspaceId?name=:path'},
-      details: {method: 'GET', url: '/api/project/:workspaceId/:path'},
-      getPermissions: {method: 'GET', url: '/api/project/:workspaceId/permissions/:path', isArray: true},
-      updatePermissions: {method: 'POST', url: '/api/project/:workspaceId/permissions/:path', isArray: true},
-      rename: {method: 'POST', url: '/api/project/:workspaceId/rename/:path?name=:name'},
-      remove: {method: 'DELETE', url: '/api/project/:workspaceId/:path'},
-      update: {method: 'PUT', url: '/api/project/:workspaceId/:path'},
-      setVisibility: {method: 'POST', url: '/api/project/:workspaceId/switch_visibility/:path?visibility=:visibility'}
+    this.remoteProjectsAPI = this.$resource('/ext/project/:workspaceId', {workspaceId: '@id'}, {
+      import: {method: 'POST', url: '/ext/project/:workspaceId/import/:path'},
+      create: {method: 'POST', url: '/ext/project/:workspaceId?name=:path'},
+      details: {method: 'GET', url: '/ext/project/:workspaceId/:path'},
+      getPermissions: {method: 'GET', url: '/ext/project/:workspaceId/permissions/:path', isArray: true},
+      updatePermissions: {method: 'POST', url: '/ext/project/:workspaceId/permissions/:path', isArray: true},
+      rename: {method: 'POST', url: '/ext/project/:workspaceId/rename/:path?name=:name'},
+      remove: {method: 'DELETE', url: '/ext/project/:workspaceId/:path'},
+      update: {method: 'PUT', url: '/ext/project/:workspaceId/:path'},
+      setVisibility: {method: 'POST', url: '/ext/project/:workspaceId/switch_visibility/:path?visibility=:visibility'}
     });
   }
 
@@ -83,6 +83,7 @@ class CodenvyProject {
     //TODO this.projectsPerWorkspaceMap.clear();
 
     this.workspaces.length = 0;
+
     // for each workspace
     workspaces.forEach((workspace) => {
 
@@ -90,11 +91,11 @@ class CodenvyProject {
       this.workspaces.push(workspace);
 
       // init bus
-      let bus = this.codenvyWebsocket.getBus(workspace.workspaceReference.id);
+      let bus = this.codenvyWebsocket.getBus(workspace.id);
       bus.subscribe('vfs', (message) => {
         // if vfs is updated, and this is a root module, refresh
 
-        if (workspace.workspaceReference.id === message.workspaceId) {
+        if (workspace.id === message.workspaceId) {
           if ('CREATED' === message.type || 'DELETED' === message.type || 'RENAMED' === message.type) {
 
             // count number of slashes to detect if this is a root project
@@ -102,7 +103,7 @@ class CodenvyProject {
 
             if (1 === slashCount) {
               // refresh
-              this.fetchProjectsForWorkspaceId(workspace.workspaceReference.id);
+              this.fetchProjectsForWorkspaceId(workspace.id);
             }
           }
         }
@@ -113,6 +114,7 @@ class CodenvyProject {
       let promise = this.fetchProjectsForWorkspace(workspace);
       promises.push(promise);
     });
+
 
     return this.$q.all(promises);
 
@@ -163,7 +165,34 @@ class CodenvyProject {
    * @param workspace
    */
   fetchProjectsForWorkspace(workspace) {
-    return this.fetchProjectsForWorkspaceId(workspace.workspaceReference.id);
+    var workspaceId = workspace.id;
+
+    var remoteProjects = [];
+    if (workspace.projects) {
+      workspace.projects.forEach((projectReference) => {
+        remoteProjects.push(projectReference);
+      });
+    }
+
+    // add the map key
+    this.projectsPerWorkspaceMap.set(workspaceId, remoteProjects);
+    this.projectsPerWorkspace[workspaceId] = remoteProjects;
+
+    // refresh global projects list
+    this.projects.length = 0;
+
+
+    for (var member in this.projectsPerWorkspace) {
+      let projects = this.projectsPerWorkspace[member];
+      projects.forEach((project) => {
+        this.projects.push(project);
+      });
+    }
+
+    // needs to return a promise
+    var deferred = this.$q.defer();
+    deferred.resolve('success');
+    return deferred.promise;
   }
 
   /**

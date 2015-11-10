@@ -1,4 +1,4 @@
-<cdvy-box >
+<cdvy-box ng-if="dashboardOverviewCtrl.isSaasServiceAvailable">
   <div layout="row" layout-align="space-around start" flex ng-controller="BillingCtrl as billingCtrl">
     <div ng-if="dashboardOverviewCtrl.isSaasServiceAvailable" layout-align="center center" class="dashboard-overview-gbh">
       <div class="dashboard-overview-title" flex>Gigabyte Hours</div>
@@ -15,12 +15,6 @@
       </div>
     </div>
 
-
-    <div layout-align="center center" class="dashboard-overview-runners">
-      <div class="dashboard-overview-title" flex>Runners</div>
-      <div class="dashboard-overview-number">{{dashboardOverviewCtrl.getProcesses()}}</div>
-      <div class="dashboard-overview-runner-desc">Active runners</div>
-    </div>
 
     <div ng-if="dashboardOverviewCtrl.isSaasServiceAvailable" layout-align="center center" class="dashboard-overview-charges" ng-controller="CreditcardCtrl as creditCardCtrl">
       <div class="dashboard-overview-title" flex>Charges</div>

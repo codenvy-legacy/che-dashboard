@@ -28,22 +28,22 @@ describe('Manage access of a project', function () {
 
   });
 
-
-  it('check permissions name', function() {
-    browser.addMockModule('userDashboardMock', accessProjectMock.listPermissions);
-    browser.get('http://localhost:5000/#/project/idFlorent/project-wk1-1');
-    browser.waitForAngular();
-
-    expect(accessProjectsPage.accessTab.isDisplayed()).toBe(true);
-
-
-    // click on the access tab
-    accessProjectsPage.accessTab.click();
-
-    // check that we have expected permissions number
-    expect(accessProjectsPage.permissionsElement.count()).toEqual(3);
-
-  });
+  //
+  //it('check permissions name', function() {
+  //  browser.addMockModule('userDashboardMock', accessProjectMock.listPermissions);
+  //  browser.get('http://localhost:5000/#/project/idFlorent/project-wk1-1');
+  //  browser.waitForAngular();
+  //
+  //  expect(accessProjectsPage.accessTab.isDisplayed()).toBe(true);
+  //
+  //
+  //  // click on the access tab
+  //  accessProjectsPage.accessTab.click();
+  //
+  //  // check that we have expected permissions number
+  //  expect(accessProjectsPage.permissionsElement.count()).toEqual(3);
+  //
+  //});
 
 
 });

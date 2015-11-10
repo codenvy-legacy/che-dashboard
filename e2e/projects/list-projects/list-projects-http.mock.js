@@ -26,8 +26,8 @@ exports.projectsList = function(){
       var nameWorkspace1 = 'florent';
       var nameWorkspace2 = 'stevan';
 
-      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withWorkspaceReference(codenvyAPIBuilder.getWorkspaceReferenceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build()).build();
-      var workspace2 = codenvyAPIBuilder.getWorkspaceBuilder().withWorkspaceReference(codenvyAPIBuilder.getWorkspaceReferenceBuilder().withName(nameWorkspace2).withId(idWorkspace2).build()).build();
+      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
+      var workspace2 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace2).withId(idWorkspace2).build();
 
       var wksp1Project1 = codenvyAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
       var wksp1Project2 = codenvyAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-2').build();
@@ -59,7 +59,7 @@ exports.projectsList2 = function(){
 
       var nameWorkspace1 = 'florent';
 
-      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withWorkspaceReference(codenvyAPIBuilder.getWorkspaceReferenceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build()).build();
+      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
 
       var wksp1Project1 = codenvyAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
       var wksp1Project2 = codenvyAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-2').build();
@@ -87,7 +87,7 @@ exports.emptyProjectsList = function(){
 
       var nameWorkspace1 = 'empty';
 
-      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withWorkspaceReference(codenvyAPIBuilder.getWorkspaceReferenceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build()).build();
+      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
 
       // create backend
       var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);

@@ -22,7 +22,7 @@ exports.listPermissions = function(){
       var nameWorkspace1 = 'florent';
       var projectName = 'project-wk1-1';
 
-      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withWorkspaceReference(codenvyAPIBuilder.getWorkspaceReferenceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build()).build();
+      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
 
       var projectReference = codenvyAPIBuilder.getProjectReferenceBuilder().withName(projectName).build();
 

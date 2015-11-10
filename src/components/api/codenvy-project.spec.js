@@ -67,8 +67,8 @@ describe('CodenvyProject', function () {
       var idWorkspace1 = 'idOfMyWorkspace1';
       var idWorkspace2 = 'idOfMyWorkspace2';
 
-      var workspace1 = apiBuilder.getWorkspaceBuilder().withWorkspaceReference(apiBuilder.getWorkspaceReferenceBuilder().withName('testWorkspace1').withId(idWorkspace1).build()).build();
-      var workspace2 = apiBuilder.getWorkspaceBuilder().withWorkspaceReference(apiBuilder.getWorkspaceReferenceBuilder().withName('testWorkspace2').withId(idWorkspace2).build()).build();
+      var workspace1 = apiBuilder.getWorkspaceBuilder().withName('testWorkspace1').withId(idWorkspace1).build();
+      var workspace2 = apiBuilder.getWorkspaceBuilder().withName('testWorkspace2').withId(idWorkspace2).build();
 
       var wksp1Project1 = apiBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
       var wksp1Project2 = apiBuilder.getProjectReferenceBuilder().withName('project-wk1-2').build();
@@ -83,10 +83,6 @@ describe('CodenvyProject', function () {
 
       // no projects now
       expect(factory.getAllProjects().length).toEqual(0);
-
-      // expecting a GET
-      httpBackend.expectGET('/api/project/' + idWorkspace1);
-      httpBackend.expectGET('/api/project/' + idWorkspace2);
 
       // update projects workspaces
       factory.onChangeWorkspaces([workspace1, workspace2]);
@@ -143,7 +139,7 @@ describe('CodenvyProject', function () {
       factory.fetchProjectDetails(testProjectDetails.workspaceId, '/' + testProjectDetails.name);
 
       // expecting GET
-      httpBackend.expectGET('/api/project/' + testProjectDetails.workspaceId + '/' + testProjectDetails.name);
+      httpBackend.expectGET('/ext/project/' + testProjectDetails.workspaceId + '/' + testProjectDetails.name);
 
       // flush command
       httpBackend.flush();
