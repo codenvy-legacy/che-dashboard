@@ -25,7 +25,7 @@ class CodenvyHttpBackend {
   constructor($httpBackend, codenvyAPIBuilder) {
     this.httpBackend = $httpBackend;
     this.projectsPerWorkspace = new Map();
-    this.workspaces = [];
+    this.workspaces = new Map();
     this.userIdMap = new Map();
     this.userEmailMap = new Map();
     this.profilesMap = new Map();
@@ -49,7 +49,15 @@ class CodenvyHttpBackend {
    */
   setup() {
     // add the remote call
-    this.httpBackend.when('GET', '/api/workspace/all').respond(this.workspaces);
+    var workspaceReturn = [];
+    var workspaceKeys = this.workspaces.keys();
+    for (let key of workspaceKeys) {
+      var tmpWorkspace = this.workspaces.get(key);
+      workspaceReturn.push(tmpWorkspace);
+    }
+
+    this.httpBackend.when('GET', '/api/workspace').respond(workspaceReturn);
+
     this.httpBackend.when('GET', '/api/project-type').respond(this.projectTypes);
 
     //memeberships:
@@ -66,6 +74,8 @@ class CodenvyHttpBackend {
       this.httpBackend.when('GET', '/api/user/find?email=' + key).respond(this.userEmailMap.get(key));
     }
     this.httpBackend.when('GET', '/api/user/inrole?role=admin&scope=system&scopeId=').respond(false);
+    this.httpBackend.when('GET', '/api/user/inrole?role=user&scope=system&scopeId=').respond(true);
+
 
     //profiles
     this.httpBackend.when('GET', '/api/profile').respond(this.defaultProfile);
@@ -78,13 +88,13 @@ class CodenvyHttpBackend {
     /// project details
     var projectDetailsKeys = this.projectDetailsMap.keys();
     for (let projectKey of projectDetailsKeys) {
-      this.httpBackend.when('GET', '/api/project/' + projectKey).respond(this.projectDetailsMap.get(projectKey));
+      this.httpBackend.when('GET', '/ext/project/' + projectKey).respond(this.projectDetailsMap.get(projectKey));
     }
 
     // permissions
     var projectPermissionsKeys = this.projectPermissionsMap.keys();
     for (let key of projectPermissionsKeys) {
-      this.httpBackend.when('GET', '/api/project/' + key.workspaceId + '/permissions/' + key.projectName).respond(this.projectPermissionsMap.get(key));
+      this.httpBackend.when('GET', '/ext/project/' + key.workspaceId + '/permissions/' + key.projectName).respond(this.projectPermissionsMap.get(key));
     }
 
     this.httpBackend.when('POST', '/api/analytics/log/session-usage').respond();
@@ -100,11 +110,11 @@ class CodenvyHttpBackend {
     workspaces.forEach((workspace) => {
 
       // if there is a workspace ID, add empty projects
-      if (workspace.workspaceReference.id) {
-        this.projectsPerWorkspace.set(workspace.workspaceReference.id, []);
+      if (workspace.id) {
+        this.projectsPerWorkspace.set(workspace.id, []);
       }
 
-      this.workspaces.push(workspace);
+      this.workspaces.set(workspace.id, workspace);
     });
 
   }
@@ -117,23 +127,40 @@ class CodenvyHttpBackend {
    */
   addProjects(workspace, projects) {
     // we need the workspaceReference ID
-    if (!workspace.workspaceReference.id) {
+    if (!workspace.id) {
       throw 'no workspace id set';
     }
 
+    var workspaceFound = this.workspaces.get(workspace.id);
+    if (!workspaceFound) {
+      this.workspaces.set(workspace.id, workspace);
+      workspaceFound = workspace;
+    }
+
+    var existingProjects = workspaceFound.projects;
+    if (!existingProjects) {
+      workspaceFound.projects = [];
+    }
+    if (projects) {
+      projects.forEach((project) => {
+        existingProjects.push(project);
+      });
+    }
+
+
     // empty array if not yet defined
-    if (!this.projectsPerWorkspace.get(workspace.workspaceReference.id)) {
-      this.projectsPerWorkspace.set(workspace.workspaceReference.id, []);
+    if (!this.projectsPerWorkspace.get(workspace.id)) {
+      this.projectsPerWorkspace.set(workspace.id, []);
     }
 
     // add each project
     projects.forEach((project) => {
-        this.projectsPerWorkspace.get(workspace.workspaceReference.id).push(project);
+        this.projectsPerWorkspace.get(workspace.id).push(project);
       }
     );
 
     // add call to the backend
-    this.httpBackend.when('GET', '/api/project/' + workspace.workspaceReference.id).respond(this.projectsPerWorkspace.get(workspace.workspaceReference.id));
+    this.httpBackend.when('GET', '/ext/project/' + workspace.id).respond(this.projectsPerWorkspace.get(workspace.id));
 
   }
 
@@ -244,7 +271,7 @@ class CodenvyHttpBackend {
    * @param newProjectDetails
    */
   addUpdatedProjectDetails(workspaceId, projectName, newProjectDetails) {
-    this.httpBackend.when('PUT', '/api/project/' + workspaceId + '/' + projectName).respond(newProjectDetails);
+    this.httpBackend.when('PUT', '/ext/project/' + workspaceId + '/' + projectName).respond(newProjectDetails);
   }
 
   /**
@@ -253,7 +280,7 @@ class CodenvyHttpBackend {
    * @param projectName the project name
    */
   addFetchProjectDetails(workspaceId, projectName) {
-    this.httpBackend.when('GET', '/api/project/' + workspaceId + '/' + projectName)
+    this.httpBackend.when('GET', '/ext/project/' + workspaceId + '/' + projectName)
       .respond(this.projectDetailsMap.get(workspaceId + '/' + projectName));
   }
 
@@ -264,7 +291,7 @@ class CodenvyHttpBackend {
    * @param newProjectName the new project name
    */
   addUpdatedProjectName(workspaceId, projectName, newProjectName) {
-    this.httpBackend.when('POST', '/api/project/' + workspaceId + '/rename/' + projectName + '?name=' + newProjectName).respond(newProjectName);
+    this.httpBackend.when('POST', '/ext/project/' + workspaceId + '/rename/' + projectName + '?name=' + newProjectName).respond(newProjectName);
   }
 
   /**
@@ -274,7 +301,7 @@ class CodenvyHttpBackend {
    * @param newVisibility the new project visibility
    */
   addSwitchVisibility(workspaceId, projectName, newVisibility) {
-    this.httpBackend.when('POST', '/api/project/' + workspaceId + '/switch_visibility/' + projectName + '?visibility=' + newVisibility).respond(newVisibility);
+    this.httpBackend.when('POST', '/ext/project/' + workspaceId + '/switch_visibility/' + projectName + '?visibility=' + newVisibility).respond(newVisibility);
   }
 
   addPermissions(workspaceId, projectName, permissions) {

@@ -56,7 +56,7 @@ class UniqueProjectNameValidator {
           var map = this.codenvyAPI.getProject().getProjectsByWorkspaceMap();
 
 
-          var projectsWorkspace = map.get(selectedWorkspace.workspaceReference.id);
+          var projectsWorkspace = map.get(selectedWorkspace.id);
           for (let i = 0; i < projectsWorkspace.length; i++) {
             let project = projectsWorkspace[i];
             if (modelValue === project.name) {
@@ -67,8 +67,8 @@ class UniqueProjectNameValidator {
           }
           deferred.resolve(true);
         } else {
-          // unable to perform the check so return false
-          deferred.reject(false);
+          // no workspace so it's ok
+          deferred.resolve(true);
         }
 
         // return promise

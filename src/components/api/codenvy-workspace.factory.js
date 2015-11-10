@@ -54,14 +54,14 @@ class CodenvyWorkspace {
     this.listeners = [];
 
     // remote call
-    this.remoteWorkspaceAPI = this.$resource('/api/workspace/all', {}, {
+    this.remoteWorkspaceAPI = this.$resource('/api/workspace', {}, {
         listByAccountId: {method: 'GET', url: '/api/workspace/find/account?id=:accountId', isArray: true},
         getDetails: {method: 'GET', url: '/api/workspace/:workspaceId'},
         addMember: {method: 'POST', url: '/api/workspace/:workspaceId/members'},
         deleteMember: {method: 'DELETE', url: '/api/workspace/:workspaceId/members/:userId'},
         getMembers: {method: 'GET', url: '/api/workspace/:workspaceId/members', isArray: true},
         getRAM: {method: 'GET', url: '/api/runner/:workspaceId/resources'},
-        create: {method: 'POST', url: '/api/workspace'},
+        create: {method: 'POST', url: '/api/workspace/config?account=:accountId'},
         delete: {method: 'DELETE', url: '/api/workspace/:workspaceId'},
         update: {method: 'POST', url : '/api/workspace/:workspaceId'}
       }
@@ -119,12 +119,13 @@ class CodenvyWorkspace {
       this.workspacesById.clear();
       // add workspace if not temporary
       data.forEach((workspace) => {
-        if (!workspace.workspaceReference.temporary) {
+
+        if (!workspace.temporary) {
           remoteWorkspaces.push(workspace);
           this.workspaces.push(workspace);
-          workspace.workspaceReference.accountId = copyWorkspaceById.get(workspace.workspaceReference.id) ?
-            copyWorkspaceById.get(workspace.workspaceReference.id).accountId : undefined;
-          this.workspacesById.set(workspace.workspaceReference.id, workspace.workspaceReference);
+          workspace.accountId = copyWorkspaceById.get(workspace.id) ?
+            copyWorkspaceById.get(workspace.id).accountId : undefined;
+          this.workspacesById.set(workspace.id, workspace);
         }
       });
       return this.workspaces;
@@ -162,10 +163,40 @@ class CodenvyWorkspace {
     return defer.promise;
   }
 
-  createWorkspace(accountId, workspaceName) {
-    let data = {accountId: accountId, name: workspaceName};
 
-    let promise = this.remoteWorkspaceAPI.create(data).$promise;
+
+  createWorkspace(accountId, workspaceName, recipeUrl) {
+    // /api/workspace/config?account=accountId
+
+
+    let data = {
+      "environments": {
+      },
+      "name": workspaceName,
+      "attributes": {},
+      "projects": [],
+      "defaultEnvName": workspaceName,
+      "description": null,
+      "commands": [],
+      "links": []
+    };
+
+
+    let envData = {
+      "name": workspaceName,
+        "recipe": null,
+        "machineConfigs": [{
+      "name": "dev-machine",
+      "limits": {"memory": 2048},
+      "type": "docker",
+      "source": {"location": "http://localhost:8080/che/api/recipe/recipe_ubuntu/script", "type": "recipe"},
+      "dev": true
+    }]
+    };
+
+    data.environments[workspaceName] = envData;
+
+    let promise = this.remoteWorkspaceAPI.create({accountId : accountId}, data).$promise;
     return promise;
   }
 

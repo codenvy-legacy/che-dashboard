@@ -17,7 +17,7 @@
 describe('CodenvyWorkspaceBuilder', function(){
 
 
-  var apiBuilder;
+  var wkspBuilder;
 
   /**
    *  setup module
@@ -29,7 +29,7 @@ describe('CodenvyWorkspaceBuilder', function(){
    * Inject builder
    */
   beforeEach(inject(function(codenvyAPIBuilder) {
-    apiBuilder = codenvyAPIBuilder;
+    wkspBuilder = codenvyAPIBuilder.getWorkspaceBuilder();
   }));
 
   /**
@@ -37,15 +37,43 @@ describe('CodenvyWorkspaceBuilder', function(){
    */
   it('check builder', function() {
 
-    var wkspBuilder = apiBuilder.getWorkspaceBuilder();
-    var wkspRefBuilder = apiBuilder.getWorkspaceReferenceBuilder();
-
     var name = 'hello';
-    var workspace = wkspBuilder.withWorkspaceReference(wkspRefBuilder.withName(name).build()).build();
+    var workspace = wkspBuilder.withName(name).build();
 
 
     // check values
-    expect(workspace.workspaceReference.name).toEqual(name);
+    expect(workspace.name).toEqual(name);
+
+  });
+
+
+  /**
+   * Check builder
+   */
+  it('check builder 1', function() {
+
+    var name = 'hello';
+    var id = 'id1';
+    var workspace = wkspBuilder.withName('hello').withId('id1').withTemporary(true).build();
+
+
+    // check values
+    expect(workspace.name).toEqual(name);
+    expect(workspace.id).toEqual(id);
+    expect(workspace.temporary).toBeTruthy();
+
+  });
+
+  /**
+   * Check builder
+   */
+  it('check builder 2', function() {
+
+    var workspace = wkspBuilder.withTemporary(false).build();
+
+    // check values
+    expect(workspace.temporary).toBeFalsy();
+
 
   });
 

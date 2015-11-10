@@ -19,11 +19,24 @@ class CodenvyWorkspaceBuilder {
 
   constructor() {
     this.workspace = {};
+    this.workspace.projects = [];
+    this.workspace.temporary = false;
+
   }
 
 
-  withWorkspaceReference(codenvyWorkspaceReference) {
-    this.workspace.workspaceReference = codenvyWorkspaceReference;
+  withName(name) {
+    this.workspace.name = name;
+    return this;
+  }
+
+  withId(id) {
+    this.workspace.id = id;
+    return this;
+  }
+
+  withTemporary(temporary) {
+    this.workspace.temporary = temporary;
     return this;
   }
 

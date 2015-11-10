@@ -13,7 +13,6 @@
 
 
 import Register from '../../utils/register';
-import CodenvyWorkspaceReferenceBuilder from './codenvy-workspacereference-builder';
 import CodenvyWorkspaceBuilder from './codenvy-workspace-builder';
 import CodenvyProjectReferenceBuilder from './codenvy-projectreference-builder';
 import CodenvyProjectDetailsBuilder from './codenvy-projectdetails-builder';
@@ -53,14 +52,6 @@ class CodenvyAPIBuilder {
    */
   getUserMembershipBuilder() {
     return new CodenvyMembershipBuilder();
-  }
-
-  /**
-   * The Codenvy Workspace Reference builder
-   * @returns {CodenvyAPI.codenvyProject|*}
-   */
-  getWorkspaceReferenceBuilder() {
-    return new CodenvyWorkspaceReferenceBuilder();
   }
 
   /**

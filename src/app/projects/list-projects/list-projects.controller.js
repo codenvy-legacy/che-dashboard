@@ -73,7 +73,7 @@ class ListProjectsCtrl {
     this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
     // init the filters of workspaces
     this.workspaces.forEach((workspace) => {
-      this.filtersWorkspaceSelected[workspace.workspaceReference.id] = true;
+      this.filtersWorkspaceSelected[workspace.id] = true;
     });
   }
 

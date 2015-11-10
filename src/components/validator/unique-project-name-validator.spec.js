@@ -58,7 +58,7 @@ describe('unique-project-name-validator', function() {
 
       // setup tests objects
       var idWorkspace1 = 'idOfMyWorkspace1';
-      var workspace1 = apiBuilder.getWorkspaceBuilder().withWorkspaceReference(apiBuilder.getWorkspaceReferenceBuilder().withName('testWorkspace1').withId(idWorkspace1).build()).build();
+      var workspace1 = apiBuilder.getWorkspaceBuilder().withName('testWorkspace1').withId(idWorkspace1).build();
       var wksp1Project1 = apiBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
 
 
@@ -96,7 +96,7 @@ describe('unique-project-name-validator', function() {
 
       // setup tests objects
       var idWorkspace1 = 'idOfMyWorkspace1';
-      var workspace1 = apiBuilder.getWorkspaceBuilder().withWorkspaceReference(apiBuilder.getWorkspaceReferenceBuilder().withName('testWorkspace1').withId(idWorkspace1).build()).build();
+      var workspace1 = apiBuilder.getWorkspaceBuilder().withName('testWorkspace1').withId(idWorkspace1).build();
       var wksp1Project1 = apiBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
 
 
