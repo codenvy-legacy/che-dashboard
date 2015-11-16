@@ -47,13 +47,12 @@ class NavBarCtrl {
     });
 
 
-
     this.profile = codenvyAPI.getProfile().getProfile();
     if (this.profile.attributes) {
       this.email = this.profile.attributes.email;
     } else {
       this.profile.$promise.then(() => {
-        this.email = this.profile.attributes ? this.profile.attributes.email : null;
+        this.email = this.profile.attributes.email ? this.profile.attributes.email : 'N/A ';
       }, () => {
         this.email = 'N/A ';
       });
@@ -93,12 +92,8 @@ class NavBarCtrl {
     return this.codenvyUser.isAdmin();
   }
 
-  isSimpleUser() {
+  isUser() {
     return this.codenvyUser.isUser();
-  }
-
-  flipOnpremAdminExpanded() {
-    this.onpremAdminExpanded = !this.onpremAdminExpanded;
   }
 }
 
