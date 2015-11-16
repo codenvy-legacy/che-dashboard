@@ -45,14 +45,6 @@ initModule.config(['$routeProvider', function ($routeProvider) {
       return deferred.promise;
     }];
 
-    // add fetch of the onboarding flag for onpremises route
-
-    if (route.templateUrl.indexOf('app/onpremises/')  === 0|| '/' === path) {
-      route.resolve.appOnBoarding = ['imsPropertiesApi', function (imsPropertiesApi) {
-        return imsPropertiesApi.fetchProperty('onboardingCompleted');
-      }];
-    }
-
     return $routeProvider.when(path, route);
   };
 
@@ -286,8 +278,6 @@ initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$t
 if (!DEV) {
   initModule.run(function (onBoardRedirect) { // jshint ignore:line
 
-  });
-  initModule.run(function (onPremiseOnBoardingRedirect) { // jshint ignore:line
   });
 }
 

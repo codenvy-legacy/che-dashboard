@@ -41,10 +41,6 @@ class OnBoarding {
     }
 
     let property = this.preferences.onBoardingFlowCompleted;
-    if (!property) {
-      // check if property is defined on the ims server
-      property = this.imsPropertiesApi.getProperty('onboardingCompleted');
-    }
 
     return !property || property !== 'true';
   }
