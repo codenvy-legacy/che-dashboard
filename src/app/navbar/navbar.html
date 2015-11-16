@@ -21,14 +21,15 @@
         <cdvy-button-dropdown cdvy-disabled="navbarCtrl.onBoarding.isUserOnBoarding()"
                               cdvy-button-dropdown-href="#/create-project" cdvy-button-dropdown-label="New Project"
                               cdvy-event-logger="new.project"
-                              cdvy-button-dropdown-controller="navbarCtrl" ng-if="navbarCtrl.isSimpleUser()"></cdvy-button-dropdown>
+                              cdvy-button-dropdown-controller="navbarCtrl"
+                              ng-if="navbarCtrl.isUser()"></cdvy-button-dropdown>
       </section>
       <section layout="column" layout-align="center center">&nbsp;</section>
-      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
+      <md-divider md-theme="factory-theme"></md-divider>
 
       <div class="admin-navbar-menu">
         <section class="left-sidebar-menu" layout="column" layout-align="center center">
-          <md-list layout="column" ng-show="navbarCtrl.isSimpleUser()">
+          <md-list layout="column">
             <md-list-item flex class="navbar-subsection-item"
                           ng-show="navbarCtrl.displayLoginItem">
               <md-button nav-bar-selected flex ng-href="#/login" layout-align="left">
@@ -38,16 +39,18 @@
                 </div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item">
-              <md-button nav-bar-selected flex ng-href="#/" layout-align="left" href="#/" target="_self" ng-click="navbarCtrl.reload()">
+            <md-list-item flex class="navbar-subsection-item"  ng-if="navbarCtrl.isUser()">
+              <md-button nav-bar-selected flex ng-href="#/" layout-align="left" href="#/" target="_self"
+                         ng-click="navbarCtrl.reload()">
                 <div class="navbar-item" layout="row" layout-align="start center">
                   <i class="fa fa-th-large icon">&nbsp;</i>
                   <span>Dashboard</span>
                 </div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item">
-              <md-button nav-bar-selected flex ng-href="#/projects" layout-align="left" cdvy-event-logger="projects" ng-click="navbarCtrl.reload()">
+            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isUser()">
+              <md-button nav-bar-selected flex ng-href="#/projects" layout-align="left" cdvy-event-logger="projects"
+                         ng-click="navbarCtrl.reload()">
                 <div class="navbar-item" layout="row" layout-align="start center">
                   <i class="fa fa-folder-open icon">&nbsp;</i>
                   <span>Projects</span>
@@ -55,7 +58,8 @@
               </md-button>
             </md-list-item>
             <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isAccountServiceAvailable">
-              <md-button nav-bar-selected flex ng-href="#/workspaces" layout-align="left" cdvy-event-logger="workspaces" ng-click="navbarCtrl.reload()">
+              <md-button nav-bar-selected flex ng-href="#/workspaces" layout-align="left" cdvy-event-logger="workspaces"
+                         ng-click="navbarCtrl.reload()">
                 <div class="navbar-item" layout="row" layout-align="start center">
                   <i class="fa fa-server fa-lg icon">&nbsp;</i>
                   <span>Workspaces</span>
@@ -63,20 +67,46 @@
               </md-button>
             </md-list-item>
             <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isFactoryServiceAvailable">
-              <md-button nav-bar-selected flex ng-href="#/factories" layout-align="left" cdvy-event-logger="factories" ng-click="navbarCtrl.reload()">
+              <md-button nav-bar-selected flex ng-href="#/factories" layout-align="left" cdvy-event-logger="factories"
+                         ng-click="navbarCtrl.reload()">
                 <div class="navbar-item" layout="row" layout-align="start center">
                   <i class="cdvyfont cdvyico-rocket-cdvyfont icon">&nbsp;</i>
                   <span>Factories</span>
                 </div>
               </md-button>
             </md-list-item>
+            <md-menu flax class="navbar-submenu-item" ng-if="navbarCtrl.hasOnPremiseAPI()" md-offset="300 8">
+              <md-button nav-bar-selected flex layout-align="left" ng-click="$mdOpenMenu($event)" ng-href>
+                <div class="navbar-item" layout="row" layout-align="start center">
+                  <i class="cdvyfont cdvyico-administration icon">&nbsp;</i>
+                  <span>Administration</span>
+                </div>
+              </md-button>
+              <md-menu-content class="navbar-submenu-content">
+                <md-menu-item>
+                  <md-button nav-bar-selected ng-href="#/onprem/admin/bridge">
+                    <div class="navbar-item" layout="row" layout-align="start center">
+                      <i class="fa fa-globe icon"></i>
+                      <span>Upgrade</span>
+                    </div>
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button nav-bar-selected ng-href="#/onprem/admin/installation">
+                    <div class="navbar-item" layout="row" layout-align="start center">
+                      <i class="fa fa-sitemap icon"></i>
+                      <span>Your Installation</span>
+                    </div>
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
           </md-list>
         </section>
       </div>
-
       <md-divider ng-show="navbarCtrl.isAdminServiceAvailable" md-theme="factory-theme"></md-divider>
       <div ng-show="navbarCtrl.isAdminServiceAvailable" class="admin-navbar-menu"
-            ng-init="configMenuIsExpand=true">
+           ng-init="configMenuIsExpand=true">
         <div class="navbar-identity"
              flex layout="row" layout-align="start center" ng-click="configMenuIsExpand=!configMenuIsExpand">
       <span flex layout="row" layout-align="start center" layout-padding>
@@ -91,7 +121,8 @@
                  ng-if="configMenuIsExpand">
           <md-list layout="column" flex>
             <md-list-item ng-show="navbarCtrl.isAdminPluginServiceAvailable" flex class="navbar-subsection-item">
-              <md-button nav-bar-selected flex ng-href="#/admin/plugins" layout-align="left" cdvy-event-logger="account" ng-click="navbarCtrl.reload()">
+              <md-button nav-bar-selected flex ng-href="#/admin/plugins" layout-align="left" cdvy-event-logger="account"
+                         ng-click="navbarCtrl.reload()">
                 <div class="navbar-item" layout="row" layout-align="start center">Plug-Ins</div>
               </md-button>
             </md-list-item>
@@ -99,9 +130,9 @@
         </section>
       </div>
 
-      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
+      <md-divider md-theme="factory-theme"></md-divider>
       <div class="admin-navbar-menu"
-           ng-show="navbarCtrl.profile.attributes && navbarCtrl.isSimpleUser()" ng-init="isExpand=true">
+           ng-show="navbarCtrl.profile.attributes && navbarCtrl.isUser()" ng-init="isExpand=true">
         <div class="navbar-identity"
              flex layout="row" layout-align="start center" ng-click="isExpand=!isExpand">
       <span flex layout="row" layout-align="start center" layout-padding>
@@ -116,40 +147,35 @@
                  ng-if="isExpand">
           <md-list layout="column" flex>
             <md-list-item flex class="navbar-subsection-item">
-              <md-button nav-bar-selected flex ng-href="#/account" layout-align="left" cdvy-event-logger="account" ng-click="navbarCtrl.reload()">
-                <div class="navbar-item" layout="row" layout-align="start center">Account</div>
+              <md-button nav-bar-selected flex ng-href="#/account" layout-align="left" cdvy-event-logger="account"
+                         ng-click="navbarCtrl.reload()">
+                <div class="navbar-item" layout="row"
+                     layout-align="start center">Account</div>
               </md-button>
             </md-list-item>
             <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isAccountServiceAvailable">
               <md-button nav-bar-selected flex ng-href="#/team" layout-align="left" cdvy-event-logger="team" ng-click="navbarCtrl.reload()">
-                <div class="navbar-item" layout="row" layout-align="start center">Team</div>
+                <div class="navbar-item" layout="row"
+                     layout-align="start center">Team</div>
               </md-button>
             </md-list-item>
             <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isSubscriptionServiceAvailable">
               <md-button nav-bar-selected flex ng-href="#/subscriptions" layout-align="left" ng-click="navbarCtrl.reload()">
-                <div class="navbar-item" layout="row" layout-align="start center"
-                     cdvy-event-logger="subscriptions">Subscriptions</div>
+                <div class="navbar-item" layout="row" cdvy-event-logger="subscriptions"
+                     layout-align="start center">Subscriptions</div>
               </md-button>
             </md-list-item>
             <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isInvoiceServiceAvailable">
               <md-button nav-bar-selected flex ng-href="#/billing" layout-align="left" ng-click="navbarCtrl.reload()">
-                <div class="navbar-item" layout="row" layout-align="start center"
-                     cdvy-event-logger="billing-and-invoices">Billing and
-                  Invoices
-                </div>
+                <div class="navbar-item" layout="row" cdvy-event-logger="billing-and-invoices"
+                     layout-align="start center">Billing and Invoices</div>
               </md-button>
             </md-list-item>
           </md-list>
         </section>
       </div>
-      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.userIsAdmin() && navbarCtrl.hasOnPremiseAPI()"></md-divider>
-
-      <cdvy-navbar-admin class="admin-navbar-menu" ng-show="navbarCtrl.userIsAdmin() && navbarCtrl.hasOnPremiseAPI()"></cdvy-navbar-admin>
-      <cdvy-admin-links class="admin-navbar-menu" ng-if="navbarCtrl.userIsAdmin() && navbarCtrl.hasOnPremiseAPI()"></cdvy-admin-links>
-
-      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
-
-      <div class="help-menu" ng-show="navbarCtrl.isSimpleUser() && !navbarCtrl.userIsAdmin()">
+      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isUser()"></md-divider>
+      <div class="help-menu" ng-show="navbarCtrl.isUser() && !navbarCtrl.userIsAdmin()">
         <section class="left-sidebar-menu" layout="column" layout-align="center center">
           <md-list layout="row">
             <md-list-item>

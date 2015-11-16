@@ -12,14 +12,12 @@
 
 import OnPremisesAdminBridgeConfig from './bridge/bridge-config';
 import OnPremisesAdminInstallationConfig from './installation/installation-config';
-import OnPremisesAdminNavbarConfig from './navbar/admin-navbar-config';
 
 class OnPremisesAdminConfig {
 
   constructor(register) {
     new OnPremisesAdminBridgeConfig(register);
     new OnPremisesAdminInstallationConfig(register);
-    new OnPremisesAdminNavbarConfig(register);
   }
 }
 
