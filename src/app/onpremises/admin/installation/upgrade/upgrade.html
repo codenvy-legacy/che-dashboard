@@ -11,7 +11,7 @@
 
 -->
 
-<cdvy-panel cdvy-title="Upgrade Your Codenvy On-Prem Installation" cdvy-panel-id="upgrade-your-installation-panel" cdvy-disabled="upgradeInstallationCtrl.isSectionDisabled()">
+<cdvy-panel cdvy-title="Upgrade" cdvy-panel-id="upgrade-your-installation-panel" cdvy-disabled="upgradeInstallationCtrl.isSectionDisabled()">
   <md-progress-linear md-mode="indeterminate"  ng-hide="upgradeInstallationCtrl.fetchAll" ></md-progress-linear>
 
   <div ng-show="upgradeInstallationCtrl.fetchAll">
@@ -20,7 +20,7 @@
       <cdvy-button-primary cdvy-button-title="Install {{upgradeInstallationCtrl.codenvyUpgradableArtifact.version}} Now" ng-click="upgradeInstallationCtrl.install(upgradeInstallationCtrl.codenvyUpgradableArtifact.version)" ng-disabled="upgradeInstallationCtrl.isSectionDisabled()"></cdvy-button-primary>
     </div>
     <div ng-hide="upgradeInstallationCtrl.codenvyUpgradableArtifact">
-      No available upgrade based on current downloaded files.
+      Nothing to upgrade.
     </div>
 
     <!-- Removed because not implemented in IM -->

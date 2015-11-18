@@ -10,13 +10,28 @@
  */
 'use strict';
 
-import OnPremisesAdminBridgeConfig from './bridge/bridge-config';
 import OnPremisesAdminInstallationConfig from './installation/installation-config';
+import OnPremisesAdminAvailableSoftwareCtrl from './software/software.controller';
+import AvailableSoftwarePanel from './software/software.directive';
+import OnPremisesAdminYourSubscriptionCtrl from './yoursubscription/yoursubscription.controller';
+import YourSubscriptionPanel from './yoursubscription/yoursubscription.directive';
 
 class OnPremisesAdminConfig {
 
   constructor(register) {
-    new OnPremisesAdminBridgeConfig(register);
+
+    register.directive('cdvyAvailableSoftware', AvailableSoftwarePanel);
+    register.directive('cdvyYourSubscription', YourSubscriptionPanel);
+    register.controller('OnPremisesAdminAvailableSoftwareCtrl', OnPremisesAdminAvailableSoftwareCtrl);
+    register.controller('OnPremisesAdminYourSubscriptionCtrl', OnPremisesAdminYourSubscriptionCtrl);
+
+    // configure routes
+    register.app.config(function ($routeProvider) {
+      $routeProvider.accessWhen('/onprem/administration', {
+        templateUrl: 'app/onpremises/admin/administration.html'
+      });
+    });
+
     new OnPremisesAdminInstallationConfig(register);
   }
 }

@@ -10,8 +10,6 @@
  */
 'use strict';
 
-import OnPremisesAdminInstallationCtrl from './installation.controller';
-
 import AutomaticUpdatesCtrl from './automatic/automatic.controller';
 import AutomaticUpdatesPanel from './automatic/automatic.directive';
 import OnPremConfigurationCtrl from './configuration/configuration.controller';
@@ -25,8 +23,6 @@ class OnPremisesAdminInstallationConfig {
 
   constructor(register) {
 
-    register.controller('OnPremisesAdminInstallationCtrl', OnPremisesAdminInstallationCtrl);
-
     register.controller('OnPremConfigurationCtrl', OnPremConfigurationCtrl);
     register.controller('UpgradeInstallationCtrl', UpgradeInstallationCtrl);
     register.controller('AutomaticUpdatesCtrl', AutomaticUpdatesCtrl);
@@ -36,15 +32,6 @@ class OnPremisesAdminInstallationConfig {
     register.directive('cdvyOnpremInstallConfig', ConfigurationPanel);
     register.directive('cdvyOnpremUpgradeInstall', UpgradeInstallationPanel);
     register.directive('cdvyOnpremYourInstall', YourInstallationPanel);
-
-    // configure routes
-    register.app.config(function ($routeProvider) {
-      $routeProvider.accessWhen('/onprem/admin/installation', {
-        templateUrl: 'app/onpremises/admin/installation/installation.html',
-        controller: 'OnPremisesAdminInstallationCtrl',
-        controllerAs: 'onPremisesAdminInstallationCtrl'
-      });
-    });
   }
 }
 

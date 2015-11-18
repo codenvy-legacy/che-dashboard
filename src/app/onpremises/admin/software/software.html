@@ -11,7 +11,7 @@
 
 -->
 
-<cdvy-panel cdvy-title="Software At Codenvy.com">
+<cdvy-panel cdvy-title="Download">
 
   <div flex layout="row" class="onprem-admin-available-software">
     <!-- TODO replace with md-table when available -->
@@ -20,7 +20,7 @@
         <tr>
           <th class="onprem-admin-available-software-namecol">Software</th>
           <th class="onprem-admin-installed-software-col">Local Version</th>
-          <th class="onprem-admin-available-software-col">Version(s) at Codenvy.com</th>
+          <th class="onprem-admin-available-software-col">Remote Version(s)</th>
         </tr>
       </thead>
       <tbody ng-if="onPremisesAdminBridgeAvailableSoftwareCtrl.artifacts">
@@ -79,6 +79,6 @@
     </table>
   </div>
   <div layout="column" layout-align="center end">
-    <div class="onprem-admin-available-software-available-version-help-download" flex>You can upgrade Codenvy On-Prem by downloading a new version and <a ng-href="#/onprem/admin/installation">installing it</a>.</div>
+    <div class="onprem-admin-available-software-available-version-help-download" flex>You can upgrade Codenvy by downloading a new version and <a ng-href="#/onprem/admin/installation">installing it</a>.</div>
   </div>
 </cdvy-panel>

@@ -11,22 +11,23 @@
 'use strict';
 
 /**
- * Defines a directive for creating "your subscription" section.
+ * Defines a directive for creating navbar.
+ * @author Florent Benoit
  */
-class YourSubscriptionPanel {
+class AvailableSoftwarePanel {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
   constructor () {
-    this.restrict = 'E';
-    this.replace = false;
-    this.templateUrl = 'app/onpremises/admin/bridge/yoursubscription/yoursubscription.html';
-    this.controller = 'OnPremisesAdminBridgeYourSubscriptionCtrl';
-    this.controllerAs = 'onPremisesAdminBridgeYourSubscriptionCtrl';
+    this.restrict='E';
+    this.replace=false;
+    this.templateUrl = 'app/onpremises/admin/software/software.html';
+    this.controller = 'OnPremisesAdminAvailableSoftwareCtrl';
+    this.controllerAs = 'onPremisesAdminAvailableSoftwareCtrl';
   }
 
 }
 
-export default YourSubscriptionPanel;
+export default AvailableSoftwarePanel;
