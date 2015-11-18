@@ -85,7 +85,7 @@ class CreateProjectSamplesCtrl {
   getItemsSize(items) {
     return Object.keys(items).length;
 
-}
+  }
 
 }
 
