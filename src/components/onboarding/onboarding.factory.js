@@ -22,9 +22,8 @@ class OnBoarding {
    * Default constructor for the artifact API.
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, imsPropertiesApi) {
-    this.imsPropertiesApi = imsPropertiesApi;
-
+  constructor(codenvyAPI, imsArtifactApi) {
+    this.imsArtifactApi = imsArtifactApi;
     this.codenvyUser = codenvyAPI.getUser();
     this.profile = codenvyAPI.getProfile().getProfile();
     this.preferences = codenvyAPI.getProfile().getPreferences();
@@ -32,12 +31,8 @@ class OnBoarding {
 
   isUserOnBoarding() {
     // if admin
-    if (this.codenvyUser.isAdmin()) {
+    if (this.codenvyUser.isAdmin() || this.imsArtifactApi.isImsAvailable()) {
       return false;
-    }
-    // check login
-    if (!this.profile.attributes) {
-      return true;
     }
 
     let property = this.preferences.onBoardingFlowCompleted;

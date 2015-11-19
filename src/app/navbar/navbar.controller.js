@@ -26,7 +26,6 @@ class NavBarCtrl {
     this.links = [{href: '#/projects', name: 'List Projects'}];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
-    this.onPremise = false;
     let promiseUser = this.codenvyUser.fetchUser();
     promiseUser.then(() => {
       this.updateAdminRole();
@@ -61,20 +60,11 @@ class NavBarCtrl {
   }
 
   updateAdminRole() {
-    // if admin, check if IM API is there
-    if (this.codenvyUser.isAdmin()) {
-      let promise = this.imsArtifactApi.getDownloadedArtifactsList();
-      promise.then(()=> {
-        this.onPremise = true;
-      }, () => {
-        this.onPremise = false;
-      });
-    }
     this.admin = this.codenvyUser.isAdmin();
   }
 
   hasOnPremiseAPI() {
-    return this.onPremise;
+    return this.codenvyUser.isAdmin() && this.imsArtifactApi.isImsAvailable();
   }
 
   reload() {

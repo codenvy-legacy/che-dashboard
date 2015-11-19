@@ -25,9 +25,10 @@ class OnBoardRedirect {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyUser, codenvyProfile, routingRedirect) {
+  constructor (codenvyUser, codenvyProfile, routingRedirect, imsArtifactApi) {
     this.codenvyUser = codenvyUser;
     this.codenvyProfile = codenvyProfile;
+    this.imsArtifactApi = imsArtifactApi;
     routingRedirect.addRouteCallback(this);
   }
 
@@ -48,13 +49,10 @@ class OnBoardRedirect {
    * @returns {*}
    */
   checkRedirect() {
-
-
-    // if user is admin, nothing to display
-    if (this.codenvyUser.isAdmin()) {
+    // if user is admin or ims available, nothing to display
+    if (this.codenvyUser.isAdmin() || this.imsArtifactApi.isImsAvailable()) {
       return {};
     }
-
 
     let preferences = this.codenvyProfile.getPreferences();
 
@@ -63,7 +61,6 @@ class OnBoardRedirect {
       return {route:'/welcome'};
     }
     return {};
-
 
   }
 
