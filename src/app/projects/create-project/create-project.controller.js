@@ -326,6 +326,18 @@ class CreateProjectCtrl {
     // select mode (create or import)
     if (this.currentTab === 'blank' || this.currentTab === 'config') {
       // no source, data is .project subpart
+      //TODO This values are hardcoded, cause required to create project. Need to fix in 4.0:
+      if (this.currentTab === 'blank' && this.importProjectData.project.type === 'maven') {
+        let name = this.importProjectData.project.name;
+        this.importProjectData.project.attributes = {'maven.artifactId' : [name], 'maven.groupId' : [name], 'maven.version' : ['1.0-SNAPSHOT']};
+      }
+
+      //TODO This values are hardcoded, cause required to create project. Need to fix in 4.0:
+      if (this.currentTab === 'blank' && this.importProjectData.project.type === 'ant') {
+        this.importProjectData.project.attributes = {'ant.source.folder': ['src'], 'ant.test.source.folder': ['test']};
+      }
+
+
       promise = this.codenvyAPI.getProject().createProject(this.workspaceSelected.workspaceReference.id, this.importProjectData.project.name, this.importProjectData.project);
       mode = 'createProject';
     } else {
@@ -405,7 +417,6 @@ class CreateProjectCtrl {
 
     // generate name
     this.generateProjectName();
-
   }
 
   isImporting() {
