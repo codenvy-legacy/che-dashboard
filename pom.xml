@@ -20,13 +20,13 @@
   </parent>
   <groupId>org.eclipse.che.dashboard</groupId>
   <artifactId>che-dashboard-war</artifactId>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>3.0.1</version>
   <packaging>war</packaging>
   <name>Eclipse Che Dashboard :: Web App</name>
   <scm>
     <connection>scm:git:git@github.com:codenvy/dashboard.git</connection>
     <developerConnection>scm:git:git@github.com:codenvy/dashboard.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>3.0.1</tag>
     <url>https://github.com/codenvy/dashboard</url>
   </scm>
   <properties>
