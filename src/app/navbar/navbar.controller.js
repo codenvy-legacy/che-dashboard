@@ -26,10 +26,6 @@ class NavBarCtrl {
     this.links = [{href: '#/projects', name: 'List Projects'}];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
-    let promiseUser = this.codenvyUser.fetchUser();
-    promiseUser.then(() => {
-      this.updateAdminRole();
-    });
 
     let promiseService = this.codenvyAPI.getService().fetchServices();
     promiseService.then(() => {
@@ -45,7 +41,6 @@ class NavBarCtrl {
       this.isAdminPluginServiceAvailable = codenvyAPI.getAdminService().isServiceAvailable(codenvyAPI.getAdminPlugins().getPluginsServicePath());
     });
 
-
     this.profile = codenvyAPI.getProfile().getProfile();
     if (this.profile.attributes) {
       this.email = this.profile.attributes.email;
@@ -57,14 +52,12 @@ class NavBarCtrl {
       });
     }
     this.onpremAdminExpanded = true;
+
+    this.codenvyUser.fetchUser();
   }
 
-  updateAdminRole() {
-    this.admin = this.codenvyUser.isAdmin();
-  }
-
-  hasOnPremiseAPI() {
-    return this.codenvyUser.isAdmin() && this.imsArtifactApi.isImsAvailable();
+  isImsAvailable() {
+    return this.imsArtifactApi.isImsAvailable();
   }
 
   reload() {

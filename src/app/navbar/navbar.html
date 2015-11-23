@@ -75,7 +75,7 @@
                 </div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.hasOnPremiseAPI()">
+            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isImsAvailable() && navbarCtrl.userIsAdmin()">
               <md-button nav-bar-selected flex ng-href="#/onprem/administration" layout-align="left" cdvy-event-logger="factories"
                          ng-click="navbarCtrl.reload()">
                 <div class="navbar-item" layout="row" layout-align="start center">
