@@ -28,15 +28,18 @@ class UpgradeInstallationCtrl {
     this.subscriptionOk = false;
 
     this.upgradable = false;
-    let promise = imsArtifactApi.artifacts().then(
-      artifacts => this.updateUpgradable(artifacts),
-      () => this.updateUpgradable(undefined)
-    );
-
 
     this.codenvyUpgradableArtifact = undefined;
 
-    promise.then(() => this.fetchAll = true, () => this.errorFetching = true);
+    let promise = imsArtifactApi.artifacts();
+
+    promise.then((artifacts) => {
+      this.fetchAll = true;
+      this.updateUpgradable(artifacts);
+    }, () => {
+      this.errorFetching = true;
+      this.updateUpgradable(undefined);
+    });
   }
 
   saveSchedule() {
@@ -59,14 +62,15 @@ class UpgradeInstallationCtrl {
   updateUpgradable(artifacts) {
     // only one artifact can be installed at a time
     // search if there is one with the correct status
-    if (artifacts) {
-        if (artifacts.codenvy && artifacts.codenvy.toInstall) {
-          artifacts.codenvy.toInstall.forEach((artifact) => {
-            if ('READY_TO_INSTALL' === artifact.status) {
-              this.codenvyUpgradableArtifact = artifact;
-            }
-          });
+    if (!artifacts) {
+      return;
+    }
+    if (artifacts.codenvy && artifacts.codenvy.toInstall) {
+      artifacts.codenvy.toInstall.forEach((artifact) => {
+        if ('READY_TO_INSTALL' === artifact.status) {
+          this.codenvyUpgradableArtifact = artifact;
         }
+      });
     }
   }
 

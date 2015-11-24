@@ -12,14 +12,14 @@
 -->
 
 <cdvy-panel cdvy-title="Your Installation">
-  <md-progress-linear md-mode="indeterminate"  ng-hide="yourInstallationCtrl.fetchAll" ></md-progress-linear>
-  <div ng-show="yourInstallationCtrl.fetchAll">
+  <md-progress-linear md-mode="indeterminate"  ng-show="yourInstallationCtrl.isLoading" ></md-progress-linear>
+  <div ng-hide="yourInstallationCtrl.isLoading">
     <div class="onprem-your-install-installed-version-block" ng-if="yourInstallationCtrl.installedVersion">
       <div class="onprem-your-install-label">Installed Version</div>
       <div flex style="height: 20px">{{yourInstallationCtrl.installedVersion}}</div>
     </div>
 
-    <div flex class="onprem-your-install-nodes">
+    <div flex class="onprem-your-install-nodes" ng-if="yourInstallationCtrl.nodeList.length > 0">
       <!-- TODO replace with md-table when available -->
       <table flex class="onprem-your-install-nodes-table">
         <thead>
@@ -34,7 +34,7 @@
       </table>
     </div>
 
-    <div flex class="onprem-your-install-nodes" ng-show="yourInstallationCtrl.downloadedVersions.length > 0">
+    <div flex class="onprem-your-install-nodes" ng-if="yourInstallationCtrl.downloadedVersions.length > 0">
       <!-- TODO replace with md-table when available -->
       <table flex class="onprem-your-install-nodes-table">
         <thead>
@@ -43,12 +43,14 @@
         <tbody>
         <tr ng-repeat="downloadedVersion in yourInstallationCtrl.downloadedVersions">
           <td class="onprem-your-install-nodes-hostname-col">{{downloadedVersion}}</td>
-          <td class="onprem-your-install-nodes-node-col"><cdvy-button-default cdvy-button-title="Delete" ng-click="yourInstallationCtrl.removeDownloadedVersion(downloadedVersion)"></cdvy-button-default></td>
+          <td class="onprem-your-install-nodes-node-col">
+            <cdvy-button-default cdvy-button-title="Delete" ng-click="yourInstallationCtrl.removeDownloadedVersion(downloadedVersion)">
+            </cdvy-button-default>
+          </td>
         </tr>
         </tbody>
       </table>
     </div>
-
 
   </div>
 </cdvy-panel>

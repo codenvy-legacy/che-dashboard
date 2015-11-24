@@ -22,17 +22,22 @@ class YourInstallationCtrl {
     this.imsArtifactApi = imsArtifactApi;
     this.imsNodesApi = imsNodesApi;
     this.$q = $q;
-    this.fetchAll = false;
-    this.errorFetching = false;
+
+    this.isLoading = false;
     this.initArtifacts();
   }
 
   initArtifacts() {
+    this.isLoading = true;
     let first = this.imsNodesApi.listNodes().then((nodes) => { this.nodeList = nodes; });
     let second = this.imsArtifactApi.getInstalledArtifactsList().then(result => this.updateInstalledVersion(result));
     let third = this.imsArtifactApi.getDownloadedArtifactsList().then(result => this.updateDownloadedVersion(result));
     let allPromise = this.$q.all([first, second, third]);
-    allPromise.then(() => this.fetchAll = true, () => this.errorFetching = true);
+    allPromise.then(() => {
+        this.isLoading = false;
+    }, () => {
+        this.isLoading = false;
+    });
 
   }
 

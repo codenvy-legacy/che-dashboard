@@ -34,13 +34,21 @@ class OnPremConfigurationCtrl {
 
     this.editorOptions.onLoad = (instance => this.codemirrorLoaded(instance, $rootScope, $timeout));
 
-    this._enterSubmitState();
+    this.isErrorConfig = false;
+
     this._retrieveConfig();
   }
 
   _retrieveConfig() {
-    this.imsConfigApi.getIMConfig().$promise.then((response) => this._formatConfig(response))
-                                            .then(() => this._exitSubmitState());
+    let promise = this.imsConfigApi.getIMConfig().$promise;
+    promise.then((response) => {
+        this.isErrorConfig = false;
+        this._formatConfig(response);
+        this._exitSubmitState();
+    }, () => {
+        this.isErrorConfig = true;
+        this._exitSubmitState();
+    });
   }
 
   _formatConfig(response) {

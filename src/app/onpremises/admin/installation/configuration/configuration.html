@@ -20,28 +20,31 @@
         <div flex class="onprem-installation-config-header-cell hheader-value">Value</div>
       </div>
       <div layout="column" class="onprem-installation-config-body">
-        <div layout="row" class="onprem-installation-config-row"
-              ng-repeat="(index, data) in onPremConfigurationCtrl.config">
+        <div layout="row" class="onprem-installation-config-row" ng-if="!onPremConfigurationCtrl.isErrorConfig"
+             ng-repeat="(index, data) in onPremConfigurationCtrl.config">
           <div flex="30" class="onprem-installation-config-cell config-key">{{data[0]}}</div>
           <div flex class="onprem-installation-config-cell config-value">
             <md-input-container>
-              <input flex ng-model="onPremConfigurationCtrl.config[index][1]" aria-label="{{data[0]}}"></input>
+              <input flex ng-model="onPremConfigurationCtrl.config[index][1]" aria-label="{{data[0]}}">
             </md-input-container>
           </div>
+        </div>
+        <div layout="row" class="onprem-installation-config-row" ng-if="onPremConfigurationCtrl.isErrorConfig">
+          <span>No property information</span>
         </div>
       </div>
     </div>
 
-    <cdvy-frame cdvy-frame-class="onprem-installation-config-update-warning">
+    <cdvy-frame cdvy-frame-class="onprem-installation-config-update-warning" ng-if="!onPremConfigurationCtrl.isErrorConfig">
       By updating these parameters, the server will restart and cause a maintenance window.
     </cdvy-frame>
     <div layout="column" layout-align="start center">
       <div flex ng-show="onPremConfigurationCtrl.submitState" layout="column" layout-align="center center">
         <md-progress-circular class="md-hue-2"  md-mode="indeterminate" md-theme="default"></md-progress-circular>
       </div>
-      <cdvy-button-primary cdvy-button-title="Update Configuration"
-                            ng-click="onPremConfigurationCtrl.updateConfig()"
-                            ng-show="!onPremConfigurationCtrl.submitState">
+      <cdvy-button-primary cdvy-button-title="Update Configuration" ng-if="!onPremConfigurationCtrl.isErrorConfig"
+                           ng-click="onPremConfigurationCtrl.updateConfig()"
+                           ng-show="!onPremConfigurationCtrl.submitState">
       </cdvy-button-primary>
     </div>
   </md-content>
