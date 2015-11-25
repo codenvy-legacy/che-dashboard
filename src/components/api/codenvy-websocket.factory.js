@@ -24,12 +24,30 @@ class CodenvyWebsocket {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($websocket, $location, $window) {
+  constructor ($websocket, $location, $window, proxySettings, userDashboardConfig) {
 
     this.$window = $window;
     this.$websocket = $websocket;
-    //this.wsBaseUrl = 'ws://' + $location.host() + ':' + $location.port() + '/api/ws/';
-    this.wsBaseUrl = 'wss://codenvy.com/api/ws/';
+
+    var wsUrl;
+
+    let inDevMode = userDashboardConfig.developmentMode;
+    if (inDevMode) {
+      // it handle then http and https
+        wsUrl = proxySettings.replace('http', 'ws') + '/api/ws/';
+    } else {
+
+      var wsProtocol;
+      if ('http' === $location.protocol()) {
+        wsProtocol = 'ws';
+      } else {
+        wsProtocol = 'wss';
+      }
+
+      wsUrl = wsProtocol + '://' + $location.host() + ':' + $location.port() + '/api/ws/';
+    }
+
+    this.wsBaseUrl = wsUrl;
     this.sockets = new Map();
   }
 

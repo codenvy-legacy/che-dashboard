@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
-/*exported CodenvyAPI, CodeMirror, GitHub, Colors, Countries, ComponentsConfig */
+/*exported CodenvyAPI, CodeMirror, GitHub, Colors, Countries, ComponentsConfig, Proxy */
 
 var DEV = true;
 
@@ -81,6 +81,10 @@ import Register from '../components/utils/register';
 
 // colors
 import Colors from './colors/codenvy-color.constant.js';
+
+// proxy
+import Proxy from './proxy/proxy-settings.constant.js';
+
 
 // countries
 import Countries from './countries/codenvy-countries.constant.js';

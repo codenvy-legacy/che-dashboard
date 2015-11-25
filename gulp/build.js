@@ -12,8 +12,16 @@
 'use strict';
 
 var gulp = require('gulp');
+var minimist = require('minimist');
 
 var paths = gulp.paths;
+
+var serverOptions = {
+  string: 'server',
+  default: {server: 'https://codenvy.com'}
+};
+
+var options = minimist(process.argv.slice(2), serverOptions);
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -91,7 +99,7 @@ gulp.task('existingfonts', function () {
     .pipe(gulp.dest(paths.dist + '/fonts/'));
 });
 
-gulp.task('fonts', ['colors', 'existingfonts'], function () {
+gulp.task('fonts', ['colors', 'proxySettings', 'existingfonts'], function () {
   return gulp.src($.mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,otf,woff,woff2}'))
     .pipe($.flatten())
@@ -112,6 +120,17 @@ gulp.task('colors', ['colorstemplate'], function () {
     .pipe(gulp.dest("src/app/colors"));
 });
 
+gulp.task('proxySettingsTemplate', function () {
+  return gulp.src("src/app/proxy/proxy-settings.constant.js.template")
+    .pipe($.replace('%CONTENT%', options.server))
+    .pipe(gulp.dest('src/app/proxy/template'));
+});
+
+gulp.task('proxySettings', ['proxySettingsTemplate'], function () {
+  return gulp.src("src/app/proxy/template/proxy-settings.constant.js.template")
+    .pipe($.rename("proxy-settings.constant.js"))
+    .pipe(gulp.dest("src/app/proxy"));
+});
 
 
 gulp.task('misc', function () {
