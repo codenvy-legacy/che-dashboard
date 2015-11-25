@@ -61,48 +61,114 @@
     </cdvy-panel>
 
 
-    <cdvy-panel cdvy-title="Select Workspace">
-        <ng-form name="workspaceInformationForm">
-        <md-radio-group ng-model="createProjectCtrl.selectWorkspaceOption">
-            <md-radio-button value="select-workspace-create">Create new
-            </md-radio-button>
-
-            <cdvy-input cdvy-form="workspaceInformationForm"
-                        cdvy-name="name"
-                        cdvy-place-holder="Name of the workspace"
-                        ng-model="createProjectCtrl.workspaceName"
-                        required
-                        ng-minlength="3"
-                        ng-maxlength="20"
-                        ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
-                <div ng-message="required">A name is required.</div>
-                <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
-                <div ng-message="minlength">The name has to be more then 3 characters long.</div>
-                <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
-            </cdvy-input>
-
-            <md-radio-button ng-show="createProjectCtrl.workspaces.length > 0" value="select-workspace-use-existing">Use existing</md-radio-button>
-        </md-radio-group>
-            </ng-form>
-
-
-        <cdvy-label-container ng-show="createProjectCtrl.selectWorkspaceOption === 'select-workspace-use-existing'" cdvy-label-name="Workspace">
-            <md-select class="create-project-select"
-                       placeholder="Select a workspace"
-                       ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
-                       ng-model="createProjectCtrl.workspaceSelected">
-                <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.name}}</md-option>
-            </md-select>
-        </cdvy-label-container>
-
-
-    </cdvy-panel>
-
-
-
     <cdvy-panel cdvy-title="Select Stack">
-        <create-project-blank class="projects-create-project-tab" layout="row" layout-wrap></create-project-blank>
+
+
+        <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.stackSelectedIndex">
+            <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack">
+                <md-tab-label>
+                    <md-icon md-font-icon="fa-magic" class="fa cdvy-tab-label-icon"></md-icon>
+                    <span class="cdvy-tab-label-title">Ready-to-go Stacks</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <create-project-blank class="projects-create-project-tab" layout="row" layout-wrap ng-init="createProjectBlankCtrl.initCallbackController(createProjectCtrl)"></create-project-blank>
+                    <cdvy-label-container cdvy-label-name="Workspace">
+
+
+                    <ng-form name="workspaceInformationForm">
+                            <cdvy-input cdvy-form="workspaceInformationForm"
+                                        cdvy-name="name"
+                                        cdvy-place-holder="Name of the workspace"
+                                        ng-model="createProjectCtrl.workspaceName"
+                                        required
+                                        ng-minlength="3"
+                                        ng-maxlength="20"
+                                        ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+                                <div ng-message="required">A name is required.</div>
+                                <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
+                                <div ng-message="minlength">The name has to be more then 3 characters long.</div>
+                                <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
+                            </cdvy-input>
+                    </ng-form>
+            </cdvy-label-container>
+
+                </md-tab-body>
+            </md-tab>
+            <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack">
+                <md-tab-label>
+                    <md-icon md-font-icon="fa-tasks" class="fa cdvy-tab-label-icon"></md-icon>
+                    <span class="cdvy-tab-label-title">Custom stack</span>
+                </md-tab-label>
+                <md-tab-body>
+
+
+                    <md-radio-group ng-model="createProjectCtrl.selectWorkspaceOption">
+                        <md-radio-button value="select-workspace-create">Create new</md-radio-button>
+
+                        <cdvy-label-container cdvy-label-name="Workspace">
+
+
+                            <ng-form name="workspaceInformationForm">
+                                <cdvy-input cdvy-form="workspaceInformationForm"
+                                            cdvy-name="name"
+                                            cdvy-place-holder="Name of the workspace"
+                                            ng-model="createProjectCtrl.workspaceName"
+                                            required
+                                            ng-minlength="3"
+                                            ng-maxlength="20"
+                                            ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+                                    <div ng-message="required">A name is required.</div>
+                                    <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
+                                    <div ng-message="minlength">The name has to be more then 3 characters long.</div>
+                                    <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
+                                </cdvy-input>
+                            </ng-form>
+                        </cdvy-label-container>
+
+
+                        <md-radio-button ng-show="createProjectCtrl.workspaces.length > 0" value="select-workspace-use-existing">Use existing</md-radio-button>
+                    </md-radio-group>
+
+                    <cdvy-label-container ng-show="createProjectCtrl.selectWorkspaceOption === 'select-workspace-use-existing'" cdvy-label-name="Select">
+                        <md-select class="create-project-select"
+                                   placeholder="Select a workspace"
+                                   ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
+                                   ng-model="createProjectCtrl.workspaceSelected">
+                            <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.name}}</md-option>
+                        </md-select>
+                    </cdvy-label-container>
+
+
+                    <div layout="row" flex layout-align="space-around start">
+                        <label flex="15" hide-sm hide-md>Recipes: </label>
+
+                        <div layout="row" flex="85"  layout-align="center start" layout-wrap>
+
+                            <div class="create-project-stack-selector" layout="column" flex="50">
+
+
+                                <div layout="column">
+                                    <md-card ng-repeat="recipe in createProjectBlankCtrl.recipes"
+                                             ng-class="$first ? 'create-project-stack-selected' : 'create-project-stack-default'"
+                                             ng-click="createProjectBlankCtrl.selectRecipe(recipe, createProjectCtrl)">
+                                        <md-card-content>{{recipe.name}}</md-card-content></md-card>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+
+
+        </md-tabs>
+
+
+
     </cdvy-panel>
+
 
   <ng-form name="projectInformationForm">
     <cdvy-panel cdvy-title="Project Information" ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);">
@@ -148,10 +214,23 @@
     </cdvy-panel>
   </ng-form>
 
-  <div ng-show="createProjectCtrl.isImporting()" layout="column" layout-align="center center">
+
+    <div  layout="column" flex="50">
+
+    </div>
+
+
+    <div ng-show="createProjectCtrl.isImporting()" layout="column" layout-align="center center">
     <md-progress-circular class="md-hue-2"  md-mode="indeterminate" md-theme="default"></md-progress-circular>
     <span>{{createProjectCtrl.importingData}}</span>
   </div>
+
+
+  <div ng-show="createProjectCtrl.createWorkspaceContent.length > 0" layout="column" layout-align="center center">
+      <md-progress-circular class="md-hue-2"  md-mode="indeterminate" md-theme="default"></md-progress-circular>
+      Worskpace {{createProjectCtrl.workspaceName}} is being initialized...
+      <p ng-bind-html="createProjectCtrl.createWorkspaceContent"></p>
+    </div>
 
   <cdvy-button-primary id="create-project-button-import"
                        cdvy-button-title="Create Project"

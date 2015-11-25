@@ -20,14 +20,15 @@ class CreateProjectCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope) {
+  constructor (codenvyAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope) {
     this.codenvyAPI = codenvyAPI;
+    this.$websocket = $websocket;
     this.$timeout = $timeout;
     this.$location = $location;
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
     this.$rootScope = $rootScope;
-    this.messageBus = [];
+    this.messageBus = null;
 
     // subitem not yet completed
     this.projectBlankCompleted = false;
@@ -38,6 +39,12 @@ class CreateProjectCtrl {
     // default options
     this.selectSourceOption = 'select-source-new';
     this.selectWorkspaceOption = 'select-workspace-create';
+
+    // text when workspace is being created
+    this.createWorkspaceContent = '';
+
+
+    this.websocketReconnect = 50;
 
     this.generateWorkspaceName();
 
@@ -155,9 +162,8 @@ class CreateProjectCtrl {
   getDefaultProjectJson() {
     return {
       source: {
-        project: {
-          location: ''
-        }
+          location: '',
+          parameters: {}
       },
       project: {
         name: '',
@@ -200,10 +206,9 @@ class CreateProjectCtrl {
     this.generateProjectName(true);
 
     // init WS bus
-    this.workspaces.forEach((workspace) => {
-      this.messageBus[workspace.id] = this.codenvyAPI.getWebsocket().getBus(workspace.id);
-    });
-
+    if (this.workspaces.length > 0) {
+      this.messageBus = this.codenvyAPI.getWebsocket().getBus(this.workspaces[0].id);
+    }
 
   }
 
@@ -236,7 +241,7 @@ class CreateProjectCtrl {
   selectGitHubRepository(gitHubRepository) {
     this.importProjectData.project.name = gitHubRepository.name;
     this.importProjectData.project.description = gitHubRepository.description;
-    this.importProjectData.source.project.location = gitHubRepository.clone_url;
+    this.importProjectData.source.location = gitHubRepository.clone_url;
   }
 
 
@@ -286,12 +291,12 @@ class CreateProjectCtrl {
     if ('blank' === tab) {
       this.importProjectData.project.type = 'blank';
     } else if ('git' === tab || 'github' === tab) {
-      this.importProjectData.source.project.type = 'git';
+      this.importProjectData.source.type = 'git';
     } else if ('zip' === tab) {
       this.importProjectData.project.type = '';
     } else if ('config' === tab) {
       this.importProjectData.project.type = 'blank';
-      this.importProjectData.source.project.type = 'git';
+      this.importProjectData.source.type = 'git';
       // set name and description from input fields into object
       if (!this.isChangeableDescription) {
         this.importProjectData.project.description = angular.copy(this.projectDescription);
@@ -305,11 +310,128 @@ class CreateProjectCtrl {
     this.isReady = !('github' === tab || 'samples' === tab);
   }
 
+
+  startWorkspace(bus, data) {
+
+    // then we've to start workspace
+    let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id, data.name);
+
+    startWorkspacePromise.then((data) => {
+      // get channels
+      let environments = data.environments;
+      let envName = data.name;
+      let channels = environments[envName].machineConfigs[0].channels;
+      let statusChannel = channels.status;
+      let outputChannel = channels.output;
+
+
+      let workspaceId = data.id;
+
+      // for now, display log of status channel in case of errors
+      bus.subscribe(statusChannel, (message) => {
+        console.log('Status channel of workspaceID', workspaceId, message);
+      });
+
+      this.createWorkspaceContent = '';
+      bus.subscribe(outputChannel, (message) => {
+        this.createWorkspaceContent = this.createWorkspaceContent + '<br>' + message;
+      });
+
+    });
+  }
+
+  createProjectInWorkspace(workspaceId, projectName, projectData) {
+
+    var promise;
+    var channel= null;
+    // select mode (create or import)
+    if (this.selectSourceOption === 'select-source-new') {
+
+      projectData.project.type = 'blank';
+      projectData.project.name = this.projectName;
+
+      // no source, data is .project subpart
+      promise = this.codenvyAPI.getProject().createProject(workspaceId, projectData.project.name, projectData.project);
+    } else {
+
+      // websocket channel
+      channel = 'importProject:output:' + workspaceId + ':' + projectName;
+
+      // on import
+      this.messageBus.subscribe(channel, (message) => {
+        this.importingData = message.line;
+      });
+      promise = this.codenvyAPI.getProject().importProject(workspaceId, projectName, projectData.source);
+    }
+
+    promise.then(() => {
+      this.createWorkspaceContent = '';
+      this.importing = false;
+      this.importingData = '';
+
+      // need to redirect to the project details as it has been created !
+      this.$location.path('project/' + workspaceId + '/' + projectName);
+      if (channel != null) {
+        this.messageBus.unsubscribe(channel);
+      }
+
+    }, (error) => {
+      if (channel != null) {
+        this.messageBus.unsubscribe(channel);
+      }
+      this.importing = false;
+      this.importingData = '';
+      // need to show the error
+      this.$mdDialog.show(
+          this.$mdDialog.alert()
+              .title('Error while creating the project')
+              .content(error.statusText + ': ' + error.data.message)
+              .ariaLabel('Project creation')
+              .ok('OK')
+      );
+    });
+  }
+
+
+
+  connectToExtensionServer(websocketURL, workspaceId, projectName, projectData) {
+    // append feedback
+    this.createWorkspaceContent += '.';
+
+    // try to connect
+    let websocketStream = this.$websocket(websocketURL);
+
+    // on success, create project
+    websocketStream.onOpen(() => {
+      websocketStream.close();
+      this.createProjectInWorkspace(workspaceId, projectName, projectData);
+    });
+
+    // on error, retry to connect or after a delay, abort
+    websocketStream.onError((error) => {
+      this.websocketReconnect--;
+      if (this.websocketReconnect > 0) {
+        this.$timeout(() => {this.connectToExtensionServer(websocketURL, workspaceId, projectName, projectData);}, 1000);
+      } else {
+        this.createWorkspaceContent = '';
+        console.log('error when starting remote extension', error);
+        // need to show the error
+        this.$mdDialog.show(
+            this.$mdDialog.alert()
+                .title('Unable to create project')
+                .content('Unable to connect to the remote extension server after workspace creation')
+                .ariaLabel('Project creation')
+                .ok('OK')
+        );
+      }
+    });
+  }
+
+
   /**
    * Call the import operation that may create or import a project
    */
   import() {
-    var promise;
 
     // set name and description for imported project
     if (!this.isChangeableDescription) {
@@ -319,124 +441,62 @@ class CreateProjectCtrl {
       this.importProjectData.project.name = angular.copy(this.projectName);
     }
 
-
     // check workspace is selected
-    if (!this.workspaceSelected) {
-
-      // TODO: for now, this is not yet working to create workspace and start it, so display an error
-      this.$mdDialog.show(
-          this.$mdDialog.alert()
-              .title('No workspace selected')
-              .content('No workspace is selected. For now it only works for existing workspaces from dashboard. Please select existing workspace and not create new.')
-              .ariaLabel('Project creation')
-              .ok('OK')
-      );
-      return;
-    } else {
-      // mode
-      this.importing = true;
-
-
-      var mode = '';
-
-      // websocket channel
-      var channel = 'importProject:output:' + this.workspaceSelected.id + ':' + this.importProjectData.project.name;
-
-
-      // select mode (create or import)
-      if (this.selectSourceOption === 'select-source-new') {
-        //this.currentTab === 'blank' || this.currentTab === 'config'
-
-        this.importProjectData.project.type = 'blank';
-        this.importProjectData.project.name = this.projectName;
-
-        // no source, data is .project subpart
-        promise = this.codenvyAPI.getProject().createProject(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData.project);
-        mode = 'createProject';
-      } else {
-        mode = 'importProject';
-        // on import
-        this.messageBus[this.workspaceSelected.id].subscribe(channel, (message) => {
-          this.importingData = message.line;
-        });
-        promise = this.codenvyAPI.getProject().importProject(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData);
-      }
-      promise.then((data) => {
-        this.importing = false;
-        this.importingData = '';
-
-        if (mode === 'importProject') {
-          data = data.projectDescriptor;
-        }
-
-        // need to redirect to the project details as it has been created !
-        this.$location.path('project/' + data.workspaceId + '/' + data.name);
-
-        this.messageBus[this.workspaceSelected.id].unsubscribe(channel);
-
-      }, (error) => {
-        this.messageBus[this.workspaceSelected.id].unsubscribe(channel);
-        this.importing = false;
-        this.importingData = '';
-        // need to show the error
-        this.$mdDialog.show(
-            this.$mdDialog.alert()
-                .title('Error while creating the project')
-                .content(error.statusText + ': ' + error.data.message)
-                .ariaLabel('Project creation')
-                .ok('OK')
-        );
-      });
-
-    }
-
-    // dummy check as it is not yet implemented
-    if ('new-usage' === true) {
-
-      // recipe url
+    if (this.selectWorkspaceOption === 'select-workspace-create') {
 
       //TODO: no account in che ? it's null when testing on localhost
       let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl);
       creationPromise.then((data) => {
 
+        // init message bus if not there
+        if (this.workspaces.length === 0) {
+          this.messageBus = this.codenvyAPI.getWebsocket().getBus(data.id);
+        }
 
-        // then we've to start workspace
-        let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id);
+        // recipe url
+        let bus = this.codenvyAPI.getWebsocket().getBus(data.id);
 
-        startWorkspacePromise.then((data) => {
+        // subscribe to workspace events
+        bus.subscribe('workspace:' + data.id, (message) => {
 
-          this.importProjectData.project.type = 'blank';
-          this.importProjectData.project.name = this.projectName;
+          if (message.eventType === 'RUNNING' && message.workspaceId === data.id) {
+            this.importProjectData.project.type = 'blank';
+            this.importProjectData.project.name = this.projectName;
+            this.createWorkspaceContent += '<br>' + 'Workspace created and started. Waiting extension server for creating project ' +  this.importProjectData.project.name + '...';
 
-          // no source, data is .project subpart
-          promise = this.codenvyAPI.getProject().createProject(data.id, this.importProjectData.project.name, this.importProjectData.project);
-          mode = 'createProject';
+            // Now that the container is started, wait for the extension server. For this, needs to get runtime details
+            let promiseRuntime = this.codenvyAPI.getWorkspace().getRuntime(data.id);
+            promiseRuntime.then((runtimeData) => {
+                // extract the Websocket URL of the runtime
+              let servers = runtimeData.devMachine.metadata.servers;
 
+              var extensionServerAddress;
+              for (var key in servers) {
+                let server = servers[key];
+                if ('extensions' === server.ref) {
+                  extensionServerAddress = server.address;
+                }
+              }
+              // try to connect
+              this.websocketReconnect = 50;
+              this.createWorkspaceContent += '<br>Connecting';
+              this.connectToExtensionServer('ws://' + extensionServerAddress + '/che/ext/ws/' + data.id, data.id, this.importProjectData.project.name, this.importProjectData);
 
-          promise.then((data) => {
-            this.importing = false;
-            this.importingData = '';
-
-            // need to redirect to the project details as it has been created !
-            this.$location.path('project/' + data.workspaceId + '/' + data.name);
-
-          }, (error) => {
-            this.importing = false;
-            this.importingData = '';
-            // need to show the error
-            this.$mdDialog.show(
-                this.$mdDialog.alert()
-                    .title('Error while creating the project')
-                    .content(error.statusText + ': ' + error.data.message)
-                    .ariaLabel('Project creation')
-                    .ok('OK')
-            );
-          });
+            });
+          }
         });
+        this.$timeout(() => {this.startWorkspace(bus, data);}, 1000);
 
       });
 
+      return;
+    } else {
+
+      // mode
+      this.importing = true;
+      this.createProjectInWorkspace(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData);
     }
+
   }
 
 
@@ -496,7 +556,7 @@ class CreateProjectCtrl {
   }
 
   isReadyToCreate() {
-    return !this.importing && this.isReady;
+    return !this.importing && this.isReady && this.createWorkspaceContent.length === 0;
   }
 
 }

@@ -65,7 +65,8 @@ class CodenvyWorkspace {
         delete: {method: 'DELETE', url: '/api/workspace/:workspaceId'},
         update: {method: 'POST', url : '/api/workspace/:workspaceId'},
         addProject: {method: 'POST', url : '/api/workspace/:workspaceId/project'},
-        startWorkspace: {method: 'POST', url : '/api/workspace/:workspaceId/runtime?environment=:workspaceId'}
+        getRuntime: {method: 'GET', url : '/api/workspace/:workspaceId/runtime'},
+        startWorkspace: {method: 'POST', url : '/api/workspace/:workspaceId/runtime?environment=:envName'}
       }
     );
   }
@@ -214,11 +215,26 @@ class CodenvyWorkspace {
     return promise;
   }
 
-  startWorkspace(workspaceId) {
-    let promise = this.remoteWorkspaceAPI.startWorkspace({workspaceId : workspaceId}, {}).$promise;
+  /**
+   * Starts the given workspace by specifying the ID and the environment name
+   * @param workspaceId the workspace ID
+   * @param envName the name of the environment
+   * @returns {*} promise
+   */
+  startWorkspace(workspaceId, envName) {
+    let promise = this.remoteWorkspaceAPI.startWorkspace({workspaceId: workspaceId, envName : envName}, {}).$promise;
     return promise;
   }
 
+  /**
+   * Gets the runtime data of the given workspace
+   * @param workspaceId the ID of the workspace
+   * @returns {*} the associated promise
+   */
+  getRuntime(workspaceId) {
+    let promise = this.remoteWorkspaceAPI.getRuntime({workspaceId: workspaceId}, {}).$promise;
+    return promise;
+  }
 
   /**
    * Ask for loading the workspaces by account id in asynchronous way

@@ -26,6 +26,8 @@ class CreateProjectBlankCtrl {
 
     this.typesByCategory = [];
     this.typesByCategory.push('java');
+    this.typesByCategory.push('javascript');
+    this.typesByCategory.push('php');
 
     // broadcast event
     this.$rootScope.$broadcast('create-project-blank:initialized');
@@ -68,6 +70,7 @@ class CreateProjectBlankCtrl {
 
 
   initCallbackController(controller) {
+    console.log('initCallbackController with controller', controller);
     this.callbackController = controller;
     this.initDefaultRecipe();
   }
@@ -76,6 +79,8 @@ class CreateProjectBlankCtrl {
    * Init default recipe only if controller is here and if recipes have been analyzed
    */
   initDefaultRecipe() {
+    console.log('initDefaultRecipe and params are ', this.callbackController,this.recipes );
+
     if (!this.callbackController) {
       return;
     }

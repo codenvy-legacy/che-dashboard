@@ -12,7 +12,7 @@
 -->
 <div layout="column" flex>
     <div layout="row" flex layout-align="space-around start">
-        <label flex="15" hide-sm hide-md>Technology: </label>
+        <label flex="15" hide-sm hide-md>Commonly used stacks: </label>
 
         <div layout="row" flex="85"  layout-wrap>
             <cdvy-simple-selecter ng-repeat="categoryName in createProjectBlankCtrl.typesByCategory"
@@ -25,31 +25,5 @@
     </div>
 
 
-    <div layout="row" flex layout-align="space-around start">
-        <label flex="15" hide-sm hide-md>Stack: </label>
-
-        <div layout="row" flex="85"  layout-align="center start" layout-wrap>
-
-            <div class="create-project-stack-selector" layout="column" flex="50">
-
-                <md-radio-group ng-model="createProjectBlankCtrl.selectStackOption">
-                    <md-radio-button value="select-default-stack">Existing stack</md-radio-button>
-                </md-radio-group>
-
-                <div layout="column">
-                    <md-card ng-repeat="recipe in createProjectBlankCtrl.recipes"
-                             ng-class="$first ? 'create-project-stack-selected' : 'create-project-stack-default'"
-                             ng-click="createProjectBlankCtrl.selectRecipe(recipe, createProjectCtrl)">
-                        <md-card-content>{{recipe.name}}</md-card-content></md-card>
-                </div>
-
-            </div>
-            <div ng-init="createProjectBlankCtrl.initCallbackController(createProjectCtrl)" layout="column" flex="50">
-
-            </div>
-
-
-        </div>
-    </div>
 
 </div>

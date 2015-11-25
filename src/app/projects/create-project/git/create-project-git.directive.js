@@ -51,7 +51,7 @@ class CreateProjectGit {
       }
 
       // get current url
-      var uri = newValue.source.project.location;
+      var uri = newValue.source.location;
 
       if (!uri || uri === '') {
         return;
