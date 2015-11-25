@@ -12,12 +12,16 @@
 
 import TeamCtrl from '../team/team.controller';
 import TeamMembersDialogAddCtrl from '../team/team-members-dialog-add.controller';
+import TeamMembersListCtrl from '../team/team-members-list.controller';
+import TeamMembersList from '../team/team-members-list.directive';
 
 class TeamConfig {
 
   constructor(register) {
     register.controller('TeamCtrl', TeamCtrl);
     register.controller('TeamMembersDialogAddCtrl', TeamMembersDialogAddCtrl);
+    register.controller('TeamMembersListCtrl', TeamMembersListCtrl);
+    register.directive('cdvyTeamMembersList', TeamMembersList);
 
     // config routes
     register.app.config(function ($routeProvider) {
