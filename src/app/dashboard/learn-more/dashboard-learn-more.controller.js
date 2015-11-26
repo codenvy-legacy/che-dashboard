@@ -23,18 +23,30 @@ class DashboardLearnMoreCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($window, $http, $location, $rootScope, codenvyWorkspace, codenvyProject, codenvyFactory, $timeout) {
+  constructor($window, $http, $location, $rootScope, $timeout, codenvyAPI, codenvyWorkspace, codenvyProject, codenvyFactory) {
     this.$window = $window;
     this.$http = $http;
     this.$location = $location;
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
+    this.codenvyAPI = codenvyAPI;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyProject = codenvyProject;
     this.codenvyFactory = codenvyFactory;
 
-    // check factories (to see if we need or not to enable the factories)
-    //this.checkFactories();
+    this.updateAccountData();
+    if (!this.accounts || this.accounts.length === 0) {
+      this.codenvyAPI.getAccount().fetchAccounts().then(() => {
+        this.updateAccountData();
+      });
+    }
+  }
+
+  updateAccountData() {
+    this.accounts = this.codenvyAPI.getAccount().getAccounts();
+    if(this.accounts && this.accounts.length > 0){
+      this.account = this.accounts[0];
+    }
   }
 
 

@@ -1,8 +1,9 @@
-<div>
+<div class="dashboard-learn-more">
 
-  <cdvy-learn-more cdvy-title="Discover Codenvy">
+  <cdvy-learn-more cdvy-title="{{ navbarCtrl.isImsAvailable() ? 'Get Started' : 'Discover Codenvy' }}">
 
-    <cdvy-learn-more-item cdvy-learn-more-key="getting-started" cdvy-learn-more-section="basic">
+    <cdvy-learn-more-item cdvy-learn-more-key="getting-started" cdvy-learn-more-section="basic"
+                          ng-if="!navbarCtrl.isImsAvailable()">
       <cdvy-learn-more-item-title>Try the guided tour</cdvy-learn-more-item-title>
       <cdvy-learn-more-item-content>Get the most out of Codenvy in seconds.
         <br>
@@ -11,6 +12,7 @@
                              ng-click="dashboardLearnMoreCtrl.gettingStarted();">
         </cdvy-button-primary>
         <br>
+
         <div layout="column" layout-align="left left">
           Learn how to:
           <ul>
@@ -25,7 +27,8 @@
 
     <cdvy-learn-more-item cdvy-learn-more-key="import-project" cdvy-learn-more-section="basic">
       <cdvy-learn-more-item-title>Import your project</cdvy-learn-more-item-title>
-      <cdvy-learn-more-item-content>Import projects from your source code repository.<br/>
+      <cdvy-learn-more-item-content>Import projects from your source code repository<br/>
+
         <div layout="column" layout-gt-lg="row" layout-align="center center">
           <cdvy-button-primary cdvy-button-title="Connect your repo"
                                cdvy-button-icon="fa fa-github"
@@ -40,36 +43,43 @@
       </cdvy-learn-more-item-content>
     </cdvy-learn-more-item>
 
-    <cdvy-learn-more-item cdvy-learn-more-key="try-samples" cdvy-learn-more-section="basic">
+    <cdvy-learn-more-item cdvy-learn-more-key="try-samples" cdvy-learn-more-section="basic"
+                          ng-if="!navbarCtrl.isImsAvailable()">
       <cdvy-learn-more-item-title>Try sample projects</cdvy-learn-more-item-title>
       <cdvy-learn-more-item-content>Here are some projects to try.
 
-        <div layout="row" class="dashboard-learn-more-poweredby">
+        <div layout="row" class="powered-by">
           <div ng-click="dashboardLearnMoreCtrl.trySampleProject()">
-            <a target="_blank" href="https://codenvy.com/f?id=xn9n91ju3khwm375"><img src="https://raw.githubusercontent.com/codenvy/factories/master/images/angularjs.png">
+            <a target="_blank" href="https://codenvy.com/f?id=xn9n91ju3khwm375"><img
+              src="https://raw.githubusercontent.com/codenvy/factories/master/images/angularjs.png">
             </a>
           </div>
           <div ng-click="dashboardLearnMoreCtrl.trySampleProject()">
-            <a target="_blank" href="https://codenvy.com/f?id=g08a3escw5kxj2xk"><img src="https://raw.githubusercontent.com/codenvy/factories/master/images/android.png">
+            <a target="_blank" href="https://codenvy.com/f?id=g08a3escw5kxj2xk"><img
+              src="https://raw.githubusercontent.com/codenvy/factories/master/images/android.png">
             </a>
           </div>
           <div ng-click="dashboardLearnMoreCtrl.trySampleProject()">
-            <a target="_blank" href="https://codenvy.com/f?id=wc8jn2ga90lbudih"><img src="https://raw.githubusercontent.com/codenvy/factories/master/images/golang.jpg">
+            <a target="_blank" href="https://codenvy.com/f?id=wc8jn2ga90lbudih"><img
+              src="https://raw.githubusercontent.com/codenvy/factories/master/images/golang.jpg">
             </a>
           </div>
         </div>
 
         <div layout="row" class="dashboard-learn-more-poweredby">
           <div ng-click="dashboardLearnMoreCtrl.trySampleProject()">
-            <a target="_blank" href="https://codenvy.com/f?id=3whn4ky6ycfnm5p1"><img src="https://raw.githubusercontent.com/codenvy/factories/master/images/jruby.png">
+            <a target="_blank" href="https://codenvy.com/f?id=3whn4ky6ycfnm5p1"><img
+              src="https://raw.githubusercontent.com/codenvy/factories/master/images/jruby.png">
             </a>
           </div>
           <div ng-click="dashboardLearnMoreCtrl.trySampleProject()">
-            <a target="_blank" href="https://codenvy.com/f?id=6cfu1qjbvpm2cs1x"><img src="https://raw.githubusercontent.com/codenvy/factories/master/images/node.jpg">
+            <a target="_blank" href="https://codenvy.com/f?id=6cfu1qjbvpm2cs1x"><img
+              src="https://raw.githubusercontent.com/codenvy/factories/master/images/node.jpg">
             </a>
           </div>
           <div ng-click="dashboardLearnMoreCtrl.trySampleProject()">
-            <a target="_blank" href="https://codenvy.com/f?id=6gfh88aqvlcbe279"><img src="https://raw.githubusercontent.com/codenvy/factories/master/images/python27.png">
+            <a target="_blank" href="https://codenvy.com/f?id=6gfh88aqvlcbe279"><img
+              src="https://raw.githubusercontent.com/codenvy/factories/master/images/python27.png">
             </a>
           </div>
         </div>
@@ -78,7 +88,30 @@
       </cdvy-learn-more-item-content>
     </cdvy-learn-more-item>
 
+    <cdvy-learn-more-item cdvy-learn-more-key="add-team-members" cdvy-learn-more-section="basic"
+                          ng-if="navbarCtrl.isImsAvailable()">
+      <cdvy-learn-more-item-title>Add team members</cdvy-learn-more-item-title>
+      <cdvy-learn-more-item-content>
+        <span>Team Members</span>
+        <div layout="row" flex layout-align="start center" class="account-container">
+          <span>Manage team of account:</span>
+          <md-select placeholder="Select an account"
+                     ng-model="dashboardLearnMoreCtrl.account" ng-change="dashboardLearnMoreCtrl.getAccountMembers()">
+            <md-option ng-repeat="account in dashboardLearnMoreCtrl.accounts" ng-value="account">{{account.name}}</md-option>
+          </md-select>
+        </div>
+        <cdvy-team-members-list cdvy-account="dashboardLearnMoreCtrl.account" flex class="members-list"></cdvy-team-members-list>
+      </cdvy-learn-more-item-content>
+    </cdvy-learn-more-item>
 
+    <cdvy-learn-more-item cdvy-learn-more-key="upgrade-codenvy" cdvy-learn-more-section="basic"
+                          ng-if="navbarCtrl.isImsAvailable() && navbarCtrl.userIsAdmin()">
+      <cdvy-learn-more-item-title>Upgrade Codenvy</cdvy-learn-more-item-title>
+      <cdvy-learn-more-item-content>
+        <span>Upgrade Codenvy from update server</span>
+        <cdvy-onprem-upgrade-install flex class="upgrade-codenvy"></cdvy-onprem-upgrade-install>
+      </cdvy-learn-more-item-content>
+    </cdvy-learn-more-item>
 
     <!--
         <cdvy-learn-more-item cdvy-learn-more-key="create-factory" cdvy-learn-more-section="basic">

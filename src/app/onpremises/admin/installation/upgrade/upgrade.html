@@ -19,8 +19,8 @@
     <div ng-show="upgradeInstallationCtrl.codenvyUpgradableArtifact">
       <cdvy-button-primary cdvy-button-title="Install {{upgradeInstallationCtrl.codenvyUpgradableArtifact.version}} Now" ng-click="upgradeInstallationCtrl.install(upgradeInstallationCtrl.codenvyUpgradableArtifact.version)" ng-disabled="upgradeInstallationCtrl.isSectionDisabled()"></cdvy-button-primary>
     </div>
-    <div ng-hide="upgradeInstallationCtrl.codenvyUpgradableArtifact">
-      Nothing to upgrade.
+    <div ng-hide="upgradeInstallationCtrl.codenvyUpgradableArtifact"  class="upgrade-info-label">
+      <span>Nothing to upgrade.</span>
     </div>
 
     <!-- Removed because not implemented in IM -->
