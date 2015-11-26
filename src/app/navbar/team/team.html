@@ -18,7 +18,7 @@
       Manage team of account:
     </div>
     <md-select placeholder="Select an account" class="team-members-account"
-               ng-model="teamCtrl.account" ng-change="teamCtrl.getAccountMembers()">
+               ng-model="teamCtrl.account">
       <md-option ng-repeat="account in teamCtrl.accounts" ng-value="account" >{{account.name}}</md-option>
     </md-select>
   </div>
