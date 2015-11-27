@@ -1,6 +1,7 @@
 <cdvy-box >
-  <div layout="row" layout-align="space-around start" flex ng-controller="BillingCtrl as billingCtrl">
-    <div ng-if="dashboardOverviewCtrl.isSaasServiceAvailable" layout-align="center center" class="dashboard-overview-gbh">
+  <div layout="row" layout-align="space-around start" flex>
+    <div ng-if="dashboardOverviewCtrl.isSaasServiceAvailable" layout-align="center center"
+         class="dashboard-overview-gbh" ng-controller="BillingCtrl as billingCtrl">
       <div class="dashboard-overview-title" flex>Gigabyte Hours</div>
       <div class="dashboard-overview-number">{{billingCtrl.usedGBH}}</div>
       <div>GBH consumed this month {{billingCtrl.providedResources.prepaidAmount ? 'out of' : ''}}</div>
@@ -32,7 +33,9 @@
                              ng-click="dashboardOverviewCtrl.addCreditCard();">
         </cdvy-button-warning>
       </div>
-      <div class="dashboard-overview-desc-last-invoice" ng-if="creditCardCtrl.creditCards.length > 0">
+
+      <div ng-if="dashboardOverviewCtrl.isSaasServiceAvailable && creditCardCtrl.creditCards.length > 0"
+           class="dashboard-overview-desc-last-invoice" ng-controller="BillingCtrl as billingCtrl">
         <div ng-if="billingCtrl.invoices.length > 0">
           <div class="dashboard-overview-charges-total" ng-init="invoice = billingCtrl.invoices[0]">${{invoice.total}}</div>
         </div>
