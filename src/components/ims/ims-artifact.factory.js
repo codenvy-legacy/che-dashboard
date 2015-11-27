@@ -36,6 +36,35 @@ class ImsArtifactApi {
       deleteDownloadedArtifact: {method: 'DELETE', url:'/im/downloads/:artifactName/:version'},
       artifactProperties: {method: 'GET', url:'/im/artifact/:artifactName/version/:version/properties'}
     });
+
+    this.isIms = false;
+
+    // update the ims available when we're initialized
+    this._updateImsAvailable(this.getDownloadedArtifactsList());
+  }
+
+  /**
+   * Get the ims available status
+   * @returns {boolean}
+   */
+  isImsAvailable() {
+    return this.isIms;
+  }
+
+  /**
+   * Update ims available status
+   * @param imsPromise
+   */
+  _updateImsAvailable(imsPromise) {
+    imsPromise.then(() => {
+      this.isIms = true;
+    }, (error) => {
+      if (error.status === 404) {
+        this.isIms = false;
+      } else {
+        this.isIms = true;
+      }
+    });
   }
 
   getDownloadedArtifactsList() {
