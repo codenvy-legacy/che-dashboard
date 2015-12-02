@@ -272,7 +272,7 @@ class CreateProjectCtrl {
     } else if ('git' === tab || 'github' === tab) {
       this.importProjectData.source.project.type = 'git';
     } else if ('zip' === tab) {
-      this.importProjectData.project.type = '';
+      this.importProjectData.source.project.type = 'zip';
     } else if ('config' === tab) {
       this.importProjectData.project.type = 'blank';
       this.importProjectData.source.project.type = 'git';
