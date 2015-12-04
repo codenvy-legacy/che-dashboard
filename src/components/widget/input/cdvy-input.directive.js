@@ -118,9 +118,8 @@ class CodenvyInput {
       if ('ngModel' === key) {
         return;
       }
-      // add ng-change attr if it exist in the parent element
+      // don't reapply ngChange
       if ('ngChange' === key) {
-        inputElement.attr('data-ng-change', 'isChanged()');
         return;
       }
       var value = attrs[key];
@@ -176,6 +175,15 @@ class CodenvyInput {
         element.removeClass('desktop-pristine');
       }
     });
+
+    if (!attr.ngChange) {
+      return;
+    }
+    //for ngChange attribute only
+    $scope.$watch('valueModel', () => {
+      $scope.isChanged();
+    });
+
   }
 }
 
