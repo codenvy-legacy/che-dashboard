@@ -242,6 +242,7 @@ class CheckLogin {
 initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', function ($rootScope, $location, routingRedirect, codenvyUser, $timeout) {
 
   $rootScope.waitingLoaded = false;
+  $rootScope.showIDE = false;
 
   /**
    * Add default redirect to login in dev mode
