@@ -35,7 +35,10 @@ class CodenvyRecipe {
     this.recipes = [];
 
     // remote call
-    this.remoteRecipesAPI = this.$resource('/api/recipe');
+    this.remoteRecipesAPI = this.$resource('/api/recipe',{}, {
+      getRecipes: {method: 'GET', url: '/api/recipe/list', isArray: true}});
+
+
   }
 
 
@@ -44,7 +47,7 @@ class CodenvyRecipe {
    */
   fetchRecipes() {
 
-    let promise = this.remoteRecipesAPI.query().$promise;
+    let promise = this.remoteRecipesAPI.getRecipes().$promise;
     let updatedPromise = promise.then((recipes) => {
 
 
