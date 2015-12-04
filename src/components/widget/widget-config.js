@@ -15,11 +15,12 @@
  CodenvyToggle, CodenvyToolbar, CodenvyLabel, CodenvyLabelContainer, CodenvyLink, CodenvyButtonDropdownCtrl, CodenvyButtonDropdown,
  CodenvyPanelCtrl, CodenvyListItemChecked, CodenvySelect, CodenvyClipboard, CodenvyEmptyState, CodenvySearch, CodenvyEventLogger,
  CodenvyLearnMoreCtrl, CodenvyLearnMore, CodenvyLearnMoreItem, CodenvyLearnMoreTemplate, CodenvyBoxCtrl, CodenvyBox, CodenvyTextInfo,
- CodenvyDropzoneCtrl, CodenvyDropzone, CodenvySimpleSelecterCtrl, CodenvySimpleSelecter */
+ CodenvyDropzoneCtrl, CodenvyDropzone, CodenvySimpleSelecterCtrl, CodenvySimpleSelecter, CodenvyButtonNotice */
 
 import CodenvyButtonPrimary from './button/cdvy-button-primary.directive';
 import CodenvyButtonDanger from './button/cdvy-button-danger.directive';
 import CodenvyButtonDefault from './button/cdvy-button-default.directive';
+import CodenvyButtonNotice from './button/cdvy-button-notice.directive';
 import CodenvyButtonWarning from './button/cdvy-button-warning.directive';
 
 

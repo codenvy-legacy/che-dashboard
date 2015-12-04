@@ -47,6 +47,10 @@ class CodenvyButton {
       template = template + ` ng-click="${attrs.ngClick}"`;
     }
 
+    if (attrs.ngHref) {
+      template = template + ` ng-href="${attrs.ngHref}"`;
+    }
+
     template = template + '>';
 
     if (attrs.cdvyButtonIcon) {
