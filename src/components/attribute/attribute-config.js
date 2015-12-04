@@ -10,5 +10,6 @@
  */
 'use strict';
 
-/*exported CodenvyFocusable*/
+/*exported CodenvyFocusable, CodenvyAutoScroll*/
 import CodenvyFocusable from './focusable/cdvy-focusable.directive';
+import CodenvyAutoScroll from './scroll/cdvy-automatic-scroll.directive';

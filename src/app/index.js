@@ -415,6 +415,13 @@ initModule.config(function($mdThemingProvider, jsonColors) {
   });
   $mdThemingProvider.definePalette('cheDefault', cheDefaultMap);
 
+  var cheNoticeMap = $mdThemingProvider.extendPalette('blue', {
+    'A400'  : getColor('$mouse-gray-color')
+  });
+  $mdThemingProvider.definePalette('cheNotice', cheNoticeMap);
+
+
+
 
   var cheAccentMap = $mdThemingProvider.extendPalette('blue', {
     '700' : getColor('$che-medium-blue-color'),
@@ -466,6 +473,12 @@ initModule.config(function($mdThemingProvider, jsonColors) {
     .primaryPalette('che')
     .accentPalette('cheDefault')
     .backgroundPalette('grey');
+
+
+  $mdThemingProvider.theme('cdvynotice')
+      .primaryPalette('che')
+      .accentPalette('cheNotice')
+      .backgroundPalette('grey');
 
   $mdThemingProvider.theme('default')
     .primaryPalette('che')
