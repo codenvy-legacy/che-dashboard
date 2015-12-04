@@ -20,7 +20,7 @@ class CreateProjectCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope) {
+  constructor (codenvyAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope, createProjectSvc) {
     this.codenvyAPI = codenvyAPI;
     this.$websocket = $websocket;
     this.$timeout = $timeout;
@@ -29,6 +29,10 @@ class CreateProjectCtrl {
     this.$scope = $scope;
     this.$rootScope = $rootScope;
     this.messageBus = null;
+    this.createProjectSvc = createProjectSvc;
+
+
+    createProjectSvc.createPopup();
 
     // subitem not yet completed
     this.projectBlankCompleted = false;
@@ -40,13 +44,15 @@ class CreateProjectCtrl {
     this.selectSourceOption = 'select-source-new';
     this.selectWorkspaceOption = 'select-workspace-create';
 
-    // text when workspace is being created
-    this.createWorkspaceContent = '';
-
-
+    // default RAM value for workspaces
+    this.workspaceRam = 1000;
     this.websocketReconnect = 50;
 
     this.generateWorkspaceName();
+
+    if (!createProjectSvc.hasInit()) {
+      console.log('retrived data');
+    }
 
     //search the selected tab
     let routeParams = $routeParams.tabName;
@@ -77,9 +83,6 @@ class CreateProjectCtrl {
       }
 
     }
-
-    // Text that will be used by the websocket processing when performing import
-    this.importingData = '';
 
     // fetch workspaces when initializing
     let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
@@ -150,8 +153,6 @@ class CreateProjectCtrl {
       }
       this.projectDescription = newProjectDescription;
     });
-
-    this.importing = false;
 
   }
 
@@ -314,6 +315,7 @@ class CreateProjectCtrl {
   startWorkspace(bus, data) {
 
     // then we've to start workspace
+    this.createProjectSvc.setCurrentProgressStep(1);
     let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id, data.name);
 
     startWorkspacePromise.then((data) => {
@@ -329,18 +331,47 @@ class CreateProjectCtrl {
 
       // for now, display log of status channel in case of errors
       bus.subscribe(statusChannel, (message) => {
+        if (message.eventType === 'DESTROYED' && message.workspaceId === data.id) {
+          this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
+
+          // need to show the error
+          this.$mdDialog.show(
+              this.$mdDialog.alert()
+                  .title('Unable to start workspace')
+                  .content('Unable to start workspace. It may be linked to OutOfMemory or the container has been destroyed')
+                  .ariaLabel('Workspace start')
+                  .ok('OK')
+          );
+        }
+        if (message.eventType === 'ERROR' && message.workspaceId === data.id) {
+          this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
+          // need to show the error
+          this.$mdDialog.show(
+              this.$mdDialog.alert()
+                  .title('Error when starting workspace')
+                  .content('Unable to start workspace. Error when trying to start the workspace: ' + message.error)
+                  .ariaLabel('Workspace start')
+                  .ok('OK')
+          );
+        }
         console.log('Status channel of workspaceID', workspaceId, message);
       });
 
-      this.createWorkspaceContent = '';
+
+
       bus.subscribe(outputChannel, (message) => {
-        this.createWorkspaceContent = this.createWorkspaceContent + '<br>' + message;
+        if (this.getCreationSteps()[this.getCurrentProgressStep()].logs.length > 0) {
+          this.getCreationSteps()[this.getCurrentProgressStep()].logs = this.getCreationSteps()[this.getCurrentProgressStep()].logs + '\n' + message;
+        } else {
+          this.getCreationSteps()[this.getCurrentProgressStep()].logs = message;
+        }
       });
 
     });
   }
 
-  createProjectInWorkspace(workspaceId, projectName, projectData) {
+  createProjectInWorkspace(workspaceId, projectName, projectData, bus) {
+    this.createProjectSvc.setCurrentProgressStep(3);
 
     var promise;
     var channel= null;
@@ -358,29 +389,28 @@ class CreateProjectCtrl {
       channel = 'importProject:output:' + workspaceId + ':' + projectName;
 
       // on import
-      this.messageBus.subscribe(channel, (message) => {
-        this.importingData = message.line;
+      bus.subscribe(channel, (message) => {
+          this.getCreationSteps()[this.getCurrentProgressStep()].logs = message.line;
       });
+
       promise = this.codenvyAPI.getProject().importProject(workspaceId, projectName, projectData.source);
     }
 
     promise.then(() => {
-      this.createWorkspaceContent = '';
-      this.importing = false;
-      this.importingData = '';
-
+      this.createProjectSvc.setCurrentProgressStep(4);
       // need to redirect to the project details as it has been created !
-      this.$location.path('project/' + workspaceId + '/' + projectName);
+      //this.$location.path('project/' + workspaceId + '/' + projectName);
       if (channel != null) {
-        this.messageBus.unsubscribe(channel);
+        bus.unsubscribe(channel);
       }
 
     }, (error) => {
       if (channel != null) {
-        this.messageBus.unsubscribe(channel);
+        bus.unsubscribe(channel);
       }
-      this.importing = false;
-      this.importingData = '';
+
+      this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
+
       // need to show the error
       this.$mdDialog.show(
           this.$mdDialog.alert()
@@ -394,26 +424,24 @@ class CreateProjectCtrl {
 
 
 
-  connectToExtensionServer(websocketURL, workspaceId, projectName, projectData) {
-    // append feedback
-    this.createWorkspaceContent += '.';
+  connectToExtensionServer(websocketURL, workspaceId, projectName, projectData, bus) {
 
     // try to connect
     let websocketStream = this.$websocket(websocketURL);
 
     // on success, create project
     websocketStream.onOpen(() => {
-      websocketStream.close();
-      this.createProjectInWorkspace(workspaceId, projectName, projectData);
+      let bus = this.codenvyAPI.getWebsocket().getExistingBus(websocketStream);
+      this.createProjectInWorkspace(workspaceId, projectName, projectData, bus);
     });
 
     // on error, retry to connect or after a delay, abort
     websocketStream.onError((error) => {
       this.websocketReconnect--;
       if (this.websocketReconnect > 0) {
-        this.$timeout(() => {this.connectToExtensionServer(websocketURL, workspaceId, projectName, projectData);}, 1000);
+        this.$timeout(() => {this.connectToExtensionServer(websocketURL, workspaceId, projectName, projectData, bus);}, 1000);
       } else {
-        this.createWorkspaceContent = '';
+        this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
         console.log('error when starting remote extension', error);
         // need to show the error
         this.$mdDialog.show(
@@ -441,9 +469,13 @@ class CreateProjectCtrl {
       this.importProjectData.project.name = angular.copy(this.projectName);
     }
 
+    // reset logs and errors
+    this.resetCreateProgress();
+    this.setCreateProjectInProgress();
+
+
     // check workspace is selected
     if (this.selectWorkspaceOption === 'select-workspace-create') {
-
       //TODO: no account in che ? it's null when testing on localhost
       let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl);
       creationPromise.then((data) => {
@@ -460,9 +492,10 @@ class CreateProjectCtrl {
         bus.subscribe('workspace:' + data.id, (message) => {
 
           if (message.eventType === 'RUNNING' && message.workspaceId === data.id) {
+            this.createProjectSvc.setCurrentProgressStep(2);
+
             this.importProjectData.project.type = 'blank';
             this.importProjectData.project.name = this.projectName;
-            this.createWorkspaceContent += '<br>' + 'Workspace created and started. Waiting extension server for creating project ' +  this.importProjectData.project.name + '...';
 
             // Now that the container is started, wait for the extension server. For this, needs to get runtime details
             let promiseRuntime = this.codenvyAPI.getWorkspace().getRuntime(data.id);
@@ -477,24 +510,41 @@ class CreateProjectCtrl {
                   extensionServerAddress = server.address;
                 }
               }
+
+              let endpoint = runtimeData.devMachine.metadata.envVariables.CHE_API_ENDPOINT;
+
+              var contextPath;
+              if (endpoint.endsWith('/api')) {
+                contextPath = 'api';
+              } else {
+                contextPath = 'che';
+              }
+
               // try to connect
               this.websocketReconnect = 50;
-              this.createWorkspaceContent += '<br>Connecting';
-              this.connectToExtensionServer('ws://' + extensionServerAddress + '/che/ext/ws/' + data.id, data.id, this.importProjectData.project.name, this.importProjectData);
+              this.connectToExtensionServer('ws://' + extensionServerAddress + '/' + contextPath + '/ext/ws/' + data.id, data.id, this.importProjectData.project.name, this.importProjectData);
 
             });
           }
         });
         this.$timeout(() => {this.startWorkspace(bus, data);}, 1000);
 
+      }, (error) => {
+        if (error.data.message) {
+          this.getCreationSteps()[this.getCurrentProgressStep()].logs = error.data.message;
+        }
+        this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
+
       });
 
       return;
     } else {
 
+      // Get bus
+      let bus = this.codenvyAPI.getWebsocket().getBus(this.workspaceSelected.id);
+
       // mode
-      this.importing = true;
-      this.createProjectInWorkspace(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData);
+      this.createProjectInWorkspace(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData, bus);
     }
 
   }
@@ -552,11 +602,46 @@ class CreateProjectCtrl {
   }
 
   isImporting() {
-    return this.importing;
+    return this.isCreateProjectInProgress();
   }
 
   isReadyToCreate() {
-    return !this.importing && this.isReady && this.createWorkspaceContent.length === 0;
+    return !this.isCreateProjectInProgress() && this.isReady;
+  }
+
+  resetCreateProgress() {
+    this.createProjectSvc.resetCreateProgress();
+  }
+
+
+  resetCreateNewProject() {
+    this.resetCreateProgress();
+    this.generateWorkspaceName();
+    this.generateProjectName(true);
+  }
+
+  showIDE() {
+    this.$rootScope.showIDE = !this.$rootScope.showIDE;
+  }
+
+  getCreationSteps() {
+    return this.createProjectSvc.getProjectCreationSteps();
+  }
+
+  getCurrentProgressStep() {
+    return this.createProjectSvc.getCurrentProgressStep();
+  }
+
+  isCreateProjectInProgress() {
+    return this.createProjectSvc.isCreateProjectInProgress();
+  }
+
+  setCreateProjectInProgress() {
+    this.createProjectSvc.setCreateProjectInProgress(true);
+  }
+
+  hideCreateProjectPanel() {
+    this.createProjectSvc.showPopup();
   }
 
 }

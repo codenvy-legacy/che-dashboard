@@ -58,16 +58,16 @@ class CodenvyProject {
     this.projectDetailsMap = new Map();
 
     // remote call
-    this.remoteProjectsAPI = this.$resource('/ext/project/:workspaceId', {workspaceId: '@id'}, {
-      import: {method: 'POST', url: '/ext/project/:workspaceId/import/:path'},
-      create: {method: 'POST', url: '/ext/project/:workspaceId?name=:path'},
-      details: {method: 'GET', url: '/ext/project/:workspaceId/:path'},
-      getPermissions: {method: 'GET', url: '/ext/project/:workspaceId/permissions/:path', isArray: true},
-      updatePermissions: {method: 'POST', url: '/ext/project/:workspaceId/permissions/:path', isArray: true},
-      rename: {method: 'POST', url: '/ext/project/:workspaceId/rename/:path?name=:name'},
-      remove: {method: 'DELETE', url: '/ext/project/:workspaceId/:path'},
-      update: {method: 'PUT', url: '/ext/project/:workspaceId/:path'},
-      setVisibility: {method: 'POST', url: '/ext/project/:workspaceId/switch_visibility/:path?visibility=:visibility'}
+    this.remoteProjectsAPI = this.$resource('/api/ext/project/:workspaceId', {workspaceId: '@id'}, {
+      import: {method: 'POST', url: '/api/ext/project/:workspaceId/import/:path'},
+      create: {method: 'POST', url: '/api/ext/project/:workspaceId?name=:path'},
+      details: {method: 'GET', url: '/api/ext/project/:workspaceId/:path'},
+      getPermissions: {method: 'GET', url: '/api/ext/project/:workspaceId/permissions/:path', isArray: true},
+      updatePermissions: {method: 'POST', url: '/api/ext/project/:workspaceId/permissions/:path', isArray: true},
+      rename: {method: 'POST', url: '/api/ext/project/:workspaceId/rename/:path?name=:name'},
+      remove: {method: 'DELETE', url: '/api/ext/project/:workspaceId/:path'},
+      update: {method: 'PUT', url: '/api/ext/project/:workspaceId/:path'},
+      setVisibility: {method: 'POST', url: '/api/ext/project/:workspaceId/switch_visibility/:path?visibility=:visibility'}
     });
   }
 

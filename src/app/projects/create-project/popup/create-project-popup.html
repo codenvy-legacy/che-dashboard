@@ -1,0 +1,31 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<div class="create-project-progress-popup" ng-show="createProjectPopupCtrl.isShowPopup() && createProjectPopupCtrl.isCreateProjectInProgress()">
+    <div class="create-project-progress-popup-content" flex>
+        <div flex layout="row">
+            <div layout="column" class="create-project-progress-popup-info-column">
+                <div class="create-project-progress-popup-title">Creating project</div>
+                <div layout="column">
+                    <div class="create-project-progress-popup-action">{{createProjectPopupCtrl.getCreationSteps()[createProjectPopupCtrl.getCurrentProgressStep()].text}}</div>
+                    <div class="create-project-progress-popup-percent">{{createProjectPopupCtrl.getCurrentProgressStep() * 25}} %</div>
+                    <div class="create-project-progress-popup-error" ng-show="createProjectPopupCtrl.getCreationSteps()[createProjectPopupCtrl.getCurrentProgressStep()].hasError">Error !</div>
+                </div>
+            </div>
+            <div layout="column" layout-align="center center" flex>
+                <cdvy-button-notice cdvy-button-title="Show Progress" ng-click="createProjectPopupCtrl.hidePopup()" href="#/create-project"></cdvy-button-notice>
+                <cdvy-button-primary ng-show="createProjectPopupCtrl.getCurrentProgressStep() === (createProjectPopupCtrl.getCreationSteps().length - 1)" cdvy-button-title="Open in IDE" href="/ws"></cdvy-button-primary>
+            </div>
+        </div>
+    </div>
+
+</div>

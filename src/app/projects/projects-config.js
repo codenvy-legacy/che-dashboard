@@ -13,6 +13,7 @@
 /*exported ListProjectsWorkspaceFilter, CreateProjectSamplesFilter, CreateProjectSamplesNameFilter */
 
 import CreateProjectCtrl from './create-project/create-project.controller';
+import CreateProjectSvc from './create-project/create-project.service.js';
 import ListProjectsCtrl from './list-projects/list-projects.controller';
 import ListProjectsWorkspaceFilter from './list-projects/list-projects-filter-workspace.filter';
 import CreateProjectGithubCtrl from './create-project/github/create-project-github.controller';
@@ -25,6 +26,9 @@ import CreateProjectSamplesCtrl from './create-project/samples/create-project-sa
 import CreateProjectSamples from './create-project/samples/create-project-samples.directive';
 import CreateProjectSamplesFilter from './create-project/samples/create-project-samples.filter';
 import CreateProjectSamplesNameFilter from './create-project/samples/create-project-samples-name.filter';
+
+import CreateProjectPopupCtrl from './create-project/popup/create-project-popup.controller';
+import CreateProjectPopup from './create-project/popup/create-project-popup.directive';
 
 import CreateProjectZip from './create-project/zip/create-project-zip.directive';
 import CreateProjectConfFile from './create-project/config-file/create-project-conf-file.directive';
@@ -49,6 +53,9 @@ class ProjectConfig {
     register.controller('CreateProjectBlankCtrl', CreateProjectBlankCtrl);
     register.directive('createProjectBlank', CreateProjectBlank);
 
+    register.controller('CreateProjectPopupCtrl', CreateProjectPopupCtrl);
+    register.directive('createProjectPopup', CreateProjectPopup);
+
     register.controller('CreateProjectGitCtrl', CreateProjectGitCtrl);
     register.directive('createProjectGit', CreateProjectGit);
 
@@ -65,6 +72,7 @@ class ProjectConfig {
 
     register.directive('createProjectConfFile', CreateProjectConfFile);
 
+    register.service('createProjectSvc', CreateProjectSvc);
     register.controller('CreateProjectCtrl', CreateProjectCtrl);
 
     register.directive('cdvyProjectItem', CodenvyProjectItem);
