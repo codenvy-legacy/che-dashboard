@@ -79,7 +79,6 @@ class CreateProjectBlankCtrl {
    * Init default recipe only if controller is here and if recipes have been analyzed
    */
   initDefaultRecipe() {
-    console.log('initDefaultRecipe and params are ', this.callbackController,this.recipes );
 
     if (!this.callbackController) {
       return;

@@ -25,11 +25,11 @@
 
             <div class="create-project-progress-panel-top" style="background-image: url('assets/images/container.png')">
                 <div class="create-project-progress-widget-progress" layout-align="center center" class="progress-global" layout="row" flex="80">
-                    <md-progress-linear flex class="create-project-panel-progress-line" md-mode="determinate" ng-value="createProjectCtrl.getCurrentProgressStep() * 25"></md-progress-linear>
+                    <md-progress-linear flex class="create-project-panel-progress-line" md-mode="indeterminate"></md-progress-linear>
                 </div>
 
                 <div layout="column" class="create-project-panel-progress-title" layout-align="center center">
-                    <div class="create-project-panel-progress-counter">{{createProjectCtrl.getCurrentProgressStep() * 25}}%</div>
+                    <div class="create-project-panel-progress-counter">{{createProjectCtrl.getCurrentProgressStep()}} / {{createProjectCtrl.getCreationSteps().length - 1}}</div>
                     <div>{{createProjectCtrl.projectName}} : {{createProjectCtrl.getCreationSteps()[createProjectCtrl.getCurrentProgressStep()].text}}</div>
                 </div>
             </div>

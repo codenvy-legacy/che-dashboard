@@ -50,10 +50,6 @@ class CreateProjectCtrl {
 
     this.generateWorkspaceName();
 
-    if (!createProjectSvc.hasInit()) {
-      console.log('retrived data');
-    }
-
     //search the selected tab
     let routeParams = $routeParams.tabName;
     if (!routeParams) {
@@ -514,10 +510,10 @@ class CreateProjectCtrl {
               let endpoint = runtimeData.devMachine.metadata.envVariables.CHE_API_ENDPOINT;
 
               var contextPath;
-              if (endpoint.endsWith('/api')) {
-                contextPath = 'api';
-              } else {
+              if (endpoint.endsWith('/che/api')) {
                 contextPath = 'che';
+              } else {
+                contextPath = 'api';
               }
 
               // try to connect
@@ -570,7 +566,7 @@ class CreateProjectCtrl {
       name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)); // jshint ignore:line
 
       this.importProjectData.project.name = name;
-
+      this.projectName = name;
     }
 
   }
