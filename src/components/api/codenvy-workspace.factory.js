@@ -42,27 +42,17 @@ class CodenvyWorkspace {
     // per Id
     this.workspacesById = new Map();
 
-    // per account
-    this.workspacesPerAccount = new Map();
-
     // per workspace
-    this.ramResourcesById = new Map();
-    // per workspace
-    this.membersById = new Map();
+    this.runtimeConfig = new Map();
 
     // listeners if workspaces are changed/updated
     this.listeners = [];
 
     // remote call
     this.remoteWorkspaceAPI = this.$resource('/api/workspace', {}, {
-        listByAccountId: {method: 'GET', url: '/api/workspace/find/account?id=:accountId', isArray: true},
         getDetails: {method: 'GET', url: '/api/workspace/:workspaceId'},
-        addMember: {method: 'POST', url: '/api/workspace/:workspaceId/members'},
-        deleteMember: {method: 'DELETE', url: '/api/workspace/:workspaceId/members/:userId'},
-        getMembers: {method: 'GET', url: '/api/workspace/:workspaceId/members', isArray: true},
-        getRAM: {method: 'GET', url: '/api/runner/:workspaceId/resources'},
         create: {method: 'POST', url: '/api/workspace/config?account=:accountId'},
-        delete: {method: 'DELETE', url: '/api/workspace/:workspaceId'},
+        deleteConfig: {method: 'DELETE', url: '/api/workspace/:workspaceId/config'},
         update: {method: 'POST', url : '/api/workspace/:workspaceId'},
         addProject: {method: 'POST', url : '/api/workspace/:workspaceId/project'},
         getRuntime: {method: 'GET', url : '/api/workspace/:workspaceId/runtime'},
@@ -96,13 +86,6 @@ class CodenvyWorkspace {
     return this.workspacesById;
   }
 
-  /**
-   * Gets the workspaces per account id
-   * @returns {Array}
-   */
-  getWorkspacesByAccountId(accountId) {
-    return this.workspacesPerAccount.get(accountId);
-  }
 
   /**
    * Ask for loading the workspaces in asynchronous way
@@ -126,8 +109,6 @@ class CodenvyWorkspace {
         if (!workspace.temporary) {
           remoteWorkspaces.push(workspace);
           this.workspaces.push(workspace);
-          workspace.accountId = copyWorkspaceById.get(workspace.id) ?
-            copyWorkspaceById.get(workspace.id).accountId : undefined;
           this.workspacesById.set(workspace.id, workspace);
         }
       });
@@ -236,22 +217,7 @@ class CodenvyWorkspace {
     return promise;
   }
 
-  /**
-   * Ask for loading the workspaces by account id in asynchronous way
-   * If there are no changes, it's not updated
-   */
-  fetchAccountWorkspaces(accountId) {
-    let query = this.remoteWorkspaceAPI.listByAccountId({accountId : accountId});
-    let promise = query.$promise;
-    let updatedPromise = promise.then((data) => {
-      this.workspacesPerAccount.set(accountId, data);
-    }, (error) => {
-      if (error.status !== 304) {
-        console.log(error);
-      }
-    });
-    return updatedPromise;
-  }
+
 
   /**
    * Performs workspace rename by the given workspaceId and new name.
@@ -270,9 +236,9 @@ class CodenvyWorkspace {
    * @param workspaceId the workspace ID
    * @returns {*|promise|n|N}
    */
-  deleteWorkspace(workspaceId) {
+  deleteWorkspaceConfig(workspaceId) {
     var defer = this.$q.defer();
-    let promise = this.remoteWorkspaceAPI.delete({workspaceId : workspaceId}).$promise;
+    let promise = this.remoteWorkspaceAPI.deleteConfig({workspaceId : workspaceId}).$promise;
     promise.then(() => {
       this.listeners.forEach((listener) => {
         listener.onDeleteWorkspace(workspaceId);
@@ -286,34 +252,14 @@ class CodenvyWorkspace {
   }
 
   /**
-   * Adds for the given workspaceId the given role for the userId
+   * Get Runtimeconfig of a workspace
    * @param workspaceId the workspace ID
-   * @param userId the user ID
-   * @param roles the array of roles to add
    * @returns {*|promise|n|N}
    */
-  addMember(workspaceId, userId, roles) {
-    let data = {};
-    data.userId = userId;
-    data.roles = roles;
-    let user  = this.codenvyUser.getUserFromId(userId);
-    if(user && user.email) {
-      this.codenvyAnalytics.userInviteAction(workspaceId, user.email);
-    }
-    return this.remoteWorkspaceAPI.addMember({workspaceId: workspaceId}, data).$promise;
-  }
-
-  /**
-   * Gets the  for the given workspaceId the given role for the userId
-   * @param workspaceId the workspace ID
-   * @param userId the user ID
-   * @param roles the array of roles to add
-   * @returns {*|promise|n|N}
-   */
-  fetchMembers(workspaceId) {
-    let promise = this.remoteWorkspaceAPI.getMembers({workspaceId: workspaceId}).$promise;
+  fetchRuntimeConfig(workspaceId) {
+    let promise = this.remoteWorkspaceAPI.getRuntime({workspaceId: workspaceId}).$promise;
     let updatedPromise = promise.then((data) => {
-      this.membersById.set(workspaceId, data);
+      this.runtimeConfig.set(workspaceId, data);
     }, (error) => {
       if (error.status !== 304) {
         console.log(error);
@@ -323,50 +269,14 @@ class CodenvyWorkspace {
   }
 
   /**
-   * Performs workspace's member deleting by the given workspaceId and userId.
-   * @param workspaceId the workspace ID
-   * @param workspaceId the user ID
-   * @returns {*|promise|n|N}
-   */
-  deleteMember(workspaceId, userId) {
-    let promise = this.remoteWorkspaceAPI.deleteMember({workspaceId : workspaceId, userId: userId}).$promise;
-    return promise;
-  }
-
-  /**
-   * Get RAM resources of a workspace: used and free RAM.
-   * @param workspaceId the workspace ID
-   * @returns {*|promise|n|N}
-   */
-  fetchRAMResources(workspaceId) {
-    let promise = this.remoteWorkspaceAPI.getRAM({workspaceId: workspaceId}).$promise;
-    let updatedPromise = promise.then((data) => {
-      this.ramResourcesById.set(workspaceId, data);
-    }, (error) => {
-      if (error.status !== 304) {
-        console.log(error);
-      }
-    });
-    return updatedPromise;
-  }
-
-  /**
-   * Get RAM resources of a workspace: used and free RAM.
+   * Get Runtime Config of a workspace.
    * @param workspaceId the workspace ID
    * @returns {Object}
    */
-  getRAMResources(workspaceId) {
-    return this.ramResourcesById.get(workspaceId);
+  getRuntimeConfig(workspaceId) {
+    return this.runtimeConfig.get(workspaceId);
   }
 
-  /**
-   * Get workspace members.
-   * @param workspaceId the workspace ID
-   * @returns {Array}
-   */
-  getMembers(workspaceId) {
-    return this.membersById.get(workspaceId);
-  }
 
   /**
    * Returns given workspace's resources locked state.

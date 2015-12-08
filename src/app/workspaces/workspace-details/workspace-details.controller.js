@@ -84,7 +84,7 @@ class WorkspaceDetailsCtrl {
       .clickOutsideToClose(true)
       .targetEvent(event);
     this.$mdDialog.show(confirm).then(() => {
-      let promise = this.codenvyAPI.getWorkspace().deleteWorkspace(this.workspaceId);
+      let promise = this.codenvyAPI.getWorkspace().deleteWorkspaceConfig(this.workspaceId);
       promise.then(() => {
         this.$location.path('/workspaces');
       }, (error) => {
