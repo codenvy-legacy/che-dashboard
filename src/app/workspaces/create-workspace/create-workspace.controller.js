@@ -28,62 +28,69 @@ class CreateWorkspaceCtrl {
     this.$q = $q;
     this.$location = $location;
     this.workspace = {};
-    this.members = [];
 
-    this.workspace.ram = 4000;
-    this.addCurrentUser();
+    this.workspace.ram = 1000;
 
-    if (this.codenvyAPI.getAccount().getAccounts().length > 0) {
-      this.accounts = this.codenvyAPI.getAccount().getAccounts();
-      this.account = this.accounts[0];
-    } else {
-      this.codenvyAPI.getAccount().fetchAccounts().then(() => {
-        this.accounts = this.codenvyAPI.getAccount().getAccounts();
-        this.account = this.accounts[0];
-      });
-    }
+    this.recipe = null;
+    this.recipes = [];
 
+
+    this.generateWorspaceName();
+
+    let promise = codenvyAPI.getRecipe().fetchRecipes();
+    promise.then(() => {
+          this.updateData();
+        },
+        (error) => {
+          // etag handling so also retrieve last data that were fetched before
+          if (error.status === 304) {
+            // ok
+            this.updateData();
+          }
+        });
 
   }
 
-  addCurrentUser() {
-    let currentUser = this.codenvyAPI.getUser().getUser();
-    let roles = [];
-    roles.push('workspace/admin');
-    roles.push('workspace/developer');
-    
-    currentUser.name = '';
-    currentUser.role = this.codenvyAPI.getUser().getDisplayRole(roles);
-    this.members.push(currentUser);
+  updateData() {
+    this.recipes.length = 0;
+
+    var remoteRecipes = this.codenvyAPI.getRecipe().getRecipes();
+    // init WS bus
+    remoteRecipes.forEach((recipe) => {
+      this.recipes.push(recipe);
+    });
+
+    this.recipe = this.recipes[0];
+
   }
+
+  selectRecipe(userRecipe) {
+    this.recipe = userRecipe;
+  }
+
+
+
+  generateWorspaceName() {
+    // starts with workspace
+    var name = 'workspace';
+    name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)); // jshint ignore:line
+
+    this.workspace.name = name;
+
+  }
+
 
   createWorkspace() {
-    let promises = [];
 
-    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(this.account.id, this.workspace.name);
+    let recipeUrl = this.recipe.links[0].href;
+    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspace.name, recipeUrl);
     creationPromise.then((data) => {
-      if (this.workspace.ram && this.workspace.ram > 0) {
-        let resources = {};
-        resources.runnerRam = this.workspace.ram;
-        let redistributePromise = this.codenvyAPI.getAccount().redistributeResources(data.accountId, data.id, resources);
-        promises.push(redistributePromise);
-      }
-
-      this.members.forEach((member) => {
-        let addMemberPromise = this.codenvyAPI.getWorkspace().addMember(data.id, member.id, member.roles);
-        promises.push(addMemberPromise);
-      });
-
-      this.$q.all(promises).then(() => {
-        this.$location.path('/workspaces');
-      }, (error) => {
-        let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
-        errorMessage = errorMessage.replace(data.id, data.name);
-        this.codenvyNotification.showError(errorMessage);
-        this.$location.path('/workspaces');
-      });
+      this.$location.path('/workspaces');
     }, (error) => {
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Error during workspace creation.');
+      let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
+      errorMessage = errorMessage.replace(data.id, data.name);
+      this.codenvyNotification.showError(errorMessage);
+      this.$location.path('/workspaces');
     });
   }
 }

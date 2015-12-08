@@ -40,20 +40,16 @@
         <span>MB value</span>
       </div>
 
-      <cdvy-label-container cdvy-label-name="Account" class="create-workspace-space-top" ng-if="createWorkspaceCtrl.accounts > 1">
-        <md-select class="create-workspace-select"
-                   placeholder="Select an account"
-                   ng-model="createWorkspaceCtrl.account">
-          <md-option ng-repeat="account in createWorkspaceCtrl.accounts" ng-value="account">{{account.name}}</md-option>
-        </md-select>
-      </cdvy-label-container>
+        <div layout="column">
+            <md-card ng-repeat="recipe in createWorkspaceCtrl.recipes"
+                     ng-class="$first ? 'create-project-stack-selected' : 'create-project-stack-default'"
+                     ng-click="createWorkspaceCtrl.selectRecipe(recipe)">
+                <md-card-content>{{recipe.name}}</md-card-content></md-card>
+        </div>
+
     </cdvy-panel>
   </ng-form>
 
-  <cdvy-panel cdvy-title="Members">
-    <workspace-details-members class="create-workspace-members" ng-controller="CreateWorkspaceAddMemberCtrl as workspaceMembersCtrl"
-                               ng-init="workspaceMembersCtrl.members = createWorkspaceCtrl.members"></workspace-details-members>
-  </cdvy-panel>
   <cdvy-button-primary id="create-project-button-import"
                        cdvy-button-title="Create Workspace"
                        ng-click="createWorkspaceCtrl.createWorkspace()"
