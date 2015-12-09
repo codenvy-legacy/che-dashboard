@@ -9,6 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
+/*global $:false, window:false */
 
 /**
  * This class is handling the controller for the projects
@@ -49,6 +50,25 @@ class CreateProjectCtrl {
     this.websocketReconnect = 50;
 
     this.generateWorkspaceName();
+
+    this.headerSteps = [
+      {
+        id: '#create-project-source-id',
+        name: 'source',
+        link: 'create-project-source'
+      },
+      {
+        id: '#create-project-source-stack',
+        name: 'stack',
+        link: 'create-project-stack'
+      },
+      {
+        id: '#create-project-source-information',
+        name: 'information',
+        link: 'create-project-information'
+      }
+    ];
+
 
     //search the selected tab
     let routeParams = $routeParams.tabName;
@@ -638,6 +658,34 @@ class CreateProjectCtrl {
 
   hideCreateProjectPanel() {
     this.createProjectSvc.showPopup();
+  }
+
+  isElementVisible(index) {
+
+    // for each id, check last
+    var maxVisibleElement = 0;
+    for (var i = 0; i < this.headerSteps.length; i++) {
+      var visibleElement = this.isvisible(this.headerSteps[i].id);
+      if (visibleElement) {
+        maxVisibleElement = i;
+      }
+    }
+    return index <= maxVisibleElement;
+  }
+
+
+  isvisible(elementName) {
+    let element = $(elementName);
+    var windowElement = $(window);
+
+    var docViewTop = windowElement.scrollTop();
+    var docViewBottom = docViewTop + windowElement.height();
+    var elemTop = element.offset().top;
+    var elemBottom = elemTop + element.height();
+
+    // use elemTop if want to see all div or elemBottom if we see partially it
+    /*((elemTop <= docViewBottom) && (elemTop >= docViewTop));*/
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
   }
 
 }

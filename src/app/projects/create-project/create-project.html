@@ -14,10 +14,33 @@
 
 </cdvy-toolbar>
 
+<div ng-hide="createProjectCtrl.isCreateProjectInProgress()" id="create-project-header-steps" flex class="create-project-header-steps">
+    <div class="create-project-header-steps-panel" layout="row" layout-wrap layout-align="center center">
+        <div layout="row" layout-wrap>
+            <div ng-repeat="step in createProjectCtrl.headerSteps" layout="row" layout-align="center center">
+                <div class="create-project-header-steps-step" ng-class="{'create-project-header-steps-step-active' : (createProjectCtrl.isElementVisible($index))}" layout="row" layout-align="center center">
+                    <div class="create-project-header-steps-step-title">{{step.name}}</div>
+                </div>
+                <div class="create-project-header-steps-link" ng-class="{'create-project-header-steps-link-active' : (createProjectCtrl.isElementVisible($index + 1))}" ng-hide="$last">
+
+                </div>
+            </div>
+        </div>
+        <div flex class="create-project-header-steps-button" layout="row" layout-align="end end">
+            <cdvy-button-primary cdvy-button-title="Create"
+                                 ng-click="!createProjectCtrl.checkValidFormState() || createProjectCtrl.import()"
+                                 ng-disabled="!createProjectCtrl.checkValidFormState() || !createProjectCtrl.isReadyToCreate()"
+                    ></cdvy-button-primary>
+        </div>
+    </div>
+</div>
+
+
+
 <md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress"
                     ng-hide="createProjectCtrl.projectBlankCompleted"></md-progress-linear>
 
-<md-content md-scroll-y flex class="projects-create-project" ng-show="createProjectCtrl.projectBlankCompleted" md-theme="maincontent-theme">
+<md-content id="create-project-content-page" md-scroll-y flex class="projects-create-project" ng-show="createProjectCtrl.projectBlankCompleted" md-theme="maincontent-theme">
     <div ng-show="createProjectCtrl.isCreateProjectInProgress()">
 
 
@@ -76,7 +99,8 @@
     <div ng-hide="createProjectCtrl.isCreateProjectInProgress()">
 
 
-        <cdvy-panel cdvy-title="Select Source">
+
+        <cdvy-panel id="create-project-source-id" cdvy-title="Select Source">
             <md-radio-group ng-model="createProjectCtrl.selectSourceOption">
                 <md-radio-button value="select-source-new">New from blank, template, or sample project</md-radio-button>
                 <md-radio-button value="select-source-existing">Import existing project</md-radio-button>
@@ -118,7 +142,7 @@
         </cdvy-panel>
 
 
-        <cdvy-panel cdvy-title="Select Stack">
+        <cdvy-panel id="create-project-source-stack"  cdvy-title="Select Stack">
 
 
             <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.stackSelectedIndex">
@@ -245,7 +269,7 @@
 
 
         <ng-form name="projectInformationForm">
-            <cdvy-panel cdvy-title="Project Information" ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);">
+            <cdvy-panel cdvy-title="Project Information" id="create-project-source-information"  ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);">
 
                 <cdvy-input cdvy-form="projectInformationForm"
                             cdvy-name="name"
@@ -275,17 +299,6 @@
                         <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
                     </cdvy-input>
                 </div>
-                <!--
-                <div layout="row" flex layout-align="space-around center">
-                    <label flex="15" >Visibility: </label>
-                    <div layout="column" flex="85">
-                        <cdvy-toggle ng-model="createProjectCtrl.importProjectData.project.visibility" >
-                            <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_open_24px" cdvy-title="public"></cdvy-toggle-button>
-                            <cdvy-toggle-button cdvy-font-icon="material-design icon-ic_lock_24px" cdvy-title="private"></cdvy-toggle-button>
-                        </cdvy-toggle>
-                    </div>
-                </div>
-                -->
 
             </cdvy-panel>
         </ng-form>
