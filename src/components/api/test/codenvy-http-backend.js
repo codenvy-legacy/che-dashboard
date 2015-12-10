@@ -88,13 +88,13 @@ class CodenvyHttpBackend {
     /// project details
     var projectDetailsKeys = this.projectDetailsMap.keys();
     for (let projectKey of projectDetailsKeys) {
-      this.httpBackend.when('GET', '/ext/project/' + projectKey).respond(this.projectDetailsMap.get(projectKey));
+      this.httpBackend.when('GET', '/api/ext/project/' + projectKey).respond(this.projectDetailsMap.get(projectKey));
     }
 
     // permissions
     var projectPermissionsKeys = this.projectPermissionsMap.keys();
     for (let key of projectPermissionsKeys) {
-      this.httpBackend.when('GET', '/ext/project/' + key.workspaceId + '/permissions/' + key.projectName).respond(this.projectPermissionsMap.get(key));
+      this.httpBackend.when('GET', '/api/ext/project/' + key.workspaceId + '/permissions/' + key.projectName).respond(this.projectPermissionsMap.get(key));
     }
 
     this.httpBackend.when('POST', '/api/analytics/log/session-usage').respond();
@@ -160,7 +160,7 @@ class CodenvyHttpBackend {
     );
 
     // add call to the backend
-    this.httpBackend.when('GET', '/ext/project/' + workspace.id).respond(this.projectsPerWorkspace.get(workspace.id));
+    this.httpBackend.when('GET', '/api/ext/project/' + workspace.id).respond(this.projectsPerWorkspace.get(workspace.id));
 
   }
 
@@ -271,7 +271,7 @@ class CodenvyHttpBackend {
    * @param newProjectDetails
    */
   addUpdatedProjectDetails(workspaceId, projectName, newProjectDetails) {
-    this.httpBackend.when('PUT', '/ext/project/' + workspaceId + '/' + projectName).respond(newProjectDetails);
+    this.httpBackend.when('PUT', '/api/ext/project/' + workspaceId + '/' + projectName).respond(newProjectDetails);
   }
 
   /**
@@ -280,7 +280,7 @@ class CodenvyHttpBackend {
    * @param projectName the project name
    */
   addFetchProjectDetails(workspaceId, projectName) {
-    this.httpBackend.when('GET', '/ext/project/' + workspaceId + '/' + projectName)
+    this.httpBackend.when('GET', '/api/ext/project/' + workspaceId + '/' + projectName)
       .respond(this.projectDetailsMap.get(workspaceId + '/' + projectName));
   }
 
@@ -291,7 +291,7 @@ class CodenvyHttpBackend {
    * @param newProjectName the new project name
    */
   addUpdatedProjectName(workspaceId, projectName, newProjectName) {
-    this.httpBackend.when('POST', '/ext/project/' + workspaceId + '/rename/' + projectName + '?name=' + newProjectName).respond(newProjectName);
+    this.httpBackend.when('POST', '/api/ext/project/' + workspaceId + '/rename/' + projectName + '?name=' + newProjectName).respond(newProjectName);
   }
 
   addPermissions(workspaceId, projectName, permissions) {
