@@ -10,7 +10,8 @@
  */
 'use strict';
 
-/*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotification, RoutingRedirect, OnBoarding, CreateProjectGitValidator, UniqueProjectNameValidator */
+/*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotification, CheBranding, RoutingRedirect, OnBoarding,
+ CreateProjectGitValidator, UniqueProjectNameValidator */
 
 import CodenvyAPI from './api/codenvy-api.factory';
 import WidgetConfig from './widget/widget-config';
@@ -33,6 +34,10 @@ import OnBoarding from './onboarding/onboarding.factory';
 
 import CreateProjectGitValidator from './validator/git-url-validator.directive';
 import UniqueProjectNameValidator from './validator/unique-project-name-validator.directive';
+
+// import CheBranding
+import CheBranding from './branding/che-branding.factory';
+
 
 // Inport IMS API definition
 import './ims/imsapi-config';

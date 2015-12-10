@@ -24,7 +24,7 @@ let initModule = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngT
 initModule.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.accessWhen = function(path, route) {
     route.resolve || (route.resolve = {});
-    route.resolve.app = ['$q', 'codenvyProfile', 'codenvyUser', function ($q, codenvyProfile, codenvyUser) {
+    route.resolve.app = ['cheBranding', '$q', 'codenvyProfile', 'codenvyUser', function (cheBranding, $q, codenvyProfile, codenvyUser) {
       var deferred = $q.defer();
 
       codenvyUser.fetchUser().then(() => {

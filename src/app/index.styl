@@ -97,12 +97,23 @@ md-option:hover
 .codenvy-hover:hover
   codenvy-brightness(80%)
 
-
-
-
 .animate-show.ng-hide-add, .animate-show.ng-hide-remove
     transition all linear 0.5s
 
-
 .animate-show.ng-hide
     opacity 0
+
+.ng-cloak
+  display none !important
+
+.image-loader-fadein.ng-enter
+  opacity 0
+  animation popInEffect 0.5s
+
+.image-loader-fadein.ng-enter-active
+  opacity 1
+
+@keyframes popInEffect
+  0% { opacity: 0;transform: scale(0.1); }
+  100% { opacity: 1;transform: scale(1); }
+

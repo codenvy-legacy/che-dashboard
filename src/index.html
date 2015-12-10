@@ -14,11 +14,11 @@
 <html class="no-js" ng-app="userDashboard">
   <head>
     <meta charset="utf-8">
-    <title>Codenvy – User Dashboard</title>
+    <title ng-bind="branding.title">Loading Dashboard...</title>
     <meta name="description" content="">
     <base href="/">
     <meta name="viewport" content="width=device-width">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" ng-href="{{branding.favicon}}">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
 
@@ -46,7 +46,14 @@
   </head>
   <body layout="row" >
   <div ng-hide="waitingLoaded" class="main-page-loader">
-    <img src="https://codenvy.com/images/logo@3x.png">Loading...
+    <div layout="row" layout-align="center center">
+      <div layout="column" layout-align="start center">
+        <img src="assets/images/loader.svg" />
+        <div class="image-loader-fadein" ng-if="branding.logoURL">
+          <img ng-src="{{branding.logoURL}}">
+          </div>
+      </div>
+    </div>
   </div>
   <!--[if lt IE 10]>
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
