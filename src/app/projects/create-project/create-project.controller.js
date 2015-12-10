@@ -185,7 +185,6 @@ class CreateProjectCtrl {
       project: {
         name: '',
         description: '',
-        visibility: 'public'
       }
     };
   }

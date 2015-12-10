@@ -31,12 +31,6 @@
               tooltip="Last modified: {{projectItemCtrl.getProjectModificationDate() | amDateFormat:'dddd, MMMM Do, YYYY'}}"
               am-time-ago="projectItemCtrl.getProjectModificationDate()"></span>
     </div>
-    <div flex="10" layout="row" layout-align="center center" ng-click="projectItemCtrl.redirectToProjectDetails()">
-      <md-icon class="codenvy-hover project-details-icon"
-               tooltip="{{projectItemCtrl.project.visibility=='public'?'Public':'Private'}}"
-               md-font-icon="material-design {{projectItemCtrl.project.visibility=='public'?'icon-ic_lock_open_24px':'icon-ic_lock_24px'}}">
-      </md-icon>
-    </div>
     <p ng-show="hover">
       <a ng-href="{{projectItemCtrl.project.ideUrl}}" target="_blank">
         <cdvy-button-default class="codenvy-hover project-list-details-arrow"

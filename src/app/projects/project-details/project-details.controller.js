@@ -34,7 +34,6 @@ class ProjectDetailsCtrl {
 
     this.askedName = null;
     this.askedDescription = null;
-    this.askedVisibility = null;
 
     if (!this.codenvyAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath)) {
       let promise = this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath);
@@ -62,7 +61,6 @@ class ProjectDetailsCtrl {
     this.projectDetails = this.codenvyAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath);
     this.askedName = angular.copy(this.projectDetails.name);
     this.askedDescription = angular.copy(this.projectDetails.description);
-    this.askedVisibility = angular.copy(this.projectDetails.visibility);
     this.loading = false;
   }
 
@@ -138,24 +136,6 @@ class ProjectDetailsCtrl {
     } else {
       this.setProjectDetails(this.projectDetails);
     }
-
-  }
-
-  updateVisibility() {
-    if (this.askedVisibility === this.projectDetails.visibility) {
-      return;
-    }
-
-    let promise = this.codenvyAPI.getProject().setVisibility(this.projectDetails.workspaceId, this.projectDetails.name, this.projectDetails.visibility);
-
-    promise.then(() => {
-      this.codenvyNotification.showInfo('Update visibility completed.');
-      this.askedVisibility = this.projectDetails.visibility;
-    }, (error) => {
-      this.projectDetails.visibility = this.askedVisibility;
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update visibility failed.');
-      console.log('error', error);
-    });
 
   }
 

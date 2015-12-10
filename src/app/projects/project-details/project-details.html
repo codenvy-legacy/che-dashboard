@@ -53,20 +53,6 @@
             <cdvy-label cdvy-label-text="{{projectDetailsCtrl.projectDetails.workspaceName}}"></cdvy-label>
           </div>
         </cdvy-panel>
-        <cdvy-panel cdvy-title="Visibility">
-          <div layout="row" flex layout-align="space-around start">
-            <label flex="15"></label>
-
-            <div layout="column" flex="85">
-              <cdvy-toggle ng-model="projectDetailsCtrl.projectDetails.visibility">
-                <cdvy-toggle-button ng-click="projectDetailsCtrl.updateVisibility()" cdvy-font-icon="material-design icon-ic_lock_open_24px"
-                                    cdvy-title="public"></cdvy-toggle-button>
-                <cdvy-toggle-button ng-click="projectDetailsCtrl.updateVisibility()" cdvy-font-icon="material-design icon-ic_lock_24px"
-                                    cdvy-title="private"></cdvy-toggle-button>
-              </cdvy-toggle>
-            </div>
-          </div>
-        </cdvy-panel>
         <cdvy-panel cdvy-title="Delete Project">
           <div layout="row" flex layout-align="space-around start">
             <label flex="15"></label>

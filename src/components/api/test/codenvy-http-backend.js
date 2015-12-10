@@ -294,16 +294,6 @@ class CodenvyHttpBackend {
     this.httpBackend.when('POST', '/ext/project/' + workspaceId + '/rename/' + projectName + '?name=' + newProjectName).respond(newProjectName);
   }
 
-  /**
-   * Add the switch visibility
-   * @param workspaceId the id of project workspace
-   * @param projectName the project name
-   * @param newVisibility the new project visibility
-   */
-  addSwitchVisibility(workspaceId, projectName, newVisibility) {
-    this.httpBackend.when('POST', '/ext/project/' + workspaceId + '/switch_visibility/' + projectName + '?visibility=' + newVisibility).respond(newVisibility);
-  }
-
   addPermissions(workspaceId, projectName, permissions) {
     var key = {workspaceId: workspaceId, projectName: projectName};
     this.projectPermissionsMap.set(key, permissions);
