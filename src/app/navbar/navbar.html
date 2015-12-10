@@ -115,7 +115,7 @@
 
       <md-divider md-theme="factory-theme"></md-divider>
       <div class="admin-navbar-menu"
-           ng-show="navbarCtrl.profile.attributes && navbarCtrl.isUser()" ng-init="isExpand=true">
+           ng-show="navbarCtrl.profile.attributes && navbarCtrl.isUser() && navbarCtrl.isAccountServiceAvailable" ng-init="isExpand=true">
         <div class="navbar-identity"
              flex layout="row" layout-align="start center" ng-click="isExpand=!isExpand">
       <span flex layout="row" layout-align="start center" layout-padding>
