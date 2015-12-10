@@ -28,7 +28,6 @@ class CodenvyProjectDetailsBuilder {
     this.projectDetails.mixins = [];
     this.projectDetails.problems = [];
     this.projectDetails.description = '';
-    this.projectDetails.visibility = 'public';
   }
 
   /**
@@ -50,17 +49,6 @@ class CodenvyProjectDetailsBuilder {
     this.projectDetails.workspaceName = workspaceName;
     return this;
   }
-
-  /**
-   * Sets visibility
-   * @param visibility the visibility
-   * @returns {CodenvyProjectDetailsBuilder}
-   */
-  withVisibility(visibility) {
-    this.projectDetails.visibility = visibility;
-    return this;
-  }
-
 
   /**
    * Sets Name

@@ -67,7 +67,6 @@ class CodenvyProject {
       rename: {method: 'POST', url: '/api/ext/project/:workspaceId/rename/:path?name=:name'},
       remove: {method: 'DELETE', url: '/api/ext/project/:workspaceId/:path'},
       update: {method: 'PUT', url: '/api/ext/project/:workspaceId/:path'},
-      setVisibility: {method: 'POST', url: '/api/ext/project/:workspaceId/switch_visibility/:path?visibility=:visibility'}
     });
   }
 
@@ -432,23 +431,6 @@ class CodenvyProject {
     let promise = this.remoteProjectsAPI.rename({workspaceId: workspaceId, path: projectName, name: newProjectName}, null).$promise;
 
     return promise;
-  }
-
-  setVisibility(workspaceId, projectName, visibility) {
-    let promiseVisibility = this.remoteProjectsAPI.setVisibility({
-      workspaceId: workspaceId,
-      path: projectName,
-      visibility: visibility
-    }, null).$promise;
-
-    // update list of projects
-    let promiseUpdateProjects = promiseVisibility.then(() => {
-      this.fetchProjectsForWorkspaceId(workspaceId);
-    });
-
-
-
-    return promiseUpdateProjects;
   }
 
   remove(workspaceId, projectName) {
