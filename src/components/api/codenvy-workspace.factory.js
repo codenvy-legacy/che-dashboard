@@ -159,7 +159,7 @@ class CodenvyWorkspace {
   }
 
 
-  createWorkspace(accountId, workspaceName, recipeUrl) {
+  createWorkspace(accountId, workspaceName, recipeUrl, memoryParam) {
     // /api/workspace/config?account=accountId
 
 
@@ -176,13 +176,18 @@ class CodenvyWorkspace {
       'links': []
     };
 
+    var memory = 2048;
+    if (memoryParam) {
+      memory = memoryParam;
+    }
+
 
     let envEntry = {
         'name': workspaceName,
         'recipe': null,
         'machineConfigs': [{
           'name': 'dev-machine',
-          'limits': {'memory': 2048},
+          'limits': {'memory': memory},
           'type': 'docker',
           'source': {'location': recipeUrl, 'type': 'recipe'},
           'dev': true

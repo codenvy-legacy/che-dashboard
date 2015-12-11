@@ -493,7 +493,7 @@ class CreateProjectCtrl {
     // check workspace is selected
     if (this.selectWorkspaceOption === 'select-workspace-create') {
       //TODO: no account in che ? it's null when testing on localhost
-      let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl);
+      let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
       creationPromise.then((data) => {
 
         // init message bus if not there

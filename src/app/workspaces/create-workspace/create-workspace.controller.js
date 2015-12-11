@@ -83,7 +83,7 @@ class CreateWorkspaceCtrl {
   createWorkspace() {
 
     let recipeUrl = this.recipe.links[0].href;
-    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspace.name, recipeUrl);
+    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspace.name, recipeUrl, this.workspace.ram);
     creationPromise.then(() => {
       this.$location.path('/workspaces');
     }, (error) => {
