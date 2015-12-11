@@ -29,10 +29,15 @@ class CodenvyRunner {
 
     // remote call
     this.remoteRunnerAPI = this.$resource('/api/runner',{}, {
-      getProcesses: {method: 'GET', url: '/api/runner/processes', isArray: true}});
+      getProcesses: {method: 'GET', url: '/api/runner/processes', isArray: true},
+      getProcessesInWorkspace: {method: 'GET', url: '/api/runner/:workspaceId/processes', isArray: true}
+    });
 
     // number of processes
     this.processesNumber = 0;
+
+    // running processes per Workspace
+    this.processesPerWorkspaceMap = new Map();
   }
 
 
@@ -63,6 +68,33 @@ class CodenvyRunner {
     return promise;
   }
 
+  /**
+   * Gets running processes in workspace
+   */
+  fetchRunningProcesses(workspaceId) {
+    this.workspaceProcesses = this.remoteRunnerAPI.getProcessesInWorkspace({workspaceId: workspaceId});
+
+    let promise = this.workspaceProcesses.$promise;
+    promise.then((data) => {
+
+      let list = [];
+      data.forEach((process) => {
+        if ('RUNNING' === process.status && workspaceId === process.workspace) {
+          list.push(process);
+        }
+      });
+      this.processesPerWorkspaceMap.set(workspaceId, list);
+    });
+
+    return promise;
+  }
+
+  /**
+   * Returns running processes list for specified workspace
+   */
+  getRunningProcesses(workspaceId) {
+    return this.processesPerWorkspaceMap.get(workspaceId);
+  }
 
 }
 

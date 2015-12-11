@@ -1,0 +1,23 @@
+<cdvy-panel cdvy-title="Running Processes">
+  <label ng-show="workspaceDetailsProcessesCtrl.runningProcesses.length === 0">No running processes.</label>
+  <div flex layout="row">
+    <cdvy-list flex ng-hide="workspaceDetailsProcessesCtrl.runningProcesses.length === 0">
+      <!--TODO add sorting ASC by project's name-->
+      <cdvy-list-item
+        flex-gt-sm="100"
+        flex="33"
+        ng-repeat="process in workspaceDetailsProcessesCtrl.runningProcesses | orderBy: 'projectName'"
+        ng-mousemove="hover=true"
+        ng-mouseout="hover=false">
+        <div layout-gt-sm="row" flex="100" layout-align="start center" class="workspace-details-processes-list-row">
+          <div flex layout="column">{{process.projectName}}</div>
+          <div flex layout="column" class="workspace-details-processes-description">{{process.environmentId}}</div>
+          <div flex="20" layout="column" class="workspace-details-processes-description">RAM: {{process.memorySize}} MB</div>
+          <div flex layout="column" class="workspace-details-processes-description">
+            <span>Started: <span tooltip="{{process.startTime | amDateFormat: 'dddd, MMMM Do, YYYY'}}" am-time-ago="{{process.startTime}}"></span></span>
+          </div>
+        </div>
+      </cdvy-list-item>
+    </cdvy-list>
+  </div>
+</cdvy-panel>
