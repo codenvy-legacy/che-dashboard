@@ -33,7 +33,6 @@ class CreateProjectCtrl {
     this.createProjectSvc = createProjectSvc;
 
 
-    createProjectSvc.createPopup();
 
     // subitem not yet completed
     this.projectBlankCompleted = false;
@@ -487,6 +486,8 @@ class CreateProjectCtrl {
     // reset logs and errors
     this.resetCreateProgress();
     this.setCreateProjectInProgress();
+
+    this.createProjectSvc.createPopup();
 
 
     // check workspace is selected

@@ -23,9 +23,10 @@ class DashboardLastProjectsCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor(codenvyProject, codenvyWorkspace) {
+  constructor(codenvyProject, codenvyWorkspace, $location) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
+    this.$location = $location;
 
     this.state = 'loading';
 
@@ -35,18 +36,28 @@ class DashboardLastProjectsCtrl {
     this.projects = this.codenvyProject.getAllProjects();
 
     promise.then(() => {
-        this.state = 'OK';
-      },
-      (error) => {
-        if (error.status === 304) {
-          // ok
+          this.checkIfWorkspaces();
           this.state = 'OK';
-          return;
-        }
-        this.state = 'error';
-      });
+        },
+        (error) => {
+          if (error.status === 304) {
+            // ok
+            this.checkIfWorkspaces();
+            this.state = 'OK';
+            return;
+          }
+          this.state = 'error';
+        });
   }
 
+
+  checkIfWorkspaces() {
+    let workspaces = this.codenvyWorkspace.getWorkspaces();
+    if (workspaces.length === 0) {
+      // needs to redirect to the create project workflow
+      this.$location.path('/create-project');
+    }
+  }
 
   getProjects() {
     return this.projects;
