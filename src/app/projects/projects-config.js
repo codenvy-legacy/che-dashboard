@@ -33,9 +33,6 @@ import CreateProjectPopup from './create-project/popup/create-project-popup.dire
 import CreateProjectZip from './create-project/zip/create-project-zip.directive';
 import CreateProjectConfFile from './create-project/config-file/create-project-conf-file.directive';
 import ProjectDetailsCtrl from './project-details/project-details.controller';
-import ProjectDetailsDevelopersCtrl from './project-details/developers/project-details-developers.controller';
-import ProjectDetailsDevelopers from './project-details/developers/project-details-developers.directive';
-import ProjectDetailsDevelopersDialogAddCtrl from './project-details/developers/project-details-developers-dialog-add.controller';
 import ProjectRepositoryConfig from './project-details/repository/project-repository-config';
 import CodenvyProjectItem from './list-projects/project-item/project-item.directive';
 import ProjectItemCtrl from './list-projects/project-item/project-item.controller';
@@ -47,8 +44,6 @@ class ProjectConfig {
     register.controller('ListProjectsCtrl', ListProjectsCtrl);
 
     register.controller('ProjectDetailsCtrl', ProjectDetailsCtrl);
-
-    register.controller('ProjectDetailsDevelopersDialogAddCtrl', ProjectDetailsDevelopersDialogAddCtrl);
 
     register.controller('CreateProjectBlankCtrl', CreateProjectBlankCtrl);
     register.directive('createProjectBlank', CreateProjectBlank);
@@ -64,9 +59,6 @@ class ProjectConfig {
 
     register.controller('CreateProjectSamplesCtrl', CreateProjectSamplesCtrl);
     register.directive('createProjectSamples', CreateProjectSamples);
-
-    register.controller('ProjectDetailsDevelopersCtrl', ProjectDetailsDevelopersCtrl);
-    register.directive('projectDetailsDevelopers', ProjectDetailsDevelopers);
 
     register.directive('createProjectZip', CreateProjectZip);
 
