@@ -113,6 +113,9 @@ new NavbarConfig(instanceRegister);
 import DashboardConfig from './dashboard/dashboard-config';
 new DashboardConfig(instanceRegister);
 
+// import ide config
+import IdeConfig from './ide/ide-config';
+new IdeConfig(instanceRegister);
 
 // import account config
 import AccountConfig from './navbar/account/account-config';
@@ -241,6 +244,7 @@ class CheckLogin {
  */
 initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', function ($rootScope, $location, routingRedirect, codenvyUser, $timeout) {
 
+  $rootScope.hideLoader = false;
   $rootScope.waitingLoaded = false;
   $rootScope.showIDE = false;
 
@@ -254,6 +258,13 @@ initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$t
   $rootScope.$on('$viewContentLoaded', function() {
 
     $timeout(function() {
+      if (!$rootScope.hideLoader) {
+        if (!$rootScope.wantTokeepLoader) {
+          $rootScope.hideLoader = true;
+        } else {
+          $rootScope.hideLoader = false;
+        }
+      }
       $rootScope.waitingLoaded = true;
     }, 1000);
   });
