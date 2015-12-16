@@ -10,6 +10,7 @@
  */
 'use strict';
 
-/*exported CodenvyFocusable, CodenvyAutoScroll*/
+/*exported CodenvyFocusable, CodenvyAutoScroll, CodenvyReloadHref*/
 import CodenvyFocusable from './focusable/cdvy-focusable.directive';
 import CodenvyAutoScroll from './scroll/cdvy-automatic-scroll.directive';
+import CodenvyReloadHref from './reload-href/cdvy-reload-href.directive';
