@@ -32,7 +32,7 @@
               am-time-ago="projectItemCtrl.getProjectModificationDate()"></span>
     </div>
     <p ng-show="hover">
-      <a ng-href="{{projectItemCtrl.project.ideUrl}}" target="_blank">
+      <a ng-href="#/ide/{{projectItemCtrl.workspaceName}}">
         <cdvy-button-default class="codenvy-hover project-list-details-arrow"
                              cdvy-button-icon="fa fa fa-chevron-circle-right"
                              cdvy-button-title="Open in IDE"></cdvy-button-default>

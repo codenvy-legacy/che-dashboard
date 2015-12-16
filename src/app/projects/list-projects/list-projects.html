@@ -57,6 +57,7 @@
                            ng-model="listProjectsCtrl.projectsSelectedStatus[project.workspaceId + project.path]"
                            cdvy-selectable="true"
                            cdvy-project-item-workspace-id="workspaceId"
+                           cdvy-project-item-workspace-name="listProjectsCtrl.getWorkspaceName(workspaceId)"
                            cdvy-project-item-project="project"
                            cdvy-profile-creation-date="listProjectsCtrl.profileCreationDate"></cdvy-project-item>
       </cdvy-list>

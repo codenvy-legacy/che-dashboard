@@ -30,6 +30,7 @@ class CodenvyProjectItem {
     // scope values
     this.scope = {
       workspaceId: '=cdvyProjectItemWorkspaceId',
+      workspaceName: '=cdvyProjectItemWorkspaceName',
       project: '=cdvyProjectItemProject',
       profileCreationDate: '=cdvyProfileCreationDate',
       isDisplayWorkspace: '=cdvyDisplayWorkspace',
