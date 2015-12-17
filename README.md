@@ -2,7 +2,7 @@
 
 
 
-Codenvy Dashboard V2
+Codenvy Dashboard V3
 ==========================
 
 #Requirements
