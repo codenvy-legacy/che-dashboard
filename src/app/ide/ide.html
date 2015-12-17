@@ -22,12 +22,11 @@
         No workspace selected. Unable to open IDE
     </div>
 
-    <div ng-show="loadingIDE" layout="column" layout-align="center center">
-        Workspace {{ideCtrl.selectedWorkspace.name}} is loading... Please Wait.
+    <div ng-show="loadingIDE && ideCtrl.selectedWorkspace" layout="column" layout-align="center center">
+        Redirecting to the IDE for workspace {{ideCtrl.selectedWorkspace.name}}... Please Wait.
         <img style="width: 300px" src="assets/images/loader.svg" />
     </div>
-
-    <div ng-hide="loadingIDE && ideCtrl.selectedWorkspace">
+    <div ng-hide="loadingIDE">
         <cdvy-button-primary cdvy-button-title="Restore IDE window"
                              ng-click="ideCtrl.displayIDE()"></cdvy-button-primary>
     </div>

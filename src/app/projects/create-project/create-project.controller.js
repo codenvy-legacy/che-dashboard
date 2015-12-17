@@ -492,6 +492,7 @@ class CreateProjectCtrl {
 
     // check workspace is selected
     if (this.selectWorkspaceOption === 'select-workspace-create') {
+      this.createProjectSvc.setWorkspaceOfProject(this.workspaceName);
       //TODO: no account in che ? it's null when testing on localhost
       let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
       creationPromise.then((data) => {
@@ -555,6 +556,8 @@ class CreateProjectCtrl {
 
       return;
     } else {
+      this.createProjectSvc.setWorkspaceOfProject(this.workspaceSelected.name);
+
 
       // Get bus
       let bus = this.codenvyAPI.getWebsocket().getBus(this.workspaceSelected.id);
@@ -658,6 +661,10 @@ class CreateProjectCtrl {
 
   hideCreateProjectPanel() {
     this.createProjectSvc.showPopup();
+  }
+
+  getWorkspaceOfProject() {
+    return this.createProjectSvc.getWorkspaceOfProject();
   }
 
   isElementVisible(index) {

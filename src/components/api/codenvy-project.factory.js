@@ -169,6 +169,8 @@ class CodenvyProject {
     var remoteProjects = [];
     if (workspace.projects) {
       workspace.projects.forEach((projectReference) => {
+        projectReference.workspaceId = workspace.id;
+        projectReference.workspaceName = workspace.name;
         remoteProjects.push(projectReference);
       });
     }

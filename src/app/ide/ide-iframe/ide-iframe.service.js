@@ -22,9 +22,10 @@ class IdeIFrameSvc {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($timeout) {
+  constructor ($timeout, $compile) {
     this.iframeAdded = false;
     this.$timeout = $timeout;
+    this.$compile = $compile;
 
   }
 
@@ -38,14 +39,10 @@ class IdeIFrameSvc {
         // The parent of the new element
         var $target = $('body');
 
-        this.$timeout(() => {
-          angular.element($target).injector().invoke(($compile) => {
-            var $scope = angular.element($target).scope();
-            $target.append($compile($div)($scope));
-            // Finally, refresh the watch expressions in the new element
-            $scope.$apply();
-          });
-        }, 500);
+      let $scope = angular.element($target).scope();
+      let insertHtml = this.$compile($div)($scope);
+      $target.append(insertHtml);
+
     }
   }
 

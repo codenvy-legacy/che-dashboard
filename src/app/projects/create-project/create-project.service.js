@@ -21,8 +21,9 @@ class CreateProjectSvc {
      * Default constructor that is using resource
      * @ngInject for Dependency injection
      */
-    constructor ($timeout) {
+    constructor ($timeout, $compile) {
         this.$timeout = $timeout;
+        this.$compile = $compile;
         this.init = false;
 
 
@@ -94,6 +95,14 @@ class CreateProjectSvc {
         this.createProjectInProgress = value;
     }
 
+    setWorkspaceOfProject(workspaceOfProject) {
+        this.workspaceOfProject = workspaceOfProject;
+    }
+
+    getWorkspaceOfProject() {
+        return this.workspaceOfProject;
+    }
+
     createPopup() {
         if (!this.initPopup) {
             this.initPopup = true;
@@ -103,15 +112,9 @@ class CreateProjectSvc {
             // The parent of the new element
             var $target = $('body');
 
-
-            this.$timeout(() => {
-                angular.element($target).injector().invoke(($compile) => {
-                    var $scope = angular.element($target).scope();
-                    $target.append($compile($div)($scope));
-                    // Finally, refresh the watch expressions in the new element
-                    $scope.$apply();
-                });
-            }, 500);
+            let $scope = angular.element($target).scope();
+            let insertHtml = this.$compile($div)($scope);
+            $target.append(insertHtml);
         }
 
     }

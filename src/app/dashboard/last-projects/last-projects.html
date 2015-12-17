@@ -7,6 +7,7 @@
     <cdvy-list ng-show="dashboardLastProjectsCtrl.getProjects().length > 0 && dashboardLastProjectsCtrl.state =='OK'">
       <cdvy-project-item ng-repeat="project in dashboardLastProjectsCtrl.getProjects() | orderBy:'-modificationDate' | limitTo:'5'"
                          cdvy-project-item-workspace-id="project.workspaceId"
+                         cdvy-project-item-workspace-name="project.workspaceName"
                          cdvy-project-item-project="project"
                          cdvy-selectable="false"
                          cdvy-display-workspace="true"

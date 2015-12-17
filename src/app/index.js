@@ -242,11 +242,13 @@ class CheckLogin {
 /**
  * Setup route redirect module
  */
-initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', function ($rootScope, $location, routingRedirect, codenvyUser, $timeout) {
+initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', 'ideIFrameSvc', function ($rootScope, $location, routingRedirect, codenvyUser, $timeout, ideIFrameSvc) {
 
   $rootScope.hideLoader = false;
   $rootScope.waitingLoaded = false;
   $rootScope.showIDE = false;
+
+
 
   /**
    * Add default redirect to login in dev mode
@@ -256,6 +258,8 @@ initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$t
   }
 
   $rootScope.$on('$viewContentLoaded', function() {
+    console.log('iframe service =',   ideIFrameSvc);
+    ideIFrameSvc.addIFrame();
 
     $timeout(function() {
       if (!$rootScope.hideLoader) {
