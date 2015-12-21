@@ -22,10 +22,13 @@ class CodenvyProfile {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($resource) {
+  constructor($resource, $http) {
 
     // keep resource
     this.$resource = $resource;
+
+    // http is used for sending data with DELETE method (angular is not sending any data by default with DELETE)
+    this.$http = $http;
 
     // remote call
     this.remoteProfileAPI = this.$resource('/api/profile', {}, {
@@ -77,7 +80,12 @@ class CodenvyProfile {
    * @param properties (list of keys)
    */
   removePreferences(properties) {
-    this.remoteProfilePreferencesAPI.delete(properties);
+    this.$http({
+      url: '/api/profile/prefs',
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json;charset=utf-8'},
+      data: properties});
+    this.fetchPreferences();
   }
 
   /**
