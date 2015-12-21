@@ -24,10 +24,10 @@
   <packaging>war</packaging>
   <name>Eclipse Che Dashboard :: Web App</name>
   <scm>
-    <connection>scm:git:git@github.com:codenvy/dashboard.git</connection>
-    <developerConnection>scm:git:git@github.com:codenvy/dashboard.git</developerConnection>
+    <connection>scm:git:git@github.com:codenvy/che-dashboard.git</connection>
+    <developerConnection>scm:git:git@github.com:codenvy/che-dashboard.git</developerConnection>
     <tag>HEAD</tag>
-    <url>https://github.com/codenvy/dashboard</url>
+    <url>https://github.com/codenvy/che-dashboard</url>
   </scm>
   <properties>
     <license_years>2015</license_years>
