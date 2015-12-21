@@ -554,7 +554,6 @@ class CreateProjectCtrl {
 
       });
 
-      return;
     } else {
       this.createProjectSvc.setWorkspaceOfProject(this.workspaceSelected.name);
 
@@ -564,6 +563,14 @@ class CreateProjectCtrl {
 
       // mode
       this.createProjectInWorkspace(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData, bus);
+    }
+
+    // do we have projects ?
+    let projects = this.codenvyAPI.getProject().getAllProjects();
+    if (projects.length > 1) {
+      // we have projects, show notification first and redirect to the list of projects
+      this.createProjectSvc.showPopup();
+      this.$location.path('/projects');
     }
 
   }
