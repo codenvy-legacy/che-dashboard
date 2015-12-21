@@ -11,7 +11,7 @@
 'use strict';
 
 /*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotification, CheBranding, RoutingRedirect, OnBoarding,
- CreateProjectGitValidator, UniqueProjectNameValidator */
+ CreateProjectGitValidator, UniqueProjectNameValidator, CodenvyIdeFetcher */
 
 import CodenvyAPI from './api/codenvy-api.factory';
 import WidgetConfig from './widget/widget-config';
@@ -37,6 +37,8 @@ import UniqueProjectNameValidator from './validator/unique-project-name-validato
 
 // import CheBranding
 import CheBranding from './branding/che-branding.factory';
+
+import CodenvyIdeFetcher from './ide-fetcher/codenvy-ide-fetcher.service';
 
 
 // Inport IMS API definition

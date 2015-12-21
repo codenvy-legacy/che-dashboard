@@ -2,5 +2,6 @@
   "title": "Codenvy - Dashboard",
   "name": "Codenvy",
   "logoFile": "logo@3x.png",
-  "favicon": "favicon.ico"
+  "favicon": "favicon.ico",
+  "ideResources": "/che/_app/"
 }

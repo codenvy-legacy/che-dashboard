@@ -22,11 +22,13 @@ class CheBranding {
      * Default constructor that is using resource
      * @ngInject for Dependency injection
      */
-    constructor(codenvyAPI, $http, $rootScope) {
+    constructor(codenvyAPI, $http, $rootScope, $q) {
         this.codenvyAPI = codenvyAPI;
         this.$http = $http;
         this.$rootScope = $rootScope;
 
+        this.deferred = $q.defer();
+        this.promise = this.deferred.promise;
         $http.get('/api/account').then(() => {
             this.updateData('codenvy');
         }, () => {
@@ -48,11 +50,17 @@ class CheBranding {
                 title: brandingData.title,
                 name: brandingData.name,
                 logoURL: assetPrefix + brandingData.logoFile,
-                favicon : brandingData.favicon
+                favicon : brandingData.favicon,
+                ideResourcesPath : brandingData.ideResources
             };
 
-
+            this.productName = this.$rootScope.branding.title;
+            this.productFavicon = this.$rootScope.branding.productFavicon;
+            this.productLogo = this.$rootScope.branding.logoURL;
+            this.ideResourcesPath = this.$rootScope.branding.ideResourcesPath;
+            this.deferred.resolve(this.$rootScope.branding);
         });
+
     }
 
     getProductName() {
@@ -68,6 +76,10 @@ class CheBranding {
 
     getProductFavicon() {
         return this.productFavicon;
+    }
+
+    getIdeResourcesPath() {
+        return this.ideResourcesPath;
     }
 }
 

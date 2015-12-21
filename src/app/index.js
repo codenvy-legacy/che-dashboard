@@ -242,12 +242,14 @@ class CheckLogin {
 /**
  * Setup route redirect module
  */
-initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', 'ideIFrameSvc', function ($rootScope, $location, routingRedirect, codenvyUser, $timeout, ideIFrameSvc) {
+initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', 'ideIFrameSvc', 'codenvyIdeFetcher',
+  function ($rootScope, $location, routingRedirect, codenvyUser, $timeout, ideIFrameSvc, codenvyIdeFetcher) {
 
   $rootScope.hideLoader = false;
   $rootScope.waitingLoaded = false;
   $rootScope.showIDE = false;
 
+  codenvyIdeFetcher;
 
 
   /**
