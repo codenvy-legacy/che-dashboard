@@ -12,6 +12,8 @@
 -->
 <cdvy-toolbar cdvy-title="Dashboard"  theme="dashboard-theme"></cdvy-toolbar>
 <md-content layout="column" class="dashboard-content" md-scroll-y flex>
+  <welcome-back></welcome-back>
+
   <dashboard-overview></dashboard-overview>
 
   <dashboard-learn-more ng-show="navbarCtrl.isUser() && navbarCtrl.isInvoiceServiceAvailable"></dashboard-learn-more>

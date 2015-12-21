@@ -1,0 +1,15 @@
+<div>
+
+<cdvy-panel cdvy-title="Welcome Back" ng-show="welcomeBackCtrl.needUserAction()">
+    <div flex>
+        <p>Would you like to load workspace {{welcomeBackCtrl.lastWorkspace}} directly in IDE every time?</p>
+        <cdvy-button-notice cdvy-button-title="yes" ng-click="welcomeBackCtrl.selectChoice(true)"></cdvy-button-notice>
+        <cdvy-button-primary cdvy-button-title="no" ng-click="welcomeBackCtrl.selectChoice(false)"></cdvy-button-primary>
+    </div>
+
+</cdvy-panel>
+<cdvy-panel cdvy-title="Welcome Back" ng-if="!welcomeBackCtrl.needUserAction() && welcomeBackCtrl.isDevMode()">
+    <p>Development mode: This panel is only shown in development</p>
+    <cdvy-button-primary cdvy-button-title="reset choice of welcome back" ng-click="welcomeBackCtrl.removeChoice()"></cdvy-button-primary>
+
+</div>

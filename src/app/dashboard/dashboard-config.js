@@ -17,6 +17,8 @@ import DashboardLastProjectsCtrl from './last-projects/last-projects.controller'
 import DashboardLastProjects from './last-projects/last-projects.directive';
 import DashboardOverviewCtrl from './overview/overview.controller';
 import DashboardOverview from './overview/overview.directive';
+import WelcomeBackCtrl from './welcome-back/welcome-back.controller';
+import WelcomeBack from './welcome-back/welcome-back.directive';
 
 class DashboardConfig {
 
@@ -26,10 +28,13 @@ class DashboardConfig {
     register.controller('DashboardOverviewCtrl', DashboardOverviewCtrl);
     register.directive('dashboardOverview', DashboardOverview);
 
-
     // last projects
     register.controller('DashboardLastProjectsCtrl', DashboardLastProjectsCtrl);
     register.directive('dashboardLastProjects', DashboardLastProjects);
+
+    // welcome back
+    register.controller('WelcomeBackCtrl', WelcomeBackCtrl);
+    register.directive('welcomeBack', WelcomeBack);
 
     // learn-more
     register.controller('DashboardLearnMoreCtrl', DashboardLearnMoreCtrl);
