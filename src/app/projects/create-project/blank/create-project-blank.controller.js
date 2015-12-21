@@ -70,7 +70,6 @@ class CreateProjectBlankCtrl {
 
 
   initCallbackController(controller) {
-    console.log('initCallbackController with controller', controller);
     this.callbackController = controller;
     this.initDefaultRecipe();
   }

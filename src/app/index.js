@@ -258,7 +258,6 @@ initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$t
   }
 
   $rootScope.$on('$viewContentLoaded', function() {
-    console.log('iframe service =',   ideIFrameSvc);
     ideIFrameSvc.addIFrame();
 
     $timeout(function() {
