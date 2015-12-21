@@ -36,7 +36,7 @@ class CreateProjectSvc {
             {text: 'Create and initialize workspace', logs: '', hasError: false},
             {text: 'Start workspace', logs: '', hasError: false},
             {text: 'Inject workspace agent', logs: '', hasError: false},
-            {text: 'Add project', logs: '', hasError: false},
+            {text: 'Creating project', logs: '', hasError: false},
             {text: 'Project created', logs: '', hasError: false}
         ];
 
