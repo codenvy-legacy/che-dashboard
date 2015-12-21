@@ -84,8 +84,8 @@ class CreateWorkspaceCtrl {
 
     let recipeUrl = this.recipe.links[0].href;
     let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspace.name, recipeUrl, this.workspace.ram);
-    creationPromise.then(() => {
-      this.$location.path('/workspaces');
+    creationPromise.then((workspaceData) => {
+      this.$location.path('/workspace/' + workspaceData.id);
     }, (error) => {
       let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
       this.codenvyNotification.showError(errorMessage);
