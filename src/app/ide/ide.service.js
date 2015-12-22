@@ -20,7 +20,7 @@ class IdeSvc {
      * Default constructor that is using resource
      * @ngInject for Dependency injection
      */
-    constructor (codenvyAPI, $rootScope, $mdDialog, userDashboardConfig, $timeout, $websocket, $sce, proxySettings, ideLoaderSvc) {
+    constructor (codenvyAPI, $rootScope, $mdDialog, userDashboardConfig, $timeout, $websocket, $sce, proxySettings, ideLoaderSvc, $location, routeHistory) {
         this.codenvyAPI = codenvyAPI;
         this.$rootScope = $rootScope;
         this.$mdDialog = $mdDialog;
@@ -30,6 +30,9 @@ class IdeSvc {
         this.$sce = $sce;
         this.proxySettings = proxySettings;
         this.ideLoaderSvc = ideLoaderSvc;
+        this.$location = $location;
+        this.routeHistory = routeHistory;
+
 
         this.currentStep = 0;
         this.selectedWorkspace = null;

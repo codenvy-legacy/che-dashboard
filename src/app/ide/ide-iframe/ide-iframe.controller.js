@@ -20,7 +20,26 @@ class IdeIFrameCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor() {
+  constructor($location, routeHistory) {
+    this.$location = $location;
+    this.routeHistory = routeHistory;
+  }
+
+
+  /**
+   * Redirect user to the last page in history or to dashboard if user came into IDE page directly
+   */
+  restoreHistory() {
+    let paths = this.routeHistory.getPaths();
+    let redirectPath;
+    // do we have at least two history in the path ?
+    if (paths.length > 2) {
+      redirectPath = paths[paths.length - 2];
+    } else {
+      // redirect to dashboard if user was coming directly on this IDE page
+      redirectPath = '/';
+    }
+    this.$location.path(redirectPath);
   }
 }
 

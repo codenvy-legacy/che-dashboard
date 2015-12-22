@@ -1,4 +1,4 @@
 <div flex style="height: 100%" class="animate-show">
-    <img title="Go to dashboard" style="position: absolute; cursor: pointer; outline: none; width: 72px;" src="assets/images/dashb-button.png" ng-click="showIDE = false">
+    <img title="Go to dashboard" style="position: absolute; cursor: pointer; outline: none; width: 72px;" src="assets/images/dashb-button.png" ng-click="ideIFrameCtrl.restoreHistory(); showIDE = false">
     <iframe class="ide-page-frame" ng-src="{{ideIframeLink}}"></iframe>
 </div>
