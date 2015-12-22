@@ -62,7 +62,13 @@ class CodenvyIdeFetcher {
     // get the content of the compilation mapping file
     let randVal = Math.floor((Math.random()*1000000)+1);
     let rand = '?uid=' + randVal;
-    let fileMappinUrl = this.cheBranding.getIdeResourcesPath() + 'compilation-mappings.txt' + rand;
+    let resourcesPath = this.cheBranding.getIdeResourcesPath();
+    if (!resourcesPath) {
+      console.log('Unable to get IDE resources path');
+      return;
+    }
+
+    let fileMappinUrl = resourcesPath + 'compilation-mappings.txt' + rand;
 
     let promise = this.$http.get(fileMappinUrl);
 

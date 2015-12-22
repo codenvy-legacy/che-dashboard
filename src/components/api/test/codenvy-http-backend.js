@@ -41,6 +41,7 @@ class CodenvyHttpBackend {
     this.defaultUser = codenvyAPIBuilder.getUserBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').build();
     this.defaultProfile = codenvyAPIBuilder.getProfileBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').withFirstName('FirstName').withLastName('LastName').build();
     this.defaultProfilePrefs = {onBoardingFlowCompleted: 'true'};
+    this.defaultBranding = {};
   }
 
 
@@ -96,6 +97,9 @@ class CodenvyHttpBackend {
     for (let key of projectPermissionsKeys) {
       this.httpBackend.when('GET', '/api/ext/project/' + key.workspaceId + '/permissions/' + key.projectName).respond(this.projectPermissionsMap.get(key));
     }
+
+    // branding
+    this.httpBackend.when('GET', 'assets/branding/codenvy/product.json').respond(this.defaultBranding);
 
     this.httpBackend.when('POST', '/api/analytics/log/session-usage').respond();
 
