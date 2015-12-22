@@ -61,12 +61,9 @@ class WelcomeBackCtrl {
 
     let preferences = this.codenvyProfile.getPreferences();
 
-
-
-
     let workspaces = this.codenvyWorkspace.getWorkspaces();
-    // no workspaces
-    if (workspaces.length >= 0) {
+    // there are workspaces
+    if (workspaces.length > 0) {
       // select the last one
       this.lastWorkspace = workspaces[0].name;
 
