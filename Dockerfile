@@ -25,4 +25,4 @@ RUN bower install && npm install
 CMD  echo "Updating rights..." && sudo chmod a+rw  /home/user/application/ && \
      ([ -d /home/user/application/node_modules ] || (echo "Initializing NPM dependencies..." && cp -a /usr/src/app/node_modules /home/user/application/)) && \
      ([ -d /home/user/application/bower_components ] || (echo "Initializing Bower dependencies..." && cp -a /usr/src/app/bower_components /home/user/application/)) && \
-    umask 0 && cd /home/user/application/ && gulp serve
+    umask 0 && cd /home/user/application/ && gulp serve --server http://machines.codenvy-stg.com/
