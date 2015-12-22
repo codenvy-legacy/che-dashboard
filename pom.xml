@@ -84,16 +84,16 @@
                 <exec dir="${basedir}" executable="bower" failonerror="true">
                   <arg value="install" />
                 </exec>
+                <!-- Run unit tests -->
+                <exec dir="${basedir}" executable="gulp" failonerror="true">
+                  <arg value="test" />
+                </exec>
+
                 <!-- Disable development mode -->
                 <replace file="${basedir}/src/app/index.js">
                   <replacetoken><![CDATA[var DEV = true;]]></replacetoken>
                   <replacevalue><![CDATA[var DEV = false;]]></replacevalue>
                 </replace>
-
-                <!-- Run unit tests -->
-                <exec dir="${basedir}" executable="gulp" failonerror="true">
-                  <arg value="test" />
-                </exec>
 
                 <!-- Build the application -->
                 <exec dir="${basedir}" executable="gulp" failonerror="true">
