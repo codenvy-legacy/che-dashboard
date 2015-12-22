@@ -36,7 +36,7 @@ class ProjectDetailsCtrl {
     this.askedDescription = null;
 
     this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
-    let promiseWorkspaces = codenvyAPI.getWorkspace().fetchWorkspaces();
+    codenvyAPI.getWorkspace().fetchWorkspaces();
 
     if (!this.codenvyAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath)) {
       let promise = this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath);
