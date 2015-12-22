@@ -35,6 +35,9 @@ class ProjectDetailsCtrl {
     this.askedName = null;
     this.askedDescription = null;
 
+    this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
+    let promiseWorkspaces = codenvyAPI.getWorkspace().fetchWorkspaces();
+
     if (!this.codenvyAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath)) {
       let promise = this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath);
 
@@ -55,6 +58,19 @@ class ProjectDetailsCtrl {
     //this.toolbarIcons = [{name: 'favorite', font: 'material-design icon-ic_star_24px'},
     //  {name: 'share', font: 'material-design icon-ic_share_24px'}
     //];
+  }
+
+  /**
+   * Gets the name of the workspace based on its ID
+   * @param workspaceId
+   * @returns {CodenvyWorkspaceReferenceBuilder.name|*}
+   */
+  getWorkspaceName(workspaceId) {
+    let workspace = this.workspacesById.get(workspaceId);
+    if (workspace) {
+      return workspace.name;
+    }
+    return '';
   }
 
   updateProjectDetails() {
