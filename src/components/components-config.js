@@ -11,14 +11,15 @@
 'use strict';
 
 /*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotification, CheBranding, RoutingRedirect, OnBoarding,
- CreateProjectGitValidator, UniqueProjectNameValidator, CodenvyIdeFetcher */
+ CreateProjectGitValidator, UniqueProjectNameValidator, CodenvyIdeFetcher, RouteHistory */
 
 import CodenvyAPI from './api/codenvy-api.factory';
 import WidgetConfig from './widget/widget-config';
 import AttributeConfig from './attribute/attribute-config';
 
-// import Routing Redirect
+// import Routing components
 import RoutingRedirect from './routing/routing-redirect.factory';
+import RouteHistory from './routing/route-history.service';
 
 // import GitHub services
 import GitHub from './github/github-service';

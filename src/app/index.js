@@ -242,15 +242,16 @@ class CheckLogin {
 /**
  * Setup route redirect module
  */
-initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', 'ideIFrameSvc', 'codenvyIdeFetcher',
-  function ($rootScope, $location, routingRedirect, codenvyUser, $timeout, ideIFrameSvc, codenvyIdeFetcher) {
+initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', 'ideIFrameSvc', 'codenvyIdeFetcher', 'routeHistory',
+function ($rootScope, $location, routingRedirect, codenvyUser, $timeout, ideIFrameSvc, codenvyIdeFetcher, routeHistory) {
 
   $rootScope.hideLoader = false;
   $rootScope.waitingLoaded = false;
   $rootScope.showIDE = false;
 
+  // here only to create instances of these components
   codenvyIdeFetcher;
-
+  routeHistory;
 
   /**
    * Add default redirect to login in dev mode
