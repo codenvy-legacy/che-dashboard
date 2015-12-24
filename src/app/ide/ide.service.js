@@ -49,6 +49,15 @@ class IdeSvc {
         this.$rootScope.showIDE = true;
     }
 
+    restoreIDE() {
+        this.$rootScope.restoringIDE = true;
+        this.displayIDE();
+    }
+
+    hasIdeLink() {
+        return this.$rootScope.ideIframeLink && (this.$rootScope.ideIframeLink !== null);
+    }
+
 
     setSelectedWorkspace(selectedWorkspace) {
         this.selectedWorkspace = selectedWorkspace;

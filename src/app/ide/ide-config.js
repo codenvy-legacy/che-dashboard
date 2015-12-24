@@ -23,6 +23,10 @@ import IdeIFrameCtrl from './ide-iframe/ide-iframe.controller';
 import IdeIFrame from './ide-iframe/ide-iframe.directive';
 import IdeIFrameSvc from './ide-iframe/ide-iframe.service';
 
+import IdeListItemNavbarCtrl from './ide-list-item-navbar/ide-list-item-navbar.controller';
+import IdeListItemNavbar from './ide-list-item-navbar/ide-list-item-navbar.directive';
+
+
 class IdeConfig {
 
   constructor(register) {
@@ -37,6 +41,10 @@ class IdeConfig {
     register.service('ideIFrameSvc', IdeIFrameSvc);
     register.controller('IdeIFrameCtrl', IdeIFrameCtrl);
     register.directive('ideIframe', IdeIFrame);
+
+    register.controller('IdeListItemNavbarCtrl', IdeListItemNavbarCtrl);
+    register.directive('ideListItemNavbar', IdeListItemNavbar);
+
 
     let ideProvider = {
       templateUrl: 'app/ide/ide.html',

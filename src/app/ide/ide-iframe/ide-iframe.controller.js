@@ -20,9 +20,10 @@ class IdeIFrameCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($location, routeHistory) {
+  constructor($location, routeHistory, $rootScope) {
     this.$location = $location;
     this.routeHistory = routeHistory;
+    this.$rootScope = $rootScope;
   }
 
 
@@ -30,6 +31,11 @@ class IdeIFrameCtrl {
    * Redirect user to the last page in history or to dashboard if user came into IDE page directly
    */
   restoreHistory() {
+    // user has restored IDE page so avoid to go in history
+    if (this.$rootScope.restoringIDE) {
+      this.$rootScope.restoringIDE = false;
+      return;
+    }
     let paths = this.routeHistory.getPaths();
     let redirectPath;
     // do we have at least two history in the path ?
