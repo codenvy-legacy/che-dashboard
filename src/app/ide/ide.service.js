@@ -39,8 +39,8 @@ class IdeSvc {
 
         this.steps = [
             {text: 'Initialize', logs: '', hasError: false},
-            {text: 'Start workspace', logs: '', hasError: false},
-            {text: 'Inject workspace agent', logs: '', hasError: false},
+            {text: 'Start workspace master', logs: '', hasError: false},
+            {text: 'Start workspace agent', logs: '', hasError: false},
             {text: 'View IDE', logs: '', hasError: false}
         ];
     }
