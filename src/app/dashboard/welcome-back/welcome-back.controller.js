@@ -23,20 +23,24 @@ class WelcomeBackCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor(codenvyProject, codenvyWorkspace, codenvyProfile, userDashboardConfig, $location, $rootScope) {
+  constructor(codenvyProject, codenvyWorkspace, codenvyProfile, userDashboardConfig, $location, $rootScope, $window) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyProfile = codenvyProfile;
     this.userDashboardConfig = userDashboardConfig;
     this.$location = $location;
     this.$rootScope = $rootScope;
+    this.$window = $window;
 
     // ask to keep loader until we've not performed the choice
     if (!$rootScope.waitingLoaded) {
       $rootScope.wantTokeepLoader = true;
     }
 
+    this.accessUrl = $window.location.href;
+
     this.requireUserAction = false;
+    this.welcomeChoice = 'Dashboard';
 
     // fetch workspaces when initializing
     let promise = this.codenvyWorkspace.fetchWorkspaces();
@@ -92,6 +96,9 @@ class WelcomeBackCtrl {
     let properties = {'choiceUDtoIDE' : value};
     this.codenvyProfile.updatePreferences(properties);
     this.requireUserAction = false;
+    if (value) {
+      this.welcomeChoice = 'IDE';
+    }
   }
 
 

@@ -2,11 +2,15 @@
 
 <cdvy-panel cdvy-title="Welcome Back" ng-show="welcomeBackCtrl.needUserAction()">
     <div flex>
-        <p>Would you like to load workspace {{welcomeBackCtrl.lastWorkspace}} directly in IDE every time?</p>
-        <cdvy-button-notice cdvy-button-title="yes" ng-click="welcomeBackCtrl.selectChoice(true)"></cdvy-button-notice>
-        <cdvy-button-primary cdvy-button-title="no" ng-click="welcomeBackCtrl.selectChoice(false)"></cdvy-button-primary>
-    </div>
+        <p class="welcome-back-prompt">Would you like {{welcomeBackCtrl.accessUrl}} to load the dashboard or IDE with your last opened workspace ({{welcomeBackCtrl.lastWorkspace}}) ?</p>
+        <cdvy-toggle ng-model="welcomeBackCtrl.welcomeChoice">
+            <cdvy-toggle-button ng-click="welcomeBackCtrl.selectChoice(false)" cdvy-font-icon="fa fa-th-large"
+                                cdvy-title="Dashboard"></cdvy-toggle-button>
+            <cdvy-toggle-button ng-click="welcomeBackCtrl.selectChoice(true)" cdvy-font-icon="fa fa-chevron-circle-right"
+                                cdvy-title="IDE"></cdvy-toggle-button>
+        </cdvy-toggle>
 
+    </div>
 </cdvy-panel>
 <cdvy-panel cdvy-title="Welcome Back" ng-if="!welcomeBackCtrl.needUserAction() && welcomeBackCtrl.isDevMode()">
     <p>Development mode: This panel is only shown in development</p>
