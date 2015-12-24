@@ -40,7 +40,8 @@ class FactoryFromTemplateCtrl {
     }
 
     this.isImporting = true;
-    // fetch it !
+
+    //fetch it !
     let promise = this.codenvyAPI.getFactoryTemplate().fetchFactoryTemplate(templateName);
 
     promise.then((factoryContent) => {

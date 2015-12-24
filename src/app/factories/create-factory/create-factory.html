@@ -19,11 +19,11 @@
       <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="selectedIndex" class="project-details-menu">
         <md-tab>
           <md-tab-label>
-            <md-icon md-font-icon="fa fa-folder-open" class="cdvy-tab-label-icon"></md-icon>
-            <span class="cdvy-tab-label-title">Projects</span>
+            <md-icon md-font-icon="fa fa-server" class="cdvy-tab-label-icon"></md-icon>
+            <span class="cdvy-tab-label-title">Workspaces</span>
           </md-tab-label>
           <md-tab-body>
-            <cdvy-factory-from-project cdvy-factory-content="createFactoryCtrl.factoryContent"
+            <cdvy-factory-from-workspace cdvy-factory-content="createFactoryCtrl.factoryContent"
                                        cdvy-is-loading="createFactoryCtrl.isLoading"
                                        cdvy-is-importing="createFactoryCtrl.isImporting"/>
           </md-tab-body>

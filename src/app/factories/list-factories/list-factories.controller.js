@@ -36,13 +36,16 @@ class ListFactoriesCtrl {
       }
     ];
 
-    this.factoriesOrderBy = 'views';
+    this.hasNextPage = true;
+
+    this.maxItems = 15;
+    this.skipCount = 0;
+
+    this.factoriesOrderBy = '';
 
     this.factoriesFilter = {
       originFactory: {
-        project: {
-          name: ''
-        }
+        name: ''
       }
     };
 
@@ -50,12 +53,10 @@ class ListFactoriesCtrl {
 
     this.isLoading = true;
 
-    let codenvyFactory = codenvyAPI.getFactory();
-
-    this.factories = codenvyFactory.getFactories();
+    this.factories = codenvyAPI.getFactory().getFactories();
 
     // fetch factories when initializing
-    let promise = codenvyFactory.fetchFactories();
+    let promise = codenvyAPI.getFactory().fetchFactories(this.maxItems, this.skipCount);
 
     promise.then(() => {
         this.isLoading = false;
@@ -68,6 +69,30 @@ class ListFactoriesCtrl {
         }
       });
   }
+
+  /**
+   * Load more factories, coll this function on list scroll down
+   */
+  loadNextPage() {
+    this.skipCount = this.factories.length;
+
+    this.isLoading = true;
+
+    let promise = this.codenvyAPI.getFactory().fetchFactories(this.maxItems, this.skipCount);
+
+    promise.then(() => {
+        this.factories = this.codenvyAPI.getFactory().getFactories();
+        this.isLoading = false;
+      },
+      (error) => {
+        this.isLoading = false;
+        if (error.status !== 304) {
+          this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
+          console.log('error', error);
+        }
+      });
+  }
+
 
   /**
    * Delete all selected factories

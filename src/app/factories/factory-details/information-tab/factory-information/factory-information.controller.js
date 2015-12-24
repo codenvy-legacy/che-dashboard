@@ -46,11 +46,7 @@ class FactoryInformationCtrl {
       this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
       console.log('error', error);
     });
-
-
   }
-
-
 }
 
 export default FactoryInformationCtrl;

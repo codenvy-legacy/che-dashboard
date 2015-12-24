@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Defines a directive for displaying factory from project widget.
+ * Defines a directive for configuring factory from file.
  * @author Oleksii Orel
  */
 class FactoryFromFile {

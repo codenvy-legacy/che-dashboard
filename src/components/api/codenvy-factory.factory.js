@@ -35,13 +35,13 @@ class CodenvyFactory {
 
     this.factories = [];
     this.factoriesById = new Map();
-    this.factoryContentsByProjectKey = new Map();// ProjectKey = project.workspaceId + project.name
+    this.factoryContentsByWorkspaceId = new Map();
 
     // remote calls
     this.remoteFactoryFindAPI = this.$resource('/api/factory/find');
     this.remoteFactoryAPI = this.$resource('/api/factory/:factoryId', {factoryId: '@id'}, {
       put: {method: 'PUT', url: '/api/factory/:factoryId'},
-      getFactoryContentFromProject: {method: 'GET', url: '/api/factory/:workspaceId/:projectPath'},
+      getFactoryContentFromWorkspace: {method: 'GET', url: '/api/factory/workspace/:workspaceId'},
       createFactoryByContent: {
         method: 'POST',
         url: '/api/factory',
@@ -64,29 +64,28 @@ class CodenvyFactory {
   /**
    * Ask for loading the factory content in asynchronous way
    * If there are no changes, it's not updated
-   * @param project
+   * @param workspace
    * @returns {*|promise|n|N}
    */
-  fetchFactoryContentFromProject(project) {
+  fetchFactoryContentFromWorkspace(workspace) {
     var deferred = this.$q.defer();
 
-    let factoryContent = this.factoryContentsByProjectKey.get(project.workspaceId + project.name);
+    let factoryContent = this.factoryContentsByWorkspaceId.get(workspace.id);
     if (factoryContent) {
       deferred.resolve(factoryContent);
     }
 
-    let promise = this.remoteFactoryAPI.getFactoryContentFromProject({
-      workspaceId: project.workspaceId,
-      projectPath: project.name
+    let promise = this.remoteFactoryAPI.getFactoryContentFromWorkspace({
+      workspaceId: workspace.id
     }).$promise;
 
     promise.then((factoryContent) => {
       //update factoryContents map
-      this.factoryContentsByProjectKey.set(project.workspaceId + project.name, factoryContent);
+      this.factoryContentsByWorkspaceId.set(workspace.id, factoryContent);
       deferred.resolve(factoryContent);
     }, (error) => {
       if (error.status === 304) {
-        let findFactoryContent = this.factoryContentsByProjectKey.get(project.workspaceId + project.name);
+        let findFactoryContent = this.factoryContentsByWorkspaceId.get(workspace.id);
         deferred.resolve(findFactoryContent);
       } else {
         deferred.reject(error);
@@ -98,12 +97,12 @@ class CodenvyFactory {
 
   /**
    * Get factory from project
-   * @param project
+   * @param workspace
    * @return the factory content
    * @returns factoryContent
    */
-  getFactoryContentFromProject(project) {
-    return this.factoryContentsByProjectKey.get(project.workspaceId + project.name);
+  getFactoryContentFromWorkspace(workspace) {
+    return this.factoryContentsByWorkspaceId.get(workspace.workspaceId);
   }
 
   /**
@@ -114,7 +113,7 @@ class CodenvyFactory {
   createFactoryByContent(factoryContent) {
 
     var formDataObject = new FormData();
-    formDataObject.append('factoryUrl', factoryContent);
+    formDataObject.append('factory', factoryContent);
 
     return this.remoteFactoryAPI.createFactoryByContent({}, formDataObject).$promise;
   }
@@ -158,11 +157,8 @@ class CodenvyFactory {
       });
 
       //set default fields
-      if (!tmpFactory.project || !tmpFactory.project.name) {
-        if (!tmpFactory.project) {
-          tmpFactory.project = {};
-        }
-        tmpFactory.project.name = '';
+      if (!tmpFactory.name) {
+        tmpFactory.name = '';
       }
 
       let findFactory = this.factoriesById.get(factoryId);
@@ -176,7 +172,7 @@ class CodenvyFactory {
       this.factoriesById.set(factoryId, factory);
       //update factories array
       this.factories.length = 0;
-      this.factoriesById.forEach((value)=> {
+      this.factoriesById.forEach((value) => {
         this.factories.push(value);
       });
 
@@ -323,8 +319,9 @@ class CodenvyFactory {
    * Ask for loading the factories in asynchronous way
    * If there are no changes, it's not updated
    */
-  fetchFactories() {
-    var deferred = this.$q.defer();
+  fetchFactories(maxItems, skipCount) {
+    var promises = [];
+
     // get the Codenvy user.
     var user = this.codenvyUser.getUser();
 
@@ -335,47 +332,26 @@ class CodenvyFactory {
       var userId = user.id;
 
       // find the factories
-      let promise = this.remoteFactoryFindAPI.query({'creator.userId': userId}).$promise;
+      let factoriesPromise = this.remoteFactoryFindAPI.query(
+        {'creator.userId': userId, 'maxItems': maxItems, 'skipCount': skipCount}).$promise;
 
       // when find is there we can ask for each factory
-      promise.then((remoteFactories) => {
-        let pos = remoteFactories.length;
-
-        if (pos === 0) {//when we haven't factories
+      factoriesPromise.then((remoteFactories) => {
+        if (remoteFactories.length === 0) {//when we have no factories
           this.factoriesById.clear();
-          deferred.resolve();
         }
 
         // Gets factory resource based on the factory ID
         remoteFactories.forEach((factory) => {
-          pos--;
-          // gets the factory id
-          var factoryURL = factory.href.trim();
-          let factoryId = this.getIDFromFactoryAPIURL(factoryURL);
-
           // there is a factory ID, so we can ask the factory details
-          if (factoryId) {
-            let tmpFactoryPromise = this.fetchFactory(factoryId);
-            tmpFactoryPromise.then(() => {
-              if (pos === 0) { //if last
-                deferred.resolve();
-              }
-            }, (error) => {
-              deferred.reject(error);
-            });
-          } else {
-            if (pos === 0) { //if last
-              deferred.resolve();
-            }
+          if (factory.id) {
+            let tmpFactoryPromise = this.fetchFactory(factory.id);
+            promises.push(tmpFactoryPromise);
           }
         });
-      }, (error) => {
-        deferred.reject(error);
       });
-    }, (error) => {
-      deferred.reject(error);
     });
-    return deferred.promise;
+    return this.$q.all(promises);
   }
 
 }

@@ -16,16 +16,13 @@
       <cdvy-list-item-checked class="factory-type-icon"
                               ng-model="factoryItemCtrl.isSelect"
                               cdvy-icon="cdvyfont cdvyico-type-{{factoryItemCtrl.factory.originFactory.project.type}} cdvyico-type-blank"
-                              cdvy-aria-label-checkbox="Factory {{factoryItemCtrl.factory.originFactory.project.name}}"></cdvy-list-item-checked>
+                              cdvy-aria-label-checkbox="Factory {{factoryItemCtrl.factory.originFactory.name}}"></cdvy-list-item-checked>
     </div>
     <div flex="50" layout="column" layout-align-gt="start center" layout-align-md="start center" layout-align-sm="center center"
          ng-click="factoryItemCtrl.redirectToFactoryDetails()">
       <div class="factory-name  codenvy-hover">
-        <span ng-if="factoryItemCtrl.factory.originFactory.project.name || factoryItemCtrl.factory.originFactory.project.description">
-          {{factoryItemCtrl.factory.originFactory.project.name}}<span class="factory-details">{{factoryItemCtrl.factory.originFactory.project.description}}</span>
-        </span>
-        <span ng-if="!factoryItemCtrl.factory.originFactory.project.name && !factoryItemCtrl.factory.originFactory.project.description">
-          {{factoryItemCtrl.factory.originFactory.source.project.location}}
+        <span ng-if="factoryItemCtrl.factory.originFactory.name">
+          {{factoryItemCtrl.factory.originFactory.name}}
         </span>
       </div>
       <div class="factory-id codenvy-hover">{{factoryItemCtrl.factory.originFactory.id}}</div>

@@ -11,10 +11,10 @@
 'use strict';
 
 /**
- * Defines a directive for displaying factory from project widget.
+ * Defines a directive for configuring factory form workspace.
  * @author Oleksii Orel
  */
-class FactoryFromProject {
+class FactoryFromWorkspace {
 
   /**
    * Default constructor that is using resource
@@ -23,11 +23,11 @@ class FactoryFromProject {
   constructor() {
     this.restrict = 'E';
 
-    this.templateUrl = 'app/factories/create-factory/projects-tab/factory-from-project.html';
+    this.templateUrl = 'app/factories/create-factory/workspaces-tab/factory-from-workspace.html';
     this.replace = false;
 
-    this.controller = 'FactoryFromProjectCtrl';
-    this.controllerAs = 'factoryFromProjectCtrl';
+    this.controller = 'FactoryFromWorkspaceCtrl';
+    this.controllerAs = 'factoryFromWorkspaceCtrl';
 
     this.bindToController = true;
 
@@ -41,4 +41,4 @@ class FactoryFromProject {
 
 }
 
-export default FactoryFromProject;
+export default FactoryFromWorkspace;

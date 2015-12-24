@@ -13,8 +13,8 @@
 
 import CreateFactoryCtrl from '../create-factory/create-factory.controller';
 
-import FactoryFromProjectCtrl from '../create-factory/projects-tab/factory-from-project.controller';
-import FactoryFromProject from '../create-factory/projects-tab/factory-from-project.directive';
+import FactoryFromWorkspaceCtrl from '../create-factory/workspaces-tab/factory-from-workpsace.controller.js';
+import FactoryFromWorkspace from '../create-factory/workspaces-tab/factory-from-workspace.directive.js';
 import FactoryFromFileCtrl from '../create-factory/config-file-tab/factory-from-file.controller';
 import FactoryFromFile from '../create-factory/config-file-tab/factory-from-file.directive';
 import FactoryFromTemplateCtrl from '../create-factory/template-tab/factory-from-template.controller';
@@ -26,8 +26,8 @@ class CreateFactoryConfig {
 
     register.controller('CreateFactoryCtrl', CreateFactoryCtrl);
 
-    register.controller('FactoryFromProjectCtrl', FactoryFromProjectCtrl);
-    register.directive('cdvyFactoryFromProject', FactoryFromProject);
+    register.controller('FactoryFromWorkspaceCtrl', FactoryFromWorkspaceCtrl);
+    register.directive('cdvyFactoryFromWorkspace', FactoryFromWorkspace);
 
     register.controller('FactoryFromFileCtrl', FactoryFromFileCtrl);
     register.directive('cdvyFactoryFromFile', FactoryFromFile);

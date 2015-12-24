@@ -26,31 +26,12 @@
                 cdvy-name="name"
                 cdvy-label-name="Name"
                 cdvy-place-holder="Name of the factory"
-                ng-model="factoryInformationCtrl.copyOriginFactory.project.name"
-                required
-                ng-maxlength="128"
-                ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
-      <div ng-message="required">A name is required.</div>
-      <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
-      <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
-      <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
-    </cdvy-input>
-    <cdvy-input cdvy-form="factoryInformationForm"
-                cdvy-name="description"
-                cdvy-label-name="Description"
-                cdvy-place-holder="Description of the factory"
-                ng-model="factoryInformationCtrl.copyOriginFactory.project.description"
-                ng-maxlength="256"
-                ng-pattern="/^[\sA-Za-z0-9_\-\.]+$/">
-      <div ng-message="pattern">The name should not contain special characters like dollar, etc.</div>
-      <div ng-message="maxlength">The name has to be less than 256 characters long.</div>
-      <div ng-message="md-maxlength">The name has to be less than 256 characters long.</div>
+                ng-model="factoryInformationCtrl.copyOriginFactory.name">
     </cdvy-input>
   </ng-form>
   <cdvy-button-primary
     ng-disabled="factoryInformationForm.$invalid
-                 || (factoryInformationCtrl.copyOriginFactory.project.name === factoryInformationCtrl.factory.originFactory.project.name
-                 && factoryInformationCtrl.copyOriginFactory.project.description === factoryInformationCtrl.factory.originFactory.project.description)"
+                 || (factoryInformationCtrl.copyOriginFactory.name === factoryInformationCtrl.factory.originFactory.name)"
     cdvy-button-title="Update" name="updateButton"
     ng-click="factoryInformationCtrl.setFactory(factoryInformationCtrl.copyOriginFactory)"/>
 </cdvy-panel>

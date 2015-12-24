@@ -11,10 +11,11 @@
 'use strict';
 
 /**
- * Controller for creating factory from a project.
+ * Controller for creating factory from a workspace.
  * @author Oleksii Orel
+ * @author Michail Kuznyetsov
  */
-class FactoryFromProjectCtrl {
+class FactoryFromWorkspaceCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -27,11 +28,10 @@ class FactoryFromProjectCtrl {
 
     this.workspaces = codenvyAPI.getWorkspace().getWorkspaces();
     this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
-    this.projectsPerWorkspace = codenvyAPI.getProject().getProjectsByWorkspace();
 
     this.filtersWorkspaceSelected = {};
 
-    this.projectFilter = {name: ''};
+    this.workspaceFilter = {name: ''};
 
     this.isLoading = true;
 
@@ -53,16 +53,14 @@ class FactoryFromProjectCtrl {
 
   updateData() {
     this.setAllFiltersWorkspaces(true);
-    this.isAllWorkspaces = true;
   }
 
   /**
-   * Get factory content from project
-   * @param project is selected project
+   * Get factory content from workspace
+   * @param workspace is selected workspace
    */
-  getFactoryContentFromProject(project) {
-    this.selectedProject = project;
-    let factoryContent = this.codenvyAPI.getFactory().getFactoryContentFromProject(project);
+  getFactoryContentFromWorkspace(workspace) {
+    let factoryContent = this.codenvyAPI.getFactory().getFactoryContentFromWorkspace(workspace);
     if (factoryContent) {
       this.factoryContent = this.$filter('json')(factoryContent, 2);
       return;
@@ -70,7 +68,7 @@ class FactoryFromProjectCtrl {
 
     this.isImporting = true;
 
-    let promise = this.codenvyAPI.getFactory().fetchFactoryContentFromProject(project);
+    let promise = this.codenvyAPI.getFactory().fetchFactoryContentFromWorkspace(workspace);
 
     promise.then((factoryContent) => {
       this.isImporting = false;
@@ -84,23 +82,12 @@ class FactoryFromProjectCtrl {
   }
 
   /**
-   * Update state for All workspaces checkbox
-   */
-  updateIsAllWorkspaces() {
-    this.workspaces.forEach((workspace) => {
-      if (!this.filtersWorkspaceSelected[workspace.workspaceReference.id]) {
-        this.isAllWorkspaces = false;
-      }
-    });
-  }
-
-  /**
    * Set all workspaces in the filters of workspaces
    * @param isChecked is setting value
    */
   setAllFiltersWorkspaces(isChecked) {
     this.workspaces.forEach((workspace) => {
-      this.filtersWorkspaceSelected[workspace.workspaceReference.id] = isChecked;
+      this.filtersWorkspaceSelected[workspace.id] = isChecked;
     });
   }
 
@@ -116,22 +103,6 @@ class FactoryFromProjectCtrl {
     }
     return '';
   }
-
-  /**
-   * Check workspace empty state
-   * @param workspaceId
-   * @param projects
-   * @returns {boolean}empty state
-   */
-  isEmpty(workspaceId, projects) {
-    if (projects && projects.length > 0) {
-      return false;
-    }
-    this.filtersWorkspaceSelected[workspaceId] = false;
-    this.isAllWorkspaces = false;
-    return true;
-  }
-
 }
 
-export default FactoryFromProjectCtrl;
+export default FactoryFromWorkspaceCtrl;

@@ -31,7 +31,7 @@ class DeleteFactoryCtrl {
 //Perform factory deletion.
   deleteFactory(event) {
     let confirm = this.$mdDialog.confirm()
-      .title('Would you like to delete the factory ' + this.factory.originFactory.project.name + '?')
+      .title('Would you like to delete the factory ' + (this.factory.originFactory.name ? '"' + this.factory.originFactory.name + '"' : this.factory.originFactory.id + '?'))
       .content('Please confirm for the factory removal.')
       .ariaLabel('Remove factory')
       .ok('Delete it!')
