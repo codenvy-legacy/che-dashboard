@@ -32,17 +32,21 @@ class TeamCtrl {
     this.members = [];
     this.isLoading = true;
 
-    this.updateAccountData();
-      this.codenvyAPI.getAccount().fetchAccounts().then(() => {
-        this.updateAccountData();
-      });
+    this.accounts = this.codenvyAPI.getAccount().getAccounts();
+
+    if(this.accounts && this.accounts.length > 0){ 
+      this.account = this.accounts[0];
+    } else {
+      this.updateAccountData();    
+    }
   }
 
   updateAccountData() {
-    this.accounts = this.codenvyAPI.getAccount().getAccounts();
-    if(this.accounts && this.accounts.length > 0){ 
-      this.account = this.accounts[0];
-    }
+    this.codenvyAPI.getAccount().fetchAccounts().then(() => {
+      if(this.accounts && this.accounts.length > 0){ 
+        this.account = this.accounts[0];
+      }
+    });
   }
  
 }
