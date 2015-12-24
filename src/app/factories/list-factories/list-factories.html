@@ -28,7 +28,8 @@
 <md-content layout="column" layout-fill class="factories-list-factories ng-scope md-maincontent-theme-theme">
   <md-progress-linear md-mode="indeterminate" class="factories-list-factories-progress"
                       ng-if="listFactoriesCtrl.isLoading"></md-progress-linear>
-  <md-content flex class="md-maincontent-theme-theme" ng-show="!listFactoriesCtrl.isLoading">
+  <md-content flex class="md-maincontent-theme-theme" ng-show="!listFactoriesCtrl.isLoading"
+    cdvy-list-on-scroll-bottom="listFactoriesCtrl.loadNextPage()">
     <div ng-if="listFactoriesCtrl.factories.length === 0" layout="row" layout-align="center center">
       <cdvy-empty-state cdvy-value="There are no factories yet."
                         cdvy-prompt="You can add a factory."
