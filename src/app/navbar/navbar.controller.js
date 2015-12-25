@@ -24,6 +24,7 @@ class NavBarCtrl {
     this.imsArtifactApi = imsArtifactApi;
     this.codenvyUser = codenvyAPI.getUser();
     this.links = [{href: '#/projects', name: 'List Projects'}];
+    this.isImsAvailable = false;
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
     let promiseUser = this.codenvyUser.fetchUser();
@@ -45,8 +46,6 @@ class NavBarCtrl {
       this.isAdminPluginServiceAvailable = codenvyAPI.getAdminService().isServiceAvailable(codenvyAPI.getAdminPlugins().getPluginsServicePath());
     });
 
-
-
     this.profile = codenvyAPI.getProfile().getProfile();
     if (this.profile.attributes) {
       this.email = this.profile.attributes.email;
@@ -62,10 +61,15 @@ class NavBarCtrl {
 
   updateAdminRole() {
     this.admin = this.codenvyUser.isAdmin();
-  }
-
-  isImsAvailable() {
-    this.imsArtifactApi.isImsAvailable();
+      // if admin, check if IM API is there
+    if (this.codenvyUser.isAdmin()) {
+      let promise = this.imsArtifactApi.getDownloadedArtifactsList();
+      promise.then(() => {
+        this.isImsAvailable = true;
+      }, () => {
+        this.isImsAvailable = false;
+      });
+    }
   }
 
   reload() {

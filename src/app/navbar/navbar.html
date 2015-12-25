@@ -141,10 +141,9 @@
           </md-list>
         </section>
       </div>
-      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.userIsAdmin() && navbarCtrl.isImsAvailable()"></md-divider>
-
-      <cdvy-navbar-admin class="admin-navbar-menu" ng-show="navbarCtrl.userIsAdmin() && navbarCtrl.isImsAvailable()"></cdvy-navbar-admin>
-      <cdvy-admin-links class="admin-navbar-menu" ng-if="navbarCtrl.userIsAdmin() && navbarCtrl.isImsAvailable()"></cdvy-admin-links>
+      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.userIsAdmin() && navbarCtrl.isImsAvailable"></md-divider>
+      <cdvy-navbar-admin class="admin-navbar-menu" ng-if="navbarCtrl.userIsAdmin() && navbarCtrl.isImsAvailable"></cdvy-navbar-admin>
+      <cdvy-admin-links class="admin-navbar-menu" ng-if="navbarCtrl.userIsAdmin()"></cdvy-admin-links>
 
       <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
 
