@@ -76,10 +76,12 @@ class IdeCtrl {
       // now, check if workspace has been started or not
       if ('RUNNING' === this.selectedWorkspace.status) {
         this.$rootScope.hideIdeLoader = true;
+        this.ideSvc.init();
         this.ideSvc.openIde();
       } else if ('STOPPED' === this.selectedWorkspace.status) {
         this.$rootScope.hideIdeLoader = false;
         this.$rootScope.hideLoader = true;
+        this.ideSvc.init();
         this.ideSvc.startIde();
       }
     }

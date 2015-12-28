@@ -17,11 +17,17 @@
                                         cdvy-button-title="Retry" ng-click="ideLoaderCtrl.resetCreateProgress()" ></cdvy-button-danger>
                 </div>
             </div>
-            <div ng-if="$index < (ideLoaderCtrl.getSteps().length - 2)" layout="row">
+            <div ng-if="$index < (ideLoaderCtrl.getSteps().length - 1)" layout="row">
                 <div ng-class="{'create-project-panel-progress-item-link-enabled' : (ideLoaderCtrl.getCurrentStep() > $index), 'create-project-panel-progress-item-link-error' : ideLoaderCtrl.getSteps()[$index].hasError}"
                      class="create-project-panel-progress-item-link">&nbsp;</div>
+
                 <textarea cdvy-auto-scroll ng-show="ideLoaderCtrl.getSteps()[$index].logs.length > 0" flex class="create-project-panel-progress-item-output" rows="5" ng-model="ideLoaderCtrl.getSteps()[$index].logs"></textarea>
             </div>
         </div>
+        <div ng-class="{'create-project-panel-progress-lastitem-enabled' : (ideLoaderCtrl.getCurrentStep() === (ideLoaderCtrl.getSteps().length - 1)), 'create-project-panel-progress-lastitem-error' : createProjectCtrl.getSteps()[$index].hasError}"
+             class="create-project-panel-progress-lastitem" layout="row" layout-align="end start">
+            &nbsp;
+        </div>
+
     </div>
 </div>

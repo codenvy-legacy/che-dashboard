@@ -45,6 +45,14 @@ class IdeSvc {
         ];
     }
 
+    init() {
+        this.steps.forEach((step) => {
+            step.logs = '';
+            step.hasError = false;
+        });
+
+    }
+
     displayIDE() {
         this.$rootScope.showIDE = true;
     }
@@ -123,6 +131,7 @@ class IdeSvc {
             let channels = environments[envName].machineConfigs[0].channels;
             let statusChannel = channels.status;
             let outputChannel = channels.output;
+            let agentChannel = 'workspace:' + data.id + ':ext-server:output';
 
 
             let workspaceId = data.id;
@@ -155,7 +164,14 @@ class IdeSvc {
                 console.log('Status channel of workspaceID', workspaceId, message);
             });
 
-
+            bus.subscribe(agentChannel, (message) => {
+                let agentStep = 2;
+                if (this.steps[agentStep].logs.length > 0) {
+                    this.steps[agentStep].logs = this.steps[agentStep].logs + '\n' + message;
+                } else {
+                    this.steps[agentStep].logs = message;
+                }
+            });
 
             bus.subscribe(outputChannel, (message) => {
                 if (this.steps[this.currentStep].logs.length > 0) {

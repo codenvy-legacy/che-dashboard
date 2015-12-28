@@ -339,6 +339,7 @@ class CreateProjectCtrl {
       let channels = environments[envName].machineConfigs[0].channels;
       let statusChannel = channels.status;
       let outputChannel = channels.output;
+      let agentChannel = 'workspace:' + data.id + ':ext-server:output';
 
 
       let workspaceId = data.id;
@@ -371,7 +372,14 @@ class CreateProjectCtrl {
         console.log('Status channel of workspaceID', workspaceId, message);
       });
 
-
+      bus.subscribe(agentChannel, (message) => {
+        let agentStep = 2;
+        if (this.getCreationSteps()[agentStep].logs.length > 0) {
+          this.getCreationSteps()[agentStep].logs = this.getCreationSteps()[agentStep].logs + '\n' + message;
+        } else {
+          this.getCreationSteps()[agentStep].logs = message;
+        }
+      });
 
       bus.subscribe(outputChannel, (message) => {
         if (this.getCreationSteps()[this.getCurrentProgressStep()].logs.length > 0) {
