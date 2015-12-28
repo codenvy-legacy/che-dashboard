@@ -26,6 +26,8 @@ import IdeIFrameSvc from './ide-iframe/ide-iframe.service';
 import IdeListItemNavbarCtrl from './ide-list-item-navbar/ide-list-item-navbar.controller';
 import IdeListItemNavbar from './ide-list-item-navbar/ide-list-item-navbar.directive';
 
+import IdeIFrameButtonLinkCtrl from './ide-iframe-button-link/ide-iframe-button-link.controller';
+import IdeIFrameButtonLink from './ide-iframe-button-link/ide-iframe-button-link.directive';
 
 class IdeConfig {
 
@@ -45,6 +47,9 @@ class IdeConfig {
     register.controller('IdeListItemNavbarCtrl', IdeListItemNavbarCtrl);
     register.directive('ideListItemNavbar', IdeListItemNavbar);
 
+
+    register.controller('IdeIFrameButtonLinkCtrl', IdeIFrameButtonLinkCtrl);
+    register.directive('ideIframeButtonLink', IdeIFrameButtonLink);
 
     let ideProvider = {
       templateUrl: 'app/ide/ide.html',
