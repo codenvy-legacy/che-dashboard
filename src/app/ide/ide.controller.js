@@ -31,9 +31,8 @@ class IdeCtrl {
     this.selectedWorkspace = null;
     this.$rootScope.loadingIDE = true;
 
-    if (!$rootScope.waitingLoaded) {
-      $rootScope.wantTokeepLoader = true;
-    }
+    $rootScope.wantTokeepLoader = true;
+    $rootScope.hideLoader = false;
 
     // search the selected workspace
     let workspace = $routeParams.workspaceName;
@@ -75,7 +74,6 @@ class IdeCtrl {
     if (this.selectedWorkspace) {
       // now, check if workspace has been started or not
       if ('RUNNING' === this.selectedWorkspace.status) {
-        this.$rootScope.hideIdeLoader = true;
         this.ideSvc.init();
         this.ideSvc.openIde();
       } else if ('STOPPED' === this.selectedWorkspace.status) {
@@ -84,6 +82,10 @@ class IdeCtrl {
         this.ideSvc.init();
         this.ideSvc.startIde();
       }
+    } else {
+      this.$rootScope.hideIdeLoader = true;
+      this.$rootScope.hideLoader = true;
+
     }
 
   }
