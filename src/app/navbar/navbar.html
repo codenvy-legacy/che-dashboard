@@ -130,7 +130,7 @@
                      layout-align="start center">Account</div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isAccountServiceAvailable">
+            <md-list-item flex class="navbar-subsection-item" ng-if="!navbarCtrl.isImsAvailable()">
               <md-button nav-bar-selected flex cdvy-reload-href href="#/team" layout-align="left" cdvy-event-logger="team">
                 <div class="navbar-item" layout="row"
                      layout-align="start center">Team</div>
@@ -142,7 +142,7 @@
                      layout-align="start center">Subscriptions</div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isInvoiceServiceAvailable">
+            <md-list-item flex class="navbar-subsection-item" ng-if="!navbarCtrl.isImsAvailable() && navbarCtrl.isInvoiceServiceAvailable">
               <md-button nav-bar-selected flex cdvy-reload-href href="#/billing" layout-align="left">
                 <div class="navbar-item" layout="row" cdvy-event-logger="billing-and-invoices"
                      layout-align="start center">Billing and Invoices</div>
