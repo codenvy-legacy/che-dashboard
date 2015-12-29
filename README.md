@@ -2,7 +2,7 @@
 
 
 
-Codenvy Dashboard V3
+Che Dashboard V3
 ==========================
 
 #Requirements
@@ -144,7 +144,7 @@ example
  * Defines a controller
  * @author Florent Benoit
  */
-class MyCtrl {
+class CheToggleCtrl {
 
   /**
    * Constructor that is using resource injection
@@ -161,7 +161,7 @@ class MyCtrl {
 
 }
 
-export default CodenvyToggleCtrl;
+export default CheToggleCtrl;
 
 ```
 
@@ -197,16 +197,16 @@ It includes toggle buttons, selecter, etc.
 A demo page is also provided to browse them: localhost:5000/#/demo-components
 
 
-## API of Codenvy
+## API of Che
 
-Each call to the Codenvy API shouldn't be made directly from the controller of the page.
-For that, it has to use Codenvy API fatories which are handling the job (with promises operations)
+Each call to the Che API shouldn't be made directly from the controller of the page.
+For that, it has to use Che API fatories which are handling the job (with promises operations)
 
-By injecting 'codenvyAPI' inside a controller, all operations can be called.
+By injecting 'cheAPI' inside a controller, all operations can be called.
 
-for example codenvyAPI.getWorkspace().getWorkspaces() for getting the array of the current workspaces of the user
+for example cheAPI.getWorkspace().getWorkspaces() for getting the array of the current workspaces of the user
 
-Mocks are also provided for the Codenvy API, allowing to emulate a real backend for unit tests or e2e tests
+Mocks are also provided for the Che API, allowing to emulate a real backend for unit tests or e2e tests
 
 
 
