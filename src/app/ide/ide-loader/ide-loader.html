@@ -12,7 +12,7 @@
                     >
                 <div  layout="row" layout-align="start center">
                     <div class="create-project-panel-progress-item-number">{{$index + 1}}</div>
-                    <div flex>{{step.text}}</div>
+                    <div flex>{{ideLoaderCtrl.getStepText($index)}}</div>
                     <cdvy-button-danger ng-show="ideLoaderCtrl.getSteps()[$index].hasError"
                                         cdvy-button-title="Retry" ng-click="ideLoaderCtrl.resetCreateProgress()" ></cdvy-button-danger>
                 </div>

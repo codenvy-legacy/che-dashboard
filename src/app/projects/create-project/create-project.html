@@ -64,7 +64,7 @@
                          >
                         <div  layout="row" layout-align="start center">
                             <div class="create-project-panel-progress-item-number">{{$index + 1}}</div>
-                            <div flex>{{step.text}}</div>
+                            <div flex>{{createProjectCtrl.getStepText($index)}}</div>
                             <cdvy-button-danger ng-show="createProjectCtrl.getCreationSteps()[$index].hasError"
                                     cdvy-button-title="Retry" ng-click="createProjectCtrl.resetCreateProgress()" ></cdvy-button-danger>
                         </div>

@@ -658,6 +658,10 @@ class CreateProjectCtrl {
     this.$rootScope.showIDE = !this.$rootScope.showIDE;
   }
 
+  getStepText(stepNumber) {
+    return this.createProjectSvc.getStepText(stepNumber);
+  }
+
   getCreationSteps() {
     return this.createProjectSvc.getProjectCreationSteps();
   }

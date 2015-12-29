@@ -33,11 +33,11 @@ class CreateProjectSvc {
 
 
         this.creationSteps = [
-            {text: 'Create and initialize workspace', logs: '', hasError: false},
-            {text: 'Start workspace', logs: '', hasError: false},
-            {text: 'Inject workspace agent', logs: '', hasError: false},
-            {text: 'Creating project', logs: '', hasError: false},
-            {text: 'Project created', logs: '', hasError: false}
+            {text: 'Create and initialize workspace', inProgressText: 'Creating workspace', logs: '', hasError: false},
+            {text: 'Start workspace master', inProgressText: 'Starting workspace master', logs: '', hasError: false},
+            {text: 'Inject workspace agent', inProgressText: 'Injecting workspace agent', logs: '', hasError: false},
+            {text: 'Create project', inProgressText: 'Creating project', logs: '', hasError: false},
+            {text: 'Project created', inProgressText: 'Opening project', logs: '', hasError: false}
         ];
 
 
@@ -45,6 +45,16 @@ class CreateProjectSvc {
         this.initPopup = false;
 
 
+    }
+
+
+    getStepText(stepNumber) {
+        let entry = this.creationSteps[stepNumber];
+        if (this.currentProgressStep >= stepNumber) {
+            return entry.inProgressText;
+        } else {
+            return entry.text;
+        }
     }
 
     getProjectCreationSteps() {

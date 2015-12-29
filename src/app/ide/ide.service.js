@@ -38,10 +38,10 @@ class IdeSvc {
         this.selectedWorkspace = null;
 
         this.steps = [
-            {text: 'Initialize', logs: '', hasError: false},
-            {text: 'Start workspace master', logs: '', hasError: false},
-            {text: 'Start workspace agent', logs: '', hasError: false},
-            {text: 'View IDE', logs: '', hasError: false}
+            {text: 'Initialize', inProgressText : 'Initializing', logs: '', hasError: false},
+            {text: 'Start workspace master', inProgressText : 'Starting workspace master', logs: '', hasError: false},
+            {text: 'Start workspace agent', inProgressText : 'Starting workspace agent', logs: '', hasError: false},
+            {text: 'View IDE', inProgressText : 'Opening IDE', logs: '', hasError: false}
         ];
     }
 
@@ -52,6 +52,16 @@ class IdeSvc {
         });
 
     }
+
+    getStepText(stepNumber) {
+        let entry = this.steps[stepNumber];
+        if (this.currentStep >= stepNumber) {
+            return entry.inProgressText;
+        } else {
+            return entry.text;
+        }
+    }
+
 
     displayIDE() {
         this.$rootScope.showIDE = true;

@@ -34,6 +34,10 @@ class IdeLoaderCtrl {
     return this.ideSvc.currentStep;
   }
 
+  getStepText(stepNumber) {
+    return this.ideSvc.getStepText(stepNumber);
+  }
+
 }
 
 
