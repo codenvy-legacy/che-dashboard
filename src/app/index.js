@@ -296,12 +296,6 @@ function ($rootScope, $location, routingRedirect, codenvyUser, $timeout, ideIFra
   });
 }]);
 
-// ask to add onboarding flow when we're on prod
-if (!DEV) {
-  initModule.run(function (onBoardRedirect) { // jshint ignore:line
-
-  });
-}
 
 // add interceptors
 initModule.factory('AuthInterceptor', function ($window, $cookies, $q, $location, $log) {
