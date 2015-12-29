@@ -2,8 +2,8 @@
 
 
 
-Che Dashboard V3
-==========================
+Che Dashboard
+==============
 
 #Requirements
 
