@@ -51,13 +51,15 @@ class CheBranding {
                 name: brandingData.name,
                 logoURL: assetPrefix + brandingData.logoFile,
                 favicon : assetPrefix + brandingData.favicon,
-                ideResourcesPath : brandingData.ideResources
+                ideResourcesPath : brandingData.ideResources,
+                helpPath : brandingData.helpPath
             };
 
             this.productName = this.$rootScope.branding.title;
             this.productFavicon = this.$rootScope.branding.productFavicon;
             this.productLogo = this.$rootScope.branding.logoURL;
             this.ideResourcesPath = this.$rootScope.branding.ideResourcesPath;
+            this.helpPath = this.$rootScope.branding.helpPath;
             this.deferred.resolve(this.$rootScope.branding);
         });
 
@@ -67,12 +69,9 @@ class CheBranding {
         return this.productName;
     }
 
-
     getProductLogo() {
         return this.productLogo;
     }
-
-
 
     getProductFavicon() {
         return this.productFavicon;
@@ -80,6 +79,10 @@ class CheBranding {
 
     getIdeResourcesPath() {
         return this.ideResourcesPath;
+    }
+
+    getProductHelpPath() {
+        return this.helpPath;
     }
 }
 

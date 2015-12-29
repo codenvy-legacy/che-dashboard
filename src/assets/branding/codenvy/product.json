@@ -3,5 +3,6 @@
   "name": "Codenvy",
   "logoFile": "logo@3x.png",
   "favicon": "favicon.ico",
-  "ideResources": "/che/_app/"
+  "ideResources": "/che/_app/",
+  "helpPath": "https://codenvy.com/support/"
 }

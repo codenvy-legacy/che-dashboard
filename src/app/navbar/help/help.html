@@ -10,15 +10,7 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<div class="codenvy-bubble codenvy-bubble-arrow-left" ng-show="helpCtrl.showHelp">
-  <ul>
-    <li><a ng-href="http://docs.codenvy.com" target="_blank">Codenvy Help</a></li>
-    <li><a ng-href="http://helpdesk.codenvy.com" target="_blank">Forum</a></li>
-    <li><a ng-href="https://codenvy.uservoice.com" target="_blank">Feedback and Feature Vote</a></li>
-    <li><a ng-href="https://codenvy.uservoice.com" target="_blank">Create Support Ticket</a></li>
-  </ul>
-</div>
-<md-button flex ng-click="helpCtrl.toggleHelp()" layout-align="left" ng-blur="helpCtrl.disableHelp()">
+<md-button class="navbar-logout-button" ng-href="{{helpCtrl.help()}}" target="_blank" flex layout-align="left">
   <div class="navbar-item" layout="row" layout-align="center center">
     <i class="material-design md-tab-themed icon-ic_help_outline_24px">&nbsp;</i>
     <span>Help</span>

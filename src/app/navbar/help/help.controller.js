@@ -23,26 +23,12 @@ class HelpCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($timeout) {
-    this.$timeout = $timeout;
-    this.showHelp = false;
+  constructor(cheBranding) {
+    this.cheBranding = cheBranding;
+    this.help = function () {
+      return this.cheBranding.getProductHelpPath();
+    };
   }
-
-  /**
-   * Toggle the help
-   */
-  toggleHelp() {
-    this.showHelp = !this.showHelp;
-  }
-
-  /**
-   * Disable the help through a timeout
-   */
-  disableHelp() {
-    this.$timeout(() => this.showHelp = false, 200);
-  }
-
-
 }
 
 export default HelpCtrl;
