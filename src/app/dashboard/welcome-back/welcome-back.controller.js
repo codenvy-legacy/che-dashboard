@@ -97,7 +97,7 @@ class WelcomeBackCtrl {
     this.codenvyProfile.updatePreferences(properties);
     this.requireUserAction = false;
     if (value) {
-      this.welcomeChoice = 'IDE';
+      this.welcomeChoice = 'Last Opened Workspace in IDE';
     }
   }
 
