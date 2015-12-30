@@ -150,9 +150,10 @@ class CodenvyFactory {
         return;
       }
 
-      let seeLink = this.lodash.find(tmpFactory.links, function (link) {
-        if (link.rel === 'create-project') {
-          return link;
+      let seeLink = [];
+      this.lodash.find(tmpFactory.links, function (link) {
+        if (link.rel === 'create-workspace') {
+          seeLink.push(link.href);
         }
       });
 
@@ -164,7 +165,8 @@ class CodenvyFactory {
       let findFactory = this.factoriesById.get(factoryId);
       let factory = {
         originFactory: tmpFactory,
-        seeURL: seeLink ? seeLink.href : '',
+        idURL: seeLink[0],
+        nameURL: seeLink[1],
         views: findFactory && findFactory.views ? findFactory.views : 0
       };
 

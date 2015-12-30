@@ -11,16 +11,6 @@
 
 -->
 <cdvy-panel cdvy-title="Factory Information">
-  <div layout="column" flex layout-align="space-around start">
-    <cdvy-text-info cdvy-label-name="URL"
-                    cdvy-text="factoryInformationCtrl.factory.seeURL ? factoryInformationCtrl.factory.seeURL : 'No value'"
-                    cdvy-href="factoryInformationCtrl.factory.seeURL"
-                    cdvy-copy-clipboard="true"></cdvy-text-info>
-  </div>
-  <div layout="column" flex layout-align="space-around start">
-    <cdvy-text-info cdvy-label-name="Creation Date"
-                    cdvy-text="factoryInformationCtrl.factory.originFactory.creator.created | amDateFormat:'Do MMMM YYYY'"></cdvy-text-info>
-  </div>
   <ng-form name="factoryInformationForm">
     <cdvy-input cdvy-form="factoryInformationForm"
                 cdvy-name="name"
@@ -29,6 +19,20 @@
                 ng-model="factoryInformationCtrl.copyOriginFactory.name">
     </cdvy-input>
   </ng-form>
+  <div layout="column" flex layout-align="space-around start">
+    <cdvy-text-info cdvy-label-name="URL"
+                    cdvy-text="factoryInformationCtrl.factory.idURL ? factoryInformationCtrl.factory.idURL : 'No value'"
+                    cdvy-href="factoryInformationCtrl.factory.idURL"
+                    cdvy-copy-clipboard="true"></cdvy-text-info>
+    <cdvy-text-info ng-show="factoryInformationCtrl.factory.nameURL"
+                    cdvy-label-name="URL"
+                    cdvy-text="factoryInformationCtrl.factory.nameURL ? factoryInformationCtrl.factory.nameURL : 'No value'"
+                    cdvy-href="factoryInformationCtrl.factory.nameURL"
+                    cdvy-copy-clipboard="true"></cdvy-text-info>
+    <cdvy-text-info cdvy-label-name="Creation Date"
+                    cdvy-text="factoryInformationCtrl.factory.originFactory.creator.created | amDateFormat:'Do MMMM YYYY'">
+    </cdvy-text-info>
+  </div>
   <cdvy-button-primary
     ng-disabled="factoryInformationForm.$invalid
                  || (factoryInformationCtrl.copyOriginFactory.name === factoryInformationCtrl.factory.originFactory.name)"
