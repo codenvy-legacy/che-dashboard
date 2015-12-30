@@ -249,7 +249,7 @@ class CodenvyHttpBackend {
    * @param projectTemplates
    */
   addProjectTemplates(projectTemplates) {
-    this.httpBackend.when('GET', '/api/project-template').respond(projectTemplates);
+    this.httpBackend.when('GET', '/api/project-template/all').respond(projectTemplates);
   }
 
   /**

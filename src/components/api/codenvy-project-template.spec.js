@@ -110,7 +110,7 @@ describe('CodenvyProjectTemplate', function(){
       factory.fetchTemplates();
 
       // expecting a GET
-      httpBackend.expectGET('/api/project-template');
+      httpBackend.expectGET('/api/project-template/all');
 
       // flush command
       httpBackend.flush();

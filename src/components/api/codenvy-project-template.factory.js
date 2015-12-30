@@ -35,7 +35,7 @@ class CodenvyProjectTemplate {
     this.templates = [];
 
     // remote call
-    this.remoteProjectTemplateAPI = this.$resource('/api/project-template');
+    this.remoteProjectTemplateAPI = this.$resource('/api/project-template/all');
   }
 
 

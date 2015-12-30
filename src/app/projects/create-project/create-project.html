@@ -106,6 +106,9 @@
                 <md-radio-button value="select-source-existing">Import existing project</md-radio-button>
             </md-radio-group>
 
+            <div ng-show="createProjectCtrl.selectSourceOption === 'select-source-new'">
+              <create-project-samples></create-project-samples>
+            </div>
 
             <div ng-show="createProjectCtrl.selectSourceOption === 'select-source-existing'">
                 <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedTabIndex">
@@ -198,8 +201,6 @@
                         <span class="cdvy-tab-label-title">Custom stack</span>
                     </md-tab-label>
                     <md-tab-body>
-
-
                         <md-radio-group ng-model="createProjectCtrl.selectWorkspaceOption">
                             <md-radio-button value="select-workspace-create">Create new</md-radio-button>
 
