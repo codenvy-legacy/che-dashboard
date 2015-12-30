@@ -113,6 +113,14 @@ class CreateProjectSvc {
         return this.workspaceOfProject;
     }
 
+    setProject(project) {
+        this.project = project;
+    }
+
+    getProject() {
+        return this.project;
+    }
+
     createPopup() {
         if (!this.initPopup) {
             this.initPopup = true;

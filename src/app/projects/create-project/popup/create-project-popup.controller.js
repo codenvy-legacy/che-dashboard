@@ -44,6 +44,14 @@ class CreateProjectPopupCtrl {
   isCreateProjectInProgress() {
     return this.createProjectSvc.isCreateProjectInProgress();
   }
+
+  getWorkspaceOfProject() {
+    return this.createProjectSvc.getWorkspaceOfProject();
+  }
+
+  getProject() {
+      return this.createProjectSvc.getProject();
+  }
 }
 
 

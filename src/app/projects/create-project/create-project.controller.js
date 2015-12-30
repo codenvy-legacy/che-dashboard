@@ -490,6 +490,7 @@ class CreateProjectCtrl {
     if (!this.isChangeableName) {
       this.importProjectData.project.name = angular.copy(this.projectName);
     }
+    this.createProjectSvc.setProject(this.importProjectData.project.name);
 
     // reset logs and errors
     this.resetCreateProgress();
