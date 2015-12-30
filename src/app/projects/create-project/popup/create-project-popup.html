@@ -11,21 +11,19 @@
 
 -->
 <div class="create-project-progress-popup" ng-show="createProjectPopupCtrl.isShowPopup() && createProjectPopupCtrl.isCreateProjectInProgress()">
-    <div class="create-project-progress-popup-content" flex>
-        <div flex layout="row">
-            <div layout="column" class="create-project-progress-popup-info-column">
-                <div class="create-project-progress-popup-title">Creating project</div>
-                <div layout="column">
-                    <div class="create-project-progress-popup-action">{{createProjectPopupCtrl.getCreationSteps()[createProjectPopupCtrl.getCurrentProgressStep()].text}}</div>
-                    <div class="create-project-progress-popup-percent">{{createProjectPopupCtrl.getCurrentProgressStep() * 25}} %</div>
-                    <div class="create-project-progress-popup-error" ng-show="createProjectPopupCtrl.getCreationSteps()[createProjectPopupCtrl.getCurrentProgressStep()].hasError">Error !</div>
+    <div class="create-project-progress-popup-content" flex layout="row">
+            <div layout="column" class="create-project-progress-popup-info-column" flex="65">
+                <div class="create-project-progress-popup-title">Creating project: {{createProjectPopupCtrl.getProject()}}</div>
+                <div layout="row" layout-align="center center" flex>
+                    <div flex="20"><img class="create-project-progress-popup-icon" src="assets/images/loader.svg"/></div>
+                    <div class="create-project-progress-popup-percent" flex="15" layout-align="center center">{{createProjectPopupCtrl.getCurrentProgressStep() * 25}} %</div>
+                    <div class="create-project-progress-popup-action" flex="65" layout-align="center center">{{createProjectPopupCtrl.getCreationSteps()[createProjectPopupCtrl.getCurrentProgressStep()].text}}</div>
                 </div>
+                <div class="create-project-progress-popup-error" ng-show="createProjectPopupCtrl.getCreationSteps()[createProjectPopupCtrl.getCurrentProgressStep()].hasError">Error !</div>
             </div>
-            <div layout="column" layout-align="center center" flex>
-                <cdvy-button-notice cdvy-button-title="Show Progress" ng-click="createProjectPopupCtrl.hidePopup()" href="#/create-project"></cdvy-button-notice>
-                <cdvy-button-primary ng-show="createProjectPopupCtrl.getCurrentProgressStep() === (createProjectPopupCtrl.getCreationSteps().length - 1)" cdvy-button-title="Open in IDE" href="/ws"></cdvy-button-primary>
+            <div layout="column" layout-align="center center" flex="35">
+                <cdvy-button-notice cdvy-button-title="Show More" ng-click="createProjectPopupCtrl.hidePopup()" href="#/create-project"></cdvy-button-notice>
+                <cdvy-button-primary ng-show="createProjectPopupCtrl.getCurrentProgressStep() === (createProjectPopupCtrl.getCreationSteps().length - 1)" cdvy-button-title="Open in IDE" ng-href="#/ide/{{createProjectPopupCtrl.getWorkspaceOfProject()}}"></cdvy-button-primary>
             </div>
-        </div>
     </div>
-
 </div>
