@@ -12,7 +12,7 @@
 /*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
  CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
  CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession, CodenvyRunner,
- CodenvyService, CodenvyAdminPlugins, CodenvyAdminService, CodenvyRecipe */
+ CodenvyService, CodenvyAdminPlugins, CodenvyAdminService, CodenvyRecipe, CodenvyStack */
 
 
 import Register from '../utils/register';
@@ -41,6 +41,7 @@ import CodenvyService from './codenvy-service.factory';
 import CodenvyAdminPlugins from './codenvy-admin-plugins.factory';
 import CodenvyAdminService from './codenvy-admin-service.factory';
 import CodenvyRecipe from './codenvy-recipe.factory';
+import CodenvyStack from './codenvy-stack.factory';
 
 
 /**
@@ -56,7 +57,7 @@ class CodenvyAPI {
    */
   constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
               codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyFactoryTemplate,
-              codenvyAnalyticsSession, codenvyRunner, codenvyService, codenvyAdminPlugins, codenvyAdminService, codenvyRecipe) {
+              codenvyAnalyticsSession, codenvyRunner, codenvyService, codenvyAdminPlugins, codenvyAdminService, codenvyRecipe, codenvyStack) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
@@ -78,6 +79,7 @@ class CodenvyAPI {
     this.codenvyAdminPlugins = codenvyAdminPlugins;
     this.codenvyAdminService = codenvyAdminService;
     this.codenvyRecipe = codenvyRecipe;
+    this.codenvyStack = codenvyStack;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
@@ -241,6 +243,14 @@ class CodenvyAPI {
    */
   getRecipe() {
     return this.codenvyRecipe;
+  }
+
+  /**
+   * The Codenvy Stack API
+   * @returns {CodenvyAPI.codenvyStack|*}
+   */
+  getStack() {
+    return this.codenvyStack;
   }
 }
 
