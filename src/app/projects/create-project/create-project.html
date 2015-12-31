@@ -106,9 +106,6 @@
                 <md-radio-button value="select-source-existing">Import existing project</md-radio-button>
             </md-radio-group>
 
-            <div ng-show="createProjectCtrl.selectSourceOption === 'select-source-new'">
-              <create-project-samples></create-project-samples>
-            </div>
 
             <div ng-show="createProjectCtrl.selectSourceOption === 'select-source-existing'">
                 <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedTabIndex">
@@ -266,6 +263,13 @@
 
 
 
+        </cdvy-panel>
+
+        <cdvy-panel id="create-project-templates" ng-show="createProjectCtrl.selectSourceOption === 'select-source-new'" cdvy-title="Select Templates">
+            <md-radio-group ng-model="createProjectCtrl.templatesChoice">
+                <md-radio-button>Ready-to-run project templates</md-radio-button>
+            </md-radio-group>
+            <create-project-samples></create-project-samples>
         </cdvy-panel>
 
 
