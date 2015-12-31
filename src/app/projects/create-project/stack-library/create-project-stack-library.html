@@ -1,0 +1,91 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<div layout="column" flex class="create-project-stack-library">
+    <div layout="row" flex layout-align="space-around start">
+        <label flex="15" hide-sm hide-md>Stack: </label>
+        <md-radio-group ng-model="createProjectStackLibraryCtrl.createChoice">
+
+            <div layout="row" flex="85">
+                <div layout="column">
+                    <md-radio-button value="new-workspace">Create new workspace</md-radio-button>
+                    <div layout="row" layout-wrap>
+                        <cdvy-stack-library-selecter ng-repeat="stack in createProjectStackLibraryCtrl.stacks"
+                                                     ng-model="createProjectStackLibraryCtrl.stackSelected"
+                                                     cdvy-is-first="{{$first}}"
+                                                     cdvy-toggle-choice="createProjectStackLibraryCtrl.createChoice"
+                                                     cdvy-stack="stack"
+                                                     cdvy-name="StackSelectWidget"
+                                                     cdvy-title="{{stack.name}}"
+                                                     cdvy-text="{{stack.description}}"
+                                                     cdvy-extra-text="{{createProjectStackLibraryCtrl.getTooltip(stack)}}"
+                                                     cdvy-callback-controller="createProjectCtrl" />
+                    </div>
+                    <ng-form name="workspaceInformationForm">
+
+                        <div class="create-workspace-input-with-description" layout="column">
+                            <cdvy-input cdvy-form="workspaceInformationForm"
+                                        cdvy-name="ram"
+                                        required
+                                        cdvy-label-name="Stack RAM"
+                                        cdvy-place-holder="No RAM allocated"
+                                        ng-model="createProjectCtrl.workspaceRam"
+                                        ng-pattern="/^(?:\d{0,10})$/">
+                                <div ng-message="required">A value is required.</div>
+                                <div ng-message="pattern">Workspace ram is requiring digits</div>
+
+                            </cdvy-input>
+                            <span>MB value</span>
+                        </div>
+
+
+                        <cdvy-label-container cdvy-label-name="Workspace name">
+
+
+                            <cdvy-input cdvy-form="workspaceInformationForm"
+                                        cdvy-name="name"
+                                        cdvy-place-holder="Name of the workspace"
+                                        ng-model="createProjectCtrl.workspaceName"
+                                        required
+                                        ng-minlength="3"
+                                        ng-maxlength="20"
+                                        ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+                                <div ng-message="required">A name is required.</div>
+                                <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
+                                <div ng-message="minlength">The name has to be more then 3 characters long.</div>
+                                <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
+                            </cdvy-input>
+                        </cdvy-label-container>
+                    </ng-form>
+
+
+
+
+                </div>
+
+                <div layout="column" ng-show="createProjectStackLibraryCtrl.workspaces.length > 0" flex="50">
+                    <md-radio-button value="existing-workspace">Use existing workspace</md-radio-button>
+                    <div layout="row" layout-wrap>
+                        <cdvy-stack-library-workspace-selecter ng-repeat="workspace in createProjectStackLibraryCtrl.workspaces"
+                                                     ng-model="createProjectStackLibraryCtrl.workspaceSelected"
+                                                     cdvy-toggle-choice="createProjectStackLibraryCtrl.createChoice"
+                                                     cdvy-title="{{workspace.id}}"
+                                                     cdvy-name="StackSelectWorkspaceWidget"
+                                                     cdvy-workspace="workspace"
+                                                     cdvy-callback-controller="createProjectCtrl" />
+                    </div>
+                </div>
+            </div>
+        </md-radio-group>
+    </div>
+
+</div>

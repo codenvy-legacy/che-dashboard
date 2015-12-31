@@ -1,0 +1,15 @@
+<md-card class="cdvy-stack-library-workspace-selecter"
+         ng-click="codenvyStackLibraryWorkspaceSelecterCtrl.setChoice(); codenvyStackLibraryWorkspaceSelecterCtrl.select(codenvyStackLibraryWorkspaceSelecterCtrl.name, codenvyStackLibraryWorkspaceSelecterCtrl.workspace)"
+         ng-class="{'cdvy-stack-library-workspace-selecter-active' : '{{codenvyStackLibraryWorkspaceSelecterCtrl.title}}' == codenvyStackLibraryWorkspaceSelecterCtrl.getSelected() && codenvyStackLibraryWorkspaceSelecterCtrl.toggleChoice == 'existing-workspace'}">
+    <md-card-content layout="column" layout-fill>
+        <div class="body">
+            <div class="title">{{codenvyStackLibraryWorkspaceSelecterCtrl.getWorkspaceStackName()}}</div>
+        </div>
+        <div class="cdvy-stack-library-workspace-selecter-workspace-name">{{codenvyStackLibraryWorkspaceSelecterCtrl.getWorkspaceName()}}</div>
+        <div class="cdvy-stack-library-workspace-selecter-text">{{codenvyStackLibraryWorkspaceSelecterCtrl.getWorkspaceStackDetails()}}</div>
+        <div layout="row" layout-align="end end" flex>
+            <div class="cdvy-stack-library-workspace-selecter-extra-text" tooltip="{{codenvyStackLibraryWorkspaceSelecterCtrl.getWorkspaceTooltip()}}">...</div>
+        </div>
+    </md-card-content>
+
+</md-card>

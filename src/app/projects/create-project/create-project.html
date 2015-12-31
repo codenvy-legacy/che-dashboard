@@ -108,7 +108,7 @@
 
 
             <div ng-show="createProjectCtrl.selectSourceOption === 'select-source-existing'">
-                <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedTabIndex">
+                <md-tabs md-stretch-tabs="always" md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedTabIndex">
                     <md-tab md-on-select="createProjectCtrl.setCurrentTab('git')" cdvy-event-logger="new.project/git">
                         <md-tab-label>
                             <md-icon md-font-icon="fa-git" class="fa cdvy-tab-label-icon"></md-icon>
@@ -146,7 +146,7 @@
 
 
             <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="createProjectCtrl.stackSelectedIndex">
-                <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack">
+                <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack" md-on-select="createProjectCtrl.setStackTab('ready-to-go')">
                     <md-tab-label>
                         <md-icon md-font-icon="fa-magic" class="fa cdvy-tab-label-icon"></md-icon>
                         <span class="cdvy-tab-label-title">Ready-to-go Stacks</span>
@@ -192,7 +192,17 @@
 
                     </md-tab-body>
                 </md-tab>
-                <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack">
+                <md-tab cdvy-event-logger="new.project/stack-library" md-on-select="createProjectCtrl.setStackTab('stack-library')">
+                    <md-tab-label>
+                        <md-icon md-font-icon="fa-sliders" class="fa cdvy-tab-label-icon"></md-icon>
+                        <span class="cdvy-tab-label-title">Stack library</span>
+                    </md-tab-label>
+                    <md-tab-body>
+                        <create-project-stack-library></create-project-stack-library>
+                    </md-tab-body>
+                </md-tab>
+<!--
+                <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack" md-on-select="createProjectCtrl.setStackTab('custom')">
                     <md-tab-label>
                         <md-icon md-font-icon="fa-tasks" class="fa cdvy-tab-label-icon"></md-icon>
                         <span class="cdvy-tab-label-title">Custom stack</span>
@@ -257,8 +267,7 @@
                         </div>
                     </md-tab-body>
                 </md-tab>
-
-
+-->
             </md-tabs>
 
 
@@ -307,6 +316,7 @@
 
             </cdvy-panel>
         </ng-form>
+
 
 
         <cdvy-button-primary id="create-project-button-import"

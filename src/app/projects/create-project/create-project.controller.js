@@ -32,7 +32,7 @@ class CreateProjectCtrl {
     this.messageBus = null;
     this.createProjectSvc = createProjectSvc;
 
-
+    this.stackTab = 'ready-to-go';
 
     // subitem not yet completed
     this.projectBlankCompleted = false;
@@ -713,6 +713,29 @@ class CreateProjectCtrl {
     // use elemTop if want to see all div or elemBottom if we see partially it
     /*((elemTop <= docViewBottom) && (elemTop >= docViewTop));*/
     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+  }
+
+  setStackTab(stackTab, create) {
+    console.log('click on select stack tab with value', stackTab);
+    this.stackTab = stackTab;
+    if ('ready-to-go' === stackTab) {
+      this.selectWorkspaceOption = 'select-workspace-create';
+    }
+  }
+
+  cdvyStackLibrarySelecter(stackName, stackContent) {
+    this.selectWorkspaceOption = 'select-workspace-create';
+    console.log('selecting stack', stackName, 'with value', stackContent);
+  }
+
+  /**
+   * Use of an existing workspace
+   * @param workspace the workspace to use
+   */
+  cdvyStackLibraryWorkspaceSelecter(workspace) {
+    this.selectWorkspaceOption = 'select-workspace-use-existing';
+    this.workspaceSelected = workspace;
+    console.log('selecting workspace stack', workspace);
   }
 
 }

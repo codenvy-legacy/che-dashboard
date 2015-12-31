@@ -17,8 +17,18 @@ import CreateProjectSvc from './create-project/create-project.service.js';
 import ListProjectsCtrl from './list-projects/list-projects.controller';
 import ListProjectsWorkspaceFilter from './list-projects/list-projects-filter-workspace.filter';
 import CreateProjectGithubCtrl from './create-project/github/create-project-github.controller';
+
+import CodenvyStackLibrarySelecterCtrl from './create-project/stack-library/stack-library-selecter/cdvy-stack-library-selecter.controller';
+import CodenvyStackLibrarySelecter from './create-project/stack-library/stack-library-selecter/cdvy-stack-library-selecter.directive';
+import CodenvyStackLibraryWorkspaceSelecterCtrl from './create-project/stack-library/stack-library-workspace-selecter/cdvy-stack-library-workspace-selecter.controller';
+import CodenvyStackLibraryWorkspaceSelecter from './create-project/stack-library/stack-library-workspace-selecter/cdvy-stack-library-workspace-selecter.directive';
+
+import CreateProjectStackLibraryCtrl from './create-project/stack-library/create-project-stack-library.controller';
+import CreateProjectStackLibrary from './create-project/stack-library/create-project-stack-library.directive';
+
 import CreateProjectBlank from './create-project/blank/create-project-blank.directive';
 import CreateProjectBlankCtrl from './create-project/blank/create-project-blank.controller';
+
 import CreateProjectGit from './create-project/git/create-project-git.directive';
 import CreateProjectGitCtrl from './create-project/git/create-project-git.controller';
 import CreateProjectGithub from './create-project/github/create-project-github.directive';
@@ -59,6 +69,15 @@ class ProjectConfig {
 
     register.controller('CreateProjectSamplesCtrl', CreateProjectSamplesCtrl);
     register.directive('createProjectSamples', CreateProjectSamples);
+
+    register.controller('CodenvyStackLibraryWorkspaceSelecterCtrl', CodenvyStackLibraryWorkspaceSelecterCtrl);
+    register.directive('cdvyStackLibraryWorkspaceSelecter', CodenvyStackLibraryWorkspaceSelecter);
+
+    register.controller('CodenvyStackLibrarySelecterCtrl', CodenvyStackLibrarySelecterCtrl);
+    register.directive('cdvyStackLibrarySelecter', CodenvyStackLibrarySelecter);
+
+    register.controller('CreateProjectStackLibraryCtrl', CreateProjectStackLibraryCtrl);
+    register.directive('createProjectStackLibrary', CreateProjectStackLibrary);
 
     register.directive('createProjectZip', CreateProjectZip);
 
