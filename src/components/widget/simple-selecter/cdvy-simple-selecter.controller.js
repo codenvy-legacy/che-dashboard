@@ -53,15 +53,7 @@ class CodenvySimpleSelecterCtrl {
    * @param category the key of t
    * @param values
    */
-  onChangeType(key) {
-
-    // look at the model and define the value
-    if (this.$scope.valueModel) {
-
-      // notify callbacks
-      this.$scope.callbackController.cdvySimpleSelecter(key);
     }
-
   }
 
 }
