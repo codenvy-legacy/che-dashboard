@@ -1,5 +1,6 @@
 <md-card class="cdvy-simple-selecter"
-         ng-click="codenvySimpleSelecterCtrl.select(codenvySimpleSelecterCtrl.name, codenvySimpleSelecterCtrl.title, codenvySimpleSelecterCtrl.valueModel)"
+         ng-init="codenvySimpleSelecterCtrl.initValue()"
+         ng-click="codenvySimpleSelecterCtrl.select(codenvySimpleSelecterCtrl.name, codenvySimpleSelecterCtrl.title, codenvySimpleSelecterCtrl.value)"
          ng-class="{'cdvy-simple-selecter-active' : '{{codenvySimpleSelecterCtrl.title}}' == codenvySimpleSelecterCtrl.getSelected()}">
   <md-icon md-font-icon="{{codenvySimpleSelecterCtrl.icon}}" flex layout="column" layout-align="start center"></md-icon>
   <div class="body">

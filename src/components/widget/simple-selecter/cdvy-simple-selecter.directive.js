@@ -41,6 +41,8 @@ class CodenvySimpleSelecter {
     this.scope = {
       valueModel : '=ngModel',
       title: '@cdvyTitle',
+      isFirst : '=cdvyIsFirst',
+      value: '=cdvyValue',
       name: '@cdvyName',
       icon: '@cdvyIcon',
       callbackController: '=cdvyCallbackController' /* object with a cdvySimpleSelecter(name) function, called when the selecter is selector or the select value changes */

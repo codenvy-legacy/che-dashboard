@@ -31,10 +31,10 @@ class CodenvySimpleSelecterCtrl {
   /**
    * perform sharing state in an upper scope as it may be shared
    */
-  select(globalSelecterName, name) {
+  select(globalSelecterName, name, value) {
     this.globalSelecterName = globalSelecterName;
     this.$scope.$parent.$parent[globalSelecterName + '.selecterSelected'] = name;
-    this.callbackController.cdvySimpleSelecter(name);
+    this.callbackController.cdvySimpleSelecter(name, value);
   }
 
   /**
@@ -47,14 +47,16 @@ class CodenvySimpleSelecterCtrl {
   }
 
 
-
   /**
-   * Event when select operation is called
-   * @param category the key of t
-   * @param values
+   * when initializing with the first item, send this item to the callback controller
    */
+  initValue() {
+    if (this.isFirst) {
+      this.callbackController.cdvySimpleSelecterDefault(this.value);
     }
   }
+
+
 
 }
 
