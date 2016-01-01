@@ -12,19 +12,19 @@
 
 /**
  * @ngdoc directive
- * @name projects.create.directive:createProjectBlank
+ * @name projects.create.directive:ReadyToGoStacks
  * @restrict E
  * @element
  *
  * @description
- * `<create-project-blank></create-project-blank>` for creating new projects from blank.
+ * `<ready-to-go-stacks></ready-to-go-stacks>` for creating new projects from ready to go stacks.
  *
  * @usage
- *   <create-project-blank class="projects-create-project-tab" layout="row" layout-wrap></create-project-blank>
+ *   <ready-to-go-stacks class="projects-create-project-tab" layout="row" layout-wrap></ready-to-go-stacks>
  *
  * @author Florent Benoit
  */
-class CreateProjectBlank {
+class ReadyToGoStacks {
 
   /**
    * Default constructor that is using resource
@@ -32,15 +32,15 @@ class CreateProjectBlank {
    */
   constructor () {
     this.restrict='E';
-    this.templateUrl = 'app/projects/create-project/blank/create-project-blank.html';
+    this.templateUrl = 'app/projects/create-project/ready-to-go-stacks/ready-to-go-stacks.html';
 
-    this.controller = 'CreateProjectBlankCtrl';
-    this.controllerAs = 'createProjectBlankCtrl';
+    this.controller = 'ReadyToGoStacksCtrl';
+    this.controllerAs = 'readyToGoStacksCtrl';
     this.bindToController = true;
 
   }
 
 }
 
-export default CreateProjectBlank;
+export default ReadyToGoStacks;
 

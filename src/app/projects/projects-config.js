@@ -17,8 +17,8 @@ import CreateProjectSvc from './create-project/create-project.service.js';
 import ListProjectsCtrl from './list-projects/list-projects.controller';
 import ListProjectsWorkspaceFilter from './list-projects/list-projects-filter-workspace.filter';
 import CreateProjectGithubCtrl from './create-project/github/create-project-github.controller';
-import CreateProjectBlank from './create-project/blank/create-project-blank.directive';
-import CreateProjectBlankCtrl from './create-project/blank/create-project-blank.controller';
+import ReadyToGoStacks from './create-project/ready-to-go-stacks/ready-to-go-stacks.directive';
+import ReadyToGoStacksCtrl from './create-project/ready-to-go-stacks/ready-to-go-stacks.controller';
 import CreateProjectGit from './create-project/git/create-project-git.directive';
 import CreateProjectGitCtrl from './create-project/git/create-project-git.controller';
 import CreateProjectGithub from './create-project/github/create-project-github.directive';
@@ -45,8 +45,8 @@ class ProjectConfig {
 
     register.controller('ProjectDetailsCtrl', ProjectDetailsCtrl);
 
-    register.controller('CreateProjectBlankCtrl', CreateProjectBlankCtrl);
-    register.directive('createProjectBlank', CreateProjectBlank);
+    register.controller('ReadyToGoStacksCtrl', ReadyToGoStacksCtrl);
+    register.directive('readyToGoStacks', ReadyToGoStacks);
 
     register.controller('CreateProjectPopupCtrl', CreateProjectPopupCtrl);
     register.directive('createProjectPopup', CreateProjectPopup);

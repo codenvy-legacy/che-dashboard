@@ -1,0 +1,68 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<ng-form name="workspaceInformationForm">
+
+    <div layout="column" flex>
+        <div layout="row" flex layout-align="space-around start">
+            <label flex="15" hide-sm hide-md>Commonly used stacks: </label>
+
+            <div layout="row" flex="85"  layout-wrap>
+                <cdvy-simple-selecter ng-repeat="stack in readyToGoStacksCtrl.stacks | filter:{ scope: 'general' }"
+                                      ng-model="createProjectCtrl.myTypeSelected"
+                                      cdvy-value="stack"
+                                      cdvy-is-first="$first"
+                                      cdvy-name="StackSelectWidget"
+                                      cdvy-title="{{stack.name}}"
+                                      cdvy-icon="cdvyfont cdvyico-type-{{stack.name}} cdvyico-type-blank"
+                                      cdvy-callback-controller="createProjectCtrl" />
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="create-workspace-input-with-description" layout="column">
+        <cdvy-input cdvy-form="workspaceInformationForm"
+                    cdvy-name="ram"
+                    required
+                    cdvy-label-name="RAM Allocated"
+                    cdvy-place-holder="No RAM allocated"
+                    ng-model="createProjectCtrl.workspaceRam"
+                    ng-pattern="/^(?:\d{0,10})$/">
+            <div ng-message="required">A value is required.</div>
+            <div ng-message="pattern">Workspace ram is requiring digits</div>
+
+        </cdvy-input>
+        <span>MB value</span>
+    </div>
+
+
+    <cdvy-label-container cdvy-label-name="Name for new workspace">
+
+
+        <cdvy-input cdvy-form="workspaceInformationForm"
+                    cdvy-name="name"
+                    cdvy-place-holder="Name of the workspace"
+                    ng-model="createProjectCtrl.workspaceName"
+                    required
+                    ng-minlength="3"
+                    ng-maxlength="20"
+                    ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+            <div ng-message="required">A name is required.</div>
+            <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
+            <div ng-message="minlength">The name has to be more then 3 characters long.</div>
+            <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
+        </cdvy-input>
+    </cdvy-label-container>
+</ng-form>
