@@ -32,17 +32,16 @@ class CreateProjectCtrl {
     this.messageBus = null;
     this.createProjectSvc = createProjectSvc;
 
+    this.stackTab = 'ready-to-go';
 
-
-    // subitem not yet completed
-    this.projectBlankCompleted = false;
+    // stacks not yet completed
+    this.stacksInitialized = false;
 
     // keep references on workspaces and projects
     this.workspaces = [];
 
     // default options
     this.selectSourceOption = 'select-source-new';
-    this.selectWorkspaceOption = 'select-workspace-create';
 
     // default RAM value for workspaces
     this.workspaceRam = 1000;
@@ -132,8 +131,8 @@ class CreateProjectCtrl {
       // ignore the error
     }
 
-    $rootScope.$on('create-project-blank:initialized', () => {
-      this.projectBlankCompleted = true;
+    $rootScope.$on('create-project-stacks:initialized', () => {
+      this.stacksInitialized = true;
     });
 
     // sets isReady status after selection
@@ -183,7 +182,7 @@ class CreateProjectCtrl {
       },
       project: {
         name: '',
-        description: '',
+        description: ''
       }
     };
   }
@@ -477,11 +476,46 @@ class CreateProjectCtrl {
     });
   }
 
+  /**
+   * User has selected a stack. needs to find or add recipe for that stack
+   */
+  computeRecipeForStack(stack) {
+    // look at recipe
+    let recipeSource = stack.source;
+
+    let promise;
+
+    // what is type of source ?
+    if ('image' === recipeSource.type) {
+      // needs to add recipe for that script
+      promise = this.submitRecipe('generated-' + stack.name, 'FROM ' + recipeSource.origin);
+    } else {
+      throw 'Not implemented';
+    }
+
+    let linkToRecipePromise = promise.then((recipe) => {
+      // return link
+      return recipe.links[0].href;
+    });
+
+
+    return linkToRecipePromise;
+  }
+
+  submitRecipe(recipeName, recipeScript) {
+    let recipe = {
+      type : 'docker',
+      name: recipeName,
+      script : recipeScript
+    };
+    return this.codenvyAPI.getRecipe().create(recipe);
+  }
+
 
   /**
-   * Call the import operation that may create or import a project
+   * Call the create operation that may create or import a project
    */
-  import() {
+  create() {
 
     // set name and description for imported project
     if (!this.isChangeableDescription) {
@@ -498,70 +532,91 @@ class CreateProjectCtrl {
 
     this.createProjectSvc.createPopup();
 
+    // logic to decide if we create workspace based on a stack or reuse existing workspace
+    var option;
+    var stack;
+    if (this.stackTab === 'ready-to-go') {
+      option = 'create-workspace';
+      stack = this.readyToGoStack;
+    } else if (this.stackTab === 'stack-library') {
+      if (this.stackLibraryOption === 'existing-workspace') {
+        option = 'reuse-workspace';
+      } else {
+        stack = this.stackLibraryUser;
+        option = 'create-workspace';
+      }
+    }
 
     // check workspace is selected
-    if (this.selectWorkspaceOption === 'select-workspace-create') {
-      this.createProjectSvc.setWorkspaceOfProject(this.workspaceName);
-      //TODO: no account in che ? it's null when testing on localhost
-      let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
-      creationPromise.then((data) => {
+    if (option === 'create-workspace') {
 
-        // init message bus if not there
-        if (this.workspaces.length === 0) {
-          this.messageBus = this.codenvyAPI.getWebsocket().getBus(data.id);
-        }
+      // needs to get recipe URL from stack
+      let promiseRecipe = this.computeRecipeForStack(stack);
+      promiseRecipe.then((recipeUrl) => {
 
-        // recipe url
-        let bus = this.codenvyAPI.getWebsocket().getBus(data.id);
+        this.createProjectSvc.setWorkspaceOfProject(this.workspaceName);
+        //TODO: no account in che ? it's null when testing on localhost
+        let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, recipeUrl, this.workspaceRam);
+        creationPromise.then((data) => {
 
-        // subscribe to workspace events
-        bus.subscribe('workspace:' + data.id, (message) => {
-
-          if (message.eventType === 'RUNNING' && message.workspaceId === data.id) {
-            this.createProjectSvc.setCurrentProgressStep(2);
-
-            this.importProjectData.project.type = 'blank';
-            this.importProjectData.project.name = this.projectName;
-
-            // Now that the container is started, wait for the extension server. For this, needs to get runtime details
-            let promiseRuntime = this.codenvyAPI.getWorkspace().getRuntime(data.id);
-            promiseRuntime.then((runtimeData) => {
-                // extract the Websocket URL of the runtime
-              let servers = runtimeData.devMachine.metadata.servers;
-
-              var extensionServerAddress;
-              for (var key in servers) {
-                let server = servers[key];
-                if ('extensions' === server.ref) {
-                  extensionServerAddress = server.address;
-                }
-              }
-
-              let endpoint = runtimeData.devMachine.metadata.envVariables.CHE_API_ENDPOINT;
-
-              var contextPath;
-              if (endpoint.endsWith('/che/api')) {
-                contextPath = 'che';
-              } else {
-                contextPath = 'api';
-              }
-
-              // try to connect
-              this.websocketReconnect = 50;
-              this.connectToExtensionServer('ws://' + extensionServerAddress + '/' + contextPath + '/ext/ws/' + data.id, data.id, this.importProjectData.project.name, this.importProjectData);
-
-            });
+          // init message bus if not there
+          if (this.workspaces.length === 0) {
+            this.messageBus = this.codenvyAPI.getWebsocket().getBus(data.id);
           }
+
+          // recipe url
+          let bus = this.codenvyAPI.getWebsocket().getBus(data.id);
+
+          // subscribe to workspace events
+          bus.subscribe('workspace:' + data.id, (message) => {
+
+            if (message.eventType === 'RUNNING' && message.workspaceId === data.id) {
+              this.createProjectSvc.setCurrentProgressStep(2);
+
+              this.importProjectData.project.type = 'blank';
+              this.importProjectData.project.name = this.projectName;
+
+              // Now that the container is started, wait for the extension server. For this, needs to get runtime details
+              let promiseRuntime = this.codenvyAPI.getWorkspace().getRuntime(data.id);
+              promiseRuntime.then((runtimeData) => {
+                // extract the Websocket URL of the runtime
+                let servers = runtimeData.devMachine.metadata.servers;
+
+                var extensionServerAddress;
+                for (var key in servers) {
+                  let server = servers[key];
+                  if ('extensions' === server.ref) {
+                    extensionServerAddress = server.address;
+                  }
+                }
+
+                let endpoint = runtimeData.devMachine.metadata.envVariables.CHE_API_ENDPOINT;
+
+                var contextPath;
+                if (endpoint.endsWith('/che/api')) {
+                  contextPath = 'che';
+                } else {
+                  contextPath = 'api';
+                }
+
+                // try to connect
+                this.websocketReconnect = 50;
+                this.connectToExtensionServer('ws://' + extensionServerAddress + '/' + contextPath + '/ext/ws/' + data.id, data.id, this.importProjectData.project.name, this.importProjectData);
+
+              });
+            }
+          });
+          this.$timeout(() => {this.startWorkspace(bus, data);}, 1000);
+
+        }, (error) => {
+          if (error.data.message) {
+            this.getCreationSteps()[this.getCurrentProgressStep()].logs = error.data.message;
+          }
+          this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
+
         });
-        this.$timeout(() => {this.startWorkspace(bus, data);}, 1000);
-
-      }, (error) => {
-        if (error.data.message) {
-          this.getCreationSteps()[this.getCurrentProgressStep()].logs = error.data.message;
-        }
-        this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
-
       });
+
 
     } else {
       this.createProjectSvc.setWorkspaceOfProject(this.workspaceSelected.name);
@@ -628,13 +683,23 @@ class CreateProjectCtrl {
    * @param name
    * @param valueSelected
    */
-  cdvySimpleSelecter(name) {
+  cdvySimpleSelecter(name, stack) {
+    // update stack
+    this.readyToGoStack = stack;
+
     this.importProjectData.project.type = name;
 
     // generate name
     this.generateProjectName();
-
   }
+
+  cdvySimpleSelecterDefault(stack) {
+    // generate name
+    this.generateProjectName();
+
+    this.readyToGoStack = stack;
+  }
+
 
   isImporting() {
     return this.isCreateProjectInProgress();
@@ -647,7 +712,6 @@ class CreateProjectCtrl {
   resetCreateProgress() {
     this.createProjectSvc.resetCreateProgress();
   }
-
 
   resetCreateNewProject() {
     this.resetCreateProgress();
@@ -713,6 +777,39 @@ class CreateProjectCtrl {
     // use elemTop if want to see all div or elemBottom if we see partially it
     /*((elemTop <= docViewBottom) && (elemTop >= docViewTop));*/
     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+  }
+
+  setStackTab(stackTab) {
+    this.stackTab = stackTab;
+  }
+
+  cdvyStackLibrarySelecter(stack) {
+    // change default once user has select it
+    this.stackLibraryUser = stack;
+    this.stackLibraryOption = 'new-workspace';
+  }
+
+  stackLibraryChoice(option) {
+    this.stackLibraryOption = option;
+  }
+
+  /**
+   * Use of an existing workspace
+   * @param workspace the workspace to use
+   */
+  cdvyStackLibraryWorkspaceSelecter(workspace) {
+    // change default once user has select it
+    this.workspaceSelected = workspace;
+
+    this.stackLibraryOption = 'existing-workspace';
+  }
+
+  cdvyStackLibrarySelecterDefault(defaultStack) {
+    this.stackLibraryUser = defaultStack;
+  }
+
+  cdvyStackLibraryWorkspaceSelecterDefault(defaultWorkspace) {
+    this.workspaceSelected = defaultWorkspace;
   }
 
 }

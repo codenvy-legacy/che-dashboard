@@ -28,7 +28,7 @@
         </div>
         <div flex class="create-project-header-steps-button" layout="row" layout-align="end end">
             <cdvy-button-primary cdvy-button-title="Create"
-                                 ng-click="!createProjectCtrl.checkValidFormState() || createProjectCtrl.import()"
+                                 ng-click="!createProjectCtrl.checkValidFormState() || createProjectCtrl.create()"
                                  ng-disabled="!createProjectCtrl.checkValidFormState() || !createProjectCtrl.isReadyToCreate()"
                     ></cdvy-button-primary>
         </div>
@@ -38,9 +38,9 @@
 
 
 <md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress"
-                    ng-hide="createProjectCtrl.projectBlankCompleted"></md-progress-linear>
+                    ng-hide="createProjectCtrl.stacksInitialized"></md-progress-linear>
 
-<md-content id="create-project-content-page" md-scroll-y flex class="projects-create-project" ng-show="createProjectCtrl.projectBlankCompleted" md-theme="maincontent-theme">
+<md-content id="create-project-content-page" md-scroll-y flex class="projects-create-project" ng-show="createProjectCtrl.stacksInitialized" md-theme="maincontent-theme">
     <div ng-show="createProjectCtrl.isCreateProjectInProgress()">
 
 
@@ -108,7 +108,7 @@
 
 
             <div ng-show="createProjectCtrl.selectSourceOption === 'select-source-existing'">
-                <md-tabs md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedTabIndex">
+                <md-tabs md-stretch-tabs="always" md-dynamic-height md-swipe-content md-selected="createProjectCtrl.selectedTabIndex">
                     <md-tab md-on-select="createProjectCtrl.setCurrentTab('git')" cdvy-event-logger="new.project/git">
                         <md-tab-label>
                             <md-icon md-font-icon="fa-git" class="fa cdvy-tab-label-icon"></md-icon>
@@ -146,118 +146,35 @@
 
 
             <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="createProjectCtrl.stackSelectedIndex">
-                <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack">
+                <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack" md-on-select="createProjectCtrl.setStackTab('ready-to-go')">
                     <md-tab-label>
                         <md-icon md-font-icon="fa-magic" class="fa cdvy-tab-label-icon"></md-icon>
                         <span class="cdvy-tab-label-title">Ready-to-go Stacks</span>
                     </md-tab-label>
                     <md-tab-body>
-                        <ng-form name="workspaceInformationForm">
-                            <create-project-blank class="projects-create-project-tab" layout="row" layout-wrap ng-init="createProjectBlankCtrl.initCallbackController(createProjectCtrl)"></create-project-blank>
-
-                            <div class="create-workspace-input-with-description" layout="column">
-                                <cdvy-input cdvy-form="workspaceInformationForm"
-                                            cdvy-name="ram"
-                                            required
-                                            cdvy-label-name="RAM Allocated"
-                                            cdvy-place-holder="No RAM allocated"
-                                            ng-model="createProjectCtrl.workspaceRam"
-                                            ng-pattern="/^(?:\d{0,10})$/">
-                                    <div ng-message="required">A value is required.</div>
-                                    <div ng-message="pattern">Workspace ram is requiring digits</div>
-
-                                </cdvy-input>
-                                <span>MB value</span>
-                            </div>
-
-
-                            <cdvy-label-container cdvy-label-name="Name for new workspace">
-
-
-                                <cdvy-input cdvy-form="workspaceInformationForm"
-                                            cdvy-name="name"
-                                            cdvy-place-holder="Name of the workspace"
-                                            ng-model="createProjectCtrl.workspaceName"
-                                            required
-                                            ng-minlength="3"
-                                            ng-maxlength="20"
-                                            ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
-                                    <div ng-message="required">A name is required.</div>
-                                    <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
-                                    <div ng-message="minlength">The name has to be more then 3 characters long.</div>
-                                    <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
-                                </cdvy-input>
-                            </cdvy-label-container>
-                        </ng-form>
-
+                            <ready-to-go-stacks class="projects-create-project-tab" layout="row" layout-wrap ng-init="readyToGoStacksCtrl.initCallbackController(createProjectCtrl)"></ready-to-go-stacks>
                     </md-tab-body>
                 </md-tab>
-                <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack">
+                <md-tab cdvy-event-logger="new.project/stack-library" md-on-select="createProjectCtrl.setStackTab('stack-library')">
                     <md-tab-label>
-                        <md-icon md-font-icon="fa-tasks" class="fa cdvy-tab-label-icon"></md-icon>
-                        <span class="cdvy-tab-label-title">Custom stack</span>
+                        <md-icon md-font-icon="fa-sliders" class="fa cdvy-tab-label-icon"></md-icon>
+                        <span class="cdvy-tab-label-title">Stack library</span>
                     </md-tab-label>
                     <md-tab-body>
-                        <md-radio-group ng-model="createProjectCtrl.selectWorkspaceOption">
-                            <md-radio-button value="select-workspace-create">Create new</md-radio-button>
-
-                            <cdvy-label-container cdvy-label-name="Workspace">
-
-
-                                <ng-form name="workspaceInformationForm">
-                                    <cdvy-input cdvy-form="workspaceInformationForm"
-                                                cdvy-name="name"
-                                                cdvy-place-holder="Name of the workspace"
-                                                ng-model="createProjectCtrl.workspaceName"
-                                                required
-                                                ng-minlength="3"
-                                                ng-maxlength="20"
-                                                ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
-                                        <div ng-message="required">A name is required.</div>
-                                        <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
-                                        <div ng-message="minlength">The name has to be more then 3 characters long.</div>
-                                        <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
-                                    </cdvy-input>
-                                </ng-form>
-                            </cdvy-label-container>
-
-
-                            <md-radio-button ng-show="createProjectCtrl.workspaces.length > 0" value="select-workspace-use-existing">Use existing</md-radio-button>
-                        </md-radio-group>
-
-                        <cdvy-label-container ng-show="createProjectCtrl.selectWorkspaceOption === 'select-workspace-use-existing'" cdvy-label-name="Select">
-                            <md-select class="create-project-select"
-                                       placeholder="Select a workspace"
-                                       ng-init="createProjectCtrl.workspaceSelected = createProjectCtrl.workspaces[0]"
-                                       ng-model="createProjectCtrl.workspaceSelected">
-                                <md-option ng-repeat="workspace in createProjectCtrl.workspaces" ng-value="workspace">{{workspace.name}}</md-option>
-                            </md-select>
-                        </cdvy-label-container>
-
-
-                        <div layout="row" flex layout-align="space-around start">
-                            <label flex="15" hide-sm hide-md>Recipes: </label>
-
-                            <div layout="row" flex="85"  layout-align="center start" layout-wrap>
-
-                                <div class="create-project-stack-selector" layout="column" flex="50">
-
-
-                                    <div layout="column">
-                                        <md-card ng-repeat="recipe in createProjectBlankCtrl.recipes"
-                                                 ng-class="$first ? 'create-project-stack-selected' : 'create-project-stack-default'"
-                                                 ng-click="createProjectBlankCtrl.selectRecipe(recipe, createProjectCtrl)">
-                                            <md-card-content>{{recipe.name}}</md-card-content></md-card>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
+                        <create-project-stack-library ng-init="createProjectStackLibraryCtrl.initCallbackController(createProjectCtrl)"></create-project-stack-library>
                     </md-tab-body>
                 </md-tab>
-
+                <!--
+                <md-tab cdvy-event-logger="new.project/custom-stack" md-on-select="createProjectCtrl.setStackTab('custom-stack')">
+                    <md-tab-label>
+                        <md-icon md-font-icon="fa-external-link" class="fa cdvy-tab-label-icon"></md-icon>
+                        <span class="cdvy-tab-label-title">Custom Stack</span>
+                    </md-tab-label>
+                    <md-tab-body>
+                        Work in progress : add custom directive there
+                    </md-tab-body>
+                </md-tab>
+                -->
 
             </md-tabs>
 
@@ -309,9 +226,10 @@
         </ng-form>
 
 
+
         <cdvy-button-primary id="create-project-button-import"
                              cdvy-button-title="Create Project"
-                             ng-click="!createProjectCtrl.checkValidFormState() || createProjectCtrl.import()"
+                             ng-click="!createProjectCtrl.checkValidFormState() || createProjectCtrl.create()"
                              ng-disabled="!createProjectCtrl.checkValidFormState() || !createProjectCtrl.isReadyToCreate()"
                              class="projects-create-project-button"
                 ></cdvy-button-primary>

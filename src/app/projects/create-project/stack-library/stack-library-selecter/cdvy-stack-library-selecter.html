@@ -1,0 +1,15 @@
+<md-card class="cdvy-stack-library-selecter"
+         ng-init="codenvyStackLibrarySelecterCtrl.initValue(codenvyStackLibrarySelecterCtrl.isFirst)"
+         ng-click="codenvyStackLibrarySelecterCtrl.setChoice(); codenvyStackLibrarySelecterCtrl.select(codenvyStackLibrarySelecterCtrl.name, codenvyStackLibrarySelecterCtrl.title, codenvyStackLibrarySelecterCtrl.stack)"
+         ng-class="{'cdvy-stack-library-selecter-active' : '{{codenvyStackLibrarySelecterCtrl.title}}' == codenvyStackLibrarySelecterCtrl.getSelected() && codenvyStackLibrarySelecterCtrl.toggleChoice == 'new-workspace'}">
+    <md-card-content layout="column" layout-fill>
+        <div class="body">
+            <div class="title">{{codenvyStackLibrarySelecterCtrl.title}}</div>
+        </div>
+        <div class="cdvy-stack-library-selecter-text">{{codenvyStackLibrarySelecterCtrl.text}}</div>
+        <div layout="row" layout-align="end end" flex>
+            <div class="cdvy-stack-library-selecter-extra-text" tooltip="{{codenvyStackLibrarySelecterCtrl.extraText}}">...</div>
+        </div>
+    </md-card-content>
+
+</md-card>
