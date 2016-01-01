@@ -36,6 +36,7 @@ class CodenvyRecipe {
 
     // remote call
     this.remoteRecipesAPI = this.$resource('/api/recipe',{}, {
+      create: {method: 'POST', url: '/api/recipe'},
       getRecipes: {method: 'GET', url: '/api/recipe/list', isArray: true}});
 
 
@@ -71,6 +72,16 @@ class CodenvyRecipe {
 
     });
     return updatedPromise;
+  }
+
+  /**
+   * Create a recipe
+   * @param recipe the recipe to create
+   * @returns {*}
+   */
+  create(recipe) {
+    let promise = this.remoteRecipesAPI.create(recipe).$promise;
+    return promise;
   }
 
   /**
