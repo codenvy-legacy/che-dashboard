@@ -237,10 +237,18 @@ class IdeSvc {
         let randVal = Math.floor((Math.random()*1000000)+1);
         let rand = '?uid=' + randVal;
 
-        if (inDevMode) {
-            this.$rootScope.ideIframeLink = this.$sce.trustAsResourceUrl(this.proxySettings + '/che/' + this.selectedWorkspace.name + rand);
+        let contextPath = '';
+        let selfLink = this.getHrefLink(this.selectedWorkspace, 'self link');
+        if (selfLink.endsWith('/api/workspace/' + this.selectedWorkspace.id)) {
+            contextPath = '/ws/';
         } else {
-            this.$rootScope.ideIframeLink = '/che/' + this.selectedWorkspace.name + rand;
+            contextPath = '/che/';
+        }
+
+        if (inDevMode) {
+            this.$rootScope.ideIframeLink = this.$sce.trustAsResourceUrl(this.proxySettings + contextPath + this.selectedWorkspace.name + rand);
+        } else {
+            this.$rootScope.ideIframeLink = contextPath + this.selectedWorkspace.name + rand;
         }
         if (!skipLoader) {
             this.$timeout(() => {
@@ -257,6 +265,26 @@ class IdeSvc {
         }, 2000);
 
 
+    }
+
+
+    /**
+     * Gets link from a workspace
+     * @param workspace the workspace on which analyze the links
+     * @param name the name of the link to find (rel attribute)
+     * @returns empty or the href attribute of the link
+     */
+    getHrefLink(workspace, name) {
+        let links = workspace.links;
+        var i = 0;
+        while (i < links.length) {
+            let link = links[i];
+            if (link.rel === name) {
+                return link.href;
+            }
+            i++;
+        }
+        return '';
     }
 
 }
