@@ -60,6 +60,8 @@ class CodenvyToolbar {
     this.controller = 'NavbarCtrl';
     this.controllerAs = 'controller';
     this.bindToController = true;
+    this.transclude= true;
+
   }
 
   /**
@@ -135,6 +137,7 @@ class CodenvyToolbar {
 
       template = template + '></cdvy-button-primary>';
     }
+    template = template + '<ng-transclude></ng-transclude>';
 
 
     template = template + '</div>'
