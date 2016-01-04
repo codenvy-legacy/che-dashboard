@@ -60,6 +60,10 @@ class ReadyToGoStacksCtrl {
     controller.recipeUrl = recipe.links[0].href;
   }
 
+  tagsToString(tags) {
+    return tags.join(', ');
+  }
+
 }
 
 export default ReadyToGoStacksCtrl;
