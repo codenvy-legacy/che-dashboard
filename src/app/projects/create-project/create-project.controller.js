@@ -372,6 +372,9 @@ class CreateProjectCtrl {
       });
 
       bus.subscribe(agentChannel, (message) => {
+        if (this.createProjectSvc.getCurrentProgressStep() < 2) {
+          this.createProjectSvc.setCurrentProgressStep(2);
+        }
         let agentStep = 2;
         if (this.getCreationSteps()[agentStep].logs.length > 0) {
           this.getCreationSteps()[agentStep].logs = this.getCreationSteps()[agentStep].logs + '\n' + message;
