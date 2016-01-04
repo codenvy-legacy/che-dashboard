@@ -2,24 +2,23 @@
   "name": "Dashboard",
   "version": "3.0.0",
   "dependencies": {
-    "angular": "~1.4.3",
-    "angular-animate": "~1.4.3",
+    "angular": "~1.4.8",
+    "angular-animate": "~1.4.8",
     "angular-bootstrap": "~0.13.0",
     "angular-card": "0.1.0",
     "angular-charts": "0.2.6",
-    "angular-cookies": "~1.4.3",
+    "angular-cookies": "~1.4.8",
     "angular-dropdowns": "~1.0.0",
     "angular-filter": "~0.5.4",
     "angular-gravatar": "~0.2.4",
-    "angular-material": "~0.10.1-rc2",
     "angular-material": "~1.0.1",
     "angular-moment": "~0.9.0",
-    "angular-messages": "~1.4.3",
-    "angular-mocks": "~1.4.3",
-    "angular-resource": "~1.4.3",
-    "angular-route": "~1.4.3",
-    "angular-sanitize": "~1.4.3",
-    "angular-touch": "~1.4.3",
+    "angular-messages": "~1.4.8",
+    "angular-mocks": "~1.4.8",
+    "angular-resource": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "angular-sanitize": "~1.4.8",
+    "angular-touch": "~1.4.8",
     "angular-ui-codemirror": "~0.2.3",
     "angular-websocket": "~1.0.9",
     "bootstrap-stylus": "~4.0.2",
@@ -38,7 +37,7 @@
   "devDependencies": {
   },
   "resolutions": {
-    "angular": "~1.4.3"
+    "angular": "~1.4.8"
   },
   "overrides": {
     "card": {
