@@ -73,7 +73,7 @@ class CodenvyStack {
 
 
      }, (error) => {*/
-    let stackContent = 'assets/html/codenvy-stack.json';
+    let stackContent = 'assets/html/che-stack.json';
     let promise = this.$http.get(stackContent);
     let updatedPromise = promise.then((data) => {
       let stacks = data.data;
