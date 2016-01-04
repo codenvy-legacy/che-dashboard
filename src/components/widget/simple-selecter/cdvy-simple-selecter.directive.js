@@ -41,6 +41,7 @@ class CodenvySimpleSelecter {
     this.scope = {
       valueModel : '=ngModel',
       title: '@cdvyTitle',
+      description: '@cdvyDescription',
       isFirst : '=cdvyIsFirst',
       value: '=cdvyValue',
       name: '@cdvyName',
