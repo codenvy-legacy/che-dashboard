@@ -31,7 +31,7 @@ class CodenvyUser {
     // remote call
     this.remoteUserAPI = this.$resource('/api/user',{}, {
       findByID: {method: 'GET', url: '/api/user/:userId'},
-      findByEmail: {method: 'GET', url: '/api/user/find?email=:userEmail'},
+      findByEmail: {method: 'GET', url: '/api/user/find?alias=:userEmail'},
       inRole: {method: 'GET', url: '/api/user/inrole?role=:role&scope=:scope&scopeId=:scopeId'},
       setPassword: {
         method: 'POST', url: '/api/user/password', isArray: false,

@@ -149,7 +149,7 @@ describe('CodenvyUser', function () {
       factory.fetchUserEmail(email);
 
       // expecting GETs
-      httpBackend.expectGET('/api/user/find?email=' + email);
+      httpBackend.expectGET('/api/user/find?alias=' + email);
 
       // flush command
       httpBackend.flush();
