@@ -239,10 +239,11 @@ class IdeSvc {
 
         let contextPath = '';
         let selfLink = this.getHrefLink(this.selectedWorkspace, 'self link');
-        if (selfLink.endsWith('/api/workspace/' + this.selectedWorkspace.id)) {
-            contextPath = '/ws/';
-        } else {
+
+        if (selfLink.endsWith('che/api/workspace/' + this.selectedWorkspace.id)) {
             contextPath = '/che/';
+        } else {
+            contextPath = '/ws/';
         }
 
         if (inDevMode) {
