@@ -33,7 +33,7 @@ class CodenvyEmptyState {
     // scope values
     this.scope = {
       value: '@cdvyValue',
-      prompt: '@cdvyPrompt',
+      prompt: '@?cdvyPrompt',
       iconClass: '@cdvyIconClass'
     };
 

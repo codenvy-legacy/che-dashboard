@@ -32,7 +32,6 @@
     cdvy-list-on-scroll-bottom="listFactoriesCtrl.loadNextPage()">
     <div ng-if="listFactoriesCtrl.factories.length === 0" layout="row" layout-align="center center">
       <cdvy-empty-state cdvy-value="There are no factories yet."
-                        cdvy-prompt="You can add a factory."
                         cdvy-icon-class="cdvyfont cdvyico-rocket-cdvyfont icon"></cdvy-empty-state>
     </div>
     <div ng-if="listFactoriesCtrl.factories.length > 0">
