@@ -29,16 +29,8 @@
         <div ng-message="minlength">The name has to be more then 3 characters long.</div>
         <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
       </cdvy-input>
-      <div class="create-workspace-input-with-description" layout="column">
-        <cdvy-input cdvy-form="workspaceInformationForm"
-                    cdvy-name="ram"
-                    cdvy-label-name="RAM Allocated"
-                    cdvy-place-holder="No RAM allocated"
-                    ng-model="createWorkspaceCtrl.workspace.ram"
-                    ng-pattern="/^(?:\d{0,10})$/">
-        </cdvy-input>
-        <span>MB value</span>
-      </div>
+      <cdvy-workspace-ram-allocation-slider ng-model="createWorkspaceCtrl.workspace.ram"></cdvy-workspace-ram-allocation-slider>
+
 
         <div layout="column">
             <md-card ng-repeat="recipe in createWorkspaceCtrl.recipes"

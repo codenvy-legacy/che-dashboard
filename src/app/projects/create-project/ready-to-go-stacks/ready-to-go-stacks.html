@@ -32,10 +32,7 @@
 
 
     </div>
-
-    <cdvy-ram-allocation-slider cdvy-value="createProjectCtrl.workspaceRam">
-        <md-slider md-discrete ng-model="createProjectCtrl.workspaceRam" min="1000" max="100000" step="1000"></md-slider>
-    </cdvy-ram-allocation-slider>
+    <cdvy-workspace-ram-allocation-slider ng-model="createProjectCtrl.workspaceRam"></cdvy-workspace-ram-allocation-slider>
 
     <cdvy-label-container cdvy-label-name="Name for new workspace">
 

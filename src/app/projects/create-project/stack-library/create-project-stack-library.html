@@ -32,21 +32,7 @@
                     </div>
                     <ng-form name="workspaceInformationForm">
 
-                        <div class="create-workspace-input-with-description" layout="column">
-                            <cdvy-input cdvy-form="workspaceInformationForm"
-                                        cdvy-name="ram"
-                                        required
-                                        cdvy-label-name="Stack RAM"
-                                        cdvy-place-holder="No RAM allocated"
-                                        ng-model="createProjectCtrl.workspaceRam"
-                                        ng-pattern="/^(?:\d{0,10})$/">
-                                <div ng-message="required">A value is required.</div>
-                                <div ng-message="pattern">Workspace ram is requiring digits</div>
-
-                            </cdvy-input>
-                            <span>MB value</span>
-                        </div>
-
+                        <cdvy-workspace-ram-allocation-slider ng-model="createProjectCtrl.workspaceRam"></cdvy-workspace-ram-allocation-slider>
 
                         <cdvy-label-container cdvy-label-name="Workspace name">
 
