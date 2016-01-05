@@ -1,0 +1,26 @@
+<div class="cdvy-ram-allocation-slider">
+
+<div layout="column" layout-gt-md="row" layout-align-gt-md="start center">
+    <md-input-container class="md-input-has-value" hide-gt-md>
+        <label>Stack RAM</label>
+    </md-input-container>
+    <div flex="15" class="cdvy-input-desktop-label">
+        <div><label hide show-gt-md>Stack RAM</label></div>
+    </div>
+    <div flex="100">
+        <div layout="row" class="slider-captions">
+            <div layout="column" flex="50" flex-gt-md="25" class="slider-actual-ram-caption">
+                <div>{{sliderValue / 1000}} GB</div>
+            </div>
+            <div layout="column" flex="50" flex-gt-md="25" layout-align="end end" class="slider-max-ram-caption">
+                <div>100 GB</div>
+            </div>
+        </div>
+        <div layout="row">
+            <div flex="100" flex-gt-md="50" class="slider-holder" ng-transclude>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
