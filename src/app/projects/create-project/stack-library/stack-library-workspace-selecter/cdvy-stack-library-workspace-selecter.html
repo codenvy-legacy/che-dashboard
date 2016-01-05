@@ -6,7 +6,10 @@
         <div class="body">
             <div class="title">{{codenvyStackLibraryWorkspaceSelecterCtrl.getWorkspaceStackName()}}</div>
         </div>
-        <div class="cdvy-stack-library-workspace-selecter-workspace-name">{{codenvyStackLibraryWorkspaceSelecterCtrl.getWorkspaceName()}}</div>
+        <div class="cdvy-stack-library-workspace-selecter-workspace-name" layout="row" layout-align="start center">
+            <div class="cdvyfont cdvyico-icon-wkps icon"></div>
+            <div>{{codenvyStackLibraryWorkspaceSelecterCtrl.getWorkspaceName()}}</div>
+        </div>
         <div class="cdvy-stack-library-workspace-selecter-text">{{codenvyStackLibraryWorkspaceSelecterCtrl.getWorkspaceStackDetails()}}</div>
         <div layout="row" layout-align="end end" flex>
             <div class="cdvy-stack-library-workspace-selecter-extra-text" tooltip="{{codenvyStackLibraryWorkspaceSelecterCtrl.getWorkspaceTooltip()}}">...</div>

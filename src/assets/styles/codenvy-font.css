@@ -28,38 +28,42 @@
 	content: "\E002";
 }
 
-.cdvyico-rocket-cdvyfont:before {
+.cdvyico-icon-wkps:before {
 	content: "\E003";
 }
 
-.cdvyico-type-blank:before {
+.cdvyico-rocket-cdvyfont:before {
 	content: "\E004";
 }
 
-.cdvyico-type-cpp:before {
+.cdvyico-type-blank:before {
 	content: "\E005";
 }
 
-.cdvyico-type-go:before {
+.cdvyico-type-cpp:before {
 	content: "\E006";
 }
 
-.cdvyico-type-java:before {
+.cdvyico-type-go:before {
 	content: "\E007";
 }
 
-.cdvyico-type-javascript:before {
+.cdvyico-type-java:before {
 	content: "\E008";
 }
 
-.cdvyico-type-php:before {
+.cdvyico-type-javascript:before {
 	content: "\E009";
 }
 
-.cdvyico-type-python:before {
+.cdvyico-type-php:before {
 	content: "\E00A";
 }
 
-.cdvyico-type-ruby:before {
+.cdvyico-type-python:before {
 	content: "\E00B";
+}
+
+.cdvyico-type-ruby:before {
+	content: "\E00C";
 }
