@@ -56,9 +56,9 @@ class CreateProjectSamplesCtrl {
    */
   selectTemplate(template, createProjectCtrl) {
     // update source details
-    createProjectCtrl.importProjectData.source.project.type = template.source.type;
-    createProjectCtrl.importProjectData.source.project.location = template.source.location;
-    createProjectCtrl.importProjectData.source.project.parameters = template.source.parameters;
+    createProjectCtrl.importProjectData.source.type = template.source.type;
+    createProjectCtrl.importProjectData.source.location = template.source.location;
+    createProjectCtrl.importProjectData.source.parameters = template.source.parameters;
     // update name, type, description
     createProjectCtrl.importProjectData.project.description = template.description;
     createProjectCtrl.importProjectData.project.type = template.projectType;

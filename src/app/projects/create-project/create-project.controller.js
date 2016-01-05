@@ -61,6 +61,11 @@ class CreateProjectCtrl {
         link: 'create-project-stack'
       },
       {
+        id: '#create-project-source-template',
+        name: 'template',
+        link: 'create-project-template'
+      },
+      {
         id: '#create-project-source-information',
         name: 'information',
         link: 'create-project-information'
