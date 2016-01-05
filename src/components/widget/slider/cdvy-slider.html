@@ -1,25 +1,19 @@
 <div class="cdvy-slider">
-
-<div layout="column" layout-gt-md="row">
-    <md-input-container class="md-input-has-value" hide-gt-md>
-        <label>{{labelName}}</label>
-    </md-input-container>
-    <div flex="15" ng-if="labelName" class="cdvy-input-desktop-label" layout-align="start center">
-        <div><label hide show-gt-md>{{labelName}}</label></div>
-    </div>
-    <div flex={{labelName ? 85 : 100}}>
-        <div layout="row" class="slider-captions">
-            <div layout="column" flex="50" flex-gt-md="25" class="slider-actual-ram-caption">
-                <div>{{sliderValue / captionValueDivider}} {{captionUnits}}</div>
+    <div layout="column" layout-gt-md="row">
+        <cdvy-label-container cdvy-label-name="{{labelName}}">
+            <div layout="row" class="slider-captions">
+                <div layout="column" flex="50" flex-gt-md="25" class="slider-actual-ram-caption">
+                    <div>{{sliderValue / captionValueDivider}} {{captionUnits}}</div>
+                </div>
+                <div layout="column" flex="50" flex-gt-md="25" layout-align="end end" class="slider-max-ram-caption">
+                    <div>{{captionMaxValue / captionValueDivider}} {{captionUnits}}</div>
+                </div>
             </div>
-            <div layout="column" flex="50" flex-gt-md="25" layout-align="end end" class="slider-max-ram-caption">
-                <div>{{captionMaxValue / captionValueDivider}} {{captionUnits}}</div>
+            <div layout="row">
+                <div flex="100" flex-gt-md="50" class="slider-holder" ng-transclude>
+                </div>
             </div>
-        </div>
-        <div layout="row">
-            <div flex="100" flex-gt-md="50" class="slider-holder" ng-transclude>
-            </div>
-        </div>
+        </cdvy-label-container>
     </div>
 </div>
 

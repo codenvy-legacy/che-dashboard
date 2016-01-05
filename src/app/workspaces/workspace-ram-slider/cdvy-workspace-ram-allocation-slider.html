@@ -1,0 +1,19 @@
+<div class="cdvy-ram-allocation-slider">
+    <cdvy-label-container cdvy-label-name="Workspace RAM">
+        <div flex="100">
+            <div layout="row" class="slider-captions">
+                <div layout="column" flex="50" flex-gt-md="25" class="slider-actual-ram-caption">
+                    <div>{{codenvyWorkspaceRamAllocationSliderCtrl.ngModel / 1000}} GB</div>
+                </div>
+                <div layout="column" flex="50" flex-gt-md="25" layout-align="end end" class="slider-max-ram-caption">
+                    <div>100 GB</div>
+                </div>
+            </div>
+            <div layout="row">
+                <div flex="100" flex-gt-md="50" class="slider-holder">
+                    <md-slider md-discrete ng-model="codenvyWorkspaceRamAllocationSliderCtrl.ngModel" min="1000" max="100000" step="500"></md-slider>
+                </div>
+            </div>
+        </div>
+    </cdvy-label-container>
+</div>

@@ -23,6 +23,10 @@ import WorkspaceDetailsProjects from './workspace-details/workspace-projects/wor
 import WorkspaceDetailsResourcesCtrl from './workspace-details/resources/workspace-details-resources.controller';
 import WorkspaceDetailsResources from './workspace-details/resources/workspace-details-resources.directive';
 
+import CodenvyWorkspaceRamAllocationSliderCtrl from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.controller';
+import CodenvyWorkspaceRamAllocationSlider from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.directive';
+
+
 /**
  * @ngdoc controller
  * @name workspaces:WorkspacesConfig
@@ -47,6 +51,9 @@ class WorkspacesConfig {
 
     register.controller('WorkspaceDetailsResourcesCtrl', WorkspaceDetailsResourcesCtrl);
     register.directive('workspaceDetailsResources', WorkspaceDetailsResources);
+
+    register.controller('CodenvyWorkspaceRamAllocationSliderCtrl', CodenvyWorkspaceRamAllocationSliderCtrl);
+    register.directive('cdvyWorkspaceRamAllocationSlider', CodenvyWorkspaceRamAllocationSlider);
 
     // config routes
     register.app.config(function ($routeProvider) {

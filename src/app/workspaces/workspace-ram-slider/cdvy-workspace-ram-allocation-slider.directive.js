@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating RAM allocation slider that are working either on desktop or on mobile devices.
  * It will change upon width of the screen
  * @author Oleksii Kurinnyi
  */
-class CodenvyRamAllocationSlider {
+class CodenvyWorkspaceRamAllocationSlider {
 
   /**
    * Default constructor that is using resource
@@ -27,16 +25,21 @@ class CodenvyRamAllocationSlider {
     this.restrict = 'E';
 
     this.replace = true;
-    this.transclude = true;
-    this.templateUrl = 'components/widget/ram-allocation-slider/cdvy-ram-allocation-slider.html';
+    this.templateUrl = 'app/workspaces/workspace-ram-slider/cdvy-workspace-ram-allocation-slider.html';
+
+    // we require ngModel as we want to use it inside our directive
+    this.require = 'ngModel';
+
+    this.bindToController = true;
+
+    this.controller = 'CodenvyWorkspaceRamAllocationSliderCtrl';
+    this.controllerAs = 'codenvyWorkspaceRamAllocationSliderCtrl';
 
     // scope values
     this.scope = {
-      sliderValue : '=cdvyValue',
+      ngModel : '='
     };
   }
 }
 
-export default CodenvyRamAllocationSlider;
-
-Register.getInstance().directive('cdvyRamAllocationSlider', CodenvyRamAllocationSlider);
+export default CodenvyWorkspaceRamAllocationSlider;

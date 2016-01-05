@@ -41,7 +41,6 @@ import CodenvyHtmlSource from './html-source/cdvy-html-source.directive';
 import CodenvyInput from './input/cdvy-input.directive';
 
 import CodenvySlider from './slider/cdvy-slider.directive';
-import CodenvyRamAllocationSlider from './ram-allocation-slider/cdvy-ram-allocation-slider.directive';
 
 import CodenvyPanelCtrl from './panel/cdvy-panel.controller';
 import CodenvyPanel from './panel/cdvy-panel.directive';
