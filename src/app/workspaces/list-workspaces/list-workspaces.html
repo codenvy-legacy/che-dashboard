@@ -24,6 +24,11 @@
   <md-progress-linear md-mode="indeterminate" class="workspaces-list-progress"
                       ng-show="listWorkspacesCtrl.state == 'loading'"></md-progress-linear>
   <md-content flex class="workspace-list-content">
+    <div ng-if="listWorkspacesCtrl.userWorkspaces.length === 0" layout="row" layout-align="center center" class="workspace-empty-list">
+      <cdvy-empty-state cdvy-value="There are no workspaces yet."
+                        cdvy-icon-class="fa fa-server fa-lg icon"></cdvy-empty-state>
+    </div>
+    <div ng-if="listWorkspacesCtrl.userWorkspaces.length > 0">
       <cdvy-list-title cdvy-icon="fa fa-folder" class="workspace-list-title">
         <span class="workspace-list-title">Workspaces ({{listWorkspacesCtrl.userWorkspaces.length}})</span>
         <span ng-show="listWorkspacesCtrl.userWorkspaces.length == 0" class="workspace-list-empty">- No workspaces inside</span>
@@ -34,7 +39,7 @@
         <cdvy-workspace-item ng-repeat="workspace in listWorkspacesCtrl.userWorkspaces | filter:listWorkspacesCtrl.workspaceFilter"
                              cdvy-workspace-item="workspace"></cdvy-workspace-item>
       </cdvy-list>
-
+    </div>
   </md-content>
 </md-content>
 
