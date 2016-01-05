@@ -10,9 +10,11 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<md-button class="navbar-logout-button" ng-href="{{helpCtrl.help()}}" target="_blank" flex layout-align="left">
-  <div class="navbar-item" layout="row" layout-align="center center">
-    <i class="material-design md-tab-themed icon-ic_help_outline_24px">&nbsp;</i>
-    <span>Help</span>
-  </div>
+<md-button class="navbar-logout-button" target="_blank" flex layout-align="left">
+  <a ng-href="{{helpCtrl.help()}}" target="_blank" class="nostyle">
+    <div class="navbar-item" layout="row" layout-align="center center">
+      <i class="material-design md-tab-themed icon-ic_help_outline_24px">&nbsp;</i>
+      <span>Help</span>
+    </div>
+  </a>
 </md-button>
