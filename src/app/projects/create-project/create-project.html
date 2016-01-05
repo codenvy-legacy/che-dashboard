@@ -86,15 +86,10 @@
                     &nbsp;
                         <cdvy-button-primary ng-show="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)"
                                 cdvy-button-title="Open in IDE" ng-href="#/ide/{{createProjectCtrl.getWorkspaceOfProject()}}"></cdvy-button-primary>
+                    <cdvy-button-notice ng-show="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)"
+                            cdvy-button-title="Add another project" ng-click="createProjectCtrl.resetCreateNewProject()"></cdvy-button-notice>
                 </div>
             </div>
-
-            <div flex ng-show="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)" layout="row" layout-align="end end">
-                <cdvy-button-primary
-                        cdvy-button-title="Add another project" ng-click="createProjectCtrl.resetCreateNewProject()"></cdvy-button-primary>
-
-            </div>
-
 
 
         </div>
