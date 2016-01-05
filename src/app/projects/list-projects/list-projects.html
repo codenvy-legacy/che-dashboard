@@ -45,7 +45,12 @@
                       ng-show="listProjectsCtrl.isLoading"></md-progress-linear>
 
   <md-content flex>
+    <div ng-if="listProjectsCtrl.projects.length === 0" layout="row" layout-align="center center" class="projects-empty-list">
+      <cdvy-empty-state cdvy-value="There are no projects yet."
+                        cdvy-icon-class="fa fa-folder-open icon"></cdvy-empty-state>
+    </div>
     <div
+      ng-if="listProjectsCtrl.projects.length > 0"
       ng-repeat="(workspaceId, projects) in listProjectsCtrl.projectsPerWorkspace | listProjectWorkspaceFilter:listProjectsCtrl.filtersWorkspaceSelected">
       <cdvy-list-title cdvy-icon="fa fa-folder">
         <span class="projects-list-workspace-name">{{listProjectsCtrl.getWorkspaceName(workspaceId)}}</span>

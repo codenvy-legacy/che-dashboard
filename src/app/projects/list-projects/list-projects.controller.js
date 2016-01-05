@@ -66,11 +66,14 @@ class ListProjectsCtrl {
     // by default, the workspace filter is hidden
     this.displayWorkspaceFilter = false;
 
+    // projects on all workspaces
+    this.projects = [];
   }
 
   updateData() {
     this.workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
     this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
+    this.projects = this.codenvyAPI.getProject().getAllProjects();
     // init the filters of workspaces
     this.workspaces.forEach((workspace) => {
       this.filtersWorkspaceSelected[workspace.id] = true;
