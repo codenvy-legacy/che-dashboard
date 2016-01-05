@@ -23,7 +23,7 @@ class NavBarCtrl {
     this.onBoarding = onBoarding;
     this.imsArtifactApi = imsArtifactApi;
     this.codenvyUser = codenvyAPI.getUser();
-    this.links = [{href: '#/projects', name: 'List Projects'}];
+    this.links = [{href: '#/create-workspace', name: 'New Workspace'}];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
 
