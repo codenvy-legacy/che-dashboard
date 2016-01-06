@@ -186,7 +186,7 @@ class CodenvyWorkspace {
         'name': workspaceName,
         'recipe': null,
         'machineConfigs': [{
-          'name': 'dev-machine',
+          'name': 'ws-machine',
           'limits': {'memory': memory},
           'type': 'docker',
           'source': {'location': recipeUrl, 'type': 'recipe'},
