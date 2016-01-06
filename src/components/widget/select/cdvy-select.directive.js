@@ -37,7 +37,6 @@ class CodenvySelect {
       labelName: '@cdvyLabelName',
       placeHolder: '@cdvyPlaceHolder',
       size: '@cdvySize',
-      myForm: '=cdvyForm',
       optionValues: '=cdvyOptionValues'
     };
 
@@ -127,12 +126,18 @@ class CodenvySelect {
     });
 
     $scope.showOptions = function () {
-      if ($scope.size && $scope.size > 0) {
-        selectElements.attr('size', $scope.size);
-      } else {
+      let size = $scope.size;
+      let valuesLength = $scope.optionValues.length;
+
+      if (!size || size < 2) {
         // set default value
-        selectElements.attr('size', 10);
+        size = 10;
       }
+      if(size >= valuesLength) {
+        size = valuesLength;
+        selectElements.addClass('cdvy-select-overflow-hidden');
+      }
+      selectElements.attr('size', size);
       selectElements.addClass('cdvy-select-border');
     };
 
