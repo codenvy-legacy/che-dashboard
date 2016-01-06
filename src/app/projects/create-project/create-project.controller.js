@@ -405,7 +405,7 @@ class CreateProjectCtrl {
     var promise;
     var channel= null;
     // select mode (create or import)
-    if (this.selectSourceOption === 'select-source-new') {
+    if (this.selectSourceOption === 'select-source-new' && projectData.source.location === '') {
 
       projectData.project.type = 'blank';
       projectData.project.name = this.projectName;
