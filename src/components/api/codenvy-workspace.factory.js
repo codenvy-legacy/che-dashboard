@@ -56,7 +56,8 @@ class CodenvyWorkspace {
         update: {method: 'POST', url : '/api/workspace/:workspaceId'},
         addProject: {method: 'POST', url : '/api/workspace/:workspaceId/project'},
         getRuntime: {method: 'GET', url : '/api/workspace/:workspaceId/runtime'},
-        startWorkspace: {method: 'POST', url : '/api/workspace/:workspaceId/runtime?environment=:envName'}
+        startWorkspace: {method: 'POST', url : '/api/workspace/:workspaceId/runtime?environment=:envName'},
+        addCommand: {method: 'POST', url: '/api/workspace/:workspaceId/command'}
       }
     );
   }
@@ -199,6 +200,16 @@ class CodenvyWorkspace {
 
     let promise = this.remoteWorkspaceAPI.create({accountId : accountId}, data).$promise;
     return promise;
+  }
+
+  /**
+   * Add a command into the workspace
+   * @param workspaceId the id of the workspace on which we want to add the command
+   * @param command the command object that contains attribute like name, type, etc.
+   * @returns promise
+   */
+  addCommand(workspaceId, command) {
+    return this.remoteWorkspaceAPI.addCommand({workspaceId : workspaceId}, command).$promise;
   }
 
   /**
