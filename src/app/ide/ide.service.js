@@ -239,9 +239,10 @@ class IdeSvc {
 
         let contextPath = '';
         let selfLink = this.getHrefLink(this.selectedWorkspace, 'self link');
+        let ideUrlLink = this.getHrefLink(this.selectedWorkspace, 'ide url');
 
-        if (selfLink.endsWith('che/api/workspace/' + this.selectedWorkspace.id)) {
-            contextPath = '/che/';
+        if (selfLink.endsWith('ide/api/workspace/' + this.selectedWorkspace.id)) {
+            contextPath = '/ide/';
         } else {
             contextPath = '/ws/';
         }
@@ -249,7 +250,7 @@ class IdeSvc {
         if (inDevMode) {
             this.$rootScope.ideIframeLink = this.$sce.trustAsResourceUrl(this.proxySettings + contextPath + this.selectedWorkspace.name + rand);
         } else {
-            this.$rootScope.ideIframeLink = contextPath + this.selectedWorkspace.name + rand;
+            this.$rootScope.ideIframeLink = ideUrlLink + rand;
         }
         if (!skipLoader) {
             this.$timeout(() => {

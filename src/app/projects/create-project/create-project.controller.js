@@ -601,8 +601,8 @@ class CreateProjectCtrl {
                 let endpoint = runtimeData.devMachine.metadata.envVariables.CHE_API_ENDPOINT;
 
                 var contextPath;
-                if (endpoint.endsWith('/che/api')) {
-                  contextPath = 'che';
+                if (endpoint.endsWith('/ide/api')) {
+                  contextPath = 'ide';
                 } else {
                   contextPath = 'api';
                 }
