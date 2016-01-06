@@ -33,7 +33,6 @@
 
 
     </div>
-    <cdvy-workspace-ram-allocation-slider ng-model="createProjectCtrl.workspaceRam"></cdvy-workspace-ram-allocation-slider>
 
     <cdvy-label-container cdvy-label-name="Name for new workspace">
 
@@ -52,4 +51,7 @@
             <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
         </cdvy-input>
     </cdvy-label-container>
+
+    <cdvy-workspace-ram-allocation-slider ng-model="createProjectCtrl.workspaceRam"></cdvy-workspace-ram-allocation-slider>
+
 </ng-form>
