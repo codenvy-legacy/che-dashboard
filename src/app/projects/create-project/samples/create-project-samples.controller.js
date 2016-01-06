@@ -59,11 +59,12 @@ class CreateProjectSamplesCtrl {
     createProjectCtrl.importProjectData.source.type = template.source.type;
     createProjectCtrl.importProjectData.source.location = template.source.location;
     createProjectCtrl.importProjectData.source.parameters = template.source.parameters;
+
+
     // update name, type, description
     createProjectCtrl.importProjectData.project.description = template.description;
     createProjectCtrl.importProjectData.project.type = template.projectType;
-    createProjectCtrl.importProjectData.project.runners = template.runners;
-    createProjectCtrl.importProjectData.project.builders = template.builders;
+    createProjectCtrl.importProjectData.project.commands = template.commands;
 
     var name = template.displayName;
     // strip space

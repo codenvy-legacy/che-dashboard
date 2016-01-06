@@ -424,7 +424,19 @@ class CreateProjectCtrl {
           this.getCreationSteps()[this.getCurrentProgressStep()].logs = message.line;
       });
 
+
       promise = this.codenvyAPI.getProject().importProject(workspaceId, projectName, projectData.source);
+
+      // add commands if there are some that have been defined
+      let commands = projectData.project.commands;
+      if (commands && commands.length > 0) {
+        commands.forEach((command) => {
+          command.name = projectName + ':' + command.name;
+          promise = promise.then(this.codenvyAPI.getWorkspace().addCommand(workspaceId, command));
+        });
+
+      }
+
     }
 
     promise.then(() => {
