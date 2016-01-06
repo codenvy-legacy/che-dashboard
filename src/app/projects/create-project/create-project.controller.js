@@ -21,7 +21,7 @@ class CreateProjectCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope, createProjectSvc) {
+  constructor(codenvyAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope, createProjectSvc, lodash) {
     this.codenvyAPI = codenvyAPI;
     this.$websocket = $websocket;
     this.$timeout = $timeout;
@@ -29,8 +29,8 @@ class CreateProjectCtrl {
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
     this.$rootScope = $rootScope;
-    this.messageBus = null;
     this.createProjectSvc = createProjectSvc;
+    this.lodash = lodash;
 
     this.stackTab = 'ready-to-go';
 
@@ -72,6 +72,8 @@ class CreateProjectCtrl {
       }
     ];
 
+    this.messageBus = null;
+    this.recipeUrl = null;
 
     //search the selected tab
     let routeParams = $routeParams.tabName;
@@ -501,24 +503,20 @@ class CreateProjectCtrl {
       throw 'Not implemented';
     }
 
-    let linkToRecipePromise = promise.then((recipe) => {
-      // return link
-      return recipe.links[0].href;
-    });
-
-
-    return linkToRecipePromise;
+    return promise;
   }
 
   submitRecipe(recipeName, recipeScript) {
     let recipe = {
-      type : 'docker',
+      type: 'docker',
       name: recipeName,
-      script : recipeScript
+      script: recipeScript
     };
-    return this.codenvyAPI.getRecipe().create(recipe);
-  }
 
+    let promise = this.codenvyAPI.getRecipe().create(recipe)
+
+    return promise;
+  }
 
   /**
    * Call the create operation that may create or import a project
@@ -553,77 +551,42 @@ class CreateProjectCtrl {
         stack = this.stackLibraryUser;
         option = 'create-workspace';
       }
+    } else if (this.stackTab === 'custom-stack') {
+      stack = null;
+      option = 'create-workspace';
     }
-
     // check workspace is selected
     if (option === 'create-workspace') {
-
-      // needs to get recipe URL from stack
-      let promiseRecipe = this.computeRecipeForStack(stack);
-      promiseRecipe.then((recipeUrl) => {
-
-        this.createProjectSvc.setWorkspaceOfProject(this.workspaceName);
-        //TODO: no account in che ? it's null when testing on localhost
-        let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, recipeUrl, this.workspaceRam);
-        creationPromise.then((data) => {
-
-          // init message bus if not there
-          if (this.workspaces.length === 0) {
-            this.messageBus = this.codenvyAPI.getWebsocket().getBus(data.id);
+      if (stack) {
+        // needs to get recipe URL from stack
+        let promise = this.computeRecipeForStack(stack);
+        promise.then((recipe) => {
+          let findLink = this.lodash.find(recipe.links, function (link) {
+            return link.rel === 'get recipe script';
+          });
+          if(findLink) {
+            this.recipeUrl = findLink.href;
+            this.createWorcspace();
           }
-
-          // recipe url
-          let bus = this.codenvyAPI.getWebsocket().getBus(data.id);
-
-          // subscribe to workspace events
-          bus.subscribe('workspace:' + data.id, (message) => {
-
-            if (message.eventType === 'RUNNING' && message.workspaceId === data.id) {
-              this.createProjectSvc.setCurrentProgressStep(2);
-
-              this.importProjectData.project.type = 'blank';
-              this.importProjectData.project.name = this.projectName;
-
-              // Now that the container is started, wait for the extension server. For this, needs to get runtime details
-              let promiseRuntime = this.codenvyAPI.getWorkspace().getRuntime(data.id);
-              promiseRuntime.then((runtimeData) => {
-                // extract the Websocket URL of the runtime
-                let servers = runtimeData.devMachine.metadata.servers;
-
-                var extensionServerAddress;
-                for (var key in servers) {
-                  let server = servers[key];
-                  if ('extensions' === server.ref) {
-                    extensionServerAddress = server.address;
-                  }
-                }
-
-                let endpoint = runtimeData.devMachine.metadata.envVariables.CHE_API_ENDPOINT;
-
-                var contextPath;
-                if (endpoint.endsWith('/ide/api')) {
-                  contextPath = 'ide';
-                } else {
-                  contextPath = 'api';
-                }
-
-                // try to connect
-                this.websocketReconnect = 50;
-                this.connectToExtensionServer('ws://' + extensionServerAddress + '/' + contextPath + '/ext/ws/' + data.id, data.id, this.importProjectData.project.name, this.importProjectData);
-
-              });
+        });
+      } else {
+        if (this.recipeUrl && this.recipeUrl.length > 0) {
+          this.createWorcspace();
+        } else {
+          let recipeName = 'rcp-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)); // jshint ignore:line
+          // needs to get recipe URL from custom recipe
+          let promise = this.submitRecipe(recipeName, this.recipeScript);
+          promise.then((recipe) => {
+            let findLink = this.lodash.find(recipe.links, function (link) {
+              return link.rel === 'get recipe script';
+            });
+            if(findLink) {
+              this.recipeUrl = findLink.href;
+              this.createWorcspace();
             }
           });
-          this.$timeout(() => {this.startWorkspace(bus, data);}, 1000);
-
-        }, (error) => {
-          if (error.data.message) {
-            this.getCreationSteps()[this.getCurrentProgressStep()].logs = error.data.message;
-          }
-          this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
-
-        });
-      });
+        }
+      }
 
 
     } else {
@@ -647,6 +610,69 @@ class CreateProjectCtrl {
 
   }
 
+  createWorcspace() {
+    this.createProjectSvc.setWorkspaceOfProject(this.workspaceName);
+    //TODO: no account in che ? it's null when testing on localhost
+    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
+    creationPromise.then((data) => {
+
+      // init message bus if not there
+      if (this.workspaces.length === 0) {
+        this.messageBus = this.codenvyAPI.getWebsocket().getBus(data.id);
+      }
+
+      // recipe url
+      let bus = this.codenvyAPI.getWebsocket().getBus(data.id);
+
+      // subscribe to workspace events
+      bus.subscribe('workspace:' + data.id, (message) => {
+
+        if (message.eventType === 'RUNNING' && message.workspaceId === data.id) {
+          this.createProjectSvc.setCurrentProgressStep(2);
+
+          this.importProjectData.project.type = 'blank';
+          this.importProjectData.project.name = this.projectName;
+
+          // Now that the container is started, wait for the extension server. For this, needs to get runtime details
+          let promiseRuntime = this.codenvyAPI.getWorkspace().getRuntime(data.id);
+          promiseRuntime.then((runtimeData) => {
+            // extract the Websocket URL of the runtime
+            let servers = runtimeData.devMachine.metadata.servers;
+
+            var extensionServerAddress;
+            for (var key in servers) {
+              let server = servers[key];
+              if ('extensions' === server.ref) {
+                extensionServerAddress = server.address;
+              }
+            }
+
+            let endpoint = runtimeData.devMachine.metadata.envVariables.CHE_API_ENDPOINT;
+
+            var contextPath;
+            if (endpoint.endsWith('/ide/api')) {
+              contextPath = 'ide';
+            } else {
+              contextPath = 'api';
+            }
+
+            // try to connect
+            this.websocketReconnect = 50;
+            this.connectToExtensionServer('ws://' + extensionServerAddress + '/' + contextPath + '/ext/ws/' + data.id, data.id, this.importProjectData.project.name, this.importProjectData);
+
+          });
+        }
+      });
+      this.$timeout(() => {this.startWorkspace(bus, data);}, 1000);
+
+    }, (error) => {
+      if (error.data.message) {
+        this.getCreationSteps()[this.getCurrentProgressStep()].logs = error.data.message;
+      }
+      this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
+
+    });
+  }
 
   /**
    * Generates a default project name only if user has not entered any data

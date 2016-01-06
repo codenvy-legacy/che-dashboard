@@ -23,10 +23,10 @@ class CodenvyRecipe {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource) {
-
+  constructor($resource, $q) {
     // keep resource
     this.$resource = $resource;
+    this.$q = $q;
 
     // recipes per id
     this.recipesByid = {};
@@ -47,10 +47,10 @@ class CodenvyRecipe {
    * Fetch the recipes
    */
   fetchRecipes() {
+    var defer = this.$q.defer();
 
     let promise = this.remoteRecipesAPI.getRecipes().$promise;
-    let updatedPromise = promise.then((recipes) => {
-
+    promise.then((recipes) => {
 
       // reset global list
       this.recipes.length = 0;
@@ -67,11 +67,16 @@ class CodenvyRecipe {
         this.recipesByid[recipeId] = recipe;
         this.recipes.push(recipe);
       });
-
-
-
+      defer.resolve();
+    }, (error) => {
+      if (error.status !== 304) {
+        defer.reject(error);
+      } else {
+        defer.resolve();
+      }
     });
-    return updatedPromise;
+
+    return defer.promise;
   }
 
   /**

@@ -22,7 +22,8 @@ import WorkspaceDetailsProjectsCtrl from './workspace-details/workspace-projects
 import WorkspaceDetailsProjects from './workspace-details/workspace-projects/workspace-details-projects.directive';
 import WorkspaceDetailsResourcesCtrl from './workspace-details/resources/workspace-details-resources.controller';
 import WorkspaceDetailsResources from './workspace-details/resources/workspace-details-resources.directive';
-
+import WorkspaceRecipeCtrl from './recipe/workspace-recipe.controller';
+import WorkspaceRecipe from './recipe/workspace-recipe.directive';
 import CodenvyWorkspaceRamAllocationSliderCtrl from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.controller';
 import CodenvyWorkspaceRamAllocationSlider from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.directive';
 
@@ -51,6 +52,9 @@ class WorkspacesConfig {
 
     register.controller('WorkspaceDetailsResourcesCtrl', WorkspaceDetailsResourcesCtrl);
     register.directive('workspaceDetailsResources', WorkspaceDetailsResources);
+
+    register.controller('WorkspaceRecipeCtrl', WorkspaceRecipeCtrl);
+    register.directive('cdvyWorkspaceRecipe', WorkspaceRecipe);
 
     register.controller('CodenvyWorkspaceRamAllocationSliderCtrl', CodenvyWorkspaceRamAllocationSliderCtrl);
     register.directive('cdvyWorkspaceRamAllocationSlider', CodenvyWorkspaceRamAllocationSlider);

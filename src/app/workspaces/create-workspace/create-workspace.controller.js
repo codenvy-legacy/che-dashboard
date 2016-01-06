@@ -22,7 +22,7 @@ class CreateWorkspaceCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $q, $location, codenvyNotification) {
+  constructor(codenvyAPI, $q, $location, codenvyNotification) {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
     this.$q = $q;
@@ -39,16 +39,8 @@ class CreateWorkspaceCtrl {
 
     let promise = codenvyAPI.getRecipe().fetchRecipes();
     promise.then(() => {
-          this.updateData();
-        },
-        (error) => {
-          // etag handling so also retrieve last data that were fetched before
-          if (error.status === 304) {
-            // ok
-            this.updateData();
-          }
-        });
-
+      this.updateData();
+    });
   }
 
   updateData() {

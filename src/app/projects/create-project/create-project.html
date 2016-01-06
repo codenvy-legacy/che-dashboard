@@ -163,21 +163,20 @@
                         <create-project-stack-library ng-init="createProjectStackLibraryCtrl.initCallbackController(createProjectCtrl)"></create-project-stack-library>
                     </md-tab-body>
                 </md-tab>
-                <!--
-                <md-tab cdvy-event-logger="new.project/custom-stack" md-on-select="createProjectCtrl.setStackTab('custom-stack')">
-                    <md-tab-label>
-                        <md-icon md-font-icon="fa-external-link" class="fa cdvy-tab-label-icon"></md-icon>
-                        <span class="cdvy-tab-label-title">Custom Stack</span>
-                    </md-tab-label>
-                    <md-tab-body>
-                        Work in progress : add custom directive there
-                    </md-tab-body>
-                </md-tab>
-                -->
 
+              <md-tab cdvy-event-logger="new.project/custom-stack" md-on-select="createProjectCtrl.setStackTab('custom-stack')">
+                <md-tab-label>
+                  <md-icon md-font-icon="material-design icon-ic_input_24px" class="cdvy-tab-label-icon"></md-icon>
+                  <span class="cdvy-tab-label-title">Custom stack</span>
+                </md-tab-label>
+                <md-tab-body>
+                  <cdvy-workspace-recipe cdvy-workspace-ram="createProjectCtrl.workspaceRam"
+                                         cdvy-workspace-name="createProjectCtrl.workspaceName"
+                                         cdvy-recipe-script="createProjectCtrl.recipeScript"
+                                         cdvy-recipe-url="createProjectCtrl.recipeUrl"></cdvy-workspace-recipe>
+                </md-tab-body>
+              </md-tab>
             </md-tabs>
-
-
 
         </cdvy-panel>
 
