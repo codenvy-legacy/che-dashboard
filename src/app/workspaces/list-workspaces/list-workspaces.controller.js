@@ -26,6 +26,7 @@ class ListWorkspacesCtrl {
     this.codenvyAPI = codenvyAPI;
     this.$q = $q;
     this.state = 'loading';
+    this.isInfoLoading = true;
     this.workspaceFilter = {name: ''};
 
     //Map of all workspaces with additional info by id:
@@ -52,6 +53,7 @@ class ListWorkspacesCtrl {
           return;
         }
         this.state = 'error';
+        this.isInfoLoading = false;
       });
   }
 
@@ -71,6 +73,7 @@ class ListWorkspacesCtrl {
       } else {
         let userWorkspace = this.workspacesById.get(workspace.workspaceReference.id);
         this.userWorkspaces.push(userWorkspace);
+        this.isInfoLoading = false;
       }
     });
 
@@ -108,8 +111,10 @@ class ListWorkspacesCtrl {
     this.$q.all(promises).then(() => {
       projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
       workspace.projects = projectsPerWorkspace[workspace.id] ? projectsPerWorkspace[workspace.id].length : undefined;
+      this.isInfoLoading = false;
     }, (error) => {
       console.log(error);
+      this.isInfoLoading = false;
     });
   }
 }
