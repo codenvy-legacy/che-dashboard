@@ -525,9 +525,7 @@ class CreateProjectCtrl {
       script: recipeScript
     };
 
-    let promise = this.codenvyAPI.getRecipe().create(recipe)
-
-    return promise;
+    return this.codenvyAPI.getRecipe().create(recipe);
   }
 
   /**
@@ -589,7 +587,7 @@ class CreateProjectCtrl {
           // needs to get recipe URL from custom recipe
           let promise = this.submitRecipe(recipeName, this.recipeScript);
           promise.then((recipe) => {
-            let findLink = this.lodash.find(recipe.links, function (link) {
+            let findLink = this.lodash.find(recipe.links, (link) => {
               return link.rel === 'get recipe script';
             });
             if(findLink) {
