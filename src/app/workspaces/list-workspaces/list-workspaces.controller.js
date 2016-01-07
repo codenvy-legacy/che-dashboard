@@ -62,6 +62,9 @@ class ListWorkspacesCtrl {
   updateSharedWorkspaces() {
     this.userWorkspaces = [];
     let workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
+    if (workspaces.length === 0) {
+      this.isInfoLoading = false;
+    }
     workspaces.forEach((workspace) => {
       //First check the list of already received workspace info:
       if (!this.workspacesById.get(workspace.id)) {
