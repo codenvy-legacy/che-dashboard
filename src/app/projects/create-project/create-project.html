@@ -13,10 +13,9 @@
 <cdvy-toolbar cdvy-title="New Project"
               class="create-project-page-toolbar">
     <div ng-show="createProjectCtrl.isCreateProjectInProgress()">
-        <cdvy-button-default cdvy-button-icon="material-design icon-ic_picture_in_picture_24px"
+        <a class="create-project-minimize-icon material-design icon-ic_picture_in_picture_24px"
                              ng-href="#/projects"
-                             ng-click="createProjectCtrl.hideCreateProjectPanel()"
-                             cdvy-button-title="Minimize"></cdvy-button-default>
+                             ng-click="createProjectCtrl.hideCreateProjectPanel()"></a>
     </div>
 </cdvy-toolbar>
 
