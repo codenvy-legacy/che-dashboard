@@ -35,7 +35,7 @@ class CreateProjectSvc {
         this.creationSteps = [
             {text: 'Create and initialize workspace', inProgressText: 'Creating workspace', logs: '', hasError: false},
             {text: 'Start workspace master', inProgressText: 'Starting workspace master', logs: '', hasError: false},
-            {text: 'Inject workspace agent', inProgressText: 'Injecting workspace agent', logs: '', hasError: false},
+            {text: 'Inject and start workspace agent', inProgressText: 'Injecting and starting workspace agent', logs: '', hasError: false},
             {text: 'Create project', inProgressText: 'Creating project', logs: '', hasError: false},
             {text: 'Project created', inProgressText: 'Opening project', logs: '', hasError: false}
         ];
