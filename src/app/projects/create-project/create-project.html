@@ -99,7 +99,7 @@
 
 
 
-        <cdvy-panel id="create-project-source-id" cdvy-title="Select Source">
+        <cdvy-panel id="create-project-source-id" cdvy-title="Select Source" cdvy-tooltip="Create new projects or import existing projects">
             <md-radio-group ng-model="createProjectCtrl.selectSourceOption">
                 <md-radio-button value="select-source-new">New from blank, template, or sample project</md-radio-button>
                 <md-radio-button value="select-source-existing">Import existing project</md-radio-button>
@@ -141,7 +141,7 @@
         </cdvy-panel>
 
 
-        <cdvy-panel id="create-project-source-stack"  cdvy-title="Select Stack">
+        <cdvy-panel id="create-project-source-stack"  cdvy-title="Select Stack" cdvy-tooltip="A stack is providing runtime of the workspace">
 
 
             <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="createProjectCtrl.stackSelectedIndex">
@@ -180,7 +180,7 @@
 
         </cdvy-panel>
 
-        <cdvy-panel id="create-project-source-template" ng-show="createProjectCtrl.selectSourceOption === 'select-source-new'" cdvy-title="Select Template">
+        <cdvy-panel id="create-project-source-template" ng-show="createProjectCtrl.selectSourceOption === 'select-source-new'" cdvy-title="Select Sample/Template" cdvy-tooltip="Select existing samples or create from a template">
             <md-radio-group ng-model="createProjectCtrl.templatesChoice">
                 <md-radio-button>Ready-to-run project templates</md-radio-button>
             </md-radio-group>
@@ -189,7 +189,7 @@
 
 
         <ng-form name="projectInformationForm">
-            <cdvy-panel cdvy-title="Project Information" id="create-project-source-information"  ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);">
+            <cdvy-panel cdvy-title="Project Information" id="create-project-source-information"  ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);" cdvy-tooltip="Name and description of the project that will be created">
 
                 <cdvy-input cdvy-form="projectInformationForm"
                             cdvy-name="name"
