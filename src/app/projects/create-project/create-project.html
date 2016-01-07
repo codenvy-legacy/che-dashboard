@@ -54,7 +54,7 @@
 
             <div class="create-project-progress-panel-top" style="background-image: url('assets/images/bg-intermediate-screen.svg')">
                 <div class="create-project-progress-widget-progress" layout-align="center center" class="progress-global" layout="row">
-                    <img ng-hide="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)"  src="assets/images/loader.svg" />
+                    <md-icon ng-hide="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)" md-svg-src="assets/images/loader.svg" class="create-project-progress-loader-icon" aria-label="loader"></md-icon>
                 </div>
 
                 <div layout="column" class="create-project-panel-progress-title" layout-align="center center">
