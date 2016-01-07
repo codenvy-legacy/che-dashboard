@@ -111,8 +111,12 @@ class CodenvyPanel {
     }
 
 
-    template = template + '{{codenvyPanelCtrl.title}}</div>'
-    + '<span flex></span>';
+    template = template + '{{codenvyPanelCtrl.title}}</div>';
+    if (attrs['cdvyTooltip']) {
+      template = template + '<div><i class="fa fa-info-circle cdvy-panel-title-tooltip-icon" tooltip="' + attrs['cdvyTooltip'] + '"></i></div>';
+    }
+
+      template = template + '<span flex></span>';
 
 
     if (attrs['cdvyToggle']) {
