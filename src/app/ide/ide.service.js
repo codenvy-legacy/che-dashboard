@@ -112,8 +112,8 @@ class IdeSvc {
                     let endpoint = runtimeData.devMachine.metadata.envVariables.CHE_API_ENDPOINT;
 
                     var contextPath;
-                    if (endpoint.endsWith('/che/api')) {
-                        contextPath = 'che';
+                    if (endpoint.endsWith('/ide/api')) {
+                        contextPath = 'ide';
                     } else {
                         contextPath = 'api';
                     }
@@ -212,7 +212,7 @@ class IdeSvc {
             if (this.websocketReconnect > 0) {
                 this.$timeout(() => {this.connectToExtensionServer(websocketURL, workspaceId);}, 1000);
             } else {
-                this.getCreationSteps()[this.getCurrentProgressStep()].hasError = true;
+                this.steps[this.currentStep].hasError = true;
                 console.log('error when starting remote extension', error);
                 // need to show the error
                 this.$mdDialog.show(
