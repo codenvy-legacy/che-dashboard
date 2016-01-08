@@ -62,7 +62,7 @@ class CreateProjectCtrl {
       },
       {
         id: '#create-project-source-template',
-        name: 'sample/template',
+        name: 'template',
         link: 'create-project-template'
       },
       {
