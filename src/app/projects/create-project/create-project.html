@@ -98,7 +98,7 @@
 
 
 
-        <cdvy-panel id="create-project-source-id" cdvy-title="Select Source" cdvy-tooltip="Create new projects or import existing projects">
+        <cdvy-panel id="create-project-source-id" cdvy-title="Select Source" cdvy-tooltip="Choose where the initial source code for this project will come from. The choice of templates and samples will vary by the stack chosen.">
             <md-radio-group ng-model="createProjectCtrl.selectSourceOption">
                 <md-radio-button value="select-source-new">New from blank, template, or sample project</md-radio-button>
                 <md-radio-button value="select-source-existing">Import existing project</md-radio-button>
@@ -140,7 +140,7 @@
         </cdvy-panel>
 
 
-        <cdvy-panel id="create-project-source-stack"  cdvy-title="Select Stack" cdvy-tooltip="A stack is providing runtime of the workspace">
+        <cdvy-panel id="create-project-source-stack"  cdvy-title="Select Stack" cdvy-tooltip="Stacks are recipes or images used to define your environment runtime. Workspace environments are used to build and run your project.">
 
 
             <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="createProjectCtrl.stackSelectedIndex">
@@ -179,7 +179,7 @@
 
         </cdvy-panel>
 
-        <cdvy-panel id="create-project-source-template" ng-show="createProjectCtrl.selectSourceOption === 'select-source-new'" cdvy-title="Select Sample/Template" cdvy-tooltip="Select existing samples or create from a template">
+        <cdvy-panel id="create-project-source-template" ng-show="createProjectCtrl.selectSourceOption === 'select-source-new'" cdvy-title="Select Template" cdvy-tooltip="Create new projects with templates configured by you using a wizard in the IDE.">
             <md-radio-group ng-model="createProjectCtrl.templatesChoice">
                 <md-radio-button>Ready-to-run project samples</md-radio-button>
             </md-radio-group>
@@ -188,7 +188,7 @@
 
 
         <ng-form name="projectInformationForm">
-            <cdvy-panel cdvy-title="Project Information" id="create-project-source-information"  ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);" cdvy-tooltip="Name and description of the project that will be created">
+            <cdvy-panel cdvy-title="Project Information" id="create-project-source-information"  ng-init="createProjectCtrl.setProjectInformationForm(projectInformationForm);" >
 
                 <cdvy-input cdvy-form="projectInformationForm"
                             cdvy-name="name"
