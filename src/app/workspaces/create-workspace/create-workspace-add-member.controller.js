@@ -62,13 +62,13 @@ class CreateWorkspaceAddMemberCtrl {
       return;
     }
 
-    let user = this.codenvyAPI.getUser().getUserFromEmail(email);
+    let user = this.codenvyAPI.getUser().getUserByAlias(email);
     if (user) {
       this.addMember(user, roles);
     } else {
-      let promiseGetUserByEmail = this.codenvyAPI.getUser().fetchUserEmail(email);
+      let promiseGetUserByEmail = this.codenvyAPI.getUser().fetchUserByAlias(email);
       promiseGetUserByEmail.then(() => {
-        user = this.codenvyAPI.getUser().getUserFromEmail(email);
+        user = this.codenvyAPI.getUser().getUserByAlias(email);
         if (user) {
           this.addMember(user, roles);
         } else {

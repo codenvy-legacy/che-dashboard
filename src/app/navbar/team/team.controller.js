@@ -132,9 +132,9 @@ class TeamCtrl {
    * @param roles the roles to add
    */
   callbackMemberAdd(email, roles) {
-    let promiseGetUserByEmail = this.codenvyAPI.getUser().fetchUserEmail(email);
+    let promiseGetUserByEmail = this.codenvyAPI.getUser().fetchUserByAlias(email);
     promiseGetUserByEmail.then(() => {
-      var user = this.codenvyAPI.getUser().getUserFromEmail(email);
+      var user = this.codenvyAPI.getUser().getUserByAlias(email);
       if (user) {
         this.addMember(user.id, roles);
       } else {

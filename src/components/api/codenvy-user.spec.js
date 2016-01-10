@@ -131,7 +131,7 @@ describe('CodenvyUser', function () {
   /**
    * Check that we're able to fetch user data by email
    */
-  it('Fetch user by email', function () {
+  it('Fetch user by alias', function () {
       // setup tests objects
       var userId = 'testUser';
       var email = 'newuseremail@codenvy.com';
@@ -146,7 +146,7 @@ describe('CodenvyUser', function () {
       codenvyBackend.setup();
 
       // fetch user
-      factory.fetchUserEmail(email);
+      factory.fetchUserByAlias(email);
 
       // expecting GETs
       httpBackend.expectGET('/api/user/find?alias=' + email);
@@ -155,7 +155,7 @@ describe('CodenvyUser', function () {
       httpBackend.flush();
 
       // now, check user
-      var user = factory.getUserFromEmail(email);
+      var user = factory.getUserByAlias(email);
 
       // check id and email
       expect(user.id).toEqual(userId);
