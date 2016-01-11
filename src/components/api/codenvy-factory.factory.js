@@ -152,7 +152,7 @@ class CodenvyFactory {
 
       let seeLink = [];
       this.lodash.find(tmpFactory.links, function (link) {
-        if (link.rel === 'create-workspace') {
+        if (link.rel === 'accept' || link.rel === 'accept-named') {
           seeLink.push(link.href);
         }
       });
