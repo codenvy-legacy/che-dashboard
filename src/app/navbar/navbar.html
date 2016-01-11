@@ -14,10 +14,7 @@
   <md-toolbar class="flex-shrink-none">
     <md-progress-linear md-mode="indeterminate" ng-hide="navbarCtrl.email"></md-progress-linear>
     <div ng-show="navbarCtrl.email">
-      <section class="md-toolbar-tools" layout="column" layout-align="center center">
-        <a href="#/projects"><img class="codenvy-logo" ng-src="{{branding.logoURL}}" alt="logo"></a>
-      </section>
-      <section layout="column" layout-align="center center">
+      <section class="navbar-top-dropdown" layout="column" layout-align="center center">
         <cdvy-button-dropdown cdvy-button-dropdown-href="#/create-project" cdvy-button-dropdown-label="New Project"
                               cdvy-event-logger="new.project"
                               cdvy-button-dropdown-controller="navbarCtrl"
@@ -162,5 +159,8 @@
         </section>
       </div>
     </div>
+    <section layout="column" layout-align="end center" flex>
+      <a href="#/projects"><img class="codenvy-logo" ng-src="{{branding.logoURL}}" alt="logo"></a>
+    </section>
   </md-toolbar>
 </div>
