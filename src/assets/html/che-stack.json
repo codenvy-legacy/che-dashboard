@@ -1,52 +1,52 @@
 [
   {
-    "id":"java-default",
-    "creator":"che",
-    "name":"Java",
-    "description":"Default Java Stack with JDK 8, Maven and Tomcat.",
-    "scope":"general",
-    "tags":[
+    "id": "java-default",
+    "creator": "che",
+    "name": "Java",
+    "description": "Default Java Stack with JDK 8, Maven and Tomcat.",
+    "scope": "general",
+    "tags": [
+      "Ubuntu",
       "Java",
       "JDK",
       "Maven",
       "Tomcat",
       "Subversion",
-      "Ubuntu",
       "Git"
     ],
-    "components":[
+    "components": [
       {
-        "name":"JDK",
-        "version":"1.8.0_45"
+        "name": "JDK",
+        "versions": "1.8.0_45"
       },
       {
-        "name":"Maven",
-        "version":"3.2.2"
+        "name": "Maven",
+        "versions": "3.2.2"
       },
       {
-        "name":"Tomcat",
-        "version":"8.0.24"
+        "name": "Tomcat",
+        "versions": "8.0.24"
       }
     ],
-    "source":{
-      "type":"image",
-      "origin":"codenvy/ubuntu_jdk8"
+    "source": {
+      "type": "image",
+      "origin": "codenvy/ubuntu_jdk8"
     },
-    "links":{
-      "method":"GET",
-      "parameters":[],
-      "rel":"icon",
-      "href":"http://path.com/to-the-icon.svg",
-      "produces":"application/svg+xml"
+    "links": {
+      "method": "GET",
+      "parameters": [],
+      "rel": "icon",
+      "href": "http://path.com/to-the-icon.svg",
+      "produces": "application/svg+xml"
     }
   },
   {
-    "id":"node-default",
-    "creator":"che",
-    "name":"Node",
-    "description":"Default Node Stack with Node 0.12.",
-    "scope":"general",
-    "tags":[
+    "id": "node-default",
+    "creator": "che",
+    "name": "Node",
+    "description": "Default Node Stack with Node 0.12.",
+    "scope": "general",
+    "tags": [
       "Ubuntu",
       "Git",
       "Node.JS",
@@ -58,51 +58,51 @@
       "Angular",
       "Karma"
     ],
-    "components":[
+    "components": [
       {
-        "name":"Node.JS",
-        "version":"0.12.9"
+        "name": "Node.JS",
+        "versions": "0.12.9"
       },
       {
-        "name":"NPM",
-        "version":"---"
+        "name": "NPM",
+        "versions": "---"
       },
       {
-        "name":"Gulp",
-        "version":"---"
+        "name": "Gulp",
+        "versions": "---"
       },
       {
-        "name":"Bower",
-        "version":"---"
+        "name": "Bower",
+        "versions": "---"
       },
       {
-        "name":"Grunt",
-        "version":"---"
+        "name": "Grunt",
+        "versions": "---"
       },
       {
-        "name":"Yeoman",
-        "version":"---"
+        "name": "Yeoman",
+        "versions": "---"
       }
     ],
-    "source":{
-      "type":"image",
-      "origin":"codenvy/node"
+    "source": {
+      "type": "image",
+      "origin": "codenvy/node"
     },
-    "links":{
-      "method":"GET",
-      "parameters":[],
-      "rel":"icon",
-      "href":"http://path.com/to-the-icon.svg",
-      "produces":"application/svg+xml"
+    "links": {
+      "method": "GET",
+      "parameters": [],
+      "rel": "icon",
+      "href": "http://path.com/to-the-icon.svg",
+      "produces": "application/svg+xml"
     }
   },
   {
-    "id":"php-default",
-    "creator":"che",
-    "name":"PHP",
-    "description":"Default PHP Stack, with extensions and composer.",
-    "scope":"general",
-    "tags":[
+    "id": "php-default",
+    "creator": "che",
+    "name": "PHP",
+    "description": "Default PHP Stack with PHP 5.5, most popular extensions and composer.",
+    "scope": "general",
+    "tags": [
       "Ubuntu",
       "Git",
       "PHP",
@@ -111,47 +111,47 @@
       "Apache",
       "Composer"
     ],
-    "components":[
+    "components": [
       {
-        "name":"PHP",
-        "version":"5.5.9"
+        "name": "PHP",
+        "versions": "5.5.9"
       },
       {
-        "name":"Apache",
-        "version":"2"
+        "name": "Apache",
+        "versions": "2"
       },
       {
-        "name":"MySQL",
-        "version":"---"
+        "name": "MySQL",
+        "versions": "---"
       },
       {
-        "name":"Sqlite",
-        "version":"---"
+        "name": "Sqlite",
+        "versions": "---"
       },
       {
-        "name":"Composer",
-        "version":"---"
+        "name": "Composer",
+        "versions": "---"
       }
     ],
-    "source":{
-      "type":"image",
-      "origin":"codenvy/php"
+    "source": {
+      "type": "image",
+      "origin": "codenvy/php"
     },
-    "links":{
-      "method":"GET",
-      "parameters":[],
-      "rel":"icon",
-      "href":"http://path.com/to-the-icon.svg",
-      "produces":"application/svg+xml"
+    "links": {
+      "method": "GET",
+      "parameters": [],
+      "rel": "icon",
+      "href": "http://path.com/to-the-icon.svg",
+      "produces": "application/svg+xml"
     }
   },
   {
-    "id":"aspnet-default",
-    "creator":"che",
-    "name":"ASP.net",
-    "description":"Default ASP.net Stack with DNX and libuv.",
-    "scope":"general",
-    "tags":[
+    "id": "aspnet-default",
+    "creator": "che",
+    "name": "ASP.net",
+    "description": "Default ASP.net Stack with DNX and libuv.",
+    "scope": "general",
+    "tags": [
       "Debian",
       "ASP",
       "Git",
@@ -160,89 +160,89 @@
       "dnx",
       "libuv"
     ],
-    "components":[
+    "components": [
       {
-        "name":"Debian",
-        "version":"7.9"
+        "name": "Debian",
+        "versions": "7.9"
       },
       {
-        "name":"Mono",
-        "version":"4.0.5.1"
+        "name": "Mono",
+        "versions": "4.0.5.1"
       },
       {
-        "name":"DNX",
-        "version":"1.0.0-rc1-final"
+        "name": "DNX",
+        "versions": "1.0.0-rc1-final"
       },
       {
-        "name":"libuv",
-        "version":"1.4.2"
+        "name": "libuv",
+        "versions": "1.4.2"
       }
     ],
-    "source":{
-      "type":"image",
-      "origin":"codenvy/aspnet"
+    "source": {
+      "type": "image",
+      "origin": "codenvy/aspnet"
     },
-    "links":{
-      "method":"GET",
-      "parameters":[],
-      "rel":"icon",
-      "href":"http://path.com/to-the-icon.svg",
-      "produces":"application/svg+xml"
+    "links": {
+      "method": "GET",
+      "parameters": [],
+      "rel": "icon",
+      "href": "http://path.com/to-the-icon.svg",
+      "produces": "application/svg+xml"
     }
   },
   {
-    "id":"java-debian",
-    "creator":"che",
-    "name":"Java Debian",
-    "description":"Java JDK Stack on Debian.",
-    "scope":"advanced",
-    "tags":[
+    "id": "java-debian",
+    "creator": "che",
+    "name": "Java Debian",
+    "description": "Java JDK Stack on Debian.",
+    "scope": "advanced",
+    "tags": [
+      "Debian",
       "Java",
       "JDK",
       "Maven",
       "Tomcat",
-      "Debian",
       "Git"
     ],
-    "components":[
+    "components": [
       {
-        "name":"Debian",
-        "version":"jessie"
+        "name": "Debian",
+        "versions": "jessie"
       },
       {
-        "name":"JDK",
-        "version":"1.8.0_45"
+        "name": "JDK",
+        "versions": "1.8.0_45"
       },
       {
-        "name":"Maven",
-        "version":"3.2.2"
+        "name": "Maven",
+        "versions": "3.2.2"
       },
       {
-        "name":"Tomcat",
-        "version":"8.0.24"
+        "name": "Tomcat",
+        "versions": "8.0.24"
       }
     ],
-    "source":{
-      "type":"image",
-      "origin":"codenvy/debian_jdk8"
+    "source": {
+      "type": "image",
+      "origin": "codenvy/debian_jdk8"
     },
-    "links":{
-      "method":"GET",
-      "parameters":[],
-      "rel":"icon",
-      "href":"http://path.com/to-the-icon.svg",
-      "produces":"application/svg+xml"
+    "links": {
+      "method": "GET",
+      "parameters": [],
+      "rel": "icon",
+      "href": "http://path.com/to-the-icon.svg",
+      "produces": "application/svg+xml"
     }
   },
   {
-    "id":"selenium",
-    "creator":"che",
-    "name":"Selenium",
-    "description":"Stack with Selenium and Chrome on Ubuntu.",
-    "scope":"advanced",
-    "tags":[
-      "Selenium",
+    "id": "selenium",
+    "creator": "che",
+    "name": "Selenium",
+    "description": "Stack with Selenium and Chrome on Ubuntu.",
+    "scope": "advanced",
+    "tags": [
       "Ubuntu",
+      "Selenium",
       "Chrome",
       "noVNC",
       "xserver",
@@ -250,136 +250,136 @@
       "webdriver",
       "x11vnc"
     ],
-    "components":[
+    "components": [
       {
-        "name":"noVNC",
-        "version":"---"
+        "name": "noVNC",
+        "versions": "---"
       },
       {
-        "name":"Selenium webdriver",
-        "version":"---"
+        "name": "Selenium webdriver",
+        "versions": "---"
       },
       {
-        "name":"Google Chrome",
-        "version":"---"
+        "name": "Google Chrome",
+        "versions": "---"
       },
       {
-        "name":"Blackbox",
-        "version":"---"
+        "name": "Blackbox",
+        "versions": "---"
       },
       {
-        "name":"Supervisor",
-        "version":"---"
+        "name": "Supervisor",
+        "versions": "---"
       }
     ],
-    "source":{
-      "type":"image",
-      "origin":"codenvy/selenium"
+    "source": {
+      "type": "image",
+      "origin": "codenvy/selenium"
     },
-    "links":{
-      "method":"GET",
-      "parameters":[],
-      "rel":"icon",
-      "href":"http://path.com/to-the-icon.svg",
-      "produces":"application/svg+xml"
+    "links": {
+      "method": "GET",
+      "parameters": [],
+      "rel": "icon",
+      "href": "http://path.com/to-the-icon.svg",
+      "produces": "application/svg+xml"
     }
   },
   {
-    "id":"debian",
-    "creator":"che",
-    "name":"Debian",
-    "description":"Simple stack with Debian (Jessie).",
-    "scope":"advanced",
-    "tags":[
+    "id": "debian",
+    "creator": "che",
+    "name": "Debian",
+    "description": "Simple stack with Debian (Jessie).",
+    "scope": "advanced",
+    "tags": [
       "Debian"
     ],
-    "components":[
+    "components": [
       {
-        "name":"Debian",
-        "version":"Jessie"
+        "name": "Debian",
+        "versions": "Jessie"
       }
     ],
-    "source":{
-      "type":"image",
-      "origin":"codenvy/debian_jre"
+    "source": {
+      "type": "image",
+      "origin": "codenvy/debian_jre"
     },
-    "links":{
-      "method":"GET",
-      "parameters":[],
-      "rel":"icon",
-      "href":"http://path.com/to-the-icon.svg",
-      "produces":"application/svg+xml"
+    "links": {
+      "method": "GET",
+      "parameters": [],
+      "rel": "icon",
+      "href": "http://path.com/to-the-icon.svg",
+      "produces": "application/svg+xml"
     }
   },
   {
-    "id":"ubuntu",
-    "creator":"che",
-    "name":"Ubuntu",
-    "description":"Simple stack with Ubuntu (latest).",
-    "scope":"advanced",
-    "tags":[
+    "id": "ubuntu",
+    "creator": "che",
+    "name": "Ubuntu",
+    "description": "Simple stack with Ubuntu (latest).",
+    "scope": "advanced",
+    "tags": [
       "Ubuntu"
     ],
-    "components":[
+    "components": [
       {
-        "name":"Ubuntu",
-        "version":"---"
+        "name": "Ubuntu",
+        "versions": "---"
       }
     ],
-    "source":{
-      "type":"image",
-      "origin":"codenvy/ubuntu_jre"
+    "source": {
+      "type": "image",
+      "origin": "codenvy/ubuntu_jre"
     },
-    "links":{
-      "method":"GET",
-      "parameters":[],
-      "rel":"icon",
-      "href":"http://path.com/to-the-icon.svg",
-      "produces":"application/svg+xml"
+    "links": {
+      "method": "GET",
+      "parameters": [],
+      "rel": "icon",
+      "href": "http://path.com/to-the-icon.svg",
+      "produces": "application/svg+xml"
     }
   },
   {
-    "id":"java-centos",
-    "creator":"che",
-    "name":"Java CentOS",
-    "description":"Java JDK Stack on CentOS.",
-    "scope":"advanced",
-    "tags":[
+    "id": "java-centos",
+    "creator": "che",
+    "name": "Java CentOS",
+    "description": "Java JDK Stack on CentOS.",
+    "scope": "advanced",
+    "tags": [
+      "CentOS",
       "Java",
       "JDK",
       "Maven",
       "Tomcat",
-      "CentOS",
       "Git"
     ],
-    "components":[
+    "components": [
       {
-        "name":"CentOS",
-        "version":"---"
+        "name": "CentOS",
+        "versions": "---"
       },
       {
-        "name":"JDK",
-        "version":"1.8.0_45"
+        "name": "JDK",
+        "versions": "1.8.0_45"
       },
       {
-        "name":"Maven",
-        "version":"3.2.2"
+        "name": "Maven",
+        "versions": "3.2.2"
       },
       {
-        "name":"Tomcat",
-        "version":"8.0.24"
+        "name": "Tomcat",
+        "versions": "8.0.24"
       }
     ],
-    "source":{
-      "type":"image",
-      "origin":"codenvy/centos_jdk8"
+    "source": {
+      "type": "image",
+      "origin": "codenvy/centos_jdk8"
     },
-    "links":{
-      "method":"GET",
-      "parameters":[],
-      "rel":"icon",
-      "href":"http://path.com/to-the-icon.svg",
-      "produces":"application/svg+xml"
+    "links": {
+      "method": "GET",
+      "parameters": [],
+      "rel": "icon",
+      "href": "http://path.com/to-the-icon.svg",
+      "produces": "application/svg+xml"
     }
   }
 ]
