@@ -72,7 +72,7 @@ class CodenvyHttpBackend {
     }
     var userEmailKeys = this.userEmailMap.keys();
     for (let key of userEmailKeys) {
-      this.httpBackend.when('GET', '/api/user/find?email=' + key).respond(this.userEmailMap.get(key));
+      this.httpBackend.when('GET', '/api/user/find?alias=' + key).respond(this.userEmailMap.get(key));
     }
     this.httpBackend.when('GET', '/api/user/inrole?role=admin&scope=system&scopeId=').respond(false);
     this.httpBackend.when('GET', '/api/user/inrole?role=user&scope=system&scopeId=').respond(true);
