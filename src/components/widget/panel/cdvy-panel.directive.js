@@ -116,7 +116,7 @@ class CodenvyPanel {
       template = template + '<div><i class="fa fa-info-circle cdvy-panel-title-tooltip-icon" tooltip-placement="right" tooltip="' + attrs['cdvyTooltip'] + '"></i></div>';
     }
 
-      template = template + '<span flex></span>';
+      template = template + '<div flex layout="column"><div class="cdvy-panel-title-top">&nbsp;</div><div class="cdvy-panel-title-bottom">&nbsp;</div></div>';
 
 
     if (attrs['cdvyToggle']) {
