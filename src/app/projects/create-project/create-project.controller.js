@@ -67,7 +67,7 @@ class CreateProjectCtrl {
       },
       {
         id: '#create-project-source-information',
-        name: 'information',
+        name: 'metadata',
         link: 'create-project-information'
       }
     ];
