@@ -13,17 +13,17 @@
 import OnPremisesAdminInstallationConfig from './installation/installation-config';
 import OnPremisesAdminAvailableSoftwareCtrl from './software/software.controller';
 import AvailableSoftwarePanel from './software/software.directive';
-import OnPremisesAdminYourSubscriptionCtrl from './yoursubscription/yoursubscription.controller';
-import YourSubscriptionPanel from './yoursubscription/yoursubscription.directive';
+import OnPremisesAdminYourLicenseCtrl from './yourlicense/yourlicense.controller';
+import YourLicensePanel from './yourlicense/yourlicense.directive';
 
 class OnPremisesAdminConfig {
 
   constructor(register) {
 
     register.directive('cdvyAvailableSoftware', AvailableSoftwarePanel);
-    register.directive('cdvyYourSubscription', YourSubscriptionPanel);
+    register.directive('cdvyYourLicense', YourLicensePanel);
     register.controller('OnPremisesAdminAvailableSoftwareCtrl', OnPremisesAdminAvailableSoftwareCtrl);
-    register.controller('OnPremisesAdminYourSubscriptionCtrl', OnPremisesAdminYourSubscriptionCtrl);
+    register.controller('OnPremisesAdminYourLicenseCtrl', OnPremisesAdminYourLicenseCtrl);
 
     // configure routes
     register.app.config(function ($routeProvider) {

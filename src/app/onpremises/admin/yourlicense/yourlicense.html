@@ -1,0 +1,57 @@
+<!--
+
+    Copyright (c) 2016 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-panel cdvy-title="Subscription">
+  <div class="onprem-license">
+    <div ng-switch on="onPremisesAdminYourLicenseCtrl.licenseState">
+      <div ng-switch on="onPremisesAdminYourLicenseCtrl.licenseState">git add -A
+        <div ng-switch-when="LICENSE">
+          <!--
+                  not implemented yet
+          -->
+        </div>
+        <div ng-switch-when="NO_LICENSE">
+          <cdvy-label-container cdvy-label-name="License">
+            <span  class="onprem-license-info-row">
+              Fair Source 10 - 10 users, single server - (See:
+              <cdvy-link ng-href="http://codenvy.com/fair-source"
+                         cdvy-link-text="http://codenvy.com/fair-source"
+                         cdvy-no-padding="true" cdvy-new-window></cdvy-link>
+              )
+            </span>
+          </cdvy-label-container>
+          <cdvy-label-container cdvy-label-name="Expiration">
+            <span class="onprem-license-info-row">
+              N/A
+            </span>
+          </cdvy-label-container>
+          <cdvy-label-container cdvy-label-name="Support">
+            <span class="onprem-license-info-row">
+              You can get support in public forums at
+              <cdvy-link ng-href="http://codenvy.com/support"
+                         cdvy-link-text="http://codenvy.com/support"
+                         cdvy-no-padding="true" cdvy-new-window></cdvy-link>
+            </span>
+          </cdvy-label-container>
+          <cdvy-label-container cdvy-label-name="Source Code" ng-if="onPremisesAdminYourLicenseCtrl.installedVersion">
+            <span class="onprem-license-info-row">
+              <cdvy-link ng-href="https://install.codenvycorp.com/codenvy/codenvy-src-{{onPremisesAdminYourLicenseCtrl.installedVersion}}.zip"
+                         cdvy-link-text="(URL)"
+                         cdvy-no-padding="true" cdvy-new-window></cdvy-link>
+            </span>
+          </cdvy-label-container>
+        </div>
+        <div ng-switch-default></div>
+      </div>
+    </div>
+  </div>
+</cdvy-panel>

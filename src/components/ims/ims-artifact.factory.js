@@ -22,7 +22,7 @@ class ImsArtifactApi {
    * Default constructor for the artifact API.
    * @ngInject for Dependency injection
    */
-  constructor($resource, $q) {
+  constructor($resource, $q, codenvyUser) {
     this.$q = $q;
 
     // remote call
@@ -39,8 +39,9 @@ class ImsArtifactApi {
 
     this.isIms = false;
 
-    // update the ims available when we're initialized
-    this._updateImsAvailable(this.getDownloadedArtifactsList());
+    codenvyUser.refetchUser().then(() => {
+      this._updateImsAvailable(this.getDownloadedArtifactsList());
+    });
   }
 
   /**

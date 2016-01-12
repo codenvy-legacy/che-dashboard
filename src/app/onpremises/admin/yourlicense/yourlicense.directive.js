@@ -11,22 +11,22 @@
 'use strict';
 
 /**
- * Defines a directive for creating "your subscription" section.
+ * Defines a directive for creating "your license" section.
  */
-class YourSubscriptionPanel {
+class YourLicensePanel {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor () {
+  constructor() {
     this.restrict = 'E';
     this.replace = false;
-    this.templateUrl = 'app/onpremises/admin/yoursubscription/yoursubscription.html';
-    this.controller = 'OnPremisesAdminYourSubscriptionCtrl';
-    this.controllerAs = 'onPremisesAdminYourSubscriptionCtrl';
+    this.templateUrl = 'app/onpremises/admin/yourlicense/yourlicense.html';
+    this.controller = 'OnPremisesAdminYourLicenseCtrl';
+    this.controllerAs = 'onPremisesAdminYourLicenseCtrl';
   }
 
 }
 
-export default YourSubscriptionPanel;
+export default YourLicensePanel;

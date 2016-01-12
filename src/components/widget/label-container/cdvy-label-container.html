@@ -1,7 +1,8 @@
 <div class="cdvy-label-container">
-  <div layout="row" flex layout-align="space-around center">
-    <label flex="15" >{{labelName}}: </label>
-    <div layout="column" flex="85">
+  <div layout="row" flex layout-align="space-around center" class="cdvy-label-container-row">
+    <label flex="15" class="cdvy-label-container-label">{{labelName}}: </label>
+
+    <div layout="column" flex="85" class="cdvy-label-container-info">
       <div flex ng-transclude></div>
     </div>
   </div>
