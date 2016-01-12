@@ -5,6 +5,7 @@
   "$che-green-color": "#60AB0A",
   "$che-purple-color": "#4E5A96",
   "$che-white-color" : "#FFFFFF",
+  "$che-ide-background-color" : "#292C2F ",
   "$dark-menu-color": "#21252B",
   "$night-foggy-sky-color": "#545B64",
   "$dark-menacing-sky-color": "#5A5A5A",
