@@ -85,7 +85,7 @@ class CodenvyBox {
       }
 
 
-      template = template + '{{codenvyBoxCtrl.title}}</div>'
+      template = template + '<div ng-bind-html="codenvyBoxCtrl.title"></div></div>'
       + '<span flex></span>';
 
 
@@ -99,8 +99,6 @@ class CodenvyBox {
 
     return template;
   }
-
-
 
 }
 
