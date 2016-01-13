@@ -10,7 +10,7 @@
  */
 'use strict';
 
-/*exported ListProjectsWorkspaceFilter, CreateProjectSamplesFilter, CreateProjectSamplesNameFilter */
+/*exported ListProjectsWorkspaceFilter, CreateProjectSamplesFilter, CreateProjectSamplesNameFilter, CreateProjectSamplesTagFilter */
 
 import CreateProjectCtrl from './create-project/create-project.controller';
 import CreateProjectSvc from './create-project/create-project.service.js';
@@ -36,6 +36,7 @@ import CreateProjectSamplesCtrl from './create-project/samples/create-project-sa
 import CreateProjectSamples from './create-project/samples/create-project-samples.directive';
 import CreateProjectSamplesFilter from './create-project/samples/create-project-samples.filter';
 import CreateProjectSamplesNameFilter from './create-project/samples/create-project-samples-name.filter';
+import CreateProjectSamplesTagFilter from './create-project/samples/create-project-samples-tag.filter';
 
 import CreateProjectPopupCtrl from './create-project/popup/create-project-popup.controller';
 import CreateProjectPopup from './create-project/popup/create-project-popup.directive';

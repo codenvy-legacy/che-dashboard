@@ -30,7 +30,7 @@
         </div>
     -->
 
-        <div ng-repeat="templatesByCategory in filteredItems = (createProjectSamplesCtrl.templates | sampleFilterProjectType:createProjectSamplesCtrl.filterProjectType | sampleNameFilter:createProjectSamplesCtrl.projectNameFilter | orderBy:'projectType' | groupBy:'category') ">
+        <div ng-repeat="templatesByCategory in filteredItems = (createProjectSamplesCtrl.templates | sampleTagFilter:createProjectCtrl.currentStackTags | sampleFilterProjectType:createProjectSamplesCtrl.filterProjectType | sampleNameFilter:createProjectSamplesCtrl.projectNameFilter | orderBy:'projectType' | groupBy:'category') ">
             <div ng-repeat="lstTemplate in templatesByCategory | orderBy:'displayName' | groupBy:'projectType'">
                 <!--
                 <cdvy-list-title cdvy-icon="fa fa-folder">

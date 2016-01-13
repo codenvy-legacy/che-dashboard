@@ -34,6 +34,8 @@ class CreateProjectCtrl {
 
     this.stackTab = 'ready-to-go';
 
+    this.currentStackTags = null;
+
     // stacks not yet completed
     this.stacksInitialized = false;
 
@@ -747,6 +749,8 @@ class CreateProjectCtrl {
     // update stack
     this.readyToGoStack = stack;
 
+    this.updateCurrentStack(stack);
+
     this.importProjectData.project.type = name;
 
     // generate name
@@ -758,6 +762,8 @@ class CreateProjectCtrl {
     this.generateProjectName();
 
     this.readyToGoStack = stack;
+
+    this.updateCurrentStack(stack);
   }
 
 
@@ -841,6 +847,15 @@ class CreateProjectCtrl {
 
   setStackTab(stackTab) {
     this.stackTab = stackTab;
+
+    let currentStack = null;
+    if (this.stackTab === 'ready-to-go') {
+      currentStack = this.readyToGoStack;
+    } else if (this.stackTab === 'stack-library' && this.stackLibraryOption === 'new-workspace') {
+      currentStack = this.stackLibraryUser;
+    }
+    this.updateCurrentStack(currentStack);
+
     this.checkDisabledWorkspace();
   }
 
@@ -848,11 +863,20 @@ class CreateProjectCtrl {
     // change default once user has select it
     this.stackLibraryUser = stack;
     this.stackLibraryOption = 'new-workspace';
+
+    this.updateCurrentStack(stack);
     this.checkDisabledWorkspace();
   }
 
   stackLibraryChoice(option) {
     this.stackLibraryOption = option;
+
+    let currentStack = null;
+    if (this.stackLibraryOption === 'new-workspace') {
+      currentStack = this.stackLibraryUser;
+    }
+    this.updateCurrentStack(currentStack);
+
     this.checkDisabledWorkspace();
   }
 
@@ -874,16 +898,24 @@ class CreateProjectCtrl {
     this.workspaceName = workspace.name;
     this.stackLibraryOption = 'existing-workspace';
     this.checkDisabledWorkspace();
+
+    this.updateCurrentStack(null);
   }
 
   cdvyStackLibrarySelecterDefault(defaultStack) {
     this.stackLibraryUser = defaultStack;
+
+    this.updateCurrentStack(defaultStack);
   }
 
   cdvyStackLibraryWorkspaceSelecterDefault(defaultWorkspace) {
     this.workspaceSelected = defaultWorkspace;
   }
 
+  updateCurrentStack(stack) {
+    this.currentStack = stack;
+    this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;
+  }
 }
 
 export default CreateProjectCtrl;
