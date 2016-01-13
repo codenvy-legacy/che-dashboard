@@ -34,7 +34,16 @@ class CreateWorkspaceCtrl {
     this.recipe = null;
     this.recipes = [];
 
+    this.selectSourceOption = 'select-source-recipe';
 
+    this.editorOptions = {
+      lineWrapping : true,
+      lineNumbers: false,
+      matchBrackets: true,
+      mode: 'application/json'
+    };
+
+    this.workspaceConfig = '';
     this.generateWorspaceName();
 
     let promise = codenvyAPI.getRecipe().fetchRecipes();
@@ -74,15 +83,27 @@ class CreateWorkspaceCtrl {
 
   createWorkspace() {
 
-    let recipeUrl = this.recipe.links[0].href;
-    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspace.name, recipeUrl, this.workspace.ram);
-    creationPromise.then((workspaceData) => {
-      this.$location.path('/workspace/' + workspaceData.id);
-    }, (error) => {
-      let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
-      this.codenvyNotification.showError(errorMessage);
-      this.$location.path('/workspaces');
-    });
+    if (this.selectSourceOption === 'select-source-recipe') {
+      let recipeUrl = this.recipe.links[0].href;
+      let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspace.name, recipeUrl, this.workspace.ram);
+      creationPromise.then((workspaceData) => {
+        this.$location.path('/workspace/' + workspaceData.id);
+      }, (error) => {
+        let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
+        this.codenvyNotification.showError(errorMessage);
+        this.$location.path('/workspaces');
+      });
+    } else {
+      //this.workspaceConfig.name = this.workspace.name;
+      let creationPromise = this.codenvyAPI.getWorkspace().createWorkspaceFromConfig(null, this.workspaceConfig);
+      creationPromise.then((workspaceData) => {
+        this.$location.path('/workspace/' + workspaceData.id);
+      }, (error) => {
+        let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
+        this.codenvyNotification.showError(errorMessage);
+        this.$location.path('/workspaces');
+      });
+    }
   }
 }
 

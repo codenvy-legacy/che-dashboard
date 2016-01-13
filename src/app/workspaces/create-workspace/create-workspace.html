@@ -31,21 +31,34 @@
       </cdvy-input>
       <cdvy-workspace-ram-allocation-slider ng-model="createWorkspaceCtrl.workspace.ram"></cdvy-workspace-ram-allocation-slider>
 
-
-        <div layout="column">
-            <md-card ng-repeat="recipe in createWorkspaceCtrl.recipes"
-                     ng-class="$first ? 'create-project-stack-selected' : 'create-project-stack-default'"
-                     ng-click="createWorkspaceCtrl.selectRecipe(recipe)">
-                <md-card-content>{{recipe.name}}</md-card-content></md-card>
-        </div>
-
     </cdvy-panel>
 
-    <cdvy-panel cdvy-title="Import workspace">
+    <cdvy-panel id="create-project-source-id" cdvy-title="Select Source" cdvy-tooltip="Create workspace from a recipe, stack or by importing workspace configuration">
+      <md-radio-group ng-model="createWorkspaceCtrl.selectSourceOption">
+        <md-radio-button value="select-source-recipe">Workspace using recipe</md-radio-button>
+        <!-- will be replaced by stack by UD-945
+        <md-radio-button value="select-source-stack">Workspace using stack</md-radio-button>
+         -->
+        <md-radio-button value="select-source-import">Import an existing workspace configuration</md-radio-button>
+      </md-radio-group>
+    </cdvy-panel>
 
-        <ui-codemirror class="workspace-export-editor" ui-codemirror="workspaceDetailsCtrl.editorOptions"
-                       ng-model="workspaceDetailsCtrl.exportWorkspaceContent"></ui-codemirror>
-        <cdvy-button-default cdvy-button-title="export" ng-click="workspaceDetailsCtrl.exportWorkspace($event)"/>
+
+    <!-- replace it by Stack with UD-945 -->
+    <cdvy-panel cdvy-title="Select recipe" ng-if="createWorkspaceCtrl.selectSourceOption === 'select-source-recipe'">
+
+      <div layout="column">
+        <md-card ng-repeat="recipe in createWorkspaceCtrl.recipes"
+                 ng-class="$first ? 'create-project-stack-selected' : 'create-project-stack-default'"
+                 ng-click="createWorkspaceCtrl.selectRecipe(recipe)">
+          <md-card-content>{{recipe.name}}</md-card-content></md-card>
+      </div>
+    </cdvy-panel>
+
+    <cdvy-panel cdvy-title="Import workspace" ng-if="createWorkspaceCtrl.selectSourceOption === 'select-source-import'">
+
+      <ui-codemirror class="workspace-editor" ui-codemirror="createWorkspaceCtrl.editorOptions"
+                     ng-model="createWorkspaceCtrl.workspaceConfig"></ui-codemirror>
 
     </cdvy-panel>
 

@@ -202,6 +202,10 @@ class CodenvyWorkspace {
     return promise;
   }
 
+  createWorkspaceFromConfig(accountId, workspaceConfig) {
+    return this.remoteWorkspaceAPI.create({accountId : accountId}, workspaceConfig).$promise;
+  }
+
   /**
    * Add a command into the workspace
    * @param workspaceId the id of the workspace on which we want to add the command
