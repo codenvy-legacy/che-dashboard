@@ -56,7 +56,7 @@ class CodenvyAnalytics {
   /**
    * Get the factory used info for the factoryIdgulp serve
    * @param factoryId the factory Id
-   * @returns {*|promise|n|N}
+   * @returns {*} the promise
    */
   getFactoryUsedFromId(factoryId) {
     return this.remoteAnalytisAPI.factory_used({factoryId: factoryId}).$promise;

@@ -65,7 +65,7 @@ class CodenvyFactory {
    * Ask for loading the factory content in asynchronous way
    * If there are no changes, it's not updated
    * @param workspace
-   * @returns {*|promise|n|N}
+   * @returns {*} the promise
    */
   fetchFactoryContentFromWorkspace(workspace) {
     var deferred = this.$q.defer();
@@ -108,7 +108,7 @@ class CodenvyFactory {
   /**
    * Create factory by content
    * @param factoryContent  the factory content
-   * @returns {*|promise|n|N}
+   * @returns {*} the promise
    */
   createFactoryByContent(factoryContent) {
 
@@ -138,7 +138,7 @@ class CodenvyFactory {
    * Ask for loading the factory in asynchronous way
    * If there are no changes, it's not updated
    * @param factoryId the factory ID
-   * @returns {*|promise|n|N}
+   * @returns {*} the promise
    */
   fetchFactory(factoryId) {
     var deferred = this.$q.defer();
@@ -219,7 +219,7 @@ class CodenvyFactory {
   /**
    * Set the factory
    * @param originFactory
-   * @returns {*|promise|n|N}
+   * @returns {*} the promise
    */
   setFactory(originFactory) {
     var deferred = this.$q.defer();
@@ -254,7 +254,7 @@ class CodenvyFactory {
    * Set the factory content by factoryId
    * @param factoryId  the factory ID
    * @param factoryContent  the factory content
-   * @returns {*|promise|n|N}
+   * @returns {*} the promise
    */
   setFactoryContent(factoryId, factoryContent) {
     var deferred = this.$q.defer();
@@ -280,7 +280,7 @@ class CodenvyFactory {
   /**
    * Performs factory deleting by the given factoryId.
    * @param factoryId the factory ID
-   * @returns {*|promise|n|N}
+   * @returns {*} the promise
    */
   deleteFactoryById(factoryId) {
     var deferred = this.$q.defer();

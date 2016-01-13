@@ -154,7 +154,7 @@ class CodenvyProfile {
   /**
    * Set the profile attributes data
    * @param attributes
-   * @returns {$promise|*|T.$promise}
+   * @returns {*} the promise
    */
   setAttributes(attributes) {
     let promise = this.remoteProfileAPI.setAttributes(attributes).$promise;

@@ -32,14 +32,14 @@ class CodenvyFactoryTemplate {
     this.factoryTemplatesByName = new Map();
 
     // remote call
-    this.remoteFactoryTemplateAPI = this.$resource('https://dockerfiles.codenvycorp.com/templates-4.0/:fileName');
+    this.remoteFactoryTemplateAPI = this.$resource('https://dockerfiles.codenvycorp.com/templates-4.0/factory/:fileName');
   }
 
   /**
    * Ask for loading the factory template in asynchronous way
    * If there are no changes, it's not updated
    * @param templateName the template name
-   * @returns {*|promise|n|N}
+   * @returns {*} the promise
    */
   fetchFactoryTemplate(templateName) {
     var deferred = this.$q.defer();

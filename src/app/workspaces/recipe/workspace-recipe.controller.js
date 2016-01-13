@@ -10,8 +10,6 @@
  */
 'use strict';
 
-import {defaultRecipeScript} from '../recipe/workspace-recipe-data';
-
 /**
  * @ngdoc controller
  * @name workspaces.recipe.controller:WorkspacesRecipeCtrl
@@ -24,15 +22,24 @@ class WorkspaceRecipeCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor() {
+  constructor(codenvyAPI) {
     this.recipeUrl = null;
-    this.recipeScript = null;
 
     //set default selection
     this.selectSourceOption = 'upload-custom-stack';
 
+    let defaultRecipe = codenvyAPI.getRecipeTemplate().getDefaultRecipe();
+
+    if (defaultRecipe !== null) {
+      this.defaultRecipeScript = defaultRecipe.script;
+    } else {
+      codenvyAPI.getRecipeTemplate().fetchDefaultRecipe().then((defaultRecipe) => {
+        this.defaultRecipeScript = defaultRecipe.script;
+      });
+    }
+
     this.editorOptions = {
-      lineWrapping : true,
+      lineWrapping: true,
       lineNumbers: true,
       matchBrackets: true,
       mode: 'text/x-dockerfile'
@@ -40,9 +47,9 @@ class WorkspaceRecipeCtrl {
 
   }
 
-  updateDefaultScript(){
+  setRecipeScript(recipeScript) {
     this.recipeUrl = null;
-    this.recipeScript = angular.copy(defaultRecipeScript);
+    this.recipeScript = angular.copy(recipeScript);
   }
 }
 

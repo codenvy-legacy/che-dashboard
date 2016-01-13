@@ -12,7 +12,7 @@
 /*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
  CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
  CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession, CodenvyRunner,
- CodenvyService, CodenvyAdminPlugins, CodenvyAdminService, CodenvyRecipe, CodenvyStack */
+ CodenvyService, CodenvyAdminPlugins, CodenvyAdminService, CodenvyRecipe, CodenvyRecipeTemplate, CodenvyStack */
 
 
 import Register from '../utils/register';
@@ -41,6 +41,7 @@ import CodenvyService from './codenvy-service.factory';
 import CodenvyAdminPlugins from './codenvy-admin-plugins.factory';
 import CodenvyAdminService from './codenvy-admin-service.factory';
 import CodenvyRecipe from './codenvy-recipe.factory';
+import CodenvyRecipeTemplate from './codenvy-recipe-template.factory';
 import CodenvyStack from './codenvy-stack.factory';
 
 
@@ -57,7 +58,8 @@ class CodenvyAPI {
    */
   constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
               codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyFactoryTemplate,
-              codenvyAnalyticsSession, codenvyRunner, codenvyService, codenvyAdminPlugins, codenvyAdminService, codenvyRecipe, codenvyStack) {
+              codenvyAnalyticsSession, codenvyRunner, codenvyService, codenvyAdminPlugins, codenvyAdminService, codenvyRecipe,
+              codenvyRecipeTemplate, codenvyStack) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
     this.codenvyFactory = codenvyFactory;
@@ -79,13 +81,12 @@ class CodenvyAPI {
     this.codenvyAdminPlugins = codenvyAdminPlugins;
     this.codenvyAdminService = codenvyAdminService;
     this.codenvyRecipe = codenvyRecipe;
+    this.codenvyRecipeTemplate = codenvyRecipeTemplate;
     this.codenvyStack = codenvyStack;
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
   }
-
-
 
 
   /**
@@ -239,11 +240,20 @@ class CodenvyAPI {
 
   /**
    * The Codenvy Recipe API
-   * @returns {CodenvyAPI.codenvyRecipe|*}
+   * @returns {CodenvyRecipe|*}
    */
   getRecipe() {
     return this.codenvyRecipe;
   }
+
+  /**
+   * The Codenvy Recipe Template API
+   * @returns {CodenvyRecipeTemplate|*}
+   */
+  getRecipeTemplate() {
+    return this.codenvyRecipeTemplate;
+  }
+
 
   /**
    * The Codenvy Stack API
