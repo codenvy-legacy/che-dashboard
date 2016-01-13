@@ -3,6 +3,6 @@
   "name": "Che",
   "logoFile": "eclipsechelogo.png",
   "favicon": "favicon.ico",
-  "ideResources": "/che/_app/",
+  "ideResources": "/ide/_app/",
   "helpPath": "https://www.eclipse.org/che/"
 }
