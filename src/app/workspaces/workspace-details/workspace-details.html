@@ -38,6 +38,35 @@
                                cdvy-button-title="Rename" name="updateButton" ng-click="workspaceDetailsCtrl.renameWorkspace(workspaceInformationForm.$valid)"/>
           </div>
         </cdvy-panel>
+          <cdvy-panel cdvy-title="Export Workspace" class="workspace-details-content">
+              <div ng-if="!workspaceDetailsCtrl.exportWorkspaceContent" layout="row" flex layout-align="space-around start">
+                <label flex="15" class="workspace-details-description">
+                    Export your workspace to a JSON file.
+                </label>
+
+                <div layout="column" flex="85">
+                  <cdvy-button-default cdvy-button-title="export" ng-click="workspaceDetailsCtrl.exportWorkspace($event)"/>
+                </div>
+              </div>
+              <div ng-if="workspaceDetailsCtrl.exportWorkspaceContent.length > 0">
+                  <div layout="row" flex>
+                    <div flex="90">
+                      <ui-codemirror class="workspace-editor"
+                                   ui-codemirror="workspaceDetailsCtrl.editorOptions"
+                                   ng-model="workspaceDetailsCtrl.exportWorkspaceContent"></ui-codemirror>
+                    </div>
+                    <div layout="row" layout-align="center center"><cdvy-clipboard class="copy-clipboard" cdvy-value="workspaceDetailsCtrl.exportWorkspaceContent"></cdvy-clipboard></div>
+                  </div>
+                  <div layout="column">
+                    <cdvy-button-default cdvy-button-title="download"
+                                         cdvy-button-icon="fa fa-download"
+                                         ng-href="{{workspaceDetailsCtrl.downloadLink}}"/>
+
+                  </div>
+              </div>
+
+
+          </cdvy-panel>
         <cdvy-panel cdvy-title="Delete Workspace" class="workspace-details-content">
           <div layout="row" flex layout-align="space-around start">
             <label flex="15" class="workspace-details-description">
