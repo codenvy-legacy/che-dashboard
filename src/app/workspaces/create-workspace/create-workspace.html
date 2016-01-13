@@ -40,6 +40,18 @@
         </div>
 
     </cdvy-panel>
+
+    <cdvy-panel cdvy-title="Import workspace">
+
+        <ui-codemirror class="workspace-export-editor" ui-codemirror="workspaceDetailsCtrl.editorOptions"
+                       ng-model="workspaceDetailsCtrl.exportWorkspaceContent"></ui-codemirror>
+        <cdvy-button-default cdvy-button-title="export" ng-click="workspaceDetailsCtrl.exportWorkspace($event)"/>
+
+    </cdvy-panel>
+
+
+
+
   </ng-form>
 
   <cdvy-button-primary id="create-project-button-import"

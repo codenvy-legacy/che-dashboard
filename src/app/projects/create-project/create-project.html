@@ -179,6 +179,32 @@
 
         </cdvy-panel>
 
+        <cdvy-panel id="create-project-workspace" cdvy-title="Configure Workspace" cdvy-panel-id="create-project-workspace" cdvy-tooltip="A workspace contains projects and runtime environments. If your stack requires a new workspace, configure it here.">
+            <ng-form name="workspaceInformationForm">
+
+                <cdvy-label-container cdvy-label-name="Name">
+                    <cdvy-input cdvy-form="workspaceInformationForm"
+                                cdvy-name="name"
+                                cdvy-place-holder="Name of the workspace"
+                                ng-model="createProjectCtrl.workspaceName"
+                                required
+                                ng-minlength="3"
+                                ng-maxlength="20"
+                                ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+                        <div ng-message="required">A name is required.</div>
+                        <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
+                        <div ng-message="minlength">The name has to be more then 3 characters long.</div>
+                        <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
+                    </cdvy-input>
+                </cdvy-label-container>
+                stack library Option {{createProjectCtrl.stackLibraryOption}} and createProjectCtrl.stackTab = {{createProjectCtrl.stackTab}}
+                value is {{createProjectCtrl.stackLibraryOption === 'existing-workspace' && createProjectCtrl.stackTab === 'stack-library'}}
+
+                <cdvy-workspace-ram-allocation-slider ng-model="createProjectCtrl.workspaceRam"></cdvy-workspace-ram-allocation-slider>
+
+            </ng-form>
+        </cdvy-panel>
+
         <cdvy-panel id="create-project-source-template" ng-show="createProjectCtrl.selectSourceOption === 'select-source-new'" cdvy-title="Select Template" cdvy-tooltip="Create new projects with templates configured by you using a wizard in the IDE.">
             <md-radio-group ng-model="createProjectCtrl.templatesChoice">
                 <md-radio-button>Ready-to-run project samples</md-radio-button>

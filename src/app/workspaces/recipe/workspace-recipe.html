@@ -24,25 +24,5 @@
         <ui-codemirror ui-codemirror="workspaceRecipeCtrl.editorOptions"
                        ng-model="workspaceRecipeCtrl.recipeScript"></ui-codemirror>
     </div>
-    <div class="workspace-info">
-    <cdvy-workspace-ram-allocation-slider ng-model="workspaceRecipeCtrl.workspaceRam"></cdvy-workspace-ram-allocation-slider>
-    <cdvy-label-container cdvy-label-name="Workspace name">
-      <cdvy-input cdvy-form="workspaceInformationForm"
-                  cdvy-name="name"
-                  cdvy-place-holder="Name of the workspace"
-                  ng-model="workspaceRecipeCtrl.workspaceName"
-                  required
-                  ng-minlength="3"
-                  ng-maxlength="20"
-                  ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
-        <div ng-message="required">A name is required.</div>
-        <div ng-message="pattern">
-          Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores
-        </div>
-        <div ng-message="minlength">The name has to be more then 3 characters long.</div>
-        <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
-      </cdvy-input>
-    </cdvy-label-container>
-    </div>
   </ng-form>
 </div>

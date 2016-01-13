@@ -61,6 +61,11 @@ class CreateProjectCtrl {
         link: 'create-project-stack'
       },
       {
+        id: '#create-project-workspace',
+        name: 'workspace',
+        link: 'create-project-workspace'
+      },
+      {
         id: '#create-project-source-template',
         name: 'template',
         link: 'create-project-template'
@@ -836,18 +841,29 @@ class CreateProjectCtrl {
 
   setStackTab(stackTab) {
     this.stackTab = stackTab;
+    this.checkDisabledWorkspace();
   }
 
   cdvyStackLibrarySelecter(stack) {
     // change default once user has select it
     this.stackLibraryUser = stack;
     this.stackLibraryOption = 'new-workspace';
+    this.checkDisabledWorkspace();
   }
 
   stackLibraryChoice(option) {
     this.stackLibraryOption = option;
+    this.checkDisabledWorkspace();
   }
 
+  checkDisabledWorkspace() {
+    let val = this.stackLibraryOption === 'existing-workspace' && this.stackTab === 'stack-library';
+    // if workspace can be configured, generate a new workspace name
+    if (!val) {
+      this.generateWorkspaceName();
+    }
+    this.$rootScope.$broadcast('cdvyPanel:disabled', { id: 'create-project-workspace', disabled: val });
+  }
   /**
    * Use of an existing workspace
    * @param workspace the workspace to use
@@ -855,8 +871,9 @@ class CreateProjectCtrl {
   cdvyStackLibraryWorkspaceSelecter(workspace) {
     // change default once user has select it
     this.workspaceSelected = workspace;
-
+    this.workspaceName = workspace.name;
     this.stackLibraryOption = 'existing-workspace';
+    this.checkDisabledWorkspace();
   }
 
   cdvyStackLibrarySelecterDefault(defaultStack) {
