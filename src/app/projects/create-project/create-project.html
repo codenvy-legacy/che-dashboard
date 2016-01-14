@@ -81,12 +81,18 @@
                     </div>
                 </div>
                 <div ng-class="{'create-project-panel-progress-lastitem-enabled' : (createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)), 'create-project-panel-progress-lastitem-error' : createProjectCtrl.getCreationSteps()[$index].hasError}"
-                     class="create-project-panel-progress-lastitem" layout="row" layout-align="end start">
-                    &nbsp;
-                    <cdvy-button-notice ng-show="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)"
-                                        cdvy-button-title="Add another project" ng-click="createProjectCtrl.resetCreateNewProject()"></cdvy-button-notice>
-                    <cdvy-button-primary ng-show="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)"
-                                         cdvy-button-title="Open in IDE" ng-href="#/ide/{{createProjectCtrl.getWorkspaceOfProject()}}"></cdvy-button-primary>
+                     class="create-project-panel-progress-lastitem" layout="row">
+                    <div layout="column" flex layout-align="start start">
+                        <cdvy-button-notice ng-show="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)"
+                                            cdvy-button-title="Add another project" ng-click="createProjectCtrl.resetCreateNewProject()"></cdvy-button-notice>
+                    </div>
+                    <div layout="column" flex layout-align="start end">
+                        <cdvy-button-primary ng-show="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)"
+                                             ng-href="#/ide/{{createProjectCtrl.getWorkspaceOfProject()}}"
+                                             class="codenvy-hover create-project-details-arrow"
+                                             cdvy-button-icon="fa fa-chevron-circle-right"
+                                             cdvy-button-title="Open in IDE"></cdvy-button-default>
+                    </div>
                 </div>
             </div>
 
