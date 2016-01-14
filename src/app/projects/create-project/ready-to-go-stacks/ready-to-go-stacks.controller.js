@@ -46,6 +46,10 @@ class ReadyToGoStacksCtrl {
     var remoteStacks = this.codenvyStack.getStacks();
     // remote stacks are
     remoteStacks.forEach((stack) => {
+      stack.iconName = stack.name.toLowerCase();
+      if (/\./.test(stack.iconName)) {
+        stack.iconName = stack.iconName.replace(new RegExp('\\.', 'g'), '');
+      }
       this.stacks.push(stack);
     });
     // broadcast event

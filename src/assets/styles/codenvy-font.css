@@ -37,33 +37,41 @@
 }
 
 .cdvyico-type-blank:before {
+	content: "\E006";
+}
+
+.cdvyico-type-aspnet:before {
 	content: "\E005";
 }
 
 .cdvyico-type-cpp:before {
-	content: "\E006";
-}
-
-.cdvyico-type-go:before {
 	content: "\E007";
 }
 
-.cdvyico-type-java:before {
+.cdvyico-type-go:before {
 	content: "\E008";
 }
 
-.cdvyico-type-javascript:before {
+.cdvyico-type-java:before {
 	content: "\E009";
 }
 
-.cdvyico-type-php:before {
+.cdvyico-type-javascript:before {
 	content: "\E00A";
 }
 
-.cdvyico-type-python:before {
+.cdvyico-type-node:before {
 	content: "\E00B";
 }
 
-.cdvyico-type-ruby:before {
+.cdvyico-type-php:before {
 	content: "\E00C";
+}
+
+.cdvyico-type-python:before {
+	content: "\E00D";
+}
+
+.cdvyico-type-ruby:before {
+	content: "\E00E";
 }
