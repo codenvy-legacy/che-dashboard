@@ -66,7 +66,7 @@ class CodenvyProject {
       updatePermissions: {method: 'POST', url: '/api/ext/project/:workspaceId/permissions/:path', isArray: true},
       rename: {method: 'POST', url: '/api/ext/project/:workspaceId/rename/:path?name=:name'},
       remove: {method: 'DELETE', url: '/api/ext/project/:workspaceId/:path'},
-      update: {method: 'PUT', url: '/api/ext/project/:workspaceId/:path'},
+      update: {method: 'PUT', url: '/api/ext/project/:workspaceId/:path'}
     });
   }
 
@@ -415,15 +415,19 @@ class CodenvyProject {
   }
 
   updateProjectDetails(projectDetails) {
+    return updateProjectDetails(projectDetails.workspaceId, projectDetails.name, projectDetails);
+  }
+
+  updateProject(workspaceId, path, projectDetails) {
     let promiseUpdateProjectDetails = this.remoteProjectsAPI.update({
-      workspaceId: projectDetails.workspaceId,
-      path: projectDetails.name
+      workspaceId: workspaceId,
+      path: path
     }, projectDetails).$promise;
 
 
     // update list of projects
     let promiseUpdateProjects = promiseUpdateProjectDetails.then(() => {
-      this.fetchProjectsForWorkspaceId(projectDetails.workspaceId);
+      this.fetchProjectsForWorkspaceId(workspaceId);
     });
 
     return promiseUpdateProjects;

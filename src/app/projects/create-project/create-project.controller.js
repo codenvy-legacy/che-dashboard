@@ -437,6 +437,12 @@ class CreateProjectCtrl {
 
       promise = this.codenvyAPI.getProject().importProject(workspaceId, projectName, projectData.source);
 
+      // needs to update configuration of the project
+      promise = promise.then(() => {
+        this.codenvyAPI.getProject().updateProject(workspaceId, projectName, projectData.project).$promise;
+      });
+
+
       // add commands if there are some that have been defined
       let commands = projectData.project.commands;
       if (commands && commands.length > 0) {
@@ -665,7 +671,6 @@ class CreateProjectCtrl {
         if (message.eventType === 'RUNNING' && message.workspaceId === data.id) {
           this.createProjectSvc.setCurrentProgressStep(2);
 
-          this.importProjectData.project.type = 'blank';
           this.importProjectData.project.name = this.projectName;
 
           // Now that the container is started, wait for the extension server. For this, needs to get runtime details
