@@ -175,7 +175,11 @@ class IdeSvc {
             });
 
             bus.subscribe(agentChannel, (message) => {
-                let agentStep = 2;
+              if (this.currentStep < 2) {
+                this.currentStep = 2;
+              }
+
+              let agentStep = 2;
                 if (this.steps[agentStep].logs.length > 0) {
                     this.steps[agentStep].logs = this.steps[agentStep].logs + '\n' + message;
                 } else {
