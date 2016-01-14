@@ -37,10 +37,11 @@ class CodenvyNotification {
   showError(text) {
     this.$mdToast.hide();
     this.$mdToast.show({
-      template: '<md-toast class="cdvy-notification-error">' +
+      template: '<md-toast class="cdvy-notification-error" layout="row" layout-align="space-between start">' +
       '<span flex><b>Failed!</b> ' + text + '</span>' +
       '<md-button ng-click="hideNotification()">Close</md-button>' +
       '</md-toast>',
+      autoWrap: false,
       controller: ['$scope', ($scope) => {
         $scope.hideNotification = this.$mdToast.hide;
       }],
