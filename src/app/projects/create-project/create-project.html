@@ -89,6 +89,7 @@
                     <div layout="column" flex layout-align="start end">
                         <cdvy-button-primary ng-show="createProjectCtrl.getCurrentProgressStep() === (createProjectCtrl.getCreationSteps().length - 1)"
                                              ng-href="{{createProjectCtrl.getIDELink()}}"
+                                             ng-click="createProjectCtrl.resetCreateNewProject()"
                                              class="codenvy-hover create-project-details-arrow"
                                              cdvy-button-icon="fa fa-chevron-circle-right"
                                              cdvy-button-title="Open in IDE"></cdvy-button-primary>

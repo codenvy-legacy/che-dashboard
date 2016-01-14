@@ -52,6 +52,12 @@ class CreateProjectPopupCtrl {
   getProject() {
       return this.createProjectSvc.getProject();
   }
+
+  resetCreateNewProject() {
+    this.hidePopup();
+    this.createProjectSvc.resetCreateProgress();
+  }
+
 }
 
 
