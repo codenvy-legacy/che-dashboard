@@ -20,9 +20,10 @@ class IdeLoaderCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(ideSvc, $rootScope) {
+  constructor(ideSvc, $rootScope, $location) {
     this.ideSvc= ideSvc;
     this.$rootScope = $rootScope;
+    this.$location = $location;
   }
 
 
@@ -36,6 +37,11 @@ class IdeLoaderCtrl {
 
   getStepText(stepNumber) {
     return this.ideSvc.getStepText(stepNumber);
+  }
+
+  cancelLoad() {
+    this.$rootScope.hideIdeLoader = true;
+    this.$location.path('#/');
   }
 
 }
