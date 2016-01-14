@@ -153,7 +153,10 @@ class CreateProjectSvc {
 
   getIDELink() {
     let link = '#/ide/' + this.getWorkspaceOfProject();
-    return  link + '?action=' + this.ideAction;
+    if (this.hasIdeAction()) {
+     link = link + '?action=' + this.ideAction;
+    }
+    return link;
   }
 
 
