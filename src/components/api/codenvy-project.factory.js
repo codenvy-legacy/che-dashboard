@@ -415,7 +415,7 @@ class CodenvyProject {
   }
 
   updateProjectDetails(projectDetails) {
-    return updateProjectDetails(projectDetails.workspaceId, projectDetails.name, projectDetails);
+    return this.updateProject(projectDetails.workspaceId, projectDetails.name, projectDetails);
   }
 
   updateProject(workspaceId, path, projectDetails) {
