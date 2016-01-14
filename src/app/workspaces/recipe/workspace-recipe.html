@@ -18,12 +18,17 @@
       </div>
       <md-radio-button value="edit-your-stack"
                        ng-click="workspaceRecipeCtrl.setRecipeScript(workspaceRecipeCtrl.defaultRecipeScript)">
-        Write your stack
+        Create your own stack
       </md-radio-button>
     </md-radio-group>
-    <div ng-if="workspaceRecipeCtrl.selectSourceOption === 'edit-your-stack'" class="recipe-editor">
-      <ui-codemirror ui-codemirror="workspaceRecipeCtrl.editorOptions"
+    <div ng-if="workspaceRecipeCtrl.selectSourceOption === 'edit-your-stack'">
+      <div class="recipe-editor">
+        <ui-codemirror ui-codemirror="workspaceRecipeCtrl.editorOptions"
                      ng-model="workspaceRecipeCtrl.recipeScript"></ui-codemirror>
+      </div>
+      <div class="recipe-docs-link">
+        <a href="https://eclipse-che.readme.io/docs/custom-machine#che-stacks">Custom stack documentation</a>
+      </div>
     </div>
   </ng-form>
 </div>
