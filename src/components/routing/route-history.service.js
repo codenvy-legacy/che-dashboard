@@ -40,6 +40,13 @@ class RouteHistory {
     return this.history[this.history.length - 1];
   }
 
+  /**
+   * Pop current path from the history.
+   */
+  popCurrentPath() {
+    this.history.pop();
+  }
+
 }
 
 export default RouteHistory;
