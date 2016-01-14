@@ -20,7 +20,7 @@ class IdeCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (ideSvc, $routeParams, ideLoaderSvc, ideIFrameSvc, codenvyAPI, $rootScope, codenvyWorkspace, $timeout) {
+  constructor (ideSvc, $routeParams, ideLoaderSvc, ideIFrameSvc, codenvyAPI, $rootScope, codenvyWorkspace, $timeout, $location, routeHistory) {
     this.ideSvc = ideSvc;
     this.ideIFrameSvc = ideIFrameSvc;
     this.$rootScope = $rootScope;
@@ -42,15 +42,30 @@ class IdeCtrl {
       this.selectedWorkspaceName = workspace;
     }
 
-    this.ideIFrameSvc.addIFrame();
+    let ideAction = $routeParams.action;
+    if (ideAction) {
+      // send action
+      this.ideSvc.setIDEAction(ideAction);
 
-    let promise = codenvyWorkspace.fetchWorkspaces();
+      // pop current route as we will redirect
+      routeHistory.popCurrentPath();
 
-    promise.then(() => {
-      this.updateData();
-    }, () => {
-      this.updateData();
-    });
+      // remove action from path
+      $location.url('/ide/' + this.selectedWorkspaceName, false);
+
+    } else {
+      // no action, keep current flow
+
+      this.ideIFrameSvc.addIFrame();
+
+      let promise = codenvyWorkspace.fetchWorkspaces();
+
+      promise.then(() => {
+        this.updateData();
+      }, () => {
+        this.updateData();
+      });
+    }
 
 
   }

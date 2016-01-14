@@ -27,6 +27,7 @@ class CreateProjectSvc {
         this.init = false;
 
 
+        this.ideAction = '';
         this.createProjectInProgress = false;
 
         this.currentProgressStep = 0;
@@ -136,6 +137,25 @@ class CreateProjectSvc {
         }
 
     }
+
+
+  hasIdeAction() {
+    return this.getIDEAction().length > 0;
+  }
+
+  getIDEAction() {
+    return this.ideAction;
+  }
+
+  setIDEAction(ideAction) {
+    this.ideAction = ideAction;
+  }
+
+  getIDELink() {
+    let link = '#/ide/' + this.getWorkspaceOfProject();
+    return  link + '?action=' + this.ideAction;
+  }
+
 
 }
 

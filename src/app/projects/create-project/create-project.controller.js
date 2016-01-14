@@ -21,7 +21,7 @@ class CreateProjectCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope, createProjectSvc, lodash) {
+  constructor(codenvyAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope, createProjectSvc, lodash, $q) {
     this.codenvyAPI = codenvyAPI;
     this.$websocket = $websocket;
     this.$timeout = $timeout;
@@ -31,6 +31,7 @@ class CreateProjectCtrl {
     this.$rootScope = $rootScope;
     this.createProjectSvc = createProjectSvc;
     this.lodash = lodash;
+    this.$q = $q;
 
     this.stackTab = 'ready-to-go';
 
@@ -44,6 +45,8 @@ class CreateProjectCtrl {
 
     // default options
     this.selectSourceOption = 'select-source-new';
+
+    this.templatesChoice = 'templates-wizard';
 
     // default RAM value for workspaces
     this.workspaceRam = 1000;
@@ -414,14 +417,14 @@ class CreateProjectCtrl {
     var promise;
     var channel= null;
     // select mode (create or import)
-    if (this.selectSourceOption === 'select-source-new' && projectData.source.location === '') {
+    if (this.selectSourceOption === 'select-source-new' && this.templatesChoice === 'templates-wizard') {
 
-      projectData.project.type = 'blank';
-      projectData.project.name = this.projectName;
+      // we do not create project as it will be done through wizard
+      var deferred = this.$q.defer();
+      promise = deferred.promise;
+      deferred.resolve(true);
 
-      // no source, data is .project subpart
-      promise = this.codenvyAPI.getProject().createProject(workspaceId, projectData.project.name, projectData.project);
-    } else {
+    } else if (projectData.source.location.length > 0) {
 
       // websocket channel
       channel = 'importProject:output:' + workspaceId + ':' + projectName;
@@ -559,6 +562,10 @@ class CreateProjectCtrl {
       this.importProjectData.project.name = angular.copy(this.projectName);
     }
     this.createProjectSvc.setProject(this.importProjectData.project.name);
+
+    if (this.templatesChoice === 'templates-wizard') {
+      this.createProjectSvc.setIDEAction('createProject:projectName=' + this.projectName);
+    }
 
     // reset logs and errors
     this.resetCreateProgress();
@@ -817,6 +824,11 @@ class CreateProjectCtrl {
     return this.createProjectSvc.getWorkspaceOfProject();
   }
 
+
+  getIDELink() {
+    return this.createProjectSvc.getIDELink();
+  }
+
   isElementVisible(index) {
 
     // for each id, check last
@@ -916,6 +928,13 @@ class CreateProjectCtrl {
     this.currentStack = stack;
     this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;
   }
+
+
+  selectWizardProject() {
+    this.importProjectData.source.location = '';
+  }
+
+
 }
 
 export default CreateProjectCtrl;

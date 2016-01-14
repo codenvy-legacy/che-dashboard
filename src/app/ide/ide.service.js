@@ -230,6 +230,10 @@ class IdeSvc {
         });
     }
 
+    setIDEAction(ideAction) {
+      this.ideAction = ideAction;
+    }
+
     openIde(skipLoader) {
         if (skipLoader) {
             this.ideLoaderSvc.addLoader();
@@ -239,7 +243,7 @@ class IdeSvc {
         this.currentStep = 3;
         let inDevMode = this.userDashboardConfig.developmentMode;
         let randVal = Math.floor((Math.random()*1000000)+1);
-        let rand = '?uid=' + randVal;
+        let appendUrl = '?uid=' + randVal;
 
         let contextPath = '';
         let selfLink = this.getHrefLink(this.selectedWorkspace, 'self link');
@@ -251,10 +255,17 @@ class IdeSvc {
             contextPath = '/ws/';
         }
 
+        if (this.ideAction != null) {
+          appendUrl = appendUrl + '&action=' + this.ideAction;
+
+          // reset action
+          this.ideAction = null;
+        }
+
         if (inDevMode) {
-            this.$rootScope.ideIframeLink = this.$sce.trustAsResourceUrl(this.proxySettings + contextPath + this.selectedWorkspace.name + rand);
+            this.$rootScope.ideIframeLink = this.$sce.trustAsResourceUrl(this.proxySettings + contextPath + this.selectedWorkspace.name + appendUrl);
         } else {
-            this.$rootScope.ideIframeLink = ideUrlLink + rand;
+            this.$rootScope.ideIframeLink = ideUrlLink + appendUrl;
         }
         if (!skipLoader) {
             this.$timeout(() => {
