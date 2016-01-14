@@ -930,6 +930,14 @@ class CreateProjectCtrl {
   }
 
   updateCurrentStack(stack) {
+    // we've a stack so need to reset workspace selected
+    if (stack != null) {
+      // reset workspace and project data already defined
+      this.workspaceSelected = null;
+      this.templatesChoice = 'templates-wizard';
+      this.generateProjectName(true);
+      this.importProjectData.project.description = '';
+    }
     this.currentStack = stack;
     this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;
   }
