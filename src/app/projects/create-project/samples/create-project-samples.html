@@ -40,7 +40,7 @@
                 <cdvy-list class="projects-create-project-samples-list">
                     <cdvy-list-item  ng-repeat="template in lstTemplate" flex>
                         <div layout-gt-sm="row" flex layout-align="start center" class="projects-create-project-samples-list-row">
-                            <div class="projects-create-project-samples-list-item" ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)" layout="column" flex>
+                            <div class="projects-create-project-samples-list-item" ng-class="{'projects-create-project-samples-list-item-active' : template.name === createProjectSamplesCtrl.selectedTemplateName}" ng-click="createProjectSamplesCtrl.selectTemplate(template, createProjectCtrl)" ng-init="createProjectSamplesCtrl.initItem($first, template, createProjectCtrl)" layout="column" flex>
                                 <div class="projects-create-project-samples-list-samplename">{{template.displayName}}</div>
                                 <div class="projects-create-project-samples-list-sampledescription">{{template.description}}</div>
                             </div>

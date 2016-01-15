@@ -46,7 +46,7 @@ class CreateProjectCtrl {
     // default options
     this.selectSourceOption = 'select-source-new';
 
-    this.templatesChoice = 'templates-wizard';
+    this.templatesChoice = 'templates-samples';
 
     // default RAM value for workspaces
     this.workspaceRam = 1000;
@@ -770,9 +770,6 @@ class CreateProjectCtrl {
   }
 
   cdvySimpleSelecterDefault(stack) {
-    // generate name
-    this.generateProjectName();
-
     this.readyToGoStack = stack;
 
     this.updateCurrentStack(stack);
@@ -934,9 +931,10 @@ class CreateProjectCtrl {
     if (stack != null) {
       // reset workspace and project data already defined
       this.workspaceSelected = null;
-      this.templatesChoice = 'templates-wizard';
-      this.generateProjectName(true);
-      this.importProjectData.project.description = '';
+      if (this.templatesChoice !== 'templates-samples') {
+        this.generateProjectName(true);
+        this.importProjectData.project.description = '';
+      }
     }
     this.currentStack = stack;
     this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;

@@ -55,6 +55,10 @@ class CreateProjectSamplesCtrl {
    * @param createProjectCtrl callback controller
    */
   selectTemplate(template, createProjectCtrl) {
+
+    // selected item
+    this.selectedTemplateName = template.name;
+
     // update source details
     createProjectCtrl.importProjectData.source.type = template.source.type;
     createProjectCtrl.importProjectData.source.location = template.source.location;
@@ -73,9 +77,22 @@ class CreateProjectSamplesCtrl {
     name = name.replace(/\./g, '_');
     createProjectCtrl.importProjectData.project.name = name;
 
+    createProjectCtrl.projectName = name;
+
     // broadcast event
     this.$rootScope.$broadcast('create-project-samples:selected');
   }
+
+
+  /**
+   * Select the first element in the list
+   */
+  initItem($first, template, createProjectCtrl) {
+      if ($first) {
+        this.selectTemplate(template, createProjectCtrl);
+      }
+  }
+
 
 
   /**
