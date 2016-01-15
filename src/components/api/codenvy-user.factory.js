@@ -38,7 +38,8 @@ class CodenvyUser {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         }
-      }
+      },
+      createUser: {method: 'POST', url: '/api/user/create'}
     });
 
     // users by ID
@@ -59,6 +60,24 @@ class CodenvyUser {
 
   }
 
+  /**
+   * Create new user
+   * @param name - new user name
+   * @param email - new user e-mail
+   * @param password - new user password
+   * @returns {*}
+   */
+  createUser(name, email, password) {
+    let data = {
+      password: password,
+      email: email,
+      name: name
+    };
+
+    let promise = this.remoteUserAPI.createUser(data).$promise;
+
+    return promise;
+  }
 
   /**
    * Gets the user ID

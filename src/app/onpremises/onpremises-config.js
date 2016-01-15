@@ -10,13 +10,14 @@
  */
 'use strict';
 
-
+import OnPremisesCreateUserConfig from './create-user/create-user-config';
 import OnPremisesAdminConfig from './admin/admin-config';
 
 
 class OnPremisesConfig {
 
   constructor(register) {
+    new OnPremisesCreateUserConfig(register);
     new OnPremisesAdminConfig(register);
   }
 }

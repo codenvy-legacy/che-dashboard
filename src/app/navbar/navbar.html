@@ -68,14 +68,27 @@
                 </div>
               </md-button>
             </md-list-item>
-            <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isImsAvailable() && navbarCtrl.userIsAdmin()">
-              <md-button nav-bar-selected flex cdvy-reload-href  href="#/onprem/administration" layout-align="left" cdvy-event-logger="factories">
-                <div class="navbar-item" layout="row" layout-align="start center">
-                  <i class="cdvyfont cdvyico-administration icon">&nbsp;</i>
-                  <span>Administration</span>
-                </div>
-              </md-button>
-            </md-list-item>
+            <div ng-if="navbarCtrl.isImsAvailable() && navbarCtrl.userIsAdmin()">
+              <md-divider md-theme="factory-theme"></md-divider>
+              <md-list-item flex class="navbar-subsection-item">
+                <md-button nav-bar-selected flex cdvy-reload-href href="#/onprem/administration" layout-align="left"
+                           cdvy-event-logger="administration">
+                  <div class="navbar-item" layout="row" layout-align="start center">
+                    <i class="cdvyfont cdvyico-administration icon">&nbsp;</i>
+                    <span>Administration</span>
+                  </div>
+                </md-button>
+              </md-list-item>
+              <md-list-item flex class="navbar-subsection-item">
+                <md-button nav-bar-selected flex cdvy-reload-href href="#/onprem/usermanagement" layout-align="left"
+                           cdvy-event-logger="usermanagement">
+                  <div class="navbar-item" layout="row" layout-align="start center">
+                    <i class="fa fa-user fa-lg icon">&nbsp;</i>
+                    <span>User Management</span>
+                  </div>
+                </md-button>
+              </md-list-item>
+            </div>
           </md-list>
         </section>
       </div>
@@ -88,7 +101,8 @@
         <i class="material-design icon-ic_build_24px">&nbsp;</i>
         <span flex class="navbar-title">Configuration</span>
       </span>
-          <i class="material-design md-tab-themed" ng-class="configMenuIsExpand ? 'icon-ic_expand_less_24px' : 'icon-ic_expand_more_24px'">&nbsp;</i>
+          <i class="material-design md-tab-themed" ng-class="configMenuIsExpand ? 'icon-ic_expand_less_24px' : 'icon-ic_expand_more_24px'">
+            &nbsp;</i>
         </div>
         <section class="animation navbar-subsection"
                  flex layout="column" layout-align="center start" layout-fill
@@ -123,25 +137,29 @@
             <md-list-item flex class="navbar-subsection-item">
               <md-button nav-bar-selected flex cdvy-reload-href href="#/account" layout-align="left" cdvy-event-logger="account">
                 <div class="navbar-item" layout="row"
-                     layout-align="start center">Account</div>
+                     layout-align="start center">Account
+                </div>
               </md-button>
             </md-list-item>
             <md-list-item flex class="navbar-subsection-item" ng-if="!navbarCtrl.isImsAvailable()">
               <md-button nav-bar-selected flex cdvy-reload-href href="#/team" layout-align="left" cdvy-event-logger="team">
                 <div class="navbar-item" layout="row"
-                     layout-align="start center">Team</div>
+                     layout-align="start center">Team
+                </div>
               </md-button>
             </md-list-item>
             <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isSubscriptionServiceAvailable">
               <md-button nav-bar-selected flex cdvy-reload-href href="#/subscriptions" layout-align="left">
                 <div class="navbar-item" layout="row" cdvy-event-logger="subscriptions"
-                     layout-align="start center">Subscriptions</div>
+                     layout-align="start center">Subscriptions
+                </div>
               </md-button>
             </md-list-item>
             <md-list-item flex class="navbar-subsection-item" ng-if="!navbarCtrl.isImsAvailable() && navbarCtrl.isInvoiceServiceAvailable">
               <md-button nav-bar-selected flex cdvy-reload-href href="#/billing" layout-align="left">
                 <div class="navbar-item" layout="row" cdvy-event-logger="billing-and-invoices"
-                     layout-align="start center">Billing and Invoices</div>
+                     layout-align="start center">Billing and Invoices
+                </div>
               </md-button>
             </md-list-item>
           </md-list>

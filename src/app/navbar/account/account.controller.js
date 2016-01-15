@@ -69,10 +69,7 @@ class AccountCtrl {
   /**
    * Set profile attributes
    */
-  setProfileAttributes(isInputFormValid) {
-    if (!isInputFormValid) {
-      return;
-    }
+  setProfileAttributes() {
 
     if (this.isAttributesChanged()) {
       let promise = this.codenvyAPI.getProfile().setAttributes(this.profileAttributes);

@@ -185,4 +185,29 @@ describe('CodenvyUser', function () {
     }
   );
 
+  /**
+   * Check that we're able to create user
+   */
+  it('Set user', function () {
+      let user = {
+        password: 'password12345',
+        email: 'test@test.com',
+        name: 'testname'
+      };
+
+      // setup backend
+      codenvyBackend.setup();
+      codenvyBackend.createUser();
+
+      // fetch profile
+      factory.createUser(user.name, user.email, user.password);
+
+      // expecting a POST
+      httpBackend.expectPOST('/api/user/create');
+
+      // flush command
+      httpBackend.flush();
+    }
+  );
+
 });
