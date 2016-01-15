@@ -189,7 +189,7 @@ describe('CodenvyUser', function () {
    * Check that we're able to create user
    */
   it('Set user', function () {
-      let user = {
+      var user = {
         password: 'password12345',
         email: 'test@test.com',
         name: 'testname'
