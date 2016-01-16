@@ -1,13 +1,12 @@
-[![Contribute](https://rawgit.com/slemeur/4a900bb68300a2643679/raw/1ad2c6d784c92fc21886c765bc6315a1f2ee690c/codenvy-contribute.svg)](https://codenvy.com/f?id=qqep9h70k6c47de1)
-
-
+## About Eclipse Che
+Eclipse Che is a next generation Eclipse IDE and open source alternative to IntelliJ. This repository is licensed under the Eclipse Public License 1.0. Visit [Eclipse Che's Web site](http://eclipse.org/che) for feature information or the main [Che assembly repository](http://github.com/codenvy/che) for a description of all participating repositories.
 
 Che Dashboard
 ==============
 
 #Requirements
 
-This new version is using bower and gulp as tools. So bower and gulp need to be installed
+This  version is using bower and gulp as tools.
 ```sh
 $ npm install --global bower gulp
 ```
