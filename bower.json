@@ -24,7 +24,7 @@
     "bootstrap-stylus": "~4.0.2",
     "braintree-angular": "~1.2.6",
     "card": "1.0.0",
-    "font-awesome": "~4.3.0",
+    "font-awesome": "~4.5.0",
     "google-material-color": "~1.2.0",
     "jsonlint": "~1.6.0",
     "ng-clip": "~0.2.6",
@@ -42,6 +42,12 @@
   "overrides": {
     "card": {
       "main": "lib/js/jquery.card.js"
+    },
+    "font-awesome": {
+      "main": [
+        "./css/font-awesome.css",
+        "./fonts/*"
+      ]
     }
   }
 }
