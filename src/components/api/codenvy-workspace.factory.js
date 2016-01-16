@@ -56,6 +56,7 @@ class CodenvyWorkspace {
         update: {method: 'POST', url : '/api/workspace/:workspaceId'},
         addProject: {method: 'POST', url : '/api/workspace/:workspaceId/project'},
         getRuntime: {method: 'GET', url : '/api/workspace/:workspaceId/runtime'},
+        deleteRuntime: {method: 'DELETE', url : '/api/workspace/:workspaceId/runtime'},
         startWorkspace: {method: 'POST', url : '/api/workspace/:workspaceId/runtime?environment=:envName'},
         addCommand: {method: 'POST', url: '/api/workspace/:workspaceId/command'}
       }
@@ -237,7 +238,10 @@ class CodenvyWorkspace {
     return promise;
   }
 
-
+  stopWorkspace(workspaceId) {
+    let promise = this.remoteWorkspaceAPI.deleteRuntime({workspaceId: workspaceId}, {}).$promise;
+    return promise;
+  }
 
   /**
    * Performs workspace rename by the given workspaceId and new name.

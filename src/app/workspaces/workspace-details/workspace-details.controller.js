@@ -54,13 +54,15 @@ class WorkspaceDetailsCtrl {
     } else {
       this.updateWorkspaceData();
     }
-
-
   }
+
 
   //Update the workspace data to be displayed.
   updateWorkspaceData() {
     this.workspaceDetails = this.codenvyAPI.getWorkspace().getWorkspacesById().get(this.workspaceId);
+    if (this.loading) {
+      this.startUpdateWorkspaceStatus();
+    }
     this.loading = false;
     this.newName = angular.copy(this.workspaceDetails.name);
   }
@@ -112,7 +114,22 @@ class WorkspaceDetailsCtrl {
     this.exportWorkspaceContent = this.$filter('json')(angular.fromJson(copyOfWorkspace), 2);
   }
 
+  stopWorkspace() {
+    let promise = this.codenvyAPI.getWorkspace().stopWorkspace(this.workspaceId);
 
+    promise.then(() => {}, (error) => {
+      this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Stop workspace failed.');
+      console.log('error', error);
+    });
+  }
+
+  startUpdateWorkspaceStatus(){
+    let bus = this.codenvyAPI.getWebsocket().getBus(this.workspaceId);
+
+    bus.subscribe('workspace:'+this.workspaceId, (message) => {
+      this.workspaceDetails.status =  message.eventType;
+    });
+  }
 }
 
 export default WorkspaceDetailsCtrl;

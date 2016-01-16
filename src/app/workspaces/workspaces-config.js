@@ -26,7 +26,7 @@ import WorkspaceRecipeCtrl from './recipe/workspace-recipe.controller';
 import WorkspaceRecipe from './recipe/workspace-recipe.directive';
 import CodenvyWorkspaceRamAllocationSliderCtrl from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.controller';
 import CodenvyWorkspaceRamAllocationSlider from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.directive';
-
+import WorkspaceStatusIndicator from './workspace-status-indicator/workspace-status-indicator.directive';
 
 /**
  * @ngdoc controller
@@ -58,6 +58,8 @@ class WorkspacesConfig {
 
     register.controller('CodenvyWorkspaceRamAllocationSliderCtrl', CodenvyWorkspaceRamAllocationSliderCtrl);
     register.directive('cdvyWorkspaceRamAllocationSlider', CodenvyWorkspaceRamAllocationSlider);
+
+    register.directive('workspaceStatusIndicator', WorkspaceStatusIndicator);
 
     // config routes
     register.app.config(function ($routeProvider) {

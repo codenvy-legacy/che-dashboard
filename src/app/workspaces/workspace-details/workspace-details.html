@@ -17,26 +17,38 @@
       </md-tab-label>
       <md-tab-body>
         <cdvy-panel cdvy-title="Workspace Information" class="workspace-details-content">
-          <ng-form name="workspaceInformationForm">
-            <cdvy-input cdvy-form="workspaceInformationForm"
-                        cdvy-name="name"
-                        cdvy-label-name="Name"
-                        cdvy-place-holder="Name of the workspace"
-                        ng-model="workspaceDetailsCtrl.newName"
-                        required
-                        ng-maxlength="128"
-                        ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
-              <div ng-message="required">A name is required.</div>
-              <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
-              <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
-              <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
-            </cdvy-input>
-          </ng-form>
-          <div layout="row" flex layout-align="space-around start">
-            <div flex="15"></div>
-            <cdvy-button-primary flex="85" ng-disabled="(workspaceInformationForm.$invalid || workspaceDetailsCtrl.newName === workspaceDetailsCtrl.workspaceDetails.name)"
-                               cdvy-button-title="Rename" name="updateButton" ng-click="workspaceDetailsCtrl.renameWorkspace(workspaceInformationForm.$valid)"/>
+          <div layout="row" flex>
+              <ng-form flex layout="column" name="workspaceInformationForm">
+                <cdvy-input cdvy-form="workspaceInformationForm"
+                            cdvy-name="name"
+                            cdvy-label-name="Name"
+                            cdvy-place-holder="Name of the workspace"
+                            ng-model="workspaceDetailsCtrl.newName"
+                            required
+                            ng-maxlength="128"
+                            ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+                  <div ng-message="required">A name is required.</div>
+                  <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
+                  <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
+                  <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
+                </cdvy-input>
+              </ng-form>
+              <div flex="none" flex-offset="5" layout="column" layout-align="end end">
+                <cdvy-button-primary ng-disabled="(workspaceInformationForm.$invalid || workspaceDetailsCtrl.newName === workspaceDetailsCtrl.workspaceDetails.name)"
+                                     cdvy-button-title="Rename" name="updateButton" ng-click="workspaceDetailsCtrl.renameWorkspace(workspaceInformationForm.$valid)"/>
+              </div>
           </div>
+          <div layout="row">
+            <cdvy-label-container flex layout="row" cdvy-label-name="State">
+              <workspace-status-indicator cdvy-status="workspaceDetailsCtrl.workspaceDetails.status"></workspace-status-indicator>
+            </cdvy-label-container>
+            <div flex="none" flex-offset="5" layout="column" layout-align="end end">
+              <cdvy-button-default ng-disabled="(workspaceDetailsCtrl.workspaceDetails.status !== 'RUNNING')"
+                                   cdvy-button-title="Stop" name="stopButton"
+                                   ng-click="workspaceDetailsCtrl.stopWorkspace()"/>
+            </div>
+          </div>
+        </div>
         </cdvy-panel>
           <cdvy-panel cdvy-title="Export Workspace" class="workspace-details-content">
               <div ng-if="!workspaceDetailsCtrl.exportWorkspaceContent" layout="row" flex layout-align="space-around start">
