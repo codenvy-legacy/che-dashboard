@@ -29,6 +29,7 @@
                   cdvy-label-name="Password"
                   cdvy-place-holder="Password of the user"
                   ng-model="loginCtrl.password"
+                  ng-keyup="$event.keyCode == 13 && loginCtrl.submit()"
                   type="password"
                   required
                   ng-maxlength="128">
