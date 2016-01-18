@@ -22,7 +22,7 @@ class CreateWorkspaceCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, $q, $location, codenvyNotification) {
+  constructor(codenvyAPI, $q, $location, $rootScope, codenvyNotification) {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
     this.$q = $q;
@@ -50,6 +50,8 @@ class CreateWorkspaceCtrl {
     promise.then(() => {
       this.updateData();
     });
+
+    $rootScope.$broadcast('navbar-selected:clear');
   }
 
   updateData() {

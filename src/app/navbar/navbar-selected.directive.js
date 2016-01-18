@@ -29,6 +29,12 @@ class NavBarSelected {
     this.controller = 'NavBarSelectedCtrl';
     this.controllerAs = 'navBarSelectedCtrl';
     this.bindToController = true;
+
+    $rootScope.$on('navbar-selected:clear', () => {
+        if (this.$rootScope.selectedNavBarElement) {
+            this.$rootScope.selectedNavBarElement.removeClass('cdvy-navbar-selected');
+        }
+    });
   }
 
 

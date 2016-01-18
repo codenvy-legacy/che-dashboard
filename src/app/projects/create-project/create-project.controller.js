@@ -185,6 +185,7 @@ class CreateProjectCtrl {
       this.projectDescription = newProjectDescription;
     });
 
+    $rootScope.$broadcast('navbar-selected:clear');
   }
 
 
