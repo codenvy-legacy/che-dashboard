@@ -29,7 +29,18 @@ class CodenvyNotification {
   showInfo(text) {
     this.$mdToast.hide();
     this.$mdToast.show({
-      template: '<md-toast class="cdvy-notification-info"><span flex>' + text + '</span></md-toast>',
+      template: '<md-toast class="cdvy-notification-info" layout="row" flex layout-align="start start">' +
+      '<i class="cdvy-notification-info-icon fa fa-check fa-2x"></i>' +
+      '<div flex="90" layout="column" layout-align="start start">' +
+      '<span flex class="cdvy-notification-info-title"><b>Success</b></span>' +
+      '<span flex class="cdvy-notification-message">' + text + '</span>' +
+      '</div>' +
+      '<i class="cdvy-notification-close-icon fa fa-times" ng-click="hideNotification()"/>' +
+      '</md-toast>',
+      autoWrap: false,
+      controller: ['$scope', ($scope) => {
+        $scope.hideNotification = this.$mdToast.hide;
+      }],
       hideDelay: 3000
     });
   }
@@ -37,9 +48,13 @@ class CodenvyNotification {
   showError(text) {
     this.$mdToast.hide();
     this.$mdToast.show({
-      template: '<md-toast class="cdvy-notification-error" layout="row" layout-align="space-between start">' +
-      '<span flex><b>Failed!</b> ' + text + '</span>' +
-      '<md-button ng-click="hideNotification()">Close</md-button>' +
+      template: '<md-toast class="cdvy-notification-error" layout="row" layout-align="start start">' +
+      '<i class="cdvy-notification-error-icon fa fa-exclamation-triangle fa-2x"></i>' +
+      '<div flex="90" layout="column" layout-align="start start">' +
+      '<span flex class="cdvy-notification-error-title"><b>Failed</b></span>' +
+      '<span flex class="cdvy-notification-message">' + text + '</span>' +
+      '</div>' +
+      '<i class="cdvy-notification-close-icon fa fa-times" ng-click="hideNotification()"/>' +
       '</md-toast>',
       autoWrap: false,
       controller: ['$scope', ($scope) => {

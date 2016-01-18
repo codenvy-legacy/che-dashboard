@@ -1,38 +1,44 @@
 md-toast.cdvy-notification-info,
-md-toast.cdvy-notification-error,
-md-toast.cdvy-notification-warning
-  border-radius: 2px;
+md-toast.cdvy-notification-error
+  transition-delay:0s
+  box-shadow-simple()
+  border-radius: 5px;
   width 588px
   max-height 288px
   top 35px
   bottom auto
   right 20px
   left inherit
-  color #ffffff
-  background-color #4255ff
+  background-color #ffffff
+  border-color $night-foggy-sky-color
+
+md-toast.cdvy-notification-info div,
+md-toast.cdvy-notification-error div
+  justify-content flex-start
+
+i.cdvy-notification-close-icon
+  margin 2px 5px
+  color $clear-foggy-sky-color
+
+i.cdvy-notification-info-icon
+  margin 5px 10px
+  color $che-green-color
+
+i.cdvy-notification-error-icon
+  margin 5px 10px
+  color $red-lipstick-color
 
 md-toast.cdvy-notification-info
   color #3c763d
-  background-color #d6e9c6
 
 md-toast.cdvy-notification-info span,
 md-toast.cdvy-notification-error span
+  margin-left 5px
   max-height 100%
   overflow auto
 
-md-toast.cdvy-notification-info span
-  text-align center
-
-md-toast.cdvy-notification-error
-  background-color #f2dede
-
-md-toast.cdvy-notification-error,
-md-toast.cdvy-notification-error span
+span.cdvy-notification-error-title
   color $red-lipstick-color
 
-md-toast.cdvy-notification-error button
-  margin-top 1px
-  margin-right 2px
-  margin-left 20px
-  text-transform none
-  border solid 1px #ebccd1
+span.cdvy-notification-message
+  color $dark-menacing-sky-color
