@@ -56,6 +56,7 @@ class CheBranding {
             };
 
             this.productName = this.$rootScope.branding.title;
+            this.name = this.$rootScope.branding.name;
             this.productFavicon = this.$rootScope.branding.productFavicon;
             this.productLogo = this.$rootScope.branding.logoURL;
             this.ideResourcesPath = this.$rootScope.branding.ideResourcesPath;
@@ -63,6 +64,10 @@ class CheBranding {
             this.deferred.resolve(this.$rootScope.branding);
         });
 
+    }
+
+    getName() {
+      return this.name;
     }
 
     getProductName() {

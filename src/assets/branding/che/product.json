@@ -1,6 +1,6 @@
 {
   "title": "Eclipse Che - Dashboard",
-  "name": "Che",
+  "name": "Eclipse Che",
   "logoFile": "che-logo.svg",
   "favicon": "favicon.ico",
   "ideResources": "/ide/_app/",
