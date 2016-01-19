@@ -1,8 +1,0 @@
-{
-  "title": "Codenvy - Dashboard",
-  "name": "Codenvy",
-  "logoFile": "logo@3x.png",
-  "favicon": "favicon.ico",
-  "ideResources": "/che/_app/",
-  "helpPath": "https://codenvy.com/support/"
-}

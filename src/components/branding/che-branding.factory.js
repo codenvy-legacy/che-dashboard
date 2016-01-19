@@ -26,22 +26,16 @@ class CheBranding {
         this.codenvyAPI = codenvyAPI;
         this.$http = $http;
         this.$rootScope = $rootScope;
-
         this.deferred = $q.defer();
         this.promise = this.deferred.promise;
-        $http.get('/api/account').then(() => {
-            this.updateData('codenvy');
-        }, () => {
-            this.updateData('che');
-        });
-
+        this.updateData();
     }
 
-    updateData(mode) {
+    updateData() {
 
-        let assetPrefix = 'assets/branding/' + mode + '/';
+        let assetPrefix = 'assets/branding/';
 
-        // load data from the mode
+        // load data
         this.$http.get(assetPrefix + 'product.json').then((data) => {
 
             let brandingData = data.data;

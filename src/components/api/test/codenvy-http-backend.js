@@ -99,7 +99,7 @@ class CodenvyHttpBackend {
     }
 
     // branding
-    this.httpBackend.when('GET', 'assets/branding/codenvy/product.json').respond(this.defaultBranding);
+    this.httpBackend.when('GET', 'assets/branding/product.json').respond(this.defaultBranding);
 
     this.httpBackend.when('POST', '/api/analytics/log/session-usage').respond();
 

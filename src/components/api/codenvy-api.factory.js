@@ -11,7 +11,7 @@
 'use strict';
 /*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
  CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
- CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession, CodenvyRunner,
+ CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession,
  CodenvyService, CodenvyAdminPlugins, CodenvyAdminService, CodenvyRecipe, CodenvyRecipeTemplate, CodenvyStack */
 
 
@@ -33,7 +33,6 @@ import CodenvyProjectType from './codenvy-project-type.factory';
 import CodenvyProjectTemplate from './codenvy-project-template.factory';
 import CodenvyWebsocket from './codenvy-websocket.factory';
 import CodenvyGit from './codenvy-git.factory';
-import CodenvyRunner from './codenvy-runner.factory';
 import CodenvySvn from './codenvy-svn.factory';
 import CodenvyFactoryTemplate from './codenvy-factory-template.factory';
 import CodenvyAnalyticsSession from './codenvy-analytics-session.factory';
@@ -58,7 +57,7 @@ class CodenvyAPI {
    */
   constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
               codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyFactoryTemplate,
-              codenvyAnalyticsSession, codenvyRunner, codenvyService, codenvyAdminPlugins, codenvyAdminService, codenvyRecipe,
+              codenvyAnalyticsSession, codenvyService, codenvyAdminPlugins, codenvyAdminService, codenvyRecipe,
               codenvyRecipeTemplate, codenvyStack) {
     this.codenvyProject = codenvyProject;
     this.codenvyWorkspace = codenvyWorkspace;
@@ -76,7 +75,6 @@ class CodenvyAPI {
     this.codenvySvn = codenvySvn;
     this.codenvyFactoryTemplate = codenvyFactoryTemplate;
     this.codenvyAnalyticsSession = codenvyAnalyticsSession;
-    this.codenvyRunner = codenvyRunner;
     this.codenvyService = codenvyService;
     this.codenvyAdminPlugins = codenvyAdminPlugins;
     this.codenvyAdminService = codenvyAdminService;
@@ -187,14 +185,6 @@ class CodenvyAPI {
    */
   getWebsocket() {
     return this.codenvyWebsocket;
-  }
-
-  /**
-   * The Codenvy Runner
-   * @returns {CodenvyRunner|*}
-   */
-  getRunner() {
-    return this.codenvyRunner;
   }
 
   /**
