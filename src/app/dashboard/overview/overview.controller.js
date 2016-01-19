@@ -23,21 +23,14 @@ class DashboardOverviewCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($location, codenvyRunner, codenvyAPI) {
+  constructor($location, codenvyAPI) {
     this.$location = $location;
-    this.codenvyRunner = codenvyRunner;
-    this.codenvyRunner.fetchProcesses();
-
     this.isSaasServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getSaas().getSaasServicePath());
 
   }
 
   addCreditCard() {
     this.$location.path('account/billing');
-  }
-
-  getProcesses() {
-    return this.codenvyRunner.getProcessesNumber();
   }
 
 }
