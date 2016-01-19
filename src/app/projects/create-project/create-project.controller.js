@@ -35,6 +35,8 @@ class CreateProjectCtrl {
 
     this.stackTab = 'ready-to-go';
 
+    this.enableWizardProject = true;
+
     this.currentStackTags = null;
 
     // stacks not yet completed
@@ -939,6 +941,20 @@ class CreateProjectCtrl {
     }
     this.currentStack = stack;
     this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;
+
+    // Enable wizard only if
+    // - ready-to-go-stack with PT
+    // - custom stack
+    if (stack != null && 'general' ===  stack.scope) {
+      if ('Java' === stack.name) {
+        this.enableWizardProject = true;
+      } else {
+        this.enableWizardProject = false;
+      }
+    } else {
+      this.enableWizardProject = true;
+    }
+
   }
 
 
