@@ -33,6 +33,9 @@ class CreateProjectCtrl {
     this.lodash = lodash;
     this.$q = $q;
 
+    // JSON used for import data
+    this.importProjectData = this.getDefaultProjectJson();
+
     this.stackTab = 'ready-to-go';
 
     this.enableWizardProject = true;
@@ -138,9 +141,6 @@ class CreateProjectCtrl {
 
     // all forms that we have
     this.forms = new Map();
-
-    // JSON used for import data
-    this.importProjectData = this.getDefaultProjectJson();
 
     this.jsonConfig = {};
     this.jsonConfig.content = '{}';
