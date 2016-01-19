@@ -74,10 +74,7 @@ class WelcomeBackCtrl {
       // user has not make the choice
       if (!preferences.choiceUDtoIDE) {
         this.requireUserAction = true;
-      }
-
-      // user has decided to redirect to the
-      if (preferences.choiceUDtoIDE && !this.$rootScope.waitingLoaded) {
+      } else if (preferences.choiceUDtoIDE === 'ide' && !this.$rootScope.waitingLoaded) {
         this.$location.path('/ide/' + this.lastWorkspace);
       }
     }
