@@ -53,7 +53,7 @@ class CodenvyWorkspace {
         getDetails: {method: 'GET', url: '/api/workspace/:workspaceId'},
         create: {method: 'POST', url: '/api/workspace/config?account=:accountId'},
         deleteConfig: {method: 'DELETE', url: '/api/workspace/:workspaceId/config'},
-        update: {method: 'POST', url : '/api/workspace/:workspaceId'},
+        updateConfig: {method: 'PUT', url : '/api/workspace/:workspaceId/config'},
         addProject: {method: 'POST', url : '/api/workspace/:workspaceId/project'},
         getRuntime: {method: 'GET', url : '/api/workspace/:workspaceId/runtime'},
         deleteRuntime: {method: 'DELETE', url : '/api/workspace/:workspaceId/runtime'},
@@ -244,14 +244,14 @@ class CodenvyWorkspace {
   }
 
   /**
-   * Performs workspace rename by the given workspaceId and new name.
+   * Performs workspace config update by the given workspaceId and new data.
    * @param workspaceId the workspace ID
-   * @param newName the new workspace name
+   * @param data the new workspace details
    * @returns {*|promise|n|N}
    */
-  renameWorkspace(workspaceId, newName) {
-    let data = {name : newName};
-    let promise = this.remoteWorkspaceAPI.update({workspaceId : workspaceId}, data).$promise;
+  updateWorkspace(workspaceId, data) {
+    let promise = this.remoteWorkspaceAPI.updateConfig({workspaceId : workspaceId}, data).$promise;
+    promise.then(() => {this.fetchWorkspaceDetails(workspaceId);});
     return promise;
   }
 

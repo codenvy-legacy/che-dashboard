@@ -73,7 +73,21 @@ class WorkspaceDetailsCtrl {
 
     this.isLoading = true;
 
-    let promise = this.codenvyAPI.getWorkspace().renameWorkspace(this.workspaceId, this.newName);
+    let promise = this.codenvyAPI.getWorkspace().fetchWorkspaceDetails(this.workspaceId);
+    promise.then(() => {
+      this.doRenameWorkspace();
+    }, () => {
+      this.doRenameWorkspace();
+    });
+  }
+
+  doRenameWorkspace() {
+    this.workspaceDetails = this.codenvyAPI.getWorkspace().getWorkspacesById().get(this.workspaceId);
+    let workspaceNewDetails = angular.copy(this.workspaceDetails);
+    workspaceNewDetails.name = this.newName;
+    delete workspaceNewDetails.links;
+
+    let promise = this.codenvyAPI.getWorkspace().updateWorkspace(this.workspaceId, workspaceNewDetails);
     promise.then((data) => {
       this.codenvyAPI.getWorkspace().getWorkspacesById().set(this.workspaceId, data);
       this.updateWorkspaceData();
