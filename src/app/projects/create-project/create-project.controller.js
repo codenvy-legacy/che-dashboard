@@ -349,12 +349,12 @@ class CreateProjectCtrl {
 
     // then we've to start workspace
     this.createProjectSvc.setCurrentProgressStep(1);
-    let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id, data.name);
+    let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
 
     startWorkspacePromise.then((data) => {
       // get channels
       let environments = data.environments;
-      let envName = data.name;
+      let envName = data.defaultEnvName;
       let channels = environments[envName].machineConfigs[0].channels;
       let statusChannel = channels.status;
       let outputChannel = channels.output;

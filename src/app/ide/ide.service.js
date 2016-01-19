@@ -132,13 +132,13 @@ class IdeSvc {
 
     startWorkspace(bus, data) {
 
-        let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id, data.name);
+        let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
 
         startWorkspacePromise.then((data) => {
             // get channels
             let environments = data.environments;
-            let envName = data.name;
-            let channels = environments[envName].machineConfigs[0].channels;
+            let defaultEnvName = data.defaultEnvName;
+            let channels = environments[defaultEnvName].machineConfigs[0].channels;
             let statusChannel = channels.status;
             let outputChannel = channels.output;
             let agentChannel = 'workspace:' + data.id + ':ext-server:output';
