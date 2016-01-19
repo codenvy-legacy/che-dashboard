@@ -448,7 +448,7 @@ class CreateProjectCtrl {
       let commands = projectData.project.commands;
       if (commands && commands.length > 0) {
         commands.forEach((command) => {
-          command.name = '[' + projectName + '] ' + command.name;
+          command.name = projectName + ': ' + command.name;
           promise = promise.then(this.codenvyAPI.getWorkspace().addCommand(workspaceId, command));
         });
 
