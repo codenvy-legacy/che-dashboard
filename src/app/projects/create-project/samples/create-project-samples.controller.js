@@ -20,9 +20,10 @@ class CreateProjectSamplesCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($rootScope, codenvyAPI) {
+  constructor($rootScope, codenvyAPI, $timeout) {
     this.$rootScope = $rootScope;
     this.codenvyAPI = codenvyAPI;
+    this.$timeout = $timeout;
 
     // ask to load codenvy templates
     let promise = codenvyAPI.getProjectTemplate().fetchTemplates();
@@ -89,7 +90,9 @@ class CreateProjectSamplesCtrl {
    */
   initItem($first, template, createProjectCtrl) {
       if ($first) {
-        this.selectTemplate(template, createProjectCtrl);
+        this.$timeout(() => {
+          this.selectTemplate(template, createProjectCtrl);
+        }, 1000);
       }
   }
 
