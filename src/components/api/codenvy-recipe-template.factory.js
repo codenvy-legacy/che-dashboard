@@ -22,14 +22,36 @@ class CodenvyRecipeTemplate {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($resource) {
+  constructor($resource, $q) {
     // keep resource
     this.$resource = $resource;
+    this.$q = $q;
 
-    this.defaultRecipe = null;
-
-    // remote call
-    this.remoteRecipeTemplateAPI = this.$resource('https://dockerfiles.codenvycorp.com/templates-4.0/recipe/:fileName');
+    // Switch to local copy for now
+    this.defaultRecipe = {
+      type: 'docker',
+      name: 'defaultName',
+      permissions: {
+        groups: [
+          {
+            name: 'public',
+            acl: [
+              'read'
+            ]
+          }
+        ],
+        users: {}
+      },
+      script: '# This is a template for your machine recipe.\n' +
+      '# Uncomment instructions that you want to use and replace them with yours.\n' +
+      '# Inherit from a base image. This can be a Codenvy verified image or any base image you can find at Docker Hub.\n' +
+      '# FROM dockerHubUser/yourImage\n' +
+      '# Expose ports. All processes running in a Docker container should be access from outside.\n' +
+      '# EXPOSE 8080\n' +
+      '# Run instructions are identical to commands in your local Unix terminal.\n' +
+      '# RUN echo "hello world"\n' +
+      '# Map application port to the IDE client.\n'
+    };
   }
 
 
@@ -46,12 +68,9 @@ class CodenvyRecipeTemplate {
    * @returns {*} the promise
    */
   fetchDefaultRecipe() {
-    let promise = this.remoteRecipeTemplateAPI.get({fileName: 'defaultRecipe.json'}).$promise;
-
-    promise.then((defaultRecipe) => {
-      this.defaultRecipe = defaultRecipe;
-    });
-
+    var deferred = this.$q.defer();
+    var promise = deferred.promise;
+    deferred.resolve(true);
     return promise;
   }
 
