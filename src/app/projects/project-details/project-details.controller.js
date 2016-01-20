@@ -46,9 +46,12 @@ class ProjectDetailsCtrl {
       }, (error) => {
         if (error.status === 304) {
           this.updateProjectDetails();
+        } else if (error.status === 503) {
+          this.missingWorkspace = true;
+          this.loading = false;
         } else {
           this.loading = false;
-          this.invalidProject = error.statusText;
+          this.invalidProject = error.statusText + error.status;
         }
       });
     } else {

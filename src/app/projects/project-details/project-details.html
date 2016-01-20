@@ -104,3 +104,15 @@
 </md-content>
 
 
+<md-content md-scroll-y flex class="projects-details-project"
+            ng-show="projectDetailsCtrl.missingWorkspace" layout="column" layout-align="center center" md-theme="maincontent-theme">
+    <cdvy-empty-state cdvy-value="The project {{projectDetailsCtrl.projectPath}} belongs to the not running workspace {{projectDetailsCtrl.getWorkspaceName(projectDetailsCtrl.workspaceId)}}."
+                      cdvy-prompt="Open the workspace {{projectDetailsCtrl.getWorkspaceName(projectDetailsCtrl.workspaceId)}} to start running it. Projects details will then be available."
+                      cdvy-icon-class="fa fa-folder-open"></cdvy-empty-state>
+
+  <cdvy-link class="projects-details-project-ws-not-started" ng-href="#/workspace/{{projectDetailsCtrl.workspaceId}}" cdvy-link-text="Open workspace"></cdvy-link>
+
+</md-content>
+
+
+
