@@ -33,16 +33,14 @@ class DashboardLastProjectsCtrl {
     // fetch workspaces when initializing
     let promise = this.codenvyWorkspace.fetchWorkspaces();
 
-    this.projects = this.codenvyProject.getAllProjects();
-
     promise.then(() => {
-          this.checkIfWorkspaces();
-          this.state = 'OK';
+        this.projects = this.codenvyProject.getAllProjects();
+        this.state = 'OK';
         },
         (error) => {
           if (error.status === 304) {
             // ok
-            this.checkIfWorkspaces();
+            this.projects = this.codenvyProject.getAllProjects();
             this.state = 'OK';
             return;
           }
@@ -50,14 +48,6 @@ class DashboardLastProjectsCtrl {
         });
   }
 
-
-  checkIfWorkspaces() {
-    let workspaces = this.codenvyWorkspace.getWorkspaces();
-    if (workspaces.length === 0) {
-      // needs to redirect to the create project workflow
-      this.$location.path('/create-project');
-    }
-  }
 
   getProjects() {
     return this.projects;
