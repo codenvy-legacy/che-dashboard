@@ -440,23 +440,28 @@ class CreateProjectCtrl {
 
       promise = this.codenvyAPI.getProject().importProject(workspaceId, projectName, projectData.source);
 
-      // needs to update configuration of the project
+      // add commands if there are some that have been defined
+      let commands = projectData.project.commands;
+      if (commands && commands.length > 0) {
+        let command = commands[0];
+        for (var i = 0; i < 100; i++) {
+          let copyCommand = angular.copy(command);
+          copyCommand.name = projectName + ': ' + command.name + ' ' + i;
+          promise = promise.then(() => {
+            this.codenvyAPI.getWorkspace().addCommand(workspaceId, command);
+          });
+        }
+      }
+    }
+
+    // needs to update configuration of the project
       promise = promise.then(() => {
         this.codenvyAPI.getProject().updateProject(workspaceId, projectName, projectData.project).$promise;
       });
 
 
-      // add commands if there are some that have been defined
-      let commands = projectData.project.commands;
-      if (commands && commands.length > 0) {
-        commands.forEach((command) => {
-          command.name = projectName + ': ' + command.name;
-          promise = promise.then(this.codenvyAPI.getWorkspace().addCommand(workspaceId, command));
-        });
 
-      }
 
-    }
 
     promise.then(() => {
       this.createProjectSvc.setCurrentProgressStep(4);
