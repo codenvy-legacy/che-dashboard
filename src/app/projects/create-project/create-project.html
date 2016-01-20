@@ -184,7 +184,7 @@
             <md-radio-group ng-model="createProjectCtrl.templatesChoice">
               <md-radio-button value="templates-samples">Ready-to-run project samples</md-radio-button>
               <create-project-samples ng-if="createProjectCtrl.templatesChoice === 'templates-samples'"></create-project-samples>
-              <md-radio-button ng-if="createProjectCtrl.enableWizardProject" ng-click="createProjectCtrl.selectWizardProject()" value="templates-wizard">Wizard-driven project configuration</md-radio-button>
+              <md-radio-button ng-if="createProjectCtrl.enableWizardProject" ng-click="createProjectCtrl.selectWizardProject()" value="templates-wizard">Wizard-driven templates</md-radio-button>
             </md-radio-group>
         </cdvy-panel>
 
