@@ -24,7 +24,6 @@ class OnPremisesAdminCreateUserCtrl {
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
 
-    this.newUserName = null;
     this.newUserEmail = null;
     this.newUserPassword = null;
   }
@@ -32,18 +31,19 @@ class OnPremisesAdminCreateUserCtrl {
   /**
    * Create new user callback
    */
-    createUser (){
-        let promise = this.codenvyAPI.getUser().createUser(this.newUserName, this.newUserEmail, this.newUserPassword);
+  createUser() {
+    //TODO should add user name in future
+    let promise = this.codenvyAPI.getUser().createUser(this.newUserEmail, null, this.newUserPassword);
 
-        promise.then(() => {
-          this.newUserName = null;
-          this.newUserEmail = null;
-          this.newUserPassword = null;
-          this.codenvyNotification.showInfo('User successfully created.');
-        }, (error) => {
-          this.codenvyNotification.showError(error.data.message ? error.data.message : '.');
-        });
-    }
+    promise.then(() => {
+      this.newUserName = null;
+      this.newUserEmail = null;
+      this.newUserPassword = null;
+      this.codenvyNotification.showInfo('User successfully created.');
+    }, (error) => {
+      this.codenvyNotification.showError(error.data.message ? error.data.message : '.');
+    });
+  }
 
 }
 

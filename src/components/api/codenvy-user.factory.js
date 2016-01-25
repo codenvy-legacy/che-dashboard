@@ -22,14 +22,14 @@ class CodenvyUser {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($resource, $q) {
+  constructor($resource, $q) {
 
     // keep resource
     this.$resource = $resource;
     this.$q = $q;
 
     // remote call
-    this.remoteUserAPI = this.$resource('/api/user',{}, {
+    this.remoteUserAPI = this.$resource('/api/user', {}, {
       findByID: {method: 'GET', url: '/api/user/:userId'},
       findByAlias: {method: 'GET', url: '/api/user/find?alias=:alias'},
       inRole: {method: 'GET', url: '/api/user/inrole?role=:role&scope=:scope&scopeId=:scopeId'},
@@ -70,9 +70,12 @@ class CodenvyUser {
   createUser(name, email, password) {
     let data = {
       password: password,
-      email: email,
       name: name
     };
+
+    if (email) {
+      data.email = email;
+    }
 
     let promise = this.remoteUserAPI.createUser(data).$promise;
 

@@ -16,17 +16,6 @@
   <cdvy-panel cdvy-title="Create User">
     <ng-form name="createUserForm">
       <cdvy-input cdvy-form="createUserForm"
-                  cdvy-name="name"
-                  cdvy-label-name="User Name"
-                  cdvy-place-holder="name"
-                  ng-maxlength="100"
-                  required
-                  ng-model="onPremisesAdminCreateUserCtrl.newUserName">
-
-        <div ng-message="required">Name is required.</div>
-        <div ng-message="maxlength">The name has to be less than 100 characters long.</div>
-      </cdvy-input>
-      <cdvy-input cdvy-form="createUserForm"
                   cdvy-name="email"
                   cdvy-label-name="Email"
                   cdvy-place-holder="e-mail"
@@ -76,7 +65,7 @@
         <div ng-message="maxlength">The password has to be less than 100 characters long.</div>
         <div
           ng-show="onPremisesAdminCreateUserCtrl.confirmNewUserPassword && (onPremisesAdminCreateUserCtrl.confirmNewUserPassword !== onPremisesAdminCreateUserCtrl.newUserPassword)">
-          New Password and Confirm new password do not match.
+          Passwords do not match.
         </div>
       </cdvy-input>
       <cdvy-button-default cdvy-button-title="Create"
