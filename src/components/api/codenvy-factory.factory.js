@@ -51,6 +51,9 @@ class CodenvyFactory {
       }
     });
 
+    // get the Codenvy user.
+    this.user = this.codenvyUser.getUser();
+
   }
 
   /**
@@ -317,6 +320,7 @@ class CodenvyFactory {
     }
   }
 
+
   /**
    * Ask for loading the factories in asynchronous way
    * If there are no changes, it's not updated
@@ -324,33 +328,23 @@ class CodenvyFactory {
   fetchFactories(maxItems, skipCount) {
     var promises = [];
 
-    // get the Codenvy user.
-    var user = this.codenvyUser.getUser();
+    // use of the user ID
+    var userId = this.user.id;
 
-    // when user is there, we can perform the request
-    user.$promise.then(() => {
+    // find the factories
+    let factoriesPromise = this.remoteFactoryFindAPI.query(
+      {'creator.userId': userId, 'maxItems': maxItems, 'skipCount': skipCount}).$promise;
 
-      // use of the user ID
-      var userId = user.id;
+    // when find is there we can ask for each factory
+    factoriesPromise.then((remoteFactories) => {
 
-      // find the factories
-      let factoriesPromise = this.remoteFactoryFindAPI.query(
-        {'creator.userId': userId, 'maxItems': maxItems, 'skipCount': skipCount}).$promise;
-
-      // when find is there we can ask for each factory
-      factoriesPromise.then((remoteFactories) => {
-        if (remoteFactories.length === 0) {//when we have no factories
-          this.factoriesById.clear();
+      // Gets factory resource based on the factory ID
+      remoteFactories.forEach((factory) => {
+        // there is a factory ID, so we can ask the factory details
+        if (factory.id) {
+          let tmpFactoryPromise = this.fetchFactory(factory.id);
+          promises.push(tmpFactoryPromise);
         }
-
-        // Gets factory resource based on the factory ID
-        remoteFactories.forEach((factory) => {
-          // there is a factory ID, so we can ask the factory details
-          if (factory.id) {
-            let tmpFactoryPromise = this.fetchFactory(factory.id);
-            promises.push(tmpFactoryPromise);
-          }
-        });
       });
     });
     return this.$q.all(promises);
