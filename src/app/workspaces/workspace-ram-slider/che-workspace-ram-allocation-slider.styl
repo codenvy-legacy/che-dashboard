@@ -2,9 +2,12 @@
 
   .slider-actual-ram-caption
     color $che-medium-blue-color
+    width 50px
 
   .slider-max-ram-caption
     color $clear-foggy-sky-color
+    width 50px
+    text-align right
 
   .slider-holder
 
@@ -30,3 +33,20 @@
     md-slider:not([disabled]):focus .md-thumb, md-slider:not([disabled]).md-active .md-thumb
       -webkit-transform scale(0.5)
       transform scale(0.5)
+
+  .slider-input
+    margin-right 5px
+
+    md-input-container .md-errors-spacer
+      display none
+
+    input
+      border none
+      box-shadow none
+      border-bottom 1px solid $default-border-color
+
+    input:focus
+      border-color $primary-color !important
+
+  .slider-max-ram-subtitle
+    color $clear-foggy-sky-color

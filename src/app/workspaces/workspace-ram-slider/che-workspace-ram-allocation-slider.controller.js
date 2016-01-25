@@ -21,5 +21,18 @@ export class CheWorkspaceRamAllocationSliderCtrl {
    * @ngInject for Dependency injection
    */
   constructor () {
+    this.inputVal = 1;
+  }
+
+  onInputValChange() {
+    if (!this.inputVal) {
+      this.inputVal = 1;
+    }
+    this.inputVal = this.inputVal > 100 ? this.inputVal = 100 : this.inputVal;
+    this.ngModel = this.inputVal * 1000;
+  }
+
+  onNgModelChange() {
+    this.inputVal = this.ngModel / 1000;
   }
 }
