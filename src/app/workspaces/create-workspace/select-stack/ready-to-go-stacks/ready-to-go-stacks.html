@@ -17,21 +17,16 @@
         <div layout="row" flex layout-align="space-around start">
             <label flex="15" hide-sm hide-md>Commonly used stacks: </label>
 
-            <div layout="row" flex="85"  layout-wrap>
+            <div layout="row" flex="85"  layout-wrap ng-if="readyToGoStacksCtrl.stacks.length > 0">
                 <cdvy-simple-selecter ng-repeat="stack in readyToGoStacksCtrl.stacks | filter:{ scope: 'general' }"
-                                      ng-model="createProjectCtrl.myTypeSelected"
                                       cdvy-value="stack"
                                       cdvy-is-first="$first"
                                       cdvy-name="StackSelectWidget"
                                       cdvy-title="{{stack.name}}"
                                       cdvy-description="{{readyToGoStacksCtrl.tagsToString(stack.tags)}}"
                                       cdvy-icon="cdvyfont cdvyico-type-{{stack.iconName}} cdvyico-type-blank"
-                                      cdvy-callback-controller="createProjectCtrl" />
+                                      cdvy-callback-controller="readyToGoStacksCtrl" />
             </div>
         </div>
-
-
-
     </div>
-
 </ng-form>

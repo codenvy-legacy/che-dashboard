@@ -28,9 +28,6 @@ class CodenvySimpleSelecter {
     //this.transclude= true;
     this.templateUrl = 'components/widget/simple-selecter/cdvy-simple-selecter.html';
 
-    // we require ngModel as we want to use it inside our directive
-    this.require = ['ngModel'];
-
 
     this.controller = 'CodenvySimpleSelecterCtrl';
     this.controllerAs = 'codenvySimpleSelecterCtrl';
@@ -39,7 +36,6 @@ class CodenvySimpleSelecter {
 
     // scope values
     this.scope = {
-      valueModel : '=ngModel',
       title: '@cdvyTitle',
       description: '@cdvyDescription',
       isFirst : '=cdvyIsFirst',

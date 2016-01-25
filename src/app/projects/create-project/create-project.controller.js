@@ -610,12 +610,12 @@ class CreateProjectCtrl {
           });
           if(findLink) {
             this.recipeUrl = findLink.href;
-            this.createWorcspace();
+            this.createWorkspace();
           }
         });
       } else {
         if (this.recipeUrl && this.recipeUrl.length > 0) {
-          this.createWorcspace();
+          this.createWorkspace();
         } else {
           let recipeName = 'rcp-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)); // jshint ignore:line
           // needs to get recipe URL from custom recipe
@@ -626,7 +626,7 @@ class CreateProjectCtrl {
             });
             if(findLink) {
               this.recipeUrl = findLink.href;
-              this.createWorcspace();
+              this.createWorkspace();
             }
           });
         }
@@ -654,7 +654,10 @@ class CreateProjectCtrl {
 
   }
 
-  createWorcspace() {
+  /**
+   * Create a new workspace from current workspace name, recipe url and workspace ram
+   */
+  createWorkspace() {
     this.createProjectSvc.setWorkspaceOfProject(this.workspaceName);
     //TODO: no account in che ? it's null when testing on localhost
     let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
@@ -731,7 +734,7 @@ class CreateProjectCtrl {
 
       // type selected
       if (this.importProjectData.project.type) {
-        name = this.importProjectData.project.type;
+        name = this.importProjectData.project.type.replace(/\s/g, '_');
       }
 
       name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)); // jshint ignore:line
@@ -742,8 +745,6 @@ class CreateProjectCtrl {
 
   }
 
-
-
   /**
    * Generates a default workspace name
    */
@@ -753,31 +754,6 @@ class CreateProjectCtrl {
       name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)); // jshint ignore:line
       this.workspaceName = name;
   }
-
-
-  /**
-   * Callback when selecter has been set
-   * @param name
-   * @param valueSelected
-   */
-  cdvySimpleSelecter(name, stack) {
-    // update stack
-    this.readyToGoStack = stack;
-
-    this.updateCurrentStack(stack);
-
-    this.importProjectData.project.type = name;
-
-    // generate name
-    this.generateProjectName();
-  }
-
-  cdvySimpleSelecterDefault(stack) {
-    this.readyToGoStack = stack;
-
-    this.updateCurrentStack(stack);
-  }
-
 
   isImporting() {
     return this.isCreateProjectInProgress();
@@ -876,24 +852,32 @@ class CreateProjectCtrl {
     this.checkDisabledWorkspace();
   }
 
-  cdvyStackLibrarySelecter(stack) {
-    // change default once user has select it
-    this.stackLibraryUser = stack;
-    this.stackLibraryOption = 'new-workspace';
+  /**
+   * Use of an existing workspace
+   * @param workspace the workspace to use
+   */
+  cdvyStackLibraryWorkspaceSelecter(workspace) {
+    this.workspaceSelected = workspace;
+    this.workspaceName = workspace.name;
+    this.stackLibraryOption = 'existing-workspace';
 
-    this.updateCurrentStack(stack);
+    this.updateCurrentStack(null);
+    this.generateProjectName(true);
     this.checkDisabledWorkspace();
   }
 
-  stackLibraryChoice(option) {
-    this.stackLibraryOption = option;
+  /**
+   * Use of an existing stack
+   * @param stack the stack to use
+   */
+  cdvyStackLibrarySelecter(stack) {
+    this.stackLibraryUser = stack;
+    this.stackLibraryOption = 'new-workspace';
 
-    let currentStack = null;
-    if (this.stackLibraryOption === 'new-workspace') {
-      currentStack = this.stackLibraryUser;
+    if(stack && stack.name != null){
+      this.importProjectData.project.type = stack.name;
     }
-    this.updateCurrentStack(currentStack);
-
+    this.updateCurrentStack(stack);
     this.checkDisabledWorkspace();
   }
 
@@ -905,40 +889,21 @@ class CreateProjectCtrl {
     }
     this.$rootScope.$broadcast('cdvyPanel:disabled', { id: 'create-project-workspace', disabled: val });
   }
+
   /**
-   * Use of an existing workspace
-   * @param workspace the workspace to use
+   * Update current stack
+   * @param stack the stack to use
    */
-  cdvyStackLibraryWorkspaceSelecter(workspace) {
-    // change default once user has select it
-    this.workspaceSelected = workspace;
-    this.workspaceName = workspace.name;
-    this.stackLibraryOption = 'existing-workspace';
-    this.checkDisabledWorkspace();
-
-    this.updateCurrentStack(null);
-  }
-
-  cdvyStackLibrarySelecterDefault(defaultStack) {
-    this.stackLibraryUser = defaultStack;
-
-    this.updateCurrentStack(defaultStack);
-  }
-
-  cdvyStackLibraryWorkspaceSelecterDefault(defaultWorkspace) {
-    this.workspaceSelected = defaultWorkspace;
-  }
-
   updateCurrentStack(stack) {
-    // we've a stack so need to reset workspace selected
-    if (stack != null) {
-      // reset workspace and project data already defined
-      this.workspaceSelected = null;
-      if (this.templatesChoice !== 'templates-samples') {
-        this.generateProjectName(true);
-        this.importProjectData.project.description = '';
-      }
+    if (!stack) {
+        return;
     }
+    if (this.stackTab === 'ready-to-go') {
+      this.readyToGoStack = stack;
+    }
+    this.templatesChoice = 'templates-samples';
+    this.generateProjectName(true);
+    this.importProjectData.project.description = '';
     this.currentStack = stack;
     this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;
 
@@ -957,11 +922,9 @@ class CreateProjectCtrl {
 
   }
 
-
   selectWizardProject() {
     this.importProjectData.source.location = '';
   }
-
 
 }
 

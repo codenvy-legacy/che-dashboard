@@ -147,45 +147,15 @@
 
         </cdvy-panel>
 
-
-        <cdvy-panel id="create-project-source-stack"  cdvy-title="Select Stack" cdvy-tooltip="Stacks are recipes or images used to define your environment runtime. Workspace environments are used to build and run your project.">
-
-
-            <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="createProjectCtrl.stackSelectedIndex">
-                <md-tab cdvy-event-logger="new.project/select-ready-to-go-stack" md-on-select="createProjectCtrl.setStackTab('ready-to-go')">
-                    <md-tab-label>
-                        <md-icon md-font-icon="fa-magic" class="fa cdvy-tab-label-icon"></md-icon>
-                        <span class="cdvy-tab-label-title">Ready-to-go Stacks</span>
-                    </md-tab-label>
-                    <md-tab-body>
-                            <ready-to-go-stacks class="projects-create-project-tab" layout="row" layout-wrap ng-init="readyToGoStacksCtrl.initCallbackController(createProjectCtrl)"></ready-to-go-stacks>
-                    </md-tab-body>
-                </md-tab>
-                <md-tab cdvy-event-logger="new.project/stack-library" md-on-select="createProjectCtrl.setStackTab('stack-library')">
-                    <md-tab-label>
-                        <md-icon md-font-icon="fa-sliders" class="fa cdvy-tab-label-icon"></md-icon>
-                        <span class="cdvy-tab-label-title">Stack library</span>
-                    </md-tab-label>
-                    <md-tab-body>
-                        <create-project-stack-library ng-init="createProjectStackLibraryCtrl.initCallbackController(createProjectCtrl)"></create-project-stack-library>
-                    </md-tab-body>
-                </md-tab>
-
-              <md-tab cdvy-event-logger="new.project/custom-stack" md-on-select="createProjectCtrl.setStackTab('custom-stack')">
-                <md-tab-label>
-                  <md-icon md-font-icon="material-design icon-ic_input_24px" class="cdvy-tab-label-icon"></md-icon>
-                  <span class="cdvy-tab-label-title">Custom stack</span>
-                </md-tab-label>
-                <md-tab-body>
-                  <cdvy-workspace-recipe cdvy-workspace-ram="createProjectCtrl.workspaceRam"
-                                         cdvy-workspace-name="createProjectCtrl.workspaceName"
-                                         cdvy-recipe-script="createProjectCtrl.recipeScript"
-                                         cdvy-recipe-url="createProjectCtrl.recipeUrl"></cdvy-workspace-recipe>
-                </md-tab-body>
-              </md-tab>
-            </md-tabs>
-
-        </cdvy-panel>
+      <cdvy-workspace-select-stack cdvy-tab-name="tabName"
+                                   cdvy-on-tab-change="createProjectCtrl.setStackTab(tabName)"
+                                   cdvy-stack="stack"
+                                   cdvy-stack-change="createProjectCtrl.cdvyStackLibrarySelecter(stack)"
+                                   cdvy-is-workspaces="true"
+                                   cdvy-workspace="workspace"
+                                   cdvy-workspace-change="createProjectCtrl.cdvyStackLibraryWorkspaceSelecter(workspace)"
+                                   cdvy-recipe-script="createProjectCtrl.recipeScript"
+                                   cdvy-recipe-url="createProjectCtrl.recipeUrl"></cdvy-workspace-select-stack>
 
         <cdvy-panel id="create-project-workspace" cdvy-title="Configure Workspace" cdvy-panel-id="create-project-workspace" cdvy-tooltip="A workspace contains projects and runtime environments. If your stack requires a new workspace, configure it here.">
             <ng-form name="workspaceInformationForm">

@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Defines a directive for displaying project recipe widget.
+ * Defines a directive for displaying recipe widget.
  * @author Oleksii Orel
  */
 class WorkspaceRecipe {
@@ -22,7 +22,7 @@ class WorkspaceRecipe {
    */
   constructor() {
     this.restrict = 'E';
-    this.templateUrl = 'app/workspaces/recipe/workspace-recipe.html';
+    this.templateUrl = 'app/workspaces/create-workspace/select-stack/recipe/workspace-recipe.html';
     this.replace = false;
 
     this.controller = 'WorkspaceRecipeCtrl';
@@ -33,8 +33,6 @@ class WorkspaceRecipe {
     // scope values
     this.scope = {
       recipeUrl:'=cdvyRecipeUrl',
-      workspaceName:'=cdvyWorkspaceName',
-      workspaceRam:'=cdvyWorkspaceRam',
       recipeScript:'=cdvyRecipeScript'
     };
 

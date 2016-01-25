@@ -12,16 +12,19 @@
 
 /**
  * @ngdoc directive
- * @name projects.create.directive:createProjectStackLibrary
+ * @name projects.create.directive:ReadyToGoStacks
  * @restrict E
  * @element
  *
  * @description
- * `<create-project-stack-library></create-project-stack-library>` for creating new projects from stack library.
+ * `<ready-to-go-stacks></ready-to-go-stacks>` for creating new projects from ready to go stacks.
+ *
+ * @usage
+ *   <ready-to-go-stacks class="projects-create-project-tab" layout="row" layout-wrap></ready-to-go-stacks>
  *
  * @author Florent Benoit
  */
-class CreateProjectStackLibrary {
+class ReadyToGoStacks {
 
   /**
    * Default constructor that is using resource
@@ -29,15 +32,21 @@ class CreateProjectStackLibrary {
    */
   constructor () {
     this.restrict='E';
-    this.templateUrl = 'app/projects/create-project/stack-library/create-project-stack-library.html';
+    this.templateUrl = 'app/workspaces/create-workspace/select-stack/ready-to-go-stacks/ready-to-go-stacks.html';
 
-    this.controller = 'CreateProjectStackLibraryCtrl';
-    this.controllerAs = 'createProjectStackLibraryCtrl';
+    this.controller = 'ReadyToGoStacksCtrl';
+    this.controllerAs = 'readyToGoStacksCtrl';
     this.bindToController = true;
+
+    // scope values
+    this.scope = {
+      stack: '=cdvyStack',
+      onChange: '&cdvyOnChange'     
+    };
 
   }
 
 }
 
-export default CreateProjectStackLibrary;
+export default ReadyToGoStacks;
 

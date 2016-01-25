@@ -15,6 +15,7 @@
  * @name workspaces.create.workspace.controller:CreateWorkspaceCtrl
  * @description This class is handling the controller for workspace creation
  * @author Ann Shumilova
+ * @author Oleksii Orel
  */
 class CreateWorkspaceCtrl {
 
@@ -22,91 +23,183 @@ class CreateWorkspaceCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, $q, $location, $rootScope, codenvyNotification) {
+  constructor($rootScope, $location, codenvyAPI, codenvyNotification, lodash) {
+    this.$location = $location;
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
-    this.$q = $q;
-    this.$location = $location;
-    this.workspace = {};
-
-    this.workspace.ram = 1000;
-
-    this.recipe = null;
-    this.recipes = [];
+    this.lodash = lodash;
 
     this.selectSourceOption = 'select-source-recipe';
 
+    this.stack = {};
+    this.workspace = {};
+
+    // default RAM value for workspaces
+    this.workspaceRam = 1000;
+
     this.editorOptions = {
-      lineWrapping : true,
+      lineWrapping: true,
       lineNumbers: false,
       matchBrackets: true,
       mode: 'application/json'
     };
 
-    this.workspaceConfig = '';
-    this.generateWorspaceName();
+    // fetch default recipe if we haven't one
+     if (!codenvyAPI.getRecipeTemplate().getDefaultRecipe()) {
+      codenvyAPI.getRecipeTemplate().fetchDefaultRecipe();
+    }
 
-    let promise = codenvyAPI.getRecipe().fetchRecipes();
-    promise.then(() => {
-      this.updateData();
-    });
+    this.stack = null;
+    this.recipeUrl = null;
+    this.recipeScript = null;
 
     $rootScope.$broadcast('navbar-selected:clear');
   }
 
-  updateData() {
-    this.recipes.length = 0;
-
-    var remoteRecipes = this.codenvyAPI.getRecipe().getRecipes();
-    // init WS bus
-    remoteRecipes.forEach((recipe) => {
-      this.recipes.push(recipe);
-    });
-
-    this.recipe = this.recipes[0];
-
-  }
-
-  selectRecipe(userRecipe) {
-    this.recipe = userRecipe;
-  }
-
-
-
-  generateWorspaceName() {
-    // starts with workspace
-    var name = 'workspace';
-    name = name + '-' + (('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)); // jshint ignore:line
-
-    this.workspace.name = name;
-
-  }
-
-
-  createWorkspace() {
-
-    if (this.selectSourceOption === 'select-source-recipe') {
-      let recipeUrl = this.recipe.links[0].href;
-      let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspace.name, recipeUrl, this.workspace.ram);
-      creationPromise.then((workspaceData) => {
-        this.$location.path('/workspace/' + workspaceData.id);
-      }, (error) => {
-        let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
-        this.codenvyNotification.showError(errorMessage);
-        this.$location.path('/workspaces');
-      });
-    } else {
-      //this.workspaceConfig.name = this.workspace.name;
-      let creationPromise = this.codenvyAPI.getWorkspace().createWorkspaceFromConfig(null, this.workspaceConfig);
-      creationPromise.then((workspaceData) => {
-        this.$location.path('/workspace/' + workspaceData.id);
-      }, (error) => {
-        let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
-        this.codenvyNotification.showError(errorMessage);
-        this.$location.path('/workspaces');
-      });
+  /**
+   * Callback when tab has been change
+   * @param tabName  the select tab name
+   */
+  setStackTab(tabName) {
+    if (tabName === 'custom-stack') {
+      this.isCustomStack = true;
+      this.generateWorkspaceName();
     }
   }
+
+  /**
+   * Callback when stack has been set
+   * @param stack  the selected stack
+   */
+  cdvyStackLibrarySelecter(stack) {
+    this.stack = stack;
+    this.recipeUrl = null;
+    this.isCustomStack = false;
+    if (stack && stack.workspaceConfig && stack.workspaceConfig.name) {
+      this.workspaceName = angular.copy(stack.workspaceConfig.name);
+    } else {
+      this.generateWorkspaceName();
+    }
+  }
+
+  /**
+   * Generates a default workspace name
+   */
+  generateWorkspaceName() {
+    // starts with wksp
+    var name = 'wksp';
+    name = name + '-' + (('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4)); // jshint ignore:line
+    this.workspaceName = name;
+  }
+
+  /**
+   * Create a new workspace
+   */
+  createWorkspace() {
+    if (this.isCustomStack) {
+      if (this.recipeUrl && this.recipeUrl.length > 0) {
+        this.submitWorkspace();
+      } else {
+        let recipeName = 'rcp-' + (('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4)); // jshint ignore:line
+        // needs to get recipe URL from custom recipe
+        let promise = this.submitRecipe(recipeName, this.recipeScript);
+        promise.then((recipe) => {
+          let findLink = this.lodash.find(recipe.links, function (link) {
+            return link.rel === 'get recipe script';
+          });
+          if (findLink) {
+            this.recipeUrl = findLink.href;
+            this.submitWorkspace();
+          }
+        }, (error) => {
+          this.codenvyNotification.showError(error.data.message ? error.data.message : 'Error during recipe creation.');
+        });
+      }
+    } else {
+      //check predefined recipe location
+      if (this.stack && this.stack.source && this.stack.source.type === 'location') {
+        this.recipeUrl = this.stack.source.origin;
+        this.submitWorkspace();
+      } else {
+        // needs to get recipe URL from stack
+        let promise = this.computeRecipeForStack(this.stack);
+        promise.then((recipe) => {
+          let findLink = this.lodash.find(recipe.links, function (link) {
+            return link.rel === 'get recipe script';
+          });
+          if (findLink) {
+            this.recipeUrl = findLink.href;
+            this.submitWorkspace();
+          }
+        }, (error) => {
+          this.codenvyNotification.showError(error.data.message ? error.data.message : 'Error during recipe creation.');
+        });
+      }
+    }
+  }
+
+  /**
+   * User has selected a stack. needs to find or add recipe for that stack
+   * @param stack the selected stack
+   * @returns {*} the promise
+   */
+  computeRecipeForStack(stack) {
+    let recipeSource = stack.source;
+    // look at recipe
+    let recipeName = 'generated-' + stack.name;
+    let recipeScript;
+    // what is type of source ?
+    switch (recipeSource.type) {
+      case 'image':
+        recipeScript = 'FROM ' + recipeSource.origin;
+        break;
+      case 'recipe':
+        recipeScript = recipeSource.origin;
+        break;
+      default:
+        throw 'Not implemented';
+    }
+
+    let promise = this.submitRecipe(recipeName, recipeScript);
+
+    return promise;
+  }
+
+  /**
+   * Create a new recipe
+   * @param recipeName the recipe name
+   * @param recipeScript the recipe script
+   * @returns {*} the promise
+   */
+  submitRecipe(recipeName, recipeScript) {
+    let recipe = angular.copy(this.codenvyAPI.getRecipeTemplate().getDefaultRecipe());
+    if (!recipe) {
+      return;
+    }
+    recipe.name = recipeName;
+    recipe.script = recipeScript;
+
+    let promise = this.codenvyAPI.getRecipe().create(recipe);
+
+    return promise;
+  }
+
+  /**
+   * Submit a new workspace from current workspace name, recipe url and workspace ram
+   */
+  submitWorkspace() {
+    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
+    creationPromise.then((workspaceData) => {
+      let infoMessage = 'Workspace ' + workspaceData.name + ' successfully created.';
+      this.codenvyNotification.showInfo(infoMessage);
+      this.$location.path('/workspace/' + workspaceData.id);
+    }, (error) => {
+      let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
+      this.codenvyNotification.showError(errorMessage);
+      this.$location.path('/workspaces');
+    });
+  }
+
 }
 
 export default CreateWorkspaceCtrl;

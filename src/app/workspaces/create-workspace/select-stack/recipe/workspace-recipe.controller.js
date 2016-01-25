@@ -22,21 +22,11 @@ class WorkspaceRecipeCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI) {
+  constructor() {
     this.recipeUrl = null;
 
     //set default selection
     this.selectSourceOption = 'upload-custom-stack';
-
-    let defaultRecipe = codenvyAPI.getRecipeTemplate().getDefaultRecipe();
-
-    if (defaultRecipe !== null) {
-      this.defaultRecipeScript = defaultRecipe.script;
-    } else {
-      codenvyAPI.getRecipeTemplate().fetchDefaultRecipe().then((defaultRecipe) => {
-        this.defaultRecipeScript = defaultRecipe.script;
-      });
-    }
 
     this.editorOptions = {
       lineWrapping: true,
@@ -45,11 +35,12 @@ class WorkspaceRecipeCtrl {
       mode: 'text/x-dockerfile'
     };
 
+    this.setDefaultData();
   }
 
-  setRecipeScript(recipeScript) {
+  setDefaultData() {
     this.recipeUrl = null;
-    this.recipeScript = angular.copy(recipeScript);
+    this.recipeScript = '';
   }
 }
 

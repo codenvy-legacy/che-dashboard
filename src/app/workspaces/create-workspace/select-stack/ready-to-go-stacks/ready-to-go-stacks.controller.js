@@ -25,22 +25,37 @@ class ReadyToGoStacksCtrl {
     this.$rootScope = $rootScope;
 
     this.stacks = [];
+    this.stack = null;
 
     let promiseStack = codenvyStack.fetchStacks();
     promiseStack.then(() => {
+        this.updateData();
+      },
+      (error) => {
+        // etag handling so also retrieve last data that were fetched before
+        if (error.status === 304) {
+          // ok
           this.updateData();
-        },
-        (error) => {
-          // etag handling so also retrieve last data that were fetched before
-          if (error.status === 304) {
-            // ok
-            this.updateData();
-          }
-        });
-
+        }
+      });
 
   }
 
+  //TODO should change cdvy-simple-selecter widget
+  cdvySimpleSelecterDefault(stack) {
+    this.stack = stack;
+    this.onChange();
+  }
+
+  //TODO should change cdvy-simple-selecter widget
+  cdvySimpleSelecter(projectName, stack) {
+    this.stack = stack;
+    this.onChange();
+  }
+
+  /**
+   * Update stacks' data
+   */
   updateData() {
     this.stacks.length = 0;
     var remoteStacks = this.codenvyStack.getStacks();
@@ -56,14 +71,9 @@ class ReadyToGoStacksCtrl {
     this.$rootScope.$broadcast('create-project-stacks:initialized');
   }
 
-  selectRecipe(recipe, controller) {
-    //
-
-
-    // first link of recipe is the recipe URL
-    controller.recipeUrl = recipe.links[0].href;
-  }
-
+  /**
+   * Joins the tags into a string
+   */
   tagsToString(tags) {
     return tags.join(', ');
   }

@@ -14,26 +14,9 @@
 
 <md-content md-scroll-y flex md-theme="maincontent-theme">
   <ng-form name="workspaceInformationForm">
-    <cdvy-panel cdvy-title="Information">
-      <cdvy-input cdvy-form="workspaceInformationForm"
-                  cdvy-name="name"
-                  cdvy-label-name="Name"
-                  cdvy-place-holder="Name of the workspace"
-                  ng-model="createWorkspaceCtrl.workspace.name"
-                  required
-                  ng-minlength="3"
-                  ng-maxlength="20"
-                  ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
-        <div ng-message="required">A name is required.</div>
-        <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin letters or underscores</div>
-        <div ng-message="minlength">The name has to be more then 3 characters long.</div>
-        <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
-      </cdvy-input>
-      <cdvy-workspace-ram-allocation-slider ng-model="createWorkspaceCtrl.workspace.ram"></cdvy-workspace-ram-allocation-slider>
 
-    </cdvy-panel>
-
-    <cdvy-panel id="create-project-source-id" cdvy-title="Select Source" cdvy-tooltip="Create workspace from a recipe, stack or by importing workspace configuration">
+    <cdvy-panel id="create-project-source-id" cdvy-title="Select Source"
+                cdvy-tooltip="Create workspace from a recipe, stack or by importing workspace configuration">
       <md-radio-group ng-model="createWorkspaceCtrl.selectSourceOption">
         <md-radio-button value="select-source-recipe">Workspace using recipe</md-radio-button>
         <!-- will be replaced by stack by UD-945
@@ -43,28 +26,40 @@
       </md-radio-group>
     </cdvy-panel>
 
-
-    <!-- replace it by Stack with UD-945 -->
-    <cdvy-panel cdvy-title="Select recipe" ng-if="createWorkspaceCtrl.selectSourceOption === 'select-source-recipe'">
-
-      <div layout="column">
-        <md-card ng-repeat="recipe in createWorkspaceCtrl.recipes"
-                 ng-class="$first ? 'create-project-stack-selected' : 'create-project-stack-default'"
-                 ng-click="createWorkspaceCtrl.selectRecipe(recipe)">
-          <md-card-content>{{recipe.name}}</md-card-content></md-card>
-      </div>
-    </cdvy-panel>
-
     <cdvy-panel cdvy-title="Import workspace" ng-if="createWorkspaceCtrl.selectSourceOption === 'select-source-import'">
 
       <ui-codemirror class="workspace-editor" ui-codemirror="createWorkspaceCtrl.editorOptions"
                      ng-model="createWorkspaceCtrl.workspaceConfig"></ui-codemirror>
 
     </cdvy-panel>
+    <cdvy-workspace-select-stack ng-if="createWorkspaceCtrl.selectSourceOption === 'select-source-recipe'"
+                                 cdvy-tab-name="tabName"
+                                 cdvy-on-tab-change="createWorkspaceCtrl.setStackTab(tabName)"
+                                 cdvy-stack="stack"
+                                 cdvy-stack-change="createWorkspaceCtrl.cdvyStackLibrarySelecter(stack)"
+                                 cdvy-recipe-script="createWorkspaceCtrl.recipeScript"
+                                 cdvy-recipe-url="createWorkspaceCtrl.recipeUrl"></cdvy-workspace-select-stack>
 
 
-
-
+    <cdvy-panel cdvy-title="Information">
+      <cdvy-input cdvy-form="workspaceInformationForm"
+                  cdvy-name="name"
+                  cdvy-label-name="Name"
+                  cdvy-place-holder="Name of the workspace"
+                  ng-model="createWorkspaceCtrl.workspaceName"
+                  required
+                  ng-minlength="3"
+                  ng-maxlength="20"
+                  ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+        <div ng-message="required">A name is required.</div>
+        <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin
+          letters or underscores
+        </div>
+        <div ng-message="minlength">The name has to be more then 3 characters long.</div>
+        <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
+      </cdvy-input>
+      <cdvy-workspace-ram-allocation-slider ng-model="createWorkspaceCtrl.workspaceRam"></cdvy-workspace-ram-allocation-slider>
+    </cdvy-panel>
   </ng-form>
 
   <cdvy-button-primary id="create-project-button-import"

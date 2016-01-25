@@ -22,8 +22,16 @@ import WorkspaceDetailsProjectsCtrl from './workspace-details/workspace-projects
 import WorkspaceDetailsProjects from './workspace-details/workspace-projects/workspace-details-projects.directive';
 import WorkspaceDetailsResourcesCtrl from './workspace-details/resources/workspace-details-resources.controller';
 import WorkspaceDetailsResources from './workspace-details/resources/workspace-details-resources.directive';
-import WorkspaceRecipeCtrl from './recipe/workspace-recipe.controller';
-import WorkspaceRecipe from './recipe/workspace-recipe.directive';
+import WorkspaceRecipeCtrl from './create-workspace/select-stack/recipe/workspace-recipe.controller';
+import WorkspaceRecipe from './create-workspace/select-stack/recipe/workspace-recipe.directive';
+import ReadyToGoStacksCtrl from './create-workspace/select-stack/ready-to-go-stacks/ready-to-go-stacks.controller';
+import ReadyToGoStacks from './create-workspace/select-stack/ready-to-go-stacks/ready-to-go-stacks.directive';
+import CodenvyStackLibrarySelecter from './create-workspace/select-stack/stack-library/stack-library-selecter/cdvy-stack-library-selecter.directive';
+import CodenvyStackLibraryWorkspaceSelecter from './create-workspace/select-stack/stack-library/stack-library-workspace-selecter/cdvy-stack-library-workspace-selecter.directive';
+import CreateProjectStackLibraryCtrl from './create-workspace/select-stack/stack-library/create-project-stack-library.controller';
+import CreateProjectStackLibrary from './create-workspace/select-stack/stack-library/create-project-stack-library.directive';
+import WorkspaceSelectStackCtrl from './create-workspace/select-stack/workspace-select-stack.controller';
+import WorkspaceSelectStack from './create-workspace/select-stack/workspace-select-stack.directive';
 import CodenvyWorkspaceRamAllocationSliderCtrl from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.controller';
 import CodenvyWorkspaceRamAllocationSlider from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.directive';
 import WorkspaceStatusIndicator from './workspace-status-indicator/workspace-status-indicator.directive';
@@ -60,6 +68,19 @@ class WorkspacesConfig {
     register.directive('cdvyWorkspaceRamAllocationSlider', CodenvyWorkspaceRamAllocationSlider);
 
     register.directive('workspaceStatusIndicator', WorkspaceStatusIndicator);
+
+    register.controller('ReadyToGoStacksCtrl', ReadyToGoStacksCtrl);
+    register.directive('readyToGoStacks', ReadyToGoStacks);
+
+    register.directive('cdvyStackLibraryWorkspaceSelecter', CodenvyStackLibraryWorkspaceSelecter);
+
+    register.directive('cdvyStackLibrarySelecter', CodenvyStackLibrarySelecter);
+
+    register.controller('CreateProjectStackLibraryCtrl', CreateProjectStackLibraryCtrl);
+    register.directive('createProjectStackLibrary', CreateProjectStackLibrary);
+
+    register.controller('WorkspaceSelectStackCtrl', WorkspaceSelectStackCtrl);
+    register.directive('cdvyWorkspaceSelectStack', WorkspaceSelectStack);
 
     // config routes
     register.app.config(function ($routeProvider) {
