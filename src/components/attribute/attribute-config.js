@@ -10,8 +10,23 @@
  */
 'use strict';
 
-/*exported CodenvyFocusable, CodenvyAutoScroll, CodenvyListOnScrollBottom, CodenvyReloadHref*/
-import CodenvyFocusable from './focusable/cdvy-focusable.directive';
-import CodenvyAutoScroll from './scroll/cdvy-automatic-scroll.directive';
-import CodenvyListOnScrollBottom from './scroll/cdvy-list-on-scroll-bottom.directive';
-import CodenvyReloadHref from './reload-href/cdvy-reload-href.directive';
+import {CodenvyFocusable} from './focusable/cdvy-focusable.directive';
+import {CodenvyAutoScroll} from './scroll/cdvy-automatic-scroll.directive';
+import {CodenvyListOnScrollBottom} from './scroll/cdvy-list-on-scroll-bottom.directive';
+import {CodenvyReloadHref} from './reload-href/cdvy-reload-href.directive';
+
+
+export class AttributeConfig {
+
+  constructor(register) {
+
+    register.directive('focusable', CodenvyFocusable);
+
+    register.directive('cdvyAutoScroll', CodenvyAutoScroll);
+
+    register.directive('cdvyListOnScrollBottom', CodenvyListOnScrollBottom);
+
+    register.directive('cdvyReloadHref', CodenvyReloadHref);
+
+  }
+}

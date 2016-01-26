@@ -10,13 +10,11 @@
  */
 'use strict';
 
-/*exported CodenvyProjectTemplateBuilder */
-
 /**
  * This class is providing a builder for ProjectTemplate
  * @author Florent Benoit
  */
-class CodenvyProjectTypeBuilder {
+export class CodenvyProjectTypeBuilder {
 
   constructor() {
     this.type = {};
@@ -45,5 +43,3 @@ class CodenvyProjectTypeBuilder {
 
 
 }
-
-export default CodenvyProjectTypeBuilder;

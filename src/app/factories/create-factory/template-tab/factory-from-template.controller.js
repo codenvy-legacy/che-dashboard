@@ -14,7 +14,7 @@
  * Controller for creating factory from a template.
  * @author Oleksii Orel
  */
-class FactoryFromTemplateCtrl {
+export class FactoryFromTemplateCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -55,5 +55,3 @@ class FactoryFromTemplateCtrl {
   }
 
 }
-
-export default FactoryFromTemplateCtrl;

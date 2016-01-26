@@ -10,9 +10,6 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
-
 /**
  * @ngdoc directive
  * @name components.directive:cdvyReloadHref
@@ -28,7 +25,7 @@ import Register from '../../utils/register';
  *
  * @author Florent Benoit
  */
-class CodenvyReloadHref {
+export class CodenvyReloadHref {
 
     /**
      * Default constructor that is using resource
@@ -57,7 +54,3 @@ class CodenvyReloadHref {
     }
 
 }
-
-export default CodenvyReloadHref;
-
-Register.getInstance().directive('cdvyReloadHref', CodenvyReloadHref);

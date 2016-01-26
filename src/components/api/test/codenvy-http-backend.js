@@ -11,13 +11,11 @@
 'use strict';
 
 
-import Register from '../../utils/register';
-
 /**
  * This class is providing helper methods for simulating a fake HTTP backend simulating
  * @author Florent Benoit
  */
-class CodenvyHttpBackend {
+export class CodenvyHttpBackend {
 
   /**
    * Constructor to use
@@ -375,7 +373,3 @@ class CodenvyHttpBackend {
 
 }
 
-export default CodenvyHttpBackend;
-
-// Register this factory
-Register.getInstance().factory('codenvyHttpBackend', CodenvyHttpBackend);

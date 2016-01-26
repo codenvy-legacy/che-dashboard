@@ -16,7 +16,7 @@
  * @description This class is handling the controller for listing the workspaces
  * @author Ann Shumilova
  */
-class ListWorkspacesCtrl {
+export class ListWorkspacesCtrl {
 
   /**
    * Default constructor that is using resource
@@ -121,5 +121,3 @@ class ListWorkspacesCtrl {
     });
   }
 }
-
-export default ListWorkspacesCtrl;

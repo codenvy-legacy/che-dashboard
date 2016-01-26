@@ -10,9 +10,7 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
-class CodenvyFrame {
+export class CodenvyFrame {
 
   /**
    * Default constructor.
@@ -47,7 +45,3 @@ class CodenvyFrame {
       </div>`;
   }
 }
-
-export default CodenvyFrame;
-
-Register.getInstance().directive('cdvyFrame', CodenvyFrame);

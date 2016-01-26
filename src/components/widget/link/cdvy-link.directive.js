@@ -10,8 +10,6 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines the link component.
  * Uses the following options:
@@ -20,7 +18,7 @@ import Register from '../../utils/register';
  * * target fot the HTML link target value (_self, _blank, _parent, _top) - see {@link https://developer.mozilla.org/fr/docs/Web/HTML/Element/a#attr-target}
  * * cdvy-no-padding if truthy, do not add the horizontal and vertical padding and margin
  */
-class CodenvyLink {
+export class CodenvyLink {
 
   /**
    * Default constructor that is using resource
@@ -59,7 +57,3 @@ class CodenvyLink {
 
 
 }
-
-export default CodenvyLink;
-
-Register.getInstance().directive('cdvyLink', CodenvyLink);

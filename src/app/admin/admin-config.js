@@ -10,12 +10,12 @@
  */
 'use strict';
 
-import AdminsPluginsConfig from './plugins/plugins-config';
+import {AdminsPluginsConfig} from './plugins/plugins-config';
 
 /**
  * @author Florent Benoit
  */
-class AdminsConfig {
+export class AdminsConfig {
 
   constructor(register) {
     new AdminsPluginsConfig(register);
@@ -23,5 +23,3 @@ class AdminsConfig {
   }
 }
 
-
-export default AdminsConfig;

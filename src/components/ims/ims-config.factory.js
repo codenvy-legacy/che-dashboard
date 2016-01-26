@@ -10,12 +10,10 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the interface with Installation Manager Server (IMS) configuration.
  */
-class ImsConfigApi {
+export class ImsConfigApi {
 
   /**
    * Default constructorfor the config API.
@@ -55,6 +53,3 @@ class ImsConfigApi {
     return this.remoteImsAPI.setIMConfig(payload);
   }
 }
-
-// Register this factory
-Register.getInstance().factory('imsConfigApi', ImsConfigApi);

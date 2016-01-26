@@ -16,7 +16,7 @@
  * @description This class is handling the controller for adding account members dialog
  * @author Ann Shumilova
  */
-class TeamMembersDialogAddCtrl {
+export class TeamMembersDialogAddCtrl {
 
   /**
    * Default constructor that is using resource
@@ -52,5 +52,3 @@ class TeamMembersDialogAddCtrl {
     this.$mdDialog.hide();
   }
 }
-
-export default TeamMembersDialogAddCtrl;

@@ -14,7 +14,7 @@
  * Defines a directive for displaying account-delete widget.
  * @author Oleksii Orel
  */
-class AccountDelete {
+export class AccountDelete {
 
   /**
    * Default constructor that is using resource
@@ -30,5 +30,3 @@ class AccountDelete {
   }
 
 }
-
-export default AccountDelete;

@@ -16,7 +16,7 @@
  * @description This class is handling the controller for adding members to new workspace
  * @author Ann Shumilova
  */
-class CreateWorkspaceAddMemberCtrl {
+export class CreateWorkspaceAddMemberCtrl {
 
   /**
    * Default constructor that is using resource
@@ -106,5 +106,3 @@ class CreateWorkspaceAddMemberCtrl {
     this.members.splice(index, 1);
   }
 }
-
-export default CreateWorkspaceAddMemberCtrl;

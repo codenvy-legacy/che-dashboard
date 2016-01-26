@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for the selecter.
  * @author Florent Benoit
  */
-class CodenvySelecter {
+export class CodenvySelecter {
 
   /**
    * Default constructor that is using resource
@@ -66,7 +64,3 @@ class CodenvySelecter {
 
 
 }
-
-export default CodenvySelecter;
-
-Register.getInstance().directive('cdvySelecter', CodenvySelecter);

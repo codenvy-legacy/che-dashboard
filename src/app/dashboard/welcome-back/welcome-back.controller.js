@@ -16,7 +16,7 @@
  * @description This class is handling the controller of the 'welcome back' panel in dashboard
  * @author Florent Benoit
  */
-class WelcomeBackCtrl {
+export class WelcomeBackCtrl {
 
 
   /**
@@ -114,6 +114,3 @@ class WelcomeBackCtrl {
 
 
 }
-
-export default WelcomeBackCtrl;
-

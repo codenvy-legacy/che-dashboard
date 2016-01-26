@@ -10,12 +10,33 @@
  */
 'use strict';
 
-import './ims-artifact.factory';
-import './ims-config.factory';
-import './ims-saasauth.factory';
-import './ims-subscription.factory';
-import './ims-update.factory';
-import './ims-nodes.factory';
-import './ims-properties.factory';
-import './ims-eventlogging.factory';
+import {ImsArtifactApi} from './ims-artifact.factory';
+import {ImsConfigApi} from './ims-config.factory';
+import {ImsSaasAuthApi} from './ims-saasauth.factory';
+import {ImsSubscriptionApi} from './ims-subscription.factory';
+import {ImsUpdateApi} from './ims-update.factory';
+import {ImsNodesApi} from './ims-nodes.factory';
+import {ImsPropertiesApi} from './ims-properties.factory';
+import {ImsEventLoggingApi} from './ims-eventlogging.factory';
 
+
+export class ImsApiConfig {
+
+  constructor(register) {
+    register.factory('imsArtifactApi', ImsArtifactApi);
+    register.factory('imsConfigApi', ImsConfigApi);
+
+    register.factory('imsSaasAuthApi', ImsSaasAuthApi);
+
+    register.factory('imsSubscriptionApi', ImsSubscriptionApi);
+
+    register.factory('imsUpdateApi', ImsUpdateApi);
+
+    register.factory('imsNodesApi', ImsNodesApi);
+
+    register.factory('imsPropertiesApi', ImsPropertiesApi);
+
+    register.factory('imsEventLoggingApi', ImsEventLoggingApi);
+
+  }
+}

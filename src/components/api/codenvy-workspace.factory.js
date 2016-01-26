@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the workspace retrieval
  * It sets to the array workspaces the current workspaces which are not temporary
  * @author Florent Benoit
  */
-class CodenvyWorkspace {
+export class CodenvyWorkspace {
 
   /**
    * Default constructor that is using resource
@@ -318,6 +316,3 @@ class CodenvyWorkspace {
     return (workspace.attributes && workspace.attributes[this.RESOURCES_USAGE_LIMIT]) ? workspace.attributes[this.RESOURCES_USAGE_LIMIT] : undefined;
   }
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyWorkspace', CodenvyWorkspace);

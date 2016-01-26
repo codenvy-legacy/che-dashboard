@@ -14,7 +14,7 @@
  * Defines a directive for displaying factory-information widget.
  * @author Oleksii Orel
  */
-class FactoryInformation {
+export class FactoryInformation {
 
   /**
    * Default constructor that is using resource
@@ -38,5 +38,3 @@ class FactoryInformation {
   }
 
 }
-
-export default FactoryInformation;

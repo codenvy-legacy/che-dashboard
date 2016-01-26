@@ -39,7 +39,7 @@ describe('CodenvyAccount', function(){
   /**
    *  setup module
    */
-  beforeEach(module('userDashboard'));
+  beforeEach(angular.mock.module('userDashboard'));
 
   /**
    * Inject factory and http backend

@@ -24,7 +24,7 @@ describe('CodenvyProjectReferenceBuilder', function(){
   /**
    *  setup module
    */
-  beforeEach(module('userDashboard'));
+  beforeEach(angular.mock.module('userDashboard'));
 
 
   /**

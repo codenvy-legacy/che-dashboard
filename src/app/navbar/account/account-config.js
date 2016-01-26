@@ -10,18 +10,18 @@
  */
 'use strict';
 
-import AddCreditcardCtrl from '../account/creditcard/add-creditcard.controller';
-import AddCreditcard from '../account/creditcard/add-creditcard.directive';
-import CreditcardCtrl from '../account/creditcard/creditcard.controller';
-import AccountProfile from './profile/account-profile.directive';
-import AccountProfileCtrl from './profile/account-profile.controller';
-import AccountDelete from '../account/account-delete.directive';
-import AccountDeleteCtrl from '../account/account-delete.controller';
-import AccountUpdatePassword from '../account/account-update-password.directive';
-import AccountCtrl from '../account/account.controller';
+import {AddCreditcardCtrl} from '../account/creditcard/add-creditcard.controller';
+import {AddCreditcard} from '../account/creditcard/add-creditcard.directive';
+import {CreditcardCtrl} from '../account/creditcard/creditcard.controller';
+import {AccountProfile} from './profile/account-profile.directive';
+import {AccountProfileCtrl} from './profile/account-profile.controller';
+import {AccountDelete} from '../account/account-delete.directive';
+import {AccountDeleteCtrl} from '../account/account-delete.controller';
+import {AccountUpdatePassword} from '../account/account-update-password.directive';
+import {AccountCtrl} from '../account/account.controller';
 
 
-class AccountConfig {
+export class AccountConfig {
 
   constructor(register) {
     register.controller('CreditcardCtrl', CreditcardCtrl);
@@ -52,5 +52,3 @@ class AccountConfig {
     });
   }
 }
-
-export default AccountConfig;

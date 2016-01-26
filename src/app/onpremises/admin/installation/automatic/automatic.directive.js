@@ -13,7 +13,7 @@
 /**
  * Defines a directive for creating the usage data and automatic upgrade panel.
  */
-class AutomaticUpdatesPanel {
+export class AutomaticUpdatesPanel {
 
   /**
    * Default constructor that is using resource
@@ -28,5 +28,3 @@ class AutomaticUpdatesPanel {
   }
 
 }
-
-export default AutomaticUpdatesPanel;

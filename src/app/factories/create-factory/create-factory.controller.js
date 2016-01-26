@@ -14,7 +14,7 @@
  * Controller for a create factory.
  * @author Oleksii Orel
  */
-class CreateFactoryCtrl {
+export class CreateFactoryCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -56,6 +56,3 @@ class CreateFactoryCtrl {
   }
 
 }
-
-export default CreateFactoryCtrl;
-

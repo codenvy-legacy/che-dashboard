@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines the super class for for all buttons
  * @author Florent Benoit
  */
-class CodenvyButtonDropdown {
+export class CodenvyButtonDropdown {
 
   /**
    * Default constructor that is using resource
@@ -39,7 +37,3 @@ class CodenvyButtonDropdown {
   }
 
 }
-
-export default CodenvyButtonDropdown;
-
-Register.getInstance().directive('cdvyButtonDropdown', CodenvyButtonDropdown);

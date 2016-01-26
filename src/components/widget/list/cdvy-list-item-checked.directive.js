@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating List Items that can be checked.
  * @author Ann Shumilova
  */
-class CodenvyListItemChecked {
+export class CodenvyListItemChecked {
 
   /**
    * Default constructor that is using resource
@@ -40,7 +38,3 @@ class CodenvyListItemChecked {
   }
 
 }
-
-export default CodenvyListItemChecked;
-
-Register.getInstance().directive('cdvyListItemChecked', CodenvyListItemChecked);

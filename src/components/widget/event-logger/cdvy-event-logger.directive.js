@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for logging user UI events.
  * @author Ann Shumilova
  */
-class CodenvyEventLogger {
+export class CodenvyEventLogger {
 
   /**
    * Default constructor that is using resource
@@ -33,7 +31,3 @@ class CodenvyEventLogger {
     });
   }
 }
-
-export default CodenvyEventLogger;
-
-Register.getInstance().directive('cdvyEventLogger', CodenvyEventLogger);

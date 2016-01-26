@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is checking onBoarding state.
  * @author Oleksii Orel
  */
-class OnBoarding {
+export class OnBoarding {
 
   /**
    * Default constructor for the artifact API.
@@ -42,5 +40,3 @@ class OnBoarding {
 
 }
 
-// Register this factory
-Register.getInstance().factory('onBoarding', OnBoarding);

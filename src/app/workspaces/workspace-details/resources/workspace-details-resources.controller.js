@@ -16,7 +16,7 @@
  * @description This class is handling the controller for details of workspace : section resources
  * @author Ann Shumilova
  */
-class WorkspaceDetailsResourcesCtrl {
+export class WorkspaceDetailsResourcesCtrl {
 
   /**
    * Default constructor that is using resource
@@ -129,5 +129,3 @@ class WorkspaceDetailsResourcesCtrl {
   }
 
 }
-
-export default WorkspaceDetailsResourcesCtrl;

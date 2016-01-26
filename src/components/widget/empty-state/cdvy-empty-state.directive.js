@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating empty state widget that are working either on desktop or on mobile devices.
  * It will change upon width of the screen
  * @author Oleksii Orel
  */
-class CodenvyEmptyState {
+export class CodenvyEmptyState {
 
   /**
    * Default constructor that is using resource
@@ -40,7 +38,3 @@ class CodenvyEmptyState {
   }
 
 }
-
-export default CodenvyEmptyState;
-
-Register.getInstance().directive('cdvyEmptyState', CodenvyEmptyState);

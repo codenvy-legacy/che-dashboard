@@ -14,7 +14,7 @@
  * Defines a directive for displaying subscription proposals.
  * @author Ann Shumilova
  */
-class SubscriptionProposal {
+export class SubscriptionProposal {
 
   /**
    * Default constructor that is using resource
@@ -41,6 +41,3 @@ class SubscriptionProposal {
   }
 
 }
-
-export default SubscriptionProposal;
-

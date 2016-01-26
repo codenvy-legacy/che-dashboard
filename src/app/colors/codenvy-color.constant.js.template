@@ -10,4 +10,11 @@
  */
 'use strict';
 
-angular.module('userDashboard').constant('jsonColors', JSON.stringify(%CONTENT%));
+export class CodenvyColorsConfig {
+
+  constructor(register) {
+    // Register this factory
+    register.app.constant('jsonColors', JSON.stringify(%CONTENT%));
+
+  }
+}

@@ -15,7 +15,7 @@
  * It will change upon width of the screen
  * @author Oleksii Kurinnyi
  */
-class CodenvyWorkspaceRamAllocationSlider {
+export class CodenvyWorkspaceRamAllocationSlider {
 
   /**
    * Default constructor that is using resource
@@ -41,5 +41,3 @@ class CodenvyWorkspaceRamAllocationSlider {
     };
   }
 }
-
-export default CodenvyWorkspaceRamAllocationSlider;

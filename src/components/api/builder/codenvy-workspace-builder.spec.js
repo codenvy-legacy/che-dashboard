@@ -22,7 +22,7 @@ describe('CodenvyWorkspaceBuilder', function(){
   /**
    *  setup module
    */
-  beforeEach(module('userDashboard'));
+  beforeEach(angular.mock.module('userDashboard'));
 
 
   /**

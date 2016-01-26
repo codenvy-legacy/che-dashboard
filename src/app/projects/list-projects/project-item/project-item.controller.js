@@ -16,7 +16,7 @@
  * @description This class is handling the controller for item of project list
  * @author Florent Benoit
  */
-class ProjectItemCtrl {
+export class ProjectItemCtrl {
 
   /**
    * Default constructor that is using resource
@@ -42,5 +42,3 @@ class ProjectItemCtrl {
   }
 
 }
-
-export default ProjectItemCtrl;

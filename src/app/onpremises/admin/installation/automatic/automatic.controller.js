@@ -12,7 +12,7 @@
 
 const anonUsageDataPropertyName = 'anon-usage-data';
 
-class AutomaticUpdatesCtrl {
+export class AutomaticUpdatesCtrl {
 
 
   /**
@@ -117,5 +117,3 @@ class AutomaticUpdatesCtrl {
     return this._usageData;
   }
 }
-
-export default AutomaticUpdatesCtrl;

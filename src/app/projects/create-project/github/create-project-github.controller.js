@@ -15,7 +15,7 @@
  * @author Stéphane Daviet
  * @author Florent Benoit
  */
-class CreateProjectGithubCtrl {
+export class CreateProjectGithubCtrl {
 
   /**
    * Default constructor that is using resource
@@ -171,5 +171,3 @@ class CreateProjectGithubCtrl {
   }
 
 }
-
-export default CreateProjectGithubCtrl;

@@ -10,12 +10,12 @@
  */
 'use strict';
 
-import FactoryDetailsCtrl from '../factory-details/factory-details.controller';
-import InformationTabConfig from './information-tab/information-tab-config';
-import ConfigurationTabConfig from './configuration-tab/configuration-tab-config';
+import {FactoryDetailsCtrl} from '../factory-details/factory-details.controller';
+import {InformationTabConfig} from './information-tab/information-tab-config';
+import {ConfigurationTabConfig} from './configuration-tab/configuration-tab-config';
 
 
-class FactoryDetailsConfig {
+export class FactoryDetailsConfig {
 
   constructor(register) {
     register.controller('FactoryDetailsCtrl', FactoryDetailsCtrl);
@@ -36,5 +36,3 @@ class FactoryDetailsConfig {
 
   }
 }
-
-export default FactoryDetailsConfig;

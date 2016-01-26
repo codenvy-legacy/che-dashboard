@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the svn API.
  * @author Oleksii Orel
  */
-class CodenvySvn {
+export class CodenvySvn {
 
 
   /**
@@ -63,6 +61,3 @@ class CodenvySvn {
   }
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvySvn', CodenvySvn);

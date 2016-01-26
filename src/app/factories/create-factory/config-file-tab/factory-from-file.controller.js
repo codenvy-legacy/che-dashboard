@@ -16,13 +16,15 @@
  * Controller for upload factory from the file.
  * @author Oleksii Orel
  */
-class FactoryFromFileCtrl {
+export class FactoryFromFileCtrl {
 
   /**
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
   constructor($filter, codenvyAPI, codenvyNotification, FileUploader) {
+    'ngInject';
+
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
 
@@ -95,5 +97,3 @@ class FactoryFromFileCtrl {
   }
 
 }
-
-export default FactoryFromFileCtrl;

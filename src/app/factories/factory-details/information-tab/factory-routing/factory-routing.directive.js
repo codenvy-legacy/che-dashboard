@@ -14,7 +14,7 @@
  * Defines a directive for displaying factory-routing widget.
  * @author Oleksii Orel
  */
-class FactoryRouting {
+export class FactoryRouting {
 
   /**
    * Default constructor that is using resource
@@ -38,5 +38,3 @@ class FactoryRouting {
   }
 
 }
-
-export default FactoryRouting;

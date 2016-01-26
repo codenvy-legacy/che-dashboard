@@ -16,7 +16,7 @@
  * @description This class is handling the controller for listing the projects
  * @author Florent Benoit
  */
-class ListProjectsCtrl {
+export class ListProjectsCtrl {
 
   /**
    * Default constructor that is using resource
@@ -190,5 +190,3 @@ class ListProjectsCtrl {
     }
   }
 }
-
-export default ListProjectsCtrl;

@@ -14,7 +14,7 @@
  * Defines a directive for displaying SaaS subscription information.
  * @author Ann Shumilova
  */
-class SaasSubscriptionInfo {
+export class SaasSubscriptionInfo {
 
   /**
    * Default constructor that is using resource
@@ -32,6 +32,4 @@ class SaasSubscriptionInfo {
   }
 
 }
-
-export default SaasSubscriptionInfo;
 

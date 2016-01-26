@@ -17,7 +17,7 @@
  * @author Ann Shumilova
  * @author Oleksii Orel
  */
-class CreateWorkspaceCtrl {
+export class CreateWorkspaceCtrl {
 
   /**
    * Default constructor that is using resource
@@ -201,5 +201,3 @@ class CreateWorkspaceCtrl {
   }
 
 }
-
-export default CreateWorkspaceCtrl;

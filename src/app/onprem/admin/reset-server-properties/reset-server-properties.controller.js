@@ -10,7 +10,7 @@
  */
 'use strict';
 
-class ResetServerPropsCtrl {
+export class ResetServerPropsCtrl {
 
   /**
    * Default constructor.
@@ -54,5 +54,3 @@ class ResetServerPropsCtrl {
     return result;
   }
 }
-
-export default ResetServerPropsCtrl;

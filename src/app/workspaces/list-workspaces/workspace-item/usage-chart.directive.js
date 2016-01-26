@@ -14,7 +14,7 @@
  * Defines a directive for displaying usage of resource: chart + description.
  * @author Ann Shumilova
  */
-class UsageChart {
+export class UsageChart {
 
   /**
    * Default constructor that is using resource
@@ -100,4 +100,3 @@ class UsageChart {
   }
 }
 
-export default UsageChart;

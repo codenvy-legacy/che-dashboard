@@ -10,8 +10,6 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * @ngdoc directive
  * @name components.directive:cdvyDropzone
@@ -35,7 +33,7 @@ import Register from '../../utils/register';
  </example>
  * @author Florent Benoit
  */
-class CodenvyDropZone {
+export class CodenvyDropZone {
 
   /**
    * Default constructor that is using resource
@@ -97,10 +95,4 @@ class CodenvyDropZone {
 
   }
 
-
-
 }
-
-export default CodenvyDropZone;
-
-Register.getInstance().directive('cdvyDropzone', CodenvyDropZone);

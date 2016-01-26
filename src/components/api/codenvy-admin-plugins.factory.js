@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the plugins management for admins
  * @author Florent Benoit
  */
-class CodenvyAdminPlugins {
+export class CodenvyAdminPlugins {
 
   /**
    * Default constructor that is using resource
@@ -99,6 +97,3 @@ class CodenvyAdminPlugins {
 
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyAdminPlugins', CodenvyAdminPlugins);

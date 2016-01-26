@@ -11,15 +11,13 @@
 'use strict';
 
 
-import Register from '../../utils/register';
-
 /**
  * @ngdoc controller
  * @name components.controller:CodenvyLearnMoreCtrl
  * @description This class is handling the controller of learnmore widget
  * @author Florent Benoit
  */
-class CodenvyLearnMoreCtrl {
+export class CodenvyLearnMoreCtrl {
 
   /**
    * Default constructor that is using resource
@@ -151,8 +149,3 @@ class CodenvyLearnMoreCtrl {
   }
 
 }
-
-
-export default CodenvyLearnMoreCtrl;
-
-Register.getInstance().controller('CodenvyLearnMoreCtrl', CodenvyLearnMoreCtrl);

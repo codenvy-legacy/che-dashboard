@@ -12,13 +12,11 @@
 
 /* global FormData */
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the factory retrieval
  * @author Florent Benoit
  */
-class CodenvyFactory {
+export class CodenvyFactory {
 
   /**
    * Default constructor that is using resource
@@ -351,6 +349,3 @@ class CodenvyFactory {
   }
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyFactory', CodenvyFactory);

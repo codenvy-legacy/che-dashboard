@@ -14,7 +14,7 @@
  * This class is providing a builder for Subscription
  * @author Ann Shumilova
  */
-class CodenvySubscriptionBuilder {
+export class CodenvySubscriptionBuilder {
 
   /**
    * Default constructor.
@@ -88,5 +88,3 @@ class CodenvySubscriptionBuilder {
 
 
 }
-
-export default CodenvySubscriptionBuilder;

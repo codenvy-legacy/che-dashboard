@@ -14,7 +14,7 @@
  * Controller for a factory item.
  * @author Oleksii Orel
  */
-class FactoryItemCtrl {
+export class FactoryItemCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -31,4 +31,3 @@ class FactoryItemCtrl {
 
 }
 
-export default FactoryItemCtrl;

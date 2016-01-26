@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the branding data in Che
  * @author Florent Benoit
  */
-class CheBranding {
+export class CheBranding {
 
     /**
      * Default constructor that is using resource
@@ -85,5 +83,3 @@ class CheBranding {
     }
 }
 
-// Register this factory
-Register.getInstance().factory('cheBranding', CheBranding);

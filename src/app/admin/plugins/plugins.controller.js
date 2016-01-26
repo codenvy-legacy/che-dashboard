@@ -16,7 +16,7 @@
  * @description This class is handling the controller of the plugins
  * @author Florent Benoit
  */
-class AdminPluginsCtrl {
+export class AdminPluginsCtrl {
 
 
   /**
@@ -287,6 +287,3 @@ class AdminPluginsCtrl {
 
 
 }
-
-export default AdminPluginsCtrl;
-

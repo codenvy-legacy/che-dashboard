@@ -16,7 +16,7 @@
  * @description This class is handling the controller for details of workspace : section projects
  * @author Ann Shumilova
  */
-class WorkspaceDetailsProjectsCtrl {
+export class WorkspaceDetailsProjectsCtrl {
 
   /**
    * Default constructor that is using resource
@@ -45,5 +45,3 @@ class WorkspaceDetailsProjectsCtrl {
     return this.$mdMedia('gt-sm');
   }
 }
-
-export default WorkspaceDetailsProjectsCtrl;

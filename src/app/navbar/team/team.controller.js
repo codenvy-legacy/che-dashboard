@@ -16,7 +16,7 @@
  * @description This class is handling the controller for account members
  * @author Ann Shumilova
  */
-class TeamCtrl {
+export class TeamCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -192,5 +192,3 @@ class TeamCtrl {
     });
   }
 }
-
-export default TeamCtrl;

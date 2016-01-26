@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../components/utils/register.js';
-
 /**
  * Provides a way to know the history of all routes that have been loaded
  * @author Florent Benoit
  */
-class RouteHistory {
+export class RouteHistory {
 
   /**
    * Default constructor that is using resource injection
@@ -48,8 +46,3 @@ class RouteHistory {
   }
 
 }
-
-export default RouteHistory;
-
-// Register this service
-Register.getInstance().service('routeHistory', RouteHistory);

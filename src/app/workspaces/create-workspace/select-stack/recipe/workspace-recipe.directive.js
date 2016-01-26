@@ -14,7 +14,7 @@
  * Defines a directive for displaying recipe widget.
  * @author Oleksii Orel
  */
-class WorkspaceRecipe {
+export class WorkspaceRecipe {
 
   /**
    * Default constructor that is using resource
@@ -39,5 +39,3 @@ class WorkspaceRecipe {
   }
 
 }
-
-export default WorkspaceRecipe;

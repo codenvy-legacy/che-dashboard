@@ -11,15 +11,13 @@
 'use strict';
 
 
-import Register from '../../utils/register';
-
 /**
  * @ngdoc controller
  * @name components.controller:CodenvyBoxCtrl
  * @description This class is handling the controller of a box
  * @author Florent Benoit
  */
-class CodenvyBoxCtrl {
+export class CodenvyBoxCtrl {
 
   /**
    * Default constructor that is using resource
@@ -30,8 +28,3 @@ class CodenvyBoxCtrl {
 
 
 }
-
-
-export default CodenvyBoxCtrl;
-
-Register.getInstance().controller('CodenvyBoxCtrl', CodenvyBoxCtrl);

@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for displaying the block with source code as well (for demos).
  * @author Florent Benoit
  */
-class CodenvyHtmlSource {
+export class CodenvyHtmlSource {
 
   /**
    * Default constructor that is using resource
@@ -44,7 +42,3 @@ class CodenvyHtmlSource {
   }
 
 }
-
-export default CodenvyHtmlSource;
-
-Register.getInstance().directive('cdvyHtmlSource', CodenvyHtmlSource);

@@ -10,13 +10,15 @@
  */
 'use strict';
 
-class OnPremisesAdminBridgeAvailableSoftwareCtrl {
+export class OnPremisesAdminAvailableSoftwareCtrl {
 
   /**
    * Default constructor.
    * @ngInject for Dependency injection
    */
   constructor(imsArtifactApi, $interval) {
+    'ngInject';
+
     this.imsArtifactApi = imsArtifactApi;
     this.$interval = $interval;
     let artifactsPromise = this.imsArtifactApi.artifacts();
@@ -105,5 +107,3 @@ class OnPremisesAdminBridgeAvailableSoftwareCtrl {
     return this.imsArtifactApi.getArtifactReleaseNotesUrl(artifactId, version);
   }
 }
-
-export default OnPremisesAdminBridgeAvailableSoftwareCtrl;

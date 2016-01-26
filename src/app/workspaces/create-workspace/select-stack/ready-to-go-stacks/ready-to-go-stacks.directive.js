@@ -24,7 +24,7 @@
  *
  * @author Florent Benoit
  */
-class ReadyToGoStacks {
+export class ReadyToGoStacks {
 
   /**
    * Default constructor that is using resource
@@ -47,6 +47,3 @@ class ReadyToGoStacks {
   }
 
 }
-
-export default ReadyToGoStacks;
-

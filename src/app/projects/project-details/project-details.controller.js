@@ -15,7 +15,7 @@
  * @author Florent Benoit
  * @author Oleksii Orel
  */
-class ProjectDetailsCtrl {
+export class ProjectDetailsCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -179,6 +179,3 @@ class ProjectDetailsCtrl {
   }
 
 }
-
-export default ProjectDetailsCtrl;
-

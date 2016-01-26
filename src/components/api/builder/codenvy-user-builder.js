@@ -16,7 +16,7 @@
  * This class is providing a builder for User
  * @author Florent Benoit
  */
-class CodenvyUserBuilder {
+export class CodenvyUserBuilder {
 
   /**
    * Default constructor.
@@ -69,5 +69,3 @@ class CodenvyUserBuilder {
 
 
 }
-
-export default CodenvyUserBuilder;

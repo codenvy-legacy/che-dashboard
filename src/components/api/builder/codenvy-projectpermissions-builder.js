@@ -16,7 +16,7 @@
  * This class is providing a builder for Project Permissions
  * @author Florent Benoit
  */
-class CodenvyProjectPermissionsBuilder {
+export class CodenvyProjectPermissionsBuilder {
 
   /**
    * Default constructor.
@@ -71,5 +71,3 @@ class CodenvyProjectPermissionsBuilder {
 
 
 }
-
-export default CodenvyProjectPermissionsBuilder;

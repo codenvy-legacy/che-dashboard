@@ -10,7 +10,7 @@
  */
 'use strict';
 
-class BillingCtrl {
+export class BillingCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -122,5 +122,3 @@ class BillingCtrl {
     });
   }
 }
-
-export default BillingCtrl;

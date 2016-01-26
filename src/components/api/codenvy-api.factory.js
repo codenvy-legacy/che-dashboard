@@ -9,39 +9,6 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
-/*exported CodenvyProject, CodenvyWorkspace, CodenvyFactory, CodenvyUser, CodenvyProjectType, CodenvyProfile, CodenvyProjectTemplate,
- CodenvyAPIBuilder, CodenvyHttpBackend, CodenvyHttpBackendFactory, CodenvyHttpBackendProviderFactory, CodenvyAccount, CodenvyAnalytics,
- CodenvySaas, CodenvyPayment, CodenvyWebsocket, CodenvyGit, CodenvySvn, CodenvyFactoryTemplate, CodenvyAnalyticsSession,
- CodenvyService, CodenvyAdminPlugins, CodenvyAdminService, CodenvyRecipe, CodenvyRecipeTemplate, CodenvyStack */
-
-
-import Register from '../utils/register';
-import CodenvyAPIBuilder from './builder/codenvy-api-builder.factory';
-import CodenvyHttpBackendFactory from './test/codenvy-http-backend.factory';
-import CodenvyHttpBackendProviderFactory from './test/codenvy-http-backend-provider.factory';
-
-import CodenvyProject from './codenvy-project.factory';
-import CodenvyWorkspace from './codenvy-workspace.factory';
-import CodenvyUser from './codenvy-user.factory';
-import CodenvyAccount from './codenvy-account.factory';
-import CodenvyAnalytics from './codenvy-analytics.factory';
-import CodenvySaas from './codenvy-saas.factory';
-import CodenvyPayment from './codenvy-payment.factory';
-import CodenvyProfile from './codenvy-profile.factory';
-import CodenvyFactory from './codenvy-factory.factory';
-import CodenvyProjectType from './codenvy-project-type.factory';
-import CodenvyProjectTemplate from './codenvy-project-template.factory';
-import CodenvyWebsocket from './codenvy-websocket.factory';
-import CodenvyGit from './codenvy-git.factory';
-import CodenvySvn from './codenvy-svn.factory';
-import CodenvyFactoryTemplate from './codenvy-factory-template.factory';
-import CodenvyAnalyticsSession from './codenvy-analytics-session.factory';
-import CodenvyService from './codenvy-service.factory';
-import CodenvyAdminPlugins from './codenvy-admin-plugins.factory';
-import CodenvyAdminService from './codenvy-admin-service.factory';
-import CodenvyRecipe from './codenvy-recipe.factory';
-import CodenvyRecipeTemplate from './codenvy-recipe-template.factory';
-import CodenvyStack from './codenvy-stack.factory';
 
 
 /**
@@ -49,7 +16,7 @@ import CodenvyStack from './codenvy-stack.factory';
  * It handles workspaces, projects, etc.
  * @author Florent Benoit
  */
-class CodenvyAPI {
+export class CodenvyAPI {
 
   /**
    * Default constructor that is using resource
@@ -84,6 +51,7 @@ class CodenvyAPI {
 
     // register listener of projects onto workspaces
     this.codenvyWorkspace.addListener(this.codenvyProject);
+
   }
 
 
@@ -253,8 +221,3 @@ class CodenvyAPI {
     return this.codenvyStack;
   }
 }
-
-export default CodenvyAPI;
-
-// Register this factory
-Register.getInstance().factory('codenvyAPI', CodenvyAPI);

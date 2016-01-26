@@ -29,7 +29,7 @@ import IdeListItemNavbar from './ide-list-item-navbar/ide-list-item-navbar.direc
 import IdeIFrameButtonLinkCtrl from './ide-iframe-button-link/ide-iframe-button-link.controller';
 import IdeIFrameButtonLink from './ide-iframe-button-link/ide-iframe-button-link.directive';
 
-class IdeConfig {
+export class IdeConfig {
 
   constructor(register) {
     register.service('ideSvc', IdeSvc);
@@ -66,5 +66,3 @@ class IdeConfig {
   }
 }
 
-
-export default IdeConfig;

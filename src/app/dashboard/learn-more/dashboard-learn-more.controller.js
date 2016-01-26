@@ -16,7 +16,7 @@
  * @description This class is handling the controller of the learn-more widget to display in the dashboard
  * @author Florent Benoit
  */
-class DashboardLearnMoreCtrl {
+export class DashboardLearnMoreCtrl {
 
 
   /**
@@ -179,6 +179,3 @@ class DashboardLearnMoreCtrl {
   }
 
 }
-
-export default DashboardLearnMoreCtrl;
-

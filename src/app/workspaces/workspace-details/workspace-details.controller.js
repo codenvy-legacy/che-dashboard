@@ -14,7 +14,7 @@
  * Controller for a workspace details.
  * @author Ann Shumilova
  */
-class WorkspaceDetailsCtrl {
+export class WorkspaceDetailsCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -145,6 +145,3 @@ class WorkspaceDetailsCtrl {
     });
   }
 }
-
-export default WorkspaceDetailsCtrl;
-

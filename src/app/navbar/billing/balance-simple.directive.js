@@ -14,7 +14,7 @@
  * Defines a directive for displaying simple balance info (with two values).
  * @author Ann Shumilova
  */
-class BalanceSimple {
+export class BalanceSimple {
 
   /**
    * Default constructor that is using resource
@@ -86,5 +86,3 @@ class BalanceSimple {
 
   }
 }
-
-export default BalanceSimple;

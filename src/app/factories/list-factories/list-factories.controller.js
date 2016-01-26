@@ -15,7 +15,7 @@
  * @author Florent Benoit
  * @author Oleksii Orel
  */
-class ListFactoriesCtrl {
+export class ListFactoriesCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -170,6 +170,4 @@ class ListFactoriesCtrl {
   }
 
 }
-
-export default ListFactoriesCtrl;
 

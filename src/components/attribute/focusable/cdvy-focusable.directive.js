@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating focusable attribute.
  * @author Oleksii Orel
  */
-class CodenvyFocusable {
+export class CodenvyFocusable {
 
   /**
    * Default constructor that is using resource
@@ -38,7 +36,3 @@ class CodenvyFocusable {
     });
   }
 }
-
-export default CodenvyFocusable;
-
-Register.getInstance().directive('focusable', CodenvyFocusable);

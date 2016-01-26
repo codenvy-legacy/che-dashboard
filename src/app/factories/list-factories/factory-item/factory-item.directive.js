@@ -14,7 +14,7 @@
  * Defines a directive for factory item in list.
  * @author Oleksii Orel
  */
-class CodenvyFactoryItem {
+export class CodenvyFactoryItem {
 
   /**
    * Default constructor.
@@ -43,5 +43,3 @@ class CodenvyFactoryItem {
   }
 
 }
-
-export default CodenvyFactoryItem;

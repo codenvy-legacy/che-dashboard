@@ -10,16 +10,16 @@
  */
 'use strict';
 
-import AutomaticUpdatesCtrl from './automatic/automatic.controller';
-import AutomaticUpdatesPanel from './automatic/automatic.directive';
-import OnPremConfigurationCtrl from './configuration/configuration.controller';
-import ConfigurationPanel from './configuration/configuration.directive';
-import UpgradeInstallationCtrl from './upgrade/upgrade.controller';
-import UpgradeInstallationPanel from './upgrade/upgrade.directive';
-import YourInstallationCtrl from './yourinstall/yourinstall.controller';
-import YourInstallationPanel from './yourinstall/yourinstall.directive';
+import {AutomaticUpdatesCtrl} from './automatic/automatic.controller';
+import {AutomaticUpdatesPanel} from './automatic/automatic.directive';
+import {OnPremConfigurationCtrl} from './configuration/configuration.controller';
+import {ConfigurationPanel} from './configuration/configuration.directive';
+import {UpgradeInstallationCtrl} from './upgrade/upgrade.controller';
+import {UpgradeInstallationPanel} from './upgrade/upgrade.directive';
+import {YourInstallationCtrl} from './yourinstall/yourinstall.controller';
+import {YourInstallationPanel} from './yourinstall/yourinstall.directive';
 
-class OnPremisesAdminInstallationConfig {
+export class OnPremisesAdminInstallationConfig {
 
   constructor(register) {
 
@@ -34,5 +34,3 @@ class OnPremisesAdminInstallationConfig {
     register.directive('cdvyOnpremYourInstall', YourInstallationPanel);
   }
 }
-
-export default OnPremisesAdminInstallationConfig;

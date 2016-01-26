@@ -14,7 +14,7 @@
  * Defines a directive for configuring factory form workspace.
  * @author Oleksii Orel
  */
-class FactoryFromWorkspace {
+export class FactoryFromWorkspace {
 
   /**
    * Default constructor that is using resource
@@ -40,5 +40,3 @@ class FactoryFromWorkspace {
   }
 
 }
-
-export default FactoryFromWorkspace;

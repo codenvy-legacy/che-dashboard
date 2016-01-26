@@ -14,13 +14,14 @@
  * Controller for a factory details.
  * @author Florent Benoit
  */
-class FactoryDetailsCtrl {
+export class FactoryDetailsCtrl {
 
   /**
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
   constructor($route, codenvyAPI) {
+    'ngInject';
 
     let factoryId = $route.current.params.id;
 
@@ -43,6 +44,4 @@ class FactoryDetailsCtrl {
   }
 
 }
-
-export default FactoryDetailsCtrl;
 

@@ -10,20 +10,24 @@
  */
 'use strict';
 
+export class CodeMirrorConstant {
 
-angular.module('userDashboard').constant('udCodemirrorConfig', {
-  codemirror: {
-    lineWrapping: true,
-    lineNumbers: true,
-    mode: 'application/json',
-    gutters: ['CodeMirror-lint-markers', 'CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-    lint: true,
-    matchBrackets: true,
-    autoCloseBrackets: true,
-    foldGutter: true,
-    styleActiveLine: true,
-    theme: 'codenvy'
+  constructor(register) {
+    register.app.constant('udCodemirrorConfig', {
+      codemirror: {
+        lineWrapping: true,
+        lineNumbers: true,
+        mode: 'application/json',
+        gutters: ['CodeMirror-lint-markers', 'CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+        lint: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        foldGutter: true,
+        styleActiveLine: true,
+        theme: 'codenvy'
+      }
+    }).config(function () {
+      uiCodemirrorDirective.$inject = ['$timeout', 'udCodemirrorConfig']; // jshint ignore:line
+    });
   }
-}).config(function() {
-  uiCodemirrorDirective.$inject = ['$timeout', 'udCodemirrorConfig']; // jshint ignore:line
-});
+}

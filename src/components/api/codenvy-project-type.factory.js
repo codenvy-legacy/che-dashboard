@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the projects type retrieval
  * It sets to the array project types
  * @author Florent Benoit
  */
-class CodenvyProjectType {
+export class CodenvyProjectType {
 
   /**
    * Default constructor that is using resource
@@ -116,6 +114,3 @@ class CodenvyProjectType {
 
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyProjectType', CodenvyProjectType);

@@ -10,17 +10,17 @@
  */
 'use strict';
 
-import DashboardCtrl from './dashboard.controller';
-import DashboardLearnMoreCtrl from './learn-more/dashboard-learn-more.controller';
-import DashboardLearnMore from './learn-more/dashboard-learn-more.directive';
-import DashboardLastProjectsCtrl from './last-projects/last-projects.controller';
-import DashboardLastProjects from './last-projects/last-projects.directive';
-import DashboardOverviewCtrl from './overview/overview.controller';
-import DashboardOverview from './overview/overview.directive';
-import WelcomeBackCtrl from './welcome-back/welcome-back.controller';
-import WelcomeBack from './welcome-back/welcome-back.directive';
+import {DashboardCtrl} from './dashboard.controller';
+import {DashboardLearnMoreCtrl} from './learn-more/dashboard-learn-more.controller';
+import {DashboardLearnMore} from './learn-more/dashboard-learn-more.directive';
+import {DashboardLastProjectsCtrl} from './last-projects/last-projects.controller';
+import {DashboardLastProjects} from './last-projects/last-projects.directive';
+import {DashboardOverviewCtrl} from './overview/overview.controller';
+import {DashboardOverview} from './overview/overview.directive';
+import {WelcomeBackCtrl} from './welcome-back/welcome-back.controller';
+import {WelcomeBack} from './welcome-back/welcome-back.directive';
 
-class DashboardConfig {
+export class DashboardConfig {
 
   constructor(register) {
 
@@ -69,5 +69,3 @@ class DashboardConfig {
 }
 
 
-
-export default DashboardConfig;

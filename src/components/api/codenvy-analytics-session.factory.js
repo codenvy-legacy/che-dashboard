@@ -10,8 +10,6 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * @ngdoc factory
  * @name api.analytics-session.factory:CodenvyAnalyticsSession
@@ -20,7 +18,7 @@ import Register from '../utils/register.js';
  *
  * @author Florent Benoit
  */
-class CodenvyAnalyticsSession {
+export class CodenvyAnalyticsSession {
 
   /**
    * Default constructor that is using resource
@@ -120,7 +118,3 @@ class CodenvyAnalyticsSession {
   }
 
 }
-
-
-// Register this factory
-Register.getInstance().factory('codenvyAnalyticsSession', CodenvyAnalyticsSession);

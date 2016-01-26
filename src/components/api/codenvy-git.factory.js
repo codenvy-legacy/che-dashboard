@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the git API.
  * @author Oleksii Orel
  */
-class CodenvyGit {
+export class CodenvyGit {
 
 
   /**
@@ -100,6 +98,3 @@ class CodenvyGit {
   }
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyGit', CodenvyGit);

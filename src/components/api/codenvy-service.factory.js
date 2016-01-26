@@ -10,13 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
 
 /**
  * This class is handling the all services API retrieval.
  * @author Ann Shumilova
  */
-class CodenvyService {
+export class CodenvyService {
 
   /**
    * Default constructor that is using resource
@@ -55,6 +54,3 @@ class CodenvyService {
     return this.services.indexOf(name) > -1;
   }
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyService', CodenvyService);

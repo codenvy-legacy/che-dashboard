@@ -16,7 +16,7 @@
  * @description This class is handling the controller of the onboarding flow
  * @author Florent Benoit
  */
-class OnBoardCtrl {
+export class OnBoardCtrl {
 
 
   /**
@@ -192,6 +192,4 @@ class OnBoardCtrl {
 
 
 }
-
-export default OnBoardCtrl;
 

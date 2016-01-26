@@ -16,7 +16,7 @@
  * @author Florent Benoit
  * @author Oleksii Orel
  */
-class CodenvyStackLibraryWorkspaceSelecter {
+export class CodenvyStackLibraryWorkspaceSelecter {
 
   /**
    * Default constructor that is using resource
@@ -70,6 +70,4 @@ class CodenvyStackLibraryWorkspaceSelecter {
 
 
 }
-
-export default CodenvyStackLibraryWorkspaceSelecter;
 

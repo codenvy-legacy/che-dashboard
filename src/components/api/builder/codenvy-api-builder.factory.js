@@ -12,24 +12,23 @@
 /*exported CodenvyWorkspaceReferenceBuilder */
 
 
-import Register from '../../utils/register';
-import CodenvyWorkspaceBuilder from './codenvy-workspace-builder';
-import CodenvyProjectReferenceBuilder from './codenvy-projectreference-builder';
-import CodenvyProjectDetailsBuilder from './codenvy-projectdetails-builder';
-import CodenvyProjectPermissionsBuilder from './codenvy-projectpermissions-builder';
-import CodenvyProjectTypeBuilder from './codenvy-projecttype-builder';
-import CodenvyProjectTemplateBuilder from './codenvy-projecttemplate-builder';
-import CodenvyProjectTypeAttributeDescriptorBuilder from './codenvy-projecttype-attribute-descriptor-builder';
-import CodenvyProfileBuilder from './codenvy-profile-builder.js';
-import CodenvyUserBuilder from './codenvy-user-builder.js';
-import CodenvyAccountBuilder from './codenvy-account-builder.js';
-import CodenvyMembershipBuilder from './codenvy-membership-builder.js';
+import {CodenvyWorkspaceBuilder} from './codenvy-workspace-builder';
+import {CodenvyProjectReferenceBuilder} from './codenvy-projectreference-builder';
+import {CodenvyProjectDetailsBuilder} from './codenvy-projectdetails-builder';
+import {CodenvyProjectPermissionsBuilder} from './codenvy-projectpermissions-builder';
+import {CodenvyProjectTypeBuilder} from './codenvy-projecttype-builder';
+import {CodenvyProjectTemplateBuilder} from './codenvy-projecttemplate-builder';
+import {CodenvyProjectTypeAttributeDescriptorBuilder} from './codenvy-projecttype-attribute-descriptor-builder';
+import {CodenvyProfileBuilder} from './codenvy-profile-builder.js';
+import {CodenvyUserBuilder} from './codenvy-user-builder.js';
+import {CodenvyAccountBuilder} from './codenvy-account-builder.js';
+import {CodenvyMembershipBuilder} from './codenvy-membership-builder.js';
 
 /**
  * This class is providing the entry point for accessing the builders
  * @author Florent Benoit
  */
-class CodenvyAPIBuilder {
+export class CodenvyAPIBuilder {
 
   /**
    * Default constructor
@@ -130,11 +129,4 @@ class CodenvyAPIBuilder {
     return new CodenvyUserBuilder();
   }
 
-
-
 }
-
-export default CodenvyAPIBuilder;
-
-// Register this factory
-Register.getInstance().factory('codenvyAPIBuilder', CodenvyAPIBuilder);

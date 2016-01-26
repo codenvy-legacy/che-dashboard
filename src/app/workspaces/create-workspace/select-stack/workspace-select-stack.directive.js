@@ -14,7 +14,7 @@
  * Defines a directive for displaying select stack widget.
  * @author Oleksii Orel
  */
-class WorkspaceSelectStack {
+export class WorkspaceSelectStack {
 
   /**
    * Default constructor that is using resource
@@ -46,5 +46,3 @@ class WorkspaceSelectStack {
   }
 
 }
-
-export default WorkspaceSelectStack;

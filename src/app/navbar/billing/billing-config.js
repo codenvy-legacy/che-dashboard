@@ -10,11 +10,11 @@
  */
 'use strict';
 
-import BillingCtrl from '../billing/billing.controller';
-import BalanceSimple from '../billing/balance-simple.directive';
-import BalanceExtended from '../billing/balance-extended.directive';
+import {BillingCtrl} from '../billing/billing.controller';
+import {BalanceSimple} from '../billing/balance-simple.directive';
+import {BalanceExtended} from '../billing/balance-extended.directive';
 
-class BillingConfig {
+export class BillingConfig {
 
   constructor(register) {
     register.controller('BillingCtrl', BillingCtrl);
@@ -44,5 +44,3 @@ class BillingConfig {
     });
   }
 }
-
-export default BillingConfig;

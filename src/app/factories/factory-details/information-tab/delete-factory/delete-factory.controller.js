@@ -14,7 +14,7 @@
  * Controller for delete a factory.
  * @author Oleksii Orel
  */
-class DeleteFactoryCtrl {
+export class DeleteFactoryCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -51,5 +51,3 @@ class DeleteFactoryCtrl {
   }
 
 }
-
-export default DeleteFactoryCtrl;

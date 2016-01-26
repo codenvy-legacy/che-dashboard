@@ -16,7 +16,7 @@
  * @description This class is handling the controller for managing credit cards (list, add, remove)
  * @author Ann Shumilova
  */
-class CreditcardCtrl {
+export class CreditcardCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -103,6 +103,3 @@ class CreditcardCtrl {
     });
   }
 }
-
-export default CreditcardCtrl;
-

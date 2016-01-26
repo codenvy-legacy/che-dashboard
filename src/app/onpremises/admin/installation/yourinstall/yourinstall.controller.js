@@ -10,7 +10,7 @@
  */
 'use strict';
 
-class YourInstallationCtrl {
+export class YourInstallationCtrl {
 
   /**
    * Default constructor.
@@ -77,5 +77,3 @@ class YourInstallationCtrl {
     this.downloadedVersions.length = 0;
   }
 }
-
-export default YourInstallationCtrl;

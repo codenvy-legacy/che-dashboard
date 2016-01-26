@@ -10,13 +10,14 @@
  */
 'use strict';
 
-class OnPremisesAdminYourLicenseCtrl {
+export class OnPremisesAdminYourLicenseCtrl {
 
   /**
    * Default constructor.
    * @ngInject for Dependency injection
    */
   constructor(imsArtifactApi) {
+    'ngInject';
 
     let artifactsList = imsArtifactApi.getInstalledArtifactsList();
 
@@ -35,5 +36,3 @@ class OnPremisesAdminYourLicenseCtrl {
   }
 
 }
-
-export default OnPremisesAdminYourLicenseCtrl;

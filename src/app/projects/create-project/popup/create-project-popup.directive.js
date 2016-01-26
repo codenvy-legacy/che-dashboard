@@ -14,7 +14,7 @@
  * Defines a directive for displaying popup about creating project.
  * @author Florent Benoit
  */
-class CreateProjectPopup {
+export class CreateProjectPopup {
 
   /**
    * Default constructor that is using resource
@@ -31,6 +31,3 @@ class CreateProjectPopup {
   }
 
 }
-
-export default CreateProjectPopup;
-

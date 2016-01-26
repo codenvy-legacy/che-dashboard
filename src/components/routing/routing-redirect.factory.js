@@ -10,15 +10,12 @@
  */
 'use strict';
 
-
-import Register from '../utils/register';
-
 /**
  * @ngdoc factory
  * @name components.routing.factory:routingRedirect
  * @author Florent Benoit
  */
-class RoutingRedirect {
+export class RoutingRedirect {
 
   /**
    * Default constructor that is using resource
@@ -80,8 +77,3 @@ class RoutingRedirect {
 
   }
 }
-
-export default RoutingRedirect;
-
-// Register this factory
-Register.getInstance().factory('routingRedirect', RoutingRedirect);

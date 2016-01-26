@@ -15,7 +15,7 @@
  * This class is providing a builder for Workspace
  * @author Florent Benoit
  */
-class CodenvyWorkspaceBuilder {
+export class CodenvyWorkspaceBuilder {
 
   constructor() {
     this.workspace = {};
@@ -47,6 +47,3 @@ class CodenvyWorkspaceBuilder {
 
 }
 
-
-
-export default CodenvyWorkspaceBuilder;

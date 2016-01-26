@@ -24,7 +24,7 @@
  *
  * @author Ann Shumilova
  */
-class WorkspaceDetailsResources {
+export class WorkspaceDetailsResources {
 
   /**
    * Default constructor that is using resource
@@ -40,6 +40,3 @@ class WorkspaceDetailsResources {
   }
 
 }
-
-export default WorkspaceDetailsResources;
-

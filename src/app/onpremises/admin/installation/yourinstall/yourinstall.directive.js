@@ -13,7 +13,7 @@
 /**
  * Defines a directive for creating the your installation panel.
  */
-class YourInstallationPanel {
+export class YourInstallationPanel {
 
   /**
    * Default constructor that is using resource
@@ -28,5 +28,3 @@ class YourInstallationPanel {
   }
 
 }
-
-export default YourInstallationPanel;

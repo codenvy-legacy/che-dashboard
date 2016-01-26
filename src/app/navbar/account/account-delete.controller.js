@@ -16,7 +16,7 @@
  * @description This class is handling the controller for the delete account widget
  * @author Oleksii Orel
  */
-class AccountDeleteCtrl {
+export class AccountDeleteCtrl {
   /**
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
@@ -30,5 +30,3 @@ class AccountDeleteCtrl {
   }
 
 }
-
-export default AccountDeleteCtrl;

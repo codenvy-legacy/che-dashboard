@@ -10,9 +10,6 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
-
 /**
  * @ngdoc directive
  * @name components.directive:cdvyAutoScroll
@@ -28,7 +25,7 @@ import Register from '../../utils/register';
  *
  * @author Florent Benoit
  */
-class CodenvyAutoScroll {
+export class CodenvyAutoScroll {
 
     /**
      * Default constructor that is using resource
@@ -51,7 +48,3 @@ class CodenvyAutoScroll {
     }
 
 }
-
-export default CodenvyAutoScroll;
-
-Register.getInstance().directive('cdvyAutoScroll', CodenvyAutoScroll);

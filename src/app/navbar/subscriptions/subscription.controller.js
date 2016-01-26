@@ -12,7 +12,7 @@
 
 import {subscriptionOffers, subscriptionDetails} from '../subscriptions/subscription-data';
 
-class SubscriptionCtrl {
+export class SubscriptionCtrl {
   /**
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
@@ -198,5 +198,3 @@ class SubscriptionCtrl {
     return onPremOffer;
   }
 }
-
-export default SubscriptionCtrl;

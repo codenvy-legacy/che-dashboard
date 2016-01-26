@@ -16,7 +16,7 @@
  * @param{string} workspaceId
  * @param{object} project
  */
-class CodenvyProjectItem {
+export class CodenvyProjectItem {
 
   /**
    * Default constructor.
@@ -48,5 +48,3 @@ class CodenvyProjectItem {
   }
 
 }
-
-export default CodenvyProjectItem;

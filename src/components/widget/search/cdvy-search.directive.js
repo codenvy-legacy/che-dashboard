@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating search/filtering input.
  * @author Ann Shumilova
  */
-class CodenvySearch {
+export class CodenvySearch {
 
   /**
    * Default constructor that is using resource
@@ -39,7 +37,3 @@ class CodenvySearch {
     };
   }
 }
-
-export default CodenvySearch;
-
-Register.getInstance().directive('cdvySearch', CodenvySearch);

@@ -14,7 +14,7 @@
  * This class is handling the controller for the create user widget
  * @author Oleksii Orel
  */
-class OnPremisesAdminCreateUserCtrl {
+export class OnPremisesAdminCreateUserCtrl {
 
   /**
    * Default constructor.
@@ -46,5 +46,3 @@ class OnPremisesAdminCreateUserCtrl {
   }
 
 }
-
-export default OnPremisesAdminCreateUserCtrl;

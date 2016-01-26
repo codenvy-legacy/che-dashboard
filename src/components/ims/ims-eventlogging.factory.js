@@ -10,12 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
 
 /**
  * This class is handling the interface with Installation Manager Server (IMS) SaaS logging events API.
  */
-class ImsEventLoggingApi {
+export class ImsEventLoggingApi {
 
   /**
    * Default constructor that is using resource
@@ -44,6 +43,3 @@ class ImsEventLoggingApi {
     return this.logSaasAnalyticsEvent(event);
   }
 }
-
-// Register this factory
-Register.getInstance().factory('imsEventLoggingApi', ImsEventLoggingApi);

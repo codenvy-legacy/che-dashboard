@@ -10,21 +10,31 @@
  */
 'use strict';
 
-angular.module('userDashboard').filter('filterStagedPlugins', function() {
-  return function (toFilterPlugins) {
-    // no plugins, nothing to get
-    if (!toFilterPlugins) {
-      return [];
-    }
 
-    let filtered = [];
-    for (var i = 0; i < toFilterPlugins.length; i++) {
-      var plugin = toFilterPlugins[i];
-      if ('STAGED_INSTALL' === plugin.status || 'STAGED_UNINSTALL' === plugin.status) {
-        filtered.push(plugin);
-      }
-    }
+export class PluginsFilter {
 
-    return filtered;
-  };
-});
+  constructor(register) {
+    // Register this factory
+    register.app.filter('filterStagedPlugins', function () {
+      return function (toFilterPlugins) {
+        // no plugins, nothing to get
+        if (!toFilterPlugins) {
+          return [];
+        }
+
+        let filtered = [];
+        for (var i = 0; i < toFilterPlugins.length; i++) {
+          var plugin = toFilterPlugins[i];
+          if ('STAGED_INSTALL' === plugin.status || 'STAGED_UNINSTALL' === plugin.status) {
+            filtered.push(plugin);
+          }
+        }
+
+        return filtered;
+      };
+    });
+  }
+}
+
+
+

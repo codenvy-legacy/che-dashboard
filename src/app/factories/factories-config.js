@@ -10,15 +10,14 @@
  */
 'use strict';
 
-/* exported ListFactoriesCtrl, FactoryCtrl, CodenvyFactoryItem */
 
-import ListFactoriesCtrl from './list-factories/list-factories.controller';
-import FactoryItemCtrl from './list-factories/factory-item/factory-item.controller';
-import CodenvyFactoryItem from './list-factories/factory-item/factory-item.directive';
-import FactoryDetailsConfig from './factory-details/factory-details-config';
-import CreateFactoryConfig from './create-factory/create-factory-config';
+import {ListFactoriesCtrl} from './list-factories/list-factories.controller';
+import {FactoryItemCtrl} from './list-factories/factory-item/factory-item.controller';
+import {CodenvyFactoryItem} from './list-factories/factory-item/factory-item.directive';
+import {FactoryDetailsConfig} from './factory-details/factory-details-config';
+import {CreateFactoryConfig} from './create-factory/create-factory-config';
 
-class FactoryConfig {
+export class FactoryConfig {
 
   constructor(register) {
     register.controller('ListFactoriesCtrl', ListFactoriesCtrl);
@@ -43,5 +42,3 @@ class FactoryConfig {
   }
 }
 
-
-export default FactoryConfig;

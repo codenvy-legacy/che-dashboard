@@ -10,7 +10,11 @@
  */
 'use strict';
 
-angular.module('userDashboard').constant('jsonCountries', JSON.stringify({
+export class CodenvyCountriesConfig {
+
+  constructor(register) {
+    // Register this factory
+    register.app.constant('jsonCountries', JSON.stringify({
     'all': [{
       name: 'Afghanistan',
       code: 'AF'
@@ -743,3 +747,6 @@ angular.module('userDashboard').constant('jsonCountries', JSON.stringify({
     }]
   }
 ));
+
+  }
+}

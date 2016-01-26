@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for the title of list.
  * @author Florent Benoit
  */
-class CodenvyList {
+export class CodenvyListTitle {
 
   /**
    * Default constructor that is using resource
@@ -34,7 +32,3 @@ class CodenvyList {
     };
   }
 }
-
-export default CodenvyList;
-
-Register.getInstance().directive('cdvyListTitle', CodenvyList);

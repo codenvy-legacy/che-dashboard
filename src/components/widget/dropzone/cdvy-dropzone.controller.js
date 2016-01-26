@@ -12,15 +12,13 @@
 
 /*global FormData, XMLHttpRequest */
 
-import Register from '../../utils/register';
-
 /**
  * @ngdoc controller
  * @name components.controller:CodenvyDropZoneCtrl
  * @description This class is handling the controller of a dropzone
  * @author Florent Benoit
  */
-class CodenvyDropZoneCtrl {
+export class CodenvyDropZoneCtrl {
 
   /**
    * Default constructor that is using resource
@@ -195,7 +193,3 @@ class CodenvyDropZoneCtrl {
 
 }
 
-
-export default CodenvyDropZoneCtrl;
-
-Register.getInstance().controller('CodenvyDropZoneCtrl', CodenvyDropZoneCtrl);

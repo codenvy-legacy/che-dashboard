@@ -14,7 +14,7 @@
  * Defines a directive for displaying delete factory widget.
  * @author Oleksii Orel
  */
-class DeleteFactory {
+export class DeleteFactory {
 
   /**
    * Default constructor that is using resource
@@ -38,5 +38,3 @@ class DeleteFactory {
   }
 
 }
-
-export default DeleteFactory;

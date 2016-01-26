@@ -13,7 +13,7 @@
 describe('controllers', function(){
   var scope;
 
-  beforeEach(module('userDashboard'));
+  beforeEach(angular.mock.module('userDashboard'));
 
   beforeEach(inject(function($rootScope) {
     scope = $rootScope.$new();

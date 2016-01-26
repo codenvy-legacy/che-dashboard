@@ -10,8 +10,7 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-import CodenvyButton from './cdvy-button.directive';
+import {CodenvyButton} from './cdvy-button.directive';
 
 /**
  * @ngdoc directive
@@ -38,7 +37,7 @@ import CodenvyButton from './cdvy-button.directive';
  </example>
  * @author Florent Benoit
  */
-class CodenvyButtonDefault extends CodenvyButton {
+export class CodenvyButtonDefault extends CodenvyButton {
 
   /**
    * Default constructor that is using resource
@@ -57,7 +56,3 @@ class CodenvyButtonDefault extends CodenvyButton {
   }
 
 }
-
-export default CodenvyButtonDefault;
-
-Register.getInstance().directive('cdvyButtonDefault', CodenvyButtonDefault);

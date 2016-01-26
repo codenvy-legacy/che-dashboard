@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the stacks retrieval
  * It sets to the array of stacks
  * @author Florent Benoit
  */
-class CodenvyStack {
+export class CodenvyStack {
 
   /**
    * Default constructor that is using resource
@@ -113,6 +111,3 @@ class CodenvyStack {
 
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyStack', CodenvyStack);

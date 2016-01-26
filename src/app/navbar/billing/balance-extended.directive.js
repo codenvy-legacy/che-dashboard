@@ -14,7 +14,7 @@
  * Defines a directive for displaying extended balance info (with three values).
  * @author Ann Shumilova
  */
-class BalanceExtened {
+export class BalanceExtended {
 
   /**
    * Default constructor that is using resource
@@ -99,5 +99,3 @@ class BalanceExtened {
 
   }
 }
-
-export default BalanceExtened;

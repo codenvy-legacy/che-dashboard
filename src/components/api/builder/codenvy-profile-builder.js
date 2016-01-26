@@ -16,7 +16,7 @@
  * This class is providing a builder for Profile
  * @author Florent Benoit
  */
-class CodenvyProfileBuilder {
+export class CodenvyProfileBuilder {
 
   /**
    * Default constructor.
@@ -87,5 +87,3 @@ class CodenvyProfileBuilder {
 
 
 }
-
-export default CodenvyProfileBuilder;

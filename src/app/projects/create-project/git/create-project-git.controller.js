@@ -14,7 +14,7 @@
  * This class is handling the controller for the git part
  * @author Florent Benoit
  */
-class CreateProjectGitCtrl {
+export class CreateProjectGitCtrl {
 
   /**
    * Default constructor that is using resource
@@ -41,6 +41,3 @@ class CreateProjectGitCtrl {
 
 
 }
-
-
-export default CreateProjectGitCtrl;

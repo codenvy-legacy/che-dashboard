@@ -10,7 +10,7 @@
  */
 'use strict';
 
-class OnPremConfigurationCtrl {
+export class OnPremConfigurationCtrl {
 
   /**
    * Default constructor.
@@ -155,5 +155,3 @@ class OnPremConfigurationCtrl {
     });
   }
 }
-
-export default OnPremConfigurationCtrl;

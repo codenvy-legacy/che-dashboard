@@ -16,7 +16,7 @@
  * This class is providing a builder for Project Reference
  * @author Florent Benoit
  */
-class CodenvyProjectReferenceBuilder {
+export class CodenvyProjectReferenceBuilder {
 
   /**
    * Default constructor.
@@ -47,4 +47,3 @@ class CodenvyProjectReferenceBuilder {
 
 }
 
-export default CodenvyProjectReferenceBuilder;

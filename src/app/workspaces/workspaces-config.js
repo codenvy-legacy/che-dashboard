@@ -10,31 +10,31 @@
  */
 'use strict';
 
+import {ListWorkspacesCtrl} from './list-workspaces/list-workspaces.controller';
+import {CodenvyWorkspaceItem} from './list-workspaces/workspace-item/workspace-item.directive';
+import {CreateWorkspaceCtrl} from './create-workspace/create-workspace.controller';
+import {CreateWorkspaceAddMemberCtrl} from './create-workspace/create-workspace-add-member.controller';
+import {UsageChart} from './list-workspaces/workspace-item/usage-chart.directive';
+import {WorkspaceItemCtrl} from './list-workspaces/workspace-item/workspace-item.controller';
+import {WorkspaceDetailsCtrl} from './workspace-details/workspace-details.controller';
+import {WorkspaceDetailsProjectsCtrl} from './workspace-details/workspace-projects/workspace-details-projects.controller';
+import {WorkspaceDetailsProjects} from './workspace-details/workspace-projects/workspace-details-projects.directive';
+import {WorkspaceDetailsResourcesCtrl} from './workspace-details/resources/workspace-details-resources.controller';
+import {WorkspaceDetailsResources} from './workspace-details/resources/workspace-details-resources.directive';
+import {ReadyToGoStacksCtrl} from './create-workspace/select-stack/ready-to-go-stacks/ready-to-go-stacks.controller';
+import {ReadyToGoStacks} from './create-workspace/select-stack/ready-to-go-stacks/ready-to-go-stacks.directive';
+import {WorkspaceRecipeCtrl} from './create-workspace/select-stack/recipe/workspace-recipe.controller';
+import {WorkspaceRecipe} from './create-workspace/select-stack/recipe/workspace-recipe.directive';
+import {CodenvyStackLibrarySelecter} from './create-workspace/select-stack/stack-library/stack-library-selecter/cdvy-stack-library-selecter.directive';
+import {CodenvyStackLibraryWorkspaceSelecter} from './create-workspace/select-stack/stack-library/stack-library-workspace-selecter/cdvy-stack-library-workspace-selecter.directive';
+import {CreateProjectStackLibraryCtrl} from './create-workspace/select-stack/stack-library/create-project-stack-library.controller';
+import {CreateProjectStackLibrary} from './create-workspace/select-stack/stack-library/create-project-stack-library.directive';
+import {WorkspaceSelectStackCtrl} from './create-workspace/select-stack/workspace-select-stack.controller';
+import {WorkspaceSelectStack} from './create-workspace/select-stack/workspace-select-stack.directive';
 
-import ListWorkspacesCtrl from './list-workspaces/list-workspaces.controller';
-import CodenvyWorkspaceItem from './list-workspaces/workspace-item/workspace-item.directive';
-import CreateWorkspaceCtrl from './create-workspace/create-workspace.controller';
-import CreateWorkspaceAddMemberCtrl from './create-workspace/create-workspace-add-member.controller';
-import UsageChart from './list-workspaces/workspace-item/usage-chart.directive';
-import WorkspaceItemCtrl from './list-workspaces/workspace-item/workspace-item.controller';
-import WorkspaceDetailsCtrl from './workspace-details/workspace-details.controller';
-import WorkspaceDetailsProjectsCtrl from './workspace-details/workspace-projects/workspace-details-projects.controller';
-import WorkspaceDetailsProjects from './workspace-details/workspace-projects/workspace-details-projects.directive';
-import WorkspaceDetailsResourcesCtrl from './workspace-details/resources/workspace-details-resources.controller';
-import WorkspaceDetailsResources from './workspace-details/resources/workspace-details-resources.directive';
-import WorkspaceRecipeCtrl from './create-workspace/select-stack/recipe/workspace-recipe.controller';
-import WorkspaceRecipe from './create-workspace/select-stack/recipe/workspace-recipe.directive';
-import ReadyToGoStacksCtrl from './create-workspace/select-stack/ready-to-go-stacks/ready-to-go-stacks.controller';
-import ReadyToGoStacks from './create-workspace/select-stack/ready-to-go-stacks/ready-to-go-stacks.directive';
-import CodenvyStackLibrarySelecter from './create-workspace/select-stack/stack-library/stack-library-selecter/cdvy-stack-library-selecter.directive';
-import CodenvyStackLibraryWorkspaceSelecter from './create-workspace/select-stack/stack-library/stack-library-workspace-selecter/cdvy-stack-library-workspace-selecter.directive';
-import CreateProjectStackLibraryCtrl from './create-workspace/select-stack/stack-library/create-project-stack-library.controller';
-import CreateProjectStackLibrary from './create-workspace/select-stack/stack-library/create-project-stack-library.directive';
-import WorkspaceSelectStackCtrl from './create-workspace/select-stack/workspace-select-stack.controller';
-import WorkspaceSelectStack from './create-workspace/select-stack/workspace-select-stack.directive';
-import CodenvyWorkspaceRamAllocationSliderCtrl from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.controller';
-import CodenvyWorkspaceRamAllocationSlider from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.directive';
-import WorkspaceStatusIndicator from './workspace-status-indicator/workspace-status-indicator.directive';
+import {CodenvyWorkspaceRamAllocationSliderCtrl} from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.controller';
+import {CodenvyWorkspaceRamAllocationSlider} from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.directive';
+import {WorkspaceStatusIndicator} from './workspace-status-indicator/workspace-status-indicator.directive';
 
 /**
  * @ngdoc controller
@@ -42,7 +42,7 @@ import WorkspaceStatusIndicator from './workspace-status-indicator/workspace-sta
  * @description This class is used for configuring all workspaces stuff.
  * @author Ann Shumilova
  */
-class WorkspacesConfig {
+export class WorkspacesConfig {
 
   constructor(register) {
     register.controller('ListWorkspacesCtrl', ListWorkspacesCtrl);
@@ -63,7 +63,6 @@ class WorkspacesConfig {
 
     register.controller('WorkspaceRecipeCtrl', WorkspaceRecipeCtrl);
     register.directive('cdvyWorkspaceRecipe', WorkspaceRecipe);
-
     register.controller('CodenvyWorkspaceRamAllocationSliderCtrl', CodenvyWorkspaceRamAllocationSliderCtrl);
     register.directive('cdvyWorkspaceRamAllocationSlider', CodenvyWorkspaceRamAllocationSlider);
 
@@ -102,5 +101,3 @@ class WorkspacesConfig {
     });
   }
 }
-
-export default WorkspacesConfig;

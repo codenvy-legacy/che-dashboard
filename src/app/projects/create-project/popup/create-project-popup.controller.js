@@ -14,7 +14,7 @@
  * This class is handling the controller for the popup of creating projects
  * @author Florent Benoit
  */
-class CreateProjectPopupCtrl {
+export class CreateProjectPopupCtrl {
 
   /**
    * Default constructor that is using resource
@@ -59,6 +59,3 @@ class CreateProjectPopupCtrl {
   }
 
 }
-
-
-export default CreateProjectPopupCtrl;

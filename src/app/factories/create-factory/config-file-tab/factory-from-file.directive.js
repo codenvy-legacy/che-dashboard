@@ -14,7 +14,7 @@
  * Defines a directive for configuring factory from file.
  * @author Oleksii Orel
  */
-class FactoryFromFile {
+export class FactoryFromFile {
 
   /**
    * Default constructor that is using resource
@@ -48,5 +48,3 @@ class FactoryFromFile {
   }
 
 }
-
-export default FactoryFromFile;

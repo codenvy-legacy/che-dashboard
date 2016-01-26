@@ -16,7 +16,7 @@
  * @description This class is handling the controller for the adding credit card
  * @author Ann Shumilova
  */
-class AddCreditcardCtrl {
+export class AddCreditcardCtrl {
 
   /**
    * Default constructor that is using resource
@@ -92,5 +92,3 @@ class AddCreditcardCtrl {
     $(element).card(card); // jshint ignore:line
   }
 }
-
-export default AddCreditcardCtrl;

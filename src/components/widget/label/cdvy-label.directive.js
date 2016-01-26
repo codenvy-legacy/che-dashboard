@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating label container.
  * @author Oleksii Orel
  */
-class CodenvyLabel {
+export class CodenvyLabel {
 
   /**
    * Default constructor that is using resource
@@ -36,7 +34,3 @@ class CodenvyLabel {
   }
 
 }
-
-export default CodenvyLabel;
-
-Register.getInstance().directive('cdvyLabel', CodenvyLabel);

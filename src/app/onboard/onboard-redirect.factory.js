@@ -18,7 +18,7 @@
  * @author Florent Benoit
  */
 
-class OnBoardRedirect {
+export class OnBoardRedirect {
 
 
   /**
@@ -65,5 +65,3 @@ class OnBoardRedirect {
   }
 
 }
-
-export default OnBoardRedirect;

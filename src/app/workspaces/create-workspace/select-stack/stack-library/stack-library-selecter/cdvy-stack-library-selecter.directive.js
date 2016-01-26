@@ -15,7 +15,7 @@
  * Defines a directive for the stack library selecter.
  * @author Florent Benoit
  */
-class CodenvyStackLibrarySelecter {
+export class CodenvyStackLibrarySelecter {
 
   /**
    * Default constructor that is using resource
@@ -44,6 +44,3 @@ class CodenvyStackLibrarySelecter {
   }
 
 }
-
-export default CodenvyStackLibrarySelecter;
-

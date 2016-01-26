@@ -27,7 +27,7 @@ describe('git-url-validator', function() {
    */
   var codenvyBackend;
 
-  beforeEach(module('userDashboard'));
+  beforeEach(angular.mock.module('userDashboard'));
 
 
 

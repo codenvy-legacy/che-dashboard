@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating text info container.
  * @author Oleksii Orel
  */
-class CodenvyTextInfo {
+export class CodenvyTextInfo {
 
   /**
    * Default constructor that is using resource
@@ -39,7 +37,3 @@ class CodenvyTextInfo {
   }
 
 }
-
-export default CodenvyTextInfo;
-
-Register.getInstance().directive('cdvyTextInfo', CodenvyTextInfo);

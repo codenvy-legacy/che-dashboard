@@ -10,9 +10,9 @@
  */
 'use strict';
 
-import OnPremisesAdminCreateUserCtrl from './create-user.controller';
+import {OnPremisesAdminCreateUserCtrl} from './create-user.controller';
 
-class OnPremisesCreateUserConfig {
+export class OnPremisesCreateUserConfig {
 
   constructor(register) {
     register.controller('OnPremisesAdminCreateUserCtrl', OnPremisesAdminCreateUserCtrl);
@@ -28,5 +28,3 @@ class OnPremisesCreateUserConfig {
 
   }
 }
-
-export default OnPremisesCreateUserConfig;

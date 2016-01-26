@@ -16,7 +16,7 @@
  * @description This class is handling the controller of the logout
  * @author Florent Benoit
  */
-class LogoutCtrl {
+export class LogoutCtrl {
 
 
   /**
@@ -46,6 +46,3 @@ class LogoutCtrl {
 
 
 }
-
-export default LogoutCtrl;
-

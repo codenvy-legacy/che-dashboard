@@ -16,7 +16,7 @@
  * This class is providing a builder for ProjectTemplate
  * @author Florent Benoit
  */
-class CodenvyProjectTemplateBuilder {
+export class CodenvyProjectTemplateBuilder {
 
   constructor() {
     this.template = {};
@@ -65,5 +65,3 @@ class CodenvyProjectTemplateBuilder {
 
 
 }
-
-export default CodenvyProjectTemplateBuilder;

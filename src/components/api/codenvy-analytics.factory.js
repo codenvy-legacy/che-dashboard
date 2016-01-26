@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the API for sending data for Codenvy Analytics.
  * @author Ann Shumilova
  */
-class CodenvyAnalytics {
+export class CodenvyAnalytics {
 
   /**
    * Default constructor that is using resource
@@ -77,6 +75,3 @@ class CodenvyAnalytics {
   }
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyAnalytics', CodenvyAnalytics);

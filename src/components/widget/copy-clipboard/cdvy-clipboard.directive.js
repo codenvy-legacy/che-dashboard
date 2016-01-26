@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for the clipboard.
  * @author Oleksii Orel
  */
-class CodenvyClipboard {
+export class CodenvyClipboard {
 
   /**
    * Default constructor that is using resource
@@ -35,7 +33,3 @@ class CodenvyClipboard {
   }
 
 }
-
-export default CodenvyClipboard;
-
-Register.getInstance().directive('cdvyClipboard', CodenvyClipboard);

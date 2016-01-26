@@ -16,7 +16,7 @@
  * @description This class is handling the controller for the 'select stack' widget.
  * @author Oleksii Orel
  */
-class WorkspaceSelectStackCtrl {
+export class WorkspaceSelectStackCtrl {
 
   /**
    * Default constructor that is using resource
@@ -85,5 +85,3 @@ class WorkspaceSelectStackCtrl {
   }
 
 }
-
-export default WorkspaceSelectStackCtrl;

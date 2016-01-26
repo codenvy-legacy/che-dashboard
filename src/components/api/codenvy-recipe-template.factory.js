@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the recipe template retrieval
  * @author Oleksii Orel
  */
-class CodenvyRecipeTemplate {
+export class CodenvyRecipeTemplate {
 
   /**
    * Default constructor that is using resource
@@ -75,6 +73,3 @@ class CodenvyRecipeTemplate {
   }
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyRecipeTemplate', CodenvyRecipeTemplate);

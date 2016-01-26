@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../components/utils/register.js';
-
 /**
  * Provides a way to download IDE .js and then cache it before trying to load the IDE
  * @author Florent Benoit
  */
-class CodenvyIdeFetcher {
+export class CodenvyIdeFetcher {
 
   /**
    * Default constructor that is using resource injection
@@ -128,8 +126,3 @@ class CodenvyIdeFetcher {
   }
 
 }
-
-export default CodenvyIdeFetcher;
-
-// Register this factory
-Register.getInstance().factory('codenvyIdeFetcher', CodenvyIdeFetcher);

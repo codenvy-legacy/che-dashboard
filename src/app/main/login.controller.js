@@ -10,7 +10,7 @@
  */
 'use strict';
 
-class LoginCtrl {
+export class LoginCtrl {
   /*@ngInject*/
   constructor($http, $cookies, $window, codenvyAPI, $timeout, $location) {
 
@@ -74,9 +74,4 @@ class LoginCtrl {
   }
 
 }
-
-
-export default LoginCtrl;
-
-
 

@@ -13,7 +13,7 @@
 /**
  * Defines a directive the upgrade installation panel.
  */
-class UpgradeInstallationPanel {
+export class UpgradeInstallationPanel {
 
   /**
    * Default constructor that is using resource
@@ -28,5 +28,3 @@ class UpgradeInstallationPanel {
   }
 
 }
-
-export default UpgradeInstallationPanel;

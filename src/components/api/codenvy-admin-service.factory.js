@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the all admin services API retrieval.
  * @author Ann Shumilova
  * @author Florent Benoit
  */
-class CodenvyAdminService {
+export class CodenvyAdminService {
 
   /**
    * Default constructor that is using resource
@@ -63,6 +61,3 @@ class CodenvyAdminService {
     return this.services && this.services.length > 0;
   }
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyAdminService', CodenvyAdminService);

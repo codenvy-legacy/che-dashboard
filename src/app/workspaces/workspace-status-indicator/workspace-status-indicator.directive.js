@@ -15,7 +15,7 @@
  * It will change upon width of the screen
  * @author Oleksii Kurinnyi
  */
-class WorkspaceStatusIndicator {
+export class WorkspaceStatusIndicator {
 
   /**
    * Default constructor that is using resource
@@ -33,5 +33,3 @@ class WorkspaceStatusIndicator {
     };
   }
 }
-
-export default WorkspaceStatusIndicator;

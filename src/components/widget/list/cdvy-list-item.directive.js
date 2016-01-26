@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating List Items.
  * @author Ann Shumilova
  */
-class CodenvyListItem {
+export class CodenvyListItem {
 
   /**
    * Default constructor that is using resource
@@ -29,7 +27,3 @@ class CodenvyListItem {
     this.templateUrl = 'components/widget/list/cdvy-list-item.html';
   }
 }
-
-export default CodenvyListItem;
-
-Register.getInstance().directive('cdvyListItem', CodenvyListItem);

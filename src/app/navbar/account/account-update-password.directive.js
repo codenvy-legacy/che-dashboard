@@ -14,7 +14,7 @@
  * Defines a directive for displaying update password widget.
  * @author Oleksii Orel
  */
-class AccountUpdatePassword {
+export class AccountUpdatePassword {
 
   /**
    * Default constructor that is using resource
@@ -65,6 +65,3 @@ class AccountUpdatePassword {
   }
 
 }
-
-export default AccountUpdatePassword;
-

@@ -16,7 +16,7 @@
  * @description This class is handling the controller of the overview to display in the dashboard
  * @author Florent Benoit
  */
-class DashboardOverviewCtrl {
+export class DashboardOverviewCtrl {
 
 
   /**
@@ -34,6 +34,3 @@ class DashboardOverviewCtrl {
   }
 
 }
-
-export default DashboardOverviewCtrl;
-

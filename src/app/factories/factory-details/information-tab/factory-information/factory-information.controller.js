@@ -14,7 +14,7 @@
  * Controller for a factory information.
  * @author Oleksii Orel
  */
-class FactoryInformationCtrl {
+export class FactoryInformationCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -48,5 +48,3 @@ class FactoryInformationCtrl {
     });
   }
 }
-
-export default FactoryInformationCtrl;

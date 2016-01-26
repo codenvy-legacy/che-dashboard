@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-Register.getInstance().app.constant('clientTokenPath', '/');//is necessary for Braintree
 
 /**
  * This class is handling the credit card API.
  * @author Ann Shumilova
  */
-class CodenvyPayment {
+export class CodenvyPayment {
 
   /**
    * Default constructor that is using resource
@@ -145,6 +143,3 @@ class CodenvyPayment {
     return this.invoicesPerAccount.get(accountId);
   }
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyPayment', CodenvyPayment);

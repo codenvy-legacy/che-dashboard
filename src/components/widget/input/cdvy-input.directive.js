@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating input that are working either on desktop or on mobile devices.
  * It will change upon width of the screen
  * @author Florent Benoit
  */
-class CodenvyInput {
+export class CodenvyInput {
 
   /**
    * Default constructor that is using resource
@@ -186,7 +184,3 @@ class CodenvyInput {
 
   }
 }
-
-export default CodenvyInput;
-
-Register.getInstance().directive('cdvyInput', CodenvyInput);

@@ -13,7 +13,7 @@
 /**
  * Defines a directive for creating the configuration panel.
  */
-class ConfigurationPanel {
+export class ConfigurationPanel {
 
   /**
    * Default constructor that is using resource
@@ -29,5 +29,3 @@ class ConfigurationPanel {
   }
 
 }
-
-export default ConfigurationPanel;

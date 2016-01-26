@@ -10,10 +10,10 @@
  */
 'use strict';
 
-import TeamCtrl from '../team/team.controller';
-import TeamMembersDialogAddCtrl from '../team/team-members-dialog-add.controller';
+import {TeamCtrl} from '../team/team.controller';
+import {TeamMembersDialogAddCtrl} from '../team/team-members-dialog-add.controller';
 
-class TeamConfig {
+export class TeamConfig {
 
   constructor(register) {
     register.controller('TeamCtrl', TeamCtrl);
@@ -29,5 +29,3 @@ class TeamConfig {
     });
   }
 }
-
-export default TeamConfig;

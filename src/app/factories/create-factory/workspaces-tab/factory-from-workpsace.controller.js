@@ -15,7 +15,7 @@
  * @author Oleksii Orel
  * @author Michail Kuznyetsov
  */
-class FactoryFromWorkspaceCtrl {
+export class FactoryFromWorkspaceCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -104,5 +104,3 @@ class FactoryFromWorkspaceCtrl {
     return '';
   }
 }
-
-export default FactoryFromWorkspaceCtrl;

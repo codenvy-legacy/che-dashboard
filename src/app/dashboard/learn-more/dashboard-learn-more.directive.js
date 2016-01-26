@@ -16,7 +16,7 @@
  * @description This class is handling the directive of the learn-more widget to display in the dashboard
  * @author Florent Benoit
  */
-class DashboardLearnMore {
+export class DashboardLearnMore {
 
 
   /**
@@ -33,6 +33,3 @@ class DashboardLearnMore {
   }
 
 }
-
-export default DashboardLearnMore;
-

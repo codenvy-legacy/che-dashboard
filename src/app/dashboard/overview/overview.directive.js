@@ -16,7 +16,7 @@
  * @description This class is handling the directive of the overview of projects in the dashboard
  * @author Florent Benoit
  */
-class DashboardOverview {
+export class DashboardOverview {
 
 
   /**
@@ -34,6 +34,3 @@ class DashboardOverview {
   }
 
 }
-
-export default DashboardOverview;
-

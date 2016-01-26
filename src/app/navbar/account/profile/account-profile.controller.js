@@ -17,13 +17,15 @@
  * @author Florent Benoit
  * @author Oleksii Orel
  */
-class AccountProfileCtrl {
+export class AccountProfileCtrl {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
   constructor(jsonCountries) {
+    'ngInject';
+
     this.countries = [];
 
     var fromJsonCountries = angular.fromJson(jsonCountries);
@@ -36,5 +38,3 @@ class AccountProfileCtrl {
     }
   }
 }
-
-export default AccountProfileCtrl;

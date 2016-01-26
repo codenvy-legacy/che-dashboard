@@ -11,13 +11,11 @@
 'use strict';
 
 
-import Register from '../../utils/register';
-
 /**
  * This class is handling the controller for the dropdown
  * @author Florent Benoit
  */
-class CodenvyButtonDropdownCtrl {
+export class CodenvyButtonDropdownCtrl {
 
   /**
    * Default constructor that is using resource
@@ -54,6 +52,3 @@ class CodenvyButtonDropdownCtrl {
 }
 
 
-export default CodenvyButtonDropdownCtrl;
-
-Register.getInstance().controller('CodenvyButtonDropdownCtrl', CodenvyButtonDropdownCtrl);

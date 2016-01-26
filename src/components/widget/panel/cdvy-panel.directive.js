@@ -10,8 +10,6 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * @ngdoc directive
  * @name components.directive:cdvyPanel
@@ -39,7 +37,7 @@ import Register from '../../utils/register';
  </example>
  * @author Florent Benoit
  */
-class CodenvyPanel {
+export class CodenvyPanel {
 
   /**
    * Default constructor that is using resource
@@ -138,7 +136,3 @@ class CodenvyPanel {
 
 
 }
-
-export default CodenvyPanel;
-
-Register.getInstance().directive('cdvyPanel', CodenvyPanel);

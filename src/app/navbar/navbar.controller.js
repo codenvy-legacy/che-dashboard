@@ -10,7 +10,7 @@
  */
 'use strict';
 
-class NavBarCtrl {
+export class NavBarCtrl {
 
   /**
    * Default constructor
@@ -79,5 +79,3 @@ class NavBarCtrl {
     return this.codenvyUser.isUser();
   }
 }
-
-export default NavBarCtrl;

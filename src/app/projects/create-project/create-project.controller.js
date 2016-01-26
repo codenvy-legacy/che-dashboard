@@ -15,7 +15,7 @@
  * This class is handling the controller for the projects
  * @author Florent Benoit
  */
-class CreateProjectCtrl {
+export class CreateProjectCtrl {
 
   /**
    * Default constructor that is using resource
@@ -927,5 +927,3 @@ class CreateProjectCtrl {
   }
 
 }
-
-export default CreateProjectCtrl;

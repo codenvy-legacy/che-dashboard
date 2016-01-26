@@ -21,7 +21,7 @@
  *
  * @author Florent Benoit
  */
-class CreateProjectStackLibrary {
+export class CreateProjectStackLibrary {
 
   /**
    * Default constructor that is using resource
@@ -45,6 +45,3 @@ class CreateProjectStackLibrary {
   }
 
 }
-
-export default CreateProjectStackLibrary;
-

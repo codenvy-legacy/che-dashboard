@@ -14,7 +14,7 @@
  * Defines a directive for displaying factory configuration widget.
  * @author Oleksii Orel
  */
-class FactoryConfiguration {
+export class FactoryConfiguration {
 
   /**
    * Default constructor that is using resource
@@ -38,5 +38,3 @@ class FactoryConfiguration {
   }
 
 }
-
-export default FactoryConfiguration;

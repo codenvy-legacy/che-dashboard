@@ -10,7 +10,7 @@
  */
 'use strict';
 
-class UpgradeInstallationCtrl {
+export class UpgradeInstallationCtrl {
 
   /**
    * Default constructor.
@@ -79,4 +79,3 @@ class UpgradeInstallationCtrl {
   }
 }
 
-export default UpgradeInstallationCtrl;

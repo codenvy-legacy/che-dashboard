@@ -24,7 +24,7 @@
  *
  * @author Florent Benoit
  */
-class AccountProfile {
+export class AccountProfile {
 
   /**
    * Default constructor that is using resource
@@ -45,5 +45,3 @@ class AccountProfile {
   }
 
 }
-
-export default AccountProfile;

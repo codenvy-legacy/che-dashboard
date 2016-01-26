@@ -10,15 +10,13 @@
  */
 'use strict';
 
-
-import Register from '../../utils/register';
-import CodenvyHttpBackend from './codenvy-http-backend';
+import {CodenvyHttpBackend} from './codenvy-http-backend';
 
 /**
  * This class is providing helper methods for simulating a fake HTTP backend simulating
  * @author Florent Benoit
  */
-class CodenvyHttpBackendProviderFactory {
+export class CodenvyHttpBackendProviderFactory {
 
   /**
    * Build a new Codenvy backend based on the given http backend.
@@ -41,8 +39,3 @@ class CodenvyHttpBackendProviderFactory {
 
 }
 
-
-export default CodenvyHttpBackendProviderFactory;
-
-// Register this factory
-Register.getInstance().factory('codenvyHttpBackendProvider', CodenvyHttpBackendProviderFactory);

@@ -10,12 +10,10 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the interface with Installation Manager Server (IMS) update API.
  */
-class ImsUpdateApi {
+export class ImsUpdateApi {
 
   /**
    * Default constructor.
@@ -35,6 +33,3 @@ class ImsUpdateApi {
   }
 
 }
-
-// Register this factory
-Register.getInstance().factory('imsUpdateApi', ImsUpdateApi);

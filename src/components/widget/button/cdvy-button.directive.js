@@ -15,7 +15,7 @@
  * Defines the super class for for all buttons
  * @author Florent Benoit
  */
-class CodenvyButton {
+export class CodenvyButton {
 
   /**
    * Default constructor that is using resource
@@ -86,5 +86,3 @@ class CodenvyButton {
   }
 
 }
-
-export default CodenvyButton;

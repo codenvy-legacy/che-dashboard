@@ -10,15 +10,15 @@
  */
 'use strict';
 
-import DeleteFactoryCtrl from '../information-tab/delete-factory/delete-factory.controller';
-import DeleteFactory from '../information-tab/delete-factory/delete-factory.directive';
-import FactoryInformationCtrl from '../information-tab/factory-information/factory-information.controller';
-import FactoryInformation from '../information-tab/factory-information/factory-information.directive';
-import FactoryRoutingCtrl from '../information-tab/factory-routing/factory-routing.controller';
-import FactoryRouting from '../information-tab/factory-routing/factory-routing.directive';
+import {DeleteFactoryCtrl} from '../information-tab/delete-factory/delete-factory.controller';
+import {DeleteFactory} from '../information-tab/delete-factory/delete-factory.directive';
+import {FactoryInformationCtrl} from '../information-tab/factory-information/factory-information.controller';
+import {FactoryInformation} from '../information-tab/factory-information/factory-information.directive';
+import {FactoryRoutingCtrl} from '../information-tab/factory-routing/factory-routing.controller';
+import {FactoryRouting} from '../information-tab/factory-routing/factory-routing.directive';
 
 
-class InformationTabConfig {
+export class InformationTabConfig {
 
   constructor(register) {
     register.controller('DeleteFactoryCtrl', DeleteFactoryCtrl);
@@ -32,5 +32,3 @@ class InformationTabConfig {
 
   }
 }
-
-export default InformationTabConfig;

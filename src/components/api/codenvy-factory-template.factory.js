@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the factory template retrieval
  * It sets to the Map factory templates
  * @author Oleksii Orel
  */
-class CodenvyFactoryTemplate {
+export class CodenvyFactoryTemplate {
 
   /**
    * Default constructor that is using resource
@@ -73,6 +71,3 @@ class CodenvyFactoryTemplate {
   }
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyFactoryTemplate', CodenvyFactoryTemplate);

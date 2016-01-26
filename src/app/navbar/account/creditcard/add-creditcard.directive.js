@@ -24,7 +24,7 @@
  *
  * @author Ann Shumilova
  */
-class AddCreditcard {
+export class AddCreditcard {
 
   /**
    * Default constructor that is using resource
@@ -58,5 +58,3 @@ class AddCreditcard {
   }
 
 }
-
-export default AddCreditcard;

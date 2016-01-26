@@ -14,7 +14,7 @@
  * This class is handling the controller for the creating stack library projects
  * @author Florent Benoit
  */
-class CreateProjectStackLibraryCtrl {
+export class CreateProjectStackLibraryCtrl {
 
   /**
    * Default constructor that is using resource
@@ -137,5 +137,3 @@ class CreateProjectStackLibraryCtrl {
   }
 
 }
-
-export default CreateProjectStackLibraryCtrl;

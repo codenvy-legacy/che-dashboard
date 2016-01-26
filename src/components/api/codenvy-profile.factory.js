@@ -10,13 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
 
 /**
  * This class is handling the profile API retrieval
  * @author Florent Benoit
  */
-class CodenvyProfile {
+export class CodenvyProfile {
 
   /**
    * Default constructor that is using resource
@@ -183,6 +182,3 @@ class CodenvyProfile {
 
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyProfile', CodenvyProfile);

@@ -10,7 +10,7 @@
  */
 'use strict';
 
-class AccountCtrl {
+export class AccountCtrl {
 
   /**
    * Controller for a account details
@@ -110,5 +110,3 @@ class AccountCtrl {
   }
 
 }
-
-export default AccountCtrl;

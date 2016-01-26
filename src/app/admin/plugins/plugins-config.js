@@ -12,13 +12,14 @@
 
 /* exported PluginFilter */
 
-import AdminPluginsCtrl from './plugins.controller';
-import PluginFilter from './plugins-filter';
-class AdminsPluginsConfig {
+import {AdminPluginsCtrl} from './plugins.controller';
+import {PluginsFilter} from './plugins-filter';
+export class AdminsPluginsConfig {
 
   constructor(register) {
     register.controller('AdminPluginsCtrl', AdminPluginsCtrl);
 
+    new PluginsFilter(register);
 
     // config routes
     register.app.config(function ($routeProvider) {
@@ -33,4 +34,3 @@ class AdminsPluginsConfig {
 }
 
 
-export default AdminsPluginsConfig;

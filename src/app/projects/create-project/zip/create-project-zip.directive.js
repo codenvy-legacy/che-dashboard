@@ -14,7 +14,7 @@
  * Defines a directive for creating project from zip.
  * @author Florent Benoit
  */
-class CreateProjectZip {
+export class CreateProjectZip {
 
   /**
    * Default constructor that is using resource
@@ -26,6 +26,3 @@ class CreateProjectZip {
   }
 
 }
-
-export default CreateProjectZip;
-

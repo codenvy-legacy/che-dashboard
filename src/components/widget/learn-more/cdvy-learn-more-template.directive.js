@@ -10,8 +10,6 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * @ngdoc directive
  * @name components.directive:cdvyLearnMoreTemplate
@@ -24,7 +22,7 @@ import Register from '../../utils/register';
  *
  * @author Florent Benoit
  */
-class CodenvyLearnMoreTemplate {
+export class CodenvyLearnMoreTemplate {
 
   /**
    * Default constructor that is using resource
@@ -55,8 +53,3 @@ class CodenvyLearnMoreTemplate {
     this.$compile(element.contents())(compileScope);
   }
 }
-
-
-export default CodenvyLearnMoreTemplate;
-
-Register.getInstance().directive('cdvyLearnMoreTemplate', CodenvyLearnMoreTemplate);

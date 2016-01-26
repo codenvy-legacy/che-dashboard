@@ -11,16 +11,16 @@
 'use strict';
 
 
-import CreateFactoryCtrl from '../create-factory/create-factory.controller';
+import {CreateFactoryCtrl} from '../create-factory/create-factory.controller';
 
-import FactoryFromWorkspaceCtrl from '../create-factory/workspaces-tab/factory-from-workpsace.controller.js';
-import FactoryFromWorkspace from '../create-factory/workspaces-tab/factory-from-workspace.directive.js';
-import FactoryFromFileCtrl from '../create-factory/config-file-tab/factory-from-file.controller';
-import FactoryFromFile from '../create-factory/config-file-tab/factory-from-file.directive';
-import FactoryFromTemplateCtrl from '../create-factory/template-tab/factory-from-template.controller';
-import FactoryFromTemplate from '../create-factory/template-tab/factory-from-template.directive';
+import {FactoryFromWorkspaceCtrl} from '../create-factory/workspaces-tab/factory-from-workpsace.controller.js';
+import {FactoryFromWorkspace} from '../create-factory/workspaces-tab/factory-from-workspace.directive.js';
+import {FactoryFromFileCtrl} from '../create-factory/config-file-tab/factory-from-file.controller';
+import {FactoryFromFile} from '../create-factory/config-file-tab/factory-from-file.directive';
+import {FactoryFromTemplateCtrl} from '../create-factory/template-tab/factory-from-template.controller';
+import {FactoryFromTemplate} from '../create-factory/template-tab/factory-from-template.directive';
 
-class CreateFactoryConfig {
+export class CreateFactoryConfig {
 
   constructor(register) {
 
@@ -47,5 +47,3 @@ class CreateFactoryConfig {
 
   }
 }
-
-export default CreateFactoryConfig;

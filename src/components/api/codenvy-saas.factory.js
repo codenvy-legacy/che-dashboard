@@ -10,13 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
 
 /**
  * This class is handling the Saas API retrieval
  * @author Ann Shumilova
  */
-class CodenvySaas {
+export class CodenvySaas {
 
   /**
    * Default constructor that is using resource
@@ -56,5 +55,3 @@ class CodenvySaas {
   }
 }
 
-// Register this factory
-Register.getInstance().factory('codenvySaas', CodenvySaas);

@@ -14,7 +14,7 @@
  * Controller for the Workspace Ram slider
  * @author Florent Benoit
  */
-class CodenvyWorkspaceRamAllocationSliderCtrl {
+export class CodenvyWorkspaceRamAllocationSliderCtrl {
 
   /**
    * Default constructor that is using resource
@@ -23,5 +23,3 @@ class CodenvyWorkspaceRamAllocationSliderCtrl {
   constructor () {
   }
 }
-
-export default CodenvyWorkspaceRamAllocationSliderCtrl;

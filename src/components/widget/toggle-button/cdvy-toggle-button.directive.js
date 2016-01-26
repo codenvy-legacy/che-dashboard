@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for a toggle button.
  * @author Florent Benoit
  */
-class CodenvyToggleButton {
+export class CodenvyToggleButton {
 
   /**
    * Default constructor that is using resource
@@ -43,7 +41,3 @@ class CodenvyToggleButton {
 
 
 }
-
-export default CodenvyToggleButton;
-
-Register.getInstance().directive('cdvyToggleButton', CodenvyToggleButton);

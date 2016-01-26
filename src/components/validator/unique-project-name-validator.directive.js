@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register';
-
 /**
  * Defines a directive for checking if the project name is not already taken
  * @author Florent Benoit
  */
-class UniqueProjectNameValidator {
+export class UniqueProjectNameValidator {
 
   /**
    * Default constructor that is using resource
@@ -79,7 +77,3 @@ class UniqueProjectNameValidator {
 
 
 }
-
-export default UniqueProjectNameValidator;
-
-Register.getInstance().directive('uniqueProjectName', UniqueProjectNameValidator);

@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the recipes retrieval
  * It sets to the array of recipes
  * @author Florent Benoit
  */
-class CodenvyRecipe {
+export class CodenvyRecipe {
 
   /**
    * Default constructor that is using resource
@@ -107,6 +105,3 @@ class CodenvyRecipe {
 
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyRecipe', CodenvyRecipe);

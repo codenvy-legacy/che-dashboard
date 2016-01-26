@@ -14,7 +14,7 @@
  * This class is handling the controller for the ready-to-go stacks
  * @author Florent Benoit
  */
-class ReadyToGoStacksCtrl {
+export class ReadyToGoStacksCtrl {
 
   /**
    * Default constructor that is using resource
@@ -79,5 +79,3 @@ class ReadyToGoStacksCtrl {
   }
 
 }
-
-export default ReadyToGoStacksCtrl;

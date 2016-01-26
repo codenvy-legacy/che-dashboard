@@ -10,12 +10,10 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the interface with Installation Manager Server (IMS) SaaS login API.
  */
-class ImsSaasAuthApi {
+export class ImsSaasAuthApi {
 
   /**
    * Default constructor that is using resource
@@ -59,6 +57,3 @@ class ImsSaasAuthApi {
     return (error && error.status === 400);
   }
 }
-
-// Register this factory
-Register.getInstance().factory('imsSaasAuthApi', ImsSaasAuthApi);

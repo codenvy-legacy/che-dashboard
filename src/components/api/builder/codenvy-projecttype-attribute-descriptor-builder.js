@@ -16,7 +16,7 @@
  * This class is providing a builder for AttributeDescriptor
  * @author Florent Benoit
  */
-class CodenvyProjectTypeAttributeDescriptorBuilder {
+export class CodenvyProjectTypeAttributeDescriptorBuilder {
 
   constructor() {
     this.attribute = {};
@@ -54,5 +54,3 @@ class CodenvyProjectTypeAttributeDescriptorBuilder {
 
 
 }
-
-export default CodenvyProjectTypeAttributeDescriptorBuilder;

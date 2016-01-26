@@ -13,7 +13,7 @@
 /**
  * Defines a directive for creating "your license" section.
  */
-class YourLicensePanel {
+export class YourLicensePanel {
 
   /**
    * Default constructor that is using resource
@@ -28,5 +28,3 @@ class YourLicensePanel {
   }
 
 }
-
-export default YourLicensePanel;

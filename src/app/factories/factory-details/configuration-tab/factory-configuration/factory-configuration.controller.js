@@ -14,7 +14,7 @@
  * Controller for a factory configuration.
  * @author Oleksii Orel
  */
-class FactoryConfigurationCtrl {
+export class FactoryConfigurationCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -80,5 +80,3 @@ class FactoryConfigurationCtrl {
   }
 
 }
-
-export default FactoryConfigurationCtrl;

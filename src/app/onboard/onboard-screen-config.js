@@ -10,10 +10,10 @@
  */
 'use strict';
 
-import OnBoardCtrl from './onboard.controller';
-import OnBoardRedirect from './onboard-redirect.factory';
+import {OnBoardCtrl} from './onboard.controller';
+import {OnBoardRedirect} from './onboard-redirect.factory';
 
-class OnBoardConfig {
+export class OnBoardScreenConfig {
 
   constructor(register) {
     register.controller('OnBoardCtrl', OnBoardCtrl);
@@ -32,5 +32,3 @@ class OnBoardConfig {
   }
 }
 
-
-export default OnBoardConfig;

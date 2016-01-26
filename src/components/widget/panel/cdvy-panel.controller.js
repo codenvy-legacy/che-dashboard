@@ -10,16 +10,13 @@
  */
 'use strict';
 
-
-import Register from '../../utils/register';
-
 /**
  * @ngdoc controller
  * @name components.controller:CodenvyPanelCtrl
  * @description This class is handling the controller of a panel
  * @author Florent Benoit
  */
-class CodenvyPanelCtrl {
+export class CodenvyPanelCtrl {
 
   /**
    * Default constructor that is using resource
@@ -109,8 +106,3 @@ class CodenvyPanelCtrl {
 
 
 }
-
-
-export default CodenvyPanelCtrl;
-
-Register.getInstance().controller('CodenvyPanelCtrl', CodenvyPanelCtrl);

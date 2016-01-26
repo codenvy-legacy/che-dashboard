@@ -14,7 +14,7 @@
  * This class is providing a builder for membership
  * @author Ann Shumilova
  */
-class CodenvyMembershipBuilder {
+export class CodenvyMembershipBuilder {
 
   /**
    * Default constructor.
@@ -64,7 +64,4 @@ class CodenvyMembershipBuilder {
     return this.membership;
   }
 
-
 }
-
-export default CodenvyMembershipBuilder;

@@ -16,7 +16,7 @@
  * @description This class is handling the controller of the last projects to display in the dashboard
  * @author Florent Benoit
  */
-class DashboardLastProjectsCtrl {
+export class DashboardLastProjectsCtrl {
 
 
   /**
@@ -55,6 +55,3 @@ class DashboardLastProjectsCtrl {
 
 
 }
-
-export default DashboardLastProjectsCtrl;
-

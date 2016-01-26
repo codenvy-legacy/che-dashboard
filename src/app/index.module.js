@@ -9,15 +9,39 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
-/*exported CodenvyAPI, CodeMirror, GitHub, Colors, Countries, ComponentsConfig, Proxy */
 
-var DEV = true;
+import {Register} from '../components/utils/register';
+
+import {ComponentsConfig} from '../components/components-config';
+
+import {AdminsConfig} from './admin/admin-config';
+import {CodenvyColorsConfig} from './colors/codenvy-color.constant';
+import {CodenvyCountriesConfig} from './countries/codenvy-countries.constant';
+import {DashboardConfig} from './dashboard/dashboard-config';
+// switch to a config
+import {DemoComponentsCtrl} from './demo-components/demo-components.controller';
+import {FactoryConfig} from './factories/factories-config';
+import {IdeConfig} from './ide/ide-config';
+// switch to a config
+import {LoginCtrl} from './main/login.controller';
+import {NavbarConfig} from './navbar/navbar-config';
+import {OnBoardScreenConfig} from './onboard/onboard-screen-config';
+
+//onprem
+import {ResetServerPropsCtrl} from './onprem/admin/reset-server-properties/reset-server-properties.controller';
+import {OnPremisesConfig} from './onpremises/onpremises-config';
+
+import {ProjectsConfig} from './projects/projects-config';
+import {ProxySettingsConfig} from './proxy/proxy-settings.constant';
+import {WorkspacesConfig} from './workspaces/workspaces-config';
+
 
 // init module
 let initModule = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute',
   'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter',
   'ngDropdowns', 'ui.gravatar', 'ngLodash', 'braintree-angular', 'angularCharts', 'ngPasswordStrength', 'ngClipboard',
   'gavruk.card', 'uuid4', 'angularFileUpload']);
+
 
 
 // add a global resolve flag on all routes (user needs to be resolved first)
@@ -76,97 +100,14 @@ initModule.config(['$routeProvider', function ($routeProvider) {
 
 }]);
 
-
-import Register from '../components/utils/register';
-
-// colors
-import Colors from './colors/codenvy-color.constant.js';
-
-// proxy
-import Proxy from './proxy/proxy-settings.constant.js';
-
-
-// countries
-import Countries from './countries/codenvy-countries.constant.js';
-
-// import components
-import ComponentsConfig from '../components/components-config';
-
-// import dashboard
-import DashboardCtrl from './dashboard/dashboard.controller';
-
-//
-import DemoComponentsCtrl from './demo-components/demo-components.controller';
-import ResetServerPropsCtrl from './onprem/admin/reset-server-properties/reset-server-properties.controller';
-
-
-// import login
-import LoginCtrl from './main/login.controller';
-
-var instanceRegister = Register.getInstance();
-
-// import navbar
-import NavbarConfig from './navbar/navbar-config';
-new NavbarConfig(instanceRegister);
-
-// import dashboard
-import DashboardConfig from './dashboard/dashboard-config';
-new DashboardConfig(instanceRegister);
-
-// import ide config
-import IdeConfig from './ide/ide-config';
-new IdeConfig(instanceRegister);
-
-// import account config
-import AccountConfig from './navbar/account/account-config';
-new AccountConfig(instanceRegister);
-
-
-// import subscription config
-import SubscriptionConfig from './navbar/subscriptions/subscription-config';
-new SubscriptionConfig(instanceRegister);
-
-// import billing config
-import BillingConfig from './navbar/billing/billing-config';
-new BillingConfig(instanceRegister);
-
-// import team config
-import TeamConfig from './navbar/team/team-config';
-new TeamConfig(instanceRegister);
-
-// import factories
-import FactoryConfig from './factories/factories-config';
-new FactoryConfig(instanceRegister);
-
-// import projects
-import ProjectsConfig from './projects/projects-config';
-new ProjectsConfig(instanceRegister);
-
-// import workspaces
-import WorkspacesConfig from './workspaces/workspaces-config';
-new WorkspacesConfig(instanceRegister);
-
-//import onpremise
-import OnPremisesConfig from './onpremises/onpremises-config';
-new OnPremisesConfig(instanceRegister);
-
-
-// import onboarding
-import OnBoardConfig from './onboard/onboard-config';
-new OnBoardConfig(instanceRegister);
-
-// import admin
-import AdminsConfig from './admin/admin-config';
-new AdminsConfig(instanceRegister);
-
+var DEV = true;
 
 // and setup controllers
-initModule.controller('DashboardCtrl', DashboardCtrl)
-  .controller('LoginCtrl', LoginCtrl);
+initModule.controller('LoginCtrl', LoginCtrl);
 
 if (DEV) {
   initModule.controller('DemoComponentsCtrl', DemoComponentsCtrl)
-        .controller('ResetServerPropsCtrl', ResetServerPropsCtrl);
+    .controller('ResetServerPropsCtrl', ResetServerPropsCtrl);
 }
 
 
@@ -243,58 +184,58 @@ class CheckLogin {
  * Setup route redirect module
  */
 initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', 'ideIFrameSvc', 'codenvyIdeFetcher', 'routeHistory',
-function ($rootScope, $location, routingRedirect, codenvyUser, $timeout, ideIFrameSvc, codenvyIdeFetcher, routeHistory) {
+  function ($rootScope, $location, routingRedirect, codenvyUser, $timeout, ideIFrameSvc, codenvyIdeFetcher, routeHistory) {
 
-  $rootScope.hideLoader = false;
-  $rootScope.waitingLoaded = false;
-  $rootScope.showIDE = false;
+    $rootScope.hideLoader = false;
+    $rootScope.waitingLoaded = false;
+    $rootScope.showIDE = false;
 
-  // here only to create instances of these components
-  codenvyIdeFetcher;
-  routeHistory;
+    // here only to create instances of these components
+    codenvyIdeFetcher;
+    routeHistory;
 
-  /**
-   * Add default redirect to login in dev mode
-   */
-  if (DEV) {
-    routingRedirect.addRouteCallback(new CheckLogin(codenvyUser));
-  }
-
-  $rootScope.$on('$viewContentLoaded', function() {
-    ideIFrameSvc.addIFrame();
-
-    $timeout(function() {
-      if (!$rootScope.hideLoader) {
-        if (!$rootScope.wantTokeepLoader) {
-          $rootScope.hideLoader = true;
-        } else {
-          $rootScope.hideLoader = false;
-        }
-      }
-      $rootScope.waitingLoaded = true;
-    }, 1000);
-  });
-
-  $rootScope.$on('$routeChangeStart', (event, next)=> {
+    /**
+     * Add default redirect to login in dev mode
+     */
     if (DEV) {
-      console.log('$routeChangeStart event with route', next);
+      routingRedirect.addRouteCallback(new CheckLogin(codenvyUser));
     }
-  });
 
-  // When a route is about to change, notify the routing redirect node
-  $rootScope.$on('$routeChangeSuccess', (event, next) => {
-    if (next.resolve) {
+    $rootScope.$on('$viewContentLoaded', function() {
+      ideIFrameSvc.addIFrame();
+
+      $timeout(function() {
+        if (!$rootScope.hideLoader) {
+          if (!$rootScope.wantTokeepLoader) {
+            $rootScope.hideLoader = true;
+          } else {
+            $rootScope.hideLoader = false;
+          }
+        }
+        $rootScope.waitingLoaded = true;
+      }, 1000);
+    });
+
+    $rootScope.$on('$routeChangeStart', (event, next)=> {
       if (DEV) {
-        console.log('$routeChangeSuccess event with route', next);
-      }// check routes
-      routingRedirect.check(event, next);
-    }
-  });
+        console.log('$routeChangeStart event with route', next);
+      }
+    });
 
-  $rootScope.$on('$routeChangeError', () => {
-    $location.path('/');
-  });
-}]);
+    // When a route is about to change, notify the routing redirect node
+    $rootScope.$on('$routeChangeSuccess', (event, next) => {
+      if (next.resolve) {
+        if (DEV) {
+          console.log('$routeChangeSuccess event with route', next);
+        }// check routes
+        routingRedirect.check(event, next);
+      }
+    });
+
+    $rootScope.$on('$routeChangeError', () => {
+      $location.path('/');
+    });
+  }]);
 
 
 // add interceptors
@@ -319,11 +260,13 @@ initModule.factory('AuthInterceptor', function ($window, $cookies, $q, $location
     responseError: function (rejection) {
 
       // handle only api call
-      if (rejection.config.url.indexOf('localhost') > 0 || rejection.config.url.indexOf('/api/user') > 0) {
-        if (rejection.status === 401 || rejection.status === 403) {
-          $log.info('Redirect to login page.');
-          $location.path('/login');
+      if (rejection.config) {
+        if (rejection.config.url.indexOf('localhost') > 0 || rejection.config.url.indexOf('/api/user') > 0) {
+          if (rejection.status === 401 || rejection.status === 403) {
+            $log.info('Redirect to login page.');
+            $location.path('/login');
 
+          }
         }
       }
       return $q.reject(rejection);
@@ -488,9 +431,9 @@ initModule.config(function($mdThemingProvider, jsonColors) {
 
 
   $mdThemingProvider.theme('cdvynotice')
-      .primaryPalette('che')
-      .accentPalette('cheNotice')
-      .backgroundPalette('grey');
+    .primaryPalette('che')
+    .accentPalette('cheNotice')
+    .backgroundPalette('grey');
 
   $mdThemingProvider.theme('default')
     .primaryPalette('che')
@@ -543,13 +486,31 @@ initModule.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 
 
 angular.module('ui.gravatar').config(['gravatarServiceProvider', function(gravatarServiceProvider) {
-    gravatarServiceProvider.defaults = {
-      size     : 43,
-      default: 'mm'  // Mystery man as default for missing avatars
-    };
+  gravatarServiceProvider.defaults = {
+    size     : 43,
+    default: 'mm'  // Mystery man as default for missing avatars
+  };
 
-    // Use https endpoint
-    gravatarServiceProvider.secure = true;
+  // Use https endpoint
+  gravatarServiceProvider.secure = true;
 
-  }
+}
 ]);
+
+var instanceRegister = new Register(initModule);
+
+new ProxySettingsConfig(instanceRegister);
+new CodenvyColorsConfig(instanceRegister);
+new CodenvyCountriesConfig(instanceRegister);
+new ComponentsConfig(instanceRegister);
+new AdminsConfig(instanceRegister);
+new IdeConfig(instanceRegister);
+new OnPremisesConfig(instanceRegister);
+
+new NavbarConfig(instanceRegister);
+new OnBoardScreenConfig(instanceRegister);
+new ProjectsConfig(instanceRegister);
+new WorkspacesConfig(instanceRegister);
+new DashboardConfig(instanceRegister);
+new FactoryConfig(instanceRegister);
+

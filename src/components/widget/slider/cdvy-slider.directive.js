@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating slider that are working either on desktop or on mobile devices.
  * It will change upon width of the screen
  * @author Oleksii Kurinnyi
  */
-class CodenvySlider {
+export class CodenvySlider {
 
   /**
    * Default constructor that is using resource
@@ -78,7 +76,3 @@ class CodenvySlider {
 
   link () { }
 }
-
-export default CodenvySlider;
-
-Register.getInstance().directive('cdvySlider', CodenvySlider);

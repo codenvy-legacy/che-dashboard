@@ -14,27 +14,34 @@
  * Defines a filter that match if category or description or project type is containing the given value
  * @author Florent Benoit
  */
-angular.module('userDashboard').filter('sampleNameFilter', function() {
-  return function (templates, categoryFilter) {
 
-    if (!templates) {
-      return [];
-    }
-    if (!categoryFilter) {
-      return templates;
-    }
+export class CreateProjectSamplesNameFilter {
 
-    var filtered = [];
-    templates.forEach((template) => {
+  constructor(register) {
+    // Register this factory
+    register.app.filter('sampleNameFilter', function () {
+      return function (templates, categoryFilter) {
 
-      if (template.projectType !== null && template.projectType.toLowerCase().indexOf(categoryFilter.toLowerCase()) >= 0) {
-        filtered.push(template);
-      } else if (template.category !== null && template.category.toLowerCase().indexOf(categoryFilter.toLowerCase()) >= 0) {
-        filtered.push(template);
-      } else if (template.description !== null && template.description.toLowerCase().indexOf(categoryFilter.toLowerCase()) >= 0) {
-        filtered.push(template);
-      }
+        if (!templates) {
+          return [];
+        }
+        if (!categoryFilter) {
+          return templates;
+        }
+
+        var filtered = [];
+        templates.forEach((template) => {
+
+          if (template.projectType !== null && template.projectType.toLowerCase().indexOf(categoryFilter.toLowerCase()) >= 0) {
+            filtered.push(template);
+          } else if (template.category !== null && template.category.toLowerCase().indexOf(categoryFilter.toLowerCase()) >= 0) {
+            filtered.push(template);
+          } else if (template.description !== null && template.description.toLowerCase().indexOf(categoryFilter.toLowerCase()) >= 0) {
+            filtered.push(template);
+          }
+        });
+        return filtered;
+      };
     });
-    return filtered;
-  };
-});
+  }
+}

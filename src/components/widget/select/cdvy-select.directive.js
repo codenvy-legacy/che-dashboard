@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for creating select that are working either on desktop or on mobile devices.
  * It will change upon width of the screen
  * @author Oleksii Orel
  */
-class CodenvySelect {
+export class CodenvySelect {
 
   /**
    * Default constructor that is using resource
@@ -149,7 +147,3 @@ class CodenvySelect {
   }
 
 }
-
-export default CodenvySelect;
-
-Register.getInstance().directive('cdvySelect', CodenvySelect);

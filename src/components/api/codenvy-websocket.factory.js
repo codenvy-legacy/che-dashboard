@@ -11,14 +11,12 @@
 'use strict';
 
 /* exported MessageBus */
-import Register from '../utils/register.js';
-
 
 /**
  * This class is handling the Websocket exchange
  * @author Florent Benoit
  */
-class CodenvyWebsocket {
+export class CodenvyWebsocket {
 
   /**
    * Default constructor that is using resource
@@ -237,7 +235,3 @@ class MessageBus { // jshint ignore:line
 
 }
 
-
-
-// Register this factory
-Register.getInstance().factory('codenvyWebsocket', CodenvyWebsocket);

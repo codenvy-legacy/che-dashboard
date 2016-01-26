@@ -14,7 +14,7 @@
  * This class is providing a builder for Account
  * @author Ann Shumilova
  */
-class CodenvyAccountBuilder {
+export class CodenvyAccountBuilder {
 
   /**
    * Default constructor.
@@ -69,5 +69,3 @@ class CodenvyAccountBuilder {
 
 
 }
-
-export default CodenvyAccountBuilder;

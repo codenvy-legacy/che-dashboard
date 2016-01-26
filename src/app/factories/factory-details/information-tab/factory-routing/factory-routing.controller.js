@@ -14,7 +14,7 @@
  * Controller for a factory routing.
  * @author Oleksii Orel
  */
-class FactoryRoutingCtrl {
+export class FactoryRoutingCtrl {
 
   /**
    * Default constructor that is using resource injection
@@ -53,5 +53,3 @@ class FactoryRoutingCtrl {
   }
 
 }
-
-export default FactoryRoutingCtrl;

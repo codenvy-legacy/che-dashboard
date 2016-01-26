@@ -14,7 +14,7 @@
  * Defines a directive for creating project from samples.
  * @author Florent Benoit
  */
-class CreateProjectSamples {
+export class CreateProjectSamples {
 
   /**
    * Default constructor that is using resource
@@ -31,6 +31,3 @@ class CreateProjectSamples {
   }
 
 }
-
-export default CreateProjectSamples;
-

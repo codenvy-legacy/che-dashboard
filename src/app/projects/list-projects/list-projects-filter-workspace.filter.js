@@ -10,31 +10,39 @@
  */
 'use strict';
 
-angular.module('userDashboard').filter('listProjectWorkspaceFilter', function() {
-  return function (workspaces, workspaceFilter) {
-    // no workspaces, nothing to get
-    if (!workspaces) {
-      return {};
-    }
 
-    // no filter, return original content
-    if (!workspaceFilter) {
-      return workspaces;
-    }
+export class ListProjectsWorkspaceFilter {
 
-    // workspaces is on the following form : Map<key = workspaceId, value = array of projects>
-    var filtered = {};
+  constructor(register) {
+    // Register this factory
+    register.app.filter('listProjectWorkspaceFilter', function() {
+      return function (workspaces, workspaceFilter) {
+        // no workspaces, nothing to get
+        if (!workspaces) {
+          return {};
+        }
 
-    // get the keys
-    var workspacesID = Object.keys(workspaces);
+        // no filter, return original content
+        if (!workspaceFilter) {
+          return workspaces;
+        }
 
-    // for each workspace ID, check if filter is enabled for the given workspace ID
-    workspacesID.forEach((workspaceID) => {
-      if (workspaceFilter[workspaceID]) {
-        filtered[workspaceID] = workspaces[workspaceID];
-      }
+        // workspaces is on the following form : Map<key = workspaceId, value = array of projects>
+        var filtered = {};
+
+        // get the keys
+        var workspacesID = Object.keys(workspaces);
+
+        // for each workspace ID, check if filter is enabled for the given workspace ID
+        workspacesID.forEach((workspaceID) => {
+          if (workspaceFilter[workspaceID]) {
+            filtered[workspaceID] = workspaces[workspaceID];
+          }
+        });
+
+        return filtered;
+      };
     });
 
-    return filtered;
-  };
-});
+  }
+}

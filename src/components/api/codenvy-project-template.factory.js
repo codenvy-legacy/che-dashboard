@@ -10,14 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the projects template retrieval
  * It sets to the array project templates
  * @author Florent Benoit
  */
-class CodenvyProjectTemplate {
+export class CodenvyProjectTemplate {
 
   /**
    * Default constructor that is using resource
@@ -101,6 +99,3 @@ class CodenvyProjectTemplate {
 
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyProjectTemplate', CodenvyProjectTemplate);

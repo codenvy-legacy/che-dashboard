@@ -14,7 +14,7 @@
  * Defines a directive for creating navbar.
  * @author Florent Benoit
  */
-class AvailableSoftwarePanel {
+export class AvailableSoftwarePanel {
 
   /**
    * Default constructor that is using resource
@@ -29,5 +29,3 @@ class AvailableSoftwarePanel {
   }
 
 }
-
-export default AvailableSoftwarePanel;

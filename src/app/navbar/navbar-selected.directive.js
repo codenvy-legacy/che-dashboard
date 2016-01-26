@@ -16,7 +16,7 @@
  * @description This class is adding a CSS class when element is clicked
  * @author Florent Benoit
  */
-class NavBarSelected {
+export class NavBarSelected {
 
   /**
    * Default constructor that is using resource
@@ -63,4 +63,3 @@ class NavBarSelected {
 
 }
 
-export default NavBarSelected;

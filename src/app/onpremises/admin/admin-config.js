@@ -10,13 +10,13 @@
  */
 'use strict';
 
-import OnPremisesAdminInstallationConfig from './installation/installation-config';
-import OnPremisesAdminAvailableSoftwareCtrl from './software/software.controller';
-import AvailableSoftwarePanel from './software/software.directive';
-import OnPremisesAdminYourLicenseCtrl from './yourlicense/yourlicense.controller';
-import YourLicensePanel from './yourlicense/yourlicense.directive';
+import {OnPremisesAdminInstallationConfig} from './installation/installation-config';
+import {OnPremisesAdminAvailableSoftwareCtrl} from './software/software.controller';
+import {AvailableSoftwarePanel} from './software/software.directive';
+import {OnPremisesAdminYourLicenseCtrl} from './yourlicense/yourlicense.controller';
+import {YourLicensePanel} from './yourlicense/yourlicense.directive';
 
-class OnPremisesAdminConfig {
+export class OnPremisesAdminConfig {
 
   constructor(register) {
 
@@ -35,5 +35,3 @@ class OnPremisesAdminConfig {
     new OnPremisesAdminInstallationConfig(register);
   }
 }
-
-export default OnPremisesAdminConfig;

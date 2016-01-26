@@ -10,12 +10,10 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling server-wide properties load/store.
  */
-class ImsPropertiesApi {
+export class ImsPropertiesApi {
 
   /**
    * Default constructor.
@@ -110,6 +108,3 @@ class ImsPropertiesApi {
     return resource;
   }
 }
-
-// Register this factory
-Register.getInstance().factory('imsPropertiesApi', ImsPropertiesApi);

@@ -16,7 +16,7 @@
  * This class is providing a builder for Project details
  * @author Florent Benoit
  */
-class CodenvyProjectDetailsBuilder {
+export class CodenvyProjectDetailsBuilder {
 
   /**
    * Default constructor.
@@ -91,5 +91,3 @@ class CodenvyProjectDetailsBuilder {
 
 
 }
-
-export default CodenvyProjectDetailsBuilder;

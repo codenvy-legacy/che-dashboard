@@ -14,7 +14,7 @@
  * Defines a directive for displaying on-prem subscription information.
  * @author Ann Shumilova
  */
-class OnpremSubscriptionInfo {
+export class OnpremSubscriptionInfo {
 
   /**
    * Default constructor that is using resource
@@ -32,6 +32,3 @@ class OnpremSubscriptionInfo {
   }
 
 }
-
-export default OnpremSubscriptionInfo;
-

@@ -12,7 +12,7 @@
 
 import {gitMixinId, subversionMixinId} from '../repository/project-repository-data';
 
-class ProjectRepositoryCtrl {
+export class ProjectRepositoryCtrl {
 
   /**
    * Controller for the project local repository and remote repositories details
@@ -91,5 +91,3 @@ class ProjectRepositoryCtrl {
   }
 
 }
-
-export default ProjectRepositoryCtrl;

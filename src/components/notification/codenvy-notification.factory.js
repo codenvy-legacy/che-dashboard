@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../components/utils/register.js';
-
 /**
  * Provides custom notifications
  * @author Oleksii Orel
  */
-class CodenvyNotification {
+export class CodenvyNotification {
 
   /**
    * Default constructor that is using resource injection
@@ -64,8 +62,3 @@ class CodenvyNotification {
     });
   }
 }
-
-export default CodenvyNotification;
-
-// Register this factory
-Register.getInstance().factory('codenvyNotification', CodenvyNotification);

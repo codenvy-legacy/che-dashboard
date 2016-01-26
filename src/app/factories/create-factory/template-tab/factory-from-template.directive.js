@@ -14,7 +14,7 @@
  * Defines a directive for displaying factory from template widget.
  * @author Oleksii Orel
  */
-class FactoryFromTemplate {
+export class FactoryFromTemplate {
 
   /**
    * Default constructor that is using resource
@@ -39,5 +39,3 @@ class FactoryFromTemplate {
   }
 
 }
-
-export default FactoryFromTemplate;

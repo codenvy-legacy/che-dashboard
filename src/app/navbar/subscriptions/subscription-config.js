@@ -10,12 +10,12 @@
  */
 'use strict';
 
-import SubscriptionCtrl from '../subscriptions/subscription.controller';
-import SubscriptionProposal from '../subscriptions/subscription-proposal.directive';
-import OnpremSubscriptionInfo from '../subscriptions/onprem-subscription-info.directive';
-import SaasSubscriptionInfo from '../subscriptions/saas-subscription-info.directive';
+import {SubscriptionCtrl} from '../subscriptions/subscription.controller';
+import {SubscriptionProposal} from '../subscriptions/subscription-proposal.directive';
+import {OnpremSubscriptionInfo} from '../subscriptions/onprem-subscription-info.directive';
+import {SaasSubscriptionInfo} from '../subscriptions/saas-subscription-info.directive';
 
-class SubscriptionConfig {
+export class SubscriptionConfig {
 
   constructor(register) {
     register.directive('subscriptionProposal', SubscriptionProposal);
@@ -47,5 +47,3 @@ class SubscriptionConfig {
     });
   }
 }
-
-export default SubscriptionConfig;

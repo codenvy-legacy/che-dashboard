@@ -10,14 +10,13 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
 
 /**
  * This class is handling the projects retrieval
  * It sets to the array projects for any workspace that is not temporary
  * @author Florent Benoit
  */
-class CodenvyProject {
+export class CodenvyProject {
 
   /**
    * Default constructor that is using resource
@@ -451,6 +450,3 @@ class CodenvyProject {
   }
 
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyProject', CodenvyProject);

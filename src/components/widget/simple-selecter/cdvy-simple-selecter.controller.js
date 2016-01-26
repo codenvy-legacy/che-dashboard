@@ -10,14 +10,11 @@
  */
 'use strict';
 
-
-import Register from '../../utils/register';
-
 /**
  * This class is handling the controller for the simple selecter (only allowing to select the widget)
  * @author Florent Benoit
  */
-class CodenvySimpleSelecterCtrl {
+export class CodenvySimpleSelecterCtrl {
 
   /**
    * Default constructor that is using resource
@@ -56,12 +53,4 @@ class CodenvySimpleSelecterCtrl {
     }
   }
 
-
-
 }
-
-
-
-export default CodenvySimpleSelecterCtrl;
-
-Register.getInstance().controller('CodenvySimpleSelecterCtrl', CodenvySimpleSelecterCtrl);

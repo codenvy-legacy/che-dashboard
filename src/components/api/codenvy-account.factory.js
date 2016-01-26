@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the account API retrieval
  * @author Ann Shumilova
  */
-class CodenvyAccount {
+export class CodenvyAccount {
 
   /**
    * Default constructor that is using resource
@@ -211,6 +209,3 @@ class CodenvyAccount {
     return promise;
   }
 }
-
-// Register this factory
-Register.getInstance().factory('codenvyAccount', CodenvyAccount);

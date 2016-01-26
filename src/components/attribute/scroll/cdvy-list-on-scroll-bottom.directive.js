@@ -10,13 +10,11 @@
  */
 'use strict';
 
-import Register from '../../utils/register';
-
 /**
  * Defines a directive for a scrolled to bottom list event.
  * @author Michail Kuznyetsov
  */
-class CodenvyListOnScrollBottom {
+export class CodenvyListOnScrollBottom {
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
@@ -37,6 +35,3 @@ class CodenvyListOnScrollBottom {
     });
   }
 }
-export default CodenvyListOnScrollBottom;
-
-Register.getInstance().directive('cdvyListOnScrollBottom', CodenvyListOnScrollBottom);

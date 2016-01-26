@@ -10,11 +10,11 @@
  */
 'use strict';
 
-import FactoryConfigurationCtrl from '../configuration-tab/factory-configuration/factory-configuration.controller';
-import FactoryConfiguration from '../configuration-tab/factory-configuration/factory-configuration.directive';
+import {FactoryConfigurationCtrl} from '../configuration-tab/factory-configuration/factory-configuration.controller';
+import {FactoryConfiguration} from '../configuration-tab/factory-configuration/factory-configuration.directive';
 
 
-class ConfigurationTabConfig {
+export class ConfigurationTabConfig {
 
   constructor(register) {
     register.controller('FactoryConfigurationCtrl', FactoryConfigurationCtrl);
@@ -22,5 +22,3 @@ class ConfigurationTabConfig {
 
   }
 }
-
-export default ConfigurationTabConfig;

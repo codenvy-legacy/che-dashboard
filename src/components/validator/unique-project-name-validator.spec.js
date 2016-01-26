@@ -39,7 +39,7 @@ describe('unique-project-name-validator', function() {
   var codenvyBackend;
 
 
-  beforeEach(module('userDashboard'));
+  beforeEach(angular.mock.module('userDashboard'));
 
 
   beforeEach(inject(function($compile, $rootScope, codenvyProject, codenvyAPIBuilder, codenvyHttpBackend) {

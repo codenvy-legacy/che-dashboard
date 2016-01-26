@@ -16,7 +16,7 @@
  * @description This class is handling the directive of the help
  * @author Florent Benoit
  */
-class Logout {
+export class LogoutWidget {
 
   /**
    * Default constructor that is using resource
@@ -33,5 +33,3 @@ class Logout {
   }
 
 }
-
-export default Logout;
