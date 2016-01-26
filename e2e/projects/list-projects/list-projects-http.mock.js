@@ -16,8 +16,7 @@ exports.projectsList = function(){
 
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
-
+    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
 
       // setup tests objects
       var idWorkspace1 = 'idFlorent';
@@ -43,7 +42,7 @@ exports.projectsList = function(){
       codenvyBackend.addProjects(workspace2, [wksp2Project1]);
       codenvyBackend.setup();
 
-    });
+    }]);
 };
 
 
@@ -51,9 +50,7 @@ exports.projectsList = function(){
 exports.projectsList2 = function(){
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
-
-
+    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
       // setup tests objects
       var idWorkspace1 = 'idFlorent';
 
@@ -73,14 +70,13 @@ exports.projectsList2 = function(){
       codenvyBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
       codenvyBackend.setup();
 
-    });
+    }]);
 };
 
 exports.emptyProjectsList = function(){
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
-
+    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
 
       // setup tests objects
       var idWorkspace1 = 'idEmpty';
@@ -97,5 +93,5 @@ exports.emptyProjectsList = function(){
       codenvyBackend.addProjects(workspace1, []);
       codenvyBackend.setup();
 
-    });
+    }]);
 };

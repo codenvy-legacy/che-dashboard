@@ -24,7 +24,7 @@ describe('Rename project', function () {
 
 
   it('launch browser', function () {
-    browser.get('http://localhost:5000/');
+    browser.get('/');
     browser.waitForAngular();
 
   });

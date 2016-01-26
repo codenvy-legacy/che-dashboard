@@ -16,7 +16,7 @@ exports.initialList = function(){
 
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
+    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
 
 
       // setup tests objects
@@ -43,6 +43,6 @@ exports.initialList = function(){
       codenvyBackend.addProjects(workspace2, [wksp2Project1]);
       codenvyBackend.setup();
 
-    });
+    }]);
 };
 

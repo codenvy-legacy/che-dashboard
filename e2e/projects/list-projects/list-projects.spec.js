@@ -26,18 +26,16 @@ describe('The projects view', function () {
 
   it('should include my 2 workspaces', function() {
     browser.addMockModule('userDashboardMock', projectsMock.projectsList);
-    browser.get('http://localhost:5000/#/projects');
+    browser.get('/#/projects');
     browser.waitForAngular();
-
     expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(2);
 
   });
 
   it('should include only 1 workspace', function() {
     browser.addMockModule('userDashboardMock', projectsMock.projectsList2);
-    browser.get('http://localhost:5000/#/projects');
+    browser.get('/#/projects');
     browser.waitForAngular();
-
     expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(1);
     expect(listProjectsPage.projectElements.count()).toEqual(2);
     expect(listProjectsPage.noProjectsLabel.isDisplayed()).toBe(false);
@@ -45,12 +43,12 @@ describe('The projects view', function () {
 
   it('should not have any projects', function() {
     browser.addMockModule('userDashboardMock', projectsMock.emptyProjectsList);
-    browser.get('http://localhost:5000/#/projects');
+    browser.get('/#/projects');
     browser.waitForAngular();
 
-    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(1);
+    expect(listProjectsPage.projectsWorkspaceElements.count()).toEqual(0);
     expect(listProjectsPage.projectElements.count()).toEqual(0);
-    expect(listProjectsPage.noProjectsLabel.isDisplayed()).toBe(true);
+    //expect(listProjectsPage.noProjectsLabel.isDisplayed()).toBe(false);
   });
 
 

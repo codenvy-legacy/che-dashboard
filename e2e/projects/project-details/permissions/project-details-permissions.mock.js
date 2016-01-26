@@ -14,8 +14,7 @@
 exports.listPermissions = function(){
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
-
+    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
 
       // setup tests objects
       var idWorkspace1 = 'idFlorent';
@@ -49,6 +48,6 @@ exports.listPermissions = function(){
       codenvyBackend.addPermissions(idWorkspace1, projectName, [permissionUser1, permissionUser2, permissionGroup1]);
       codenvyBackend.setup();
 
-    });
+    }]);
 };
 

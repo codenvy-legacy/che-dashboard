@@ -14,8 +14,7 @@
 exports.updatedProjectName = function () {
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyHttpBackendProvider, codenvyAPIBuilder) {
-
+    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
 
       // setup tests objects
       var newProjectName = 'rename-tst';
@@ -47,14 +46,13 @@ exports.updatedProjectName = function () {
       codenvyBackend.addUpdatedProjectName(projectDetails.workspaceId, projectDetails.name, newProjectDetails.name);
       codenvyBackend.setup();
 
-    });
+    }]);
 };
 
 exports.updatedProjectDescription = function () {
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyHttpBackendProvider, codenvyAPIBuilder) {
-
+    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
 
       // setup tests objects
       var newProjectDescription = 'rename-description';
@@ -86,14 +84,13 @@ exports.updatedProjectDescription = function () {
       codenvyBackend.addUpdatedProjectDetails(projectDetails.workspaceId, projectDetails.name, newProjectDetails);
       codenvyBackend.setup();
 
-    });
+    }]);
 };
 
 exports.updatedProjectVisibility = function () {
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyHttpBackendProvider, codenvyAPIBuilder) {
-
+    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
 
       // setup tests objects
       var newVisibility = 'public';
@@ -117,6 +114,6 @@ exports.updatedProjectVisibility = function () {
       codenvyBackend.addSwitchVisibility(projectDetails.workspaceId, projectDetails.name, newVisibility);
       codenvyBackend.setup();
 
-    });
+    }]);
 };
 
