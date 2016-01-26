@@ -18,6 +18,8 @@ function listFiles() {
 
   return wiredep(wiredepOptions).js
     .concat([
+      // used to emulate Map for example
+      'node_modules/babel-polyfill/dist/polyfill.js',
       path.join(conf.paths.tmp, '/serve/app/index.module.js'),
     ])
     .concat(pathSrcHtml);
@@ -40,10 +42,11 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers : ['PhantomJS'], // can be replaced by Chrome
 
     plugins : [
       'karma-chrome-launcher',
+      'karma-phantomjs-launcher',
       'karma-coverage',
       'karma-jasmine',
       'karma-ng-html2js-preprocessor'
