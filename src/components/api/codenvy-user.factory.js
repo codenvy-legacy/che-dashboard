@@ -106,20 +106,24 @@ export class CodenvyUser {
     if (!ignoreCache && this.userPromise) {
       return this.userPromise;
     }
-    this.user = this.remoteUserAPI.get();
+    let user = this.remoteUserAPI.get();
 
     // check admin or not
     let isAdminPromise = this.fetchIsUserInRole('admin', 'system', '');
     let isUserPromise = this.fetchIsUserInRole('user', 'system', '');
 
-    let promise = this.user.$promise;
+    let promise = user.$promise;
     // check if if was OK or not
     let updatePromise = promise.then(() => {
       this.isLogged = true;
     }, () => {
       this.isLogged = false;
     });
-    this.userPromise = this.$q.all([updatePromise, isUserPromise, isAdminPromise]);
+    let allPromise = this.$q.all([updatePromise, isUserPromise, isAdminPromise]);
+    this.userPromise = allPromise.then(() => {
+      this.user = user;
+    });
+
     return this.userPromise;
   }
 
