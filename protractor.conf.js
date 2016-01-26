@@ -21,12 +21,10 @@ exports.config = {
         '--window-size=1024,768']
     }
   },
+  
+  baseUrl: 'http://localhost:3000',
 
-  onPrepare: function () {
-    browser.driver.get('http://localhost:5000');
-  },
-
-  // Spec patterns are relative to the current working directly when
+  // Spec patterns are relative to the current working directory when
   // protractor is called.
   specs: [paths.e2e + '/**/*.js'],
 

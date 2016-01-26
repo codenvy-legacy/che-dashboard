@@ -1,69 +1,71 @@
 'use strict';
 
+var path = require('path');
+var conf = require('./gulp/conf');
+
+var _ = require('lodash');
+var wiredep = require('wiredep');
+
+var pathSrcHtml = [
+  path.join(conf.paths.src, '/**/*.html')
+];
+
+function listFiles() {
+  var wiredepOptions = _.extend({}, conf.wiredep, {
+    dependencies: true,
+    devDependencies: true
+  });
+
+  return wiredep(wiredepOptions).js
+    .concat([
+      path.join(conf.paths.tmp, '/serve/app/index.module.js'),
+    ])
+    .concat(pathSrcHtml);
+}
+
 module.exports = function(config) {
 
-  // custom saucelabs browsers
-  var customLaunchers = {
-    sauceLabsChrome: {
-      base: 'SauceLabs',
-      browserName: 'chrome',
-      platform: 'Windows 7',
-      version: '39'
-    },
-    sauceLabsFirefox: {
-      base: 'SauceLabs',
-      browserName: 'firefox',
-      platform: 'Linux',
-      version: '35'
-    },
-    sauceLabsSafari: {
-      base: 'SauceLabs',
-      browserName: 'safari',
-      platform: 'OS X 10.10',
-      version: '8.0'
-    }
-  };
+  var configuration = {
+    files: listFiles(),
 
-  config.set({
+    singleRun: true,
 
-    autoWatch : false,
+    autoWatch: false,
+
+    ngHtml2JsPreprocessor: {
+      stripPrefix: conf.paths.src + '/'
+    },
+
+    logLevel: 'WARN',
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome', /*'sauceLabsChrome', 'sauceLabsFirefox', 'sauceLabsSafari'*/],
+    browsers : ['Chrome'],
 
-    logLevel: config.LOG_INFO,
+    plugins : [
+      'karma-chrome-launcher',
+      'karma-coverage',
+      'karma-jasmine',
+      'karma-ng-html2js-preprocessor'
+    ],
 
-    logColors: true,
-
-    sauceLabs: {
-      testName: 'User Dashboard Unit Tests',
-      startConnect: false
-    },
-
-
-    customLaunchers: customLaunchers,
-
-    reporters: ['progress', 'coverage', 'dots', 'saucelabs'],
-
-    preprocessors: {
-      '**/app/index.js': ['coverage']
-    },
-
-    // optionally, configure the reporter
     coverageReporter: {
       type : 'html',
       dir : 'coverage/'
     },
 
-    singleRun: true,
+    reporters: ['progress']
+  };
 
-    plugins : [
-      'karma-chrome-launcher',
-      'karma-coverage',
-      'karma-sauce-launcher',
-      'karma-jasmine',
-    ]
-
+  // This is the default preprocessors configuration for a usage with Karma cli
+  // The coverage preprocessor in added in gulp/unit-test.js only for single tests
+  // It was not possible to do it there because karma doesn't let us now if we are
+  // running a single test or not
+  configuration.preprocessors = {};
+  pathSrcHtml.forEach(function(path) {
+    configuration.preprocessors[path] = ['ng-html2js'];
   });
+
+
+  config.set(configuration);
 };

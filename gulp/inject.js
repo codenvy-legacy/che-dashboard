@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 Codenvy, S.A.
+ * Copyright (c) 2015-2016 Codenvy, S.A.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,41 +11,33 @@
 
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');
-
-var paths = gulp.paths;
+var conf = require('./conf');
 
 var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
+var _ = require('lodash');
 
-gulp.task('inject', ['colors', 'styles', 'browserify'], function () {
-
+gulp.task('inject', ['scripts', 'styles'], function () {
   var injectStyles = gulp.src([
-    paths.tmp + '/serve/{app,components}/**/*.css',
-    '!' + paths.tmp + '/serve/app/vendor.css'
+    path.join(conf.paths.tmp, '/serve/app/**/*.css'),
+    path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
   ], { read: false });
 
   var injectScripts = gulp.src([
-    paths.tmp + '/serve/{app,components}/**/*.js',
-    '!' + paths.src + '/{app,components}/**/*.spec.js',
-    '!' + paths.src + '/{app,components}/**/*.mock.js'
+    path.join(conf.paths.tmp, '/serve/app/**/*.module.js')
   ], { read: false });
 
   var injectOptions = {
-    ignorePath: [paths.src, paths.tmp + '/serve'],
+    ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
     addRootSlash: false
   };
 
-  var wiredepOptions = {
-    directory: 'bower_components',
-    exclude: [/bootstrap\.js/, /bootstrap\.css/, /bootstrap\.css/, /foundation\.css/]
-  };
-
-  return gulp.src(paths.src + '/*.html')
+  return gulp.src(path.join(conf.paths.src, '/*.html'))
     .pipe($.inject(injectStyles, injectOptions))
     .pipe($.inject(injectScripts, injectOptions))
-    .pipe(wiredep(wiredepOptions))
-    .pipe(gulp.dest(paths.tmp + '/serve'));
-
+    .pipe(wiredep(_.extend({}, conf.wiredep)))
+    .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
 });
