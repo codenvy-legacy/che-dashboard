@@ -128,6 +128,15 @@ export class WorkspaceDetailsCtrl {
     this.exportWorkspaceContent = this.$filter('json')(angular.fromJson(copyOfWorkspace), 2);
   }
 
+  runWorkspace() {
+    let promise = this.codenvyAPI.getWorkspace().startWorkspace(this.workspaceId, this.workspaceDetails.defaultEnvName);
+
+    promise.then(() => {}, (error) => {
+      this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Start workspace failed.');
+      console.log('error', error);
+    });
+  }
+
   stopWorkspace() {
     let promise = this.codenvyAPI.getWorkspace().stopWorkspace(this.workspaceId);
 

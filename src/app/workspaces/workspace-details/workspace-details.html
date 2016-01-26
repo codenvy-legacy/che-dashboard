@@ -16,7 +16,7 @@
         <span class="cdvy-tab-label-title">Settings</span>
       </md-tab-label>
       <md-tab-body>
-        <cdvy-panel cdvy-title="Workspace Information" class="workspace-details-content">
+        <cdvy-panel cdvy-title="Workspace Information" class="workspace-details-content workspace-details-information">
           <div layout="row" flex>
               <ng-form flex layout="column" name="workspaceInformationForm">
                 <cdvy-input cdvy-form="workspaceInformationForm"
@@ -43,7 +43,12 @@
               <workspace-status-indicator cdvy-status="workspaceDetailsCtrl.workspaceDetails.status"></workspace-status-indicator>
             </cdvy-label-container>
             <div flex="none" flex-offset="5" layout="column" layout-align="end end">
+              <cdvy-button-default ng-disabled="(workspaceDetailsCtrl.workspaceDetails.status !== 'STOPPED')"
+                                   ng-show="(workspaceDetailsCtrl.workspaceDetails.status === 'STOPPED' || workspaceDetailsCtrl.workspaceDetails.status === 'STARTING')"
+                                   cdvy-button-title="Run" name="runButton"
+                                   ng-click="workspaceDetailsCtrl.runWorkspace()"/>
               <cdvy-button-default ng-disabled="(workspaceDetailsCtrl.workspaceDetails.status !== 'RUNNING')"
+                                   ng-show="(workspaceDetailsCtrl.workspaceDetails.status === 'RUNNING' || workspaceDetailsCtrl.workspaceDetails.status === 'STOPPING')"
                                    cdvy-button-title="Stop" name="stopButton"
                                    ng-click="workspaceDetailsCtrl.stopWorkspace()"/>
             </div>
