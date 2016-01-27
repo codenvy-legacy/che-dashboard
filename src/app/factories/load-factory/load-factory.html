@@ -10,51 +10,39 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="Load Factory"
-              class="create-project-page-toolbar">
-</cdvy-toolbar>
-
-<md-content id="create-project-content-page" md-scroll-y flex class="projects-create-project" md-theme="maincontent-theme">
-    <div ng-show="loadFactoryCtrl.isLoadFactoryInProgress()">
-        <div id="create-project-panel" class="create-project-progress-panel" >
-            <div class="create-project-progress-panel-top" style="background-image: url('assets/images/bg-intermediate-screen.svg')">
-                <div class="create-project-progress-widget-progress" layout-align="center center" class="progress-global" layout="row">
-                    <md-icon ng-hide="loadFactoryCtrl.getCurrentProgressStep() === (loadFactoryCtrl.getLoadingSteps().length - 1)" md-svg-src="assets/images/loader.svg" class="create-project-progress-loader-icon" aria-label="loader"></md-icon>
-                </div>
-
-                <div layout="column" class="create-project-panel-progress-title" layout-align="center center">
-                    <div class="create-project-panel-progress-counter" ng-show="loadFactoryCtrl.getCurrentProgressStep() < (loadFactoryCtrl.getLoadingSteps().length - 1)">{{loadFactoryCtrl.getCurrentProgressStep() + 1}} / {{loadFactoryCtrl.getLoadingSteps().length - 1}}</div>
-                    <div>{{loadFactoryCtrl.getLoadingSteps()[loadFactoryCtrl.getCurrentProgressStep()].text}}</div>
-                </div>
-            </div>
-            <div class="create-project-progress-panel-bottom">
-                <div ng-repeat="step in loadFactoryCtrl.getLoadingSteps()">
-                    <div ng-if="$index < (loadFactoryCtrl.getLoadingSteps().length - 1)"
-                         class="create-project-panel-progress-items"
-                         ng-class="{'create-project-panel-progress-items-enabled' : (loadFactoryCtrl.getCurrentProgressStep() >= $index), 'create-project-panel-progress-items-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
-                         >
-                        <div  layout="row" layout-align="start center">
-                            <div class="create-project-panel-progress-item-number" ng-class="{'create-project-panel-progress-item-number-in-progress' : (loadFactoryCtrl.getCurrentProgressStep() === $index)}">{{$index + 1}}</div>
-                            <div flex>{{loadFactoryCtrl.getStepText($index)}}</div>
-                            <cdvy-button-danger ng-show="loadFactoryCtrl.getLoadingSteps()[$index].hasError"
-                                    cdvy-button-title="Retry" ng-click="loadFactoryCtrl.resetLoadFactoryInProgress()" ></cdvy-button-danger>
-                        </div>
-                    </div>
-                    <div ng-if="$index < (loadFactoryCtrl.getLoadingSteps().length - 1)" layout="row">
-                        <div ng-class="{'create-project-panel-progress-item-link-enabled' : (loadFactoryCtrl.getCurrentProgressStep() > $index), 'create-project-panel-progress-item-link-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
-                             class="create-project-panel-progress-item-link">&nbsp;</div>
-                        <textarea cdvy-auto-scroll ng-show="loadFactoryCtrl.getLoadingSteps()[$index].logs.length > 0" flex class="create-project-panel-progress-item-output" rows="5" ng-model="loadFactoryCtrl.getLoadingSteps()[$index].logs"></textarea>
-                    </div>
-                </div>
-                <div ng-class="{'create-project-panel-progress-lastitem-enabled' : (loadFactoryCtrl.getCurrentProgressStep() === (loadFactoryCtrl.getLoadingSteps().length - 1)), 'create-project-panel-progress-lastitem-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
-                     class="create-project-panel-progress-lastitem" layout="row" layout-align="end start">
-                    &nbsp;
-                    <cdvy-button-primary ng-show="loadFactoryCtrl.getCurrentProgressStep() === (loadFactoryCtrl.getLoadingSteps().length - 1)"
-                                         cdvy-button-title="Open in IDE" ng-href="#/ide/{{loadFactoryCtrl.getWorkspace()}}"></cdvy-button-primary>
-                </div>
-            </div>
-
-
-        </div>
+<div class="load-factory-main-container">
+<div flex style="height: 100%" class="ide-loader load-factory-main-panel">
+  <div layout="column" layout-align="start center">
+    <div class="ide-loader-logo" ng-if="branding.logoURL">
+      <img ng-src="{{branding.logoURL}}">
     </div>
-</md-content>
+  </div>
+  <div class="create-project-progress-panel-bottom">
+    <div ng-repeat="step in loadFactoryCtrl.getLoadingSteps()">
+      <div ng-if="$index < (loadFactoryCtrl.getLoadingSteps().length -1)"
+           class="create-project-panel-progress-items"
+           ng-class="{'create-project-panel-progress-items-enabled' : (loadFactoryCtrl.getCurrentProgressStep() >= $index), 'create-project-panel-progress-items-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
+        >
+        <div  layout="row" layout-align="start center">
+          <div class="create-project-panel-progress-item-number" ng-class="{'create-project-panel-progress-item-number-in-progress' : (loadFactoryCtrl.getCurrentProgressStep() === $index && !loadFactoryCtrl.getLoadingSteps()[$index].hasError)}">{{$index + 1}}</div>
+          <div flex>{{loadFactoryCtrl.getStepText($index)}}</div>
+          <cdvy-button-danger ng-show="loadFactoryCtrl.getLoadingSteps()[$index].hasError"
+                              cdvy-button-title="Retry" ng-click="loadFactoryCtrl.resetCreateProgress()" ></cdvy-button-danger>
+        </div>
+      </div>
+      <div ng-if="$index < (loadFactoryCtrl.getLoadingSteps().length - 1)" layout="row">
+        <div ng-class="{'create-project-panel-progress-item-link-enabled' : (loadFactoryCtrl.getCurrentProgressStep() > $index), 'create-project-panel-progress-item-link-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
+             class="create-project-panel-progress-item-link">&nbsp;</div>
+
+        <textarea cdvy-auto-scroll ng-show="loadFactoryCtrl.getLoadingSteps()[$index].logs.length > 0" flex class="create-project-panel-progress-item-output" rows="5" ng-model="loadFactoryCtrl.getLoadingSteps()[$index].logs"></textarea>
+      </div>
+    </div>
+    <div ng-class="{'create-project-panel-progress-lastitem-enabled' : (loadFactoryCtrl.getCurrentProgressStep() === (loadFactoryCtrl.getLoadingSteps().length - 1)), 'create-project-panel-progress-lastitem-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
+         class="create-project-panel-progress-lastitem" layout="row" layout-align="end start">
+      &nbsp;
+    </div>
+    <div ng-click="loadFactoryCtrl.cancelLoad()" class="ide-loader-cancel-item">Workspace does not load propertly ? Return to dashboard</div>
+
+  </div>
+</div>
+</div>

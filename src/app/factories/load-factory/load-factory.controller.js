@@ -32,9 +32,12 @@ class LoadFactoryCtrl {
 
     this.websocketReconnect = 50;
 
+    angular.element('#codenvyleftmenu').hide();
+
     this.loadFactoryService.resetLoadProgress();
     this.loadFactoryService.setLoadFactoryInProgress(true);
     this.getFactoryData($route.current.params.id);
+
   }
 
   /**
@@ -164,8 +167,9 @@ class LoadFactoryCtrl {
     this.loadFactoryService.goToNextStep();
     let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(workspace.id, workspace.defaultEnvName);
 
+    this.subscribeOnEvents(workspace, bus);
     startWorkspacePromise.then((data) => {
-      this.subscribeOnEvents(data, bus);
+      console.log('Workspace started', data);
     });
   }
 
