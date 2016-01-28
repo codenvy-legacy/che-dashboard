@@ -23,7 +23,7 @@ export class CreateWorkspaceCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($rootScope, $location, codenvyAPI, codenvyNotification, lodash) {
+  constructor($location, codenvyAPI, codenvyNotification, lodash) {
     this.$location = $location;
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
@@ -52,8 +52,6 @@ export class CreateWorkspaceCtrl {
     this.stack = null;
     this.recipeUrl = null;
     this.recipeScript = null;
-
-    $rootScope.$broadcast('navbar-selected:clear');
   }
 
   /**

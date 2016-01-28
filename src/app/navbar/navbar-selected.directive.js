@@ -22,19 +22,15 @@ export class NavBarSelected {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor ($rootScope) {
+  constructor ($rootScope, $location) {
     this.$rootScope = $rootScope;
+    this.$location = $location;
     this.restrict = 'A';
     this.replace = false;
     this.controller = 'NavBarSelectedCtrl';
     this.controllerAs = 'navBarSelectedCtrl';
     this.bindToController = true;
 
-    $rootScope.$on('navbar-selected:clear', () => {
-        if (this.$rootScope.selectedNavBarElement) {
-            this.$rootScope.selectedNavBarElement.removeClass('cdvy-navbar-selected');
-        }
-    });
   }
 
 
@@ -42,8 +38,7 @@ export class NavBarSelected {
    * Monitor click
    */
   link($scope, element, attrs, controller) {
-    element.bind('click', () => {
-
+    let select = (elem) => {
       // if there is a previous selected element, unselect it
       if (this.$rootScope.selectedNavBarElement) {
         this.$rootScope.selectedNavBarElement.removeClass('cdvy-navbar-selected');
@@ -52,12 +47,40 @@ export class NavBarSelected {
       controller.close();
 
       // select the new element
-      this.$rootScope.selectedNavBarElement = element;
+      this.$rootScope.selectedNavBarElement = elem;
       // add the class
-      element.addClass('cdvy-navbar-selected');
+      elem.addClass('cdvy-navbar-selected');
 
+    };
+
+    // highlight item at start
+    if (attrs['ngHref'] === '#'+this.$location.path()) {
+      select(element);
+    }
+
+    // highlight item on click
+    element.bind('click', () => {
+      select(element);
     });
 
+    $scope.$on('navbar-selected:clear', () => {
+      // unselect item
+      if (this.$rootScope.selectedNavBarElement) {
+        this.$rootScope.selectedNavBarElement.removeClass('cdvy-navbar-selected');
+        delete this.$rootScope.selectedNavBarElement;
+      }
+    });
+    $scope.$on('navbar-selected:restore', (event, path) => {
+      // check if item is selected already
+      if (this.$rootScope.selectedNavBarElement) {
+        return;
+      }
+
+      // select item
+      if (attrs['ngHref'] === path) {
+        select(element);
+      }
+    });
   }
 
 

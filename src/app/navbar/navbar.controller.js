@@ -16,8 +16,10 @@ export class NavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($mdSidenav, userDashboardConfig, codenvyAPI, onBoarding, $route, imsArtifactApi) {
+  constructor($mdSidenav, $scope, $location, $route, userDashboardConfig, codenvyAPI, onBoarding, imsArtifactApi) {
     this.mdSidenav = $mdSidenav;
+    this.$scope = $scope;
+    this.$location = $location;
     this.$route = $route;
     this.codenvyAPI = codenvyAPI;
     this.onBoarding = onBoarding;
@@ -54,6 +56,39 @@ export class NavBarCtrl {
     this.onpremAdminExpanded = true;
 
     this.codenvyUser.fetchUser();
+
+    this.menuItemUrl = {
+      login: '#/login',
+      dashboard: '#/',
+      projects: '#/projects',
+      workspaces: '#/workspaces',
+      factories: '#/factories',
+      administration: '#/onprem/administration',
+      usermanagement: '#/onprem/usermanagement',
+
+      // subsection
+      plugins: '#/admin/plugins',
+
+      // subsection
+      account: '#/account',
+      team: '#/team',
+      subscriptions: '#/subscriptions',
+      billing: '#/billing'
+    };
+
+    // clear highlighting of menu item from navbar
+    // if route is not part of navbar
+    // or restore highlighting otherwise
+    $scope.$on('$locationChangeStart', () => {
+      let path = '#' + $location.path(),
+        match = Object.keys(this.menuItemUrl).some(item => this.menuItemUrl[item] === path);
+      if (match) {
+        $scope.$broadcast('navbar-selected:restore', path);
+      }
+      else {
+        $scope.$broadcast('navbar-selected:clear');
+      }
+    });
   }
 
   isImsAvailable() {
