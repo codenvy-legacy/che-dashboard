@@ -361,6 +361,11 @@ class LoadFactoryCtrl {
   resetLoadFactoryInProgress() {
     this.loadFactoryService.resetLoadProgress();
   }
+
+  getIDELink() {
+    let link = '#/ide/' + this.getWorkspace();
+    return link;
+  }
 }
 
 export default LoadFactoryCtrl;

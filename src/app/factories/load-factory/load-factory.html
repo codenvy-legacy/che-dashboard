@@ -10,8 +10,7 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<div class="load-factory-main-container">
-<div flex style="height: 100%" class="ide-loader load-factory-main-panel">
+<div flex style="height: 100%" class="ide-loader" id="factoryLoader">
   <div layout="column" layout-align="start center">
     <div class="ide-loader-logo" ng-if="branding.logoURL">
       <img ng-src="{{branding.logoURL}}">
@@ -39,10 +38,15 @@
     </div>
     <div ng-class="{'create-project-panel-progress-lastitem-enabled' : (loadFactoryCtrl.getCurrentProgressStep() === (loadFactoryCtrl.getLoadingSteps().length - 1)), 'create-project-panel-progress-lastitem-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
          class="create-project-panel-progress-lastitem" layout="row" layout-align="end start">
-      &nbsp;
+      <div layout="column" flex layout-align="start end">
+        &nbsp;
+        <cdvy-button-primary ng-show="loadFactoryCtrl.getCurrentProgressStep() === (loadFactoryCtrl.getLoadingSteps().length - 1)"
+          ng-href="{{loadFactoryCtrl.getIDELink()}}"
+          ng-click="loadFactoryCtrl.resetLoadFactoryInProgress()"
+          class="codenvy-hover create-project-details-arrow"
+          cdvy-button-icon="fa fa-chevron-circle-right"
+          cdvy-button-title="Open in IDE"></cdvy-button-primary>
     </div>
-    <div ng-click="loadFactoryCtrl.cancelLoad()" class="ide-loader-cancel-item">Workspace does not load propertly ? Return to dashboard</div>
-
   </div>
 </div>
 </div>
