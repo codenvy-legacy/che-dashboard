@@ -55,7 +55,7 @@ export class CodenvyToolbar {
   constructor () {
     this.restrict='E';
     this.replace = true;
-    this.controller = 'NavbarCtrl';
+    this.controller = 'CheNavBarCtrl';
     this.controllerAs = 'controller';
     this.bindToController = true;
     this.transclude= true;

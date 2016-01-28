@@ -10,8 +10,8 @@
  */
 'use strict';
 
-import {NavBarCtrl} from './navbar.controller';
-import {NavBar} from './navbar.directive';
+import {CheNavBarCtrl} from './navbar.controller';
+import {CheNavBar} from './navbar.directive';
 import {NavBarSelectedCtrl} from './navbar-selected.controller';
 import {NavBarSelected} from './navbar-selected.directive';
 import {HelpCtrl} from './help/help.controller';
@@ -27,11 +27,11 @@ import {TeamConfig} from './team/team-config';
 export class NavbarConfig {
 
   constructor(register) {
-    register.controller('NavbarCtrl', NavBarCtrl);
+    register.controller('CheNavBarCtrl', CheNavBarCtrl);
     register.controller('HelpCtrl', HelpCtrl);
     register.controller('LogoutCtrl', LogoutCtrl);
     register.controller('NavBarSelectedCtrl', NavBarSelectedCtrl);
-    register.directive('cdvyNavBar', NavBar);
+    register.directive('cheNavBar', CheNavBar);
     register.directive('navBarSelected', NavBarSelected);
     register.directive('helpWidget', HelpWidget);
     register.directive('logoutWidget', LogoutWidget);

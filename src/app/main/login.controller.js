@@ -27,7 +27,7 @@ export class LoginCtrl {
     this.location = $location;
 
     // hide the navbar
-    angular.element('#codenvynavbar').hide();
+    angular.element('#chenavbar').hide();
 
   }
 

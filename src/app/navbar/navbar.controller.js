@@ -10,7 +10,7 @@
  */
 'use strict';
 
-export class NavBarCtrl {
+export class CheNavBarCtrl {
 
   /**
    * Default constructor

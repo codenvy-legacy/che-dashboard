@@ -14,7 +14,7 @@
  * Defines a directive for creating navbar.
  * @author Florent Benoit
  */
-export class NavBar {
+export class CheNavBar {
 
   /**
    * Default constructor that is using resource
@@ -24,7 +24,7 @@ export class NavBar {
     this.restrict='E';
     this.replace = false;
     this.templateUrl = 'app/navbar/navbar.html';
-    this.controller = 'NavbarCtrl';
+    this.controller = 'CheNavBarCtrl';
     this.controllerAs = 'navbarCtrl';
   }
 
