@@ -28,10 +28,10 @@ export class BillingConfig {
           controller: 'BillingCtrl',
           controllerAs: 'billingCtrl',
           resolve: {
-            check: ['$q', 'codenvyService', function ($q, codenvyService) {
+            check: ['$q', 'cheService', function ($q, cheService) {
               var defer = $q.defer();
-              codenvyService.fetchServices().then(() => {
-                if (codenvyService.isServiceAvailable('saas')) {
+              cheService.fetchServices().then(() => {
+                if (cheService.isServiceAvailable('saas')) {
                   defer.resolve();
                 } else {
                   defer.reject();

@@ -23,24 +23,24 @@ export class DashboardLastProjectsCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor(codenvyProject, codenvyWorkspace, $location) {
-    this.codenvyProject = codenvyProject;
-    this.codenvyWorkspace = codenvyWorkspace;
+  constructor(cheProject, cheWorkspace, $location) {
+    this.cheProject = cheProject;
+    this.cheWorkspace = cheWorkspace;
     this.$location = $location;
 
     this.state = 'loading';
 
     // fetch workspaces when initializing
-    let promise = this.codenvyWorkspace.fetchWorkspaces();
+    let promise = this.cheWorkspace.fetchWorkspaces();
 
     promise.then(() => {
-        this.projects = this.codenvyProject.getAllProjects();
+        this.projects = this.cheProject.getAllProjects();
         this.state = 'OK';
         },
         (error) => {
           if (error.status === 304) {
             // ok
-            this.projects = this.codenvyProject.getAllProjects();
+            this.projects = this.cheProject.getAllProjects();
             this.state = 'OK';
             return;
           }

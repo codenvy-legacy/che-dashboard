@@ -20,9 +20,9 @@ export class FactoryInformationCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($scope, codenvyAPI, codenvyNotification) {
+  constructor($scope, codenvyAPI, cheNotification) {
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
     let ctrl = this;
 
@@ -41,9 +41,9 @@ export class FactoryInformationCtrl {
 
     promise.then(() => {
       this.factory.originFactory = factory;
-      this.codenvyNotification.showInfo('Factory information successfully updated.');
+      this.cheNotification.showInfo('Factory information successfully updated.');
     }, (error) => {
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
       console.log('error', error);
     });
   }

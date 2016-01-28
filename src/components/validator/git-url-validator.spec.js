@@ -23,20 +23,20 @@ describe('git-url-validator', function() {
   var httpBackend;
 
   /**
-   * Codenvy backend
+   * Che backend
    */
-  var codenvyBackend;
+  var cheBackend;
 
   beforeEach(angular.mock.module('userDashboard'));
 
 
 
-  beforeEach(inject(function($compile, $rootScope, codenvyHttpBackend) {
+  beforeEach(inject(function($compile, $rootScope, cheHttpBackend) {
     $scope = $rootScope;
     // setup backend
-    codenvyBackend = codenvyHttpBackend;
-    httpBackend = codenvyHttpBackend.getHttpBackend();
-    codenvyBackend.setup();
+    cheBackend = cheHttpBackend;
+    httpBackend = cheHttpBackend.getHttpBackend();
+    cheBackend.setup();
 
     var element = angular.element(
       '<form name="form">' +

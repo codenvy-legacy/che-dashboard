@@ -21,8 +21,8 @@ export class CreateProjectCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope, createProjectSvc, lodash, $q) {
-    this.codenvyAPI = codenvyAPI;
+  constructor(cheAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope, createProjectSvc, lodash, $q) {
+    this.cheAPI = cheAPI;
     this.$websocket = $websocket;
     this.$timeout = $timeout;
     this.$location = $location;
@@ -121,7 +121,7 @@ export class CreateProjectCtrl {
     }
 
     // fetch workspaces when initializing
-    let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
+    let promise = cheAPI.getWorkspace().fetchWorkspaces();
     promise.then(() => {
         this.updateData();
       },
@@ -232,14 +232,14 @@ export class CreateProjectCtrl {
    */
   updateData() {
 
-    this.workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
+    this.workspaces = this.cheAPI.getWorkspace().getWorkspaces();
 
     // generate project name
     this.generateProjectName(true);
 
     // init WS bus
     if (this.workspaces.length > 0) {
-      this.messageBus = this.codenvyAPI.getWebsocket().getBus(this.workspaces[0].id);
+      this.messageBus = this.cheAPI.getWebsocket().getBus(this.workspaces[0].id);
     }
 
   }
@@ -347,7 +347,7 @@ export class CreateProjectCtrl {
 
     // then we've to start workspace
     this.createProjectSvc.setCurrentProgressStep(1);
-    let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
+    let startWorkspacePromise = this.cheAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
 
     startWorkspacePromise.then((data) => {
       // get channels
@@ -436,11 +436,11 @@ export class CreateProjectCtrl {
       });
 
 
-      promise = this.codenvyAPI.getProject().importProject(workspaceId, projectName, projectData.source);
+      promise = this.cheAPI.getProject().importProject(workspaceId, projectName, projectData.source);
 
       // needs to update configuration of the project
       promise = promise.then(() => {
-        this.codenvyAPI.getProject().updateProject(workspaceId, projectName, projectData.project).$promise;
+        this.cheAPI.getProject().updateProject(workspaceId, projectName, projectData.project).$promise;
       });
 
 
@@ -449,7 +449,7 @@ export class CreateProjectCtrl {
       if (commands && commands.length > 0) {
         commands.forEach((command) => {
           command.name = projectName + ': ' + command.name;
-          promise = promise.then(this.codenvyAPI.getWorkspace().addCommand(workspaceId, command));
+          promise = promise.then(this.cheAPI.getWorkspace().addCommand(workspaceId, command));
         });
 
       }
@@ -491,7 +491,7 @@ export class CreateProjectCtrl {
 
     // on success, create project
     websocketStream.onOpen(() => {
-      let bus = this.codenvyAPI.getWebsocket().getExistingBus(websocketStream);
+      let bus = this.cheAPI.getWebsocket().getExistingBus(websocketStream);
       this.createProjectInWorkspace(workspaceId, projectName, projectData, bus);
     });
 
@@ -553,7 +553,7 @@ export class CreateProjectCtrl {
       script: recipeScript
     };
 
-    return this.codenvyAPI.getRecipe().create(recipe);
+    return this.cheAPI.getRecipe().create(recipe);
   }
 
   /**
@@ -636,14 +636,14 @@ export class CreateProjectCtrl {
 
 
       // Get bus
-      let bus = this.codenvyAPI.getWebsocket().getBus(this.workspaceSelected.id);
+      let bus = this.cheAPI.getWebsocket().getBus(this.workspaceSelected.id);
 
       // mode
       this.createProjectInWorkspace(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData, bus);
     }
 
     // do we have projects ?
-    let projects = this.codenvyAPI.getProject().getAllProjects();
+    let projects = this.cheAPI.getProject().getAllProjects();
     if (projects.length > 1) {
       // we have projects, show notification first and redirect to the list of projects
       this.createProjectSvc.showPopup();
@@ -658,16 +658,16 @@ export class CreateProjectCtrl {
   createWorkspace() {
     this.createProjectSvc.setWorkspaceOfProject(this.workspaceName);
     //TODO: no account in che ? it's null when testing on localhost
-    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
+    let creationPromise = this.cheAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
     creationPromise.then((data) => {
 
       // init message bus if not there
       if (this.workspaces.length === 0) {
-        this.messageBus = this.codenvyAPI.getWebsocket().getBus(data.id);
+        this.messageBus = this.cheAPI.getWebsocket().getBus(data.id);
       }
 
       // recipe url
-      let bus = this.codenvyAPI.getWebsocket().getBus(data.id);
+      let bus = this.cheAPI.getWebsocket().getBus(data.id);
 
       // subscribe to workspace events
       bus.subscribe('workspace:' + data.id, (message) => {
@@ -678,7 +678,7 @@ export class CreateProjectCtrl {
           this.importProjectData.project.name = this.projectName;
 
           // Now that the container is started, wait for the extension server. For this, needs to get runtime details
-          let promiseRuntime = this.codenvyAPI.getWorkspace().getRuntime(data.id);
+          let promiseRuntime = this.cheAPI.getWorkspace().getRuntime(data.id);
           promiseRuntime.then((runtimeData) => {
             // extract the Websocket URL of the runtime
             let servers = runtimeData.devMachine.metadata.servers;
@@ -823,12 +823,18 @@ export class CreateProjectCtrl {
 
 
   isvisible(elementName) {
-    let element = $(elementName);
+    let element = angular.element(elementName);
     var windowElement = $(window);
 
     var docViewTop = windowElement.scrollTop();
     var docViewBottom = docViewTop + windowElement.height();
-    var elemTop = element.offset().top;
+
+    var offset = element.offset();
+    if (!offset) {
+      return false;
+    }
+
+    var elemTop = offset.top;
     var elemBottom = elemTop + element.height();
 
     // use elemTop if want to see all div or elemBottom if we see partially it

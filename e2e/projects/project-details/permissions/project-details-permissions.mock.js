@@ -14,18 +14,18 @@
 exports.listPermissions = function(){
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
+    .run(['$httpBackend', 'cheAPIBuilder', 'cheHttpBackendProvider', function($httpBackend, cheAPIBuilder, cheHttpBackendProvider) {
 
       // setup tests objects
       var idWorkspace1 = 'idFlorent';
       var nameWorkspace1 = 'florent';
       var projectName = 'project-wk1-1';
 
-      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
+      var workspace1 = cheAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
 
-      var projectReference = codenvyAPIBuilder.getProjectReferenceBuilder().withName(projectName).build();
+      var projectReference = cheAPIBuilder.getProjectReferenceBuilder().withName(projectName).build();
 
-      var projectDetails = codenvyAPIBuilder.getProjectDetailsBuilder().withName(projectName).withWorkspaceId(idWorkspace1).withWorkspaceName(nameWorkspace1).withVisibility('public').build();
+      var projectDetails = cheAPIBuilder.getProjectDetailsBuilder().withName(projectName).withWorkspaceId(idWorkspace1).withWorkspaceName(nameWorkspace1).withVisibility('public').build();
 
 
       // add users
@@ -33,20 +33,20 @@ exports.listPermissions = function(){
       var idOther2 = 'idUser2';
       var idGroup1 = 'idGroup1';
 
-      var permissionUser1 = codenvyAPIBuilder.getProjectPermissionsBuilder().withUser(idOther1, ['read', 'build']).build();
-      var permissionUser2 = codenvyAPIBuilder.getProjectPermissionsBuilder().withUser(idOther2, ['read', 'write']).build();
+      var permissionUser1 = cheAPIBuilder.getProjectPermissionsBuilder().withUser(idOther1, ['read', 'build']).build();
+      var permissionUser2 = cheAPIBuilder.getProjectPermissionsBuilder().withUser(idOther2, ['read', 'write']).build();
 
-      var permissionGroup1 = codenvyAPIBuilder.getProjectPermissionsBuilder().withGroup(idGroup1, ['build']).build();
+      var permissionGroup1 = cheAPIBuilder.getProjectPermissionsBuilder().withGroup(idGroup1, ['build']).build();
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
+      var cheBackend = cheHttpBackendProvider.buildBackend($httpBackend, cheAPIBuilder);
 
       // setup it
-      codenvyBackend.addWorkspaces([workspace1]);
-      codenvyBackend.addProjects(workspace1, [projectReference]);
-      codenvyBackend.addProjectDetails(projectDetails);
-      codenvyBackend.addPermissions(idWorkspace1, projectName, [permissionUser1, permissionUser2, permissionGroup1]);
-      codenvyBackend.setup();
+      cheBackend.addWorkspaces([workspace1]);
+      cheBackend.addProjects(workspace1, [projectReference]);
+      cheBackend.addProjectDetails(projectDetails);
+      cheBackend.addPermissions(idWorkspace1, projectName, [permissionUser1, permissionUser2, permissionGroup1]);
+      cheBackend.setup();
 
     }]);
 };

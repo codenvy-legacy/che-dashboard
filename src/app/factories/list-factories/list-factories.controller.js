@@ -21,10 +21,10 @@ export class ListFactoriesCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($mdDialog, codenvyAPI, codenvyNotification) {
+  constructor($mdDialog, codenvyAPI, cheNotification) {
     this.$mdDialog = $mdDialog;
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
     this.dropDownOptionsList = [
       {
@@ -64,7 +64,7 @@ export class ListFactoriesCtrl {
       (error) => {
         this.isLoading = false;
         if (error.status !== 304) {
-          codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
+          cheNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
           console.log('error', error);
         }
       });
@@ -87,7 +87,7 @@ export class ListFactoriesCtrl {
       (error) => {
         this.isLoading = false;
         if (error.status !== 304) {
-          this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
+          this.cheNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
           console.log('error', error);
         }
       });
@@ -134,25 +134,25 @@ export class ListFactoriesCtrl {
               queueLenth--;
               if (!queueLenth) {
                 if (isError) {
-                  this.codenvyNotification.showError('Delete failed.');
+                  this.cheNotification.showError('Delete failed.');
                 } else {
-                  this.codenvyNotification.showInfo('Has been successfully removed.');
+                  this.cheNotification.showInfo('Has been successfully removed.');
                 }
               }
             }, (error) => {
               queueLenth--;
               if (!queueLenth) {
-                this.codenvyNotification.showError('Delete failed.');
+                this.cheNotification.showError('Delete failed.');
               }
               console.log('error', error);
             });
           });
         });
       } else {
-        this.codenvyNotification.showError('No selected factories.');
+        this.cheNotification.showError('No selected factories.');
       }
     } else {
-      this.codenvyNotification.showError('No selected factories.');
+      this.cheNotification.showError('No selected factories.');
     }
   }
 

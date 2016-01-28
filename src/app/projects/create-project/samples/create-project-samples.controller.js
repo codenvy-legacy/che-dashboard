@@ -20,13 +20,13 @@ export class CreateProjectSamplesCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($rootScope, codenvyAPI, $timeout) {
+  constructor($rootScope, cheAPI, $timeout) {
     this.$rootScope = $rootScope;
-    this.codenvyAPI = codenvyAPI;
+    this.cheAPI = cheAPI;
     this.$timeout = $timeout;
 
     // ask to load codenvy templates
-    let promise = codenvyAPI.getProjectTemplate().fetchTemplates();
+    let promise = cheAPI.getProjectTemplate().fetchTemplates();
 
     // promise update
     promise.then(() => {
@@ -46,8 +46,8 @@ export class CreateProjectSamplesCtrl {
    * Defines the samples
    */
   updateData() {
-    this.templatesByCategory = this.codenvyAPI.getProjectTemplate().getTemplatesByCategory();
-    this.templates = this.codenvyAPI.getProjectTemplate().getAllProjectTemplates();
+    this.templatesByCategory = this.cheAPI.getProjectTemplate().getTemplatesByCategory();
+    this.templates = this.cheAPI.getProjectTemplate().getAllProjectTemplates();
   }
 
   /**

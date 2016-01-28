@@ -22,8 +22,8 @@ export class ListWorkspacesCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $q) {
-    this.codenvyAPI = codenvyAPI;
+  constructor (cheAPI, $q) {
+    this.cheAPI = cheAPI;
     this.$q = $q;
     this.state = 'loading';
     this.isInfoLoading = true;
@@ -41,7 +41,7 @@ export class ListWorkspacesCtrl {
   //Fetch current user's workspaces (where he is a member):
   getUserWorkspaces() {
     // fetch workspaces when initializing
-    let promise = this.codenvyAPI.getWorkspace().fetchWorkspaces();
+    let promise = this.cheAPI.getWorkspace().fetchWorkspaces();
 
     promise.then(() => {
         this.updateSharedWorkspaces();
@@ -61,15 +61,15 @@ export class ListWorkspacesCtrl {
   //Update the info of all user workspaces:
   updateSharedWorkspaces() {
     this.userWorkspaces = [];
-    let workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
+    let workspaces = this.cheAPI.getWorkspace().getWorkspaces();
     if (workspaces.length === 0) {
       this.isInfoLoading = false;
     }
     workspaces.forEach((workspace) => {
       //First check the list of already received workspace info:
       if (!this.workspacesById.get(workspace.id)) {
-        this.codenvyAPI.getWorkspace().fetchWorkspaceDetails(workspace.id).then(() => {
-          let userWorkspace = this.codenvyAPI.getWorkspace().getWorkspacesById().get(workspace.id);
+        this.cheAPI.getWorkspace().fetchWorkspaceDetails(workspace.id).then(() => {
+          let userWorkspace = this.cheAPI.getWorkspace().getWorkspacesById().get(workspace.id);
           this.getWorkspaceInfo(userWorkspace);
           this.userWorkspaces.push(userWorkspace);
         });
@@ -95,24 +95,24 @@ export class ListWorkspacesCtrl {
     let promises = [];
     this.workspacesById.set(workspace.id, workspace);
 
-    workspace.isLocked = this.codenvyAPI.getWorkspace().isWorkspaceResourcesLocked(workspace);
+    workspace.isLocked = this.cheAPI.getWorkspace().isWorkspaceResourcesLocked(workspace);
     workspace.usedResources = this.workspaceUsedResources.get(workspace.id);
 
     //No access to runner resources if workspace is locked:
     if (!workspace.isLocked) {
-      let promiseRuntimeConfig = this.codenvyAPI.getWorkspace().fetchRuntimeConfig(workspace.id);
+      let promiseRuntimeConfig = this.cheAPI.getWorkspace().fetchRuntimeConfig(workspace.id);
       promises.push(promiseRuntimeConfig);
     }
 
-    let projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
+    let projectsPerWorkspace = this.cheAPI.getProject().getProjectsByWorkspace();
     if (!projectsPerWorkspace || !projectsPerWorkspace[workspace.id]) {
-      let promiseProjectsNumber = this.codenvyAPI.getProject().fetchProjectsForWorkspaceId(workspace.id);
+      let promiseProjectsNumber = this.cheAPI.getProject().fetchProjectsForWorkspaceId(workspace.id);
       promises.push(promiseProjectsNumber);
     }
 
-    workspace.providedResources = this.codenvyAPI.getWorkspace().getWorkspaceResourcesUsageLimit(workspace);
+    workspace.providedResources = this.cheAPI.getWorkspace().getWorkspaceResourcesUsageLimit(workspace);
     this.$q.all(promises).then(() => {
-      projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
+      projectsPerWorkspace = this.cheAPI.getProject().getProjectsByWorkspace();
       workspace.projects = projectsPerWorkspace[workspace.id] ? projectsPerWorkspace[workspace.id].length : undefined;
       this.isInfoLoading = false;
     }, (error) => {

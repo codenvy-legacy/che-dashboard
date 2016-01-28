@@ -20,8 +20,7 @@ export class CreateProjectGitCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI) {
-    this.codenvyAPI = codenvyAPI;
+  constructor() {
     this.focus = false;
   }
 

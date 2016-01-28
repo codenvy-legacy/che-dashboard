@@ -50,10 +50,10 @@ export class DashboardConfig {
         controller: 'DashboardCtrl',
         controllerAs: 'dashboardCtrl',
         resolve: {
-          check: ['$q', 'codenvyService', 'codenvyAdminService', function ($q, codenvyService, codenvyAdminService) {
+          check: ['$q', 'cheService', 'cheAdminService', function ($q, cheService, cheAdminService) {
             var defer = $q.defer();
-            codenvyService.fetchServices().then(() => {
-              codenvyAdminService.fetchServices().then(() => {
+            cheService.fetchServices().then(() => {
+              cheAdminService.fetchServices().then(() => {
                 defer.resolve();
               }, () => {
                 defer.resolve();

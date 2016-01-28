@@ -22,12 +22,13 @@ export class TeamCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $mdMedia, $q, $mdDialog, codenvyNotification) {
+  constructor (cheAPI, codenvyAPI, $mdMedia, $q, $mdDialog, cheNotification) {
     this.codenvyAPI = codenvyAPI;
+    this.cheAPI = cheAPI;
     this.$mdMedia = $mdMedia;
     this.$q = $q;
     this.$mdDialog = $mdDialog;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
     this.members = [];
     this.isLoading = true;
@@ -58,26 +59,26 @@ export class TeamCtrl {
     var promises = [];
 
     this.members.forEach((member) => {
-      member.role = this.codenvyAPI.getUser().getDisplayRole(member.roles);
+      member.role = this.cheAPI.getUser().getDisplayRole(member.roles);
 
-      let user = this.codenvyAPI.getUser().getUserFromId(member.userId);
+      let user = this.cheAPI.getUser().getUserFromId(member.userId);
       if (user) {
         member.email = user.email;
       } else {
-        let userPromise = this.codenvyAPI.getUser().fetchUserId(member.userId);
+        let userPromise = this.cheAPI.getUser().fetchUserId(member.userId);
         let updateUserPromise = userPromise.then(() => {
-          member.email = this.codenvyAPI.getUser().getUserFromId(member.userId).email;
+          member.email = this.cheAPI.getUser().getUserFromId(member.userId).email;
         });
         promises.push(updateUserPromise);
       }
 
-      let profile = this.codenvyAPI.getProfile().getProfileFromId(member.userId);
+      let profile = this.cheAPI.getProfile().getProfileFromId(member.userId);
       if (profile) {
         member.name = this.getFullName(profile);
       } else {
-        let profilePromise = this.codenvyAPI.getProfile().fetchProfileId(member.userId);
+        let profilePromise = this.cheAPI.getProfile().fetchProfileId(member.userId);
         let updateProfilePromise = profilePromise.then(() => {
-          member.name = this.getFullName(this.codenvyAPI.getProfile().getProfileFromId(member.userId));
+          member.name = this.getFullName(this.cheAPI.getProfile().getProfileFromId(member.userId));
         });
         promises.push(updateProfilePromise);
       }
@@ -138,10 +139,10 @@ export class TeamCtrl {
       if (user) {
         this.addMember(user.id, roles);
       } else {
-        this.codenvyNotification.showError('User with email: ' + email + ' not found.');
+        this.cheNotification.showError('User with email: ' + email + ' not found.');
       }
     }, (error) => {
-      this.codenvyNotification.showError(error.data.message ? error.data.message : '.');
+      this.cheNotification.showError(error.data.message ? error.data.message : '.');
     });
   }
 
@@ -162,7 +163,7 @@ export class TeamCtrl {
       this.isLoading = false;
       let errorMessage = error.data.message ? error.data.message : 'Add team member failed.';
       errorMessage = errorMessage.replace(this.account.id, this.account.name);
-      this.codenvyNotification.showError(errorMessage);
+      this.cheNotification.showError(errorMessage);
       console.log('error', error);
     });
   }
@@ -186,7 +187,7 @@ export class TeamCtrl {
         });
       }, (error) => {
         this.isLoading = false;
-        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Delete team member failed.');
+        this.cheNotification.showError(error.data.message ? error.data.message : 'Delete team member failed.');
         console.log('error', error);
       });
     });

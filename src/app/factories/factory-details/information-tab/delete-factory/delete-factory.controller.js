@@ -20,11 +20,11 @@ export class DeleteFactoryCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($mdDialog, $location, codenvyAPI, codenvyNotification) {
+  constructor($mdDialog, $location, codenvyAPI, cheNotification) {
     this.$mdDialog = $mdDialog;
     this.$location = $location;
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
   }
 
@@ -44,7 +44,7 @@ export class DeleteFactoryCtrl {
       promise.then(() => {
         this.$location.path('/factories');
       }, (error) => {
-        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Delete failed.');
+        this.cheNotification.showError(error.data.message ? error.data.message : 'Delete failed.');
         console.log('error', error);
       });
     });

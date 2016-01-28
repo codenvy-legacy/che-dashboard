@@ -33,7 +33,7 @@ import {CreateProjectZip} from './create-project/zip/create-project-zip.directiv
 import {CreateProjectConfFile} from './create-project/config-file/create-project-conf-file.directive';
 import {ProjectDetailsCtrl} from './project-details/project-details.controller';
 import {ProjectRepositoryConfig} from './project-details/repository/project-repository-config';
-import {CodenvyProjectItem} from './list-projects/project-item/project-item.directive';
+import {CheProjectItem} from './list-projects/project-item/project-item.directive';
 import {ProjectItemCtrl} from './list-projects/project-item/project-item.controller';
 
 export class ProjectsConfig {
@@ -68,7 +68,7 @@ export class ProjectsConfig {
     register.service('createProjectSvc', CreateProjectSvc);
     register.controller('CreateProjectCtrl', CreateProjectCtrl);
 
-    register.directive('cdvyProjectItem', CodenvyProjectItem);
+    register.directive('cdvyProjectItem', CheProjectItem);
 
     register.controller('ProjectItemCtrl', ProjectItemCtrl);
 

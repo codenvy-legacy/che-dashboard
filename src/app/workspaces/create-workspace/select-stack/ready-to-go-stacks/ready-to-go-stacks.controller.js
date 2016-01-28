@@ -20,14 +20,14 @@ export class ReadyToGoStacksCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyStack, $rootScope) {
-    this.codenvyStack = codenvyStack;
+  constructor(cheStack, $rootScope) {
+    this.cheStack = cheStack;
     this.$rootScope = $rootScope;
 
     this.stacks = [];
     this.stack = null;
 
-    let promiseStack = codenvyStack.fetchStacks();
+    let promiseStack = cheStack.fetchStacks();
     promiseStack.then(() => {
         this.updateData();
       },
@@ -58,7 +58,7 @@ export class ReadyToGoStacksCtrl {
    */
   updateData() {
     this.stacks.length = 0;
-    var remoteStacks = this.codenvyStack.getStacks();
+    var remoteStacks = this.cheStack.getStacks();
     // remote stacks are
     remoteStacks.forEach((stack) => {
       stack.iconName = stack.name.toLowerCase();

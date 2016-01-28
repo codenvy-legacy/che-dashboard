@@ -20,10 +20,10 @@ export class FactoryRoutingCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($scope, codenvyAPI, codenvyNotification) {
+  constructor($scope, codenvyAPI, cheNotification) {
     this.$scope = $scope;
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
     //set default value for factory workspace.
     $scope.$watch('factoryRoutingCtrl.factory.originFactory.workspace', function (newWorkspace) {
@@ -44,10 +44,10 @@ export class FactoryRoutingCtrl {
 
     promise.then(() => {
       this.factory.workspace = angular.copy(factoryWorkspace);
-      this.codenvyNotification.showInfo('Factory workspace information successfully updated.');
+      this.cheNotification.showInfo('Factory workspace information successfully updated.');
     }, (error) => {
       factoryWorkspace = this.factory.originFactory.workspace;
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
       console.log('error', error);
     });
   }

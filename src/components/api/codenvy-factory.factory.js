@@ -22,12 +22,12 @@ export class CodenvyFactory {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($resource, $q, codenvyUser, lodash, codenvyAnalytics) {
+  constructor($resource, $q, cheUser, lodash, codenvyAnalytics) {
     // keep resource
     this.$resource = $resource;
     this.$q = $q;
 
-    this.codenvyUser = codenvyUser;
+    this.cheUser = cheUser;
     this.lodash = lodash;
     this.codenvyAnalytics = codenvyAnalytics;
 
@@ -50,7 +50,10 @@ export class CodenvyFactory {
     });
 
     // get the Codenvy user.
-    this.user = this.codenvyUser.getUser();
+    let promise = this.cheUser.fetchUser();
+    promise.then(() => {
+      this.user = this.cheUser.getUser();
+    });
 
   }
 

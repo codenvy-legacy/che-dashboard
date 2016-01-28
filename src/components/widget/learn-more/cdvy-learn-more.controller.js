@@ -23,18 +23,18 @@ export class CodenvyLearnMoreCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($scope, $element, $attrs, $compile, codenvyProfile) {
+  constructor($scope, $element, $attrs, $compile, cheProfile) {
     this.items = [];
 
     this.WIDGET_PREFERENCES_PREFIX = 'learn-widget-';
 
-    this.codenvyProfile = codenvyProfile;
+    this.cheProfile = cheProfile;
 
     // current index is first one
     this.currentIndex = 0;
 
 
-    let preferences = this.codenvyProfile.getPreferences();
+    let preferences = this.cheProfile.getPreferences();
     let promise = preferences.$promise;
 
     promise.then(() => {
@@ -87,7 +87,7 @@ export class CodenvyLearnMoreCtrl {
     let checkKey = this.WIDGET_PREFERENCES_PREFIX + key;
     var properties = {};
     properties[checkKey] = value;
-    this.codenvyProfile.updatePreferences(properties);
+    this.cheProfile.updatePreferences(properties);
 
     // also update icon state
     this.stateIcons[key] = value;
@@ -104,7 +104,7 @@ export class CodenvyLearnMoreCtrl {
     // check if key is stored in preferences
     // if there,
     if (key) {
-      let preferences = this.codenvyProfile.getPreferences();
+      let preferences = this.cheProfile.getPreferences();
       let promise = preferences.$promise;
 
       promise.then(() => {

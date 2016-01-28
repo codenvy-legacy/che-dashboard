@@ -23,8 +23,9 @@ export class OnBoardCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, $location, $rootScope, userDashboardConfig) {
+  constructor(codenvyAPI, cheAPI, $location, $rootScope, userDashboardConfig) {
     this.codenvyAPI = codenvyAPI;
+    this.cheAPI = cheAPI;
     this.$location = $location;
 
     this.stepsIcons = new Map();
@@ -33,17 +34,17 @@ export class OnBoardCtrl {
 
     this.$rootScope = $rootScope;
 
-    this.profile = codenvyAPI.getProfile().getProfile();
+    this.profile = cheAPI.getProfile().getProfile();
 
     this.devMode = userDashboardConfig.developmentMode;
 
-    this.isCreditCardServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getCreditCardServicePath());
+    this.isCreditCardServiceAvailable = cheAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getCreditCardServicePath());
   }
 
 
   deleteOnBoardingCompleted() {
     let properties = {'onBoardingFlowCompleted' : 'false'};
-    this.codenvyAPI.getProfile().updatePreferences(properties);
+    this.cheAPI.getProfile().updatePreferences(properties);
 
   }
 
@@ -127,7 +128,7 @@ export class OnBoardCtrl {
 
     // save preferences by updating the onboarding flow
     let properties = {'onBoardingFlowCompleted' : 'true'};
-    this.codenvyAPI.getProfile().updatePreferences(properties);
+    this.cheAPI.getProfile().updatePreferences(properties);
 
     this.$location.path('/create-project');
   }

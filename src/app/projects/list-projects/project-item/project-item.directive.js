@@ -16,7 +16,7 @@
  * @param{string} workspaceId
  * @param{object} project
  */
-export class CodenvyProjectItem {
+export class CheProjectItem {
 
   /**
    * Default constructor.

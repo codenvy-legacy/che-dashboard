@@ -119,15 +119,15 @@ gulp.task('fonts', ['colors', 'proxySettings', 'existingfonts'], function () {
 
 var fs = require('fs');
 gulp.task('colorstemplate', function () {
-  return gulp.src('src/app/colors/codenvy-color.constant.js.template')
-    .pipe($.replace('%CONTENT%', fs.readFileSync('src/app/colors/codenvy-colors.json')))
+  return gulp.src('src/app/colors/che-color.constant.js.template')
+    .pipe($.replace('%CONTENT%', fs.readFileSync('src/app/colors/che-colors.json')))
     .pipe($.replace('\"', '\''))
     .pipe(gulp.dest('src/app/colors/template'));
 });
 
 gulp.task('colors', ['colorstemplate'], function () {
-  return gulp.src("src/app/colors/template/codenvy-color.constant.js.template")
-    .pipe($.rename("codenvy-color.constant.js"))
+  return gulp.src("src/app/colors/template/che-color.constant.js.template")
+    .pipe($.rename("che-color.constant.js"))
     .pipe(gulp.dest("src/app/colors"));
 });
 

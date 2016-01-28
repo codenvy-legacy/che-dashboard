@@ -21,13 +21,14 @@ export class FactoryFromWorkspaceCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($filter, codenvyAPI, codenvyNotification) {
+  constructor($filter, cheAPI, codenvyAPI, cheNotification) {
     this.$filter = $filter;
+    this.cheAPI = cheAPI;
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
-    this.workspaces = codenvyAPI.getWorkspace().getWorkspaces();
-    this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
+    this.workspaces = cheAPI.getWorkspace().getWorkspaces();
+    this.workspacesById = cheAPI.getWorkspace().getWorkspacesById();
 
     this.filtersWorkspaceSelected = {};
 
@@ -36,7 +37,7 @@ export class FactoryFromWorkspaceCtrl {
     this.isLoading = true;
 
     // fetch workspaces when initializing
-    let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
+    let promise = cheAPI.getWorkspace().fetchWorkspaces();
 
     promise.then(() => {
         this.isLoading = false;
@@ -76,7 +77,7 @@ export class FactoryFromWorkspaceCtrl {
     }, (error) => {
       this.isImporting = false;
       this.factoryContent = null;
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Get factory configuration failed.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Get factory configuration failed.');
       console.log('error', error);
     });
   }

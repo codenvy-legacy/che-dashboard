@@ -20,10 +20,10 @@ export class CreateProjectStackLibraryCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($scope, codenvyStack, codenvyWorkspace) {
+  constructor($scope, cheStack, cheWorkspace) {
     this.$scope = $scope;
-    this.codenvyStack = codenvyStack;
-    this.codenvyWorkspace = codenvyWorkspace;
+    this.cheStack = cheStack;
+    this.cheWorkspace = cheWorkspace;
 
     this.stacks = [];
     this.workspaces = [];
@@ -31,7 +31,7 @@ export class CreateProjectStackLibraryCtrl {
     this.createChoice = 'new-workspace';
     this.onChoice();
 
-    let promiseStack = codenvyStack.fetchStacks();
+    let promiseStack = cheStack.fetchStacks();
     promiseStack.then(() => {
         this.updateDataStacks();
       },
@@ -43,7 +43,7 @@ export class CreateProjectStackLibraryCtrl {
         }
       });
     if (this.isWorkspaces) {
-      let promiseWorkspaces = codenvyWorkspace.fetchWorkspaces();
+      let promiseWorkspaces = cheWorkspace.fetchWorkspaces();
       promiseWorkspaces.then(() => {
           this.updateDataWorkspaces();
         },
@@ -103,7 +103,7 @@ export class CreateProjectStackLibraryCtrl {
    */
   updateDataStacks() {
     this.stacks.length = 0;
-    var remoteStacks = this.codenvyStack.getStacks();
+    var remoteStacks = this.cheStack.getStacks();
     // remote stacks are
     remoteStacks.forEach((stack) => {
       this.stacks.push(stack);
@@ -116,7 +116,7 @@ export class CreateProjectStackLibraryCtrl {
    */
   updateDataWorkspaces() {
     this.workspaces.length = 0;
-    var remoteWorkspaces = this.codenvyWorkspace.getWorkspaces();
+    var remoteWorkspaces = this.cheWorkspace.getWorkspaces();
     // remote workspaces are
     remoteWorkspaces.forEach((workspace) => {
       this.workspaces.push(workspace);

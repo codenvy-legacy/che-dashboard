@@ -32,7 +32,7 @@ export class FactoryDetailsCtrl {
     promise.then((factory) => {
       this.factory = factory;
     }, (error) => {
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Get factory failed.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Get factory failed.');
       console.log('error', error);
     });
 

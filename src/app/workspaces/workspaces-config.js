@@ -11,7 +11,7 @@
 'use strict';
 
 import {ListWorkspacesCtrl} from './list-workspaces/list-workspaces.controller';
-import {CodenvyWorkspaceItem} from './list-workspaces/workspace-item/workspace-item.directive';
+import {CheWorkspaceItem} from './list-workspaces/workspace-item/workspace-item.directive';
 import {CreateWorkspaceCtrl} from './create-workspace/create-workspace.controller';
 import {CreateWorkspaceAddMemberCtrl} from './create-workspace/create-workspace-add-member.controller';
 import {UsageChart} from './list-workspaces/workspace-item/usage-chart.directive';
@@ -49,7 +49,7 @@ export class WorkspacesConfig {
     register.controller('CreateWorkspaceCtrl', CreateWorkspaceCtrl);
     register.controller('CreateWorkspaceAddMemberCtrl', CreateWorkspaceAddMemberCtrl);
 
-    register.directive('cdvyWorkspaceItem', CodenvyWorkspaceItem);
+    register.directive('cdvyWorkspaceItem', CheWorkspaceItem);
     register.controller('WorkspaceItemCtrl', WorkspaceItemCtrl);
     register.directive('usageChart', UsageChart);
 

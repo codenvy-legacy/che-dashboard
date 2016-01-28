@@ -22,7 +22,7 @@ export class AddCreditcardCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, jsonCountries) {
+  constructor(codenvyAPI, cheAPI, jsonCountries) {
     this.creditCard = {};
     this.values = {
       number: '•••• •••• •••• ••••',
@@ -42,7 +42,7 @@ export class AddCreditcardCtrl {
     };
 
     this.countries = [];
-    this.profile = codenvyAPI.getProfile().getProfile();
+    this.profile = cheAPI.getProfile().getProfile();
 
     let allCountries = angular.fromJson(jsonCountries).all;
     allCountries.forEach((country) => {

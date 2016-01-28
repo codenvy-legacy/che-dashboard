@@ -16,7 +16,7 @@ exports.projectsList = function(){
 
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
+    .run(['$httpBackend', 'cheAPIBuilder', 'cheHttpBackendProvider', function($httpBackend, cheAPIBuilder, cheHttpBackendProvider) {
 
       // setup tests objects
       var idWorkspace1 = 'idFlorent';
@@ -25,22 +25,22 @@ exports.projectsList = function(){
       var nameWorkspace1 = 'florent';
       var nameWorkspace2 = 'stevan';
 
-      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
-      var workspace2 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace2).withId(idWorkspace2).build();
+      var workspace1 = cheAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
+      var workspace2 = cheAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace2).withId(idWorkspace2).build();
 
-      var wksp1Project1 = codenvyAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
-      var wksp1Project2 = codenvyAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-2').build();
-      var wksp2Project1 = codenvyAPIBuilder.getProjectReferenceBuilder().withName('project-wk2-1').build();
+      var wksp1Project1 = cheAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
+      var wksp1Project2 = cheAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-2').build();
+      var wksp2Project1 = cheAPIBuilder.getProjectReferenceBuilder().withName('project-wk2-1').build();
 
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
+      var cheBackend = cheHttpBackendProvider.buildBackend($httpBackend, cheAPIBuilder);
 
       // setup it
-      codenvyBackend.addWorkspaces([workspace1, workspace2]);
-      codenvyBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
-      codenvyBackend.addProjects(workspace2, [wksp2Project1]);
-      codenvyBackend.setup();
+      cheBackend.addWorkspaces([workspace1, workspace2]);
+      cheBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
+      cheBackend.addProjects(workspace2, [wksp2Project1]);
+      cheBackend.setup();
 
     }]);
 };
@@ -50,25 +50,25 @@ exports.projectsList = function(){
 exports.projectsList2 = function(){
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
+    .run(['$httpBackend', 'cheAPIBuilder', 'cheHttpBackendProvider', function($httpBackend, cheAPIBuilder, cheHttpBackendProvider) {
       // setup tests objects
       var idWorkspace1 = 'idFlorent';
 
       var nameWorkspace1 = 'florent';
 
-      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
+      var workspace1 = cheAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
 
-      var wksp1Project1 = codenvyAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
-      var wksp1Project2 = codenvyAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-2').build();
+      var wksp1Project1 = cheAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-1').build();
+      var wksp1Project2 = cheAPIBuilder.getProjectReferenceBuilder().withName('project-wk1-2').build();
 
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
+      var cheBackend = cheHttpBackendProvider.buildBackend($httpBackend, cheAPIBuilder);
 
       // setup it
-      codenvyBackend.addWorkspaces([workspace1]);
-      codenvyBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
-      codenvyBackend.setup();
+      cheBackend.addWorkspaces([workspace1]);
+      cheBackend.addProjects(workspace1, [wksp1Project1, wksp1Project2]);
+      cheBackend.setup();
 
     }]);
 };
@@ -76,22 +76,22 @@ exports.projectsList2 = function(){
 exports.emptyProjectsList = function(){
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(['$httpBackend', 'codenvyAPIBuilder', 'codenvyHttpBackendProvider', function($httpBackend, codenvyAPIBuilder, codenvyHttpBackendProvider) {
+    .run(['$httpBackend', 'cheAPIBuilder', 'cheHttpBackendProvider', function($httpBackend, cheAPIBuilder, cheHttpBackendProvider) {
 
       // setup tests objects
       var idWorkspace1 = 'idEmpty';
 
       var nameWorkspace1 = 'empty';
 
-      var workspace1 = codenvyAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
+      var workspace1 = cheAPIBuilder.getWorkspaceBuilder().withName(nameWorkspace1).withId(idWorkspace1).build();
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
+      var cheBackend = cheHttpBackendProvider.buildBackend($httpBackend, cheAPIBuilder);
 
       // setup it
-      codenvyBackend.addWorkspaces([workspace1]);
-      codenvyBackend.addProjects(workspace1, []);
-      codenvyBackend.setup();
+      cheBackend.addWorkspaces([workspace1]);
+      cheBackend.addProjects(workspace1, []);
+      cheBackend.setup();
 
     }]);
 };

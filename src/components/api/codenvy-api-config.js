@@ -10,78 +10,76 @@
  */
 'use strict';
 
+import {CheAPI} from './che-api.factory';
+import {CheProject} from './che-project.factory';
+import {CheWorkspace} from './che-workspace.factory';
+import {CheUser} from './che-user.factory';
+import {CheProjectType} from './che-project-type.factory';
+import {CheProjectTemplate} from './che-project-template.factory';
+import {CheRecipe} from './che-recipe.factory';
+import {CheRecipeTemplate} from './che-recipe-template.factory';
+import {CheStack} from './che-stack.factory';
+import {CheWebsocket} from './che-websocket.factory';
+import {CheProfile} from './che-profile.factory';
+
+import {CheService} from './che-service.factory';
+import {CheGit} from './che-git.factory';
+import {CheSvn} from './che-svn.factory';
+import {CheHttpBackend} from './test/che-http-backend';
+import {CheHttpBackendProviderFactory} from './test/che-http-backend-provider.factory'
+import {CheHttpBackendFactory} from './test/che-http-backend.factory';
+import {CheAPIBuilder} from './builder/che-api-builder.factory';
+
+import {CheAdminPlugins} from './che-admin-plugins.factory';
+import {CheAdminService} from './che-admin-service.factory';
+
 import {CodenvyAPI} from './codenvy-api.factory';
-import {CodenvyAPIBuilder} from './builder/codenvy-api-builder.factory';
 import {CodenvyAccount} from './codenvy-account.factory';
-import {CodenvyService} from './codenvy-service.factory';
-import {CodenvyProject} from './codenvy-project.factory';
-import {CodenvyWorkspace} from './codenvy-workspace.factory';
-import {CodenvyUser} from './codenvy-user.factory';
-import {CodenvyAdminService} from './codenvy-admin-service.factory';
-import {CodenvyHttpBackend} from './test/codenvy-http-backend';
-import {CodenvyHttpBackendProviderFactory} from './test/codenvy-http-backend-provider.factory'
-import {CodenvyHttpBackendFactory} from './test/codenvy-http-backend.factory';
 import {CodenvyAnalytics} from './codenvy-analytics.factory';
 import {CodenvySaas} from './codenvy-saas.factory';
 import {CodenvyPayment} from './codenvy-payment.factory';
-import {CodenvyProfile} from './codenvy-profile.factory';
 import {CodenvyFactory} from './codenvy-factory.factory';
-import {CodenvyProjectType} from './codenvy-project-type.factory';
-import {CodenvyProjectTemplate} from './codenvy-project-template.factory';
-import {CodenvyWebsocket} from './codenvy-websocket.factory';
-import {CodenvyGit} from './codenvy-git.factory';
-import {CodenvySvn} from './codenvy-svn.factory';
 import {CodenvyFactoryTemplate} from './codenvy-factory-template.factory';
 import {CodenvyAnalyticsSession} from './codenvy-analytics-session.factory';
-import {CodenvyAdminPlugins} from './codenvy-admin-plugins.factory';
-import {CodenvyRecipe} from './codenvy-recipe.factory';
-import {CodenvyRecipeTemplate} from './codenvy-recipe-template.factory';
-import {CodenvyStack} from './codenvy-stack.factory';
 
 export class ApiConfig {
 
   constructor(register) {
-    register.factory('codenvyAdminService', CodenvyAdminService);
-    register.factory('codenvyService', CodenvyService);
-    register.factory('codenvyProject', CodenvyProject);
-    register.factory('codenvyWorkspace', CodenvyWorkspace);
-    register.factory('codenvyUser', CodenvyUser);
+    register.factory('cheProject', CheProject);
+    register.factory('cheWorkspace', CheWorkspace);
+    register.factory('cheUser', CheUser);
+    register.factory('cheProjectType', CheProjectType);
+    register.factory('cheProjectTemplate', CheProjectTemplate);
+    register.factory('cheProfile', CheProfile);
+    register.factory('cheWebsocket', CheWebsocket);
+    register.factory('cheRecipe', CheRecipe);
+    register.factory('cheRecipeTemplate', CheRecipeTemplate);
+    register.factory('cheStack', CheStack);
+    register.factory('cheGit', CheGit);
+    register.factory('cheSvn', CheSvn);
+    register.factory('cheHttpBackendProvider', CheHttpBackendProviderFactory);
+    register.factory('cheHttpBackend', CheHttpBackendFactory);
+    register.factory('cheAPIBuilder', CheAPIBuilder);
+    register.factory('cheAdminPlugins', CheAdminPlugins);
+    register.factory('cheAdminService', CheAdminService);
+    register.factory('cheService', CheService);
+
+    register.factory('cheAPI', CheAPI);
+
+
     register.factory('codenvyAccount', CodenvyAccount);
     register.factory('codenvyAnalytics', CodenvyAnalytics);
     register.factory('codenvySaas', CodenvySaas);
-
     register.factory('codenvyPayment', CodenvyPayment);
     register.app.constant('clientTokenPath', '/');//is necessary for Braintree
-
-    register.factory('codenvyProfile', CodenvyProfile);
     register.factory('codenvyFactory', CodenvyFactory);
-    register.factory('codenvyProjectType', CodenvyProjectType);
-
-    register.factory('codenvyProjectTemplate', CodenvyProjectTemplate);
-
-
-    register.factory('codenvyWebsocket', CodenvyWebsocket);
-    register.factory('codenvyGit', CodenvyGit);
-    register.factory('codenvySvn', CodenvySvn);
-
     register.factory('codenvyFactoryTemplate', CodenvyFactoryTemplate);
-
     register.factory('codenvyAnalyticsSession', CodenvyAnalyticsSession);
 
-    register.factory('codenvyAdminPlugins', CodenvyAdminPlugins);
-
-    register.factory('codenvyRecipe', CodenvyRecipe);
-
-    register.factory('codenvyRecipeTemplate', CodenvyRecipeTemplate);
-    register.factory('codenvyStack', CodenvyStack);
 
 
-    register.factory('codenvyHttpBackendProvider', CodenvyHttpBackendProviderFactory);
-    register.factory('codenvyHttpBackend', CodenvyHttpBackendFactory);
-    //register.factory('codenvyHttpBackend', CodenvyHttpBackend);
 
     register.factory('codenvyAPI', CodenvyAPI);
-    register.factory('codenvyAPIBuilder', CodenvyAPIBuilder);
 
   }
 }

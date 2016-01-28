@@ -17,11 +17,12 @@ export class AccountCtrl {
    * @ngInject for Dependency injection
    * @author Oleksii Orel
    */
-  constructor($routeParams, $location, codenvyAPI, codenvyNotification) {
+  constructor($routeParams, $location, cheAPI, codenvyAPI, cheNotification) {
+    this.cheAPI = cheAPI;
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
-    this.profile = this.codenvyAPI.getProfile().getProfile();
+    this.profile = this.cheAPI.getProfile().getProfile();
 
     this.profileAttributes = {};
 
@@ -55,7 +56,7 @@ export class AccountCtrl {
     }
 
     this.resetPasswordForm = false;
-    this.isCreditCardServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getCreditCardServicePath());
+    this.isCreditCardServiceAvailable = this.cheAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getCreditCardServicePath());
   }
 
   /**
@@ -72,17 +73,17 @@ export class AccountCtrl {
   setProfileAttributes() {
 
     if (this.isAttributesChanged()) {
-      let promise = this.codenvyAPI.getProfile().setAttributes(this.profileAttributes);
+      let promise = this.cheAPI.getProfile().setAttributes(this.profileAttributes);
 
       promise.then(() => {
-        this.codenvyNotification.showInfo('Profile successfully updated.');
+        this.cheNotification.showInfo('Profile successfully updated.');
         this.profile.attributes = angular.copy(this.profileAttributes);
       }, (error) => {
         if (error.status === 304) {
           this.profile.attributes = angular.copy(this.profileAttributes);
         } else {
           this.profileAttributes = angular.copy(this.profile.attributes);
-          this.codenvyNotification.showError(error.data.message ? error.data.message : 'Profile update failed.');
+          this.cheNotification.showError(error.data.message ? error.data.message : 'Profile update failed.');
           console.log('error', error);
         }
       });
@@ -98,13 +99,13 @@ export class AccountCtrl {
       return;
     }
 
-    let promise = this.codenvyAPI.getUser().setPassword(password);
+    let promise = this.cheAPI.getUser().setPassword(password);
 
     promise.then(() => {
-      this.codenvyNotification.showInfo('Password successfully updated.');
+      this.cheNotification.showInfo('Password successfully updated.');
       this.resetPasswordForm = true;
     }, (error) => {
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Password updated failed.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Password updated failed.');
       console.log('error', error);
     });
   }

@@ -22,17 +22,18 @@ export class WorkspaceDetailsResourcesCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($route, codenvyAPI, codenvyNotification) {
+  constructor($route, codenvyAPI, cheWorkspace, cheNotification) {
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheWorkspace = cheWorkspace;
+    this.cheNotification = cheNotification;
 
     this.workspaceId = $route.current.params.workspaceId;
 
-    let workspace = this.codenvyAPI.getWorkspace().getWorkspacesById().get(this.workspaceId);
+    let workspace = this.cheWorkspace.getWorkspacesById().get(this.workspaceId);
     if (workspace && workspace.accountId) {
       this.getWorkspaceInfo();
     } else {
-      let promise = this.codenvyAPI.getWorkspace().fetchWorkspaceDetails(this.workspaceId);
+      let promise = this.cheWorkspace.fetchWorkspaceDetails(this.workspaceId);
       promise.then(() => {
         this.getWorkspaceInfo();
       }, (error) => {
@@ -47,7 +48,7 @@ export class WorkspaceDetailsResourcesCtrl {
   }
 
   getWorkspaceInfo() {
-    this.workspace = this.codenvyAPI.getWorkspace().getWorkspacesById().get(this.workspaceId);
+    this.workspace = this.cheWorkspace.getWorkspacesById().get(this.workspaceId);
 
     let usedResourcesPromise = this.codenvyAPI.getAccount().fetchUsedResources(this.workspace.accountId);
     usedResourcesPromise.then(() => {
@@ -65,17 +66,17 @@ export class WorkspaceDetailsResourcesCtrl {
   updateWorkspaceData() {
     this.loading = false;
 
-    this.workspace.isLocked = this.codenvyAPI.getWorkspace().isWorkspaceResourcesLocked(this.workspace);
+    this.workspace.isLocked = this.cheWorkspace.isWorkspaceResourcesLocked(this.workspace);
 
-    this.workspace.providedResources = this.codenvyAPI.getWorkspace().getWorkspaceResourcesUsageLimit(this.workspace);
+    this.workspace.providedResources = this.cheWorkspace.getWorkspaceResourcesUsageLimit(this.workspace);
 
     if (this.workspace.providedResources) {
       this.newLimit = angular.copy(this.workspace.providedResources);
     }
     if (!this.workspace.isLocked) {
-      let promiseResources = this.codenvyAPI.getWorkspace().fetchRAMResources(this.workspace.id);
+      let promiseResources = this.cheWorkspace.fetchRAMResources(this.workspace.id);
       promiseResources.then(() => {
-        let ramResources = this.codenvyAPI.getWorkspace().getRAMResources(this.workspace.id);
+        let ramResources = this.cheWorkspace.getRAMResources(this.workspace.id);
         this.workspace.usedRAM = ramResources.usedMemory;
         this.workspace.allocatedRAM = ramResources.totalMemory;
         this.newRAM = angular.copy(ramResources.totalMemory);
@@ -117,13 +118,13 @@ export class WorkspaceDetailsResourcesCtrl {
 
     let promise = this.codenvyAPI.getAccount().redistributeResources(this.workspace.accountId, this.workspaceId, resources);
     promise.then(() => {
-      this.codenvyNotification.showInfo('Workspace resources is successfully updated.');
+      this.cheNotification.showInfo('Workspace resources is successfully updated.');
       this.workspace.allocatedRAM = angular.copy(this.newRAM);
       this.workspace.providedResources = angular.copy(this.newLimit);
     }, (error) => {
       let errorMessage = error.data.message ? error.data.message : 'Update workspace resources failed.';
       errorMessage = errorMessage.replace(this.workspaceId, this.workspace.name);
-      this.codenvyNotification.showError(errorMessage);
+      this.cheNotification.showError(errorMessage);
       console.log('error', error);
     });
   }

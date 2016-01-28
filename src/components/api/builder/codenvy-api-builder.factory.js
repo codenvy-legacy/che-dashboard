@@ -9,18 +9,8 @@
  *   Codenvy, S.A. - initial API and implementation
  */
 'use strict';
-/*exported CodenvyWorkspaceReferenceBuilder */
 
 
-import {CodenvyWorkspaceBuilder} from './codenvy-workspace-builder';
-import {CodenvyProjectReferenceBuilder} from './codenvy-projectreference-builder';
-import {CodenvyProjectDetailsBuilder} from './codenvy-projectdetails-builder';
-import {CodenvyProjectPermissionsBuilder} from './codenvy-projectpermissions-builder';
-import {CodenvyProjectTypeBuilder} from './codenvy-projecttype-builder';
-import {CodenvyProjectTemplateBuilder} from './codenvy-projecttemplate-builder';
-import {CodenvyProjectTypeAttributeDescriptorBuilder} from './codenvy-projecttype-attribute-descriptor-builder';
-import {CodenvyProfileBuilder} from './codenvy-profile-builder.js';
-import {CodenvyUserBuilder} from './codenvy-user-builder.js';
 import {CodenvyAccountBuilder} from './codenvy-account-builder.js';
 import {CodenvyMembershipBuilder} from './codenvy-membership-builder.js';
 
@@ -51,82 +41,6 @@ export class CodenvyAPIBuilder {
    */
   getUserMembershipBuilder() {
     return new CodenvyMembershipBuilder();
-  }
-
-  /**
-   * The Codenvy Workspace builder
-   * @returns {CodenvyWorkspaceBuilder}
-   */
-  getWorkspaceBuilder() {
-    return new CodenvyWorkspaceBuilder();
-  }
-
-  /***
-   * The Codenvy Profile builder
-   * @returns {CodenvyProfileBuilder}
-   */
-  getProfileBuilder() {
-    return new CodenvyProfileBuilder();
-  }
-
-  /***
-   * The Codenvy Project Reference builder
-   * @returns {CodenvyProjectReferenceBuilder}
-   */
-  getProjectReferenceBuilder() {
-    return new CodenvyProjectReferenceBuilder();
-  }
-
-
-  /***
-   * The Codenvy Project Details builder
-   * @returns {CodenvyProjectDetailsBuilder}
-   */
-  getProjectDetailsBuilder() {
-    return new CodenvyProjectDetailsBuilder();
-  }
-
-
-
-  /***
-   * The Codenvy Project Permission builder
-   * @returns {CodenvyProjectPermissionsBuilder}
-   */
-  getProjectPermissionsBuilder() {
-    return new CodenvyProjectPermissionsBuilder();
-  }
-
-
-  /***
-   * The Codenvy Project Template builder
-   * @returns {CodenvyProjectTemplateBuilder}
-   */
-  getProjectTemplateBuilder() {
-    return new CodenvyProjectTemplateBuilder();
-  }
-
-  /***
-   * The Codenvy Project Type builder
-   * @returns {CodenvyProjectTypeBuilder}
-   */
-  getProjectTypeBuilder() {
-    return new CodenvyProjectTypeBuilder();
-  }
-
-  /**
-   * Attribute descriptor builder
-   * @returns {CodenvyProjectTypeAttributeDescriptorBuilder}
-   */
-  getProjectTypeAttributeDescriptorBuilder() {
-    return new CodenvyProjectTypeAttributeDescriptorBuilder();
-  }
-
-  /***
-   * The Codenvy User builder
-   * @returns {CodenvyUserBuilder}
-   */
-  getUserBuilder() {
-    return new CodenvyUserBuilder();
   }
 
 }

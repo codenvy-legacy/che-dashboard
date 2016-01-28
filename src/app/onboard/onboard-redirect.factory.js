@@ -25,9 +25,9 @@ export class OnBoardRedirect {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyUser, codenvyProfile, routingRedirect, imsArtifactApi) {
-    this.codenvyUser = codenvyUser;
-    this.codenvyProfile = codenvyProfile;
+  constructor (cheUser, cheProfile, routingRedirect, imsArtifactApi) {
+    this.cheUser = cheUser;
+    this.cheProfile = cheProfile;
     this.imsArtifactApi = imsArtifactApi;
     routingRedirect.addRouteCallback(this);
   }
@@ -50,11 +50,11 @@ export class OnBoardRedirect {
    */
   checkRedirect() {
     // if user is admin or ims available, nothing to display
-    if (this.codenvyUser.isAdmin() || this.imsArtifactApi.isImsAvailable()) {
+    if (this.cheUser.isAdmin() || this.imsArtifactApi.isImsAvailable()) {
       return {};
     }
 
-    let preferences = this.codenvyProfile.getPreferences();
+    let preferences = this.cheProfile.getPreferences();
 
     // Preferences say that flow hasn't been completed ?
     if (!preferences.onBoardingFlowCompleted || preferences.onBoardingFlowCompleted !== 'true') {

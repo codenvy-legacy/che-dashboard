@@ -20,10 +20,10 @@ export class CreateFactoryCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($location, codenvyAPI, codenvyNotification) {
+  constructor($location, codenvyAPI, cheNotification) {
     this.$location = $location;
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
     this.isLoading = false;
     this.isImporting = false;
@@ -46,11 +46,11 @@ export class CreateFactoryCtrl {
 
     promise.then((factory) => {
       this.isImporting = false;
-      this.codenvyNotification.showInfo('Factory successfully created.');
+      this.cheNotification.showInfo('Factory successfully created.');
       this.$location.path('/factory/' + factory.id);
     }, (error) => {
       this.isImporting = false;
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Create factory failed.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Create factory failed.');
       console.log('error', error);
     });
   }

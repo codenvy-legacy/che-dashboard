@@ -23,10 +23,10 @@ export class CreateWorkspaceCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($location, codenvyAPI, codenvyNotification, lodash) {
+  constructor($location, cheAPI, cheNotification, lodash) {
     this.$location = $location;
-    this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheAPI = cheAPI;
+    this.cheNotification = cheNotification;
     this.lodash = lodash;
 
     this.selectSourceOption = 'select-source-recipe';
@@ -45,8 +45,8 @@ export class CreateWorkspaceCtrl {
     };
 
     // fetch default recipe if we haven't one
-     if (!codenvyAPI.getRecipeTemplate().getDefaultRecipe()) {
-      codenvyAPI.getRecipeTemplate().fetchDefaultRecipe();
+     if (!cheAPI.getRecipeTemplate().getDefaultRecipe()) {
+       cheAPI.getRecipeTemplate().fetchDefaultRecipe();
     }
 
     this.stack = null;
@@ -110,7 +110,7 @@ export class CreateWorkspaceCtrl {
             this.submitWorkspace();
           }
         }, (error) => {
-          this.codenvyNotification.showError(error.data.message ? error.data.message : 'Error during recipe creation.');
+          this.cheNotification.showError(error.data.message ? error.data.message : 'Error during recipe creation.');
         });
       }
     } else {
@@ -130,7 +130,7 @@ export class CreateWorkspaceCtrl {
             this.submitWorkspace();
           }
         }, (error) => {
-          this.codenvyNotification.showError(error.data.message ? error.data.message : 'Error during recipe creation.');
+          this.cheNotification.showError(error.data.message ? error.data.message : 'Error during recipe creation.');
         });
       }
     }
@@ -170,14 +170,14 @@ export class CreateWorkspaceCtrl {
    * @returns {*} the promise
    */
   submitRecipe(recipeName, recipeScript) {
-    let recipe = angular.copy(this.codenvyAPI.getRecipeTemplate().getDefaultRecipe());
+    let recipe = angular.copy(this.cheAPI.getRecipeTemplate().getDefaultRecipe());
     if (!recipe) {
       return;
     }
     recipe.name = recipeName;
     recipe.script = recipeScript;
 
-    let promise = this.codenvyAPI.getRecipe().create(recipe);
+    let promise = this.cheAPI.getRecipe().create(recipe);
 
     return promise;
   }
@@ -186,14 +186,14 @@ export class CreateWorkspaceCtrl {
    * Submit a new workspace from current workspace name, recipe url and workspace ram
    */
   submitWorkspace() {
-    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
+    let creationPromise = this.cheAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
     creationPromise.then((workspaceData) => {
       let infoMessage = 'Workspace ' + workspaceData.name + ' successfully created.';
-      this.codenvyNotification.showInfo(infoMessage);
+      this.cheNotification.showInfo(infoMessage);
       this.$location.path('/workspace/' + workspaceData.id);
     }, (error) => {
       let errorMessage = error.data.message ? error.data.message : 'Error during workspace creation.';
-      this.codenvyNotification.showError(errorMessage);
+      this.cheNotification.showError(errorMessage);
       this.$location.path('/workspaces');
     });
   }

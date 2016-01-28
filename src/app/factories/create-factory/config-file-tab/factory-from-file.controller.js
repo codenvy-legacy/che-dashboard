@@ -22,11 +22,11 @@ export class FactoryFromFileCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($filter, codenvyAPI, codenvyNotification, FileUploader) {
+  constructor($filter, codenvyAPI, cheNotification, FileUploader) {
     'ngInject';
 
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
     // If you want select just one file, you won't need to clear the input
     FileUploader.FileSelect.prototype.isEmptyAfterSelection = function () {
@@ -52,7 +52,7 @@ export class FactoryFromFileCtrl {
         let isValidSize = item.size > 0 && item.size < 500000;
 
         if (!isValidSize) {
-          ctrl.codenvyNotification.showError('File size error.');
+          ctrl.cheNotification.showError('File size error.');
         }
         return isValidSize;
       }
@@ -65,7 +65,7 @@ export class FactoryFromFileCtrl {
         let isValidItem = item.type === 'application/json' || item.type === '';
 
         if (!isValidItem) {
-          ctrl.codenvyNotification.showError('File type error.');
+          ctrl.cheNotification.showError('File type error.');
         }
         return isValidItem;
       }
@@ -80,15 +80,15 @@ export class FactoryFromFileCtrl {
       reader.onload = function () {
         try {
           ctrl.factoryContent = $filter('json')(angular.fromJson(reader.result), 2);
-          ctrl.codenvyNotification.showInfo('Successfully loaded file\'s configuration ' + uploadedFileName + '.');
+          ctrl.cheNotification.showInfo('Successfully loaded file\'s configuration ' + uploadedFileName + '.');
         } catch (e) {
           // invalid JSON
           ctrl.factoryContent = null;
-          ctrl.codenvyNotification.showError('Invalid JSON.');
+          ctrl.cheNotification.showError('Invalid JSON.');
         }
       };
       reader.onerror = function (error) {
-        ctrl.codenvyNotification.showError(error.data.message ? error.data.message : 'Error reading file.');
+        ctrl.cheNotification.showError(error.data.message ? error.data.message : 'Error reading file.');
         console.log('Error reading file');
       };
     };

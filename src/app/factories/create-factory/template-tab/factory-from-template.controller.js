@@ -20,10 +20,10 @@ export class FactoryFromTemplateCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($filter, codenvyAPI, codenvyNotification) {
+  constructor($filter, codenvyAPI, cheNotification) {
     this.$filter = $filter;
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
     this.isImporting = false;
     this.factoryContent = null;
@@ -49,7 +49,7 @@ export class FactoryFromTemplateCtrl {
       this.factoryContent = this.$filter('json')(factoryContent, 2);
     }, (error) => {
       this.isImporting = false;
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Fail to get factory template.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Fail to get factory template.');
       console.log('error', error);
     });
   }

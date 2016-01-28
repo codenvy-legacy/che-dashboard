@@ -21,8 +21,9 @@ export class CreateProjectGithubCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $rootScope, $http, $q, $window, $location, $browser, $modal, $filter, GitHub, githubPopup, gitHubTokenStore,
+  constructor (cheAPI, $rootScope, $http, $q, $window, $location, $browser, $modal, $filter, GitHub, githubPopup, gitHubTokenStore,
                cheBranding, githubOrganizationNameResolver) {
+    this.cheAPI = cheAPI;
     this.$http = $http;
     this.$rootScope = $rootScope;
     this.$q = $q;
@@ -36,10 +37,9 @@ export class CreateProjectGithubCtrl {
     this.githubPopup = githubPopup;
     this.cheBranding = cheBranding;
     this.githubOrganizationNameResolver = githubOrganizationNameResolver;
-    this.codenvyAPI = codenvyAPI;
 
     this.productName = cheBranding.getName();
-    var userAPI = codenvyAPI.getUser();
+    var userAPI = cheAPI.getUser();
 
     this.user = userAPI.getUser();
     this.user.$promise.then(() => {

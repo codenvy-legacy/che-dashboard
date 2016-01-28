@@ -31,10 +31,10 @@ export class SubscriptionConfig {
         controller: 'SubscriptionCtrl',
         controllerAs: 'subscriptionCtrl',
         resolve: {
-          check: ['$q', 'codenvyService', function ($q, codenvyService) {
+          check: ['$q', 'cheService', function ($q, cheService) {
             var defer = $q.defer();
-            codenvyService.fetchServices().then(() => {
-              if (codenvyService.isServiceAvailable('subscription')) {
+            cheService.fetchServices().then(() => {
+              if (cheService.isServiceAvailable('subscription')) {
                 defer.resolve();
               } else {
                 defer.reject();

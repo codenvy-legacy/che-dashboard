@@ -23,14 +23,14 @@ export class DashboardLearnMoreCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($window, $http, $location, $rootScope, codenvyWorkspace, codenvyProject, codenvyFactory, $timeout) {
+  constructor($window, $http, $location, $rootScope, cheWorkspace, cheProject, codenvyFactory, $timeout) {
     this.$window = $window;
     this.$http = $http;
     this.$location = $location;
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
-    this.codenvyWorkspace = codenvyWorkspace;
-    this.codenvyProject = codenvyProject;
+    this.cheWorkspace = cheWorkspace;
+    this.cheProject = cheProject;
     this.codenvyFactory = codenvyFactory;
 
     // check factories (to see if we need or not to enable the factories)
@@ -43,7 +43,7 @@ export class DashboardLearnMoreCtrl {
    */
   gettingStarted() {
     // take first workspace
-    let promise = this.codenvyWorkspace.fetchWorkspaces();
+    let promise = this.cheWorkspace.fetchWorkspaces();
     promise.then(() => { this.openGuidedTour();}, () => { this.openGuidedTour();});
 
   }
@@ -52,7 +52,7 @@ export class DashboardLearnMoreCtrl {
    * Open the guided tour by updating the browser location
    */
   openGuidedTour() {
-    let workspaces = this.codenvyWorkspace.getWorkspaces();
+    let workspaces = this.cheWorkspace.getWorkspaces();
 
     // take first workspace
     let workspaceId = workspaces[0].workspaceReference.id;
@@ -61,7 +61,7 @@ export class DashboardLearnMoreCtrl {
     let expectedProjectName = 'getting-started-guided-tour';
 
     // get current projects
-    let projectsMap = this.codenvyProject.getProjectsByWorkspaceMap();
+    let projectsMap = this.cheProject.getProjectsByWorkspaceMap();
 
     // search ig guided tour is found
     let projects = projectsMap.get(workspaceId);
@@ -80,9 +80,9 @@ export class DashboardLearnMoreCtrl {
       let promise = this.addGuidedTourProject(workspaceId);
       promise.then(() => {
 
-        let fetchDetailsPromise = this.codenvyProject.fetchProjectDetails(workspaceId, expectedProjectName);
+        let fetchDetailsPromise = this.cheProject.fetchProjectDetails(workspaceId, expectedProjectName);
         let getDetailsPromise = fetchDetailsPromise.then(() => {
-          let details = this.codenvyProject.getProjectDetailsByKey(workspaceId, expectedProjectName);
+          let details = this.cheProject.getProjectDetailsByKey(workspaceId, expectedProjectName);
           this.redirectToGuidedTour(details.ideUrl);
         });
         return getDetailsPromise;
@@ -100,7 +100,7 @@ export class DashboardLearnMoreCtrl {
     let promise = this.$http.get('https://dockerfiles.codenvycorp.com/guided-tour/getting-started/getting-started-factory.json');
 
     let dataPromise = promise.then((response) => {
-      return this.codenvyProject.importProject(workspaceId, 'getting-started-guided-tour', response.data);
+      return this.cheProject.importProject(workspaceId, 'getting-started-guided-tour', response.data);
     });
 
     return dataPromise;

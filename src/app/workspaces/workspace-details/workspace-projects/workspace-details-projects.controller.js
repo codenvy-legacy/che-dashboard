@@ -22,21 +22,21 @@ export class WorkspaceDetailsProjectsCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($route, codenvyAPI, $mdMedia) {
-    this.codenvyAPI = codenvyAPI;
+  constructor($route, cheAPI, $mdMedia) {
+    this.cheAPI = cheAPI;
     this.$mdMedia = $mdMedia;
 
     this.workspaceId = $route.current.params.workspaceId;
 
-    let profilePreferences = codenvyAPI.getProfile().getPreferences();
+    let profilePreferences = this.cheAPI.getProfile().getPreferences();
 
     this.profileCreationDate = profilePreferences['codenvy:created'];
 
-    this.projects = this.codenvyAPI.getProject().getProjectsByWorkspaceMap().get(this.workspaceId);
+    this.projects = this.cheAPI.getProject().getProjectsByWorkspaceMap().get(this.workspaceId);
     if (!this.projects) {
-      let promise = this.codenvyAPI.getProject().fetchProjectsForWorkspaceId(this.workspaceId);
+      let promise = this.cheAPI.getProject().fetchProjectsForWorkspaceId(this.workspaceId);
       promise.then(() => {
-        this.projects = this.codenvyAPI.getProject().getProjectsByWorkspaceMap().get(this.workspaceId);
+        this.projects = this.cheAPI.getProject().getProjectsByWorkspaceMap().get(this.workspaceId);
       });
     }
   }

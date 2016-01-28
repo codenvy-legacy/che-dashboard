@@ -20,8 +20,8 @@ export class UniqueProjectNameValidator {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyAPI, $q) {
-    this.codenvyAPI = codenvyAPI;
+  constructor (cheAPI, $q) {
+    this.cheAPI = cheAPI;
     this.$q = $q;
     this.restrict='A';
     this.require = 'ngModel';
@@ -51,7 +51,7 @@ export class UniqueProjectNameValidator {
         // found a selected workspace ?
         if (selectedWorkspace) {
           // check if project is there
-          var map = this.codenvyAPI.getProject().getProjectsByWorkspaceMap();
+          var map = this.cheAPI.getProject().getProjectsByWorkspaceMap();
 
 
           var projectsWorkspace = map.get(selectedWorkspace.id);

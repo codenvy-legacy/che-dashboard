@@ -22,35 +22,15 @@ export class CodenvyAPI {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyProject, codenvyWorkspace, codenvyFactory, codenvyAccount, codenvyAnalytics, codenvySaas, codenvyUser, codenvyPayment,
-              codenvyProfile, codenvyProjectType, codenvyProjectTemplate, codenvyWebsocket, codenvyGit, codenvySvn, codenvyFactoryTemplate,
-              codenvyAnalyticsSession, codenvyService, codenvyAdminPlugins, codenvyAdminService, codenvyRecipe,
-              codenvyRecipeTemplate, codenvyStack) {
-    this.codenvyProject = codenvyProject;
-    this.codenvyWorkspace = codenvyWorkspace;
-    this.codenvyFactory = codenvyFactory;
+  constructor(codenvyAccount, codenvyAnalytics, codenvyAnalyticsSession,
+                codenvyFactory, codenvyFactoryTemplate, codenvyPayment, codenvySaas) {
     this.codenvyAccount = codenvyAccount;
     this.codenvyAnalytics = codenvyAnalytics;
-    this.codenvySaas = codenvySaas;
-    this.codenvyUser = codenvyUser;
-    this.codenvyPayment = codenvyPayment;
-    this.codenvyProfile = codenvyProfile;
-    this.codenvyProjectType = codenvyProjectType;
-    this.codenvyProjectTemplate = codenvyProjectTemplate;
-    this.codenvyWebsocket = codenvyWebsocket;
-    this.codenvyGit = codenvyGit;
-    this.codenvySvn = codenvySvn;
-    this.codenvyFactoryTemplate = codenvyFactoryTemplate;
     this.codenvyAnalyticsSession = codenvyAnalyticsSession;
-    this.codenvyService = codenvyService;
-    this.codenvyAdminPlugins = codenvyAdminPlugins;
-    this.codenvyAdminService = codenvyAdminService;
-    this.codenvyRecipe = codenvyRecipe;
-    this.codenvyRecipeTemplate = codenvyRecipeTemplate;
-    this.codenvyStack = codenvyStack;
-
-    // register listener of projects onto workspaces
-    this.codenvyWorkspace.addListener(this.codenvyProject);
+    this.codenvyFactory = codenvyFactory;
+    this.codenvyFactoryTemplate = codenvyFactoryTemplate;
+    this.codenvyPayment = codenvyPayment;
+    this.codenvySaas = codenvySaas;
 
   }
 
@@ -67,36 +47,8 @@ export class CodenvyAPI {
     return this.codenvyAnalytics;
   }
 
-  /**
-   * The Codenvy Saas API
-   * @returns {CodenvyAPI.codenvySaas|*}
-   */
-  getSaas() {
-    return this.codenvySaas;
-  }
-
-  /**
-   * The Codenvy Payment API
-   * @returns {CodenvyAPI.codenvyPayment|*}
-   */
-  getPayment() {
-    return this.codenvyPayment;
-  }
-
-  /**
-   * The Codenvy Project API
-   * @returns {CodenvyAPI.codenvyProject|*}
-   */
-  getProject() {
-    return this.codenvyProject;
-  }
-
-  /**
-   * The Codenvy Workspace API
-   * @returns {CodenvyAPI.codenvyWorkspace|*}
-   */
-  getWorkspace() {
-    return this.codenvyWorkspace;
+  getAnalyticsSession() {
+    return this.codenvyAnalyticsSession;
   }
 
   /**
@@ -116,108 +68,20 @@ export class CodenvyAPI {
   }
 
   /**
-   * The Codenvy User API
-   * @returns {CodenvyUser|*}
+   * The Codenvy Payment API
+   * @returns {CodenvyAPI.codenvyPayment|*}
    */
-  getUser() {
-    return this.codenvyUser;
+  getPayment() {
+    return this.codenvyPayment;
   }
 
   /**
-   * The Codenvy Profile API
-   * @returns {CodenvyProfile|*}
+   * The Codenvy Saas API
+   * @returns {CodenvyAPI.codenvySaas|*}
    */
-  getProfile() {
-    return this.codenvyProfile;
-  }
-
-  /**
-   * The Codenvy Project Type API
-   * @returns {CodenvyProjectType|*}
-   */
-  getProjectType() {
-    return this.codenvyProjectType;
-  }
-
-  /**
-   * The Codenvy Project Template API
-   * @returns {CodenvyProjectTemplate|*}
-   */
-  getProjectTemplate() {
-    return this.codenvyProjectTemplate;
-  }
-
-  /**
-   * The Codenvy Websocket API
-   * @returns {CodenvyWebsocket|*}
-   */
-  getWebsocket() {
-    return this.codenvyWebsocket;
-  }
-
-  /**
-   * The Codenvy Git API
-   * @returns {CodenvyGit|*}
-   */
-  getGit() {
-    return this.codenvyGit;
-  }
-
-  /**
-   * The Codenvy Svn API
-   * @returns {CodenvySvn|*}
-   */
-  getSvn() {
-    return this.codenvySvn;
-  }
-
-  /**
-   * The Codenvy Services API
-   * @returns {CodenvyService|*}
-   */
-  getService() {
-    return this.codenvyService;
-  }
-
-  /**
-   * The Codenvy Admin Services API
-   * @returns {CodenvyAdminService|*}
-   */
-  getAdminService() {
-    return this.codenvyAdminService;
+  getSaas() {
+    return this.codenvySaas;
   }
 
 
-  /**
-   * The Codenvy Admin plugins API
-   * @returns {CodenvyAdminPlugins|*}
-   */
-  getAdminPlugins() {
-    return this.codenvyAdminPlugins;
-  }
-
-  /**
-   * The Codenvy Recipe API
-   * @returns {CodenvyRecipe|*}
-   */
-  getRecipe() {
-    return this.codenvyRecipe;
-  }
-
-  /**
-   * The Codenvy Recipe Template API
-   * @returns {CodenvyRecipeTemplate|*}
-   */
-  getRecipeTemplate() {
-    return this.codenvyRecipeTemplate;
-  }
-
-
-  /**
-   * The Codenvy Stack API
-   * @returns {CodenvyAPI.codenvyStack|*}
-   */
-  getStack() {
-    return this.codenvyStack;
-  }
 }

@@ -15,7 +15,7 @@
  * Expects in parent scope:
  * @param{object} workspace
  */
-export class CodenvyWorkspaceItem {
+export class CheWorkspaceItem {
 
   /**
    * Default constructor.

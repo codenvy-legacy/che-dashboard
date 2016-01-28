@@ -20,9 +20,10 @@ export class WorkspaceDetailsCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($route, $location, codenvyAPI, $mdDialog, codenvyNotification, $filter) {
-    this.codenvyNotification = codenvyNotification;
-    this.codenvyAPI = codenvyAPI;
+  constructor($route, $location, cheWorkspace, cheAPI, $mdDialog, cheNotification, $filter) {
+    this.cheNotification = cheNotification;
+    this.cheAPI = cheAPI;
+    this.cheWorkspace = cheWorkspace;
     this.$mdDialog = $mdDialog;
     this.$location = $location;
     this.$filter = $filter;
@@ -39,8 +40,8 @@ export class WorkspaceDetailsCtrl {
 
     this.loading = true;
 
-    if (!this.codenvyAPI.getWorkspace().getWorkspacesById().get(this.workspaceId)) {
-      let promise = this.codenvyAPI.getWorkspace().fetchWorkspaceDetails(this.workspaceId);
+    if (!this.cheWorkspace.getWorkspacesById().get(this.workspaceId)) {
+      let promise = this.cheWorkspace.fetchWorkspaceDetails(this.workspaceId);
       promise.then(() => {
         this.updateWorkspaceData();
       }, (error) => {
@@ -59,7 +60,7 @@ export class WorkspaceDetailsCtrl {
 
   //Update the workspace data to be displayed.
   updateWorkspaceData() {
-    this.workspaceDetails = this.codenvyAPI.getWorkspace().getWorkspacesById().get(this.workspaceId);
+    this.workspaceDetails = this.cheWorkspace.getWorkspacesById().get(this.workspaceId);
     if (this.loading) {
       this.startUpdateWorkspaceStatus();
     }
@@ -73,7 +74,7 @@ export class WorkspaceDetailsCtrl {
 
     this.isLoading = true;
 
-    let promise = this.codenvyAPI.getWorkspace().fetchWorkspaceDetails(this.workspaceId);
+    let promise = this.cheWorkspace.fetchWorkspaceDetails(this.workspaceId);
     promise.then(() => {
       this.doRenameWorkspace();
     }, () => {
@@ -82,18 +83,18 @@ export class WorkspaceDetailsCtrl {
   }
 
   doRenameWorkspace() {
-    this.workspaceDetails = this.codenvyAPI.getWorkspace().getWorkspacesById().get(this.workspaceId);
+    this.workspaceDetails = this.cheWorkspace.getWorkspacesById().get(this.workspaceId);
     let workspaceNewDetails = angular.copy(this.workspaceDetails);
     workspaceNewDetails.name = this.newName;
     delete workspaceNewDetails.links;
 
-    let promise = this.codenvyAPI.getWorkspace().updateWorkspace(this.workspaceId, workspaceNewDetails);
+    let promise = this.cheWorkspace.updateWorkspace(this.workspaceId, workspaceNewDetails);
     promise.then((data) => {
-      this.codenvyAPI.getWorkspace().getWorkspacesById().set(this.workspaceId, data);
+      this.cheWorkspace.getWorkspacesById().set(this.workspaceId, data);
       this.updateWorkspaceData();
-      this.codenvyNotification.showInfo('Workspace name is successfully updated.');
+      this.cheNotification.showInfo('Workspace name is successfully updated.');
     }, (error) => {
-      this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Rename workspace failed.');
+      this.cheNotification.showError(error.data.message !== null ? error.data.message : 'Rename workspace failed.');
       console.log('error', error);
     });
   }
@@ -109,11 +110,11 @@ export class WorkspaceDetailsCtrl {
       .clickOutsideToClose(true)
       .targetEvent(event);
     this.$mdDialog.show(confirm).then(() => {
-      let promise = this.codenvyAPI.getWorkspace().deleteWorkspaceConfig(this.workspaceId);
+      let promise = this.cheWorkspace.deleteWorkspaceConfig(this.workspaceId);
       promise.then(() => {
         this.$location.path('/workspaces');
       }, (error) => {
-        this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Delete workspace failed.');
+        this.cheNotification.showError(error.data.message !== null ? error.data.message : 'Delete workspace failed.');
         console.log('error', error);
       });
     });
@@ -138,16 +139,16 @@ export class WorkspaceDetailsCtrl {
   }
 
   stopWorkspace() {
-    let promise = this.codenvyAPI.getWorkspace().stopWorkspace(this.workspaceId);
+    let promise = this.cheWorkspace.stopWorkspace(this.workspaceId);
 
     promise.then(() => {}, (error) => {
-      this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Stop workspace failed.');
+      this.cheNotification.showError(error.data.message !== null ? error.data.message : 'Stop workspace failed.');
       console.log('error', error);
     });
   }
 
   startUpdateWorkspaceStatus(){
-    let bus = this.codenvyAPI.getWebsocket().getBus(this.workspaceId);
+    let bus = this.cheAPI.getWebsocket().getBus(this.workspaceId);
 
     bus.subscribe('workspace:'+this.workspaceId, (message) => {
       this.workspaceDetails.status =  message.eventType;

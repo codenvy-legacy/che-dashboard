@@ -20,9 +20,9 @@ export class OnPremisesAdminCreateUserCtrl {
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, codenvyNotification) {
-    this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+  constructor(cheAPI, cheNotification) {
+    this.cheAPI = cheAPI;
+    this.cheNotification = cheNotification;
 
     this.newUserEmail = null;
     this.newUserPassword = null;
@@ -33,15 +33,15 @@ export class OnPremisesAdminCreateUserCtrl {
    */
   createUser() {
     //TODO should add user name in future
-    let promise = this.codenvyAPI.getUser().createUser(this.newUserEmail, null, this.newUserPassword);
+    let promise = this.cheAPI.getUser().createUser(this.newUserEmail, null, this.newUserPassword);
 
     promise.then(() => {
       this.newUserName = null;
       this.newUserEmail = null;
       this.newUserPassword = null;
-      this.codenvyNotification.showInfo('User successfully created.');
+      this.cheNotification.showInfo('User successfully created.');
     }, (error) => {
-      this.codenvyNotification.showError(error.data.message ? error.data.message : '.');
+      this.cheNotification.showError(error.data.message ? error.data.message : '.');
     });
   }
 

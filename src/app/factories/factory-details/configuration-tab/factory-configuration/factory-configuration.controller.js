@@ -20,10 +20,10 @@ export class FactoryConfigurationCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($route, $scope, $filter, codenvyAPI, codenvyNotification) {
+  constructor($route, $scope, $filter, codenvyAPI, cheNotification) {
     this.$filter = $filter;
     this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
 
     this.factoryId = $route.current.params.id;
 
@@ -58,9 +58,9 @@ export class FactoryConfigurationCtrl {
         this.updateFactoryContent(factory.originFactory);
       }
       this.factory = factory;
-      this.codenvyNotification.showInfo('Factory information successfully updated.');
+      this.cheNotification.showInfo('Factory information successfully updated.');
     }, (error) => {
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
       console.log('error', error);
     });
   }
@@ -71,10 +71,10 @@ export class FactoryConfigurationCtrl {
 
     promise.then((factory) => {
       this.factory = factory;
-      this.codenvyNotification.showInfo('Factory information successfully updated.');
+      this.cheNotification.showInfo('Factory information successfully updated.');
     }, (error) => {
       this.factoryContent = this.$filter('json')(this.originFactoryContent, 2);
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Update factory failed.');
       console.log('error', error);
     });
   }

@@ -15,8 +15,8 @@ import {Register} from '../components/utils/register';
 import {ComponentsConfig} from '../components/components-config';
 
 import {AdminsConfig} from './admin/admin-config';
-import {CodenvyColorsConfig} from './colors/codenvy-color.constant';
-import {CodenvyCountriesConfig} from './countries/codenvy-countries.constant';
+import {CheColorsConfig} from './colors/che-color.constant';
+import {CheCountriesConfig} from './countries/che-countries.constant';
 import {DashboardConfig} from './dashboard/dashboard-config';
 // switch to a config
 import {DemoComponentsCtrl} from './demo-components/demo-components.controller';
@@ -48,11 +48,11 @@ let initModule = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngT
 initModule.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.accessWhen = function(path, route) {
     route.resolve || (route.resolve = {});
-    route.resolve.app = ['cheBranding', '$q', 'codenvyProfile', 'codenvyUser', function (cheBranding, $q, codenvyProfile, codenvyUser) {
+    route.resolve.app = ['cheBranding', '$q', 'cheProfile', 'cheUser', function (cheBranding, $q, cheProfile, cheUser) {
       var deferred = $q.defer();
 
-      codenvyUser.fetchUser().then(() => {
-        let profilePreferences = codenvyProfile.getPreferences();
+      cheUser.fetchUser().then(() => {
+        let profilePreferences = cheProfile.getPreferences();
         if (profilePreferences && profilePreferences.$resolved) {
           deferred.resolve();
         } else {
@@ -74,11 +74,11 @@ initModule.config(['$routeProvider', function ($routeProvider) {
 
   $routeProvider.accessOtherWise = function(route) {
     route.resolve || (route.resolve = {});
-    route.resolve.app = ['$q', 'codenvyProfile', 'codenvyUser', function ($q, codenvyProfile, codenvyUser) {
+    route.resolve.app = ['$q', 'cheProfile', 'cheUser', function ($q, cheProfile, cheUser) {
       var deferred = $q.defer();
 
-      codenvyUser.fetchUser().then(() => {
-        let profilePreferences = codenvyProfile.getPreferences();
+      cheUser.fetchUser().then(() => {
+        let profilePreferences = cheProfile.getPreferences();
         if (profilePreferences && profilePreferences.$resolved) {
           deferred.resolve();
         } else {
@@ -153,8 +153,8 @@ class CheckLogin {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (codenvyUser) {
-    this.codenvyUser = codenvyUser;
+  constructor (cheUser) {
+    this.cheUser = cheUser;
   }
 
   checkPage(path) {
@@ -166,9 +166,9 @@ class CheckLogin {
 
 
   checkRedirect() {
-    let user = this.codenvyUser.getUser();
+    let user = this.cheUser.getUser();
     // User is not admin and user has no email it needs to be logged in
-    if (!this.codenvyUser.isAdmin() && !user.email) {
+    if (!this.cheUser.isAdmin() && !user.email) {
       return {route:'/login'};
     }
 
@@ -183,22 +183,22 @@ class CheckLogin {
 /**
  * Setup route redirect module
  */
-initModule.run(['$rootScope', '$location', 'routingRedirect', 'codenvyUser', '$timeout', 'ideIFrameSvc', 'codenvyIdeFetcher', 'routeHistory',
-  function ($rootScope, $location, routingRedirect, codenvyUser, $timeout, ideIFrameSvc, codenvyIdeFetcher, routeHistory) {
+initModule.run(['$rootScope', '$location', 'routingRedirect', 'cheUser', '$timeout', 'ideIFrameSvc', 'cheIdeFetcher', 'routeHistory',
+  function ($rootScope, $location, routingRedirect, cheUser, $timeout, ideIFrameSvc, cheIdeFetcher, routeHistory) {
 
     $rootScope.hideLoader = false;
     $rootScope.waitingLoaded = false;
     $rootScope.showIDE = false;
 
     // here only to create instances of these components
-    codenvyIdeFetcher;
+    cheIdeFetcher;
     routeHistory;
 
     /**
      * Add default redirect to login in dev mode
      */
     if (DEV) {
-      routingRedirect.addRouteCallback(new CheckLogin(codenvyUser));
+      routingRedirect.addRouteCallback(new CheckLogin(cheUser));
     }
 
     $rootScope.$on('$viewContentLoaded', function() {
@@ -281,7 +281,7 @@ initModule.factory('ETagInterceptor', function ($window, $cookies, $q) {
 
   return {
     request: function(config) {
-      // add IfNoneMatch request on the codenvy api if there is an existing eTag
+      // add IfNoneMatch request on the che api if there is an existing eTag
       if ('GET' === config.method) {
         if (config.url.indexOf('/api') === 0) {
           let eTagURI = etagMap[config.url];
@@ -480,7 +480,7 @@ initModule.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
     $httpProvider.interceptors.push('AuthInterceptor');
     $httpProvider.interceptors.push('LogInterceptor');
   }
-  // Add the ETag interceptor for Codenvy API
+  // Add the ETag interceptor for Che API
   $httpProvider.interceptors.push('ETagInterceptor');
 }]);
 
@@ -500,8 +500,8 @@ angular.module('ui.gravatar').config(['gravatarServiceProvider', function(gravat
 var instanceRegister = new Register(initModule);
 
 new ProxySettingsConfig(instanceRegister);
-new CodenvyColorsConfig(instanceRegister);
-new CodenvyCountriesConfig(instanceRegister);
+new CheColorsConfig(instanceRegister);
+new CheCountriesConfig(instanceRegister);
 new ComponentsConfig(instanceRegister);
 new AdminsConfig(instanceRegister);
 new IdeConfig(instanceRegister);

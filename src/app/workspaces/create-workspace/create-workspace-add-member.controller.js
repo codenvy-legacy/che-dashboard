@@ -22,12 +22,12 @@ export class CreateWorkspaceAddMemberCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($route, codenvyAPI, $mdDialog, $mdMedia, $q, codenvyNotification) {
-    this.codenvyAPI = codenvyAPI;
+  constructor($route, cheAPI, $mdDialog, $mdMedia, $q, cheNotification) {
+    this.cheAPI = cheAPI;
     this.$mdDialog = $mdDialog;
     this.$mdMedia = $mdMedia;
     this.$q = $q;
-    this.codenvyNotification = codenvyNotification;
+    this.cheNotification = cheNotification;
   }
 
   widthGtSm() {
@@ -58,24 +58,24 @@ export class CreateWorkspaceAddMemberCtrl {
   callbackMemberAdd(email, roles) {
     let isAlreadyAdded = this.isAlreadyAdded(email);
     if (isAlreadyAdded) {
-      this.codenvyNotification.showInfo('You already have ' + email + ' in the list.');
+      this.cheNotification.showInfo('You already have ' + email + ' in the list.');
       return;
     }
 
-    let user = this.codenvyAPI.getUser().getUserByAlias(email);
+    let user = this.cheAPI.getUser().getUserByAlias(email);
     if (user) {
       this.addMember(user, roles);
     } else {
-      let promiseGetUserByEmail = this.codenvyAPI.getUser().fetchUserByAlias(email);
+      let promiseGetUserByEmail = this.cheAPI.getUser().fetchUserByAlias(email);
       promiseGetUserByEmail.then(() => {
-        user = this.codenvyAPI.getUser().getUserByAlias(email);
+        user = this.cheAPI.getUser().getUserByAlias(email);
         if (user) {
           this.addMember(user, roles);
         } else {
-          this.codenvyNotification.showError('User with email: ' + email + ' not found.');
+          this.cheNotification.showError('User with email: ' + email + ' not found.');
         }
       }, (error) => {
-        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Failed to add member ' + email + '.');
+        this.cheNotification.showError(error.data.message ? error.data.message : 'Failed to add member ' + email + '.');
       });
     }
   }
@@ -96,7 +96,7 @@ export class CreateWorkspaceAddMemberCtrl {
 
   addMember(user, roles) {
     user.roles = roles;
-    user.role = this.codenvyAPI.getUser().getDisplayRole(roles);
+    user.role = this.cheAPI.getUser().getDisplayRole(roles);
     user.name = '';
     this.members.push(user);
   }
