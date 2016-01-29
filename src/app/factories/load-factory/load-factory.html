@@ -1,0 +1,48 @@
+<!--
+
+    Copyright (c) 2015 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<div class="load-factory-main-container">
+<div flex style="height: 100%" class="ide-loader load-factory-main-panel">
+  <div layout="column" layout-align="start center">
+    <div class="ide-loader-logo" ng-if="branding.logoURL">
+      <img ng-src="{{branding.logoURL}}">
+    </div>
+  </div>
+  <div class="create-project-progress-panel-bottom">
+    <div ng-repeat="step in loadFactoryCtrl.getLoadingSteps()">
+      <div ng-if="$index < (loadFactoryCtrl.getLoadingSteps().length -1)"
+           class="create-project-panel-progress-items"
+           ng-class="{'create-project-panel-progress-items-enabled' : (loadFactoryCtrl.getCurrentProgressStep() >= $index), 'create-project-panel-progress-items-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
+        >
+        <div  layout="row" layout-align="start center">
+          <div class="create-project-panel-progress-item-number" ng-class="{'create-project-panel-progress-item-number-in-progress' : (loadFactoryCtrl.getCurrentProgressStep() === $index && !loadFactoryCtrl.getLoadingSteps()[$index].hasError)}">{{$index + 1}}</div>
+          <div flex>{{loadFactoryCtrl.getStepText($index)}}</div>
+          <cdvy-button-danger ng-show="loadFactoryCtrl.getLoadingSteps()[$index].hasError"
+                              cdvy-button-title="Retry" ng-click="loadFactoryCtrl.resetCreateProgress()" ></cdvy-button-danger>
+        </div>
+      </div>
+      <div ng-if="$index < (loadFactoryCtrl.getLoadingSteps().length - 1)" layout="row">
+        <div ng-class="{'create-project-panel-progress-item-link-enabled' : (loadFactoryCtrl.getCurrentProgressStep() > $index), 'create-project-panel-progress-item-link-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
+             class="create-project-panel-progress-item-link">&nbsp;</div>
+
+        <textarea cdvy-auto-scroll ng-show="loadFactoryCtrl.getLoadingSteps()[$index].logs.length > 0" flex class="create-project-panel-progress-item-output" rows="5" ng-model="loadFactoryCtrl.getLoadingSteps()[$index].logs"></textarea>
+      </div>
+    </div>
+    <div ng-class="{'create-project-panel-progress-lastitem-enabled' : (loadFactoryCtrl.getCurrentProgressStep() === (loadFactoryCtrl.getLoadingSteps().length - 1)), 'create-project-panel-progress-lastitem-error' : loadFactoryCtrl.getLoadingSteps()[$index].hasError}"
+         class="create-project-panel-progress-lastitem" layout="row" layout-align="end start">
+      <div layout="column" flex layout-align="start end">
+        &nbsp;
+    </div>
+  </div>
+</div>
+</div>
+</div>

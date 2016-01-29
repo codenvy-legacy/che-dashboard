@@ -16,6 +16,8 @@ import {FactoryItemCtrl} from './list-factories/factory-item/factory-item.contro
 import {CodenvyFactoryItem} from './list-factories/factory-item/factory-item.directive';
 import {FactoryDetailsConfig} from './factory-details/factory-details-config';
 import {CreateFactoryConfig} from './create-factory/create-factory-config';
+import {LoadFactoryCtrl} from './load-factory/load-factory.controller';
+import {LoadFactoryService} from './load-factory/load-factory.service.js';
 
 export class FactoryConfig {
 
@@ -25,12 +27,21 @@ export class FactoryConfig {
     register.controller('FactoryItemCtrl', FactoryItemCtrl);
     register.directive('cdvyFactoryItem', CodenvyFactoryItem);
 
+    register.controller('LoadFactoryCtrl', LoadFactoryCtrl);
+    register.service('loadFactoryService', LoadFactoryService);
+
+
     // config routes
     register.app.config(function ($routeProvider) {
       $routeProvider.accessWhen('/factories', {
         templateUrl: 'app/factories/list-factories/list-factories.html',
         controller: 'ListFactoriesCtrl',
         controllerAs: 'listFactoriesCtrl'
+      })
+      .accessWhen('/load-factory/:id', {
+        templateUrl: 'app/factories/load-factory/load-factory.html',
+        controller: 'LoadFactoryCtrl',
+        controllerAs: 'loadFactoryCtrl'
       });
 
     });
