@@ -11,7 +11,7 @@
                  ng-class="{'create-project-panel-progress-items-enabled' : (ideLoaderCtrl.getCurrentStep() >= $index), 'create-project-panel-progress-items-error' : ideLoaderCtrl.getSteps()[$index].hasError}"
                     >
                 <div  layout="row" layout-align="start center">
-                    <div class="create-project-panel-progress-item-number">{{$index + 1}}</div>
+                    <div class="create-project-panel-progress-item-number" ng-class="{'create-project-panel-progress-item-number-in-progress' : (ideLoaderCtrl.getCurrentStep() === $index && !ideLoaderCtrl.getSteps()[$index].hasError)}">{{$index + 1}}</div>
                     <div flex>{{ideLoaderCtrl.getStepText($index)}}</div>
                     <cdvy-button-danger ng-show="ideLoaderCtrl.getSteps()[$index].hasError"
                                         cdvy-button-title="Retry" ng-click="ideLoaderCtrl.resetCreateProgress()" ></cdvy-button-danger>

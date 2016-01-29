@@ -87,6 +87,24 @@ md-select.create-project-select
   text-align center
   line-height 40px
 
+.create-project-panel-progress-item-number-in-progress
+  animation pulse 5s infinite
+
+@keyframes pulse {
+  0% {
+    background-color white
+    color black
+  }
+  50% {
+    background-color $item-enabled-color-bg
+    color white
+  }
+  100% {
+    background-color white
+    color black
+  }
+}
+
 .create-project-panel-progress-title
   font-size 1.5em
   font-weight 800
