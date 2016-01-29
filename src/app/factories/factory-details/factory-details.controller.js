@@ -20,7 +20,7 @@ export class FactoryDetailsCtrl {
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($route, codenvyAPI) {
+  constructor($route, codenvyAPI, cheNotification) {
     'ngInject';
 
     let factoryId = $route.current.params.id;
@@ -32,7 +32,7 @@ export class FactoryDetailsCtrl {
     promise.then((factory) => {
       this.factory = factory;
     }, (error) => {
-      this.cheNotification.showError(error.data.message ? error.data.message : 'Get factory failed.');
+      cheNotification.showError(error.data.message ? error.data.message : 'Get factory failed.');
       console.log('error', error);
     });
 
