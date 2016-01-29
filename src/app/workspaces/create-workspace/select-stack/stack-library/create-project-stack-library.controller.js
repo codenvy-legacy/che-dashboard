@@ -20,13 +20,17 @@ export class CreateProjectStackLibraryCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($scope, cheStack, cheWorkspace) {
+  constructor($scope, cheStack, cheWorkspace, lodash) {
     this.$scope = $scope;
     this.cheStack = cheStack;
     this.cheWorkspace = cheWorkspace;
+    this.lodash = lodash;
 
     this.stacks = [];
     this.workspaces = [];
+
+    this.allStackTags = [];
+    this.filteredStackIds = [];
 
     this.createChoice = 'new-workspace';
     this.onChoice();
@@ -66,6 +70,38 @@ export class CreateProjectStackLibraryCtrl {
       this.createChoice = 'existing-workspace';
     });
 
+    // create array of id of stacks which contain selected tags
+    // to make filtration faster
+    $scope.$on('event:updateFilter', (event, tags) => {
+      this.allStackTags = [];
+      this.filteredStackIds = [];
+
+      if (!tags) {
+        tags = [];
+      }
+
+      this.stacks.forEach((stack) => {
+        let matches = 0,
+          stackTags = stack.tags.map(tag => tag.toLowerCase());
+        for (let i = 0; i < tags.length; i++) {
+          if (stackTags.indexOf(tags[i].toLowerCase()) > -1) {
+            matches++;
+          }
+        }
+        if (matches === tags.length) {
+          this.filteredStackIds.push(stack.id);
+          this.allStackTags = this.allStackTags.concat(stack.tags);
+        }
+      });
+      this.allStackTags = this.lodash.uniq(this.allStackTags);
+    });
+
+    // set first stack as selected after filtration finished
+    $scope.$watch('filteredStacks && filteredStacks.length', (length) => {
+      if (length) {
+        this.setStackSelectionById($scope.filteredStacks[0].id);
+      }
+    });
   }
 
   /**
@@ -107,8 +143,10 @@ export class CreateProjectStackLibraryCtrl {
     // remote stacks are
     remoteStacks.forEach((stack) => {
       this.stacks.push(stack);
+      this.filteredStackIds.push(stack.id);
+      this.allStackTags = this.allStackTags.concat(stack.tags);
     });
-
+    this.allStackTags = this.lodash.uniq(this.allStackTags);
   }
 
   /**

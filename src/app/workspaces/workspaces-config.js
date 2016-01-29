@@ -36,6 +36,9 @@ import {CodenvyWorkspaceRamAllocationSliderCtrl} from './workspace-ram-slider/cd
 import {CodenvyWorkspaceRamAllocationSlider} from './workspace-ram-slider/cdvy-workspace-ram-allocation-slider.directive';
 import {WorkspaceStatusIndicator} from './workspace-status-indicator/workspace-status-indicator.directive';
 
+import {CodenvyStackLibraryFilterCtrl} from './create-workspace/select-stack/stack-library/stack-library-filter/cdvy-stack-library-filter.controller';
+import {CodenvyStackLibraryFilter}     from './create-workspace/select-stack/stack-library/stack-library-filter/cdvy-stack-library-filter.directive';
+import {CreateProjectStackLibrarySelectedStackFilter} from './create-workspace/select-stack/stack-library/create-project-stack-library-selected-stack.filter.js';
 /**
  * @ngdoc controller
  * @name workspaces:WorkspacesConfig
@@ -45,6 +48,9 @@ import {WorkspaceStatusIndicator} from './workspace-status-indicator/workspace-s
 export class WorkspacesConfig {
 
   constructor(register) {
+
+    new CreateProjectStackLibrarySelectedStackFilter(register);
+
     register.controller('ListWorkspacesCtrl', ListWorkspacesCtrl);
     register.controller('CreateWorkspaceCtrl', CreateWorkspaceCtrl);
     register.controller('CreateWorkspaceAddMemberCtrl', CreateWorkspaceAddMemberCtrl);
@@ -63,6 +69,7 @@ export class WorkspacesConfig {
 
     register.controller('WorkspaceRecipeCtrl', WorkspaceRecipeCtrl);
     register.directive('cdvyWorkspaceRecipe', WorkspaceRecipe);
+
     register.controller('CodenvyWorkspaceRamAllocationSliderCtrl', CodenvyWorkspaceRamAllocationSliderCtrl);
     register.directive('cdvyWorkspaceRamAllocationSlider', CodenvyWorkspaceRamAllocationSlider);
 
@@ -80,6 +87,9 @@ export class WorkspacesConfig {
 
     register.controller('WorkspaceSelectStackCtrl', WorkspaceSelectStackCtrl);
     register.directive('cdvyWorkspaceSelectStack', WorkspaceSelectStack);
+
+    register.controller('CodenvyStackLibraryFilterCtrl', CodenvyStackLibraryFilterCtrl);
+    register.directive('cdvyStackLibraryFilter', CodenvyStackLibraryFilter);
 
     // config routes
     register.app.config(function ($routeProvider) {

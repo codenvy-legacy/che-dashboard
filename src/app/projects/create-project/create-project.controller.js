@@ -899,6 +899,8 @@ export class CreateProjectCtrl {
    * @param stack the stack to use
    */
   updateCurrentStack(stack) {
+    this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;
+
     if (!stack) {
         return;
     }
@@ -908,8 +910,6 @@ export class CreateProjectCtrl {
     this.templatesChoice = 'templates-samples';
     this.generateProjectName(true);
     this.importProjectData.project.description = '';
-    this.currentStack = stack;
-    this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;
 
     // Enable wizard only if
     // - ready-to-go-stack with PT
