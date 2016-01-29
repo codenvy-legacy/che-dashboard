@@ -29,7 +29,7 @@ export class CheProfileBuilder {
   /**
    * Sets the email of the user
    * @param email the email to use
-   * @returns {CodenvyProfileBuilder}
+   * @returns {CheProfileBuilder}
    */
   withEmail(email) {
     return this.withAttribute('email', email);
@@ -38,7 +38,7 @@ export class CheProfileBuilder {
   /**
    * Sets the firstName of the user
    * @param firstName the firstName to use
-   * @returns {CodenvyProfileBuilder}
+   * @returns {CheProfileBuilder}
    */
   withFirstName(firstName) {
     return this.withAttribute('firstName', firstName);
@@ -47,7 +47,7 @@ export class CheProfileBuilder {
   /**
    * Sets the lastName of the user
    * @param lastName the lastName to use
-   * @returns {CodenvyProfileBuilder}
+   * @returns {CheProfileBuilder}
    */
   withLastName(lastName) {
     return this.withAttribute('lastName', lastName);
@@ -56,7 +56,7 @@ export class CheProfileBuilder {
   /**
    * Sets the id of the profile
    * @param id the id to use
-   * @returns {CodenvyProfileBuilder}
+   * @returns {CheProfileBuilder}
    */
   withId(id) {
     this.profile.id = id;
@@ -68,7 +68,7 @@ export class CheProfileBuilder {
    * Sets an attribute on the profile
    * @param name the attribute name
    * @param name the attribute value
-   * @returns {CodenvyProfileBuilder}
+   * @returns {CheProfileBuilder}
    */
   withAttribute(name, value) {
     this.profile.attributes[name] = value;
@@ -78,7 +78,7 @@ export class CheProfileBuilder {
 
   /**
    * Build the user
-   * @returns {CodenvyProfileBuilder.profile|*}
+   * @returns {CheProfileBuilder.profile|*}
    */
   build() {
     return this.profile;

@@ -32,15 +32,15 @@ export class WorkspaceSelectStack {
 
     // scope values
     this.scope = {
-      isWorkspaces: '@cdvyIsWorkspaces',
-      tabName: '=cdvyTabName',
-      onTabChange: '&cdvyOnTabChange',
-      stack: '=cdvyStack',
-      onStackChange: '&cdvyStackChange',
-      workspace: '=cdvyWorkspace',
-      onWorkspaceChange: '&cdvyWorkspaceChange',
-      recipeScript: '=cdvyRecipeScript',
-      recipeUrl: '=cdvyRecipeUrl'
+      isWorkspaces: '@cheIsWorkspaces',
+      tabName: '=cheTabName',
+      onTabChange: '&cheOnTabChange',
+      stack: '=cheStack',
+      onStackChange: '&cheStackChange',
+      workspace: '=cheWorkspace',
+      onWorkspaceChange: '&cheWorkspaceChange',
+      recipeScript: '=cheRecipeScript',
+      recipeUrl: '=cheRecipeUrl'
     };
 
   }

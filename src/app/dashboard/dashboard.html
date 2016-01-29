@@ -10,14 +10,8 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="Dashboard"  theme="dashboard-theme"></cdvy-toolbar>
+<che-toolbar che-title="Dashboard"  theme="dashboard-theme"></che-toolbar>
 <md-content layout="column" class="dashboard-content" md-scroll-y flex>
   <welcome-back></welcome-back>
-
-  <dashboard-overview></dashboard-overview>
-
-  <dashboard-learn-more ng-show="navbarCtrl.isUser() && navbarCtrl.isInvoiceServiceAvailable"></dashboard-learn-more>
-
   <dashboard-last-projects></dashboard-last-projects>
-
 </md-content>

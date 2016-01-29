@@ -25,7 +25,7 @@ export class CreateProjectSamplesCtrl {
     this.cheAPI = cheAPI;
     this.$timeout = $timeout;
 
-    // ask to load codenvy templates
+    // ask to load che templates
     let promise = cheAPI.getProjectTemplate().fetchTemplates();
 
     // promise update

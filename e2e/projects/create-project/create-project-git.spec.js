@@ -22,50 +22,5 @@ describe('Create project using git TAB', function () {
     createProjectMock = require('./create-project-http.mock');
   });
 
-  //
-  //it('launch browser', function() {
-  //  browser.get('http://localhost:5000/');
-  //  browser.waitForAngular();
-  //
-  //});
-
-
-  //it('Check setting git URL', function() {
-  //  browser.addMockModule('userDashboardMock', createProjectMock.initialList);
-  //  browser.get('http://localhost:5000/#/create-project');
-  //  browser.waitForAngular();
-  //
-  //  expect(createProjectsPage.gitTab.isDisplayed()).toBe(true);
-  //
-  //  // click on the git tab
-  //  createProjectsPage.gitTab.click();
-  //
-  //  // get input element
-  //  var gitInputElement = createProjectsPage.gitUrlInput;
-  //
-  //  // check that input is invalid
-  //  expect(gitInputElement.getAttribute('class')).toMatch('ng-invalid');
-  //  expect(gitInputElement.getAttribute('class')).toContain('ng-invalid-git-url', 'ng-invalid-required');
-  //
-  //  // we can see the input element of git
-  //  expect(gitInputElement.isDisplayed()).toBe(true);
-  //
-  //
-  //  // check we have a dummy name and not user-dashboard already
-  //  expect(createProjectsPage.projectInformationName.getAttribute('value')).not.toEqual('user-dashboard');
-  //
-  //  // generated project name should start with project-<projecttype>
-  //  expect(createProjectsPage.projectInformationName.getAttribute('value')).toContain('blank-');
-  //
-  //
-  //  // now enter a valid URL
-  //  gitInputElement.sendKeys('https://github.com/codenvy/user-dashboard').then(function() {
-  //    // check it's now valid
-  //    expect(gitInputElement.getAttribute('class')).toContain('ng-valid-required', 'ng-valid', 'ng-valid-git-url');
-  //
-  //    // now we want to also check that project name has been automatically setup
-  //    expect(createProjectsPage.projectInformationName.getAttribute('value')).toEqual('user-dashboard');
-  //  });
-  //});
 
 });

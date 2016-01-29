@@ -95,7 +95,7 @@ export class ListWorkspacesCtrl {
     let promises = [];
     this.workspacesById.set(workspace.id, workspace);
 
-    workspace.isLocked = this.cheAPI.getWorkspace().isWorkspaceResourcesLocked(workspace);
+    workspace.isLocked = false;
     workspace.usedResources = this.workspaceUsedResources.get(workspace.id);
 
     //No access to runner resources if workspace is locked:
@@ -110,7 +110,6 @@ export class ListWorkspacesCtrl {
       promises.push(promiseProjectsNumber);
     }
 
-    workspace.providedResources = this.cheAPI.getWorkspace().getWorkspaceResourcesUsageLimit(workspace);
     this.$q.all(promises).then(() => {
       projectsPerWorkspace = this.cheAPI.getProject().getProjectsByWorkspace();
       workspace.projects = projectsPerWorkspace[workspace.id] ? projectsPerWorkspace[workspace.id].length : undefined;

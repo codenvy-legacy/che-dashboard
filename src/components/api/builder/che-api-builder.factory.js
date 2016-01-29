@@ -52,7 +52,7 @@ export class CheAPIBuilder {
 
   /***
    * The Che Project Reference builder
-   * @returns {CodenvyProjectReferenceBuilder}
+   * @returns {CheProjectReferenceBuilder}
    */
   getProjectReferenceBuilder() {
     return new CheProjectReferenceBuilder();

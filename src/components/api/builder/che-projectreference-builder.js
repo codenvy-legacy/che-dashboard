@@ -10,8 +10,6 @@
  */
 'use strict';
 
-/*exported CodenvyProjectReferenceBuilder */
-
 /**
  * This class is providing a builder for Project Reference
  * @author Florent Benoit
@@ -29,7 +27,7 @@ export class CheProjectReferenceBuilder {
   /**
    * Sets the name of the project reference
    * @param name the name to use
-   * @returns {CodenvyProjectReferenceBuilder}
+   * @returns {CheProjectReferenceBuilder}
    */
   withName(name) {
     this.projectReference.name = name;
@@ -38,7 +36,7 @@ export class CheProjectReferenceBuilder {
 
   /**
    * Build the project reference
-   * @returns {CodenvyProjectReferenceBuilder.projectReference|*}
+   * @returns {CheProjectReferenceBuilder.projectReference|*}
    */
   build() {
     return this.projectReference;

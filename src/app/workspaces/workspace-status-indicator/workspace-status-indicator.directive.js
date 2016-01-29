@@ -29,7 +29,7 @@ export class WorkspaceStatusIndicator {
 
     // scope values
     this.scope = {
-      status : '=cdvyStatus'
+      status : '=cheStatus'
     };
   }
 }

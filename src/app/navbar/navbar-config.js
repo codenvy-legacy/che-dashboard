@@ -16,29 +16,15 @@ import {NavBarSelectedCtrl} from './navbar-selected.controller';
 import {NavBarSelected} from './navbar-selected.directive';
 import {HelpCtrl} from './help/help.controller';
 import {HelpWidget} from './help/help.directive';
-import {LogoutCtrl} from './logout/logout.controller';
-import {LogoutWidget} from './logout/logout.directive';
-
-import {AccountConfig} from './account/account-config';
-import {BillingConfig} from './billing/billing-config';
-import {SubscriptionConfig} from './subscriptions/subscription-config';
-import {TeamConfig} from './team/team-config';
 
 export class NavbarConfig {
 
   constructor(register) {
     register.controller('CheNavBarCtrl', CheNavBarCtrl);
     register.controller('HelpCtrl', HelpCtrl);
-    register.controller('LogoutCtrl', LogoutCtrl);
     register.controller('NavBarSelectedCtrl', NavBarSelectedCtrl);
     register.directive('cheNavBar', CheNavBar);
     register.directive('navBarSelected', NavBarSelected);
     register.directive('helpWidget', HelpWidget);
-    register.directive('logoutWidget', LogoutWidget);
-
-    new AccountConfig(register);
-    new BillingConfig(register);
-    new SubscriptionConfig(register);
-    new TeamConfig(register);
   }
 }

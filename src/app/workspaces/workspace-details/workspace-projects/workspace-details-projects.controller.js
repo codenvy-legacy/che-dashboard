@@ -30,7 +30,7 @@ export class WorkspaceDetailsProjectsCtrl {
 
     let profilePreferences = this.cheAPI.getProfile().getPreferences();
 
-    this.profileCreationDate = profilePreferences['codenvy:created'];
+    this.profileCreationDate = profilePreferences['che:created'];
 
     this.projects = this.cheAPI.getProject().getProjectsByWorkspaceMap().get(this.workspaceId);
     if (!this.projects) {

@@ -11,13 +11,12 @@
 'use strict';
 
 // components
-import {ApiConfig} from './api/codenvy-api-config';
+import {ApiConfig} from './api/che-api-config';
 import {AttributeConfig} from './attribute/attribute-config';
 import {CheBrandingConfig} from './branding/che-branding-config';
 import {CodeMirrorConstant} from './codemirror/codemirror';
 import {GitHubService} from './github/github-service';
 import {CheIdeFetcherConfig} from './ide-fetcher/che-ide-fetcher-config';
-import {ImsApiConfig} from './ims/imsapi-config';
 import {CheNotificationConfig} from './notification/che-notification-config';
 import {OnBoardingConfig} from './onboarding/onboarding-config';
 import {RoutingConfig} from './routing/routing-config';
@@ -33,7 +32,6 @@ export class ComponentsConfig {
     new CodeMirrorConstant(register);
     new GitHubService(register);
     new CheIdeFetcherConfig(register);
-    new ImsApiConfig(register);
     new CheNotificationConfig(register);
     new OnBoardingConfig(register);
     new RoutingConfig(register);

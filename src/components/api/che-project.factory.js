@@ -371,7 +371,7 @@ export class CheProject {
 
   /**
    * The projects per workspace id
-   * @returns {CodenvyProject.projectsPerWorkspace|*}
+   * @returns {CheProject.projectsPerWorkspace|*}
    */
   getProjectsByWorkspace() {
     return this.projectsPerWorkspace;

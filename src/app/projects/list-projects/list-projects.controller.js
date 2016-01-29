@@ -51,7 +51,7 @@ export class ListProjectsCtrl {
 
     let profilePreferences = cheAPI.getProfile().getPreferences();
 
-    this.profileCreationDate = profilePreferences['codenvy:created'];
+    this.profileCreationDate = profilePreferences['che:created'];
 
     this.dropDownOptionsList = [
       {

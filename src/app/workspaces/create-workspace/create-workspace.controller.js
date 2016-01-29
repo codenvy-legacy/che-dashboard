@@ -69,7 +69,7 @@ export class CreateWorkspaceCtrl {
    * Callback when stack has been set
    * @param stack  the selected stack
    */
-  cdvyStackLibrarySelecter(stack) {
+  cheStackLibrarySelecter(stack) {
     this.stack = stack;
     this.recipeUrl = null;
     this.isCustomStack = false;

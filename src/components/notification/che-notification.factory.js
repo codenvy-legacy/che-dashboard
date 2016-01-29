@@ -27,13 +27,13 @@ export class CheNotification {
   showInfo(text) {
     this.$mdToast.hide();
     this.$mdToast.show({
-      template: '<md-toast class="cdvy-notification-info" layout="row" flex layout-align="start start">' +
-      '<i class="cdvy-notification-info-icon fa fa-check fa-2x"></i>' +
+      template: '<md-toast class="che-notification-info" layout="row" flex layout-align="start start">' +
+      '<i class="che-notification-info-icon fa fa-check fa-2x"></i>' +
       '<div flex="90" layout="column" layout-align="start start">' +
-      '<span flex class="cdvy-notification-info-title"><b>Success</b></span>' +
-      '<span flex class="cdvy-notification-message">' + text + '</span>' +
+      '<span flex class="che-notification-info-title"><b>Success</b></span>' +
+      '<span flex class="che-notification-message">' + text + '</span>' +
       '</div>' +
-      '<i class="cdvy-notification-close-icon fa fa-times" ng-click="hideNotification()"/>' +
+      '<i class="che-notification-close-icon fa fa-times" ng-click="hideNotification()"/>' +
       '</md-toast>',
       autoWrap: false,
       controller: ['$scope', ($scope) => {
@@ -46,13 +46,13 @@ export class CheNotification {
   showError(text) {
     this.$mdToast.hide();
     this.$mdToast.show({
-      template: '<md-toast class="cdvy-notification-error" layout="row" layout-align="start start">' +
-      '<i class="cdvy-notification-error-icon fa fa-exclamation-triangle fa-2x"></i>' +
+      template: '<md-toast class="che-notification-error" layout="row" layout-align="start start">' +
+      '<i class="che-notification-error-icon fa fa-exclamation-triangle fa-2x"></i>' +
       '<div flex="90" layout="column" layout-align="start start">' +
-      '<span flex class="cdvy-notification-error-title"><b>Failed</b></span>' +
-      '<span flex class="cdvy-notification-message">' + text + '</span>' +
+      '<span flex class="che-notification-error-title"><b>Failed</b></span>' +
+      '<span flex class="che-notification-message">' + text + '</span>' +
       '</div>' +
-      '<i class="cdvy-notification-close-icon fa fa-times" ng-click="hideNotification()"/>' +
+      '<i class="che-notification-close-icon fa fa-times" ng-click="hideNotification()"/>' +
       '</md-toast>',
       autoWrap: false,
       controller: ['$scope', ($scope) => {

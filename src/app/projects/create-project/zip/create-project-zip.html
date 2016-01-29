@@ -12,12 +12,12 @@
 -->
 <form name="createProjectZipForm">
   <div layout="row" flex ng-init="createProjectCtrl.setForm(createProjectZipForm, 'zip');"></div>
-  <cdvy-input cdvy-form="createProjectZipForm"
-              cdvy-name="remotezipURL"
-              cdvy-label-name="Zip URL"
-              cdvy-place-holder="Url of the zip file"
+  <che-input che-form="createProjectZipForm"
+              che-name="remotezipURL"
+              che-label-name="Zip URL"
+              che-place-holder="Url of the zip file"
               ng-model="createProjectCtrl.importProjectData.source.location"
               required>
     <div ng-message="required">A zip URL is required.</div>
-  </cdvy-input>
+  </che-input>
 </form>

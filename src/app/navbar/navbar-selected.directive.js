@@ -41,7 +41,7 @@ export class NavBarSelected {
     let select = (elem) => {
       // if there is a previous selected element, unselect it
       if (this.$rootScope.selectedNavBarElement) {
-        this.$rootScope.selectedNavBarElement.removeClass('cdvy-navbar-selected');
+        this.$rootScope.selectedNavBarElement.removeClass('che-navbar-selected');
       }
 
       controller.close();
@@ -49,7 +49,7 @@ export class NavBarSelected {
       // select the new element
       this.$rootScope.selectedNavBarElement = elem;
       // add the class
-      elem.addClass('cdvy-navbar-selected');
+      elem.addClass('che-navbar-selected');
 
     };
 
@@ -66,7 +66,7 @@ export class NavBarSelected {
     $scope.$on('navbar-selected:clear', () => {
       // unselect item
       if (this.$rootScope.selectedNavBarElement) {
-        this.$rootScope.selectedNavBarElement.removeClass('cdvy-navbar-selected');
+        this.$rootScope.selectedNavBarElement.removeClass('che-navbar-selected');
         delete this.$rootScope.selectedNavBarElement;
       }
     });

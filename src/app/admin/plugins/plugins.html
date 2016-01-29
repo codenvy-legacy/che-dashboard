@@ -10,11 +10,11 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="Plug-Ins"></cdvy-toolbar>
+<che-toolbar che-title="Plug-Ins"></che-toolbar>
 
 <md-content layout="column" class="plugins-content" md-scroll-y flex>
 
-  <cdvy-panel cdvy-title="Installed">
+  <che-panel che-title="Installed">
     <div class="plugins-panel-subtitle">Plug-ins that are packaged and linked in this Che assembly.</div>
 
     <div class="plugins-nothing-now" ng-show="(adminPluginsCtrl.plugins | filter: { status: 'INSTALLED' }).length == 0">
@@ -37,7 +37,7 @@
           <td>{{plugin.name}}</td>
           <td>{{plugin.version}}</td>
           <td>{{plugin.category}}</td>
-          <td> <cdvy-link cdvy-no-padding ng-click="adminPluginsCtrl.uninstall(plugin.name)" cdvy-link-text="Uninstall"></cdvy-link>
+          <td> <che-link che-no-padding ng-click="adminPluginsCtrl.uninstall(plugin.name)" che-link-text="Uninstall"></che-link>
           </td>
         <tr>
         <tr ng-repeat="plugin in adminPluginsCtrl.plugins | filter: { status: 'STAGED_UNINSTALL' }">
@@ -52,24 +52,24 @@
 
 
       <div class="plugins-review-box" ng-show="(adminPluginsCtrl.plugins | filter: { status: 'STAGED_UNINSTALL' }).length > 0">
-        {{(adminPluginsCtrl.plugins | filter: { status: 'STAGED_UNINSTALL' }).length}} staged for installation<!--<cdvy-link cdvy-no-padding ng-click="adminPluginsCtrl.scrollToStaged()" cdvy-link-text="Review"></cdvy-link>-->
+        {{(adminPluginsCtrl.plugins | filter: { status: 'STAGED_UNINSTALL' }).length}} staged for installation<!--<che-link che-no-padding ng-click="adminPluginsCtrl.scrollToStaged()" che-link-text="Review"></che-link>-->
       </div>
 
 
     </div>
 
-  </cdvy-panel>
+  </che-panel>
 
 
-  <cdvy-panel cdvy-title="Available">
+  <che-panel che-title="Available">
     <div class="plugins-panel-subtitle">Plug-ins that can be added to this Che assembly.</div>
 
     <div layout="row">
       <div class="plugins-staged-zone-action" layout="row" flex="66">
-        <cdvy-dropzone cdvy-callback-controller="adminPluginsCtrl"></cdvy-dropzone>
+        <che-dropzone che-callback-controller="adminPluginsCtrl"></che-dropzone>
       </div>
       <div layout="row" flex layout-align="end center">
-        <cdvy-button-default cdvy-button-title="refresh"></cdvy-button-default>
+        <che-button-default che-button-title="refresh"></che-button-default>
       </div>
     </div>
 
@@ -91,8 +91,8 @@
           <td>{{plugin.version}}</td>
           <td>{{plugin.category}}</td>
           <td>
-            <cdvy-link ng-click="adminPluginsCtrl.install(plugin.name)" cdvy-link-text="Stage"></cdvy-link>
-            <cdvy-link ng-click="adminPluginsCtrl.remove($event, plugin.name)" cdvy-link-text="Delete"></cdvy-link>
+            <che-link ng-click="adminPluginsCtrl.install(plugin.name)" che-link-text="Stage"></che-link>
+            <che-link ng-click="adminPluginsCtrl.remove($event, plugin.name)" che-link-text="Delete"></che-link>
           </td>
         <tr>
         <tr ng-repeat="plugin in adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }">
@@ -110,14 +110,14 @@
         <ng-pluralize count="(adminPluginsCtrl.plugins | filter: { status: 'STAGED_INSTALL' }).length"
                       when="{'one': '{} staged change',
                        'other': '{} staged changes'}">
-        </ng-pluralize> on available plug-ins:&nbsp;<cdvy-link ng-click="adminPluginsCtrl.scrollToStaged()" cdvy-link-text="Review"></cdvy-link>
+        </ng-pluralize> on available plug-ins:&nbsp;<che-link ng-click="adminPluginsCtrl.scrollToStaged()" che-link-text="Review"></che-link>
       </div>
     </div>
 
-  </cdvy-panel>
+  </che-panel>
 
   <a id="plugin-staged"></a>
-  <cdvy-panel cdvy-title="Staged">
+  <che-panel che-title="Staged">
     <div class="plugins-panel-subtitle">Plug-ins that will be packaged and linked into this Che assembly.</div>
 
     <div class="plugins-nothing-now" ng-show="(adminPluginsCtrl.plugins | filterStagedPlugins).length == 0">
@@ -142,12 +142,12 @@
           <td>{{plugin.version}}</td>
           <td>{{plugin.category}}</td>
           <td>{{adminPluginsCtrl.prettyPrintStatus(plugin)}}</td>
-          <td><cdvy-link cdvy-no-padding ng-click="adminPluginsCtrl.cancelStage(plugin)" cdvy-link-text="Remove"></cdvy-link></td>
+          <td><che-link che-no-padding ng-click="adminPluginsCtrl.cancelStage(plugin)" che-link-text="Remove"></che-link></td>
         <tr>
         </tbody>
       </table>
       <div layout="column" layout-align="end end">
-        <cdvy-button-primary ng-click="adminPluginsCtrl.buildAssembly()" ng-disabled="adminPluginsCtrl.buildInProgress" cdvy-button-title="build assembly"></cdvy-button-primary>
+        <che-button-primary ng-click="adminPluginsCtrl.buildAssembly()" ng-disabled="adminPluginsCtrl.buildInProgress" che-button-title="build assembly"></che-button-primary>
       </div>
 
     </div>
@@ -156,7 +156,7 @@
       <div ng-show="adminPluginsCtrl.reloadcheDone">Che App Reloaded</div>
       <div class="plugins-build-failed" ng-show="adminPluginsCtrl.buildCheFailed">Build of Che App failed. See log below</div>
       <div layout="row" ng-show="adminPluginsCtrl.displayReloadChe">
-        <cdvy-button-default ng-click="adminPluginsCtrl.reloadChe()" cdvy-button-title="Reload Eclipse Che"></cdvy-button-default>
+        <che-button-default ng-click="adminPluginsCtrl.reloadChe()" che-button-title="Reload Eclipse Che"></che-button-default>
         <div ng-show="adminPluginsCtrl.reloadcheInProgress"><md-progress-circular md-diameter="25" md-theme="maincontent-theme" md-mode="indeterminate"></md-progress-circular></div>
       </div>
       <div layout="row" layout-align="start center" ng-show="adminPluginsCtrl.buildInProgress">
@@ -164,14 +164,14 @@
         <div><md-progress-circular md-diameter="25" md-theme="maincontent-theme" md-mode="indeterminate"></md-progress-circular></div>
       </div>
       <div layout="column">
-        <cdvy-button-default ng-show="adminPluginsCtrl.currentBuildLog.length > 0" ng-click="adminPluginsCtrl.toggleDisplayLog()" cdvy-button-title="{{adminPluginsCtrl.displayLog ? 'Hide Log' : 'Show Build Log'}}"></cdvy-button-default>
+        <che-button-default ng-show="adminPluginsCtrl.currentBuildLog.length > 0" ng-click="adminPluginsCtrl.toggleDisplayLog()" che-button-title="{{adminPluginsCtrl.displayLog ? 'Hide Log' : 'Show Build Log'}}"></che-button-default>
         <div ng-show="adminPluginsCtrl.displayLog && adminPluginsCtrl.currentBuildLog.length > 0" class="plugins-install-output" ng-bind-html="adminPluginsCtrl.currentBuildLog">
         </div>
 
       </div>
     </div>
 
-  </cdvy-panel>
+  </che-panel>
 
 
   <div class="plugin-empty-space"></div>

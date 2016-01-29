@@ -68,7 +68,7 @@ export class ProjectsConfig {
     register.service('createProjectSvc', CreateProjectSvc);
     register.controller('CreateProjectCtrl', CreateProjectCtrl);
 
-    register.directive('cdvyProjectItem', CheProjectItem);
+    register.directive('cheProjectItem', CheProjectItem);
 
     register.controller('ProjectItemCtrl', ProjectItemCtrl);
 

@@ -20,8 +20,7 @@ export class OnBoarding {
    * Default constructor for the artifact API.
    * @ngInject for Dependency injection
    */
-  constructor(cheAPI, imsArtifactApi) {
-    this.imsArtifactApi = imsArtifactApi;
+  constructor(cheAPI) {
     this.cheUser = cheAPI.getUser();
     this.profile = cheAPI.getProfile().getProfile();
     this.preferences = cheAPI.getProfile().getPreferences();
@@ -29,7 +28,7 @@ export class OnBoarding {
 
   isUserOnBoarding() {
     // if admin
-    if (this.cheUser.isAdmin() || this.imsArtifactApi.isImsAvailable()) {
+    if (this.cheUser.isAdmin()) {
       return false;
     }
 

@@ -68,7 +68,7 @@ describe('CheProjectTemplate', function(){
       var templateHelloWorldCli = apiBuilder.getProjectTemplateBuilder()
         .withProjectType('maven')
         .withCategory('Samples - Hello World')
-        .withSourceLocation('https://github.com/codenvy-templates/desktop-console-java.git')
+        .withSourceLocation('https://github.com/eclipse/dummy-che-templates/desktop-console-java.git')
         .withSourceType('git')
         .withSourceParameters({branch: '3.1.0', keepVcs: 'false'})
         .withDescription('A simple JAR project based on Maven.')
@@ -78,7 +78,7 @@ describe('CheProjectTemplate', function(){
       var templateSwing = apiBuilder.getProjectTemplateBuilder()
         .withProjectType('maven')
         .withCategory('Samples - Hello World')
-        .withSourceLocation('https://github.com/codenvy-templates/desktop-swing-java-basic.git')
+        .withSourceLocation('https://github.com/eclipse/dummy-che-templates/desktop-swing-java-basic.git')
         .withSourceType('git')
         .withSourceParameters({branch: '3.1.0', keepVcs: 'false'})
         .withDescription('A simple Java Swing application.')
@@ -87,12 +87,12 @@ describe('CheProjectTemplate', function(){
 
       var templateUD = apiBuilder.getProjectTemplateBuilder()
         .withProjectType('AngularJS')
-        .withCategory('Samples - Codenvy')
-        .withSourceLocation('https://github.com/codenvy/user-dashboard.git')
+        .withCategory('Samples - Che')
+        .withSourceLocation('https://github.com/eclipse/che-dashboard.git')
         .withSourceType('git')
         .withSourceParameters({branch: '3.1.0', keepVcs: 'false'})
-        .withDescription('Codenvy User Dashboard example..')
-        .withDisplayname('User Dashboard')
+        .withDescription('Che Dashboard example..')
+        .withDisplayname('Che Dashboard')
         .build();
 
       // providing request
@@ -139,7 +139,7 @@ describe('CheProjectTemplate', function(){
 
 
       // check category samples
-      var sampleCategory = templatesByCategory['Samples - Codenvy'];
+      var sampleCategory = templatesByCategory['Samples - Che'];
       expect(sampleCategory).not.toBeNull();
       expect(sampleCategory.length).toEqual(1);
       var anotherType = sampleCategory[0];

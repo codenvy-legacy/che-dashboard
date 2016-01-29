@@ -36,8 +36,8 @@ export class CheHttpBackend {
     this.memberships = [];
 
 
-    this.defaultUser = cheAPIBuilder.getUserBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').build();
-    this.defaultProfile = cheAPIBuilder.getProfileBuilder().withId('idDefaultUser').withEmail('defaultuser@codenvy.com').withFirstName('FirstName').withLastName('LastName').build();
+    this.defaultUser = cheAPIBuilder.getUserBuilder().withId('idDefaultUser').withEmail('eclipseChe@eclipse.org').build();
+    this.defaultProfile = cheAPIBuilder.getProfileBuilder().withId('idDefaultUser').withEmail('eclipseChe@eclipse.org').withFirstName('FirstName').withLastName('LastName').build();
     this.defaultProfilePrefs = {onBoardingFlowCompleted: 'true'};
     this.defaultBranding = {};
   }

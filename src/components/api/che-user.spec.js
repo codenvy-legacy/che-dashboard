@@ -64,7 +64,7 @@ describe('CheUser', function () {
   it('Fetch user', function () {
       // setup tests objects
       var userId = 'idTestUser';
-      var email = 'testuser@codenvy.com';
+      var email = 'eclipseChe@eclipse.org';
 
       var testUser = apiBuilder.getUserBuilder().withId(userId).withEmail(email).build();
 
@@ -99,7 +99,7 @@ describe('CheUser', function () {
   it('Fetch user by id', function () {
       // setup tests objects
       var userId = 'newIdTestUser';
-      var email = 'testuser@codenvy.com';
+      var email = 'eclipseChe@eclipse.org';
 
       var testUser = apiBuilder.getUserBuilder().withId(userId).withEmail(email).build();
 
@@ -134,7 +134,7 @@ describe('CheUser', function () {
   it('Fetch user by alias', function () {
       // setup tests objects
       var userId = 'testUser';
-      var email = 'newuseremail@codenvy.com';
+      var email = 'eclipseChe@eclipse.org';
 
       var testUser = apiBuilder.getUserBuilder().withId(userId).withEmail(email).build();
 
@@ -191,7 +191,7 @@ describe('CheUser', function () {
   it('Set user', function () {
       var user = {
         password: 'password12345',
-        email: 'test@test.com',
+        email: 'eclipseChe@eclipse.org',
         name: 'testname'
       };
 

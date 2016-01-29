@@ -37,9 +37,9 @@ export class CreateProjectStackLibrary {
 
     // scope values
     this.scope = {
-      stacks: '=cdvyStacks',
-      isWorkspaces: '@cdvyIsWorkspaces',
-      workspaces: '=cdvyWorkspaces'
+      stacks: '=cheStacks',
+      isWorkspaces: '@cheIsWorkspaces',
+      workspaces: '=cheWorkspaces'
     };
 
   }

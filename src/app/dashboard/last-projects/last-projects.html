@@ -1,19 +1,19 @@
-<cdvy-box cdvy-title="Recent Projects" cdvy-title-icon="material-design icon-ic_widgets_24px" cdvy-box-theme="primary">
+<che-box che-title="Recent Projects" che-title-icon="material-design icon-ic_widgets_24px" che-box-theme="primary">
   <div class="dashboard-last-projects">
     <md-progress-linear md-mode="indeterminate"
                         ng-show="dashboardLastProjectsCtrl.state == 'loading'"></md-progress-linear>
 
     <span ng-show="dashboardLastProjectsCtrl.state == 'OK' && dashboardLastProjectsCtrl.getProjects().length == 0">No projects found</span>
-    <cdvy-list ng-show="dashboardLastProjectsCtrl.getProjects().length > 0 && dashboardLastProjectsCtrl.state =='OK'">
-      <cdvy-project-item ng-repeat="project in dashboardLastProjectsCtrl.getProjects() | orderBy:'-modificationDate' | limitTo:'5'"
-                         cdvy-project-item-workspace-id="project.workspaceId"
-                         cdvy-project-item-workspace-name="project.workspaceName"
-                         cdvy-project-item-project="project"
-                         cdvy-selectable="false"
-                         cdvy-display-workspace="true"
-                         cdvy-profile-creation-date="listProjectsCtrl.profileCreationDate"></cdvy-project-item>
-    </cdvy-list>
+    <che-list ng-show="dashboardLastProjectsCtrl.getProjects().length > 0 && dashboardLastProjectsCtrl.state =='OK'">
+      <che-project-item ng-repeat="project in dashboardLastProjectsCtrl.getProjects() | orderBy:'-modificationDate' | limitTo:'5'"
+                         che-project-item-workspace-id="project.workspaceId"
+                         che-project-item-workspace-name="project.workspaceName"
+                         che-project-item-project="project"
+                         che-selectable="false"
+                         che-display-workspace="true"
+                         che-profile-creation-date="listProjectsCtrl.profileCreationDate"></che-project-item>
+    </che-list>
 
   </div>
-</cdvy-box>
+</che-box>
 

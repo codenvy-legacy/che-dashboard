@@ -16,27 +16,17 @@ export class CheNavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($mdSidenav, $scope, $location, $route, userDashboardConfig, cheAPI, codenvyAPI, onBoarding, imsArtifactApi) {
+  constructor($mdSidenav, $scope, $location, $route, userDashboardConfig, cheAPI, onBoarding) {
     this.mdSidenav = $mdSidenav;
     this.$scope = $scope;
     this.$location = $location;
     this.$route = $route;
     this.cheAPI = cheAPI;
-    this.codenvyAPI = codenvyAPI;
     this.onBoarding = onBoarding;
-    this.imsArtifactApi = imsArtifactApi;
     this.cheUser = cheAPI.getUser();
     this.links = [{href: '#/create-workspace', name: 'New Workspace'}];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
-
-    let promiseService = this.cheAPI.getService().fetchServices();
-    promiseService.then(() => {
-      this.isInvoiceServiceAvailable = cheAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getInvoiceServicePath());
-      this.isSubscriptionServiceAvailable = cheAPI.getService().isServiceAvailable(codenvyAPI.getAccount().getSubscriptionServicePath());
-      this.isAccountServiceAvailable = cheAPI.getService().isServiceAvailable(codenvyAPI.getAccount().getAccountServicePath());
-      this.isFactoryServiceAvailable = cheAPI.getService().isServiceAvailable(codenvyAPI.getFactory().getFactoryServicePath());
-    });
 
     let promiseAdminService = this.cheAPI.getAdminService().fetchServices();
     promiseAdminService.then(() => {
@@ -54,18 +44,13 @@ export class CheNavBarCtrl {
         this.email = 'N/A ';
       });
     }
-    this.onpremAdminExpanded = true;
-
     this.cheUser.fetchUser();
 
     this.menuItemUrl = {
-      login: '#/login',
       dashboard: '#/',
       projects: '#/projects',
       workspaces: '#/workspaces',
       factories: '#/factories',
-      administration: '#/onprem/administration',
-      usermanagement: '#/onprem/usermanagement',
 
       // subsection
       plugins: '#/admin/plugins',

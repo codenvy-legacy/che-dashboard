@@ -23,7 +23,7 @@ describe('CheProject', function () {
   var httpBackend;
 
   /**
-   * Codenvy backend
+   * Che backend
    */
   var cheBackend;
 

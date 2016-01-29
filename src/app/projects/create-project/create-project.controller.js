@@ -860,7 +860,7 @@ export class CreateProjectCtrl {
    * Use of an existing workspace
    * @param workspace the workspace to use
    */
-  cdvyStackLibraryWorkspaceSelecter(workspace) {
+  cheStackLibraryWorkspaceSelecter(workspace) {
     this.workspaceSelected = workspace;
     this.workspaceName = workspace.name;
     this.stackLibraryOption = 'existing-workspace';
@@ -874,7 +874,7 @@ export class CreateProjectCtrl {
    * Use of an existing stack
    * @param stack the stack to use
    */
-  cdvyStackLibrarySelecter(stack) {
+  cheStackLibrarySelecter(stack) {
     this.stackLibraryUser = stack;
     this.stackLibraryOption = 'new-workspace';
 
@@ -891,7 +891,7 @@ export class CreateProjectCtrl {
     if (!val) {
       this.generateWorkspaceName();
     }
-    this.$rootScope.$broadcast('cdvyPanel:disabled', { id: 'create-project-workspace', disabled: val });
+    this.$rootScope.$broadcast('chePanel:disabled', { id: 'create-project-workspace', disabled: val });
   }
 
   /**

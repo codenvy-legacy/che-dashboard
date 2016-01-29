@@ -24,7 +24,7 @@ export class CodeMirrorConstant {
         autoCloseBrackets: true,
         foldGutter: true,
         styleActiveLine: true,
-        theme: 'codenvy'
+        theme: 'che'
       }
     }).config(function () {
       uiCodemirrorDirective.$inject = ['$timeout', 'udCodemirrorConfig']; // jshint ignore:line

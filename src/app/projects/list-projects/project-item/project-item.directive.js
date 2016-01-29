@@ -29,12 +29,12 @@ export class CheProjectItem {
 
     // scope values
     this.scope = {
-      workspaceId: '=cdvyProjectItemWorkspaceId',
-      workspaceName: '=cdvyProjectItemWorkspaceName',
-      project: '=cdvyProjectItemProject',
-      profileCreationDate: '=cdvyProfileCreationDate',
-      isDisplayWorkspace: '=cdvyDisplayWorkspace',
-      isSelectable: '=cdvySelectable',
+      workspaceId: '=cheProjectItemWorkspaceId',
+      workspaceName: '=cheProjectItemWorkspaceName',
+      project: '=cheProjectItemProject',
+      profileCreationDate: '=cheProfileCreationDate',
+      isDisplayWorkspace: '=cheDisplayWorkspace',
+      isSelectable: '=cheSelectable',
       isSelect: '=?ngModel'
     };
 

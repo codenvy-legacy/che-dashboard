@@ -64,7 +64,7 @@ describe('CheProfile', function () {
   it('Fetch profile', function () {
       // setup tests objects
       var profileId = 'idDefaultUser';
-      var email = 'testUser@codenvy.com';
+      var email = 'eclipseChe@eclipse.org';
       var firstName = 'FirstName';
       var lastName = 'LastName';
 
@@ -103,7 +103,7 @@ describe('CheProfile', function () {
    */
   it('Set attributes', function () {
       // setup tests object
-      var testAttributes = {lastName: '<none>', email: 'newTestUser@codenvy.com'};
+      var testAttributes = {lastName: '<none>', email: 'eclipseChe@eclipse.org'};
 
       // setup backend
       cheBackend.setup();

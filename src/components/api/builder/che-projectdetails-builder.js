@@ -10,8 +10,6 @@
  */
 'use strict';
 
-/*exported CodenvyProjectDetailsBuilder */
-
 /**
  * This class is providing a builder for Project details
  * @author Florent Benoit
@@ -33,7 +31,7 @@ export class CheProjectDetailsBuilder {
   /**
    * Sets workspaceId
    * @param workspaceId the workspace ID
-   * @returns {CodenvyProjectDetailsBuilder}
+   * @returns {CheProjectDetailsBuilder}
    */
   withWorkspaceId(workspaceId) {
     this.projectDetails.workspaceId = workspaceId;
@@ -43,7 +41,7 @@ export class CheProjectDetailsBuilder {
   /**
    * Sets workspaceName
    * @param workspaceName the workspace name
-   * @returns {CodenvyProjectDetailsBuilder}
+   * @returns {CheProjectDetailsBuilder}
    */
   withWorkspaceName(workspaceName) {
     this.projectDetails.workspaceName = workspaceName;
@@ -53,7 +51,7 @@ export class CheProjectDetailsBuilder {
   /**
    * Sets Name
    * @param Name the project's name
-   * @returns {CodenvyProjectDetailsBuilder}
+   * @returns {CheProjectDetailsBuilder}
    */
   withName(name) {
     this.projectDetails.name = name;
@@ -63,7 +61,7 @@ export class CheProjectDetailsBuilder {
   /**
    * Sets permissions
    * @param permissions the project's permissions
-   * @returns {CodenvyProjectDetailsBuilder}
+   * @returns {CheProjectDetailsBuilder}
    */
   withPermissions(permissions) {
     this.projectDetails.permissions = permissions;
@@ -73,7 +71,7 @@ export class CheProjectDetailsBuilder {
   /**
    * Sets type
    * @param type the project's type
-   * @returns {CodenvyProjectDetailsBuilder}
+   * @returns {CheProjectDetailsBuilder}
    */
   withType(type) {
     this.projectDetails.type = type;
@@ -83,7 +81,7 @@ export class CheProjectDetailsBuilder {
 
   /**
    * Build the project details
-   * @returns {CodenvyProjectDetailsBuilder.projectDetails|*}
+   * @returns {CheProjectDetailsBuilder.projectDetails|*}
    */
   build() {
     return this.projectDetails;

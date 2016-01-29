@@ -10,8 +10,6 @@
  */
 'use strict';
 
-/*exported CodenvyProjecPermissionsBuilder */
-
 /**
  * This class is providing a builder for Project Permissions
  * @author Florent Benoit
@@ -30,7 +28,7 @@ export class CheProjectPermissionsBuilder {
    * Adds permission for the given user
    * @param userId the userID
    * @param roles the roles to add
-   * @returns {CodenvyProjecPermissionsBuilder}
+   * @returns {CheProjectPermissionsBuilder}
    */
   withUser(userId, roles) {
     if (!roles) {
@@ -48,7 +46,7 @@ export class CheProjectPermissionsBuilder {
    * Adds permission for the given group
    * @param group the group
    * @param roles the roles to add
-   * @returns {CodenvyProjecPermissionsBuilder}
+   * @returns {CheProjectPermissionsBuilder}
    */
   withGroup(group, roles) {
     if (!roles) {
@@ -63,7 +61,7 @@ export class CheProjectPermissionsBuilder {
 
   /**
    * Build the project permissions
-   * @returns {CodenvyProjectReferenceBuilder.projectPermissions|*}
+   * @returns {CheProjectPermissionsBuilder.projectPermissions|*}
    */
   build() {
     return this.projectPermission;

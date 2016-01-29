@@ -20,8 +20,7 @@ export class CheBranding {
      * Default constructor that is using resource
      * @ngInject for Dependency injection
      */
-    constructor(codenvyAPI, $http, $rootScope, $q) {
-        this.codenvyAPI = codenvyAPI;
+    constructor($http, $rootScope, $q) {
         this.$http = $http;
         this.$rootScope = $rootScope;
         this.deferred = $q.defer();

@@ -22,8 +22,8 @@
                 <div class="create-project-progress-popup-error" ng-show="createProjectPopupCtrl.getCreationSteps()[createProjectPopupCtrl.getCurrentProgressStep()].hasError">Error !</div>
             </div>
             <div layout="column" layout-align="center center" flex="35">
-                <cdvy-button-notice cdvy-button-title="Show More" ng-click="createProjectPopupCtrl.hidePopup()" href="#/create-project"></cdvy-button-notice>
-                <cdvy-button-primary ng-show="createProjectPopupCtrl.getCurrentProgressStep() === (createProjectPopupCtrl.getCreationSteps().length - 1)" ng-click="createProjectPopupCtrl.resetCreateNewProject()" cdvy-button-title="Open in IDE" ng-href="{{createProjectPopupCtrl.getIDELink()}}"></cdvy-button-primary>
+                <che-button-notice che-button-title="Show More" ng-click="createProjectPopupCtrl.hidePopup()" href="#/create-project"></che-button-notice>
+                <che-button-primary ng-show="createProjectPopupCtrl.getCurrentProgressStep() === (createProjectPopupCtrl.getCreationSteps().length - 1)" ng-click="createProjectPopupCtrl.resetCreateNewProject()" che-button-title="Open in IDE" ng-href="{{createProjectPopupCtrl.getIDELink()}}"></che-button-primary>
             </div>
     </div>
 </div>

@@ -25,7 +25,7 @@ export class CheWorkspaceItem {
 
     // scope values
     this.scope = {
-      workspace: '=cdvyWorkspaceItem'
+      workspace: '=cheWorkspaceItem'
     };
 
     this.templateUrl = 'app/workspaces/list-workspaces/workspace-item/workspace-item.html';

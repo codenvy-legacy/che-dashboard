@@ -130,10 +130,10 @@ export class WorkspaceDetailsCtrl {
   }
 
   runWorkspace() {
-    let promise = this.codenvyAPI.getWorkspace().startWorkspace(this.workspaceId, this.workspaceDetails.defaultEnvName);
+    let promise = this.cheAPI.getWorkspace().startWorkspace(this.workspaceId, this.workspaceDetails.defaultEnvName);
 
     promise.then(() => {}, (error) => {
-      this.codenvyNotification.showError(error.data.message !== null ? error.data.message : 'Start workspace failed.');
+      this.cheNotification.showError(error.data.message !== null ? error.data.message : 'Start workspace failed.');
       console.log('error', error);
     });
   }

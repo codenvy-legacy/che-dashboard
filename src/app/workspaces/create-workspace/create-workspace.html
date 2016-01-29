@@ -10,42 +10,39 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="New Workspace"></cdvy-toolbar>
+<che-toolbar che-title="New Workspace"></che-toolbar>
 
 <md-content md-scroll-y flex md-theme="maincontent-theme">
   <ng-form name="workspaceInformationForm">
 
-    <cdvy-panel id="create-project-source-id" cdvy-title="Select Source"
-                cdvy-tooltip="Create workspace from a recipe, stack or by importing workspace configuration">
+    <che-panel id="create-project-source-id" che-title="Select Source"
+                che-tooltip="Create workspace from a recipe, stack or by importing workspace configuration">
       <md-radio-group ng-model="createWorkspaceCtrl.selectSourceOption">
         <md-radio-button value="select-source-recipe">Workspace using recipe</md-radio-button>
-        <!-- will be replaced by stack by UD-945
-        <md-radio-button value="select-source-stack">Workspace using stack</md-radio-button>
-         -->
         <md-radio-button value="select-source-import">Import an existing workspace configuration</md-radio-button>
       </md-radio-group>
-    </cdvy-panel>
+    </che-panel>
 
-    <cdvy-panel cdvy-title="Import workspace" ng-if="createWorkspaceCtrl.selectSourceOption === 'select-source-import'">
+    <che-panel che-title="Import workspace" ng-if="createWorkspaceCtrl.selectSourceOption === 'select-source-import'">
 
       <ui-codemirror class="workspace-editor" ui-codemirror="createWorkspaceCtrl.editorOptions"
                      ng-model="createWorkspaceCtrl.workspaceConfig"></ui-codemirror>
 
-    </cdvy-panel>
-    <cdvy-workspace-select-stack ng-if="createWorkspaceCtrl.selectSourceOption === 'select-source-recipe'"
-                                 cdvy-tab-name="tabName"
-                                 cdvy-on-tab-change="createWorkspaceCtrl.setStackTab(tabName)"
-                                 cdvy-stack="stack"
-                                 cdvy-stack-change="createWorkspaceCtrl.cdvyStackLibrarySelecter(stack)"
-                                 cdvy-recipe-script="createWorkspaceCtrl.recipeScript"
-                                 cdvy-recipe-url="createWorkspaceCtrl.recipeUrl"></cdvy-workspace-select-stack>
+    </che-panel>
+    <che-workspace-select-stack ng-if="createWorkspaceCtrl.selectSourceOption === 'select-source-recipe'"
+                                 che-tab-name="tabName"
+                                 che-on-tab-change="createWorkspaceCtrl.setStackTab(tabName)"
+                                 che-stack="stack"
+                                 che-stack-change="createWorkspaceCtrl.cheStackLibrarySelecter(stack)"
+                                 che-recipe-script="createWorkspaceCtrl.recipeScript"
+                                 che-recipe-url="createWorkspaceCtrl.recipeUrl"></che-workspace-select-stack>
 
 
-    <cdvy-panel cdvy-title="Information">
-      <cdvy-input cdvy-form="workspaceInformationForm"
-                  cdvy-name="name"
-                  cdvy-label-name="Name"
-                  cdvy-place-holder="Name of the workspace"
+    <che-panel che-title="Information">
+      <che-input che-form="workspaceInformationForm"
+                  che-name="name"
+                  che-label-name="Name"
+                  che-place-holder="Name of the workspace"
                   ng-model="createWorkspaceCtrl.workspaceName"
                   required
                   ng-minlength="3"
@@ -57,16 +54,16 @@
         </div>
         <div ng-message="minlength">The name has to be more then 3 characters long.</div>
         <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
-      </cdvy-input>
-      <cdvy-workspace-ram-allocation-slider ng-model="createWorkspaceCtrl.workspaceRam"></cdvy-workspace-ram-allocation-slider>
-    </cdvy-panel>
+      </che-input>
+      <che-workspace-ram-allocation-slider ng-model="createWorkspaceCtrl.workspaceRam"></che-workspace-ram-allocation-slider>
+    </che-panel>
   </ng-form>
 
-  <cdvy-button-primary id="create-project-button-import"
-                       cdvy-button-title="Create Workspace"
+  <che-button-primary id="create-project-button-import"
+                       che-button-title="Create Workspace"
                        ng-click="createWorkspaceCtrl.createWorkspace()"
                        ng-disabled="workspaceInformationForm.$invalid">
-  </cdvy-button-primary>
+  </che-button-primary>
 
 </md-content>
 

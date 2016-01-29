@@ -41,14 +41,14 @@ export class ReadyToGoStacksCtrl {
 
   }
 
-  //TODO should change cdvy-simple-selecter widget
-  cdvySimpleSelecterDefault(stack) {
+  //TODO should change che-simple-selecter widget
+  cheSimpleSelecterDefault(stack) {
     this.stack = stack;
     this.onChange();
   }
 
-  //TODO should change cdvy-simple-selecter widget
-  cdvySimpleSelecter(projectName, stack) {
+  //TODO should change che-simple-selecter widget
+  cheSimpleSelecter(projectName, stack) {
     this.stack = stack;
     this.onChange();
   }

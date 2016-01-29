@@ -65,7 +65,7 @@ describe('CheGit', function () {
       // setup tests objects
       var workspaceId = 'workspace123test';
       var projectPath = '/testProject';
-      var localUrl = 'http://codenvy.com/git/f1/' + workspaceId + projectPath;
+      var localUrl = 'http://eclipse.org/che/git/f1/' + workspaceId + projectPath;
 
       // providing request
       // add test localUrl on Http backend

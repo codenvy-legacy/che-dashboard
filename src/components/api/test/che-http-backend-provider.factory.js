@@ -19,7 +19,7 @@ import {CheHttpBackend} from './che-http-backend';
 export class CheHttpBackendProviderFactory {
 
   /**
-   * Build a new Codenvy backend based on the given http backend.
+   * Build a new Che backend based on the given http backend.
    * @param $httpBackend the backend on which to add calls
    * @returns {CheHttpBackend} the new instance
    */

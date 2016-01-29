@@ -40,8 +40,8 @@ export class ReadyToGoStacks {
 
     // scope values
     this.scope = {
-      stack: '=cdvyStack',
-      onChange: '&cdvyOnChange'     
+      stack: '=cheStack',
+      onChange: '&cheOnChange'
     };
 
   }

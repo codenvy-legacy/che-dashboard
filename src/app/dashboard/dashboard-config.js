@@ -11,22 +11,14 @@
 'use strict';
 
 import {DashboardCtrl} from './dashboard.controller';
-import {DashboardLearnMoreCtrl} from './learn-more/dashboard-learn-more.controller';
-import {DashboardLearnMore} from './learn-more/dashboard-learn-more.directive';
 import {DashboardLastProjectsCtrl} from './last-projects/last-projects.controller';
 import {DashboardLastProjects} from './last-projects/last-projects.directive';
-import {DashboardOverviewCtrl} from './overview/overview.controller';
-import {DashboardOverview} from './overview/overview.directive';
 import {WelcomeBackCtrl} from './welcome-back/welcome-back.controller';
 import {WelcomeBack} from './welcome-back/welcome-back.directive';
 
 export class DashboardConfig {
 
   constructor(register) {
-
-    // overview
-    register.controller('DashboardOverviewCtrl', DashboardOverviewCtrl);
-    register.directive('dashboardOverview', DashboardOverview);
 
     // last projects
     register.controller('DashboardLastProjectsCtrl', DashboardLastProjectsCtrl);
@@ -35,10 +27,6 @@ export class DashboardConfig {
     // welcome back
     register.controller('WelcomeBackCtrl', WelcomeBackCtrl);
     register.directive('welcomeBack', WelcomeBack);
-
-    // learn-more
-    register.controller('DashboardLearnMoreCtrl', DashboardLearnMoreCtrl);
-    register.directive('dashboardLearnMore', DashboardLearnMore);
 
     // controller
     register.controller('DashboardCtrl', DashboardCtrl);

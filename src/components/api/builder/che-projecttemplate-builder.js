@@ -10,8 +10,6 @@
  */
 'use strict';
 
-/*exported CodenvyProjectTemplateBuilder */
-
 /**
  * This class is providing a builder for ProjectTemplate
  * @author Florent Benoit

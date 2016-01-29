@@ -22,9 +22,6 @@ export class CheWorkspace {
    * @ngInject for Dependency injection
    */
   constructor ($resource, $q, cheUser) {
-    this.RESOURCES_LOCKED_PROPERTY = 'codenvy:resources_locked';
-    this.RESOURCES_USAGE_LIMIT = 'codenvy:resources_usage_limit';
-
     // keep resource
     this.$resource = $resource;
 
@@ -297,20 +294,4 @@ export class CheWorkspace {
     return this.runtimeConfig.get(workspaceId);
   }
 
-
-  /**
-   * Returns given workspace's resources locked state.
-   * @returns {Boolean}
-   */
-  isWorkspaceResourcesLocked(workspace) {
-    return !!(workspace.attributes && workspace.attributes[this.RESOURCES_LOCKED_PROPERTY] && workspace.attributes[this.RESOURCES_LOCKED_PROPERTY] === 'true');
-  }
-
-  /**
-   * Returns given workspace's resources usage limit.
-   * @returns {Number}
-   */
-  getWorkspaceResourcesUsageLimit(workspace) {
-    return (workspace.attributes && workspace.attributes[this.RESOURCES_USAGE_LIMIT]) ? workspace.attributes[this.RESOURCES_USAGE_LIMIT] : undefined;
-  }
 }

@@ -42,7 +42,7 @@ export class CheRecipeTemplate {
       },
       script: '# This is a template for your machine recipe.\n' +
       '# Uncomment instructions that you want to use and replace them with yours.\n' +
-      '# Inherit from a base image. This can be a Codenvy verified image or any base image you can find at Docker Hub.\n' +
+      '# Inherit from a base image. This can be a Eclipse Che verified image or any base image you can find at Docker Hub.\n' +
       '# FROM dockerHubUser/yourImage\n' +
       '# Expose ports. All processes running in a Docker container should be access from outside.\n' +
       '# EXPOSE 8080\n' +

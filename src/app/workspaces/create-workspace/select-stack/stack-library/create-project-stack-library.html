@@ -2,10 +2,10 @@
   <div class="stack-label-info">Select from our library of stacks.</div>
 
   <div layout="row" flex="100">
-    <cdvy-stack-library-filter layout="row" flex
+    <che-stack-library-filter layout="row" flex
                                ng-model="createProjectStackLibraryCtrl.allStackTags"
                                ng-show="createProjectStackLibraryCtrl.createChoice === 'new-workspace'">
-    </cdvy-stack-library-filter>
+    </che-stack-library-filter>
   </div>
 
   <div layout="row" flex layout-align="start start">
@@ -17,14 +17,14 @@
             Create new workspace
           </md-radio-button>
           <div layout="row" layout-wrap>
-            <cdvy-stack-library-selecter ng-repeat="stack in filteredStacks = (createProjectStackLibraryCtrl.stacks | stackSelectedStackFilter:createProjectStackLibraryCtrl.filteredStackIds)"
+            <che-stack-library-selecter ng-repeat="stack in filteredStacks = (createProjectStackLibraryCtrl.stacks | stackSelectedStackFilter:createProjectStackLibraryCtrl.filteredStackIds)"
                                          ng-init="$first && createProjectStackLibraryCtrl.setStackSelectionById(stack.id)"
-                                         cdvy-is-select="stack.id === createProjectStackLibraryCtrl.selectedStackId"
-                                         cdvy-is-active="createProjectStackLibraryCtrl.createChoice === 'new-workspace'"
-                                         cdvy-title="{{stack.name}}"
-                                         cdvy-text="{{stack.description}}"
-                                         cdvy-extra-text="{{createProjectStackLibraryCtrl.getTooltip(stack)}}"
-                                         cdvy-stack-id="{{stack.id}}"/>
+                                         che-is-select="stack.id === createProjectStackLibraryCtrl.selectedStackId"
+                                         che-is-active="createProjectStackLibraryCtrl.createChoice === 'new-workspace'"
+                                         che-title="{{stack.name}}"
+                                         che-text="{{stack.description}}"
+                                         che-extra-text="{{createProjectStackLibraryCtrl.getTooltip(stack)}}"
+                                         che-stack-id="{{stack.id}}"/>
           </div>
         </div>
         <div layout="column" ng-if="createProjectStackLibraryCtrl.workspaces.length > 0 && createProjectStackLibraryCtrl.isWorkspaces" flex="auto">
@@ -32,11 +32,11 @@
             Use existing workspace
           </md-radio-button>
           <div layout="row" layout-wrap>
-            <cdvy-stack-library-workspace-selecter ng-repeat="workspace in createProjectStackLibraryCtrl.workspaces"
+            <che-stack-library-workspace-selecter ng-repeat="workspace in createProjectStackLibraryCtrl.workspaces"
                                                    ng-init="$first && createProjectStackLibraryCtrl.setWorkspaceSelectionById(workspace.id)"
-                                                   cdvy-is-select="workspace.id === createProjectStackLibraryCtrl.selectedWorkspaceId"
-                                                   cdvy-is-active="createProjectStackLibraryCtrl.createChoice === 'existing-workspace'"
-                                                   cdvy-workspace="workspace"/>
+                                                   che-is-select="workspace.id === createProjectStackLibraryCtrl.selectedWorkspaceId"
+                                                   che-is-active="createProjectStackLibraryCtrl.createChoice === 'existing-workspace'"
+                                                   che-workspace="workspace"/>
           </div>
         </div>
       </div>
