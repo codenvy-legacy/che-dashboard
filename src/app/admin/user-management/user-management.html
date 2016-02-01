@@ -1,0 +1,47 @@
+<!--
+
+    Copyright (c) 2015-2016 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<cdvy-toolbar cdvy-title="User Management"></cdvy-toolbar>
+<md-content flex md-scroll-y md-theme="maincontent-theme" class="admins-user-management">
+  <md-progress-linear md-mode="indeterminate" ng-if="adminsUserManagementCtrl.isLoading"></md-progress-linear>
+  <div ng-if="!adminsUserManagementCtrl.isLoading">
+    <div class="user-list-title">List of users</div>
+    <md-content class="user-management-content">
+      <div flex layout="row" layout-align="end center">
+        <cdvy-list flex ng-if="adminsUserManagementCtrl.users && adminsUserManagementCtrl.users.length > 0" class="admin-user-list"
+                   ng-class="{ 'list-small': !adminsUserManagementCtrl.$mdMedia('gt-sm') }"  cdvy-list-on-scroll-bottom="adminsUserManagementCtrl.loadNextPage()">
+          <cdvy-list-item ng-repeat="user in adminsUserManagementCtrl.users" flex-gt-sm="100" flex="33" ng-mouseover="hover=true"
+                          ng-mouseout="hover=false">
+            <div layout-gt-sm="row" flex="100" class="user-row" layout-align="start center">
+              <img class="user-face" gravatar-src="user.email">
+              <span class="user-email" flex="50" layout="row">{{user.email}}</span>
+              <span class="user-description" flex="30" layout="row">{{user.name}}</span>
+              <span class="user-actions" flex="10" layout="row" ng-show="hover" layout-align="end center">
+                <span class="codenvy-hover material-design icon-ic_remove_circle_outline_24px"
+                      tooltip="Remove" ng-click="adminsUserManagementCtrl.removeUser($event, user);">
+                </span>
+              </span>
+            </div>
+          </cdvy-list-item>
+        </cdvy-list>
+        <div class="add-button-container" ng-class="{ 'list-side-big': adminsUserManagementCtrl.$mdMedia('gt-sm') }"
+             layout-gt-sm="column" layout-align="end center">
+          <md-button tooltip="Add new User" class="md-fab" ng-class="{ 'md-fab-bottom-right': !adminsUserManagementCtrl.$mdMedia('gt-sm') }"
+                     aria-label="add member"
+                     ng-click="adminsUserManagementCtrl.showAddUserDialog($event);">
+            <span class="fa fa-plus"></span>
+          </md-button>
+        </div>
+      </div>
+    </md-content>
+  </div>
+</md-content>

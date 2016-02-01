@@ -68,9 +68,8 @@
                 </div>
               </md-button>
             </md-list-item>
-            <div ng-if="navbarCtrl.isImsAvailable() && navbarCtrl.userIsAdmin()">
-              <md-divider md-theme="factory-theme"></md-divider>
-              <md-list-item flex class="navbar-subsection-item">
+              <md-divider md-theme="factory-theme" ng-if="navbarCtrl.userIsAdmin()"></md-divider>
+              <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.isImsAvailable() && navbarCtrl.userIsAdmin()">
                 <md-button nav-bar-selected flex cdvy-reload-href href="#/onprem/administration" layout-align="left"
                            cdvy-event-logger="administration">
                   <div class="navbar-item" layout="row" layout-align="start center">
@@ -79,8 +78,8 @@
                   </div>
                 </md-button>
               </md-list-item>
-              <md-list-item flex class="navbar-subsection-item">
-                <md-button nav-bar-selected flex cdvy-reload-href href="#/onprem/usermanagement" layout-align="left"
+              <md-list-item flex class="navbar-subsection-item" ng-if="navbarCtrl.userIsAdmin()">
+                <md-button nav-bar-selected flex cdvy-reload-href href="#/admin/usermanagement" layout-align="left"
                            cdvy-event-logger="usermanagement">
                   <div class="navbar-item" layout="row" layout-align="start center">
                     <i class="fa fa-user fa-lg icon">&nbsp;</i>
@@ -88,7 +87,6 @@
                   </div>
                 </md-button>
               </md-list-item>
-            </div>
           </md-list>
         </section>
       </div>

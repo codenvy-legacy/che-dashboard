@@ -8,14 +8,24 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  */
+.admins-add-user-form
+  margin 17px 12px 17px 12px
+  min-width 720px
+  max-width 80%
 
-.onprem-admin-create-user .password-prompt
+.admins-add-user-form .form-input-fields
+  margin 12px
+
+.admins-add-user-form .password-prompt
   display block
-  width calc(15% - 10px)
+  width 15%
+  font-size 12px
   color $disabled-color
 
-.onprem-admin-create-user cdvy-button-default
-  margin-left calc(15% - 10px)
-
-.onprem-admin-create-user .password-prompt .progress
+.admins-add-user-form .password-prompt .progress
   height 6px
+
+.admins-add-user-form cdvy-button-primary,
+.admins-add-user-form cdvy-button-notice
+  margin-right 5px
+  float right

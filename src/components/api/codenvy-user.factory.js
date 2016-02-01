@@ -39,7 +39,9 @@ class CodenvyUser {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         }
       },
-      createUser: {method: 'POST', url: '/api/user/create'}
+      createUser: {method: 'POST', url: '/api/user/create'},
+      getUsers: {method: 'GET', url: '/api/admin/user?maxItems=:maxItems&skipCount=:skipCount', isArray: true},
+      removeUserById: {method: 'DELETE', url: '/api/user/:userId'}
     });
 
     // users by ID
@@ -58,6 +60,8 @@ class CodenvyUser {
 
     this.userPromise = null;
 
+    // all users by ID
+    this.adminUsersMap = new Map();
   }
 
   /**
@@ -78,6 +82,57 @@ class CodenvyUser {
     }
 
     let promise = this.remoteUserAPI.createUser(data).$promise;
+
+    // check if was OK or not
+    promise.then((user) => {
+      //update users map
+      this.adminUsersMap.set(user.id, user);//add user
+    });
+
+    return promise;
+  }
+
+  /**
+   * Ask for loading the users in asynchronous way
+   * If there are no changes, it's not updated
+   * @param maxItems - the max number of items to return 
+   * @param skipCount - the number of items to skip
+   * @returns {*} the promise
+   */
+  fetchUsers(maxItems, skipCount) {
+    let promise = this.remoteUserAPI.getUsers({maxItems: maxItems, skipCount: skipCount}).$promise;
+
+    promise.then((remoteUsers) => {
+      //update users map
+      remoteUsers.forEach((user) => {
+        this.adminUsersMap.set(user.id, user);//add user
+      });
+    });
+
+    return promise;
+  }
+
+  /**
+   * Gets the users
+   * @returns {Map}
+   */
+  getUsersMap() {
+    return this.adminUsersMap;
+  }
+
+  /**
+   * Performs user deleting by the given user ID.
+   * @param userId the user id
+   * @returns {*} the promise
+   */
+  deleteUserById(userId) {
+    let promise = this.remoteUserAPI.removeUserById({userId: userId}).$promise;
+
+    // check if was OK or not
+    promise.then(() => {
+      //update users map
+      this.adminUsersMap.delete(userId);//remove user
+    });
 
     return promise;
   }

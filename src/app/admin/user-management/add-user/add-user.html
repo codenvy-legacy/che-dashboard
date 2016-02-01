@@ -1,0 +1,78 @@
+<!--
+
+    Copyright (c) 2015-2016 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<ng-form name="createUserForm" class="admins-add-user-form">
+  <div class="form-input-fields">
+    <cdvy-input cdvy-form="createUserForm"
+                cdvy-name="email"
+                cdvy-label-name="Email"
+                cdvy-place-holder="e-mail"
+                ng-maxlength="100"
+                type="email"
+                focusable
+                required
+                ng-model="adminsAddUserCtrl.newUserEmail">
+
+      <div ng-message="required">Email is required.</div>
+      <div ng-message="email">Enter a valid email address.</div>
+      <div ng-message="maxlength">The name has to be less than 100 characters long.</div>
+    </cdvy-input>
+    <cdvy-input cdvy-form="createUserForm"
+                cdvy-name="password"
+                cdvy-label-name="Password"
+                cdvy-place-holder="password"
+                cdvy-pattern="^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*).{0,}$"
+                ng-maxlength="100"
+                ng-minlength="8"
+                type="password"
+                required
+                ng-model="adminsAddUserCtrl.newUserPassword">
+
+      <div ng-message="required">A password is required.</div>
+      <div ng-message="pattern">Password should contain both letters and digits</div>
+      <div ng-message="minlength">Password should contain at least 8 characters.</div>
+      <div ng-message="maxlength">The password has to be less than 100 characters long.</div>
+    </cdvy-input>
+    <div class="password-prompt">
+      <span>Minimum 8 characters, both letters and digits.</span>
+
+      <p>Password strength:</p>
+
+      <div ng-password-strength="adminsAddUserCtrl.newUserPassword" strength="passStrength" inner-class="meter"></div>
+    </div>
+    <cdvy-input cdvy-form="createUserForm"
+                cdvy-name="confirmPassword"
+                cdvy-label-name="Confirm password"
+                cdvy-place-holder="confirm password"
+                ng-model="confirmNewUserPassword"
+                ng-maxlength="100"
+                type="password"
+                required>
+
+      <div ng-message="required">A confirm password is required.</div>
+      <div ng-message="maxlength">The password has to be less than 100 characters long.</div>
+      <div
+        ng-show="confirmNewUserPassword && (confirmNewUserPassword !== adminsAddUserCtrl.newUserPassword)">
+        Passwords do not match.
+      </div>
+    </cdvy-input>
+  </div>
+  <cdvy-button-primary cdvy-button-title="Create"
+                       ng-click="adminsAddUserCtrl.createUser()"
+                       cdvy-event-logger="admin/add-user/add"
+                       ng-disabled="createUserForm.$invalid || confirmNewUserPassword !== adminsAddUserCtrl.newUserPassword">
+  </cdvy-button-primary>
+  <cdvy-button-notice cdvy-button-title="Cancel"
+                      ng-click="adminsAddUserCtrl.abort()"
+                      cdvy-event-logger="admin/add-user/cancel">
+  </cdvy-button-notice>
+</ng-form>

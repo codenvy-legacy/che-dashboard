@@ -11,6 +11,7 @@
 'use strict';
 
 import AdminsPluginsConfig from './plugins/plugins-config';
+import AdminsUserManagementConfig from './user-management/user-management-config';
 
 /**
  * @author Florent Benoit
@@ -19,6 +20,7 @@ class AdminsConfig {
 
   constructor(register) {
     new AdminsPluginsConfig(register);
+    new AdminsUserManagementConfig(register);
 
   }
 }

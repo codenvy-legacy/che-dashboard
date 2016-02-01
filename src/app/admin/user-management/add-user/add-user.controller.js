@@ -11,40 +11,47 @@
 'use strict';
 
 /**
- * This class is handling the controller for the create user widget
+ * This class is handling the controller for the add user
  * @author Oleksii Orel
  */
-class OnPremisesAdminCreateUserCtrl {
+class AdminsAddUserCtrl {
 
   /**
    * Default constructor.
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, codenvyNotification) {
+  constructor($mdDialog, codenvyAPI, codenvyNotification) {
+    this.$mdDialog = $mdDialog;
     this.codenvyAPI = codenvyAPI;
     this.codenvyNotification = codenvyNotification;
-
-    this.newUserEmail = null;
-    this.newUserPassword = null;
   }
 
+
   /**
-   * Create new user callback
+   * Callback of the add button of the dialog(create new user).
    */
   createUser() {
     //TODO should add user name in future
     let promise = this.codenvyAPI.getUser().createUser(this.newUserEmail, null, this.newUserPassword);
 
     promise.then(() => {
-      this.newUserName = null;
-      this.newUserEmail = null;
-      this.newUserPassword = null;
+      this.$mdDialog.hide();
+      this.callbackController.updateUsers();
       this.codenvyNotification.showInfo('User successfully created.');
     }, (error) => {
       this.codenvyNotification.showError(error.data.message ? error.data.message : '.');
     });
   }
 
+
+  /**
+   * Callback of the cancel button of the dialog.
+   */
+  abort() {
+    this.$mdDialog.hide();
+  }
+
+
 }
 
-export default OnPremisesAdminCreateUserCtrl;
+export default AdminsAddUserCtrl;
