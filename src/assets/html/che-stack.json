@@ -17,15 +17,15 @@
     "components": [
       {
         "name": "JDK",
-        "versions": "1.8.0_45"
+        "version": "1.8.0_45"
       },
       {
         "name": "Maven",
-        "versions": "3.2.2"
+        "version": "3.2.2"
       },
       {
         "name": "Tomcat",
-        "versions": "8.0.24"
+        "version": "8.0.24"
       }
     ],
     "source": {
@@ -61,27 +61,27 @@
     "components": [
       {
         "name": "Node.JS",
-        "versions": "0.12.9"
+        "version": "0.12.9"
       },
       {
         "name": "NPM",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Gulp",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Bower",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Grunt",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Yeoman",
-        "versions": "---"
+        "version": "---"
       }
     ],
     "source": {
@@ -114,23 +114,23 @@
     "components": [
       {
         "name": "PHP",
-        "versions": "5.5.9"
+        "version": "5.5.9"
       },
       {
         "name": "Apache",
-        "versions": "2"
+        "version": "2"
       },
       {
         "name": "MySQL",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Sqlite",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Composer",
-        "versions": "---"
+        "version": "---"
       }
     ],
     "source": {
@@ -163,19 +163,19 @@
     "components": [
       {
         "name": "Debian",
-        "versions": "7.9"
+        "version": "7.9"
       },
       {
         "name": "Mono",
-        "versions": "4.0.5.1"
+        "version": "4.0.5.1"
       },
       {
         "name": "DNX",
-        "versions": "1.0.0-rc1-final"
+        "version": "1.0.0-rc1-final"
       },
       {
         "name": "libuv",
-        "versions": "1.4.2"
+        "version": "1.4.2"
       }
     ],
     "source": {
@@ -207,19 +207,19 @@
     "components": [
       {
         "name": "Debian",
-        "versions": "jessie"
+        "version": "jessie"
       },
       {
         "name": "JDK",
-        "versions": "1.8.0_45"
+        "version": "1.8.0_45"
       },
       {
         "name": "Maven",
-        "versions": "3.2.2"
+        "version": "3.2.2"
       },
       {
         "name": "Tomcat",
-        "versions": "8.0.24"
+        "version": "8.0.24"
       }
     ],
     "source": {
@@ -253,23 +253,23 @@
     "components": [
       {
         "name": "noVNC",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Selenium webdriver",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Google Chrome",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Blackbox",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "Supervisor",
-        "versions": "---"
+        "version": "---"
       }
     ],
     "source": {
@@ -296,7 +296,7 @@
     "components": [
       {
         "name": "Debian",
-        "versions": "Jessie"
+        "version": "Jessie"
       }
     ],
     "source": {
@@ -323,7 +323,7 @@
     "components": [
       {
         "name": "Ubuntu",
-        "versions": "---"
+        "version": "---"
       }
     ],
     "source": {
@@ -355,19 +355,19 @@
     "components": [
       {
         "name": "CentOS",
-        "versions": "---"
+        "version": "---"
       },
       {
         "name": "JDK",
-        "versions": "1.8.0_45"
+        "version": "1.8.0_45"
       },
       {
         "name": "Maven",
-        "versions": "3.2.2"
+        "version": "3.2.2"
       },
       {
         "name": "Tomcat",
-        "versions": "8.0.24"
+        "version": "8.0.24"
       }
     ],
     "source": {
