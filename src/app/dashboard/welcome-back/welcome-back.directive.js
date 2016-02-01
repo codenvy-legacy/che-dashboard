@@ -16,7 +16,7 @@
  * @description This class is handling the directive of the 'welcome back' panel in the dashboard
  * @author Florent Benoit
  */
-class WelcomeBack {
+export class WelcomeBack {
 
 
   /**
@@ -33,6 +33,3 @@ class WelcomeBack {
   }
 
 }
-
-export default WelcomeBack;
-

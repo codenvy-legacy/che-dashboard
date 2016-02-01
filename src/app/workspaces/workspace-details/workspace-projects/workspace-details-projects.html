@@ -15,13 +15,13 @@
   Project{{(workspaceDetailsProjectsCtrl.projects && workspaceDetailsProjectsCtrl.projects.length === 1) ? '' : 's'}} in the workspace</div>
 <md-content class="workspace-projects-content">
   <div flex layout="row" layout-align="end center">
-    <cdvy-list flex ng-if="workspaceDetailsProjectsCtrl.projects && workspaceDetailsProjectsCtrl.projects.length > 0"
+    <che-list flex ng-if="workspaceDetailsProjectsCtrl.projects && workspaceDetailsProjectsCtrl.projects.length > 0"
                ng-class="{ 'projects-small': !workspaceDetailsProjectsCtrl.widthGtSm() }">
-      <cdvy-project-item ng-repeat="project in workspaceDetailsProjectsCtrl.projects" flex-gt-sm="100" flex="33"
-                         cdvy-project-item-workspace-id="workspaceDetailsProjectsCtrl.workspaceId"
-                         cdvy-project-item-project="project"
-                         cdvy-profile-creation-date="workspaceDetailsProjectsCtrl.profileCreationDate"></cdvy-project-item>
-    </cdvy-list>
+      <che-project-item ng-repeat="project in workspaceDetailsProjectsCtrl.projects" flex-gt-sm="100" flex="33"
+                         che-project-item-workspace-id="workspaceDetailsProjectsCtrl.workspaceId"
+                         che-project-item-project="project"
+                         che-profile-creation-date="workspaceDetailsProjectsCtrl.profileCreationDate"></che-project-item>
+    </che-list>
     <div class="workspace-projects-list-side" ng-class="{ 'workspace-projects-list-side-big': workspaceDetailsProjectsCtrl.widthGtSm() }"
           layout-gt-sm="column" layout-align="end center">
       <a ng-href="#/create-project" href="#/create-project">

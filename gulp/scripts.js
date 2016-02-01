@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 Codenvy, S.A.
+ * Copyright (c) 2015-2016 Codenvy, S.A.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,34 +11,68 @@
 
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');
+var conf = require('./conf');
 
-var paths = gulp.paths;
+var browserSync = require('browser-sync');
+var webpack = require('webpack-stream');
 
 var $ = require('gulp-load-plugins')();
 
+function webpackWrapper(watch, test, callback) {
+  var webpackOptions = {
+    watch: watch,
+    module: {
+      preLoaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'eslint-loader'}],
+      loaders: [{ test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'babel-loader']}]
+    },
+    output: { filename: 'index.module.js' }
+  };
+
+  if(watch) {
+    webpackOptions.devtool = 'inline-source-map';
+  }
+
+  var webpackChangeHandler = function(err, stats) {
+    if(err) {
+      conf.errorHandler('Webpack')(err);
+    }
+    $.util.log(stats.toString({
+      colors: $.util.colors.supportsColor,
+      chunks: false,
+      hash: false,
+      version: false
+    }));
+    browserSync.reload();
+    if(watch) {
+      watch = false;
+      callback();
+    }
+  };
+
+  var sources = [ path.join(conf.paths.src, '/app/index.module.js') ];
+  if (test) {
+    sources.push(path.join(conf.paths.src, '/{app,components}/**/*.spec.js'));
+  }
+
+  return gulp.src(sources)
+    .pipe(webpack(webpackOptions, null, webpackChangeHandler))
+    .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
+}
+
 gulp.task('scripts', ['colors', 'proxySettings'], function () {
-  return gulp.src(paths.src + '/{app,components}/**/*.js')
-    .pipe($.sourcemaps.init())
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.babel())
-    .on('error',  $.notify.onError({
-      message: "Error: <%= error.message %>",
-      title: "There was an error in the code"}))
-    .pipe($.ngAnnotate())
-    .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(paths.tmp + '/babel'))
-    .pipe($.size());
+  return webpackWrapper(false, false);
 });
 
-gulp.task('browserify', ['scripts'], function () {
-  return gulp.src(paths.tmp + '/babel/app/index.js', { read: false })
-    .pipe($.browserify( {debug : true}))
-    .on('error', function handleError(err) {
-      console.error(err.toString());
-      this.emit('end');
-    })
-    .pipe(gulp.dest(paths.tmp + '/serve/app'))
-    .pipe($.size());
+gulp.task('scripts:watch', ['scripts'], function (callback) {
+  return webpackWrapper(true, false, callback);
+});
+
+gulp.task('scripts:test', ['colors', 'proxySettings'], function () {
+  return webpackWrapper(false, true);
+});
+
+gulp.task('scripts:test-watch', ['scripts'], function (callback) {
+  return webpackWrapper(true, true, callback);
 });

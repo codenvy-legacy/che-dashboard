@@ -20,8 +20,8 @@ class IdeSvc {
      * Default constructor that is using resource
      * @ngInject for Dependency injection
      */
-    constructor (codenvyAPI, $rootScope, $mdDialog, userDashboardConfig, $timeout, $websocket, $sce, proxySettings, ideLoaderSvc, $location, routeHistory) {
-        this.codenvyAPI = codenvyAPI;
+    constructor (cheAPI, $rootScope, $mdDialog, userDashboardConfig, $timeout, $websocket, $sce, proxySettings, ideLoaderSvc, $location, routeHistory) {
+        this.cheAPI = cheAPI;
         this.$rootScope = $rootScope;
         this.$mdDialog = $mdDialog;
         this.$timeout = $timeout;
@@ -88,7 +88,7 @@ class IdeSvc {
         this.currentStep = 1;
 
         // recipe url
-        let bus = this.codenvyAPI.getWebsocket().getBus(this.selectedWorkspace.id);
+        let bus = this.cheAPI.getWebsocket().getBus(this.selectedWorkspace.id);
 
         // subscribe to workspace events
         bus.subscribe('workspace:' + this.selectedWorkspace.id, (message) => {
@@ -96,7 +96,7 @@ class IdeSvc {
             if (message.eventType === 'RUNNING' && message.workspaceId === this.selectedWorkspace.id) {
 
                 // Now that the container is started, wait for the extension server. For this, needs to get runtime details
-                let promiseRuntime = this.codenvyAPI.getWorkspace().getRuntime(this.selectedWorkspace.id);
+                let promiseRuntime = this.cheAPI.getWorkspace().getRuntime(this.selectedWorkspace.id);
                 promiseRuntime.then((runtimeData) => {
                     // extract the Websocket URL of the runtime
                     let servers = runtimeData.devMachine.metadata.servers;
@@ -132,7 +132,7 @@ class IdeSvc {
 
     startWorkspace(bus, data) {
 
-        let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
+        let startWorkspacePromise = this.cheAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
 
         startWorkspacePromise.then((data) => {
             // get channels

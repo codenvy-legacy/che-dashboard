@@ -14,7 +14,7 @@
  * Defines a directive for displaying usage of resource: chart + description.
  * @author Ann Shumilova
  */
-class UsageChart {
+export class UsageChart {
 
   /**
    * Default constructor that is using resource
@@ -26,13 +26,13 @@ class UsageChart {
     this.replace = true;
 
     this.scope = {
-      label: '@cdvyLabel',
-      used: '@cdvyUsed',
-      usedDescription: '@cdvyUsedDescription',
-      usedColor: '@cdvyUsedColor',
-      provided: '@cdvyProvided',
-      providedDescription: '@cdvyProvidedDescription',
-      large: '@cdvyLarge'
+      label: '@cheLabel',
+      used: '@cheUsed',
+      usedDescription: '@cheUsedDescription',
+      usedColor: '@cheUsedColor',
+      provided: '@cheProvided',
+      providedDescription: '@cheProvidedDescription',
+      large: '@cheLarge'
     };
 
   }
@@ -52,13 +52,13 @@ class UsageChart {
     });
 
     var t = this;
-    attrs.$observe('cdvyUsed', function () {
+    attrs.$observe('cheUsed', function () {
       if ($scope.used && $scope.provided) {
         t.initChart($scope);
       }
     });
 
-    attrs.$observe('cdvyProvided', function () {
+    attrs.$observe('cheProvided', function () {
       if ($scope.used && $scope.provided) {
         t.initChart($scope);
       }
@@ -100,4 +100,3 @@ class UsageChart {
   }
 }
 
-export default UsageChart;

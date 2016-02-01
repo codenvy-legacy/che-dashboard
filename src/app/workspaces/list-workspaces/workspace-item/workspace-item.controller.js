@@ -16,7 +16,7 @@
  * @description This class is handling the controller for item of workspace list
  * @author Ann Shumilova
  */
-class WorkspaceItemCtrl {
+export class WorkspaceItemCtrl {
 
   /**
    * Default constructor that is using resource
@@ -31,5 +31,3 @@ class WorkspaceItemCtrl {
   }
 
 }
-
-export default WorkspaceItemCtrl;

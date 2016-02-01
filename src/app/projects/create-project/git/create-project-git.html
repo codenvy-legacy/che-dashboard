@@ -12,10 +12,10 @@
 -->
 <form name="createProjectGitForm">
   <div layout="row" flex ng-init="createProjectCtrl.setForm(createProjectGitForm, 'git')"></div>
-  <cdvy-input cdvy-form="createProjectGitForm"
-              cdvy-name="remoteGitURL"
-              cdvy-label-name="Git URL"
-              cdvy-place-holder="Url of the git repository"
+  <che-input che-form="createProjectGitForm"
+              che-name="remoteGitURL"
+              che-label-name="Git URL"
+              che-place-holder="Url of the git repository"
               ng-focus="$parent.createProjectGitCtrl.setFocus()"
               ng-blur="$parent.createProjectGitCtrl.lostFocus()"
               ng-model="createProjectCtrl.importProjectData.source.location"
@@ -23,7 +23,7 @@
               required>
     <div ng-message="gitUrl">Invalid Git URL</div>
     <div ng-message="required">A repository URL is required.</div>
-  </cdvy-input>
+  </che-input>
 
 
 </form>

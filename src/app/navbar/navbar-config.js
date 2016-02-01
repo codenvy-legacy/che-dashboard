@@ -10,28 +10,21 @@
  */
 'use strict';
 
-import NavBarCtrl from '../navbar/navbar.controller';
-import NavBar from '../navbar/navbar.directive.js';
-import NavBarSelectedCtrl from '../navbar/navbar-selected.controller.js';
-import NavBarSelected from '../navbar/navbar-selected.directive.js';
-import HelpCtrl from '../navbar/help/help.controller.js';
-import HelpWidget from '../navbar/help/help.directive.js';
-import LogoutCtrl from '../navbar/logout/logout.controller.js';
-import LogoutWidget from '../navbar/logout/logout.directive.js';
+import {CheNavBarCtrl} from './navbar.controller';
+import {CheNavBar} from './navbar.directive';
+import {NavBarSelectedCtrl} from './navbar-selected.controller';
+import {NavBarSelected} from './navbar-selected.directive';
+import {HelpCtrl} from './help/help.controller';
+import {HelpWidget} from './help/help.directive';
 
-class NavbarConfig {
+export class NavbarConfig {
 
   constructor(register) {
-    register.controller('NavbarCtrl', NavBarCtrl);
+    register.controller('CheNavBarCtrl', CheNavBarCtrl);
     register.controller('HelpCtrl', HelpCtrl);
-    register.controller('LogoutCtrl', LogoutCtrl);
     register.controller('NavBarSelectedCtrl', NavBarSelectedCtrl);
-    register.directive('cdvyNavBar', NavBar);
+    register.directive('cheNavBar', CheNavBar);
     register.directive('navBarSelected', NavBarSelected);
     register.directive('helpWidget', HelpWidget);
-    register.directive('logoutWidget', LogoutWidget);
   }
 }
-
-
-export default NavbarConfig;

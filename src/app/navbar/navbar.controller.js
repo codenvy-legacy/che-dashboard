@@ -10,38 +10,31 @@
  */
 'use strict';
 
-class NavBarCtrl {
+export class CheNavBarCtrl {
 
   /**
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($mdSidenav, userDashboardConfig, codenvyAPI, onBoarding, $route, imsArtifactApi) {
+  constructor($mdSidenav, $scope, $location, $route, userDashboardConfig, cheAPI, onBoarding) {
     this.mdSidenav = $mdSidenav;
+    this.$scope = $scope;
+    this.$location = $location;
     this.$route = $route;
-    this.codenvyAPI = codenvyAPI;
+    this.cheAPI = cheAPI;
     this.onBoarding = onBoarding;
-    this.imsArtifactApi = imsArtifactApi;
-    this.codenvyUser = codenvyAPI.getUser();
+    this.cheUser = cheAPI.getUser();
     this.links = [{href: '#/create-workspace', name: 'New Workspace'}];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
 
-    let promiseService = this.codenvyAPI.getService().fetchServices();
-    promiseService.then(() => {
-      this.isInvoiceServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getPayment().getInvoiceServicePath());
-      this.isSubscriptionServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getAccount().getSubscriptionServicePath());
-      this.isAccountServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getAccount().getAccountServicePath());
-      this.isFactoryServiceAvailable = codenvyAPI.getService().isServiceAvailable(codenvyAPI.getFactory().getFactoryServicePath());
-    });
-
-    let promiseAdminService = this.codenvyAPI.getAdminService().fetchServices();
+    let promiseAdminService = this.cheAPI.getAdminService().fetchServices();
     promiseAdminService.then(() => {
-      this.isAdminServiceAvailable = codenvyAPI.getAdminService().isAdminServiceAvailable();
-      this.isAdminPluginServiceAvailable = codenvyAPI.getAdminService().isServiceAvailable(codenvyAPI.getAdminPlugins().getPluginsServicePath());
+      this.isAdminServiceAvailable = cheAPI.getAdminService().isAdminServiceAvailable();
+      this.isAdminPluginServiceAvailable = cheAPI.getAdminService().isServiceAvailable(cheAPI.getAdminPlugins().getPluginsServicePath());
     });
 
-    this.profile = codenvyAPI.getProfile().getProfile();
+    this.profile = cheAPI.getProfile().getProfile();
     if (this.profile.attributes) {
       this.email = this.profile.attributes.email;
     } else {
@@ -51,9 +44,37 @@ class NavBarCtrl {
         this.email = 'N/A ';
       });
     }
-    this.onpremAdminExpanded = true;
+    this.cheUser.fetchUser();
 
-    this.codenvyUser.fetchUser();
+    this.menuItemUrl = {
+      dashboard: '#/',
+      projects: '#/projects',
+      workspaces: '#/workspaces',
+      factories: '#/factories',
+
+      // subsection
+      plugins: '#/admin/plugins',
+
+      // subsection
+      account: '#/account',
+      team: '#/team',
+      subscriptions: '#/subscriptions',
+      billing: '#/billing'
+    };
+
+    // clear highlighting of menu item from navbar
+    // if route is not part of navbar
+    // or restore highlighting otherwise
+    $scope.$on('$locationChangeStart', () => {
+      let path = '#' + $location.path(),
+        match = Object.keys(this.menuItemUrl).some(item => this.menuItemUrl[item] === path);
+      if (match) {
+        $scope.$broadcast('navbar-selected:restore', path);
+      }
+      else {
+        $scope.$broadcast('navbar-selected:clear');
+      }
+    });
   }
 
   isImsAvailable() {
@@ -72,12 +93,10 @@ class NavBarCtrl {
   }
 
   userIsAdmin() {
-    return this.codenvyUser.isAdmin();
+    return this.cheUser.isAdmin();
   }
 
   isUser() {
-    return this.codenvyUser.isUser();
+    return this.cheUser.isUser();
   }
 }
-
-export default NavBarCtrl;

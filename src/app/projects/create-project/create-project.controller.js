@@ -15,14 +15,14 @@
  * This class is handling the controller for the projects
  * @author Florent Benoit
  */
-class CreateProjectCtrl {
+export class CreateProjectCtrl {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope, createProjectSvc, lodash, $q) {
-    this.codenvyAPI = codenvyAPI;
+  constructor(cheAPI, $websocket, $routeParams, $filter, $timeout, $location, $mdDialog, $scope, $rootScope, createProjectSvc, lodash, $q) {
+    this.cheAPI = cheAPI;
     this.$websocket = $websocket;
     this.$timeout = $timeout;
     this.$location = $location;
@@ -121,7 +121,7 @@ class CreateProjectCtrl {
     }
 
     // fetch workspaces when initializing
-    let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
+    let promise = cheAPI.getWorkspace().fetchWorkspaces();
     promise.then(() => {
         this.updateData();
       },
@@ -186,8 +186,6 @@ class CreateProjectCtrl {
       }
       this.projectDescription = newProjectDescription;
     });
-
-    $rootScope.$broadcast('navbar-selected:clear');
   }
 
 
@@ -234,14 +232,14 @@ class CreateProjectCtrl {
    */
   updateData() {
 
-    this.workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
+    this.workspaces = this.cheAPI.getWorkspace().getWorkspaces();
 
     // generate project name
     this.generateProjectName(true);
 
     // init WS bus
     if (this.workspaces.length > 0) {
-      this.messageBus = this.codenvyAPI.getWebsocket().getBus(this.workspaces[0].id);
+      this.messageBus = this.cheAPI.getWebsocket().getBus(this.workspaces[0].id);
     }
 
   }
@@ -349,7 +347,7 @@ class CreateProjectCtrl {
 
     // then we've to start workspace
     this.createProjectSvc.setCurrentProgressStep(1);
-    let startWorkspacePromise = this.codenvyAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
+    let startWorkspacePromise = this.cheAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
 
     startWorkspacePromise.then((data) => {
       // get channels
@@ -438,11 +436,11 @@ class CreateProjectCtrl {
       });
 
 
-      promise = this.codenvyAPI.getProject().importProject(workspaceId, projectName, projectData.source);
+      promise = this.cheAPI.getProject().importProject(workspaceId, projectName, projectData.source);
 
       // needs to update configuration of the project
       promise = promise.then(() => {
-        this.codenvyAPI.getProject().updateProject(workspaceId, projectName, projectData.project).$promise;
+        this.cheAPI.getProject().updateProject(workspaceId, projectName, projectData.project).$promise;
       });
 
 
@@ -451,7 +449,7 @@ class CreateProjectCtrl {
       if (commands && commands.length > 0) {
         commands.forEach((command) => {
           command.name = projectName + ': ' + command.name;
-          promise = promise.then(this.codenvyAPI.getWorkspace().addCommand(workspaceId, command));
+          promise = promise.then(this.cheAPI.getWorkspace().addCommand(workspaceId, command));
         });
 
       }
@@ -493,7 +491,7 @@ class CreateProjectCtrl {
 
     // on success, create project
     websocketStream.onOpen(() => {
-      let bus = this.codenvyAPI.getWebsocket().getExistingBus(websocketStream);
+      let bus = this.cheAPI.getWebsocket().getExistingBus(websocketStream);
       this.createProjectInWorkspace(workspaceId, projectName, projectData, bus);
     });
 
@@ -555,7 +553,7 @@ class CreateProjectCtrl {
       script: recipeScript
     };
 
-    return this.codenvyAPI.getRecipe().create(recipe);
+    return this.cheAPI.getRecipe().create(recipe);
   }
 
   /**
@@ -638,14 +636,14 @@ class CreateProjectCtrl {
 
 
       // Get bus
-      let bus = this.codenvyAPI.getWebsocket().getBus(this.workspaceSelected.id);
+      let bus = this.cheAPI.getWebsocket().getBus(this.workspaceSelected.id);
 
       // mode
       this.createProjectInWorkspace(this.workspaceSelected.id, this.importProjectData.project.name, this.importProjectData, bus);
     }
 
     // do we have projects ?
-    let projects = this.codenvyAPI.getProject().getAllProjects();
+    let projects = this.cheAPI.getProject().getAllProjects();
     if (projects.length > 1) {
       // we have projects, show notification first and redirect to the list of projects
       this.createProjectSvc.showPopup();
@@ -660,16 +658,16 @@ class CreateProjectCtrl {
   createWorkspace() {
     this.createProjectSvc.setWorkspaceOfProject(this.workspaceName);
     //TODO: no account in che ? it's null when testing on localhost
-    let creationPromise = this.codenvyAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
+    let creationPromise = this.cheAPI.getWorkspace().createWorkspace(null, this.workspaceName, this.recipeUrl, this.workspaceRam);
     creationPromise.then((data) => {
 
       // init message bus if not there
       if (this.workspaces.length === 0) {
-        this.messageBus = this.codenvyAPI.getWebsocket().getBus(data.id);
+        this.messageBus = this.cheAPI.getWebsocket().getBus(data.id);
       }
 
       // recipe url
-      let bus = this.codenvyAPI.getWebsocket().getBus(data.id);
+      let bus = this.cheAPI.getWebsocket().getBus(data.id);
 
       // subscribe to workspace events
       bus.subscribe('workspace:' + data.id, (message) => {
@@ -680,7 +678,7 @@ class CreateProjectCtrl {
           this.importProjectData.project.name = this.projectName;
 
           // Now that the container is started, wait for the extension server. For this, needs to get runtime details
-          let promiseRuntime = this.codenvyAPI.getWorkspace().getRuntime(data.id);
+          let promiseRuntime = this.cheAPI.getWorkspace().getRuntime(data.id);
           promiseRuntime.then((runtimeData) => {
             // extract the Websocket URL of the runtime
             let servers = runtimeData.devMachine.metadata.servers;
@@ -825,12 +823,18 @@ class CreateProjectCtrl {
 
 
   isvisible(elementName) {
-    let element = $(elementName);
+    let element = angular.element(elementName);
     var windowElement = $(window);
 
     var docViewTop = windowElement.scrollTop();
     var docViewBottom = docViewTop + windowElement.height();
-    var elemTop = element.offset().top;
+
+    var offset = element.offset();
+    if (!offset) {
+      return false;
+    }
+
+    var elemTop = offset.top;
     var elemBottom = elemTop + element.height();
 
     // use elemTop if want to see all div or elemBottom if we see partially it
@@ -856,7 +860,7 @@ class CreateProjectCtrl {
    * Use of an existing workspace
    * @param workspace the workspace to use
    */
-  cdvyStackLibraryWorkspaceSelecter(workspace) {
+  cheStackLibraryWorkspaceSelecter(workspace) {
     this.workspaceSelected = workspace;
     this.workspaceName = workspace.name;
     this.stackLibraryOption = 'existing-workspace';
@@ -870,7 +874,7 @@ class CreateProjectCtrl {
    * Use of an existing stack
    * @param stack the stack to use
    */
-  cdvyStackLibrarySelecter(stack) {
+  cheStackLibrarySelecter(stack) {
     this.stackLibraryUser = stack;
     this.stackLibraryOption = 'new-workspace';
 
@@ -887,7 +891,7 @@ class CreateProjectCtrl {
     if (!val) {
       this.generateWorkspaceName();
     }
-    this.$rootScope.$broadcast('cdvyPanel:disabled', { id: 'create-project-workspace', disabled: val });
+    this.$rootScope.$broadcast('chePanel:disabled', { id: 'create-project-workspace', disabled: val });
   }
 
   /**
@@ -895,6 +899,8 @@ class CreateProjectCtrl {
    * @param stack the stack to use
    */
   updateCurrentStack(stack) {
+    this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;
+
     if (!stack) {
         return;
     }
@@ -904,8 +910,6 @@ class CreateProjectCtrl {
     this.templatesChoice = 'templates-samples';
     this.generateProjectName(true);
     this.importProjectData.project.description = '';
-    this.currentStack = stack;
-    this.currentStackTags = stack && stack.tags ? angular.copy(stack.tags) : null;
 
     // Enable wizard only if
     // - ready-to-go-stack with PT
@@ -927,5 +931,3 @@ class CreateProjectCtrl {
   }
 
 }
-
-export default CreateProjectCtrl;

@@ -15,15 +15,15 @@
  * @author Florent Benoit
  * @author Oleksii Orel
  */
-class ProjectDetailsCtrl {
+export class ProjectDetailsCtrl {
 
   /**
    * Default constructor that is using resource injection
    * @ngInject for Dependency injection
    */
-  constructor($route, $location, codenvyAPI, $mdDialog, codenvyNotification) {
-    this.codenvyNotification = codenvyNotification;
-    this.codenvyAPI = codenvyAPI;
+  constructor($route, $location, cheAPI, $mdDialog, cheNotification) {
+    this.cheNotification = cheNotification;
+    this.cheAPI = cheAPI;
     this.$mdDialog = $mdDialog;
     this.$location = $location;
 
@@ -35,11 +35,11 @@ class ProjectDetailsCtrl {
     this.askedName = null;
     this.askedDescription = null;
 
-    this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
-    codenvyAPI.getWorkspace().fetchWorkspaces();
+    this.workspacesById = cheAPI.getWorkspace().getWorkspacesById();
+    cheAPI.getWorkspace().fetchWorkspaces();
 
-    if (!this.codenvyAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath)) {
-      let promise = this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath);
+    if (!this.cheAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath)) {
+      let promise = this.cheAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath);
 
       promise.then(() => {
         this.updateProjectDetails();
@@ -66,7 +66,7 @@ class ProjectDetailsCtrl {
   /**
    * Gets the name of the workspace based on its ID
    * @param workspaceId
-   * @returns {CodenvyWorkspaceReferenceBuilder.name|*}
+   * @returns {CheWorkspace.name|*}
    */
   getWorkspaceName(workspaceId) {
     let workspace = this.workspacesById.get(workspaceId);
@@ -77,7 +77,7 @@ class ProjectDetailsCtrl {
   }
 
   updateProjectDetails() {
-    this.projectDetails = this.codenvyAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath);
+    this.projectDetails = this.cheAPI.getProject().getProjectDetailsByKey(this.workspaceId, this.projectPath);
     this.askedName = angular.copy(this.projectDetails.name);
     this.askedDescription = angular.copy(this.projectDetails.description);
     this.loading = false;
@@ -91,13 +91,13 @@ class ProjectDetailsCtrl {
   }
 
   setProjectDetails(projectDetails) {
-    let promise = this.codenvyAPI.getProject().updateProjectDetails(projectDetails);
+    let promise = this.cheAPI.getProject().updateProjectDetails(projectDetails);
 
     promise.then(() => {
-      this.codenvyNotification.showInfo('Project information successfully updated.');
+      this.cheNotification.showInfo('Project information successfully updated.');
       this.updateLocation();
       if (this.isNameChanged()) {
-        this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath).then(() => {
+        this.cheAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath).then(() => {
           this.updateProjectDetails();
         });
       } else {
@@ -105,7 +105,7 @@ class ProjectDetailsCtrl {
       }
     }, (error) => {
       this.projectDetails.description = this.askedDescription;
-      this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
+      this.cheNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
       console.log('error', error);
     });
 
@@ -133,15 +133,15 @@ class ProjectDetailsCtrl {
     }
 
     if (this.isNameChanged()) {
-      let promise = this.codenvyAPI.getProject().rename(this.projectDetails.workspaceId, this.askedName, this.projectDetails.name);
+      let promise = this.cheAPI.getProject().rename(this.projectDetails.workspaceId, this.askedName, this.projectDetails.name);
 
       promise.then(() => {
-        this.codenvyAPI.getProject().removeProjectDetailsByKey(this.workspaceId, this.projectPath);
-        this.codenvyAPI.getProject().fetchProjectsForWorkspaceId(this.workspaceId);
+        this.cheAPI.getProject().removeProjectDetailsByKey(this.workspaceId, this.projectPath);
+        this.cheAPI.getProject().fetchProjectsForWorkspaceId(this.workspaceId);
         if (!this.isDescriptionChanged()) {
-          this.codenvyNotification.showInfo('Project information successfully updated.');
+          this.cheNotification.showInfo('Project information successfully updated.');
           this.updateLocation();
-          this.codenvyAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath).then(() => {
+          this.cheAPI.getProject().fetchProjectDetails(this.workspaceId, this.projectPath).then(() => {
             this.updateProjectDetails();
           });
         } else {
@@ -149,7 +149,7 @@ class ProjectDetailsCtrl {
         }
       }, (error) => {
         this.projectDetails.name = this.askedName;
-        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
+        this.cheNotification.showError(error.data.message ? error.data.message : 'Update information failed.');
         console.log('error', error);
       });
     } else {
@@ -169,7 +169,7 @@ class ProjectDetailsCtrl {
       .targetEvent(event);
     this.$mdDialog.show(confirm).then(() => {
       // remove it !
-      let promise = this.codenvyAPI.getProject().remove(this.projectDetails.workspaceId, this.projectDetails.name);
+      let promise = this.cheAPI.getProject().remove(this.projectDetails.workspaceId, this.projectDetails.name);
       promise.then(() => {
         this.$location.path('/projects');
       }, (error) => {
@@ -179,6 +179,3 @@ class ProjectDetailsCtrl {
   }
 
 }
-
-export default ProjectDetailsCtrl;
-

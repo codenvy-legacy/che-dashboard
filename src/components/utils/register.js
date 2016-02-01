@@ -15,18 +15,10 @@
  * https://raw.githubusercontent.com/michaelbromley/angular-es6/master/src/app/utils/register.js
  * Florent: Add userDashboard module and transform it to a class
  */
-class Register {
-  constructor() {
-    this.app = angular.module('userDashboard');
+export class Register {
+  constructor(moduleApp) {
+    this.app = moduleApp;
   }
-
- static getInstance() {
-   if (this.instance == null ) {
-     this.instance = new Register();
-   }
-   return this.instance;
- }
-
 
 
 
@@ -58,6 +50,12 @@ class Register {
     var factoryArray = this._createFactoryArray(constructorFn);
 
     this.app.directive(name, factoryArray);
+    return this;
+  }
+
+
+  filter(name, contructorFn) {
+    this.app.filter(name, contructorFn);
     return this;
   }
 
@@ -93,6 +91,11 @@ class Register {
    */
   _normalizeConstructor(input) {
     var constructorFn;
+
+    if (!input) {
+      var stack = new Error().stack;
+      console.log('Invalid constructor', stack);
+    }
 
     if (input.constructor === Array) {
       //
@@ -158,4 +161,4 @@ class Register {
 
 }
 
-export default Register;
+//export default Register;

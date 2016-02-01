@@ -16,17 +16,17 @@
  * @description This class is handling the controller of the 'welcome back' panel in dashboard
  * @author Florent Benoit
  */
-class WelcomeBackCtrl {
+export class WelcomeBackCtrl {
 
 
   /**
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor(codenvyProject, codenvyWorkspace, codenvyProfile, userDashboardConfig, $location, $rootScope, $window) {
-    this.codenvyProject = codenvyProject;
-    this.codenvyWorkspace = codenvyWorkspace;
-    this.codenvyProfile = codenvyProfile;
+  constructor(cheProject, cheWorkspace, cheProfile, userDashboardConfig, $location, $rootScope, $window) {
+    this.cheProject = cheProject;
+    this.cheWorkspace = cheWorkspace;
+    this.cheProfile = cheProfile;
     this.userDashboardConfig = userDashboardConfig;
     this.$location = $location;
     this.$rootScope = $rootScope;
@@ -43,7 +43,7 @@ class WelcomeBackCtrl {
     this.welcomeChoice = 'Dashboard';
 
     // fetch workspaces when initializing
-    let promise = this.codenvyWorkspace.fetchWorkspaces();
+    let promise = this.cheWorkspace.fetchWorkspaces();
 
     promise.then(() => {
           this.checkIfWorkspaces();
@@ -63,9 +63,9 @@ class WelcomeBackCtrl {
 
   checkIfWorkspaces() {
 
-    let preferences = this.codenvyProfile.getPreferences();
+    let preferences = this.cheProfile.getPreferences();
 
-    let workspaces = this.codenvyWorkspace.getWorkspaces();
+    let workspaces = this.cheWorkspace.getWorkspaces();
     // there are workspaces
     if (workspaces.length > 0) {
       // select the last one
@@ -91,7 +91,7 @@ class WelcomeBackCtrl {
   selectChoice(value) {
     // save preferences by updating the choiceUDtoIDE property
     let properties = {'choiceUDtoIDE' : value};
-    this.codenvyProfile.updatePreferences(properties);
+    this.cheProfile.updatePreferences(properties);
     this.requireUserAction = false;
     if (value) {
       this.welcomeChoice = 'Last Opened Workspace in IDE';
@@ -109,11 +109,8 @@ class WelcomeBackCtrl {
 
   removeChoice() {
     let properties = ['choiceUDtoIDE'];
-    this.codenvyProfile.removePreferences(properties);
+    this.cheProfile.removePreferences(properties);
   }
 
 
 }
-
-export default WelcomeBackCtrl;
-

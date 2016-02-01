@@ -10,28 +10,25 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is checking onBoarding state.
  * @author Oleksii Orel
  */
-class OnBoarding {
+export class OnBoarding {
 
   /**
    * Default constructor for the artifact API.
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI, imsArtifactApi) {
-    this.imsArtifactApi = imsArtifactApi;
-    this.codenvyUser = codenvyAPI.getUser();
-    this.profile = codenvyAPI.getProfile().getProfile();
-    this.preferences = codenvyAPI.getProfile().getPreferences();
+  constructor(cheAPI) {
+    this.cheUser = cheAPI.getUser();
+    this.profile = cheAPI.getProfile().getProfile();
+    this.preferences = cheAPI.getProfile().getPreferences();
   }
 
   isUserOnBoarding() {
     // if admin
-    if (this.codenvyUser.isAdmin() || this.imsArtifactApi.isImsAvailable()) {
+    if (this.cheUser.isAdmin()) {
       return false;
     }
 
@@ -42,5 +39,3 @@ class OnBoarding {
 
 }
 
-// Register this factory
-Register.getInstance().factory('onBoarding', OnBoarding);

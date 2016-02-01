@@ -10,11 +10,11 @@
  */
 'use strict';
 
-import ProjectRepositoryCtrl from '../repository/project-repository.controller';
-import ProjectRepository from '../repository/project-repository.directive';
+import {ProjectRepositoryCtrl} from '../repository/project-repository.controller';
+import {ProjectRepository} from '../repository/project-repository.directive';
 
 
-class ProjectRepositoryConfig {
+export class ProjectRepositoryConfig {
 
   constructor(register) {
     register.controller('ProjectRepositoryCtrl', ProjectRepositoryCtrl);
@@ -22,5 +22,3 @@ class ProjectRepositoryConfig {
 
   }
 }
-
-export default ProjectRepositoryConfig;

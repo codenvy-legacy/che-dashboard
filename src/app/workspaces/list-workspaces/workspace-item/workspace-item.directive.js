@@ -15,7 +15,7 @@
  * Expects in parent scope:
  * @param{object} workspace
  */
-class CodenvyWorkspaceItem {
+export class CheWorkspaceItem {
 
   /**
    * Default constructor.
@@ -25,7 +25,7 @@ class CodenvyWorkspaceItem {
 
     // scope values
     this.scope = {
-      workspace: '=cdvyWorkspaceItem'
+      workspace: '=cheWorkspaceItem'
     };
 
     this.templateUrl = 'app/workspaces/list-workspaces/workspace-item/workspace-item.html';
@@ -37,5 +37,3 @@ class CodenvyWorkspaceItem {
   }
 
 }
-
-export default CodenvyWorkspaceItem;

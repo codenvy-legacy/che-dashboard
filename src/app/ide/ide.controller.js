@@ -20,12 +20,11 @@ class IdeCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor (ideSvc, $routeParams, ideLoaderSvc, ideIFrameSvc, codenvyAPI, $rootScope, codenvyWorkspace, $timeout, $location, routeHistory) {
+  constructor (ideSvc, $routeParams, ideLoaderSvc, ideIFrameSvc, $rootScope, cheWorkspace, $timeout, $location, routeHistory) {
     this.ideSvc = ideSvc;
     this.ideIFrameSvc = ideIFrameSvc;
     this.$rootScope = $rootScope;
-    this.codenvyWorkspace = codenvyWorkspace;
-    this.codenvyAPI = codenvyAPI;
+    this.cheWorkspace = cheWorkspace;
     this.ideLoaderSvc = ideLoaderSvc;
     this.$timeout = $timeout;
     this.selectedWorkspace = null;
@@ -58,7 +57,7 @@ class IdeCtrl {
 
       this.ideIFrameSvc.addIFrame();
 
-      let promise = codenvyWorkspace.fetchWorkspaces();
+      let promise = cheWorkspace.fetchWorkspaces();
 
       promise.then(() => {
         this.updateData();
@@ -78,7 +77,7 @@ class IdeCtrl {
   updateData() {
     this.hasData = true;
 
-    this.workspaces = this.codenvyWorkspace.getWorkspaces();
+    this.workspaces = this.cheWorkspace.getWorkspaces();
     for (var i = 0; i < this.workspaces.length; i++) {
       if (this.workspaces[i].name === this.selectedWorkspaceName) {
         this.selectedWorkspace = this.workspaces[i];

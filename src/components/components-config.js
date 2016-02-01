@@ -10,37 +10,33 @@
  */
 'use strict';
 
-/*exported CodenvyAPI, WidgetConfig, AttributeConfig, GitHub, CodeMirror, CodenvyNotification, CheBranding, RoutingRedirect, OnBoarding,
- CreateProjectGitValidator, UniqueProjectNameValidator, CodenvyIdeFetcher, RouteHistory */
+// components
+import {ApiConfig} from './api/che-api-config';
+import {AttributeConfig} from './attribute/attribute-config';
+import {CheBrandingConfig} from './branding/che-branding-config';
+import {CodeMirrorConstant} from './codemirror/codemirror';
+import {GitHubService} from './github/github-service';
+import {CheIdeFetcherConfig} from './ide-fetcher/che-ide-fetcher-config';
+import {CheNotificationConfig} from './notification/che-notification-config';
+import {OnBoardingConfig} from './onboarding/onboarding-config';
+import {RoutingConfig} from './routing/routing-config';
+import {ValidatorConfig} from './validator/validator-config';
+import {WidgetConfig} from './widget/widget-config';
 
-import CodenvyAPI from './api/codenvy-api.factory';
-import WidgetConfig from './widget/widget-config';
-import AttributeConfig from './attribute/attribute-config';
+export class ComponentsConfig {
 
-// import Routing components
-import RoutingRedirect from './routing/routing-redirect.factory';
-import RouteHistory from './routing/route-history.service';
+  constructor(register) {
+    new ApiConfig(register);
+    new AttributeConfig(register);
+    new CheBrandingConfig(register);
+    new CodeMirrorConstant(register);
+    new GitHubService(register);
+    new CheIdeFetcherConfig(register);
+    new CheNotificationConfig(register);
+    new OnBoardingConfig(register);
+    new RoutingConfig(register);
+    new ValidatorConfig(register);
+    new WidgetConfig(register);
 
-// import GitHub services
-import GitHub from './github/github-service';
-
-// import custom codemirror
-import CodeMirror from './codemirror/codemirror';
-
-// import custom notification
-import CodenvyNotification from './notification/codenvy-notification.factory';
-
-// import OnBoarding
-import OnBoarding from './onboarding/onboarding.factory';
-
-import CreateProjectGitValidator from './validator/git-url-validator.directive';
-import UniqueProjectNameValidator from './validator/unique-project-name-validator.directive';
-
-// import CheBranding
-import CheBranding from './branding/che-branding.factory';
-
-import CodenvyIdeFetcher from './ide-fetcher/codenvy-ide-fetcher.service';
-
-
-// Inport IMS API definition
-import './ims/imsapi-config';
+  }
+}

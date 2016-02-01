@@ -16,7 +16,7 @@
  * @description This class is handling the controller of the dashboard
  * @author Florent Benoit
  */
-class DashboardCtrl {
+export class DashboardCtrl {
 
 
   /**
@@ -24,11 +24,8 @@ class DashboardCtrl {
    * @ngInject for Dependency injection
    */
   constructor() {
-
   }
 
 
 }
-
-export default DashboardCtrl;
 

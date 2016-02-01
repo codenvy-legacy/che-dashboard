@@ -16,7 +16,7 @@
  * @param{string} workspaceId
  * @param{object} project
  */
-class CodenvyProjectItem {
+export class CheProjectItem {
 
   /**
    * Default constructor.
@@ -29,12 +29,12 @@ class CodenvyProjectItem {
 
     // scope values
     this.scope = {
-      workspaceId: '=cdvyProjectItemWorkspaceId',
-      workspaceName: '=cdvyProjectItemWorkspaceName',
-      project: '=cdvyProjectItemProject',
-      profileCreationDate: '=cdvyProfileCreationDate',
-      isDisplayWorkspace: '=cdvyDisplayWorkspace',
-      isSelectable: '=cdvySelectable',
+      workspaceId: '=cheProjectItemWorkspaceId',
+      workspaceName: '=cheProjectItemWorkspaceName',
+      project: '=cheProjectItemProject',
+      profileCreationDate: '=cheProfileCreationDate',
+      isDisplayWorkspace: '=cheDisplayWorkspace',
+      isSelectable: '=cheSelectable',
       isSelect: '=?ngModel'
     };
 
@@ -48,5 +48,3 @@ class CodenvyProjectItem {
   }
 
 }
-
-export default CodenvyProjectItem;

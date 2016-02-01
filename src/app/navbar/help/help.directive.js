@@ -16,7 +16,7 @@
  * @description This class is handling the directive of the help
  * @author Florent Benoit
  */
-class HelpWidget {
+export class HelpWidget {
 
   /**
    * Default constructor that is using resource
@@ -33,5 +33,3 @@ class HelpWidget {
   }
 
 }
-
-export default HelpWidget;

@@ -14,7 +14,7 @@
  * Defines a directive for creating project from configuration file.
  * @author Florent Benoit
  */
-class CreateProjectConfFile {
+export class CreateProjectConfFile {
 
   /**
    * Default constructor that is using resource
@@ -41,6 +41,3 @@ class CreateProjectConfFile {
   }
 
 }
-
-export default CreateProjectConfFile;
-

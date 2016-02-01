@@ -14,8 +14,7 @@
 exports.updatedProjectName = function () {
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyHttpBackendProvider, codenvyAPIBuilder) {
-
+    .run(['$httpBackend', 'cheAPIBuilder', 'cheHttpBackendProvider', function($httpBackend, cheAPIBuilder, cheHttpBackendProvider) {
 
       // setup tests objects
       var newProjectName = 'rename-tst';
@@ -39,22 +38,21 @@ exports.updatedProjectName = function () {
       };
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
+      var cheBackend = cheHttpBackendProvider.buildBackend($httpBackend, cheAPIBuilder);
 
       // setup it
-      codenvyBackend.addProjectDetails(projectDetails);
-      codenvyBackend.addProjectDetails(newProjectDetails);
-      codenvyBackend.addUpdatedProjectName(projectDetails.workspaceId, projectDetails.name, newProjectDetails.name);
-      codenvyBackend.setup();
+      cheBackend.addProjectDetails(projectDetails);
+      cheBackend.addProjectDetails(newProjectDetails);
+      cheBackend.addUpdatedProjectName(projectDetails.workspaceId, projectDetails.name, newProjectDetails.name);
+      cheBackend.setup();
 
-    });
+    }]);
 };
 
 exports.updatedProjectDescription = function () {
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyHttpBackendProvider, codenvyAPIBuilder) {
-
+    .run(['$httpBackend', 'cheAPIBuilder', 'cheHttpBackendProvider', function($httpBackend, cheAPIBuilder, cheHttpBackendProvider) {
 
       // setup tests objects
       var newProjectDescription = 'rename-description';
@@ -78,22 +76,21 @@ exports.updatedProjectDescription = function () {
       };
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
+      var cheBackend = cheHttpBackendProvider.buildBackend($httpBackend, cheAPIBuilder);
 
       // setup it
-      codenvyBackend.addProjectDetails(projectDetails);
-      codenvyBackend.addFetchProjectDetails(projectDetails.workspaceId, projectDetails.name);
-      codenvyBackend.addUpdatedProjectDetails(projectDetails.workspaceId, projectDetails.name, newProjectDetails);
-      codenvyBackend.setup();
+      cheBackend.addProjectDetails(projectDetails);
+      cheBackend.addFetchProjectDetails(projectDetails.workspaceId, projectDetails.name);
+      cheBackend.addUpdatedProjectDetails(projectDetails.workspaceId, projectDetails.name, newProjectDetails);
+      cheBackend.setup();
 
-    });
+    }]);
 };
 
 exports.updatedProjectVisibility = function () {
 
   angular.module('userDashboardMock', ['userDashboard', 'ngMockE2E'])
-    .run(function ($httpBackend, codenvyHttpBackendProvider, codenvyAPIBuilder) {
-
+    .run(['$httpBackend', 'cheAPIBuilder', 'cheHttpBackendProvider', function($httpBackend, cheAPIBuilder, cheHttpBackendProvider) {
 
       // setup tests objects
       var newVisibility = 'public';
@@ -108,15 +105,15 @@ exports.updatedProjectVisibility = function () {
       };
 
       // create backend
-      var codenvyBackend = codenvyHttpBackendProvider.buildBackend($httpBackend, codenvyAPIBuilder);
+      var cheBackend = cheHttpBackendProvider.buildBackend($httpBackend, cheAPIBuilder);
 
       // setup it
-      codenvyBackend.addProjectDetails(projectDetails);
-      codenvyBackend.addFetchProjectDetails(projectDetails.workspaceId, projectDetails.name);
-      codenvyBackend.addSwitchVisibility(projectDetails.workspaceId, projectDetails.name, projectDetails.visibility);
-      codenvyBackend.addSwitchVisibility(projectDetails.workspaceId, projectDetails.name, newVisibility);
-      codenvyBackend.setup();
+      cheBackend.addProjectDetails(projectDetails);
+      cheBackend.addFetchProjectDetails(projectDetails.workspaceId, projectDetails.name);
+      cheBackend.addSwitchVisibility(projectDetails.workspaceId, projectDetails.name, projectDetails.visibility);
+      cheBackend.addSwitchVisibility(projectDetails.workspaceId, projectDetails.name, newVisibility);
+      cheBackend.setup();
 
-    });
+    }]);
 };
 

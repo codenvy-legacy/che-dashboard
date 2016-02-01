@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 Codenvy, S.A.
+ * Copyright (c) 2015-2016 Codenvy, S.A.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,13 +11,13 @@
 
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');
-
-var $ = require('gulp-load-plugins')();
+var conf = require('./conf');
 
 var browserSync = require('browser-sync');
 
-var paths = gulp.paths;
+var $ = require('gulp-load-plugins')();
 
 // Downloads the selenium webdriver
 gulp.task('webdriver-update', $.protractor.webdriver_update);
@@ -25,11 +25,13 @@ gulp.task('webdriver-update', $.protractor.webdriver_update);
 gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
 
 function runProtractor (done) {
+  var params = process.argv;
+  var args = params.length > 3 ? [params[3], params[4]] : [];
 
-  gulp.src(paths.e2e + '/**/*.js')
+  gulp.src(path.join(conf.paths.e2e, '/**/*.js'))
     .pipe($.protractor.protractor({
-      /*debug:true,*/
-      configFile: 'protractor.conf.js'
+      configFile: 'protractor.conf.js',
+      args: args
     }))
     .on('error', function (err) {
       // Make sure failed tests cause gulp to exit non-zero

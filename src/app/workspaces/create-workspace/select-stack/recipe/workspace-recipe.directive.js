@@ -14,7 +14,7 @@
  * Defines a directive for displaying recipe widget.
  * @author Oleksii Orel
  */
-class WorkspaceRecipe {
+export class WorkspaceRecipe {
 
   /**
    * Default constructor that is using resource
@@ -32,12 +32,10 @@ class WorkspaceRecipe {
 
     // scope values
     this.scope = {
-      recipeUrl:'=cdvyRecipeUrl',
-      recipeScript:'=cdvyRecipeScript'
+      recipeUrl:'=cheRecipeUrl',
+      recipeScript:'=cheRecipeScript'
     };
 
   }
 
 }
-
-export default WorkspaceRecipe;

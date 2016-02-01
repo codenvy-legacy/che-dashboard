@@ -16,22 +16,22 @@
  * @description This class is handling the controller of the plugins
  * @author Florent Benoit
  */
-class AdminPluginsCtrl {
+export class AdminPluginsCtrl {
 
 
   /**
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($scope, $q, $mdDialog, $interval, $location, $anchorScroll, codenvyNotification, codenvyAdminPlugins) {
+  constructor($scope, $q, $mdDialog, $interval, $location, $anchorScroll, cheNotification, cheAdminPlugins) {
     this.$scope = $scope;
     this.$q = $q;
     this.$mdDialog = $mdDialog;
     this.$interval = $interval;
     this.$location = $location;
     this.$anchorScroll = $anchorScroll;
-    this.codenvyNotification = codenvyNotification;
-    this.codenvyAdminPlugins = codenvyAdminPlugins;
+    this.cheNotification = cheNotification;
+    this.cheAdminPlugins = cheAdminPlugins;
 
     this.isLoading = true;
     this.buildInProgress = false;
@@ -45,7 +45,7 @@ class AdminPluginsCtrl {
 
 
   refreshPlugins() {
-    let promise = this.codenvyAdminPlugins.fetchPlugins();
+    let promise = this.cheAdminPlugins.fetchPlugins();
 
     promise.then(() => {
         this.updateData();
@@ -74,11 +74,11 @@ class AdminPluginsCtrl {
       .clickOutsideToClose(true)
       .targetEvent(event);
     this.$mdDialog.show(confirm).then(() => {
-      let promise = this.codenvyAdminPlugins.removePlugin(pluginName);
+      let promise = this.cheAdminPlugins.removePlugin(pluginName);
       promise.then(() => {
         this.refreshPlugins();
       }, (error) => {
-        this.codenvyNotification.showError(error.data.message ? error.data.message : 'Delete failed.');
+        this.cheNotification.showError(error.data.message ? error.data.message : 'Delete failed.');
         console.log('error', error);
       });
     });
@@ -92,7 +92,7 @@ class AdminPluginsCtrl {
    * @param pluginName name of the plugin to install and then add into staged
    */
   install(pluginName) {
-    let promise = this.codenvyAdminPlugins.updatePlugin(pluginName, 'TO_INSTALL');
+    let promise = this.cheAdminPlugins.updatePlugin(pluginName, 'TO_INSTALL');
     let installPromise = promise.then(() => {
       this.refreshPlugins();
     });
@@ -106,7 +106,7 @@ class AdminPluginsCtrl {
    * @param pluginName name of the plugin to install and then add into staged
    */
   uninstall(pluginName) {
-    let promise = this.codenvyAdminPlugins.updatePlugin(pluginName, 'TO_UNINSTALL');
+    let promise = this.cheAdminPlugins.updatePlugin(pluginName, 'TO_UNINSTALL');
     let uninstallPromise = promise.then(() => {
       this.refreshPlugins();
     });
@@ -139,7 +139,7 @@ class AdminPluginsCtrl {
     }
 
 
-    let promise = this.codenvyAdminPlugins.updatePlugin(plugin.name, action);
+    let promise = this.cheAdminPlugins.updatePlugin(plugin.name, action);
     let cancelPromise = promise.then(() => {
       this.refreshPlugins();
     });
@@ -152,7 +152,7 @@ class AdminPluginsCtrl {
   updateData() {
 
     this.plugins.length = 0;
-    let updatePlugins = this.codenvyAdminPlugins.getPlugins();
+    let updatePlugins = this.cheAdminPlugins.getPlugins();
     updatePlugins.forEach((plugin) => {
       this.plugins.push(plugin);
     });
@@ -170,7 +170,7 @@ class AdminPluginsCtrl {
 
     var pluginReference = this.getPluginReference(url);
 
-    let promise = this.codenvyAdminPlugins.addPlugin(pluginReference);
+    let promise = this.cheAdminPlugins.addPlugin(pluginReference);
     let addPromise = promise.then(() => {
       this.refreshPlugins();
     }, (error) => {
@@ -207,7 +207,7 @@ class AdminPluginsCtrl {
     this.displayLog = false;
 
 
-    let startInstallPromise = this.codenvyAdminPlugins.startInstall();
+    let startInstallPromise = this.cheAdminPlugins.startInstall();
     startInstallPromise.then((data) => {
       // get ID
       let id = data.id;
@@ -218,7 +218,7 @@ class AdminPluginsCtrl {
 
     }, (error) => {
       this.buildInProgress = false;
-      this.codenvyNotification.showError(error.data.message ? error.data.message : error);
+      this.cheNotification.showError(error.data.message ? error.data.message : error);
     });
 
   }
@@ -230,7 +230,7 @@ class AdminPluginsCtrl {
   }
 
   checkInstall(id) {
-    let checkStatusPromise = this.codenvyAdminPlugins.getInstallDetails(id);
+    let checkStatusPromise = this.cheAdminPlugins.getInstallDetails(id);
 
     checkStatusPromise.then((data) => {
 
@@ -264,7 +264,7 @@ class AdminPluginsCtrl {
    */
   reloadChe() {
     this.reloadcheInProgress = true;
-    let promise = this.codenvyAdminPlugins.reloadCheApp();
+    let promise = this.cheAdminPlugins.reloadCheApp();
     promise.then(() => {
       this.reloadcheInProgress = false;
       this.reloadcheDone = true;
@@ -287,6 +287,3 @@ class AdminPluginsCtrl {
 
 
 }
-
-export default AdminPluginsCtrl;
-

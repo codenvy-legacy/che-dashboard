@@ -75,17 +75,17 @@ $submenu-font-size = 12px
 .navbar-submenu-content a.md-button
   height 36px
 
-.admin-navbar-menu md-list-item a.md-button.cdvy-navbar-selected span
+.admin-navbar-menu md-list-item a.md-button.che-navbar-selected span
   color $white-color
 
 /* background color */
 
-.admin-navbar-menu md-list-item a.md-button.cdvy-navbar-selected,
+.admin-navbar-menu md-list-item a.md-button.che-navbar-selected,
 .admin-navbar-menu md-list-item a.md-button:hover,
 .admin-navbar-menu md-menu a.md-button:hover
   background-color $active-background-color
 
-.admin-navbar-menu md-menu a.md-button.cdvy-navbar-selected
+.admin-navbar-menu md-menu a.md-button.che-navbar-selected
   background-color inherit
 
 /* layout */
@@ -126,16 +126,16 @@ $submenu-font-size = 12px
   text-decoration none
 
 /* uselessly long selector to pump up specificity */
-.admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button.cdvy-navbar-selected,
+.admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button.che-navbar-selected,
 .admin-navbar-menu section.navbar-subsection md-list md-item.navbar-subsection-item md-list-item a.md-button:hover,
 .navbar-submenu-content md-menu-item a.md-button:hover
   background-color $active-background-color
 
-.admin-navbar-menu a:hover, .admin-navbar-menu a.cdvy-navbar-selected
+.admin-navbar-menu a:hover, .admin-navbar-menu a.che-navbar-selected
   color inherit
 
 /* effect */
-.admin-navbar-menu md-list-item a.cdvy-navbar-selected .md-ripple-container:before
+.admin-navbar-menu .che-navbar-selected:before
   content ""
   left 0
   top 4px
@@ -175,7 +175,7 @@ $submenu-font-size = 12px
 
 /* user avatar */
 .admin-navbar-menu .navbar-identity .developers-face
-  codenvy-developers-face()
+  che-developers-face()
   -webkit-box-shadow 0 0 0 1px $faces-shadow
   -moz-box-shadow 0 0 0 1px $faces-shadow
   box-shadow 0 0 0 1px $faces-shadow

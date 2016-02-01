@@ -24,7 +24,7 @@
  *
  * @author Florent Benoit
  */
-class ReadyToGoStacks {
+export class ReadyToGoStacks {
 
   /**
    * Default constructor that is using resource
@@ -40,13 +40,10 @@ class ReadyToGoStacks {
 
     // scope values
     this.scope = {
-      stack: '=cdvyStack',
-      onChange: '&cdvyOnChange'     
+      stack: '=cheStack',
+      onChange: '&cheOnChange'
     };
 
   }
 
 }
-
-export default ReadyToGoStacks;
-

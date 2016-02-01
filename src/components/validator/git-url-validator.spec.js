@@ -23,20 +23,20 @@ describe('git-url-validator', function() {
   var httpBackend;
 
   /**
-   * Codenvy backend
+   * Che backend
    */
-  var codenvyBackend;
+  var cheBackend;
 
-  beforeEach(module('userDashboard'));
+  beforeEach(angular.mock.module('userDashboard'));
 
 
 
-  beforeEach(inject(function($compile, $rootScope, codenvyHttpBackend) {
+  beforeEach(inject(function($compile, $rootScope, cheHttpBackend) {
     $scope = $rootScope;
     // setup backend
-    codenvyBackend = codenvyHttpBackend;
-    httpBackend = codenvyHttpBackend.getHttpBackend();
-    codenvyBackend.setup();
+    cheBackend = cheHttpBackend;
+    httpBackend = cheHttpBackend.getHttpBackend();
+    cheBackend.setup();
 
     var element = angular.element(
       '<form name="form">' +
@@ -74,8 +74,8 @@ describe('git-url-validator', function() {
 
 
     it('gitHUb URL', function() {
-      form.url.$setViewValue('https://github.com/codenvy/user-dashboard');
-      expect($scope.model.myURL).toEqual('https://github.com/codenvy/user-dashboard');
+      form.url.$setViewValue('https://github.com/eclipse/che-dashboard');
+      expect($scope.model.myURL).toEqual('https://github.com/eclipse/che-dashboard');
       expect(form.url.$valid).toBe(true);
     });
 

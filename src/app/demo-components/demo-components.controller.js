@@ -14,7 +14,7 @@
  * This class is handling the controller for the demo of components
  * @author Florent Benoit
  */
-class DemoComponentsCtrl {
+export class DemoComponentsCtrl {
 
   /**
    * Default constructor that is using resource
@@ -47,7 +47,4 @@ class DemoComponentsCtrl {
   }
 
 
-
 }
-
-export default DemoComponentsCtrl;

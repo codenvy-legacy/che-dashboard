@@ -10,4 +10,11 @@
  */
 'use strict';
 
-angular.module('userDashboard').constant('proxySettings', '%CONTENT%');
+export class ProxySettingsConfig {
+
+  constructor(register) {
+    // Register this factory
+    register.app.constant('proxySettings', '%CONTENT%');
+
+  }
+}

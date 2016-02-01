@@ -15,7 +15,7 @@
  * It will change upon width of the screen
  * @author Oleksii Kurinnyi
  */
-class WorkspaceStatusIndicator {
+export class WorkspaceStatusIndicator {
 
   /**
    * Default constructor that is using resource
@@ -29,9 +29,7 @@ class WorkspaceStatusIndicator {
 
     // scope values
     this.scope = {
-      status : '=cdvyStatus'
+      status : '=cheStatus'
     };
   }
 }
-
-export default WorkspaceStatusIndicator;

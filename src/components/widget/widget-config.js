@@ -10,76 +10,114 @@
  */
 'use strict';
 
-/*exported CodenvyButtonPrimary, CodenvyButtonDefault, CodenvyButtonDanger, CodenvyButtonWarning, CodenvyList, CodenvyListItem, CodenvyListTitle,
- CodenvyHtmlSource, CodenvyInput, CodenvySlider, CodenvyRamAllocationSlider, CodenvyTab, CodenvyPanel, CodenvySelecterCtrl, CodenvySelecter, CodenvyToggleCtrl, CodenvyToggleButton,
- CodenvyToggle, CodenvyToolbar, CodenvyLabel, CodenvyLabelContainer, CodenvyLink, CodenvyButtonDropdownCtrl, CodenvyButtonDropdown,
- CodenvyPanelCtrl, CodenvyListItemChecked, CodenvySelect, CodenvyClipboard, CodenvyEmptyState, CodenvySearch, CodenvyEventLogger,
- CodenvyLearnMoreCtrl, CodenvyLearnMore, CodenvyLearnMoreItem, CodenvyLearnMoreTemplate, CodenvyBoxCtrl, CodenvyBox, CodenvyTextInfo,
- CodenvyDropzoneCtrl, CodenvyDropzone, CodenvySimpleSelecterCtrl, CodenvySimpleSelecter, CodenvyButtonNotice */
 
-import CodenvyButtonPrimary from './button/cdvy-button-primary.directive';
-import CodenvyButtonDanger from './button/cdvy-button-danger.directive';
-import CodenvyButtonDefault from './button/cdvy-button-default.directive';
-import CodenvyButtonNotice from './button/cdvy-button-notice.directive';
-import CodenvyButtonWarning from './button/cdvy-button-warning.directive';
+import {CheBoxCtrl} from './box/che-box.controller';
+import {CheBox} from './box/che-box.directive';
+import {CheButtonPrimary} from './button/che-button-primary.directive';
+import {CheButtonDanger} from './button/che-button-danger.directive';
+import {CheButtonDefault} from './button/che-button-default.directive';
+import {CheButtonNotice} from './button/che-button-notice.directive';
+import {CheButtonWarning} from './button/che-button-warning.directive';
+import {CheButtonDropdownCtrl} from './button-dropdown/che-button-dropdown.controller';
+import {CheButtonDropdown} from './button-dropdown/che-button-dropdown.directive';
+import {CheClipboard} from './copy-clipboard/che-clipboard.directive';
+import {CheDropZoneCtrl} from './dropzone/che-dropzone.controller';
+import {CheDropZone} from './dropzone/che-dropzone.directive';
+import {CheEmptyState} from './empty-state/che-empty-state.directive';
+import {CheEventLogger} from './event-logger/che-event-logger.directive';
+import {CheFrame} from './frame/che-frame.directive';
+import {CheHtmlSource} from './html-source/che-html-source.directive';
+import {CheInput} from './input/che-input.directive';
+import {CheLabel} from './label/che-label.directive';
+import {CheLabelContainer} from './label-container/che-label-container.directive';
+import {CheLearnMoreCtrl} from './learn-more/che-learn-more.controller';
+import {CheLearnMore} from './learn-more/che-learn-more.directive';
+import {CheLearnMoreItem} from './learn-more/che-learn-more-item.directive';
+import {CheLearnMoreTemplate} from './learn-more/che-learn-more-template.directive';
+import {CheLink} from './link/che-link.directive';
+import {CheList} from './list/che-list.directive';
+import {CheListItem} from './list/che-list-item.directive';
+import {CheListTitle} from './list/che-list-title.directive';
+import {CheListItemChecked} from './list/che-list-item-checked.directive';
+import {ChePanelCtrl} from './panel/che-panel.controller';
+import {ChePanel} from './panel/che-panel.directive';
+import {CheSearch} from './search/che-search.directive';
+import {CheSelect} from './select/che-select.directive';
+import {CheSelecterCtrl} from './selecter/che-selecter.controller';
+import {CheSelecter} from './selecter/che-selecter.directive';
+import {CheSimpleSelecterCtrl} from './simple-selecter/che-simple-selecter.controller';
+import {CheSimpleSelecter} from './simple-selecter/che-simple-selecter.directive';
+import {CheSlider} from './slider/che-slider.directive';
+import {CheTextInfo} from './text-info/che-text-info.directive';
+import {CheToggleCtrl} from './toggle-button/che-toggle.controller';
+import {CheToggleButton} from './toggle-button/che-toggle-button.directive';
+import {CheToggle} from './toggle-button/che-toggle.directive';
+import {CheToolbar} from './toolbar/che-toolbar.directive';
 
 
-import CodenvyBoxCtrl from './box/cdvy-box.controller';
-import CodenvyBox from './box/cdvy-box.directive';
+export class WidgetConfig {
 
-import CodenvyDropzoneCtrl from './dropzone/cdvy-dropzone.controller';
-import CodenvyDropzone from './dropzone/cdvy-dropzone.directive';
+  constructor(register) {
 
+    //box
+    register.controller('CheBoxCtrl', CheBoxCtrl)
+      .directive('cheBox', CheBox)
 
-import CodenvyLink from './link/cdvy-link.directive';
+      // button
+      .directive('cheButtonPrimary', CheButtonPrimary)
+      .directive('cheButtonDanger', CheButtonDanger)
+      .directive('cheButtonDefault', CheButtonDefault)
+      .directive('cheButtonNotice', CheButtonNotice)
+      .directive('cheButtonWarning', CheButtonWarning)
+      // dropdown
+      .controller('CheButtonDropdownCtrl', CheButtonDropdownCtrl)
+      .directive('cheButtonDropdown', CheButtonDropdown)
+      //clipboard
+      .directive('cheClipboard', CheClipboard)
+      //dropzone
+      .controller('CheDropZoneCtrl', CheDropZoneCtrl)
+      .directive('cheDropzone', CheDropZone)
+      .directive('cheEmptyState', CheEmptyState)
+      .directive('cheEventLogger', CheEventLogger)
+      .directive('cheFrame', CheFrame)
+      .directive('cheHtmlSource', CheHtmlSource)
+      .directive('cheInput', CheInput)
+      .directive('cheLabel', CheLabel)
+      .directive('cheLabelContainer', CheLabelContainer)
 
-import CodenvyButtonDropdownCtrl from './button-dropdown/cdvy-button-dropdown.controller';
-import CodenvyButtonDropdown from './button-dropdown/cdvy-button-dropdown.directive';
+      .controller('CheLearnMoreCtrl', CheLearnMoreCtrl)
+      .directive('cheLearnMore', CheLearnMore)
+      .directive('cheLearnMoreItem', CheLearnMoreItem)
+      .directive('cheLearnMoreTemplate', CheLearnMoreTemplate)
 
-import CodenvyHtmlSource from './html-source/cdvy-html-source.directive';
+      .directive('cheLink', CheLink)
 
-import CodenvyInput from './input/cdvy-input.directive';
+      .directive('cheListItemChecked', CheListItemChecked)
+      .directive('cheListTitle', CheListTitle)
+      .directive('cheList', CheList)
+      .directive('cheListItem', CheListItem)
 
-import CodenvySlider from './slider/cdvy-slider.directive';
+      .controller('ChePanelCtrl', ChePanelCtrl)
+      .directive('chePanel', ChePanel)
 
-import CodenvyPanelCtrl from './panel/cdvy-panel.controller';
-import CodenvyPanel from './panel/cdvy-panel.directive';
+      .directive('cheSearch', CheSearch)
 
-import CodenvyLabelContainer from './label-container/cdvy-label-container.directive';
+      .directive('cheSelect', CheSelect)
 
-import CodenvyList from './list/cdvy-list.directive';
-import CodenvyListItem from './list/cdvy-list-item.directive';
-import CodenvyListTitle from './list/cdvy-list-title.directive';
-import CodenvyListItemChecked from './list/cdvy-list-item-checked.directive';
+      .controller('CheSelecterCtrl', CheSelecterCtrl)
+      .directive('cheSelecter', CheSelecter)
 
-import CodenvySelecterCtrl from './selecter/cdvy-selecter.controller';
-import CodenvySelecter from './selecter/cdvy-selecter.directive';
-import CodenvySimpleSelecterCtrl from './simple-selecter/cdvy-simple-selecter.controller';
-import CodenvySimpleSelecter from './simple-selecter/cdvy-simple-selecter.directive';
+      .controller('CheSimpleSelecterCtrl', CheSimpleSelecterCtrl)
+      .directive('cheSimpleSelecter', CheSimpleSelecter)
 
-import CodenvyToggleCtrl from './toggle-button/cdvy-toggle.controller';
-import CodenvyToggleButton from './toggle-button/cdvy-toggle-button.directive';
-import CodenvyToggle from './toggle-button/cdvy-toggle.directive';
+      .directive('cheSlider', CheSlider)
+      .directive('cheTextInfo', CheTextInfo)
 
-import CodenvyToolbar from './toolbar/toolbar.directive';
+      .controller('CheToggleCtrl', CheToggleCtrl)
+      .directive('cheToggleButton', CheToggleButton)
+      .directive('cheToggle', CheToggle)
 
-import CodenvyLabel from './label/cdvy-label.directive';
+      .directive('cheToolbar', CheToolbar);
 
-import CodenvyTextInfo from './text-info/cdvy-text-info.directive';
-
-import CodenvySelect from './select/cdvy-select.directive';
-
-import CodenvyLearnMoreCtrl from './learn-more/cdvy-learn-more.controller';
-import CodenvyLearnMore from './learn-more/cdvy-learn-more.directive';
-import CodenvyLearnMoreItem from './learn-more/cdvy-learn-more-item.directive';
-import CodenvyLearnMoreTemplate from './learn-more/cdvy-learn-more-template.directive';
-
-import CodenvyClipboard from './copy-clipboard/cdvy-clipboard.directive';
-
-import CodenvyEmptyState from './empty-state/cdvy-empty-state.directive';
-
-import CodenvySearch from './search/cdvy-search.directive';
-
-import CodenvyEventLogger from './event-logger/cdvy-event-logger.directive';
-
-import './frame/cdvy-frame.directive';
+  }
+}

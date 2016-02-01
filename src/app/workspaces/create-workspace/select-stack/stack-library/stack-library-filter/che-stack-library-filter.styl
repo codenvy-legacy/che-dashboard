@@ -1,0 +1,136 @@
+.stack-library-filter
+  padding-bottom 20px
+
+  .md-chip-input-container
+    margin 0 !important
+
+    input
+      height 17px !important
+      line-height 17px !important
+      font-size 11px
+      text-transform uppercase
+
+.stack-library-filter
+  .md-chips
+    padding 0 0 2px 0
+    margin-right 0px
+
+    .md-chip:last-of-type
+      margin-right 16px
+
+    .md-chip
+      border-radius 3px !important
+      border none !important
+      padding 0 !important
+      height 17px
+      line-height 16px
+      font-size 11px
+      font-weight bold
+
+      // common
+      md-chip-template
+
+        div
+          color #fff !important
+          display inline-block
+          height 17px
+
+        .stack-library-filter-tag-text, .stack-library-filter-suggestion-text
+          border 1px solid #fff
+          border-radius 3px !important
+
+        .stack-library-filter-tag-btn, .stack-library-filter-suggestion-btn
+          border-left 1px solid #fff
+          position absolute
+          right 0
+
+        .stack-library-filter-suggestion-btn
+
+          cursor pointer
+
+// tags
+.stack-library-filter-tags
+  padding-bottom 10px
+
+  .md-chips:not(.md-focused)
+    box-shadow 0 1px #E0E0E0 !important
+  .md-chips.md-focused
+    box-shadow 0 1px #4A90E2 !important
+
+  .md-chips
+    .md-chip-content
+      padding-right 0 !important
+
+    // hide native 'remove' button
+    .md-chip .md-chip-remove
+      width 18px
+      height 18px
+
+      md-icon
+        visibility hidden
+
+    .md-chip
+      .stack-library-filter-tag-text
+        padding 0 25px 0 11px
+
+      .stack-library-filter-tag-btn
+        border-left-width 2px !important
+        line-height 16px
+        font-size 14px
+        padding 0 3px
+
+    // not focused
+    .md-chip:not(.md-focused)
+      background-color #5f8ae6 !important
+
+      .stack-library-filter-tag-text
+        border-color #5f8ae6
+
+      .stack-library-filter-tag-btn
+        border-left-color #aac2f0 !important
+
+    // focused
+    .md-chip.md-focused
+      .stack-library-filter-tag-text
+        border-color #21252b
+
+      .stack-library-filter-tag-btn
+        border-left-color #c5c5c5 !important
+
+// suggestions
+.stack-library-filter-suggestions
+
+  .md-chips
+    box-shadow none !important
+
+    .md-chip
+      .stack-library-filter-suggestion-text
+        padding 0 28px 0 11px
+
+      .stack-library-filter-suggestion-btn
+        line-height 19px
+        font-size 14px
+        padding 0 5px
+
+    // unselected
+    .md-chip:not(.stack-library-filter-suggestion-selected)
+      background-color #c5c5c5 !important
+
+      .stack-library-filter-suggestion-text
+        border-color #c5c5c5 !important
+
+    // selected
+    .md-chip.stack-library-filter-suggestion-selected
+      background-color #9cb3cf !important
+
+      .stack-library-filter-suggestion-text
+        border-color #5f8ae6 !important
+
+// other
+.stack-library-filter-description
+  font-size 12px
+  color $disabled-color
+  line-height 12px
+
+.stack-library-filter-description-bold
+  font-weight bold

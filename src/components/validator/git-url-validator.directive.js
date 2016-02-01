@@ -10,13 +10,12 @@
  */
 'use strict';
 
-import Register from '../utils/register';
 
 /**
  * Defines a directive for checking git URL
  * @author Florent Benoit
  */
-class GitUrlValidator {
+export class GitUrlValidator {
 
   /**
    * Default constructor that is using resource
@@ -39,7 +38,3 @@ class GitUrlValidator {
   }
 
 }
-
-export default GitUrlValidator;
-
-Register.getInstance().directive('gitUrl', GitUrlValidator);

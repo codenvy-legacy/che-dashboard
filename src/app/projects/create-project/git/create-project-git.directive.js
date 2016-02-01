@@ -14,7 +14,7 @@
  * Defines a directive for creating project from git.
  * @author Florent Benoit
  */
-class CreateProjectGit {
+export class CreateProjectGit {
 
   /**
    * Default constructor that is using resource
@@ -90,6 +90,3 @@ class CreateProjectGit {
 
   }
 }
-
-export default CreateProjectGit;
-

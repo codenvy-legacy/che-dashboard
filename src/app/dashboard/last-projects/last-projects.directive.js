@@ -16,7 +16,7 @@
  * @description This class is handling the directive of the listing last opened projects in the dashboard
  * @author Florent Benoit
  */
-class DashboardLastProjects {
+export class DashboardLastProjects {
 
 
   /**
@@ -33,6 +33,3 @@ class DashboardLastProjects {
   }
 
 }
-
-export default DashboardLastProjects;
-

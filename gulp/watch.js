@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 Codenvy, S.A.
+ * Copyright (c) 2015-2016 Codenvy, S.A.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,15 +11,33 @@
 
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');
+var conf = require('./conf');
 
-var paths = gulp.paths;
+var browserSync = require('browser-sync');
 
-gulp.task('watch', ['inject'], function () {
+function isOnlyChange(event) {
+  return event.type === 'changed';
+}
+
+gulp.task('watch', ['scripts:watch', 'inject'], function () {
+
+  gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject']);
+
   gulp.watch([
-    paths.src + '/*.html',
-    paths.src + '/{app,components}/**/*.styl',
-    paths.src + '/{app,components}/**/*.js',
-    'bower.json'
-  ], ['inject']);
+    path.join(conf.paths.src, '/app/**/*.css'),
+    path.join(conf.paths.src, '/app/**/*.styl')
+  ], function(event) {
+    if(isOnlyChange(event)) {
+      gulp.start('styles');
+    } else {
+      gulp.start('inject');
+    }
+  });
+
+
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {
+    browserSync.reload(event.path);
+  });
 });

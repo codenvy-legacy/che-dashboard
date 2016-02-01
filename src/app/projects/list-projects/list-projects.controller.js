@@ -16,27 +16,27 @@
  * @description This class is handling the controller for listing the projects
  * @author Florent Benoit
  */
-class ListProjectsCtrl {
+export class ListProjectsCtrl {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($mdDialog, codenvyAPI, codenvyNotification) {
+  constructor($mdDialog, cheAPI, cheNotification) {
     this.$mdDialog = $mdDialog;
-    this.codenvyAPI = codenvyAPI;
-    this.codenvyNotification = codenvyNotification;
+    this.cheAPI = cheAPI;
+    this.cheNotification = cheNotification;
 
     this.filtersWorkspaceSelected = {};
     this.projectFilter = {name: ''};
     this.projectsSelectedStatus = {};
-    this.workspacesById = codenvyAPI.getWorkspace().getWorkspacesById();
+    this.workspacesById = cheAPI.getWorkspace().getWorkspacesById();
 
 
 
     this.isLoading = true;
     // fetch workspaces when initializing
-    let promise = codenvyAPI.getWorkspace().fetchWorkspaces();
+    let promise = cheAPI.getWorkspace().fetchWorkspaces();
 
     promise.then(() => {
         this.updateData();
@@ -49,9 +49,9 @@ class ListProjectsCtrl {
         }
       });
 
-    let profilePreferences = codenvyAPI.getProfile().getPreferences();
+    let profilePreferences = cheAPI.getProfile().getPreferences();
 
-    this.profileCreationDate = profilePreferences['codenvy:created'];
+    this.profileCreationDate = profilePreferences['che:created'];
 
     this.dropDownOptionsList = [
       {
@@ -71,9 +71,9 @@ class ListProjectsCtrl {
   }
 
   updateData() {
-    this.workspaces = this.codenvyAPI.getWorkspace().getWorkspaces();
-    this.projectsPerWorkspace = this.codenvyAPI.getProject().getProjectsByWorkspace();
-    this.projects = this.codenvyAPI.getProject().getAllProjects();
+    this.workspaces = this.cheAPI.getWorkspace().getWorkspaces();
+    this.projectsPerWorkspace = this.cheAPI.getProject().getProjectsByWorkspace();
+    this.projects = this.cheAPI.getProject().getAllProjects();
     // init the filters of workspaces
     this.workspaces.forEach((workspace) => {
       this.filtersWorkspaceSelected[workspace.id] = true;
@@ -83,7 +83,7 @@ class ListProjectsCtrl {
   /**
    * Gets the name of the workspace based on its ID
    * @param workspaceId
-   * @returns {CodenvyWorkspaceReferenceBuilder.name|*}
+   * @returns {CheWorkspace.name|*}
    */
   getWorkspaceName(workspaceId) {
     return this.workspacesById.get(workspaceId).name;
@@ -160,35 +160,33 @@ class ListProjectsCtrl {
             var partsArray = key.split('/');
             if (partsArray.length === 2) {
               this.projectsSelectedStatus[key] = false;
-              let promise = this.codenvyAPI.getProject().remove(partsArray[0], partsArray[1]);
+              let promise = this.cheAPI.getProject().remove(partsArray[0], partsArray[1]);
               promise.then(() => {
                 queueLenth--;
                 if (!queueLenth) {
                   if (isError) {
-                    this.codenvyNotification.showError('Delete failed.');
+                    this.cheNotification.showError('Delete failed.');
                   } else {
-                    this.codenvyNotification.showInfo('Has been successfully removed.');
+                    this.cheNotification.showInfo('Has been successfully removed.');
                   }
                 }
               }, (error) => {
                 queueLenth--;
                 if (!queueLenth) {
-                  this.codenvyNotification.showError('Delete failed.');
+                  this.cheNotification.showError('Delete failed.');
                 }
                 console.log('error', error);
               });
             } else {
-              this.codenvyNotification.showError('No such project.');
+              this.cheNotification.showError('No such project.');
             }
           });
         });
       } else {
-        this.codenvyNotification.showError('No selected projects.');
+        this.cheNotification.showError('No selected projects.');
       }
     } else {
-      this.codenvyNotification.showError('No selected projects.');
+      this.cheNotification.showError('No selected projects.');
     }
   }
 }
-
-export default ListProjectsCtrl;

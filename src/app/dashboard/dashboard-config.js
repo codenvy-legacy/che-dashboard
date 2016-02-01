@@ -10,23 +10,15 @@
  */
 'use strict';
 
-import DashboardCtrl from './dashboard.controller';
-import DashboardLearnMoreCtrl from './learn-more/dashboard-learn-more.controller';
-import DashboardLearnMore from './learn-more/dashboard-learn-more.directive';
-import DashboardLastProjectsCtrl from './last-projects/last-projects.controller';
-import DashboardLastProjects from './last-projects/last-projects.directive';
-import DashboardOverviewCtrl from './overview/overview.controller';
-import DashboardOverview from './overview/overview.directive';
-import WelcomeBackCtrl from './welcome-back/welcome-back.controller';
-import WelcomeBack from './welcome-back/welcome-back.directive';
+import {DashboardCtrl} from './dashboard.controller';
+import {DashboardLastProjectsCtrl} from './last-projects/last-projects.controller';
+import {DashboardLastProjects} from './last-projects/last-projects.directive';
+import {WelcomeBackCtrl} from './welcome-back/welcome-back.controller';
+import {WelcomeBack} from './welcome-back/welcome-back.directive';
 
-class DashboardConfig {
+export class DashboardConfig {
 
   constructor(register) {
-
-    // overview
-    register.controller('DashboardOverviewCtrl', DashboardOverviewCtrl);
-    register.directive('dashboardOverview', DashboardOverview);
 
     // last projects
     register.controller('DashboardLastProjectsCtrl', DashboardLastProjectsCtrl);
@@ -35,10 +27,6 @@ class DashboardConfig {
     // welcome back
     register.controller('WelcomeBackCtrl', WelcomeBackCtrl);
     register.directive('welcomeBack', WelcomeBack);
-
-    // learn-more
-    register.controller('DashboardLearnMoreCtrl', DashboardLearnMoreCtrl);
-    register.directive('dashboardLearnMore', DashboardLearnMore);
 
     // controller
     register.controller('DashboardCtrl', DashboardCtrl);
@@ -50,10 +38,10 @@ class DashboardConfig {
         controller: 'DashboardCtrl',
         controllerAs: 'dashboardCtrl',
         resolve: {
-          check: ['$q', 'codenvyService', 'codenvyAdminService', function ($q, codenvyService, codenvyAdminService) {
+          check: ['$q', 'cheService', 'cheAdminService', function ($q, cheService, cheAdminService) {
             var defer = $q.defer();
-            codenvyService.fetchServices().then(() => {
-              codenvyAdminService.fetchServices().then(() => {
+            cheService.fetchServices().then(() => {
+              cheAdminService.fetchServices().then(() => {
                 defer.resolve();
               }, () => {
                 defer.resolve();
@@ -69,5 +57,3 @@ class DashboardConfig {
 }
 
 
-
-export default DashboardConfig;

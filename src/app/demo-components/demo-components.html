@@ -14,23 +14,23 @@
   <md-tab label="Font">
 
     <p>Headings</p>
-    <cdvy-html-source>
+    <che-html-source>
       <h1>This is h1 <small>Secondary text</small></h1>
       <h2>This is h2 <small>Secondary text</small></h2>
       <h3>This is h3 <small>Secondary text</small></h3>
       <h4>This is h4 <small>Secondary text</small></h4>
       <h5>This is h5 <small>Secondary text</small></h5>
       <h6>This is h6 <small>Secondary text</small></h6>
-    </cdvy-html-source>
+    </che-html-source>
   </md-tab>
   <md-tab label="Panel">
-    <cdvy-html-source>
+    <che-html-source>
 
-      <cdvy-panel cdvy-title="My first panel"></cdvy-panel>
+      <che-panel che-title="My first panel"></che-panel>
 
-      <cdvy-panel cdvy-title="Another panel" cdvy-title-icon="material-design icon-ic_check_box_outline_blank_24px"></cdvy-panel>
-      <cdvy-panel cdvy-title="Another panel" cdvy-title-icon="material-design icon-ic_check_24px"></cdvy-panel>
-      <cdvy-panel cdvy-title="Yet another panel"><span>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.
+      <che-panel che-title="Another panel" che-title-icon="material-design icon-ic_check_box_outline_blank_24px"></che-panel>
+      <che-panel che-title="Another panel" che-title-icon="material-design icon-ic_check_24px"></che-panel>
+      <che-panel che-title="Yet another panel"><span>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.
 
 Isdem diebus Apollinaris Domitiani gener, paulo ante agens palatii Caesaris curam, ad Mesopotamiam missus a socero per militares numeros immodice scrutabatur, an quaedam altiora meditantis iam Galli secreta susceperint scripta, qui conpertis Antiochiae gestis per minorem Armeniam lapsus Constantinopolim petit exindeque per protectores retractus artissime tenebatur.
 
@@ -39,68 +39,68 @@ Sed tamen haec cum ita tutius observentur, quidam vigore artuum inminuto rogati 
 Dumque ibi diu moratur commeatus opperiens, quorum translationem ex Aquitania verni imbres solito crebriores prohibebant auctique torrentes, Herculanus advenit protector domesticus, Hermogenis ex magistro equitum filius, apud Constantinopolim, ut supra rettulimus, populari quondam turbela discerpti. quo verissime referente quae Gallus egerat, damnis super praeteritis maerens et futurorum timore suspensus angorem animi quam diu potuit emendabat.
 
 Ultima Syriarum est Palaestina per intervalla magna protenta, cultis abundans terris et nitidis et civitates habens quasdam egregias, nullam nulli cedentem sed sibi vicissim velut ad perpendiculum aemulas: Caesaream, quam ad honorem Octaviani principis exaedificavit Herodes, et Eleutheropolim et Neapolim itidemque Ascalonem Gazam aevo superiore exstructas.</span>
-      </cdvy-panel>
+      </che-panel>
 
-    </cdvy-html-source>
+    </che-html-source>
   </md-tab>
   <md-tab label="Selecter" >
     <div>Selected book is {{demoComponentsCtrl.selectedBook}}</div>
 
     <div layout="row" layout-wrap>
-      <cdvy-selecter ng-repeat="(author, books) in demoComponentsCtrl.booksByAuthor"
+      <che-selecter ng-repeat="(author, books) in demoComponentsCtrl.booksByAuthor"
                      ng-model="demoComponentsCtrl.selectedBook"
-                     cdvy-values="books"
-                     cdvy-name="PickupBook"
-                     cdvy-title="{{author}}"
-                     cdvy-icon="fa fa-cube"
-                     cdvy-callback-controller="demoComponentsCtrl"
-                     cdvy-options="book.title for book in values" />
+                     che-values="books"
+                     che-name="PickupBook"
+                     che-title="{{author}}"
+                     che-icon="fa fa-cube"
+                     che-callback-controller="demoComponentsCtrl"
+                     che-options="book.title for book in values" />
     </div>
   </md-tab>
 
   <md-tab label="Icons" >
     <div>Material design icons</div>
-    <cdvy-html-source>
+    <che-html-source>
 
       <md-icon md-font-icon="material-design icon-ic_account_balance_24px"></md-icon>
       <md-icon md-font-icon="material-design icon-ic_lock_24px"></md-icon>
       <md-icon md-font-icon="material-design icon-ic_lock_open_24px"></md-icon>
-      <md-icon md-font-icon="cdvyfont cdvyico-blank"></md-icon>
-      <md-icon md-font-icon="cdvyfont cdvyico-cpp"></md-icon>
-      <md-icon md-font-icon="cdvyfont cdvyico-java"></md-icon>
-    </cdvy-html-source>
+      <md-icon md-font-icon="chefont cheico-blank"></md-icon>
+      <md-icon md-font-icon="chefont cheico-cpp"></md-icon>
+      <md-icon md-font-icon="chefont cheico-java"></md-icon>
+    </che-html-source>
     </div>
   </md-tab>
 
 
   <md-tab label="Buttons" >
     <div layout="column" >
-      <cdvy-html-source>
+      <che-html-source>
 
-        <cdvy-panel cdvy-title="Buttons" layout="column">
-          <cdvy-button-primary cdvy-button-title="Primary button"></cdvy-button-primary>
-          <cdvy-button-primary cdvy-button-title="Primary button with icon" cdvy-button-icon="fa fa-file-text-o"></cdvy-button-primary>
+        <che-panel che-title="Buttons" layout="column">
+          <che-button-primary che-button-title="Primary button"></che-button-primary>
+          <che-button-primary che-button-title="Primary button with icon" che-button-icon="fa fa-file-text-o"></che-button-primary>
 
-          <cdvy-button-default cdvy-button-title="default disabled button"
+          <che-button-default che-button-title="default disabled button"
                                ng-click="demoComponentsCtrl.toggleDisabled2()"
                                ng-disabled="!demoComponentsCtrl.isToggleDisabled2()">
-          </cdvy-button-default>
+          </che-button-default>
 
-          <cdvy-button-default cdvy-button-title="default button icon" cdvy-button-icon="fa fa-check-square">
-          </cdvy-button-default>
+          <che-button-default che-button-title="default button icon" che-button-icon="fa fa-check-square">
+          </che-button-default>
 
 
 
-          <cdvy-button-danger cdvy-button-title="Danger button"></cdvy-button-danger>
-          <cdvy-button-danger cdvy-button-title="Danger button icon" cdvy-button-icon="fa fa-trash"></cdvy-button-danger>
-        </cdvy-panel>
-      </cdvy-html-source>
+          <che-button-danger che-button-title="Danger button"></che-button-danger>
+          <che-button-danger che-button-title="Danger button icon" che-button-icon="fa fa-trash"></che-button-danger>
+        </che-panel>
+      </che-html-source>
 
       <p>Selected value of toggle is : {{demoComponentsCtrl.selectedToggle}}</p>
-      <cdvy-toggle ng-init="demoComponentsCtrl.selectedToggle='Public'" ng-model="demoComponentsCtrl.selectedToggle">
-        <cdvy-toggle-button cdvy-font-icon="fa fa-lock" cdvy-title="Public"></cdvy-toggle-button>
-        <cdvy-toggle-button cdvy-font-icon="fa fa-unlock" cdvy-title="Private"></cdvy-toggle-button>
-      </cdvy-toggle>
+      <che-toggle ng-init="demoComponentsCtrl.selectedToggle='Public'" ng-model="demoComponentsCtrl.selectedToggle">
+        <che-toggle-button che-font-icon="fa fa-lock" che-title="Public"></che-toggle-button>
+        <che-toggle-button che-font-icon="fa fa-unlock" che-title="Private"></che-toggle-button>
+      </che-toggle>
 
 
 
@@ -109,12 +109,12 @@ Ultima Syriarum est Palaestina per intervalla magna protenta, cultis abundans te
   <md-tab label="Input" >
 
     <div layout="column" flex ng-form="demoForm">
-      <cdvy-html-source>
+      <che-html-source>
 
-        <cdvy-input cdvy-form="demoForm"
-                    cdvy-name="demoinput"
-                    cdvy-label-name="Name"
-                    cdvy-place-holder="Name of this demo"
+        <che-input che-form="demoForm"
+                    che-name="demoinput"
+                    che-label-name="Name"
+                    che-place-holder="Name of this demo"
                     ng-model="demoComponentsCtrl.selectedInput"
                     required
                     ng-maxlength="128"
@@ -123,8 +123,8 @@ Ultima Syriarum est Palaestina per intervalla magna protenta, cultis abundans te
           <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
           <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
           <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
-        </cdvy-input>
-      </cdvy-html-source>
+        </che-input>
+      </che-html-source>
     </div>
 
   </md-tab>
@@ -132,26 +132,26 @@ Ultima Syriarum est Palaestina per intervalla magna protenta, cultis abundans te
   <md-tab label="List" >
 
     <div layout="column">
-    <cdvy-html-source>
+    <che-html-source>
 
-        <cdvy-list style="margin: 10px; width: 200px">
-          <cdvy-list-item ng-repeat="document in demoComponentsCtrl.listItemsDocs">
+        <che-list style="margin: 10px; width: 200px">
+          <che-list-item ng-repeat="document in demoComponentsCtrl.listItemsDocs">
             <div layout="row" flex="100" style="height: 24px; margin: 5px">
-              <cdvy-list-item-checked flex="20" cdvy-icon="md-font fa fa-file-text-o" style="font-size: 20px"></cdvy-list-item-checked>
+              <che-list-item-checked flex="20" che-icon="md-font fa fa-file-text-o" style="font-size: 20px"></che-list-item-checked>
               <div flex="80" style="height: 20px">{{document}}</div>
             </div>
-          </cdvy-list-item>
-        </cdvy-list>
+          </che-list-item>
+        </che-list>
 
-      <cdvy-list style="margin: 10px; width: 200px">
-        <cdvy-list-item ng-repeat="task in demoComponentsCtrl.listItemsTasks">
+      <che-list style="margin: 10px; width: 200px">
+        <che-list-item ng-repeat="task in demoComponentsCtrl.listItemsTasks">
           <div layout="row" flex="100" style="height: 24px; margin: 5px">
             <div flex="70">{{task.name}}</div>
-            <cdvy-list-item-checked flex="30" ng-model="task.done"></cdvy-list-item-checked>
+            <che-list-item-checked flex="30" ng-model="task.done"></che-list-item-checked>
           </div>
-        </cdvy-list-item>
-      </cdvy-list>
-      </cdvy-html-source>
+        </che-list-item>
+      </che-list>
+      </che-html-source>
   </div>
 
   </md-tab>

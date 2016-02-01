@@ -16,7 +16,7 @@
  * @description This class is controller of NavBarSelected
  * @author Florent Benoit
  */
-class NavBarSelectedCtrl {
+export class NavBarSelectedCtrl {
 
   /**
    * Default constructor that is using resource
@@ -35,5 +35,3 @@ class NavBarSelectedCtrl {
 
 
 }
-
-export default NavBarSelectedCtrl;

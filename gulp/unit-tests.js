@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 Codenvy, S.A.
+ * Copyright (c) 2015-2016 Codenvy, S.A.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,38 +11,53 @@
 
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');
+var conf = require('./conf');
 
-var $ = require('gulp-load-plugins')();
+var karma = require('karma');
 
-var wiredep = require('wiredep');
+var pathSrcHtml = [
+  path.join(conf.paths.src, '/**/*.html')
+];
 
-var paths = gulp.paths;
+var pathSrcJs = [
+  path.join(conf.paths.tmp, '/serve/app/index.module.js')
+];
 
 function runTests (singleRun, done) {
-  var bowerDeps = wiredep({
-    directory: 'bower_components',
-    exclude: ['bootstrap-sass-official'],
-    dependencies: true,
-    devDependencies: true
+  var reporters = ['progress'];
+  var preprocessors = {};
+
+  pathSrcHtml.forEach(function(path) {
+    preprocessors[path] = ['ng-html2js'];
   });
 
-  var testFiles = bowerDeps.js.concat([
-    paths.tmp + '/serve/app/index.js',
-    paths.src + '/{app,components}/**/*.spec.js',
-    paths.src + '/{app,components}/**/*.mock.js'
-  ]);
-
-  gulp.src(testFiles)
-    .pipe($.karma({
-      configFile: 'karma.conf.js',
-      action: (singleRun)? 'run': 'watch'
-    }))
-    .on('error', function (err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
+  if (singleRun) {
+    pathSrcJs.forEach(function(path) {
+      preprocessors[path] = ['coverage'];
     });
+    reporters.push('coverage')
+  }
+
+  var localConfig = {
+    configFile: path.join(__dirname, '/../karma.conf.js'),
+    singleRun: singleRun,
+    autoWatch: !singleRun,
+    reporters: reporters,
+    preprocessors: preprocessors
+  };
+
+  var server = new karma.Server(localConfig, function(failCount) {
+    done(failCount ? new Error("Failed " + failCount + " tests.") : null);
+  })
+  server.start();
 }
 
-gulp.task('test', ['browserify'], function (done) { runTests(true /* singleRun */, done); });
-gulp.task('test:auto', ['browserify'], function (done) { runTests(false /* singleRun */, done); });
+gulp.task('test', ['scripts:test'], function(done) {
+  runTests(true, done);
+});
+
+gulp.task('test:auto', ['scripts:test-watch'], function(done) {
+  runTests(false, done);
+});

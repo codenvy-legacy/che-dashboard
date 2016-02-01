@@ -11,7 +11,7 @@
 
 -->
 <!doctype html>
-<html class="no-js" ng-app="userDashboard">
+<html class="no-js" ng-app="userDashboard" ng-strict-di>
   <head>
     <meta charset="utf-8">
     <title ng-bind="branding.title">Loading Dashboard...</title>
@@ -19,27 +19,21 @@
     <base href="/">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" ng-href="{{branding.favicon}}">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-
-
-    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
     <link rel="stylesheet" type="text/css" href="../bower_components/codemirror/addon/lint/lint.css">
     <link rel="stylesheet" type="text/css" href="../bower_components/codemirror/addon/fold/foldgutter.css">
     <link rel="stylesheet" type="text/css" href="../bower_components/ng-password-strength/dist/styles/main.css">
     <link rel="stylesheet" type="text/css" href="assets/styles/material-design.css">
     <link rel="stylesheet" type="text/css" href="assets/styles/font.css">
-    <link rel="stylesheet" type="text/css" href="assets/styles/codenvy-font.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/che-font.css">
 
 
     <!-- bower:css -->
-    <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
     <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- build:css({.tmp/serve,src}) styles/app.css -->
     <!-- inject:css -->
-    <!-- css files will be automaticaly insert here -->
+    <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
   </head>
@@ -53,8 +47,8 @@
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <md-sidenav class='ide-show not-visible' ng-hide="showIDE" ng-class="waitingLoaded ? 'md-sidenav-left md-whiteframe-z2 dark-menu-bg sidebar-entry' : 'not-visible'" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-    <cdvy-nav-bar id="codenvynavbar" ></cdvy-nav-bar>
+  <md-sidenav id="chenavmenu" class='ide-show not-visible' ng-hide="showIDE" ng-class="waitingLoaded ? 'md-sidenav-left md-whiteframe-z2 dark-menu-bg sidebar-entry' : 'not-visible'" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+    <che-nav-bar id="chenavbar" ></che-nav-bar>
   </md-sidenav>
   <div class="main-page ide-show" layout="column" role="main" tabindex="-1" flex ng-view ng-show="waitingLoaded && !showIDE">
 
@@ -75,13 +69,13 @@
     <script src="../bower_components/codemirror/addon/fold/brace-fold.js"></script>
     <script src="../bower_components/codemirror/addon/selection/active-line.js"></script>
     <!-- bower:js -->
-    <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+    <!-- build:js({.tmp/serve,.tmp/partials}) scripts/app.js -->
     <!-- inject:js -->
-    <!-- js files will be automaticaly insert here -->
+    <!-- js files will be automatically insert here -->
     <!-- endinject -->
 
     <!-- inject:partials -->

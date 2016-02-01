@@ -1,18 +1,18 @@
 <div>
-    <cdvy-box cdvy-title="What Should <span class='welcome-back-title-bold'>{{welcomeBackCtrl.accessUrl}}</span> Load?" cdvy-title-icon="fa fa-compass" cdvy-box-theme="primary" ng-show="welcomeBackCtrl.needUserAction()">
-        <cdvy-list>
-            <cdvy-list-item flex>
-                <cdvy-toggle ng-model="welcomeBackCtrl.welcomeChoice">
-                    <cdvy-toggle-button ng-click="welcomeBackCtrl.selectChoice('dashboard')" cdvy-font-icon="fa fa-th-large"
-                                        cdvy-title="Dashboard"></cdvy-toggle-button>
-                    <cdvy-toggle-button ng-click="welcomeBackCtrl.selectChoice('ide')" cdvy-font-icon="fa fa-chevron-circle-right"
-                                        cdvy-title="Last Opened Workspace in IDE"></cdvy-toggle-button>
-                </cdvy-toggle>
-            </cdvy-list-item>
-        </cdvy-list>
-    </cdvy-box>
-    <cdvy-panel cdvy-title="What Should '/' Load?" ng-if="!welcomeBackCtrl.needUserAction() && welcomeBackCtrl.isDevMode()">
+    <che-box che-title="What Should <span class='welcome-back-title-bold'>{{welcomeBackCtrl.accessUrl}}</span> Load?" che-title-icon="fa fa-compass" che-box-theme="primary" ng-show="welcomeBackCtrl.needUserAction()">
+        <che-list>
+            <che-list-item flex>
+                <che-toggle ng-model="welcomeBackCtrl.welcomeChoice">
+                    <che-toggle-button ng-click="welcomeBackCtrl.selectChoice('dashboard')" che-font-icon="fa fa-th-large"
+                                        che-title="Dashboard"></che-toggle-button>
+                    <che-toggle-button ng-click="welcomeBackCtrl.selectChoice('ide')" che-font-icon="fa fa-chevron-circle-right"
+                                        che-title="Last Opened Workspace in IDE"></che-toggle-button>
+                </che-toggle>
+            </che-list-item>
+        </che-list>
+    </che-box>
+    <che-panel che-title="What Should '/' Load?" ng-if="!welcomeBackCtrl.needUserAction() && welcomeBackCtrl.isDevMode()">
         <p>Development mode: This panel is only shown in development</p>
-        <cdvy-button-primary cdvy-button-title="reset choice of welcome back" ng-click="welcomeBackCtrl.removeChoice()"></cdvy-button-primary>
-    </cdvy-panel>
+        <che-button-primary che-button-title="reset choice of welcome back" ng-click="welcomeBackCtrl.removeChoice()"></che-button-primary>
+    </che-panel>
 </div>

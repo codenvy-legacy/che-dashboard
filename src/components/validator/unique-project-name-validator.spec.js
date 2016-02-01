@@ -34,21 +34,21 @@ describe('unique-project-name-validator', function() {
   var httpBackend;
 
   /**
-   * Codenvy backend
+   * Che backend
    */
-  var codenvyBackend;
+  var cheBackend;
 
 
-  beforeEach(module('userDashboard'));
+  beforeEach(angular.mock.module('userDashboard'));
 
 
-  beforeEach(inject(function($compile, $rootScope, codenvyProject, codenvyAPIBuilder, codenvyHttpBackend) {
+  beforeEach(inject(function($compile, $rootScope, cheProject, cheAPIBuilder, cheHttpBackend) {
     $scope = $rootScope;
     $compiler = $compile;
-    factoryProject = codenvyProject;
-    apiBuilder = codenvyAPIBuilder;
-    codenvyBackend = codenvyHttpBackend;
-    httpBackend = codenvyHttpBackend.getHttpBackend();
+    factoryProject = cheProject;
+    apiBuilder = cheAPIBuilder;
+    cheBackend = cheHttpBackend;
+    httpBackend = cheHttpBackend.getHttpBackend();
 
   }));
 
@@ -63,8 +63,8 @@ describe('unique-project-name-validator', function() {
 
 
       // add into backend
-      codenvyBackend.addProjects(workspace1, [wksp1Project1]);
-      codenvyBackend.setup();
+      cheBackend.addProjects(workspace1, [wksp1Project1]);
+      cheBackend.setup();
 
 
       // update projects workspaces
@@ -101,13 +101,13 @@ describe('unique-project-name-validator', function() {
 
 
       // add into backend
-      codenvyBackend.addProjects(workspace1, [wksp1Project1]);
+      cheBackend.addProjects(workspace1, [wksp1Project1]);
 
       // update projects workspaces
       factoryProject.onChangeWorkspaces([workspace1]);
 
       // setup backend
-      codenvyBackend.setup();
+      cheBackend.setup();
 
       // flush HTTP backend
       httpBackend.flush();

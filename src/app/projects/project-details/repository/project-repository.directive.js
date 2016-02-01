@@ -14,7 +14,7 @@
  * Defines a directive for displaying project repository widget.
  * @author Oleksii Orel
  */
-class ProjectRepository {
+export class ProjectRepository {
 
   /**
    * Default constructor that is using resource
@@ -35,5 +35,3 @@ class ProjectRepository {
   }
 
 }
-
-export default ProjectRepository;

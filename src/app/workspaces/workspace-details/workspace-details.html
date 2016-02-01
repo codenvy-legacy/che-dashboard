@@ -1,10 +1,10 @@
-<cdvy-toolbar cdvy-title="{{workspaceDetailsCtrl.workspaceDetails.name}}"
-              cdvy-title-icons-controller="workspaceDetailsCtrl"
-              cdvy-button-name="Open in IDE"
-              cdvy-button-href="#/ide/{{workspaceDetailsCtrl.workspaceDetails.name}}"
-              cdvy-breadcrumb-title="All workspaces"
-              cdvy-breadcrumb-href="#/workspaces">
-</cdvy-toolbar>
+<che-toolbar che-title="{{workspaceDetailsCtrl.workspaceDetails.name}}"
+             che-title-icons-controller="workspaceDetailsCtrl"
+             che-button-name="Open in IDE"
+             che-button-href="#/ide/{{workspaceDetailsCtrl.workspaceDetails.name}}"
+             che-breadcrumb-title="All workspaces"
+             che-breadcrumb-href="#/workspaces">
+</che-toolbar>
 <md-progress-linear md-mode="indeterminate" ng-show="workspaceDetailsCtrl.loading"></md-progress-linear>
 
 <md-content md-scroll-y flex ng-if="workspaceDetailsCtrl.workspaceDetails"
@@ -12,17 +12,17 @@
   <md-tabs md-dynamic-height md-stretch-tabs="always" md-swipe-content md-selected="selectedIndex">
     <md-tab>
       <md-tab-label>
-        <md-icon md-font-icon="material-design icon-ic_settings_24px" class="cdvy-tab-label-icon"></md-icon>
-        <span class="cdvy-tab-label-title">Settings</span>
+        <md-icon md-font-icon="material-design icon-ic_settings_24px" class="che-tab-label-icon"></md-icon>
+        <span class="che-tab-label-title">Settings</span>
       </md-tab-label>
       <md-tab-body>
-        <cdvy-panel cdvy-title="Workspace Information" class="workspace-details-content">
+        <che-panel che-title="Workspace Information" class="workspace-details-content workspace-details-information">
           <div layout="row" flex>
               <ng-form flex layout="column" name="workspaceInformationForm">
-                <cdvy-input cdvy-form="workspaceInformationForm"
-                            cdvy-name="name"
-                            cdvy-label-name="Name"
-                            cdvy-place-holder="Name of the workspace"
+                <che-input che-form="workspaceInformationForm"
+                            che-name="name"
+                            che-label-name="Name"
+                            che-place-holder="Name of the workspace"
                             ng-model="workspaceDetailsCtrl.newName"
                             required
                             ng-maxlength="128"
@@ -31,33 +31,38 @@
                   <div ng-message="pattern">The name should not contain special characters like space, dollar, etc.</div>
                   <div ng-message="maxlength">The name has to be less than 128 characters long.</div>
                   <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
-                </cdvy-input>
+                </che-input>
               </ng-form>
               <div flex="none" flex-offset="5" layout="column" layout-align="end end">
-                <cdvy-button-primary ng-disabled="(workspaceInformationForm.$invalid || workspaceDetailsCtrl.newName === workspaceDetailsCtrl.workspaceDetails.name)"
-                                     cdvy-button-title="Rename" name="updateButton" ng-click="workspaceDetailsCtrl.renameWorkspace(workspaceInformationForm.$valid)"/>
+                <che-button-primary ng-disabled="(workspaceInformationForm.$invalid || workspaceDetailsCtrl.newName === workspaceDetailsCtrl.workspaceDetails.name)"
+                                     che-button-title="Rename" name="updateButton" ng-click="workspaceDetailsCtrl.renameWorkspace(workspaceInformationForm.$valid)"/>
               </div>
           </div>
           <div layout="row">
-            <cdvy-label-container flex layout="row" cdvy-label-name="State">
-              <workspace-status-indicator cdvy-status="workspaceDetailsCtrl.workspaceDetails.status"></workspace-status-indicator>
-            </cdvy-label-container>
+            <che-label-container flex layout="row" che-label-name="State">
+              <workspace-status-indicator che-status="workspaceDetailsCtrl.workspaceDetails.status"></workspace-status-indicator>
+            </che-label-container>
             <div flex="none" flex-offset="5" layout="column" layout-align="end end">
-              <cdvy-button-default ng-disabled="(workspaceDetailsCtrl.workspaceDetails.status !== 'RUNNING')"
-                                   cdvy-button-title="Stop" name="stopButton"
+              <che-button-default ng-disabled="(workspaceDetailsCtrl.workspaceDetails.status !== 'STOPPED')"
+                                   ng-show="(workspaceDetailsCtrl.workspaceDetails.status === 'STOPPED' || workspaceDetailsCtrl.workspaceDetails.status === 'STARTING')"
+                                   che-button-title="Run" name="runButton"
+                                   ng-click="workspaceDetailsCtrl.runWorkspace()"/>
+              <che-button-default ng-disabled="(workspaceDetailsCtrl.workspaceDetails.status !== 'RUNNING')"
+                                   ng-show="(workspaceDetailsCtrl.workspaceDetails.status === 'RUNNING' || workspaceDetailsCtrl.workspaceDetails.status === 'STOPPING')"
+                                   che-button-title="Stop" name="stopButton"
                                    ng-click="workspaceDetailsCtrl.stopWorkspace()"/>
             </div>
           </div>
         </div>
-        </cdvy-panel>
-          <cdvy-panel cdvy-title="Export Workspace" class="workspace-details-content">
+        </che-panel>
+          <che-panel che-title="Export Workspace" class="workspace-details-content">
               <div ng-if="!workspaceDetailsCtrl.exportWorkspaceContent" layout="row" flex layout-align="space-around start">
                 <label flex="15" class="workspace-details-description">
                     Export your workspace to a JSON file.
                 </label>
 
                 <div layout="column" flex="85">
-                  <cdvy-button-default cdvy-button-title="export" ng-click="workspaceDetailsCtrl.exportWorkspace($event)"/>
+                  <che-button-default che-button-title="export" ng-click="workspaceDetailsCtrl.exportWorkspace($event)"/>
                 </div>
               </div>
               <div ng-if="workspaceDetailsCtrl.exportWorkspaceContent.length > 0">
@@ -67,34 +72,34 @@
                                    ui-codemirror="workspaceDetailsCtrl.editorOptions"
                                    ng-model="workspaceDetailsCtrl.exportWorkspaceContent"></ui-codemirror>
                     </div>
-                    <div layout="row" layout-align="center center"><cdvy-clipboard class="copy-clipboard" cdvy-value="workspaceDetailsCtrl.exportWorkspaceContent"></cdvy-clipboard></div>
+                    <div layout="row" layout-align="center center"><che-clipboard class="copy-clipboard" che-value="workspaceDetailsCtrl.exportWorkspaceContent"></che-clipboard></div>
                   </div>
                   <div layout="column">
-                    <cdvy-button-default cdvy-button-title="download"
-                                         cdvy-button-icon="fa fa-download"
+                    <che-button-default che-button-title="download"
+                                         che-button-icon="fa fa-download"
                                          ng-href="{{workspaceDetailsCtrl.downloadLink}}"/>
 
                   </div>
               </div>
 
 
-          </cdvy-panel>
-        <cdvy-panel cdvy-title="Delete Workspace" class="workspace-details-content">
+          </che-panel>
+        <che-panel che-title="Delete Workspace" class="workspace-details-content">
           <div layout="row" flex layout-align="space-around start">
             <label flex="15" class="workspace-details-description">
               This is irreversible. Deleting your workspace will also delete its projects.
             </label>
             <div layout="column" flex="85">
-              <cdvy-button-danger cdvy-button-title="Delete" ng-click="workspaceDetailsCtrl.deleteWorkspace($event)"/>
+              <che-button-danger che-button-title="Delete" ng-click="workspaceDetailsCtrl.deleteWorkspace($event)"/>
             </div>
           </div>
-        </cdvy-panel>
+        </che-panel>
       </md-tab-body>
     </md-tab>
     <md-tab >
       <md-tab-label>
-        <md-icon md-font-icon="material-design icon-ic_inbox_24px" class="cdvy-tab-label-icon"></md-icon>
-        <span class="cdvy-tab-label-title">Projects</span>
+        <md-icon md-font-icon="material-design icon-ic_inbox_24px" class="che-tab-label-icon"></md-icon>
+        <span class="che-tab-label-title">Projects</span>
       </md-tab-label>
       <md-tab-body>
         <workspace-details-projects></workspace-details-projects>

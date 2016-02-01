@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 Codenvy, S.A.
+ * Copyright (c) 2015-2016 Codenvy, S.A.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,21 +11,21 @@
 
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');
-
-var paths = gulp.paths;
+var conf = require('./conf');
 
 var $ = require('gulp-load-plugins')();
 
 gulp.task('generatesvgfonts', function() {
   return gulp.src('src/assets/svg/*')
     .pipe($.iconfontCss({
-      fontName: 'codenvy',
-      targetPath: '../styles/codenvy-font.css',
+      fontName: 'che',
+      targetPath: '../styles/che-font.css',
       fontPath: '../fonts/'
     }))
     .pipe($.iconfont({
-      fontName: 'codenvy',
+      fontName: 'che',
       appendCodepoints: false,
       normalize: true,
       svg: true,
@@ -38,9 +38,9 @@ gulp.task('generatesvgfonts', function() {
 
 
 gulp.task('svgfonts', ['generatesvgfonts'], function () {
-  return gulp.src(['src/assets/styles/codenvy-font.css'])
-    .pipe($.replace('icon:before', 'cdvyfont:before'))
-    .pipe($.replace('.icon-', '.cdvyico-'))
+  return gulp.src(['src/assets/styles/che-font.css'])
+    .pipe($.replace('icon:before', 'chefont:before'))
+    .pipe($.replace('.icon-', '.cheico-'))
     .pipe(gulp.dest('src/assets/styles'));
 
 });

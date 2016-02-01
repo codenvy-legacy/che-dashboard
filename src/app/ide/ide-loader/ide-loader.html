@@ -11,17 +11,17 @@
                  ng-class="{'create-project-panel-progress-items-enabled' : (ideLoaderCtrl.getCurrentStep() >= $index), 'create-project-panel-progress-items-error' : ideLoaderCtrl.getSteps()[$index].hasError}"
                     >
                 <div  layout="row" layout-align="start center">
-                    <div class="create-project-panel-progress-item-number">{{$index + 1}}</div>
+                    <div class="create-project-panel-progress-item-number" ng-class="{'create-project-panel-progress-item-number-in-progress' : (ideLoaderCtrl.getCurrentStep() === $index && !ideLoaderCtrl.getSteps()[$index].hasError)}">{{$index + 1}}</div>
                     <div flex>{{ideLoaderCtrl.getStepText($index)}}</div>
-                    <cdvy-button-danger ng-show="ideLoaderCtrl.getSteps()[$index].hasError"
-                                        cdvy-button-title="Retry" ng-click="ideLoaderCtrl.resetCreateProgress()" ></cdvy-button-danger>
+                    <che-button-danger ng-show="ideLoaderCtrl.getSteps()[$index].hasError"
+                                        che-button-title="Retry" ng-click="ideLoaderCtrl.resetCreateProgress()" ></che-button-danger>
                 </div>
             </div>
             <div ng-if="$index < (ideLoaderCtrl.getSteps().length - 1)" layout="row">
                 <div ng-class="{'create-project-panel-progress-item-link-enabled' : (ideLoaderCtrl.getCurrentStep() > $index), 'create-project-panel-progress-item-link-error' : ideLoaderCtrl.getSteps()[$index].hasError}"
                      class="create-project-panel-progress-item-link">&nbsp;</div>
 
-                <textarea cdvy-auto-scroll ng-show="ideLoaderCtrl.getSteps()[$index].logs.length > 0" flex class="create-project-panel-progress-item-output" rows="5" ng-model="ideLoaderCtrl.getSteps()[$index].logs"></textarea>
+                <textarea che-auto-scroll ng-show="ideLoaderCtrl.getSteps()[$index].logs.length > 0" flex class="create-project-panel-progress-item-output" rows="5" ng-model="ideLoaderCtrl.getSteps()[$index].logs"></textarea>
             </div>
         </div>
         <div ng-class="{'create-project-panel-progress-lastitem-enabled' : (ideLoaderCtrl.getCurrentStep() === (ideLoaderCtrl.getSteps().length - 1)), 'create-project-panel-progress-lastitem-error' : createProjectCtrl.getSteps()[$index].hasError}"

@@ -15,7 +15,7 @@
  * This class is handling the service for the creation of projects
  * @author Florent Benoit
  */
-class CreateProjectSvc {
+export class CreateProjectSvc {
 
     /**
      * Default constructor that is using resource
@@ -161,5 +161,3 @@ class CreateProjectSvc {
 
 
 }
-
-export default CreateProjectSvc;

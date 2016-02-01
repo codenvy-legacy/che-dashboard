@@ -10,9 +10,9 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
-<cdvy-toolbar cdvy-title="Opening IDE">
+<che-toolbar che-title="Opening IDE">
 
-</cdvy-toolbar>
+</che-toolbar>
 <md-progress-linear md-mode="indeterminate" class="projects-list-projects-progress"
                     ng-hide="ideCtrl.hasData"></md-progress-linear>
 
@@ -27,8 +27,8 @@
         <img style="width: 300px" src="assets/images/loader.svg" />
     </div>
     <div ng-hide="loadingIDE">
-        <cdvy-button-primary cdvy-button-title="Restore IDE window"
-                             ng-click="ideCtrl.displayIDE()"></cdvy-button-primary>
+        <che-button-primary che-button-title="Restore IDE window"
+                             ng-click="ideCtrl.displayIDE()"></che-button-primary>
     </div>
 
 

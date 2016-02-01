@@ -14,14 +14,13 @@
  * This class is handling the controller for the git part
  * @author Florent Benoit
  */
-class CreateProjectGitCtrl {
+export class CreateProjectGitCtrl {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyAPI) {
-    this.codenvyAPI = codenvyAPI;
+  constructor() {
     this.focus = false;
   }
 
@@ -41,6 +40,3 @@ class CreateProjectGitCtrl {
 
 
 }
-
-
-export default CreateProjectGitCtrl;

@@ -16,20 +16,19 @@
  * @description This class is handling the controller of the help
  * @author Florent Benoit
  */
-class HelpCtrl {
 
+export class HelpCtrl {
 
   /**
    * Default constructor
    * @ngInject for Dependency injection
    */
   constructor(cheBranding) {
+    'ngInject';
     this.cheBranding = cheBranding;
     this.help = function () {
       return this.cheBranding.getProductHelpPath();
     };
   }
 }
-
-export default HelpCtrl;
 

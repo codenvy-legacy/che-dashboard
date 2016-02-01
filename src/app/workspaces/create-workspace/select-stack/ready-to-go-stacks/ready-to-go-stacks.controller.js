@@ -14,20 +14,20 @@
  * This class is handling the controller for the ready-to-go stacks
  * @author Florent Benoit
  */
-class ReadyToGoStacksCtrl {
+export class ReadyToGoStacksCtrl {
 
   /**
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(codenvyStack, $rootScope) {
-    this.codenvyStack = codenvyStack;
+  constructor(cheStack, $rootScope) {
+    this.cheStack = cheStack;
     this.$rootScope = $rootScope;
 
     this.stacks = [];
     this.stack = null;
 
-    let promiseStack = codenvyStack.fetchStacks();
+    let promiseStack = cheStack.fetchStacks();
     promiseStack.then(() => {
         this.updateData();
       },
@@ -41,14 +41,14 @@ class ReadyToGoStacksCtrl {
 
   }
 
-  //TODO should change cdvy-simple-selecter widget
-  cdvySimpleSelecterDefault(stack) {
+  //TODO should change che-simple-selecter widget
+  cheSimpleSelecterDefault(stack) {
     this.stack = stack;
     this.onChange();
   }
 
-  //TODO should change cdvy-simple-selecter widget
-  cdvySimpleSelecter(projectName, stack) {
+  //TODO should change che-simple-selecter widget
+  cheSimpleSelecter(projectName, stack) {
     this.stack = stack;
     this.onChange();
   }
@@ -58,7 +58,7 @@ class ReadyToGoStacksCtrl {
    */
   updateData() {
     this.stacks.length = 0;
-    var remoteStacks = this.codenvyStack.getStacks();
+    var remoteStacks = this.cheStack.getStacks();
     // remote stacks are
     remoteStacks.forEach((stack) => {
       stack.iconName = stack.name.toLowerCase();
@@ -79,5 +79,3 @@ class ReadyToGoStacksCtrl {
   }
 
 }
-
-export default ReadyToGoStacksCtrl;

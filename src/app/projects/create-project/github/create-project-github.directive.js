@@ -14,7 +14,7 @@
  * Defines a directive for creating project from github.
  * @author Florent Benoit
  */
-class CreateProjectGithub {
+export class CreateProjectGithub {
 
   /**
    * Default constructor that is using resource
@@ -56,6 +56,3 @@ class CreateProjectGithub {
 
   }
 }
-
-export default CreateProjectGithub;
-

@@ -10,27 +10,33 @@
  */
 'use strict';
 
-angular.module('userDashboard').filter('sampleTagFilter', function() {
-  return function (templates, tagFilter) {
-    if (!templates) {
-      return [];
+export class CreateProjectSamplesTagFilter {
 
-    }
-    if (!tagFilter) {
-      return templates;
-    }
+  constructor(register) {
+    // Register this factory
+    register.app.filter('sampleTagFilter', function () {
+      return function (templates, tagFilter) {
+        if (!templates) {
+          return [];
 
-    var filtered = [];
-    templates.forEach((template) => {
-      for (let i=0; i<template.tags.length; i++) {
-        for (let j=0; j<tagFilter.length; j++) {
-          if (template.tags[i].toLowerCase() === tagFilter[j].toLowerCase()) {
-            filtered.push(template);
-            return;
-          }
         }
-      }
+        if (!tagFilter) {
+          return templates;
+        }
+
+        var filtered = [];
+        templates.forEach((template) => {
+          for (let i = 0; i < template.tags.length; i++) {
+            for (let j = 0; j < tagFilter.length; j++) {
+              if (template.tags[i].toLowerCase() === tagFilter[j].toLowerCase()) {
+                filtered.push(template);
+                return;
+              }
+            }
+          }
+        });
+        return filtered;
+      };
     });
-    return filtered;
-  };
-});
+  }
+}

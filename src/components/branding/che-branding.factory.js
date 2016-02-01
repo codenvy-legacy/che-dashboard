@@ -10,20 +10,17 @@
  */
 'use strict';
 
-import Register from '../utils/register.js';
-
 /**
  * This class is handling the branding data in Che
  * @author Florent Benoit
  */
-class CheBranding {
+export class CheBranding {
 
     /**
      * Default constructor that is using resource
      * @ngInject for Dependency injection
      */
-    constructor(codenvyAPI, $http, $rootScope, $q) {
-        this.codenvyAPI = codenvyAPI;
+    constructor($http, $rootScope, $q) {
         this.$http = $http;
         this.$rootScope = $rootScope;
         this.deferred = $q.defer();
@@ -85,5 +82,3 @@ class CheBranding {
     }
 }
 
-// Register this factory
-Register.getInstance().factory('cheBranding', CheBranding);
