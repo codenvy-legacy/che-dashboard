@@ -1,57 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+<!--
+
+    Copyright (c) 2015-2016 Codenvy, S.A.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Codenvy, S.A. - initial API and implementation
+
+-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
    width="26.047388"
    height="26.555061"
    viewBox="0 0 26.047388 26.555061"
    version="1.1"
-   id="svg2"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="header-triangle.svg">
-  <metadata
-     id="metadata12">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs10" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1742"
-     inkscape:window-height="783"
-     id="namedview8"
-     showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:zoom="24.722548"
-     inkscape:cx="3.4140182"
-     inkscape:cy="18.648305"
-     inkscape:window-x="20"
-     inkscape:window-y="43"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="g4" />
+   >
   <g
      id="g4"
      style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
@@ -60,8 +25,6 @@
        d="M -0.00693993,0.44493795 26.040449,0.45433153 26,27 l -0.304035,-10e-6 c -1.651596,-5.7e-5 -3.764316,-1.104193 -4.711509,-2.455623 L 5.8673213,2.9756369 C 4.9168228,1.6194906 2.8115558,0.52011685 1.1549734,0.52011682 L 0,0.52011681 Z"
        transform="matrix(-1,0,0,1,26,0)"
        id="path6"
-       inkscape:connector-curvature="0"
-       style="fill:#353e50"
-       sodipodi:nodetypes="cccsssscc" />
+       style="fill:#353e50"/>
   </g>
 </svg>
