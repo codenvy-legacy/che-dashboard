@@ -154,26 +154,24 @@ export class CheWorkspace {
   }
 
 
-  createWorkspace(accountId, workspaceName, recipeUrl, memoryParam) {
+  createWorkspace(accountId, workspaceName, recipeUrl, ram) {
     // /api/workspace/config?account=accountId
 
 
     let data = {
-      'environments': {
-
-      },
+      'environments': [],
       'name': workspaceName,
       'attributes': {},
       'projects': [],
-      'defaultEnvName': workspaceName,
+      'defaultEnv': workspaceName,
       'description': null,
       'commands': [],
       'links': []
     };
 
     var memory = 2048;
-    if (memoryParam) {
-      memory = memoryParam;
+    if (ram) {
+      memory = ram;
     }
 
 
@@ -182,15 +180,14 @@ export class CheWorkspace {
         'recipe': null,
         'machineConfigs': [{
           'name': 'ws-machine',
-          'limits': {'memory': memory},
+          'limits': {'ram': memory},
           'type': 'docker',
           'source': {'location': recipeUrl, 'type': 'recipe'},
           'dev': true
         }]
       };
 
-    data.environments[workspaceName] = envEntry;
-
+    data.environments.push(envEntry);
 
     let promise = this.remoteWorkspaceAPI.create({accountId : accountId}, data).$promise;
     return promise;

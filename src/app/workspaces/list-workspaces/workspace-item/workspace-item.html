@@ -21,7 +21,7 @@
         <div class="workspace-item-details" flex="10">
           <workspace-status-indicator che-status="workspaceItemCtrl.workspace.status"></workspace-status-indicator>
         </div>
-        <div class="workspace-consumed-value" flex="10">{{workspaceItemCtrl.workspace.environments[workspaceItemCtrl.workspace.defaultEnvName].machineConfigs[0].limits.memory}} MB</div>
+        <div class="workspace-consumed-value" flex="10">{{workspaceItemCtrl.getDefaultEnvironment(workspaceItemCtrl.workspace).machineConfigs[0].limits.ram}} MB</div>
         <a ng-href="#/ide/{{workspaceItemCtrl.workspace.name}}">
             <che-button-default class="che-hover workspace-list-details-arrow"
                                  che-button-icon="fa fa fa-chevron-circle-right"

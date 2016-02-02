@@ -20,9 +20,10 @@ class IdeSvc {
      * Default constructor that is using resource
      * @ngInject for Dependency injection
      */
-    constructor (cheAPI, $rootScope, $mdDialog, userDashboardConfig, $timeout, $websocket, $sce, proxySettings, ideLoaderSvc, $location, routeHistory) {
+    constructor (cheAPI, $rootScope, lodash, $mdDialog, userDashboardConfig, $timeout, $websocket, $sce, proxySettings, ideLoaderSvc, $location, routeHistory) {
         this.cheAPI = cheAPI;
         this.$rootScope = $rootScope;
+        this.lodash = lodash;
         this.$mdDialog = $mdDialog;
         this.$timeout = $timeout;
         this.$websocket = $websocket;
@@ -132,13 +133,17 @@ class IdeSvc {
 
     startWorkspace(bus, data) {
 
-        let startWorkspacePromise = this.cheAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
+        let startWorkspacePromise = this.cheAPI.getWorkspace().startWorkspace(data.id, data.defaultEnv);
 
         startWorkspacePromise.then((data) => {
             // get channels
             let environments = data.environments;
-            let defaultEnvName = data.defaultEnvName;
-            let channels = environments[defaultEnvName].machineConfigs[0].channels;
+            let defaultEnvName = data.defaultEnv;
+            let defaultEnvironment = this.lodash.find(environments, (environment) => {
+              return environment.name === defaultEnvName;
+            });
+
+            let channels = defaultEnvironment.machineConfigs[0].channels;
             let statusChannel = channels.status;
             let outputChannel = channels.output;
             let agentChannel = 'workspace:' + data.id + ':ext-server:output';

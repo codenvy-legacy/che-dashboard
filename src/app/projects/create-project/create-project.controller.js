@@ -347,13 +347,17 @@ export class CreateProjectCtrl {
 
     // then we've to start workspace
     this.createProjectSvc.setCurrentProgressStep(1);
-    let startWorkspacePromise = this.cheAPI.getWorkspace().startWorkspace(data.id, data.defaultEnvName);
+    let startWorkspacePromise = this.cheAPI.getWorkspace().startWorkspace(data.id, data.defaultEnv);
 
     startWorkspacePromise.then((data) => {
       // get channels
       let environments = data.environments;
-      let envName = data.defaultEnvName;
-      let channels = environments[envName].machineConfigs[0].channels;
+      let envName = data.defaultEnv;
+      let defaultEnvironment = this.lodash.find(environments, (environment) => {
+          return environment.name === envName;
+      });
+
+      let channels = defaultEnvironment.machineConfigs[0].channels;
       let statusChannel = channels.status;
       let outputChannel = channels.output;
       let agentChannel = 'workspace:' + data.id + ':ext-server:output';

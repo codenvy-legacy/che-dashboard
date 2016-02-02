@@ -22,12 +22,21 @@ export class WorkspaceItemCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor($location) {
+  constructor($location, lodash) {
     this.$location = $location;
+    this.lodash = lodash;
   }
 
   redirectToWorkspaceDetails() {
     this.$location.path('/workspace/' + this.workspace.id);
   }
 
+  getDefaultEnvironment(workspace) {
+    let environments = workspace.environments;
+    let envName = workspace.defaultEnv;
+    let defaultEnvironment = this.lodash.find(environments, (environment) => {
+        return environment.name === envName;
+    });
+    return defaultEnvironment;
+  }
 }

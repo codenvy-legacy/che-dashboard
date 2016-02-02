@@ -130,7 +130,7 @@ export class WorkspaceDetailsCtrl {
   }
 
   runWorkspace() {
-    let promise = this.cheAPI.getWorkspace().startWorkspace(this.workspaceId, this.workspaceDetails.defaultEnvName);
+    let promise = this.cheAPI.getWorkspace().startWorkspace(this.workspaceId, this.workspaceDetails.defaultEnv);
 
     promise.then(() => {}, (error) => {
       this.cheNotification.showError(error.data.message !== null ? error.data.message : 'Start workspace failed.');
