@@ -89,7 +89,7 @@ export class CreateProjectSamplesCtrl {
    * Select the first element in the list
    */
   initItem($first, template, createProjectCtrl) {
-      if ($first) {
+      if ($first && createProjectCtrl.selectSourceOption === 'select-source-new') {
         this.$timeout(() => {
           this.selectTemplate(template, createProjectCtrl);
         }, 1000);
