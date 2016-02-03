@@ -18,7 +18,10 @@ var conf = require('./conf');
 var $ = require('gulp-load-plugins')();
 
 gulp.task('generatesvgfonts', function() {
-  return gulp.src('src/assets/svg/*')
+
+  var sources = [ path.join(conf.paths.src, '/assets/svg/type-blank.svg'), path.join(conf.paths.src, '/assets/svg/*.svg') ];
+
+  return gulp.src(sources)
     .pipe($.iconfontCss({
       fontName: 'che',
       targetPath: '../styles/che-font.css',
