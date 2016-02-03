@@ -20,7 +20,7 @@
 }
 
 
-.cheico-README.MD:before {
+.cheico-type-blank:before {
 	content: "\E001";
 }
 
@@ -40,38 +40,34 @@
 	content: "\E005";
 }
 
-.cheico-type-blank:before {
+.cheico-type-cpp:before {
 	content: "\E006";
 }
 
-.cheico-type-cpp:before {
+.cheico-type-go:before {
 	content: "\E007";
 }
 
-.cheico-type-go:before {
+.cheico-type-java:before {
 	content: "\E008";
 }
 
-.cheico-type-java:before {
+.cheico-type-javascript:before {
 	content: "\E009";
 }
 
-.cheico-type-javascript:before {
+.cheico-type-node:before {
 	content: "\E00A";
 }
 
-.cheico-type-node:before {
+.cheico-type-php:before {
 	content: "\E00B";
 }
 
-.cheico-type-php:before {
+.cheico-type-python:before {
 	content: "\E00C";
 }
 
-.cheico-type-python:before {
-	content: "\E00D";
-}
-
 .cheico-type-ruby:before {
-	content: "\E00E";
+	content: "\E00D";
 }
