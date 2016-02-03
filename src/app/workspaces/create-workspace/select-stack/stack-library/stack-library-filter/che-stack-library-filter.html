@@ -1,6 +1,6 @@
-<div layout="column" flex class="stack-library-filter">
-    <div layout="row" flex layout-align="center center">
-      <div flex="15" hide-sm hide-md>
+<div layout="column" flex="100" class="stack-library-filter">
+    <div layout="row" flex="100" layout-align="start center">
+      <div flex="15" layout="column">
         <div>Filter: </div>
         <div class="stack-library-filter-description">
           You can filter the stacks by selecting technologies.
@@ -23,13 +23,13 @@
             </div>
           </md-chip-template>
         </md-chips>
-        <div class="stack-library-filter-description">
+        <div class="stack-library-filter-description" ng-class="{'stack-library-filter-hidden': !cheStackLibraryFilterCtrl.suggestions.length}">
           Use <span class="stack-library-filter-description-bold">tab</span> or <i class="fa fa-arrow-up"></i> <i class="fa fa-arrow-down"></i> to navigate. <span class="stack-library-filter-description-bold">Return</span> to add.
         </div>
       </div>
     </div>
-    <div layout="row" flex="100" layout-align="center center" ng-show="cheStackLibraryFilterCtrl.suggestions.length">
-      <label flex="15" hide-sm hide-md>Suggestions: </label>
+    <div layout="row" flex="100" layout-align="start center" class="stack-library-filter-suggestions-row" ng-class="{'stack-library-filter-hidden': !cheStackLibraryFilterCtrl.suggestions.length}">
+      <label flex="15">Suggestions: </label>
       <div layout="column" flex="85">
         <md-chips ng-model="cheStackLibraryFilterCtrl.suggestions"
                   class="stack-library-filter-suggestions"

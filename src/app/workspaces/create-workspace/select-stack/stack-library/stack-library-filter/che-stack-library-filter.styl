@@ -3,6 +3,7 @@
 
   .md-chip-input-container
     margin 0 !important
+    line-height 31px
 
     input
       height 17px !important
@@ -33,7 +34,7 @@
         div
           color #fff !important
           display inline-block
-          height 17px
+          height 15px
 
         .stack-library-filter-tag-text, .stack-library-filter-suggestion-text
           border 1px solid #fff
@@ -43,21 +44,19 @@
           border-left 1px solid #fff
           position absolute
           right 0
-
-        .stack-library-filter-suggestion-btn
-
-          cursor pointer
+          height 17px
 
 // tags
 .stack-library-filter-tags
   padding-bottom 10px
 
   .md-chips:not(.md-focused)
-    box-shadow 0 1px #E0E0E0 !important
+    box-shadow 0 1px $default-border-color !important
   .md-chips.md-focused
-    box-shadow 0 1px #4A90E2 !important
+    box-shadow 0 1px $primary-color !important
 
   .md-chips
+
     .md-chip-content
       padding-right 0 !important
 
@@ -70,32 +69,29 @@
         visibility hidden
 
     .md-chip
+      background-color $che-medium-blue-color
+
       .stack-library-filter-tag-text
         padding 0 25px 0 11px
 
       .stack-library-filter-tag-btn
-        border-left-width 2px !important
-        line-height 16px
+        line-height 17px
         font-size 14px
         padding 0 3px
 
     // not focused
     .md-chip:not(.md-focused)
-      background-color #5f8ae6 !important
+      background-color $clear-foggy-sky-color
 
       .stack-library-filter-tag-text
-        border-color #5f8ae6
-
-      .stack-library-filter-tag-btn
-        border-left-color #aac2f0 !important
+        border-color $clear-foggy-sky-color !important
 
     // focused
     .md-chip.md-focused
-      .stack-library-filter-tag-text
-        border-color #21252b
+      background-color alpha($che-medium-blue-color, 0.7)
 
-      .stack-library-filter-tag-btn
-        border-left-color #c5c5c5 !important
+      .stack-library-filter-tag-text
+        border-color $che-medium-blue-color
 
 // suggestions
 .stack-library-filter-suggestions
@@ -111,20 +107,21 @@
         line-height 19px
         font-size 14px
         padding 0 5px
+        cursor pointer
 
     // unselected
     .md-chip:not(.stack-library-filter-suggestion-selected)
-      background-color #c5c5c5 !important
+      background-color $clear-foggy-sky-color
 
       .stack-library-filter-suggestion-text
-        border-color #c5c5c5 !important
+        border-color $clear-foggy-sky-color
 
     // selected
     .md-chip.stack-library-filter-suggestion-selected
-      background-color #9cb3cf !important
+      background-color alpha($che-green-color, 0.7)
 
       .stack-library-filter-suggestion-text
-        border-color #5f8ae6 !important
+        border-color $che-green-color
 
 // other
 .stack-library-filter-description
@@ -134,3 +131,9 @@
 
 .stack-library-filter-description-bold
   font-weight bold
+
+.stack-library-filter-hidden
+  visibility hidden
+
+.stack-library-filter-suggestions-row
+  line-height 27px

@@ -46,8 +46,8 @@ export class CheStackLibraryFilter {
 
 
   link($scope, element) {
+    let ctrl = $scope.cheStackLibraryFilterCtrl;
     let selectSuggestion = (element, index) => {
-      let ctrl = $scope.cheStackLibraryFilterCtrl;
       let selectionClass = 'stack-library-filter-suggestion-selected',
         suggestionElements = element.find('.stack-library-filter-suggestions md-chip');
 
