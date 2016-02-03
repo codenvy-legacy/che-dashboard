@@ -46,11 +46,11 @@
               <che-button-default ng-disabled="(workspaceDetailsCtrl.workspaceDetails.status !== 'STOPPED')"
                                    ng-show="(workspaceDetailsCtrl.workspaceDetails.status === 'STOPPED' || workspaceDetailsCtrl.workspaceDetails.status === 'STARTING')"
                                    che-button-title="Run" name="runButton"
-                                   ng-click="workspaceDetailsCtrl.runWorkspace()"/>
+                                   ng-click="workspaceDetailsCtrl.runWorkspace()"></che-button-default>
               <che-button-default ng-disabled="(workspaceDetailsCtrl.workspaceDetails.status !== 'RUNNING')"
                                    ng-show="(workspaceDetailsCtrl.workspaceDetails.status === 'RUNNING' || workspaceDetailsCtrl.workspaceDetails.status === 'STOPPING')"
                                    che-button-title="Stop" name="stopButton"
-                                   ng-click="workspaceDetailsCtrl.stopWorkspace()"/>
+                                   ng-click="workspaceDetailsCtrl.stopWorkspace()"></che-button-default>
             </div>
           </div>
         </div>
