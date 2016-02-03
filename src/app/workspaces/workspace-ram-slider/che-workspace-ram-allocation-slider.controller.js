@@ -20,6 +20,16 @@ export class CheWorkspaceRamAllocationSliderCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor () {
+  constructor ($scope) {
+    "ngInject";
+
+    $scope.$watch(() => {return this.inputVal;}, (newVal, oldVal) => {
+      if (!newVal || newVal===oldVal) {
+        // do not change ngModel if input contains incorrect value
+        return;
+      }
+      this.ngModel = newVal * 1000;
+    });
   }
+
 }
