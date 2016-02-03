@@ -448,8 +448,9 @@ export class CreateProjectCtrl {
       let commands = projectData.project.commands;
       if (commands && commands.length > 0) {
         commands.forEach((command) => {
-          command.name = projectName + ': ' + command.name;
-          promise = promise.then(this.cheAPI.getWorkspace().addCommand(workspaceId, command));
+          let newCommand = angular.copy(command);
+          newCommand.name = projectName + ': ' + newCommand.name;
+          promise = promise.then(this.cheAPI.getWorkspace().addCommand(workspaceId, newCommand));
         });
 
       }
