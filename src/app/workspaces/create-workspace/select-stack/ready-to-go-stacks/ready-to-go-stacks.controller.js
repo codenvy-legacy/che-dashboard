@@ -20,9 +20,10 @@ export class ReadyToGoStacksCtrl {
    * Default constructor that is using resource
    * @ngInject for Dependency injection
    */
-  constructor(cheStack, $rootScope) {
-    this.cheStack = cheStack;
+  constructor($timeout, $rootScope, cheStack) {
+    this.$timeout = $timeout;
     this.$rootScope = $rootScope;
+    this.cheStack = cheStack;
 
     this.stacks = [];
     this.stack = null;
@@ -44,13 +45,17 @@ export class ReadyToGoStacksCtrl {
   //TODO should change che-simple-selecter widget
   cheSimpleSelecterDefault(stack) {
     this.stack = stack;
-    this.onChange();
+    this.$timeout(() => {
+      this.onChange();
+    });
   }
 
   //TODO should change che-simple-selecter widget
   cheSimpleSelecter(projectName, stack) {
     this.stack = stack;
-    this.onChange();
+    this.$timeout(() => {
+      this.onChange();
+    });
   }
 
   /**
