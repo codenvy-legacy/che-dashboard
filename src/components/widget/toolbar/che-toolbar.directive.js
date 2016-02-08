@@ -88,15 +88,12 @@ export class CheToolbar {
     }
 
     var template = '<div class=\"che-toolbar\"><md-toolbar md-theme=\"' + theme +'\">\n'
-      + '<div layout=\"column\" flex>'
-      + '<div layout=\"row\" flex class=\"che-toolbar-breadcrumb\" layout-align=\"start center\">'
-      + '<button class=\"toolbar-switch\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
-      + '<md-icon md-font-icon=\"fa fa-bars fa-2x\"></md-icon>'
-      + '</button>';
+      + '<div layout=\"column\" flex>';
 
     // start href link
     if (breadcrumbHref) {
-      template = template + '<a href=\"' + breadcrumbHref + '\" layout=\"row\" layout-align=\"start center\">' +
+      template = template + '<div layout=\"row\" flex class=\"che-toolbar-breadcrumb\" layout-align=\"start center\">'
+      + '<a href=\"' + breadcrumbHref + '\" layout=\"row\" layout-align=\"start center\">' +
       '<i class=\"icon-breadcrumb material-design icon-ic_chevron_left_24px\" md-theme=\"default\"></i>';
     }
 
@@ -106,11 +103,13 @@ export class CheToolbar {
 
     // end href link
     if (breadcrumbHref) {
-      template = template + '</a>';
+      template = template + '</a></div>';
     }
 
-    template = template + '</div>'
-    + '<div layout=\"row\" flex class=\"che-toolbar-header\">'
+    template = template + '<div layout=\"row\" flex layout-align=\"start center\" class=\"che-toolbar-header\">'
+    + '<button class=\"che-toolbar-control-button\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
+    + '<md-icon md-font-icon=\"fa fa-bars\"></md-icon>'
+    + '</button>'
     + '<div class=\"che-toolbar-title\">'
     + '<span class=\"che-toolbar-title-label\">'
     + title + '</span><span class=\"che-toolbar-title-icons\">';
@@ -124,7 +123,11 @@ export class CheToolbar {
     + '</span>'
     + '</div>'
     + '<span flex></span>'
-    + '<div class=\"che-toolbar-button\" layout=\"row\">';
+    + '<div layout=\"row\" layout-align=\"start center\">';
+
+    template = template + '<div class=\"che-toolbar-control-button\"><md-icon md-font-icon=\"fa fa-search\"></md-icon></div>';
+
+    template = template + '<div class=\"che-toolbar-control-button\"><md-icon md-font-icon=\"fa fa-ellipsis-v\"></md-icon></div>';
 
     if (buttonName) {
       template = template + '<che-button-primary che-button-title=\"' + buttonName + '\" href=\"' + buttonHref + '\"';
