@@ -3,6 +3,18 @@
   border-bottom $default-dark-color 1px solid
   width 100%
 
+.move-out, .move-in
+  -webkit-transition max-width 0.5s ease-in-out
+  -moz-transition max-width 0.5s ease-in-out
+  -o-transition max-width 0.5s ease-in-out
+  transition max-width 0.5s ease-in-out
+
+.move-in
+  max-width 0px
+
+.move-out
+  max-width 800px
+
 .search-input
   background-color inherit
   color $default-dark-color
@@ -12,29 +24,32 @@
   height 24px
   line-height 24px
   width 100%
+  font-size 12pt
   outline none
 
 .search-input::-webkit-input-placeholder
   color $default-dark-color
-  font-size 14pt
+  font-size 12pt
   opacity  0.7
 
 .search-input:-moz-placeholder
 /* Mozilla Firefox 4 to 18 */
   color $default-dark-color
-  font-size 14pt
+  font-size 12pt
   opacity  0.7
 
 .search-input::-moz-placeholder
 /* Mozilla Firefox 19+ */
   color $default-dark-color
-  font-size 14pt
+  font-size 12pt
   opacity  0.7
 
 .search-component md-icon
   height 18px
   width 18px
+  outline none
 
 .search-icon
-  float right
+  margin-right 10px
+  outline none
 

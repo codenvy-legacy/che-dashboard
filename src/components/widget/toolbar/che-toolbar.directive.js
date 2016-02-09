@@ -81,6 +81,13 @@ export class CheToolbar {
     var subheaderTitle = attrs.cheSubheaderTitle;
     var subheaderIcon = attrs.cheSubheaderIcon;
 
+    var searchPlaceholder = attrs.cheSearchPlaceholder;
+    var searchModel = attrs.cheSearchModel;
+
+    var dropdownMenu = attrs.cheDropdownMenu;
+    var dropdownModel = attrs.cheDropdownModel;
+    var dropdownOnchange = attrs.cheDropdownOnchange;
+
     var theme = attrs.theme;
 
     if (!theme) {
@@ -119,24 +126,33 @@ export class CheToolbar {
       + titleController + '.callbackToolbarClick(icon.name)\"';
     }
 
-    template = template
-    + '</span>'
-    + '</div>'
-    + '<span flex></span>'
-    + '<div layout=\"row\" layout-align=\"start center\">';
+    template += '</span></div>';
 
-    template = template + '<div class=\"che-toolbar-control-button\"><md-icon md-font-icon=\"fa fa-search\"></md-icon></div>';
+    if (searchModel) {
+      template += '<che-search flex che-placeholder=\"' + searchPlaceholder+ '\" class=\"che-toolbar-control-button\" ng-model=\"' + searchModel + '\"></che-search>';
+    } else {
+      template += '<span flex></span>';
+    }
+    template += '<div layout=\"row\" layout-align=\"start center\">';
 
-    template = template + '<div class=\"che-toolbar-control-button\"><md-icon md-font-icon=\"fa fa-ellipsis-v\"></md-icon></div>';
+    if (dropdownMenu) {
+      template += '<div class=\"che-toolbar-control-button\" dropdown-menu=\"'+ dropdownMenu+'\" dropdown-model=\"'
+      + dropdownModel+'\" dropdown-onchange=\"' + dropdownOnchange+'\" dropdown-item-label=\"name\"><md-icon md-font-icon=\"fa fa-ellipsis-v\"></md-icon></div>';
+
+   /* template += "<i class=\"material-design icon-ic_filter_list_24px\" dropdown-menu=\"listProjectsCtrl.dropDownOptionsList\" " +
+    "dropdown-model=\"listProjectsCtrl.dropDownValue\" dropdown-onchange=\"listProjectsCtrl.dropDownSelected(selected)\"" +
+    ></i>";*/
+
+    }
 
     if (buttonName) {
-      template = template + '<che-button-primary che-button-title=\"' + buttonName + '\" href=\"' + buttonHref + '\"';
+      template = template + '<a class=\"che-toolbar-control-button\" title=\"' + buttonName + '\" href=\"' + buttonHref + '\"';
 
       if (buttonHrefTarget) {
         template = template + ' target=\"' + buttonHrefTarget + '\"';
       }
 
-      template = template + '></che-button-primary>';
+      template = template + '><md-icon md-font-icon=\"fa fa-plus\"></md-icon></a>';
     }
     template = template + '<ng-transclude></ng-transclude>';
 
