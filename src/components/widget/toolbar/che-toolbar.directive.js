@@ -68,7 +68,7 @@ export class CheToolbar {
    * @param attrs
    * @returns {string} the template
    */
-  template( element, attrs){
+  template( element, attrs) {
     var title = attrs.cheTitle;
     var titleController  = attrs.cheTitleIconsController;
     var buttonHref = attrs.cheButtonHref;
@@ -85,8 +85,6 @@ export class CheToolbar {
     var searchModel = attrs.cheSearchModel;
 
     var dropdownMenu = attrs.cheDropdownMenu;
-    var dropdownModel = attrs.cheDropdownModel;
-    var dropdownOnchange = attrs.cheDropdownOnchange;
 
     var theme = attrs.theme;
 
@@ -114,9 +112,9 @@ export class CheToolbar {
     }
 
     template = template + '<div layout=\"row\" flex layout-align=\"start center\" class=\"che-toolbar-header\">'
-    + '<button class=\"che-toolbar-control-button\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
+    + '<div class=\"che-toolbar-control-button\" hide-gt-md ng-click=\"controller.toggleLeftMenu()\" >'
     + '<md-icon md-font-icon=\"fa fa-bars\"></md-icon>'
-    + '</button>'
+    + '</div>'
     + '<div class=\"che-toolbar-title\">'
     + '<span class=\"che-toolbar-title-label\">'
     + title + '</span><span class=\"che-toolbar-title-icons\">';
@@ -129,20 +127,19 @@ export class CheToolbar {
     template += '</span></div>';
 
     if (searchModel) {
-      template += '<che-search flex che-placeholder=\"' + searchPlaceholder+ '\" class=\"che-toolbar-control-button\" ng-model=\"' + searchModel + '\"></che-search>';
+      template += '<che-search flex che-placeholder=\"' + searchPlaceholder+ '\" ng-model=\"' + searchModel + '\"></che-search>';
     } else {
       template += '<span flex></span>';
     }
     template += '<div layout=\"row\" layout-align=\"start center\">';
 
     if (dropdownMenu) {
-      template += '<div class=\"che-toolbar-control-button\" dropdown-menu=\"'+ dropdownMenu+'\" dropdown-model=\"'
-      + dropdownModel+'\" dropdown-onchange=\"' + dropdownOnchange+'\" dropdown-item-label=\"name\"><md-icon md-font-icon=\"fa fa-ellipsis-v\"></md-icon></div>';
-
-   /* template += "<i class=\"material-design icon-ic_filter_list_24px\" dropdown-menu=\"listProjectsCtrl.dropDownOptionsList\" " +
-    "dropdown-model=\"listProjectsCtrl.dropDownValue\" dropdown-onchange=\"listProjectsCtrl.dropDownSelected(selected)\"" +
-    ></i>";*/
-
+      template += '<md-menu>' + '<div class=\"che-toolbar-control-button\" ng-click=\"$mdOpenMenu($event)\">';
+      template += '<md-icon md-font-icon=\"fa fa-ellipsis-v\"></md-icon></div>';
+      template += '<md-menu-content width=\"3\">';
+      template += '<md-menu-item ng-repeat=\"item in ' + dropdownMenu + '" >';
+      template += '<md-button ng-click=\"item.onclick()\">{{item.title}}</md-button>';
+      template += '</md-menu-content></md-menu>';
     }
 
     if (buttonName) {
@@ -170,7 +167,6 @@ export class CheToolbar {
       + subheaderTitle
       + '</div>';
     }
-
 
     template = template
     + '</div>'
