@@ -32,8 +32,11 @@ export class CheSearch {
     // scope values
     this.scope = {
       placeholder:'@chePlaceholder',
+      replaceElement: '@cheReplaceElement',
       valueModel : '=ngModel',
       inputName:'@cheName'
     };
   }
+
+
 }

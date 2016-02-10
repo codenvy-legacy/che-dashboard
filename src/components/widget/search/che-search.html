@@ -1,5 +1,5 @@
 <div flex ng-init="show=false" layout="row">
-  <md-icon md-font-icon="fa fa-search" class="search-icon che-toolbar-control-button" ng-click="show=true"></md-icon>
+  <md-icon md-font-icon="fa fa-search" class="search-icon" ng-click="show=true" ng-class="{'che-toolbar-control-button' : !show}"></md-icon>
   <div flex  layout="row" ng-class="{'move-out': show, 'move-in': !show}" class="search-component">
     <input class="search-input" type="text" name="{{inputName}}" ng-trim="false" data-ng-model="valueModel" placeholder="{{placeholder}}">
     <md-icon md-font-icon="fa fa-close" ng-click="show=false" ng-show="show"></md-icon>
